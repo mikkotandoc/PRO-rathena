@@ -124,15 +124,15 @@ anthell02,0,0,0,0	boss_monster	Maya	1147,1,7200000,600000,1
 //==================================================
 // Illusion of Twins
 //==================================================
-ant_d02_i	monster	Diligent Andre	21386,30,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Diligent Andre Larva	21388,20,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Mushy Ant Egg	21391,20,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Diligent Deniro	21389,30,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Gutsy Familiar	21393,25,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Gutsy Giearth	21392,15,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Diligent Piere	21390,30,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Diligent Soldier Andre	21387,15,5000,0,"ant_d02_i_boss::OnMobDead"
-ant_d02_i	monster	Diligent Vitata	21394,15,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Diligent Andre	21386,50,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Diligent Andre Larva	21388,40,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Mushy Ant Egg	21391,40,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Diligent Deniro	21389,50,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Gutsy Familiar	21393,50,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Gutsy Giearth	21392,30,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Diligent Piere	21390,50,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Diligent Soldier Andre	21387,30,5000,0,"ant_d02_i_boss::OnMobDead"
+ant_d02_i	monster	Diligent Vitata	21394,30,5000,0,"ant_d02_i_boss::OnMobDead"
 
 -	script	ant_d02_i_boss	-1,{
 	end;

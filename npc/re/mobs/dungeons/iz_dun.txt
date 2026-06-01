@@ -124,11 +124,11 @@ iz_dun05,0,0,0,0	boss_monster	Kraken	2202,1,7200000,1800000,0
 //==================================================
 // Illusion of Underwater
 //==================================================
-iz_d04_i	monster	Deep Sea Sropho	20801,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Obeaune	20802,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Merman	20805,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Marse	20804,45,5000,0,"iz_d04_i_boss::OnMobDead"
-iz_d04_i	monster	Deep Sea Deviace	20803,45,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	Deep Sea Sropho	20801,65,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	Deep Sea Obeaune	20802,65,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	Deep Sea Merman	20805,65,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	Deep Sea Marse	20804,65,5000,0,"iz_d04_i_boss::OnMobDead"
+iz_d04_i	monster	Deep Sea Deviace	20803,65,5000,0,"iz_d04_i_boss::OnMobDead"
 
 -	script	iz_d04_i_boss	-1,{
 	end;

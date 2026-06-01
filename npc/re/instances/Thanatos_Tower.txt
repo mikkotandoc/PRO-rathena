@@ -41,11 +41,11 @@ tha_t01,161,78,3	script	Solice#mot	4_F_CHNDOCTOR,{
 		mes "^4D4DFFThe required level for this daily quest is Level 180 or above.^000000";
 		end;
 	}
-	if(isbegin_quest(17408) == 0){
-		mes "[ Solice ]";
-		mes "Oh! You scared me! You're not currently in contract with us, so please go ahead and sign a contract.";
-		end;
-	}
+//	if(isbegin_quest(17408) == 0){
+//		mes "[ Solice ]";
+//		mes "Oh! You scared me! You're not currently in contract with us, so please go ahead and sign a contract.";
+//		end;
+//	}
 	if(isbegin_quest(17415) < 2){
 		mes "[ Solice ]";
 		mes "Should I go up again? If I'm lucky again this time, I won't be blind and a victim.";
