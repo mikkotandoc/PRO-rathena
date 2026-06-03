@@ -188,30 +188,24 @@ Body:
             Item: Play_RO_Gold_Coin_
             Amount: 4
       - Index: 23
-        Item: FullPeneShadow_Mix
-        RequiredItems:
-          - Index: 0
-            Item: Play_RO_Gold_Coin_
-            Amount: 45
-      - Index: 24
         Item: All_Shadow_Cube
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 60
-      - Index: 25
+            Amount: 20
+      - Index: 24
         Item: FullPeneShadow_Mix
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 45
-      - Index: 26
+      - Index: 25
         Item: FullTempShadow_Mix
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 45
-      - Index: 27
+      - Index: 26
         Item: Convex_Mirror
         RequiredItems:
           - Index: 0
