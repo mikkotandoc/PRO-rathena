@@ -257,7 +257,7 @@ Body:
           - Index: 0
             Item: Fate_Fragment
             Amount: 50
-  - Name: remorse_item
+  - Name: remorsing
     Items:
       - Index: 0
         Item: Shine_Ring_R
