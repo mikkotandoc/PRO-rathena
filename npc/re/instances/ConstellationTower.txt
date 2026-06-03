@@ -20,12 +20,12 @@ e_tower,72,115,2	script	Oscar#Con1	4_ED_OSCAR,{
 			close3;
 		}
 
-		if(checkquest(30059,PLAYTIME) == 2) {
+		if(checkquest(30060,PLAYTIME) == 2) {
 			mes "^0000ffYou can enter the Tower of Constellations again.^000000";
-			erasequest 30059;
+			erasequest 30060;
 			close3;
-		} else  if(checkquest(30059,PLAYTIME) == 0 || checkquest(30059,PLAYTIME) == 1) {
-			mes "^ff0000The copy cools down waiting for 3 day.^000000";
+		} else  if(checkquest(30060,PLAYTIME) == 0 || checkquest(30059,PLAYTIME) == 1) {
+			mes "^ff0000The copy cools down for 3 days.^000000";
 			close3;
 		} else {
 			.@party_id = getcharid(1);
@@ -117,6 +117,8 @@ e_tower,72,115,2	script	Oscar#Con1	4_ED_OSCAR,{
 }
 
 1@ch_t,12,222,0	script	Start Device#HRO_JumpingDevice	10007,{
+	completequest 30059;
+	setquest 30060;
 	'TotalPlayer = getmapusers(instance_mapname("1@ch_t"));
 	warp instance_mapname("1@ch_t"),48,13;
 	'CountPlayer = 'CountPlayer + 1;
