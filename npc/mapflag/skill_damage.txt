@@ -8,3 +8,6 @@
 //===== Additional Comments: ================================= 
 //= 1.0 Initial script. [Cydh]
 //============================================================
+bl_death	mapflag	skill_damage	all,BL_PC,0,-90,-90
+bl_grass	mapflag	skill_damage	all,BL_PC,0,-90,-90
+bl_lava	mapflag	skill_damage	all,BL_PC,0,-90,-90
