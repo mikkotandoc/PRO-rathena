@@ -177,7 +177,7 @@ ba_in01,358,50,8	script	Omega#ms01	EP17_2_OMEGA_CLEANER,{
 		.npc_is_walking = true;
 		donpcevent "Omega#ms01::OnWalk";
 	}
-	callshop( "barter_biosphere_1" );
+	callshop( "barter_biosphere_omega" );
 	end;
 
 OnWalk:
