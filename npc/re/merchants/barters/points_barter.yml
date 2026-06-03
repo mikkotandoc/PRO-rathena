@@ -86,116 +86,134 @@ Body:
             Item: Play_RO_Gold_Coin_
             Amount: 18
       - Index: 6
-        Item: GrayWolf_7_Ticket
+        Item: Bs_Sha_M_S_3
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 70
+            Amount: 20
       - Index: 7
+        Item: Bs_Sha_M_S_4
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 20
+      - Index: 8
         Item: HE_Bubble_Gum
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 1
-      - Index: 8
-        Item: Bubble_Gum_Green
-        RequiredItems:
-          - Index: 0
-            Item: Play_RO_Gold_Coin_
-            Amount: 70
       - Index: 9
-        Item: Bubble_Gum_Yellow
+        Item: Bubble_Gum_Green
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 1
       - Index: 10
-        Item: Bubble_Gum_Orange
+        Item: Bubble_Gum_Yellow
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 1
       - Index: 11
-        Item: Bubble_Gum_Red
+        Item: Bubble_Gum_Orange
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 1
       - Index: 12
-        Item: HE_Battle_Manual
+        Item: Bubble_Gum_Red
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 1
       - Index: 13
+        Item: HE_Battle_Manual
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 1
+      - Index: 14
         Item: Shadow_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 10
-      - Index: 14
+      - Index: 15
         Item: Physical_S_Package
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 10
-      - Index: 15
+      - Index: 16
         Item: Magical_S_Package
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 10
-      - Index: 16
+      - Index: 17
         Item: Up_Hero_Weapon_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 10
-      - Index: 17
+      - Index: 18
         Item: Comp_Power_Booster
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 5
-      - Index: 18
+      - Index: 19
         Item: E_Red_Booster
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 10
-      - Index: 19
+      - Index: 20
         Item: Comp_Almighty
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 5
-      - Index: 20
+      - Index: 21
         Item: E_Infinity_Drink
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 10
-      - Index: 21
+      - Index: 22
         Item: Shadow_Refine_Hammer
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 4
-      - Index: 22
+      - Index: 23
         Item: FullPeneShadow_Mix
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 45
-      - Index: 23
+      - Index: 24
         Item: All_Shadow_Cube
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 60
-      - Index: 24
+      - Index: 25
+        Item: FullPeneShadow_Mix
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 45
+      - Index: 26
+        Item: FullTempShadow_Mix
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 45
+      - Index: 27
         Item: FullPene_Armor_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 115
+            Amount: 135
