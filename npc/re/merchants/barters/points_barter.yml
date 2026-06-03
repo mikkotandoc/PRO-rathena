@@ -212,8 +212,8 @@ Body:
             Item: Play_RO_Gold_Coin_
             Amount: 45
       - Index: 27
-        Item: FullPene_Armor_Box
+        Item: Convex_Mirror
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 135
+            Amount: 5
