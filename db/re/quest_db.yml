@@ -12286,6 +12286,61 @@ Body:
     Title: I would like to know what it is
   - Id: 16453
     Title: I would like to know what it is
+  - Id: 16461
+    Title: Tomb of Remorse
+  - Id: 16462
+    Title: Tomb of Remorse
+  - Id: 16463
+    Title: Tomb of Remorse
+  - Id: 16464
+    Title: Tomb of Remorse Cooldown
+    TimeLimit: 4h
+  - Id: 16465
+    Title: Broken Threads of Fate
+    Targets:
+      - Mob: MD_SAKRAY
+        Count: 1
+  - Id: 16466
+    Title: Broken Threads of Fate Cooldown
+    TimeLimit: 4h
+  - Id: 16467
+    Title: Shedding in tears
+    Targets:
+      - Mob: MD_TIARA
+        Count: 1
+  - Id: 16468
+    Title: Shedding in tears Cooldown
+    TimeLimit: 4h
+  - Id: 16469
+    Title: Memory Fragments
+  - Id: 16470
+    Title: Memory Fragments Cooldown
+    TimeLimit: 4h
+  - Id: 16471
+    Title: Fragment of the Past
+  - Id: 16472
+    Title: Fragment of the Past Cooldown
+    TimeLimit: 4h
+  - Id: 16473
+    Title: Memory Fragment
+  - Id: 16474
+    Title: Memory Fragment
+  - Id: 16475
+    Title: Memory Fragment
+  - Id: 16476
+    Title: Memory Fragment
+  - Id: 16477
+    Title: Memory Fragment
+  - Id: 16478
+    Title: Memory Fragment
+  - Id: 16479
+    Title: Memory Fragment
+  - Id: 16480
+    Title: Memory Fragment
+  - Id: 16481
+    Title: Memory Fragment
+  - Id: 16482
+    Title: Memory Fragment
   - Id: 16521
     Title: 4th floor of Rudus, an organic field for waste specimens
   - Id: 16522
@@ -13548,6 +13603,12 @@ Body:
   - Id: 21173
     Title: Trust of the Village
     TimeLimit: 4h
+  - Id: 30059
+    Title: Constellation Tower Effect
+    TimeLimit: +4h
+  - Id: 30060
+    Title: Constellation Tower Cooldown
+    TimeLimit: +3d
   - Id: 50000
     Title: Pirate Dagger materials
   - Id: 50001
@@ -15182,82 +15243,82 @@ Body:
       - Mob: DIMIK_4
         Count: 10
     TimeLimit: 4h
-  - Id: 80300
+  - Id: 80326
     Title: "Eden Quest Board : Hunt Nightmare Terror - Waiting"
     TimeLimit: +4h
-  - Id: 80301
+  - Id: 80327
     Title: "Eden Quest Board : Hunt Deleter Duo - Waiting"
     TimeLimit: +4h
-  - Id: 80302
+  - Id: 80328
     Title: "Eden Quest Board : Hunt Carat - Waiting"
     TimeLimit: +4h
-  - Id: 80303
+  - Id: 80329
     Title: "Eden Quest Board : Hunt Arclouse - Waiting"
     TimeLimit: +4h
-  - Id: 80304
+  - Id: 80330
     Title: "Eden Quest Board : Hunt Anolian - Waiting"
     TimeLimit: +4h
-  - Id: 80305
+  - Id: 80331
     Title: "Eden Quest Board : Hunt Sting - Waiting"
     TimeLimit: +4h
-  - Id: 80306
+  - Id: 80332
     Title: "Eden Quest Board : Hunt Majorous - Waiting"
     TimeLimit: +4h
-  - Id: 80307
+  - Id: 80333
     Title: "Eden Quest Board : Hunt Raydric - Waiting"
     TimeLimit: +4h
-  - Id: 80308
+  - Id: 80334
     Title: "Eden Quest Board : Hunt Khalitzburg - Waiting"
     TimeLimit: +4h
-  - Id: 80309
+  - Id: 80335
     Title: "Eden Quest Board : Hunt Wanderer - Waiting"
     TimeLimit: +4h
-  - Id: 80310
+  - Id: 80336
     Title: "Eden Quest Board : Hunt Abysmal Knight - Waiting"
     TimeLimit: +4h
-  - Id: 80311
+  - Id: 80337
     Title: "Eden Quest Board : Hunt Pinguicula - Waiting"
     TimeLimit: +4h
-  - Id: 80312
+  - Id: 80338
     Title: "Eden Quest Board : Hunt Luciola Vespa - Waiting"
     TimeLimit: +4h
-  - Id: 80313
+  - Id: 80339
     Title: "Eden Quest Board : Hunt Tendrillion - Waiting"
     TimeLimit: +4h
-  - Id: 80314
+  - Id: 80340
     Title: "Eden Quest Board : Hunt Dark Pinguicula - Waiting"
     TimeLimit: +4h
-  - Id: 80315
+  - Id: 80341
     Title: "Eden Quest Board : Hunt Nepenthes - Waiting"
     TimeLimit: +4h
-  - Id: 80316
+  - Id: 80342
     Title: "Eden Quest Board : Hunt Naga - Waiting"
     TimeLimit: +4h
-  - Id: 80317
+  - Id: 80343
     Title: "Eden Quest Board : Hunt Cornus - Waiting"
     TimeLimit: +4h
-  - Id: 80318
+  - Id: 80344
     Title: "Eden Quest Board : Hunt Centipede Larva - Waiting"
     TimeLimit: +4h
-  - Id: 80319
+  - Id: 80345
     Title: "Eden Quest Board : Hunt Ancient Mimic - Waiting"
     TimeLimit: +4h
-  - Id: 80320
+  - Id: 80346
     Title: "Eden Quest Board : Hunt Deathword - Waiting"
     TimeLimit: +4h
-  - Id: 80321
+  - Id: 80347
     Title: "Eden Quest Board : Hunt Owl Baron - Waiting"
     TimeLimit: +4h
-  - Id: 80322
+  - Id: 80348
     Title: "Eden Quest Board : Hunt Orange & Green Venatu - Waiting"
     TimeLimit: +4h
-  - Id: 80323
+  - Id: 80349
     Title: "Eden Quest Board : Hunt Red & Blue Venatu - Waiting"
     TimeLimit: +4h
-  - Id: 80324
+  - Id: 80350
     Title: "Eden Quest Board : Hunt Blue & Orange Dimik - Waiting"
     TimeLimit: +4h
-  - Id: 80325
+  - Id: 80351
     Title: "Eden Quest Board : Hunt Green & Red Dimik - Waiting"
     TimeLimit: +4h
   - Id: 80500

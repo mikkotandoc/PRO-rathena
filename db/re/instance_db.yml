@@ -598,6 +598,13 @@ Body:
       6@thts: true
       7@thts: true
       8@thts: true
+  - Id: 121
+    Name: Tomb of Remorse
+    TimeLimit: 3600
+    Enter:
+      Map: 1@spa2
+      X: 52
+      Y: 198
   - Id: 130
     Name: Maze of Oz
     TimeLimit: 7200
