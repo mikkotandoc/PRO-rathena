@@ -108,7 +108,7 @@ Body:
         RequiredItems:
           - Index: 0
             Item: Fate_Shard_E
-            Amount: 5		
+            Amount: 5
   - Name: mot_shop_1
     Items:
       - Index: 0
@@ -182,7 +182,7 @@ Body:
         RequiredItems:
           - Index: 0
             Item: Sin_Fragment
-            Amount: 50		
+            Amount: 50
   - Name: mot_shop_2
     Items:
       - Index: 0
@@ -270,4 +270,4 @@ Body:
         RequiredItems:
           - Index: 0
             Item: Fate_Fragment
-            Amount: 50  
+            Amount: 50
