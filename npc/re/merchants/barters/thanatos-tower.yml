@@ -260,26 +260,14 @@ Body:
   - Name: remorse_item
     Items:
       - Index: 0
-        Item: Sakray_Fury
+        Item: Shine_Ring_R
         RequiredItems:
           - Index: 0
-            Item: Mine_As
+            Item: Fate_Fragment
             Amount: 50
       - Index: 1
-        Item: Sakray_Regret
+        Item: Shine_Ring_A
         RequiredItems:
           - Index: 0
-            Item: Mine_As
-            Amount: 50
-      - Index: 2
-        Item: Sakray_Fury2
-        RequiredItems:
-          - Index: 0
-            Item: Mine_As
-            Amount: 250
-      - Index: 3
-        Item: Sakray_Regret2
-        RequiredItems:
-          - Index: 0
-            Item: Mine_As
-            Amount: 250   
+            Item: Fate_Fragment
+            Amount: 50  
