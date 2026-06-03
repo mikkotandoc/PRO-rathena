@@ -111608,7 +111608,7 @@ Body:
         Rate: 1000
       - Item: Sakray_Regret2
         Rate: 1000
-      - Item: MD_Sakray_Card
+      - Item: Sakray_Card
         Rate: 1
         StealProtected: true
   - Id: 20893

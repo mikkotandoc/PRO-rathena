@@ -14165,7 +14165,7 @@
 //20894,Undead Knight@NPC_RANDOMBREAK,chase,172,5,1000,0,5000,yes,target,always,0,,,,,,,
 20895,Undead Soldier@SM_MAGNUM,attack,7,10,1000,0,5000,no,self,always,,,,,,,,
 20895,Undead Soldier@SM_MAGNUM,chase,7,10,1000,0,5000,no,self,always,,,,,,,,
-20895,Undead Soldier@NPC_ARMORBRAKE,attack,344,8,1000,0,10000,yes,target,always,,,,,,,
+20895,Undead Soldier@NPC_ARMORBRAKE,attack,344,8,1000,0,10000,yes,target,always,,,,,,,,,
 20895,Undead Soldier@NPC_GUIDEDATTACK,attack,172,10,1000,0,5000,yes,target,always,0,,,,,,,
 20895,Undead Soldier@NPC_UNDEADATTACK,attack,347,10,1000,0,5000,yes,target,always,0,,,,,,,
 20895,Undead Soldier@NPC_STUNATTACK,attack,179,10,1000,0,5000,no,target,always,,,,,,,,
