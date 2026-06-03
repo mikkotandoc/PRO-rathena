@@ -115,7 +115,7 @@ prt_mz03_i	monster	Chaos Mantis	20528,64,5000
 prt_mz03_i	monster	Chaos Baphomet Jr.	20525,70,5000
 prt_mz03_i	monster	Chaotic Stem Worm	20532,24,5000
 
-prt_mz03_i	monster	Chaotic Andrea	20521,,3600000,0,"prt_mz03_i_boss::OnMobDead"
+prt_mz03_i	monster	Chaotic Andrea	20521,1,3600000,0,"prt_mz03_i_boss::OnMobDead"
 prt_mz03_i	monster	Chaotic Anes	20522,1,3600000,0,"prt_mz03_i_boss::OnMobDead"
 prt_mz03_i	monster	Chaotic Silvano	20523,1,3600000,0,"prt_mz03_i_boss::OnMobDead"
 prt_mz03_i	monster	Chaotic Cecilia	20524,1,3600000,0,"prt_mz03_i_boss::OnMobDead"

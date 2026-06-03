@@ -78,7 +78,7 @@ gef_d01_i	monster	White Plant	1082,20
 gef_d01_i	monster	Blue Plant	1079,4
 gef_d01_i	monster	Matt Drainliar	3750,40
 gef_d01_i	monster	Living Dead	3751,20
-gef_d01_i	monster	Starving Living Dead	3752,2030
+gef_d01_i	monster	Starving Living Dead	3752,30
 gef_d01_i	monster	Living Dead	3753,50
 gef_d01_i	monster	Sweet Nightmare	3754,40
 gef_d01_i	monster	Black Mushroom	3755,30
