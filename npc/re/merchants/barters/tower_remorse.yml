@@ -51,28 +51,24 @@ Body:
     Items:
       - Index: 0
         Item: Sakray_Fury
-        Zeny: 100000
         RequiredItems:
           - Index: 0
             Item: Mine_As
             Amount: 50
       - Index: 1
         Item: Sakray_Regret
-        Zeny: 100000
         RequiredItems:
           - Index: 0
             Item: Mine_As
             Amount: 50
       - Index: 2
         Item: Sakray_Fury2
-        Zeny: 150000
         RequiredItems:
           - Index: 0
             Item: Mine_As
             Amount: 250
       - Index: 3
         Item: Sakray_Regret2
-        Zeny: 150000
         RequiredItems:
           - Index: 0
             Item: Mine_As
