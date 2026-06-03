@@ -40,6 +40,7 @@
 #            Item       Aegis name of required item.
 #            Amount     Amount of required item. (Default: 1)
 #            Refine     Refine level of required item. (Default: 0)
+#   - Path: npc/re/merchants/barters/tower_remorse.yml
 ###########################################################################
 
 Header:
@@ -70,4 +71,3 @@ Footer:
   - Path: npc/re/merchants/barters/eden_market.yml
   - Path: npc/re/merchants/barters/biosphere.yml
   - Path: npc/re/merchants/barters/constellation_tower.yml
-  - Path: npc/re/merchants/barters/tower_remorse.yml
