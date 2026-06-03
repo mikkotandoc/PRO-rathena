@@ -257,17 +257,3 @@ Body:
           - Index: 0
             Item: Fate_Fragment
             Amount: 50
-  - Name: remorsing
-    Items:
-      - Index: 0
-        Item: Shine_Ring_R
-        RequiredItems:
-          - Index: 0
-            Item: Fate_Fragment
-            Amount: 50
-      - Index: 1
-        Item: Shine_Ring_A
-        RequiredItems:
-          - Index: 0
-            Item: Fate_Fragment
-            Amount: 50
