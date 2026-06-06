@@ -45264,13 +45264,6 @@ Body:
 #        List:
 #          - Index: 0
 #            Item: Vesper_H_Gear_K
-  - Group: BS_ITEM_M_S_63
-    SubGroups:
-      - SubGroup: 0
-        Algorithm: All
-        List:
-          - Index: 0
-            Item: Corruption_Boots_K
   - Group: ENCHANT_STONE_BOX28
     SubGroups:
       - SubGroup: 6
@@ -133810,3 +133803,10 @@ Body:
             Item: C_Shining_Angel_Wing
             Amount: 1
             Rate: 4
+  - Group: BS_ITEM_M_S_63
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Corruption_Boots_K

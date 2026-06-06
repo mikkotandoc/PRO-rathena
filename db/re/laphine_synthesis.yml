@@ -4574,14 +4574,6 @@ Body:
 #        Amount: 30
 #      - Item: Zelunium
 #        Amount: 250
-  - Item: Bs_Item_M_S_63
-    RewardGroup: BS_ITEM_M_S_63
-    RequiredRequirementsCount: 2
-    Requirements:
-      - Item: EP19_D_P_Stone
-        Amount: 30
-      - Item: Zelunium
-        Amount: 250
 #  - Item: Mocadas_Slabs1
 #    RewardGroup: MOCADAS_SLABS1
 #    RequiredRequirementsCount: 3
@@ -4842,3 +4834,11 @@ Body:
       - Item: D_Glacier_Shotgun
       - Item: D_Glacier_Gatling
       - Item: D_Glacier_Launcher
+  - Item: Bs_Item_M_S_63
+    RewardGroup: BS_ITEM_M_S_63
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: EP19_D_P_Stone
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
