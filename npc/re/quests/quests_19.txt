@@ -7365,7 +7365,7 @@ OnTouch:
 		mes "Adventurer! Are you entering?";
 		mes "If you start a search operation now, you'll have to put all your efforts into it. The atmosphere over there is bad.";
 		next;
-		mes "^FF0000『 If you start a search operation, you will not be able to enter the existing 2nd floor map of the snake's nest until the operation is completed.^000000";
+		mes "^FF0000   If you start a search operation, you will not be able to enter the existing 2nd floor map of the snake's nest until the operation is completed.^000000";
 		next;
 		if (select( "Enter now.", "I need to prepare." ) == 2) {
 			mes "[Iwin Recon Unit]";
@@ -10507,7 +10507,7 @@ jor_back2,250,30,2	script(CLOAKED)	Lunch#lunch	4_EP19_LUNCH,{
 		sleep2 500;
 		break;
 	}
-	npctalk "Lunch: - - ， ， 　， 　- - 　- - ， 　- - ， - 　， - ， ， 　　， - - ， 　， ， ， ， 　- ， -", "", bc_self;
+	npctalk "Lunch: - -              - -   - -      - -    -      -              - -                    -    -", "", bc_self;
 	sleep2 500;
 	emotion ET_HUK;
 	sleep2 500;
@@ -11412,7 +11412,7 @@ icas_in,185,63,3	script	Vellgunde#ep19vell02	4_EP19_VELLGUNDE,{
 				close3;
 			}
 			delitem 1000608,35;	// Ep19_Snow_Flower
-			getgroupitem(IG_ICE_F_STONE_BOX2);
+			getgroupitem(IG_ICE_F_STONE_BOX);
 			mes "[Vellgunde]";
 			mes "Now, here are the results of the Manastone.";
 			mes "Are you as good as you need to be?";

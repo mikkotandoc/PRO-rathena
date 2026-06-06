@@ -4526,62 +4526,62 @@ Body:
         Amount: 150
       - Item: Shadowdecon
         Amount: 150
-#  - Item: Bs_Item_M_S_57
-#    RewardGroup: BS_ITEM_M_S_57
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: Tiger's_Skin
-#        Amount: 50
-#      - Item: Zelunium
-#        Amount: 250
-#  - Item: Bs_Item_M_S_58
-#    RewardGroup: BS_ITEM_M_S_58
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: Will_Of_Darkness_
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
-#  - Item: Bs_Item_M_S_59
-#    RewardGroup: BS_ITEM_M_S_59
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: Loki's_Whispers
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
-#  - Item: Bs_Item_M_S_60
-#    RewardGroup: BS_ITEM_M_S_60
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: EP20_D_Scale
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
-#  - Item: Bs_Item_M_S_61
-#    RewardGroup: BS_ITEM_M_S_61
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: Will_Of_Darkness_
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
-#  - Item: Bs_Item_M_S_62
-#    RewardGroup: BS_ITEM_M_S_62
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: EP19_Luminant
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
-#  - Item: Bs_Item_M_S_63
-#    RewardGroup: BS_ITEM_M_S_63
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: EP19_D_P_Stone
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
+  - Item: Bs_Item_M_S_57
+    RewardGroup: BS_ITEM_M_S_57
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: Tiger's_Skin
+        Amount: 50
+      - Item: Zelunium
+        Amount: 250
+  - Item: Bs_Item_M_S_58
+    RewardGroup: BS_ITEM_M_S_58
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: Will_Of_Darkness_
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
+  - Item: Bs_Item_M_S_59
+    RewardGroup: BS_ITEM_M_S_59
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: Loki's_Whispers
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
+  - Item: Bs_Item_M_S_60
+    RewardGroup: BS_ITEM_M_S_60
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: EP20_D_Scale
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
+  - Item: Bs_Item_M_S_61
+    RewardGroup: BS_ITEM_M_S_61
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: Will_Of_Darkness_
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
+  - Item: Bs_Item_M_S_62
+    RewardGroup: BS_ITEM_M_S_62
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: EP19_Luminant
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
+  - Item: Bs_Item_M_S_63
+    RewardGroup: BS_ITEM_M_S_63
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: EP19_D_P_Stone
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
 #  - Item: Mocadas_Slabs1
 #    RewardGroup: MOCADAS_SLABS1
 #    RequiredRequirementsCount: 3
