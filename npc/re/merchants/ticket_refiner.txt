@@ -30,6 +30,7 @@ prontera,182,174,6	script	Refine Master	851,{
 		6870,	// Guarantee_Weapon_13Up
 		6584,	// Guarantee_Weapon_12Up
 		6238,	// Guarantee_Weapon_11Up
+		6993,	// Guarantee_Weapon_10Up
 		6228,	// Guarantee_Weapon_9Up
 		6229,	// Guarantee_Weapon_8Up
 		6230,	// Guarantee_Weapon_7Up
@@ -45,6 +46,7 @@ prontera,182,174,6	script	Refine Master	851,{
 		6876,	// Guarantee_Armor_13Up
 		6585,	// Guarantee_Armor_12Up
 		6239,	// Guarantee_Armor_11Up
+		6994,	// Guarantee_Armor_10Up
 		6232,	// Guarantee_Armor_9Up
 		6233,	// Guarantee_Armor_8Up
 		6234,	// Guarantee_Armor_7Up
