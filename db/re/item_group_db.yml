@@ -45229,7 +45229,6 @@ Body:
         List:
           - Index: 0
             Item: Beast_Leather_Shoes
-            Amount: 1
   - Group: BS_ITEM_M_S_58
     SubGroups:
       - SubGroup: 0
@@ -45237,7 +45236,6 @@ Body:
         List:
           - Index: 0
             Item: Pirate_Captain_Coat
-            Amount: 1
   - Group: BS_ITEM_M_S_59
     SubGroups:
       - SubGroup: 0
@@ -45245,7 +45243,6 @@ Body:
         List:
           - Index: 0
             Item: Phreeoni_Wing
-            Amount: 1
   - Group: BS_ITEM_M_S_60
     SubGroups:
       - SubGroup: 0
@@ -45253,7 +45250,6 @@ Body:
         List:
           - Index: 0
             Item: Boitata_Hat_K
-            Amount: 1
   - Group: BS_ITEM_M_S_61
     SubGroups:
       - SubGroup: 0
@@ -45261,7 +45257,6 @@ Body:
         List:
           - Index: 0
             Item: Beelzebub_Crown_K
-            Amount: 1
   - Group: BS_ITEM_M_S_62
     SubGroups:
       - SubGroup: 0
@@ -45269,7 +45264,6 @@ Body:
         List:
           - Index: 0
             Item: Vesper_H_Gear_K
-            Amount: 1
   - Group: BS_ITEM_M_S_63
     SubGroups:
       - SubGroup: 0
@@ -45277,7 +45271,6 @@ Body:
         List:
           - Index: 0
             Item: Corruption_Boots_K
-            Amount: 1
   - Group: ENCHANT_STONE_BOX28
     SubGroups:
       - SubGroup: 6
