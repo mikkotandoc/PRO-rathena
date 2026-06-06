@@ -599,12 +599,13 @@ Body:
       7@thts: true
       8@thts: true
   - Id: 121
-    Name: Tomb of Remorse
-    TimeLimit: 3600
+    Name: Old Glast Heim Hard
     Enter:
-      Map: 1@spa2
-      X: 52
-      Y: 198
+      Map: 1@gl_k2
+      X: 150
+      Y: 20
+    AdditionalMaps:
+      2@gl_k2: true
   - Id: 130
     Name: Maze of Oz
     TimeLimit: 7200
