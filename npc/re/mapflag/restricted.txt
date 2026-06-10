@@ -245,6 +245,14 @@ lhz_d_n2	mapflag	restricted	6
 2@nyr	mapflag	restricted	6
 
 //============================================================
+// Episode 19 - Isgard's Ice Castle
+//============================================================
+1@jorlab	mapflag	restricted	6
+1@jorchs	mapflag	restricted	6
+1@iwp	mapflag	restricted	6
+1@whl	mapflag	restricted	6
+
+//============================================================
 // Sunken Tower
 //============================================================
 1@ch_u	mapflag	restricted	6

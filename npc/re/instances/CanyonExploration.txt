@@ -1,0 +1,67 @@
+//===== rAthena Script =======================================
+//= Instance: Canyon Exploration (Episode 20)
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Main quest instance - maps 1@20cn1, 1@20cn2
+//============================================================
+
+function	script	F_ep20_canyon_clear	{
+	if (ep20_main == 13 && isbegin_quest(17713) == 1) {
+		completequest 17713;
+		ep20_main = 14;
+		callfunc("F_ep20_reward", 20, 90);
+	}
+	return;
+}
+
+icecastle,201,171,3	script	Canyon Exploration#ep20	4_BULLETIN_BOARD2,{
+	end;
+
+OnStart:
+	if (ep20_main != 13) end;
+	if (instance_create("Canyon Exploration") < 0) {
+		mes "[System]";
+		mes "Party leader must create the instance.";
+		close;
+	}
+	warp "1@20cn1",100,100;
+	end;
+}
+
+1@20cn1,100,100,0	script	#ep20cn_evt01	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (ep20_main != 13) end;
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Follow the road. Watch for suspicious Iwin ahead.";
+	next;
+	mes "[Lehar]";
+	mes "Something feels wrong... Bagot!";
+	close2;
+	cutin "",255;
+	warp "1@20cn2",33,27;
+	end;
+}
+
+1@20cn2,33,27,3	script	Lehar#ep20cn01	4_EP19_LEHAR,{
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "We saw Bagot manipulating the canyon mana. Let's get out and report.";
+	next;
+	mes "[Lehar]";
+	mes "The white cat guided us out safely.";
+	callfunc("F_ep20_canyon_clear");
+	close2;
+	cutin "",255;
+	instance_destroy;
+	warp "icecastle",201,171;
+	end;
+}
+
+1@20cn1,1,1,0	script	#ep20cn_ctrl	-1,{
+OnInstanceInit:
+	disablenpc instance_npcname("#ep20cn_evt01");
+	enablenpc instance_npcname("#ep20cn_evt01");
+	end;
+}

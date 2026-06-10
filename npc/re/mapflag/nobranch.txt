@@ -396,6 +396,14 @@ tra_fild03	mapflag	nobranch
 que_thr	mapflag	nobranch
 
 //============================================================
+// Episode 19 - Isgard's Ice Castle
+//============================================================
+1@jorlab	mapflag	nobranch
+1@jorchs	mapflag	nobranch
+1@iwp	mapflag	nobranch
+1@whl	mapflag	nobranch
+
+//============================================================
 // Sunken Tower
 //============================================================
 1@ch_u	mapflag	nobranch

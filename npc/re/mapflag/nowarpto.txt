@@ -425,6 +425,14 @@ que_thr	mapflag	nowarpto
 wolfvill	mapflag	nowarpto
 
 //============================================================
+// Episode 19 - Isgard's Ice Castle
+//============================================================
+1@jorlab	mapflag	nowarpto
+1@jorchs	mapflag	nowarpto
+1@iwp	mapflag	nowarpto
+1@whl	mapflag	nowarpto
+
+//============================================================
 // Sunken Tower
 //============================================================
 1@ch_u	mapflag	nowarpto

@@ -1,0 +1,55 @@
+//===== rAthena Script =======================================
+//= Instance: The Immortal (Episode 20 finale)
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Final boss Lasgand - map 1@twig (quest version)
+//============================================================
+
+function	script	F_ep20_immortal_clear	{
+	if (ep20_main == 29 && isbegin_quest(17728) == 1) {
+		completequest 17728;
+		ep20_main = 30;
+		callfunc("F_ep20_reward", 30, 100);
+	}
+	return;
+}
+
+jor_twig,140,153,3	script	The Immortal#ep20	4_BULLETIN_BOARD2,{
+	end;
+
+OnStart:
+	if (ep20_main != 29) end;
+	if (instance_create("The Immortal") < 0) {
+		mes "Party leader must create the instance.";
+		close;
+	}
+	warp "1@twig",150,150;
+	end;
+}
+
+1@twig,150,150,3	script	Lasgand#ep20boss	4_EP20_LASGAND,{
+	if (ep20_main != 29) end;
+	mes "[Lasgand]";
+	mes "You dare interrupt my ascension?!";
+	close2;
+	.@label$ = instance_npcname("Lasgand#ep20boss") + "::OnBossDead";
+	monster "1@twig",150,150,"Phantom Lasgand",21982,1,.@label$;
+	disablenpc instance_npcname("Lasgand#ep20boss");
+	end;
+
+OnBossDead:
+	if (mobcount("1@twig", instance_npcname("Lasgand#ep20boss") + "::OnBossDead") > 0)
+		end;
+	mapannounce "1@twig","Nyar: I will suppress his power... for now.",bc_map,0xFFFF00;
+	sleep2 2000;
+	cutin "ep19_aurelie01.png",1;
+	mes "[Aurelie]";
+	mes "We obtained the Corrupted Heart Fragment of Ymir.";
+	mes "Lasgand lives, but his godhood failed.";
+	callfunc("F_ep20_immortal_clear");
+	close2;
+	cutin "",255;
+	instance_destroy;
+	warp "icas_in",248,112;
+	end;
+}

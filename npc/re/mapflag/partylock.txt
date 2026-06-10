@@ -258,6 +258,14 @@
 2@nyr	mapflag	partylock
 
 //============================================================
+// Episode 19 - Isgard's Ice Castle
+//============================================================
+1@jorlab	mapflag	partylock
+1@jorchs	mapflag	partylock
+1@iwp	mapflag	partylock
+1@whl	mapflag	partylock
+
+//============================================================
 // Sunken Tower
 //============================================================
 1@ch_u	mapflag	partylock

@@ -49,6 +49,8 @@ Body:
     Value: 3
   - Name: REPUTATION_EP19
     Value: 4
+  - Name: REPUTATION_EP20
+    Value: 5
 
 Footer:
   Imports:

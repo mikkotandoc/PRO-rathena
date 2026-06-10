@@ -1,0 +1,335 @@
+//===== rAthena Script =======================================
+//= Old Glast Heim - Challenge Mode
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= kRO/iRO based Challenge Mode instance (1@gl_he / 1@gl_he2)
+//= Uses existing MG_* mobs until official MD_C_* mobs are added.
+//============================================================
+
+function	script	F_OGHCM_MaxLevel	{
+	.@clears = #OGHCM_Clear;
+	if (.@clears >= 100) return 10;
+	if (.@clears >= 80) return 9;
+	if (.@clears >= 60) return 8;
+	if (.@clears >= 45) return 7;
+	if (.@clears >= 35) return 6;
+	if (.@clears >= 26) return 5;
+	if (.@clears >= 18) return 4;
+	if (.@clears >= 11) return 3;
+	if (.@clears >= 5) return 2;
+	return 1;
+}
+
+function	script	F_OGHCM_Reward	{
+	.@level = getarg(0);
+	.@bonus_root = getarg(1,0);
+	.@bonus_slave = getarg(2,0);
+	.@bonus_clean = getarg(3,0);
+
+	.@circlet_min = 1 + (.@level / 3);
+	.@circlet_max = min(.@level + 4, 10);
+	getitem 25864, rand(.@circlet_min, .@circlet_max); // Sealed Temporal Circlet
+
+	.@frag_max = 15 + (.@level * 3);
+	getitem 25867, rand(1, .@frag_max); // Temporal Fragment
+
+	if (.@level >= 3)
+		getitem 25865, rand(1, min(.@level - 1, 7)); // Temporal Gemstone
+	if (.@level >= 5)
+		getitem 25866, rand(1, min(.@level, 28)); // Temporal Spell
+	if (.@bonus_root)
+		getitem 25864, 1;
+	if (.@bonus_slave)
+		getitem 25864, 1;
+	if (.@bonus_clean)
+		getitem 25864, 1;
+	if (.@level >= 8)
+		getitem 25866, 1;
+	return;
+}
+
+glast_01,139,285,5	script	Oscar#oghcm	4_ED_OSCAR,{
+	if (BaseLevel < 170) {
+		mes "[Oscar]";
+		mes "This contaminated time zone is too dangerous for you.";
+		mes "Come back after reaching Base Level 170.";
+		close;
+	}
+	.@md_name$ = "Old Glast Heim (Challenge Mode)";
+	.@max_level = callfunc("F_OGHCM_MaxLevel");
+
+	mes "[Oscar]";
+	mes "The dimension we've discovered this time is a variant of Himmelmez's attack timeline.";
+	mes "Before the contaminated time erodes the present, we must stop it from growing.";
+	next;
+	mes "[Oscar]";
+	mes "Your total clears: ^0000CD" + #OGHCM_Clear + "^000000";
+	mes "Highest contamination level available: ^0000CD" + .@max_level + "^000000";
+	next;
+
+	switch( checkquest(12493,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Oscar]";
+		mes "You still have after-effects from the last challenge.";
+		mes "Please rest and return later.";
+		close;
+	case 2:
+		if (isbegin_quest(12493) > 0)
+			erasequest 12493;
+		break;
+	}
+
+	if (!instance_check_party(getcharid(1))) {
+		mes "[Oscar]";
+		mes "Form a party with at least one other member and talk to me again.";
+		close;
+	}
+
+	.@menu$ = (is_party_leader() ? "Open Time Gap:" : "") + "Enter " + .@md_name$ + ":Cancel";
+	switch( select(.@menu$) ) {
+	case 1:
+		if (!is_party_leader()) {
+			mes "[Oscar]";
+			mes "Only the party leader can open the time gap.";
+			close;
+		}
+		switch( instance_create(.@md_name$) ) {
+		case -3:
+			dispbottom "Memorial Dungeon, '" + .@md_name$ + "' is already in progress.", 0xFFFFFF;
+			close;
+		case -4:
+		case -2:
+		case -1:
+			mes "[Oscar]";
+			mes "^0000FF" + .@md_name$ + "^000000 - time gap generation failed.";
+			close;
+		}
+		mes "[Oscar]";
+		mes "The time gap is open. Select a contamination level inside.";
+		close;
+	case 2:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "[Oscar]";
+			mes "An unknown error has occurred.";
+			close;
+		case IE_NOINSTANCE:
+			mes "[Oscar]";
+			mes "The time gap is not open yet. Ask your party leader to generate it first.";
+			close;
+		case IE_NOMEMBER:
+			mes "[Oscar]";
+			mes "You must be in a party to enter.";
+			close;
+		case IE_OK:
+			mapannounce "glast_01", getpartyname(getcharid(1)) + " party member " + strcharinfo(0) + " enters " + .@md_name$ + ".", bc_map, 0x00FF99;
+			setquest 12493;
+			end;
+		}
+	case 3:
+		close;
+	}
+	end;
+}
+
+1@gl_he,150,28,5	script	Oscar#oghcm_start	4_ED_OSCAR,{
+	if (!is_party_leader()) {
+		mes "[Oscar]";
+		mes "The party leader must choose the contamination level.";
+		close;
+	}
+	if ('OGHCM_Started) {
+		mes "[Oscar]";
+		mes "The challenge has already begun.";
+		close;
+	}
+	.@max = callfunc("F_OGHCM_MaxLevel");
+	mes "[Oscar]";
+	mes "Select the contamination level for this run.";
+	mes "Higher levels mean stronger enemies and better rewards.";
+	next;
+	.@menu$ = "";
+	for (.@i = 1; .@i <= .@max; .@i++)
+		.@menu$ = .@menu$ + "Level " + .@i + ":";
+	.@menu$ = .@menu$ + "Cancel";
+	.@pick = select(.@menu$);
+	if (.@pick > .@max) {
+		close;
+	}
+	'OGHCM_Level = .@pick;
+	'OGHCM_Started = 1;
+	'OGHCM_WestClear = 0;
+	'OGHCM_EastClear = 0;
+	'OGHCM_RootKilled = 0;
+	'OGHCM_SlaveKills = 0;
+	'OGHCM_BossClean = 1;
+	'map1$ = instance_mapname("1@gl_he");
+	'map2$ = instance_mapname("1@gl_he2");
+	'party_id = getcharid(1);
+
+	mapannounce 'map1$, "Oscar: Contamination Level " + 'OGHCM_Level + " selected. Splitting the party.", bc_map, 0xFFFF00;
+	getpartymember 'party_id, 1;
+	getpartymember 'party_id, 2;
+	.@count = $@partymembercount;
+	for (.@i = 0; .@i < .@count; .@i++) {
+		if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i]) == 0)
+			continue;
+		if (.@i % 2)
+			warpchar 'map1$, 215, 79, $@partymembercid[.@i];
+		else
+			warpchar 'map1$, 80, 80, $@partymembercid[.@i];
+	}
+	donpcevent instance_npcname("OGHCM Controller") + "::OnStart";
+	close;
+}
+
+-	script	OGHCM Controller	-1,{
+OnStart:
+	sleep 2000;
+	.@map$ = 'map1$;
+	.@lvl = 'OGHCM_Level;
+	.@mob_count = 25 + (.@lvl * 2);
+	.@label$ = instance_npcname("OGHCM Controller") + "::OnWestDead";
+	areamonster .@map$, 60, 60, 100, 100, "--ja--", MG_ZOMBIE, .@mob_count / 4, .@label$;
+	areamonster .@map$, 60, 60, 100, 100, "--ja--", MG_GHOUL, .@mob_count / 4, .@label$;
+	areamonster .@map$, 60, 60, 100, 100, "--ja--", MG_WRAITH, .@mob_count / 4, .@label$;
+	areamonster .@map$, 60, 60, 100, 100, "--ja--", MG_RAYDRIC, .@mob_count / 4, .@label$;
+	.@label$ = instance_npcname("OGHCM Controller") + "::OnEastDead";
+	areamonster .@map$, 195, 60, 235, 100, "--ja--", MG_ZOMBIE, .@mob_count / 4, .@label$;
+	areamonster .@map$, 195, 60, 235, 100, "--ja--", MG_GHOUL, .@mob_count / 4, .@label$;
+	areamonster .@map$, 195, 60, 235, 100, "--ja--", MG_WRAITH, .@mob_count / 4, .@label$;
+	areamonster .@map$, 195, 60, 235, 100, "--ja--", MG_RAYDRIC_ARCHER, .@mob_count / 4, .@label$;
+	'OGHCM_WestLeft = .@mob_count;
+	'OGHCM_EastLeft = .@mob_count;
+	end;
+
+OnWestDead:
+	if (--'OGHCM_WestLeft > 5)
+		end;
+	if ('OGHCM_WestClear)
+		end;
+	'OGHCM_WestClear = 1;
+	callsub S_CheckPhase;
+	end;
+
+OnEastDead:
+	if (--'OGHCM_EastLeft > 5)
+		end;
+	if ('OGHCM_EastClear)
+		end;
+	'OGHCM_EastClear = 1;
+	callsub S_CheckPhase;
+	end;
+
+S_CheckPhase:
+	if (!'OGHCM_WestClear || !'OGHCM_EastClear)
+		end;
+	mapannounce 'map1$, "Oscar: Both wings are clear. A Prime Corruption Root has appeared in the central corridor!", bc_map, 0xFF5555;
+	.@roots = 1;
+	if ('OGHCM_Level >= 4) .@roots = rand(1,2);
+	if ('OGHCM_Level >= 6) .@roots = rand(1,3);
+	if ('OGHCM_Level >= 8) .@roots = rand(1,4);
+	for (.@i = 0; .@i < .@roots; .@i++)
+		monster 'map1$, 150, 79, "--ja--", MG_CORRUPTION_ROOT, 1, instance_npcname("OGHCM Controller") + "::OnRootDead";
+	initnpctimer;
+	end;
+
+OnTimer30000:
+	killmonster 'map1$, instance_npcname("OGHCM Controller") + "::OnRootDead";
+	if (!'OGHCM_RootKilled) {
+		mapannounce 'map1$, "Oscar: I purified the corruption root for you. Rewards will be reduced.", bc_map, 0xFF9900;
+		'OGHCM_BossClean = 0;
+	}
+	enablenpc instance_npcname("Oscar#oghcm_mid");
+	end;
+
+OnRootDead:
+	if (!'OGHCM_RootKilled) {
+		'OGHCM_RootKilled = 1;
+		stopnpctimer;
+	}
+	end;
+
+OnBossDead:
+	killmonster 'map2$, instance_npcname("OGHCM Controller") + "::OnSlaveDead";
+	'OGHCM_Complete = 1;
+	enablenpc instance_npcname("Oscar#oghcm_reward");
+	mapannounce 'map2$, "Oscar: The phantom has fallen. Claim your reward.", bc_map, 0x00FF99;
+	end;
+
+OnSlaveDead:
+	'OGHCM_SlaveKills++;
+	end;
+}
+
+1@gl_he,150,79,5	script(CLOAKED)	Oscar#oghcm_mid	4_ED_OSCAR,{
+	mes "[Oscar]";
+	mes "The central corridor is secure.";
+	mes "Shall we proceed to the boss chamber?";
+	next;
+	if (select("Proceed.", "Not yet.") == 2)
+		close;
+	disablenpc instance_npcname("Oscar#oghcm_mid");
+	warpparty 'map2$, 150, 28, 'party_id, 'map2$;
+	enablenpc instance_npcname("Oscar#oghcm_boss");
+	end;
+}
+
+1@gl_he2,150,28,5	script(CLOAKED)	Oscar#oghcm_boss	4_ED_OSCAR,{
+	if ('OGHCM_BossStarted)
+		end;
+	mes "[Oscar]";
+	mes "I will summon the phantom of this timeline.";
+	mes "Prepare yourselves.";
+	next;
+	if (select("Summon the boss.", "Wait.") == 2)
+		close;
+	'OGHCM_BossStarted = 1;
+	disablenpc instance_npcname("Oscar#oghcm_boss");
+	.@lvl = 'OGHCM_Level;
+	.@himmel_chance = 459 + (.@lvl * 50);
+	if (rand(10000) < .@himmel_chance && .@lvl >= 3) {
+		'OGHCM_BossIsHimmel = 1;
+		monster 'map2$, 150, 60, "--ja--", MG_AMDARAIS_H, 1, instance_npcname("OGHCM Controller") + "::OnBossDead";
+		mapannounce 'map2$, "Oscar: Phantom Himmelmez has appeared!", bc_map, 0xFF00FF;
+	} else {
+		'OGHCM_BossIsHimmel = 0;
+		monster 'map2$, 150, 60, "--ja--", MG_AMDARAIS, 1, instance_npcname("OGHCM Controller") + "::OnBossDead";
+		mapannounce 'map2$, "Oscar: Phantom Amdarais has appeared!", bc_map, 0xFF0000;
+	}
+	.@slaves = 5 + 'OGHCM_Level;
+	for (.@i = 0; .@i < .@slaves; .@i++)
+		monster 'map2$, 140 + rand(20), 50 + rand(20), "--ja--", MG_KHALITZBURG, 1, instance_npcname("OGHCM Controller") + "::OnSlaveDead";
+	end;
+}
+
+1@gl_he2,150,20,5	script(CLOAKED)	Oscar#oghcm_reward	4_ED_OSCAR,{
+	if (!'OGHCM_Complete) {
+		mes "[Oscar]";
+		mes "Defeat the phantom boss first.";
+		close;
+	}
+	mes "[Oscar]";
+	mes "Well done. Here are your rewards for Contamination Level " + 'OGHCM_Level + ".";
+	callfunc("F_OGHCM_Reward", 'OGHCM_Level, 'OGHCM_RootKilled, ('OGHCM_SlaveKills >= 100), 'OGHCM_BossClean);
+	#OGHCM_Clear++;
+	mes "[Oscar]";
+	mes "Total clears: ^0000CD" + #OGHCM_Clear + "^000000";
+	close2;
+	warp "glast_01", 139, 283;
+	end;
+}
+
+1@gl_he,1,1,0	script	#oghcm_init	-1,{
+OnInstanceInit:
+	'OGHCM_Started = 0;
+	'OGHCM_Complete = 0;
+	'OGHCM_BossStarted = 0;
+	disablenpc instance_npcname("Oscar#oghcm_mid");
+	disablenpc instance_npcname("Oscar#oghcm_boss");
+	disablenpc instance_npcname("Oscar#oghcm_reward");
+	end;
+}

@@ -250,6 +250,7 @@ function	script	F_EpClearSkip	{
 						case 16: terra_gloria_main = 25; break;
 						case 18: ep18_main = 57; break;
 						case 19: ep19_main = 100; break;
+						case 20: ep20_main = 100; break;
 					}
 				}
 			}

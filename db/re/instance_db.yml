@@ -377,10 +377,13 @@ Body:
       Y: 22
   - Id: 49
     Name: Old Glast Heim (Challenge Mode)
+    TimeLimit: 5400
     Enter:
       Map: 1@gl_he
       X: 150
       Y: 28
+    AdditionalMaps:
+      1@gl_he2: true
   - Id: 50
     Name: Old Glast Heim (Beginner)
     Enter:
@@ -548,30 +551,35 @@ Body:
       Y: 19
   - Id: 74
     Name: Bagot Laboratory
+    TimeLimit: 3600
     Enter:
       Map: 1@jorlab
       X: 57
       Y: 45
   - Id: 75
     Name: Confused Snake's Nest
+    TimeLimit: 3600
     Enter:
       Map: 1@jorchs
       X: 272
       Y: 20
   - Id: 76
     Name: Iwin Patrol
+    TimeLimit: 3600
     Enter:
       Map: 1@iwp
       X: 380
       Y: 229
   - Id: 77
     Name: Airship Destruction
+    TimeLimit: 3600
     Enter:
       Map: 1@whl
       X: 32
       Y: 53
   - Id: 78
     Name: Simulation Battle
+    TimeLimit: 3600
     Enter:
       Map: 1@jorlab
       X: 57
@@ -643,24 +651,40 @@ Body:
       Map: 1@adv
       X: 134
       Y: 19
-  - Id: 138
-    Name: Bagot's Laboratory
+  - Id: 141
+    Name: Canyon Exploration
     TimeLimit: 3600
     Enter:
-      Map: 1@jorlab
-      X: 57
-      Y: 45
-  - Id: 139
-    Name: Chaotic Snake Nest
+      Map: 1@20cn1
+      X: 100
+      Y: 100
+  - Id: 142
+    Name: Drift Ice Zone
     TimeLimit: 3600
     Enter:
-      Map: 1@jorchs
-      X: 272
-      Y: 20
-  - Id: 140
-    Name: Airship Sabotage Operation
+      Map: 1@twsd
+      X: 314
+      Y: 92
+  - Id: 143
+    Name: Nest of Twigs
     TimeLimit: 3600
     Enter:
-      Map: 1@whl
-      X: 32
-      Y: 53
+      Map: 1@twig
+      X: 100
+      Y: 100
+  - Id: 144
+    Name: The Immortal
+    TimeLimit: 3600
+    Enter:
+      Map: 1@twig
+      X: 150
+      Y: 150
+  - Id: 145
+    Name: EDDA Somatology Laboratory
+    TimeLimit: 7200
+    Enter:
+      Map: 1@gol1
+      X: 198
+      Y: 37
+    AdditionalMaps:
+      1@gol2: true

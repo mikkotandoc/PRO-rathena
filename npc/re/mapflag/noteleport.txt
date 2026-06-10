@@ -451,6 +451,18 @@ que_thr	mapflag	noteleport
 2@nyr	mapflag	monster_noteleport
 
 //============================================================
+// Episode 19 - Isgard's Ice Castle
+//============================================================
+1@jorlab	mapflag	noteleport
+1@jorchs	mapflag	noteleport
+1@iwp	mapflag	noteleport
+1@whl	mapflag	noteleport
+1@jorlab	mapflag	monster_noteleport
+1@jorchs	mapflag	monster_noteleport
+1@iwp	mapflag	monster_noteleport
+1@whl	mapflag	monster_noteleport
+
+//============================================================
 // Sunken Tower
 //============================================================
 1@ch_u	mapflag	noteleport

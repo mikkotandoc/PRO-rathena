@@ -5788,6 +5788,16 @@ static struct Damage battle_calc_weapon_attack(block_list *src, block_list *targ
 
 	battle_do_reflect(BF_WEAPON,&wd, src, target, skill_id, skill_lv); //WIP [lighta]
 
+	// Custom: specific monster takes only 10% physical damage from players (EPISODE 20 FILES.) PRO-Ragnarok Values are not final and may be changed later.
+	if (src && src->type == BL_PC && target && target->type == BL_MOB) {
+		mob_data* md = BL_CAST(BL_MOB, target);
+
+		if (md && md->mob_id == 1002) { // Poring
+			wd.damage /= 10;
+			wd.damage2 /= 10;
+		}
+	}
+
 	return wd;
 }
 
@@ -6280,6 +6290,16 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 	battle_absorb_damage(target, &ad);
 
 	//battle_do_reflect(BF_MAGIC,&ad, src, target, skill_id, skill_lv); //WIP [lighta] Magic skill has own handler at skill_attack
+
+	// Custom: specific monster takes only 10% magic damage from players. EPISODE 20 Monsters. PRO-Ragnarok Values are not final and may be changed later.
+	if (src && src->type == BL_PC && target && target->type == BL_MOB) {
+		mob_data* md = BL_CAST(BL_MOB, target);
+
+		if (md && md->mob_id == 1002) { // Poring
+			ad.damage /= 10;
+			ad.damage2 /= 10;
+		}
+	}
 	return ad;
 }
 
@@ -6700,6 +6720,16 @@ struct Damage battle_calc_misc_attack(block_list *src,block_list *target,uint16 
 	battle_absorb_damage(target, &md);
 
 	battle_do_reflect(BF_MISC,&md, src, target, skill_id, skill_lv); //WIP [lighta]
+
+	// Custom: specific monster takes only 10% miscellaneous damage from players. Episode 20 Monsters. PRO-Ragnarok Values are not final and may be changed later.
+	if (src && src->type == BL_PC && target && target->type == BL_MOB) {
+		mob_data* mob = BL_CAST(BL_MOB, target);
+
+		if (mob && mob->mob_id == 1002) { // Poring
+			md.damage /= 10;
+			md.damage2 /= 10;
+		}
+	}
 
 	return md;
 }

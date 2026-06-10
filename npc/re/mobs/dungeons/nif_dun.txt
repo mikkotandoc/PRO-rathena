@@ -15,4 +15,4 @@ nif_dun02	monster	Disguiser	DISGUISER,80
 nif_dun02	monster	Grote	GROTE,80
 nif_dun02	monster	Pierrotzoist	PIERROTZOIST,80
 nif_dun02	monster	Blue Moon Loli Ruri	BLUEMOON_LOLI_RURI,80
-nif_dun02	boss_monster	Death Witch	DEATH_WITCH,1,21600000,600000,0
+nif_dun02	boss_monster	Death Witch	DEATH_WITCH,1,10800000,600000,0

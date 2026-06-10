@@ -105811,6 +105811,10 @@ Body:
     DamageMotion: 480
     Ai: 21
     Drops:
+      - Item: Angelic_Chain
+        Rate: 1500
+      - Item: Shadowdecon_Ore
+        Rate: 1500
       - Item: Angel_Dream
         Rate: 1500
       - Item: Rune_Of_Darkness
@@ -105854,12 +105858,18 @@ Body:
     DamageMotion: 480
     Ai: 21
     Drops:
+      - Item: Angelic_Chain
+        Rate: 1500
+      - Item: Shadowdecon_Ore
+        Rate: 1500
       - Item: Angel_Dream
-        Rate: 1500 
-      - Item: Odin_itembox
-        Rate: 5
+        Rate: 1500
       - Item: Rune_Of_Darkness
         Rate: 3000
+      - Item: Odin_itembox
+        Rate: 5
+      - Item: Stone_Of_Intelligence_
+        Rate: 100
       - Item: Soft_Feather
         Rate: 2000
       - Item: Angelgolt_Card
@@ -105899,6 +105909,10 @@ Body:
         Rate: 350
       - Item: Rune_Of_Darkness
         Rate: 5000
+      - Item: Shard_Gold
+        Rate: 2
+      - Item: Zelunium
+        Rate: 8
       - Item: Odin_itembox
         Rate: 5
       - Item: Soft_Feather
@@ -105944,6 +105958,10 @@ Body:
         Rate: 10000
       - Item: Angel_Dream
         Rate: 1500
+      - Item: Shard_Blue
+        Rate: 2
+      - Item: Shadowdecon
+        Rate: 8
       - Item: Odin_itembox
         Rate: 5
       - Item: Soft_Feather
@@ -105985,6 +106003,8 @@ Body:
     Drops:
       - Item: Scell
         Rate: 10000
+      - Item: Shadowdecon_Ore
+        Rate: 150
       - Item: Soft_Feather
         Rate: 10000
       - Item: Light_Granule
@@ -106032,6 +106052,8 @@ Body:
         Rate: 10000
       - Item: Soft_Feather
         Rate: 10000
+      - Item: Zelunium_Ore
+        Rate: 150
       - Item: Light_Granule
         Rate: 10000      
       - Item: Old_Violet_Box
@@ -124578,8 +124600,36 @@ Body:
     Class: Boss
 #  - Id: 21995
 #    AegisName: EP20_NPC_COCOPO
-#  - Id: 21996
-#    AegisName: EP20_SNOW_ANGEL
+  - Id: 21996
+    AegisName: EP20_SNOW_ANGEL
+    Name: Snowstorm Angel
+    Level: 235
+    Hp: 207606917
+    BaseExp: 517488
+    JobExp: 362242
+    Attack: 11690
+    Attack2: 5003
+    Defense: 329
+    MagicDefense: 179
+    Str: 101
+    Agi: 83
+    Vit: 97
+    Int: 101
+    Dex: 98
+    Luk: 97
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Angel
+    Element: Holy
+    ElementLevel: 4
+    WalkSpeed: 170
+    AttackDelay: 1470
+    AttackMotion: 735
+    DamageMotion: 350
+    Class: Boss
+    MvpExp: 100000
 #  - Id: 21997
 #    AegisName: G_EP20_JORMUNGUARD1
 #  - Id: 21998
@@ -124866,8 +124916,59 @@ Body:
 #    AegisName: AB_YEMOB_131
 #  - Id: 22139
 #    AegisName: AB_YEMOB_132
-#  - Id: 22140
-#    AegisName: BIO_ANOLIAN
+  - Id: 22140
+    AegisName: BIO_ANOLIAN
+    Name: Bio Anolian
+    Level: 263
+    Hp: 107320500
+    BaseExp: 5440652
+    JobExp: 3789414
+    Attack: 32536
+    Attack2: 48488
+    Defense: 229
+    MagicDefense: 115
+    Str: 369
+    Agi: 254
+    Vit: 293
+    Int: 236
+    Dex: 423
+    Luk: 323
+    AttackRange: 1
+    SkillRange: 9
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 160
+    AttackDelay: 1100
+    DamageMotion: 250
+    Modes:
+    Aggressive: true
+    CanMove: true
+    CanAttack: true
+    AttackRange: 5
+    SkillRange: 12
+    ChaseRange: 12
+    DamageTaken: 10
+    Ai: 04
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Bar_D_Ic_Energy
+        Rate: 500
+      - Item: Bar_D_Ic_Crystal
+        Rate: 50
+      - Item: Etel_Dust
+        Rate: 150
+      - Item: Ice_Barmund_Rune
+        Rate: 80
+      - Item: Ice_Barmund_Rune2
+        Rate: 20
+      - Item: Barmund_Ice_Essence
+        Rate: 30
+      - Item: Bar_D_Ic_Specimen
+        Rate: 2500
 #  - Id: 22141
 #    AegisName: BIO_SKEL_ARCHER
 #  - Id: 22142
@@ -124888,6 +124989,56 @@ Body:
 #    AegisName: BIO_HOLY_SKOGUL
 #  - Id: 22150
 #    AegisName: BIO_KAPHA
+  - Id: 22150
+    AegisName: BIO_KAPHA
+    Name: Bio Kapha
+    Level: 263
+    Hp: 105899670
+    BaseExp: 5440652
+    JobExp: 3789414
+    Attack: 31020
+    Attack2: 46214
+    Defense: 299
+    MagicDefense: 115
+    Str: 369
+    Agi: 254
+    Vit: 293
+    Int: 236
+    Dex: 423
+    Luk: 395
+    AttackRange: 1
+    SkillRange: 9
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 140
+    AttackDelay: 1160
+    DamageMotion: 250
+    Modes:
+    Aggressive: true
+    CanMove: true
+    CanAttack: true
+    DamageTaken: 10
+    Ai: 04
+    Modes:
+      Detector: true
+    Drops:
+      - Item: Bar_D_Ic_Energy
+        Rate: 500
+      - Item: Bar_D_Ic_Crystal
+        Rate: 50
+      - Item: Etel_Dust
+        Rate: 150
+      - Item: Ice_Barmund_Rune
+        Rate: 80
+      - Item: Ice_Barmund_Rune2
+        Rate: 20
+      - Item: Barmund_Ice_Essence
+        Rate: 30
+      - Item: Bar_D_Ic_Specimen
+        Rate: 2500
 #  - Id: 22151
 #    AegisName: BIO_SKEL_SOLDIER
 #  - Id: 22152
@@ -130421,8 +130572,35 @@ Body:
 #    AegisName: JP_MAZEMOB_149
 #  - Id: 23059
 #    AegisName: JP_MAZEMOB_150
-#  - Id: 23060
-#    AegisName: EP20_ARMOERDCOPO
+  - Id: 23060
+    AegisName: EP20_ARMOERDCOPO
+    Name: Armored Copo
+    Level: 243
+    Hp: 34890060
+    BaseExp: 593294
+    JobExp: 415305
+    Attack: 6442
+    Attack2: 2896
+    Defense: 342
+    MagicDefense: 187
+    Str: 109
+    Agi: 90
+    Vit: 104
+    Int: 109
+    Dex: 106
+    Luk: 104
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Brute
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 860
+    AttackMotion: 430
+    DamageMotion: 300
+    Ai: 01
 #  - Id: 23061
 #    AegisName: MIN_ECLIPSE_TW
 #  - Id: 23062

@@ -12217,6 +12217,9 @@ Body:
   - Id: 16390
     Title: Standby
     TimeLimit: 4h
+  - Id: 16400
+    Title: EDDA Somatology Laboratory - Waiting
+    TimeLimit: 4h
   - Id: 16405
     Title: Happy Egg Exploration-Standby
     TimeLimit: 4h
@@ -13042,6 +13045,88 @@ Body:
   - Id: 17662
     Title: Standby: Finding an Underground Hideout on the Ground
     TimeLimit: 4h
+  - Id: 17700
+    Title: Natives of the Ancient Ice Gorge
+  - Id: 17701
+    Title: Natives of the Ancient Ice Gorge
+  - Id: 17702
+    Title: Natives of the Ancient Ice Gorge
+  - Id: 17703
+    Title: Natives of the Ancient Ice Gorge
+  - Id: 17704
+    Title: Natives of the Ancient Ice Gorge
+  - Id: 17705
+    Title: Natives of the Ancient Ice Gorge
+  - Id: 17706
+    Title: Era of Cold War and Espionage
+  - Id: 17707
+    Title: Era of Cold War and Espionage
+  - Id: 17708
+    Title: Era of Cold War and Espionage
+  - Id: 17709
+    Title: Era of Cold War and Espionage
+  - Id: 17710
+    Title: Era of Cold War and Espionage
+  - Id: 17711
+    Title: Era of Cold War and Espionage
+  - Id: 17712
+    Title: More Expert Than Any Awin
+  - Id: 17713
+    Title: More Expert Than Any Awin
+  - Id: 17714
+    Title: Kopo's Secret Base
+  - Id: 17715
+    Title: Infiltration of Rgans' Hideout
+  - Id: 17716
+    Title: Infiltration of Rgans' Hideout
+  - Id: 17717
+    Title: Infiltration of Rgans' Hideout
+    Targets:
+      - Mob: EP20_RGAN_WARLOCK
+        Count: 5
+      - Mob: EP20_JORGAN_HEALER
+        Count: 5
+  - Id: 17718
+    Title: Infiltration of Rgans' Hideout
+  - Id: 17719
+    Title: Infiltration of Rgans' Hideout
+  - Id: 17720
+    Title: Where the End of the Maze Leads
+  - Id: 17721
+    Title: Where the End of the Maze Leads
+  - Id: 17722
+    Title: Deep Ancient Sea
+  - Id: 17723
+    Title: Deep Ancient Sea
+  - Id: 17724
+    Title: Deep Ancient Sea
+  - Id: 17725
+    Title: Deep Ancient Sea
+    Targets:
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 5
+  - Id: 17726
+    Title: The Undying One
+  - Id: 17727
+    Title: The Undying One
+  - Id: 17728
+    Title: The Undying One
+  - Id: 20000
+    Title: Natives of the Ancient Ice Gorge
+  - Id: 20001
+    Title: Era of Cold War and Espionage
+  - Id: 20003
+    Title: More Expert Than Any Awin
+  - Id: 20004
+    Title: Kopo's Secret Base
+  - Id: 20005
+    Title: Infiltration of Rgans' Hideout
+  - Id: 20006
+    Title: Where the End of the Maze Leads
+  - Id: 20007
+    Title: Deep Ancient Sea
+  - Id: 20008
+    Title: The Undying One
   - Id: 18000
     Title: Ready to enter
   - Id: 18001

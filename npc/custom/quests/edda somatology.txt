@@ -169,30 +169,35 @@ OnMobDead:
         mes "WARNING: Battle mode simulation active.";
         mes "No cutscenes will interrupt. The combat matrix is intensive.";
         next;
-        if (select("Initiate Battle Matrix:Cancel") == 2) close;
-        
+        if (select("Initiate Battle Matrix:Cancel") == 2)
+            close;
+
+        .@map$ = instance_mapname("2@edda");
+        .@event$ = instance_npcname("Sierra#bat_ctrl") + "::OnMobDead";
+        mapannounce .@map$, "[System]: Hostile biological signals detected!", bc_map, 0xFF0000;
+        areamonster .@map$,40,40,70,70,"Regenschirm Elite Guard",20543,15,.@event$;
+        areamonster .@map$,40,40,70,70,"Regenschirm Scientist",20543,10,.@event$;
+        set_instance_var("mobs_left", 25);
+        set_instance_var("progress", 1);
         close;
-        // Spawn heavy mob counts for Battle Mode
-        mapannounce instance_mapname("2@edda"), "[System]: Hostile biological signals detected!", bc_map, 0xFF0000;
-        instance_monster(.@instance, "2@edda", 45, 45, "Regenschirm Elite Guard", 20543, 15, "Sierra#bat_ctrl::OnMobDead");
-        instance_monster(.@instance, "2@edda", 65, 65, "Regenschirm Scientist", 20543, 10, "Sierra#bat_ctrl::OnMobDead");
-        
-        instance_set_var(.@instance, "mobs_left", 25);
-        instance_set_var(.@instance, "progress", 1);
-        end;
+    }
+
+    if (.@prog == 1) {
+        mes "[Sierra]";
+        mes "Clear every hostile signal in this sector first.";
+        close;
     }
 
     if (.@prog == 2) {
         mes "[Sierra]";
         mes "The perimeter is cleared. The final combat simulation core is accessible.";
         next;
+        .@map$ = instance_mapname("2@edda");
+        .@event$ = instance_npcname("Sierra#bat_ctrl") + "::OnBossDead";
+        mapannounce .@map$, "[System]: Unknown Swordsman (MVP) materialized!", bc_map, 0xFF0000;
+        monster .@map$,50,50,"Unknown Swordsman",20536,1,.@event$;
+        set_instance_var("progress", 3);
         close;
-        
-        mapannounce instance_mapname("2@edda"), "[System]: Unknown Swordsman (MVP) materialized!", bc_map, 0xFF0000;
-        // 102571 = Unknown Swordsman MVP
-        instance_monster(.@instance, "2@edda", 50, 50, "Unknown Swordsman", 102571, 1, "Sierra#bat_ctrl::OnBossDead");
-        instance_set_var(.@instance, "progress", 3);
-        end;
     }
     
     if (.@prog == 4) {
@@ -213,19 +218,17 @@ OnMobDead:
     end;
 
 OnMobDead:
-    .@instance = instance_id();
-    .@rem = instance_get_var(.@instance, "mobs_left") - 1;
-    instance_set_var(.@instance, "mobs_left", .@rem);
+    .@rem = get_instance_var("mobs_left") - 1;
+    set_instance_var("mobs_left", .@rem);
 
-    if (.@rem <= 0 && instance_get_var(.@instance, "progress") == 1) {
+    if (.@rem <= 0 && get_instance_var("progress") == 1) {
         mapannounce instance_mapname("2@edda"), "[System]: Security grid broken. Speak to Sierra to reveal the boss.", bc_map, 0x00FF00;
-        instance_set_var(.@instance, "progress", 2);
+        set_instance_var("progress", 2);
     }
     end;
 
 OnBossDead:
-    .@instance = instance_id();
     mapannounce instance_mapname("2@edda"), "[System]: Combat sequence cleared. Claim your rewards.", bc_map, 0x00FFFF;
-    instance_set_var(.@instance, "progress", 4);
+    set_instance_var("progress", 4);
     end;
 }

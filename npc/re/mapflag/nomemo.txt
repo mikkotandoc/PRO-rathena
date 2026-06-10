@@ -489,6 +489,14 @@ que_thr	mapflag	nomemo
 wolfvill	mapflag	nomemo
 
 //============================================================
+// Episode 19 - Isgard's Ice Castle
+//============================================================
+1@jorlab	mapflag	nomemo
+1@jorchs	mapflag	nomemo
+1@iwp	mapflag	nomemo
+1@whl	mapflag	nomemo
+
+//============================================================
 // Sunken Tower
 //============================================================
 1@ch_u	mapflag	nomemo

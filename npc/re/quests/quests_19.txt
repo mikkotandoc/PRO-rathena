@@ -10685,6 +10685,16 @@ icecastle,27,126,3	script(CLOAKED)	Horuru#if19msdq	4_EP19_IWIN,{
 		end;
 	}
 
+	// Episode 20 - The Immortal
+	if (ep20_main == 0) {
+		callfunc("F_ep20_startHoruru");
+		end;
+	}
+	if (ep20_main > 0 && ep20_main < 100) {
+		callfunc("F_ep20_horuruProgress");
+		end;
+	}
+
 	// daily
 	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
 		mes "You cannot proceed with the conversation due to the large number of items you have.";
@@ -10960,6 +10970,7 @@ OnInit:
 
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17650) == 2 && F_queststatus_between(17651,17661) == 0 && checkquest(17662,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(17662,PLAYTIME) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "callfunc(\"F_ep20_canStart\") && ep20_main == 0" );
 	end;
 }
 

@@ -196,6 +196,7 @@ function	script	SprintIndex	{
 //instance_warning(<TYPE>);
 //instance_hide(<NPC Name>,<bool>);
 //instance_enable(<NPC Name>,<bool>);
+//instance_disable(<NPC Name>);
 //instance_event(<NPC Name>,<Event Name>,<Attach Player Bool>);
 //*/
 function	script	instance_warning	{
@@ -242,6 +243,11 @@ function	script	instance_enable	{
 		enablenpc instance_npcname(getarg(0));
 	else
 		disablenpc instance_npcname(getarg(0));
+	return;
+}
+
+function	script	instance_disable	{
+	disablenpc instance_npcname(getarg(0));
 	return;
 }
 

@@ -1,0 +1,69 @@
+//===== rAthena Script =======================================
+//= Instance: Drift Ice Zone (Episode 20)
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Main quest instance - map 1@twsd
+//============================================================
+
+function	script	F_ep20_drift_clear	{
+	if (ep20_main == 21 && isbegin_quest(17721) == 1) {
+		completequest 17721;
+		ep20_main = 22;
+		callfunc("F_ep20_reward", 20, 90);
+	}
+	return;
+}
+
+jor_maze,140,72,3	script	Drift Ice Zone#ep20	4_BULLETIN_BOARD2,{
+	end;
+
+OnStart:
+	if (ep20_main != 21) end;
+	if (instance_create("Drift Ice Zone") < 0) {
+		mes "Party leader must create the instance.";
+		close;
+	}
+	warp "1@twsd",314,92;
+	end;
+}
+
+1@twsd,314,92,3	script	Rgan Bishop#ep20tw01	4_EP19_RGAN_SR2,{
+	mes "[Rgan Bishop]";
+	mes "Intruders! Heart Hunters, stop them!";
+	close2;
+	.@label$ = instance_npcname("Rgan Bishop#ep20tw01") + "::OnClear";
+	monster "1@twsd",310,95,"Heart Hunter",21312,2,.@label$;
+	end;
+
+OnClear:
+	if (mobcount("1@twsd", instance_npcname("Rgan Bishop#ep20tw01") + "::OnClear") > 0)
+		end;
+	mes "[Lehar]";
+	mes "Bagot escaped again, but we learned their layout.";
+	callfunc("F_ep20_drift_clear");
+	close2;
+	instance_destroy;
+	warp "jor_back1",365,226;
+	end;
+}
+
+1@twsd,162,245,3	script	Lehar#ep20tw01	4_EP19_LEHAR,{
+	mes "[Lehar]";
+	mes "Keep pressing forward. Serekgand is deeper in.";
+	close;
+}
+
+1@twsd,48,326,3	script	Serekgand#ep20tw01	4_EP19_RGAN_SR1,{
+	mes "[Serekgand]";
+	mes "You won't leave alive!";
+	close2;
+	.@label$ = instance_npcname("Serekgand#ep20tw01") + "::OnDead";
+	monster "1@twsd",48,326,"Serekgand",21988,1,.@label$;
+	end;
+
+OnDead:
+	if (mobcount("1@twsd", instance_npcname("Serekgand#ep20tw01") + "::OnDead") > 0)
+		end;
+	mapannounce "1@twsd","Lehar: We have what we need. Retreat!",bc_map,0xFFFF00;
+	end;
+}

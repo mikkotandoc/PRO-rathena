@@ -1,0 +1,54 @@
+//===== rAthena Script =======================================
+//= Instance: Nest of Twigs (Episode 20)
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Main quest instance - map 1@twig
+//============================================================
+
+function	script	F_ep20_twig_clear	{
+	if (ep20_main == 25 && isbegin_quest(17724) == 1) {
+		completequest 17724;
+		ep20_main = 26;
+		setquest 17725;
+		callfunc("F_ep20_reward", 10, 70);
+	}
+	return;
+}
+
+jor_twice,164,244,3	script	Nest of Twigs#ep20	4_BULLETIN_BOARD2,{
+	end;
+
+OnStart:
+	if (ep20_main != 25) end;
+	if (instance_create("Nest of Twigs") < 0) {
+		mes "Party leader must create the instance.";
+		close;
+	}
+	warp "1@twig",100,100;
+	end;
+}
+
+1@twig,100,100,3	script	Lehar#ep20twig01	4_EP19_LEHAR,{
+	if (ep20_main != 25) end;
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Guardians ahead! Stay close!";
+	close2;
+	cutin "",255;
+	.@label$ = instance_npcname("Lehar#ep20twig01") + "::OnGuardDead";
+	monster "1@twig",105,100,"Guardian",21990,3,.@label$;
+	end;
+
+OnGuardDead:
+	if (mobcount("1@twig", instance_npcname("Lehar#ep20twig01") + "::OnGuardDead") > 0)
+		end;
+	cutin "ep19_leon01.png",0;
+	mes "[Leon]";
+	mes "The twig nest entrance is collapsing. We did it!";
+	callfunc("F_ep20_twig_clear");
+	close2;
+	cutin "",255;
+	instance_destroy;
+	warp "jor_safty1",328,150;
+	end;
+}

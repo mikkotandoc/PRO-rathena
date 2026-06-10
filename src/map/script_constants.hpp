@@ -5180,6 +5180,13 @@
 	export_constant(IG_BS_ITEM_M_S_54);
 	export_constant(IG_BS_ITEM_M_S_55);
 	export_constant(IG_BS_ITEM_M_S_56);
+	export_constant(IG_BS_ITEM_M_S_57);
+	export_constant(IG_BS_ITEM_M_S_58);
+	export_constant(IG_BS_ITEM_M_S_59);
+	export_constant(IG_BS_ITEM_M_S_60);
+	export_constant(IG_BS_ITEM_M_S_61);
+	export_constant(IG_BS_ITEM_M_S_62);
+	export_constant(IG_BS_ITEM_M_S_63);
 	export_constant(IG_ENCHANT_STONE_BOX28);
 	export_constant(IG_S_FULLPENE_EARRING);
 	export_constant(IG_S_FULLPENE_PENDANT);
