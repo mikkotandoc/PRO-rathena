@@ -10,6 +10,7 @@
 #include <common/ers.hpp>
 #include <common/malloc.hpp>
 #include <common/nullpo.hpp>
+#include <common/packets.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp>
 #include <common/strlib.hpp>

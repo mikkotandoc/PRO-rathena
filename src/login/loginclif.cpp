@@ -277,7 +277,7 @@ static uint32 logclif_shield_next_challenge() {
 }
 
 static void logclif_shield_send_challenge( int32 fd, struct login_session_data& sd ){
-	if( !login_config.shield_handshake_check ){
+	if( !login_config.shield_handshake_check || session[fd]->flag.server ){
 		return;
 	}
 
@@ -294,6 +294,20 @@ static void logclif_shield_send_challenge( int32 fd, struct login_session_data& 
 static void logclif_shield_init( struct login_session_data& sd ){
 	sd.shield.challenge = logclif_shield_next_challenge();
 	sd.shield.verified = false;
+	sd.shield.challenge_sent = false;
+}
+
+static void logclif_shield_ensure_challenge( int32 fd, struct login_session_data& sd ){
+	if( !login_config.shield_handshake_check || sd.shield.verified || session[fd]->flag.server ){
+		return;
+	}
+
+	if( sd.shield.challenge_sent ){
+		return;
+	}
+
+	logclif_shield_send_challenge( fd, sd );
+	sd.shield.challenge_sent = true;
 }
 
 static bool logclif_shield_require_verified( int32 fd, struct login_session_data& sd ){
@@ -639,7 +653,6 @@ int32 logclif_parse(int32 fd) {
 		sd = (struct login_session_data*)session[fd]->session_data;
 		sd->fd = fd;
 		logclif_shield_init( *sd );
-		logclif_shield_send_challenge( fd, *sd );
 	}
 
 	while( RFIFOREST(fd) >= 2 )
@@ -648,8 +661,13 @@ int32 logclif_parse(int32 fd) {
 
 		switch( command ){
 			// Connection request of a char-server
-			case 0x2710: logclif_parse_reqcharconnec(fd,sd, ip); return 0; // processing will continue elsewhere
+			case 0x2710:
+				sd->shield.verified = true;
+				session[fd]->flag.server = 1;
+				logclif_parse_reqcharconnec(fd,sd, ip);
+				return 0; // processing will continue elsewhere
 			default:
+				logclif_shield_ensure_challenge( fd, *sd );
 				if( !login_packet_db.handle( fd, *sd ) ){
 					return 0;
 				}

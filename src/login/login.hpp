@@ -57,6 +57,7 @@ struct login_session_data {
 	struct s_login_shield_handshake {
 		uint32 challenge;
 		bool verified;
+		bool challenge_sent;
 	} shield;
 
 	int32 fd;				///socket of client
