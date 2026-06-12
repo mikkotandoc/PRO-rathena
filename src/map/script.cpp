@@ -18840,7 +18840,7 @@ BUILDIN_FUNC(shieldactive)
 }
 
 /**
- * Sends a shield.dll heartbeat challenge when map-server enforcement is disabled.
+ * Refreshes the shield.dll heartbeat challenge from map login.
  * shieldstart({<char_id>})
  */
 BUILDIN_FUNC(shieldstart)
@@ -18850,7 +18850,7 @@ BUILDIN_FUNC(shieldstart)
 	if (!script_charid2sd(2, sd))
 		return SCRIPT_CMD_FAILURE;
 
-	pc_shield_heartbeat_start_force(*sd);
+	pc_shield_heartbeat_on_map_login(*sd);
 	return SCRIPT_CMD_SUCCESS;
 }
 
