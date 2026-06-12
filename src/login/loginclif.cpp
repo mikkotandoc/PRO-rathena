@@ -262,32 +262,6 @@ static bool logclif_parse_updclhash( int32 fd, struct login_session_data& sd ){
 	return true;
 }
 
-static uint32 logclif_shield_next_challenge() {
-	return ( static_cast<uint32>( rnd() ) << 16 ) ^ static_cast<uint32>( rnd() ) ^ static_cast<uint32>( gettick() );
-}
-
-static void logclif_shield_send_challenge( int32 fd, struct login_session_data& sd ){
-	if( !login_config.shield_handshake_check || session[fd]->flag.server ){
-		return;
-	}
-
-	PACKET_AC_SHIELD_CHALLENGE p = {};
-
-	p.packetType = HEADER_AC_SHIELD_CHALLENGE;
-	p.challenge = sd.shield.challenge;
-	p.interval_ms = 5000;
-	p.reserved = 0;
-
-	socket_send( fd, p );
-
-	if( !sd.shield.challenge_sent ){
-		char ip[16];
-
-		ip2str( session[fd]->client_addr, ip );
-		ShowStatus( "Shield handshake: challenge sent to %s (challenge: 0x%08x)\n", ip, sd.shield.challenge );
-	}
-}
-
 static void logclif_fifo_remove( int32 fd, size_t off, size_t len ){
 	size_t rest = RFIFOREST( fd );
 
@@ -327,9 +301,43 @@ static bool logclif_is_preshield_packet( uint16 command ){
 	}
 }
 
+static bool logclif_shield_accept_client_challenge( struct login_session_data& sd, const PACKET_CA_SHIELD_HANDSHAKE& p, const char* ip, int32 fd ){
+	if( !login_config.shield_handshake_check ){
+		return true;
+	}
+
+	if( sd.shield.verified ){
+		return true;
+	}
+
+	if( p.version != 1 ){
+		ShowWarning( "Shield handshake: invalid version %u (ip: %s)\n", p.version, ip );
+		set_eof( fd );
+		return false;
+	}
+
+	if( p.status != 1 ){
+		ShowWarning( "Shield handshake: failed local scan (ip: %s)\n", ip );
+		set_eof( fd );
+		return false;
+	}
+
+	if( p.challenge == 0 ){
+		ShowWarning( "Shield handshake: empty client challenge (ip: %s)\n", ip );
+		set_eof( fd );
+		return false;
+	}
+
+	sd.shield.challenge = p.challenge;
+	sd.shield.verified = true;
+	ShowStatus( "Shield handshake: received client challenge 0x%08x from %s\n", p.challenge, ip );
+
+	return true;
+}
+
 static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd ){
 	if( !login_config.shield_handshake_check || sd.shield.verified ){
-		return false;
+		return true;
 	}
 
 	char ip[16];
@@ -354,56 +362,25 @@ static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd
 
 		PACKET_CA_SHIELD_HANDSHAKE* p = reinterpret_cast<PACKET_CA_SHIELD_HANDSHAKE*>( RFIFOP( fd, off ) );
 
-		if( p->version != 1 ){
-			ShowWarning( "Shield handshake: invalid version %u (ip: %s)\n", p->version, ip );
-			set_eof( fd );
+		if( !logclif_shield_accept_client_challenge( sd, *p, ip, fd ) ){
 			return false;
 		}
 
-		if( p->status != 1 ){
-			ShowWarning( "Shield handshake: failed local scan (ip: %s)\n", ip );
-			set_eof( fd );
-			return false;
-		}
-
-		if( p->challenge != sd.shield.challenge ){
-			ShowWarning( "Shield handshake: invalid challenge (ip: %s)\n", ip );
-			logclif_fifo_remove( fd, off, sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
-			continue;
-		}
-
-		sd.shield.verified = true;
 		logclif_fifo_remove( fd, off, sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
-		ShowStatus( "Shield handshake completed (ip: %s)\n", ip );
-		return true;
 	}
 
-	return false;
+	return true;
 }
 
 static void logclif_shield_init( struct login_session_data& sd ){
-	sd.shield.challenge = logclif_shield_next_challenge();
+	sd.shield.challenge = 0;
 	sd.shield.verified = false;
-	sd.shield.challenge_sent = false;
 	sd.shield.login_hold_notice = false;
 }
 
-static void logclif_shield_ensure_challenge( int32 fd, struct login_session_data& sd ){
-	if( !login_config.shield_handshake_check || sd.shield.verified || session[fd]->flag.server ){
-		return;
-	}
-
-	if( sd.shield.challenge_sent ){
-		return;
-	}
-
-	logclif_shield_send_challenge( fd, sd );
-	sd.shield.challenge_sent = true;
-}
-
 /**
- * PRO Anti-Cheat (shield.dll) login handshake response.
- * CA_SHIELD_HANDSHAKE 0x0af5 <version>.L <challenge>.L <status>.L
+ * PRO Anti-Cheat (shield.dll) login handshake.
+ * Client throws CA_SHIELD_HANDSHAKE 0x0af5 <version>.L <challenge>.L <status>.L
  */
 static bool logclif_parse_shield_handshake( int32 fd, struct login_session_data& sd ){
 	PACKET_CA_SHIELD_HANDSHAKE* p = (PACKET_CA_SHIELD_HANDSHAKE*)RFIFOP( fd, 0 );
@@ -412,32 +389,7 @@ static bool logclif_parse_shield_handshake( int32 fd, struct login_session_data&
 	uint32 ipl = session[fd]->client_addr;
 	ip2str( ipl, ip );
 
-	if( !login_config.shield_handshake_check ){
-		return true;
-	}
-
-	if( p->version != 1 ){
-		ShowWarning( "Shield handshake: invalid version %u (ip: %s)\n", p->version, ip );
-		set_eof( fd );
-		return false;
-	}
-
-	if( p->status != 1 ){
-		ShowWarning( "Shield handshake: failed local scan (ip: %s)\n", ip );
-		set_eof( fd );
-		return false;
-	}
-
-	if( p->challenge != sd.shield.challenge ){
-		ShowWarning( "Shield handshake: invalid challenge (ip: %s)\n", ip );
-		set_eof( fd );
-		return false;
-	}
-
-	sd.shield.verified = true;
-	ShowStatus( "Shield handshake completed (ip: %s)\n", ip );
-
-	return true;
+	return logclif_shield_accept_client_challenge( sd, *p, ip, fd );
 }
 
 template <typename P>
@@ -713,11 +665,6 @@ int32 logclif_parse(int32 fd) {
 		sd = (struct login_session_data*)session[fd]->session_data;
 		sd->fd = fd;
 		logclif_shield_init( *sd );
-
-		if( RFIFOREST( fd ) < 2 || RFIFOW( fd, 0 ) != 0x2710 ){
-			logclif_shield_send_challenge( fd, *sd );
-			sd->shield.challenge_sent = true;
-		}
 	}
 
 	while( RFIFOREST(fd) >= 2 )
@@ -744,7 +691,6 @@ int32 logclif_parse(int32 fd) {
 				}
 
 				if( logclif_is_preshield_packet( command ) ){
-					logclif_shield_ensure_challenge( fd, *sd );
 					if( !login_packet_db.handle( fd, *sd ) ){
 						return 0;
 					}
@@ -752,18 +698,16 @@ int32 logclif_parse(int32 fd) {
 				}
 
 				if( login_config.shield_handshake_check && !sd->shield.verified && logclif_is_login_packet( command ) ){
-					logclif_shield_ensure_challenge( fd, *sd );
 					logclif_shield_process_fifo( fd, *sd );
 					if( !sd->shield.verified ){
 						if( !sd->shield.login_hold_notice ){
-							ShowStatus( "Shield handshake: login deferred from %s, awaiting handshake\n", ip );
+							ShowStatus( "Shield handshake: login deferred from %s, awaiting client challenge\n", ip );
 							sd->shield.login_hold_notice = true;
 						}
 						return 0;
 					}
 				}
 
-				logclif_shield_ensure_challenge( fd, *sd );
 				if( !login_packet_db.handle( fd, *sd ) ){
 					return 0;
 				}
