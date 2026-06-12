@@ -294,7 +294,6 @@ static bool logclif_is_preshield_packet( uint16 command ){
 		case HEADER_CA_REQ_HASH:
 		case HEADER_CA_CONNECT_INFO_CHANGED:
 		case HEADER_CA_SHIELD_HANDSHAKE:
-		case HEADER_CA_SHIELD_CHALLENGE:
 		case HEADER_CT_AUTH:
 			return true;
 		default:
@@ -302,17 +301,33 @@ static bool logclif_is_preshield_packet( uint16 command ){
 	}
 }
 
-static void logclif_shield_send_ack( int32 fd, struct login_session_data& sd ){
-	PACKET_AC_SHIELD_ACK p = {};
-
-	p.packetType = HEADER_AC_SHIELD_ACK;
-	p.challenge = sd.shield.challenge;
-	p.result = 1;
-
-	socket_send( fd, p );
+static uint32 logclif_shield_next_challenge() {
+	return ( static_cast<uint32>( rnd() ) << 16 ) ^ static_cast<uint32>( rnd() ) ^ static_cast<uint32>( gettick() );
 }
 
-static bool logclif_shield_accept_challenge_value( struct login_session_data& sd, uint32 challenge, const char* ip, int32 fd ){
+static void logclif_shield_send_challenge( int32 fd, struct login_session_data& sd ){
+	if( !login_config.shield_handshake_check || session[fd]->flag.server ){
+		return;
+	}
+
+	PACKET_AC_SHIELD_CHALLENGE p = {};
+
+	p.packetType = HEADER_AC_SHIELD_CHALLENGE;
+	p.challenge = sd.shield.challenge;
+	p.interval_ms = 5000;
+	p.reserved = 0;
+
+	socket_send( fd, p );
+
+	if( !sd.shield.challenge_sent ){
+		char ip[16];
+
+		ip2str( session[fd]->client_addr, ip );
+		ShowStatus( "Shield handshake: challenge 0x%08x sent to %s (AC_SHIELD_CHALLENGE 0x0af6)\n", sd.shield.challenge, ip );
+	}
+}
+
+static bool logclif_shield_accept_heartbeat( struct login_session_data& sd, const PACKET_CA_SHIELD_HANDSHAKE& p, const char* ip, int32 fd ){
 	if( !login_config.shield_handshake_check ){
 		return true;
 	}
@@ -321,22 +336,6 @@ static bool logclif_shield_accept_challenge_value( struct login_session_data& sd
 		return true;
 	}
 
-	if( challenge == 0 ){
-		ShowWarning( "Shield handshake: empty client challenge (ip: %s)\n", ip );
-		set_eof( fd );
-		return false;
-	}
-
-	sd.shield.challenge = challenge;
-	sd.shield.verified = true;
-	sd.shield.login_hold_notice = false;
-	logclif_shield_send_ack( fd, sd );
-	ShowStatus( "Shield handshake: received client challenge 0x%08x from %s\n", challenge, ip );
-
-	return true;
-}
-
-static bool logclif_shield_accept_client_challenge( struct login_session_data& sd, const PACKET_CA_SHIELD_HANDSHAKE& p, const char* ip, int32 fd ){
 	if( p.version != 1 ){
 		ShowWarning( "Shield handshake: invalid version %u (ip: %s)\n", p.version, ip );
 		set_eof( fd );
@@ -349,11 +348,17 @@ static bool logclif_shield_accept_client_challenge( struct login_session_data& s
 		return false;
 	}
 
-	return logclif_shield_accept_challenge_value( sd, p.challenge, ip, fd );
-}
+	if( p.challenge != sd.shield.challenge ){
+		ShowWarning( "Shield handshake: challenge mismatch (expected 0x%08x, got 0x%08x, ip: %s)\n", sd.shield.challenge, p.challenge, ip );
+		set_eof( fd );
+		return false;
+	}
 
-static bool logclif_shield_accept_client_challenge_short( struct login_session_data& sd, const PACKET_CA_SHIELD_CHALLENGE& p, const char* ip, int32 fd ){
-	return logclif_shield_accept_challenge_value( sd, p.challenge, ip, fd );
+	sd.shield.verified = true;
+	sd.shield.login_hold_notice = false;
+	ShowStatus( "Shield handshake: heartbeat accepted from %s (challenge 0x%08x)\n", ip, p.challenge );
+
+	return true;
 }
 
 static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd ){
@@ -368,21 +373,11 @@ static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd
 	while( true ){
 		size_t rest = RFIFOREST( fd );
 		size_t off = rest;
-		size_t packet_size = 0;
 		size_t i;
 
-		for( i = 0; i + sizeof( int16 ) <= rest; i++ ){
-			uint16 command = RFIFOW( fd, i );
-
-			if( command == HEADER_CA_SHIELD_HANDSHAKE && i + sizeof( PACKET_CA_SHIELD_HANDSHAKE ) <= rest ){
+		for( i = 0; i + sizeof( PACKET_CA_SHIELD_HANDSHAKE ) <= rest; i++ ){
+			if( RFIFOW( fd, i ) == HEADER_CA_SHIELD_HANDSHAKE ){
 				off = i;
-				packet_size = sizeof( PACKET_CA_SHIELD_HANDSHAKE );
-				break;
-			}
-
-			if( command == HEADER_CA_SHIELD_CHALLENGE && i + sizeof( PACKET_CA_SHIELD_CHALLENGE ) <= rest ){
-				off = i;
-				packet_size = sizeof( PACKET_CA_SHIELD_CHALLENGE );
 				break;
 			}
 		}
@@ -391,36 +386,41 @@ static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd
 			break;
 		}
 
-		uint16 command = RFIFOW( fd, off );
-		bool accepted = false;
+		PACKET_CA_SHIELD_HANDSHAKE* p = reinterpret_cast<PACKET_CA_SHIELD_HANDSHAKE*>( RFIFOP( fd, off ) );
 
-		if( command == HEADER_CA_SHIELD_HANDSHAKE ){
-			PACKET_CA_SHIELD_HANDSHAKE* p = reinterpret_cast<PACKET_CA_SHIELD_HANDSHAKE*>( RFIFOP( fd, off ) );
-			accepted = logclif_shield_accept_client_challenge( sd, *p, ip, fd );
-		}else if( command == HEADER_CA_SHIELD_CHALLENGE ){
-			PACKET_CA_SHIELD_CHALLENGE* p = reinterpret_cast<PACKET_CA_SHIELD_CHALLENGE*>( RFIFOP( fd, off ) );
-			accepted = logclif_shield_accept_client_challenge_short( sd, *p, ip, fd );
-		}
-
-		if( !accepted ){
+		if( !logclif_shield_accept_heartbeat( sd, *p, ip, fd ) ){
 			return false;
 		}
 
-		logclif_fifo_remove( fd, off, packet_size );
+		logclif_fifo_remove( fd, off, sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
 	}
 
 	return true;
 }
 
 static void logclif_shield_init( struct login_session_data& sd ){
-	sd.shield.challenge = 0;
+	sd.shield.challenge = logclif_shield_next_challenge();
 	sd.shield.verified = false;
+	sd.shield.challenge_sent = false;
 	sd.shield.login_hold_notice = false;
 }
 
+static void logclif_shield_ensure_challenge( int32 fd, struct login_session_data& sd ){
+	if( !login_config.shield_handshake_check || sd.shield.verified || session[fd]->flag.server ){
+		return;
+	}
+
+	if( sd.shield.challenge_sent ){
+		return;
+	}
+
+	logclif_shield_send_challenge( fd, sd );
+	sd.shield.challenge_sent = true;
+}
+
 /**
- * PRO Anti-Cheat (shield.dll) login handshake.
- * Client throws CA_SHIELD_HANDSHAKE 0x0af5 <version>.L <challenge>.L <status>.L
+ * PRO Anti-Cheat (shield.dll) login heartbeat response.
+ * Same as map-server CZ_SHIELD_HEARTBEAT: 0x0af5 <version>.L <challenge>.L <status>.L
  */
 static bool logclif_parse_shield_handshake( int32 fd, struct login_session_data& sd ){
 	PACKET_CA_SHIELD_HANDSHAKE* p = (PACKET_CA_SHIELD_HANDSHAKE*)RFIFOP( fd, 0 );
@@ -429,21 +429,7 @@ static bool logclif_parse_shield_handshake( int32 fd, struct login_session_data&
 	uint32 ipl = session[fd]->client_addr;
 	ip2str( ipl, ip );
 
-	return logclif_shield_accept_client_challenge( sd, *p, ip, fd );
-}
-
-/**
- * PRO Anti-Cheat (shield.dll) login handshake (short form).
- * Client throws CA_SHIELD_CHALLENGE 0x0af6 <challenge>.L <interval_ms>.W <reserved>.W
- */
-static bool logclif_parse_shield_challenge( int32 fd, struct login_session_data& sd ){
-	PACKET_CA_SHIELD_CHALLENGE* p = (PACKET_CA_SHIELD_CHALLENGE*)RFIFOP( fd, 0 );
-
-	char ip[16];
-	uint32 ipl = session[fd]->client_addr;
-	ip2str( ipl, ip );
-
-	return logclif_shield_accept_client_challenge_short( sd, *p, ip, fd );
+	return logclif_shield_accept_heartbeat( sd, *p, ip, fd );
 }
 
 template <typename P>
@@ -679,7 +665,6 @@ public:
 		this->add( HEADER_CA_REQ_HASH, true, sizeof( PACKET_CA_REQ_HASH ), logclif_parse_reqkey );
 		this->add( HEADER_CT_AUTH, true, sizeof( PACKET_CT_AUTH ), logclif_parse_otp_login );
 		this->add( HEADER_CA_SHIELD_HANDSHAKE, true, sizeof( PACKET_CA_SHIELD_HANDSHAKE ), logclif_parse_shield_handshake );
-		this->add( HEADER_CA_SHIELD_CHALLENGE, true, sizeof( PACKET_CA_SHIELD_CHALLENGE ), logclif_parse_shield_challenge );
 	}
 } login_packet_db;
 
@@ -720,6 +705,11 @@ int32 logclif_parse(int32 fd) {
 		sd = (struct login_session_data*)session[fd]->session_data;
 		sd->fd = fd;
 		logclif_shield_init( *sd );
+
+		if( RFIFOREST( fd ) < 2 || RFIFOW( fd, 0 ) != 0x2710 ){
+			logclif_shield_send_challenge( fd, *sd );
+			sd->shield.challenge_sent = true;
+		}
 	}
 
 	while( RFIFOREST(fd) >= 2 )
@@ -738,7 +728,7 @@ int32 logclif_parse(int32 fd) {
 				logclif_parse_reqcharconnec(fd,sd, ip);
 				return 0; // processing will continue elsewhere
 			default:
-				if( command == HEADER_CA_SHIELD_HANDSHAKE || command == HEADER_CA_SHIELD_CHALLENGE ){
+				if( command == HEADER_CA_SHIELD_HANDSHAKE ){
 					if( !login_packet_db.handle( fd, *sd ) ){
 						return 0;
 					}
@@ -746,6 +736,7 @@ int32 logclif_parse(int32 fd) {
 				}
 
 				if( logclif_is_preshield_packet( command ) ){
+					logclif_shield_ensure_challenge( fd, *sd );
 					if( !login_packet_db.handle( fd, *sd ) ){
 						return 0;
 					}
@@ -753,16 +744,18 @@ int32 logclif_parse(int32 fd) {
 				}
 
 				if( login_config.shield_handshake_check && !sd->shield.verified && logclif_is_login_packet( command ) ){
+					logclif_shield_ensure_challenge( fd, *sd );
 					logclif_shield_process_fifo( fd, *sd );
 					if( !sd->shield.verified ){
 						if( !sd->shield.login_hold_notice ){
-							ShowStatus( "Shield handshake: login deferred from %s, awaiting client challenge (0x0af5 or 0x0af6), pending packet 0x%04x\n", ip, command );
+							ShowStatus( "Shield handshake: login deferred from %s, awaiting 0x0af5 heartbeat (pending 0x%04x)\n", ip, command );
 							sd->shield.login_hold_notice = true;
 						}
 						break;
 					}
 				}
 
+				logclif_shield_ensure_challenge( fd, *sd );
 				if( !login_packet_db.handle( fd, *sd ) ){
 					return 0;
 				}
