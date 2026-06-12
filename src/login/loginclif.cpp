@@ -22,9 +22,6 @@
 #include "loginchrif.hpp"
 #include "loginlog.hpp"
 
-static void logclif_auth_failed( int32 fd, int32 result, const char* unblock_time = "" );
-static void logclif_auth_failed( struct login_session_data* sd, int32 result );
-
 /**
  * Transmit auth result to client.
  * @param fd: client file desciptor link
@@ -41,6 +38,75 @@ static void logclif_sent_auth_result(int32 fd,char result){
 	p.result = result;
 
 	socket_send( fd, p );
+}
+
+static void logclif_auth_failed( int32 fd, int32 result, const char* unblock_time = "" ){
+	PACKET_AC_REFUSE_LOGIN p = {};
+
+	p.packetType = HEADER_AC_REFUSE_LOGIN;
+	p.error = result;
+	safestrncpy( p.unblock_time, unblock_time, sizeof( p.unblock_time ) );
+
+	socket_send( fd, p );
+}
+
+/**
+ * Inform client that auth has failed.
+ * @param sd: player session
+ * @param result: nb (msg define in conf)
+    0 = Unregistered ID
+    1 = Incorrect Password
+    2 = This ID is expired
+    3 = Rejected from Server
+    4 = You have been blocked by the GM Team
+    5 = Your Game's EXE file is not the latest version
+    6 = You are prohibited to log in until %s
+    7 = Server is jammed due to over populated
+    8 = No more accounts may be connected from this company
+    9 = MSI_REFUSE_BAN_BY_DBA
+    10 = MSI_REFUSE_EMAIL_NOT_CONFIRMED
+    11 = MSI_REFUSE_BAN_BY_GM
+    12 = MSI_REFUSE_TEMP_BAN_FOR_DBWORK
+    13 = MSI_REFUSE_SELF_LOCK
+    14 = MSI_REFUSE_NOT_PERMITTED_GROUP
+    15 = MSI_REFUSE_NOT_PERMITTED_GROUP
+    99 = This ID has been totally erased
+    100 = Login information remains at %s
+    101 = Account has been locked for a hacking investigation. Please contact the GM Team for more information
+    102 = This account has been temporarily prohibited from login due to a bug-related investigation
+    103 = This character is being deleted. Login is temporarily unavailable for the time being
+    104 = This character is being deleted. Login is temporarily unavailable for the time being
+     default = Unknown Error.
+ */
+static void logclif_auth_failed(struct login_session_data* sd, int32 result) {
+	int32 fd = sd->fd;
+	uint32 ip = session[fd]->client_addr;
+
+	if (login_config.log_login)
+	{
+		if(result >= 0 && result <= 15)
+		    login_log(ip, sd->userid, result, msg_txt(result));
+		else if(result >= 99 && result <= 104)
+		    login_log(ip, sd->userid, result, msg_txt(result-83)); //-83 offset
+		else
+		    login_log(ip, sd->userid, result, msg_txt(22)); //unknow error
+	}
+
+	if( (result == 0 || result == 1) && login_config.dynamic_pass_failure_ban )
+		ipban_log(ip); // log failed password attempt
+
+	// 6 = You are prohibited to log in until %s
+	if( result == 6 ){
+		char unblock_time[20];
+		struct mmo_account acc;
+		AccountDB* accounts = login_get_accounts_db();
+		time_t unban_time = ( accounts->load_str( accounts, &acc, sd->userid ) ) ? acc.unban_time : 0;
+		timestamp2string( unblock_time, sizeof( unblock_time ), unban_time, login_config.date_format );
+
+		logclif_auth_failed( fd, result, unblock_time );
+	}else{
+		logclif_auth_failed( fd, result );
+	}
 }
 
 /**
@@ -178,75 +244,6 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	struct online_login_data* data = login_add_online_user(-1, sd->account_id);
 	// schedule deletion of this node
 	data->waiting_disconnect = add_timer(gettick()+AUTH_TIMEOUT, login_waiting_disconnect_timer, sd->account_id, 0);
-}
-
-static void logclif_auth_failed( int32 fd, int32 result, const char* unblock_time ){
-	PACKET_AC_REFUSE_LOGIN p = {};
-
-	p.packetType = HEADER_AC_REFUSE_LOGIN;
-	p.error = result;
-	safestrncpy( p.unblock_time, "", sizeof( p.unblock_time ) );
-
-	socket_send( fd, p );
-}
-
-/**
- * Inform client that auth has failed.
- * @param sd: player session
- * @param result: nb (msg define in conf)
-    0 = Unregistered ID
-    1 = Incorrect Password
-    2 = This ID is expired
-    3 = Rejected from Server
-    4 = You have been blocked by the GM Team
-    5 = Your Game's EXE file is not the latest version
-    6 = You are prohibited to log in until %s
-    7 = Server is jammed due to over populated
-    8 = No more accounts may be connected from this company
-    9 = MSI_REFUSE_BAN_BY_DBA
-    10 = MSI_REFUSE_EMAIL_NOT_CONFIRMED
-    11 = MSI_REFUSE_BAN_BY_GM
-    12 = MSI_REFUSE_TEMP_BAN_FOR_DBWORK
-    13 = MSI_REFUSE_SELF_LOCK
-    14 = MSI_REFUSE_NOT_PERMITTED_GROUP
-    15 = MSI_REFUSE_NOT_PERMITTED_GROUP
-    99 = This ID has been totally erased
-    100 = Login information remains at %s
-    101 = Account has been locked for a hacking investigation. Please contact the GM Team for more information
-    102 = This account has been temporarily prohibited from login due to a bug-related investigation
-    103 = This character is being deleted. Login is temporarily unavailable for the time being
-    104 = This character is being deleted. Login is temporarily unavailable for the time being
-     default = Unknown Error.
- */
-static void logclif_auth_failed(struct login_session_data* sd, int32 result) {
-	int32 fd = sd->fd;
-	uint32 ip = session[fd]->client_addr;
-
-	if (login_config.log_login)
-	{
-		if(result >= 0 && result <= 15)
-		    login_log(ip, sd->userid, result, msg_txt(result));
-		else if(result >= 99 && result <= 104)
-		    login_log(ip, sd->userid, result, msg_txt(result-83)); //-83 offset
-		else
-		    login_log(ip, sd->userid, result, msg_txt(22)); //unknow error
-	}
-
-	if( (result == 0 || result == 1) && login_config.dynamic_pass_failure_ban )
-		ipban_log(ip); // log failed password attempt
-
-	// 6 = You are prohibited to log in until %s
-	if( result == 6 ){
-		char unblock_time[20];
-		struct mmo_account acc;
-		AccountDB* accounts = login_get_accounts_db();
-		time_t unban_time = ( accounts->load_str( accounts, &acc, sd->userid ) ) ? acc.unban_time : 0;
-		timestamp2string( unblock_time, sizeof( unblock_time ), unban_time, login_config.date_format );
-
-		logclif_auth_failed( fd, result, unblock_time );
-	}else{
-		logclif_auth_failed( fd, result );
-	}
 }
 
 /**
