@@ -22,6 +22,9 @@
 #include "loginchrif.hpp"
 #include "loginlog.hpp"
 
+static void logclif_auth_failed( int32 fd, int32 result, const char* unblock_time = "" );
+static void logclif_auth_failed( struct login_session_data* sd, int32 result );
+
 /**
  * Transmit auth result to client.
  * @param fd: client file desciptor link
@@ -57,7 +60,7 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 
 		ip2str( ip, reject_ip );
 		ShowNotice( "Connection refused: shield handshake not completed (account: %s, ip: %s)\n", sd->userid, reject_ip );
-		logclif_auth_failed( fd, 5 );
+		logclif_auth_failed( sd, 5 );
 		set_eof( fd );
 		return;
 	}
@@ -177,7 +180,7 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	data->waiting_disconnect = add_timer(gettick()+AUTH_TIMEOUT, login_waiting_disconnect_timer, sd->account_id, 0);
 }
 
-static void logclif_auth_failed( int32 fd, int32 result, const char* unblock_time = "" ){
+static void logclif_auth_failed( int32 fd, int32 result, const char* unblock_time ){
 	PACKET_AC_REFUSE_LOGIN p = {};
 
 	p.packetType = HEADER_AC_REFUSE_LOGIN;
