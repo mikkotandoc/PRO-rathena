@@ -7,7 +7,6 @@
 #include <cstring>
 #include <memory>
 
-#include <common/packets.hpp>
 #include <common/showmsg.hpp>
 #include <common/socket.hpp>
 #include <common/sql.hpp>
@@ -793,12 +792,12 @@ int32 chlogif_parse(int32 fd) {
 			case 0x2734: next = chlogif_parse_askkick(fd); break;
 			case 0x2735: next = chlogif_parse_updip(fd); break;
 			case 0x2743: next = chlogif_parse_vipack(fd); break;
-			case HEADER_AC_SHIELD_CHALLENGE:
+			case 0x0af6:
 				// Anti-cheat handshake packet; ignored on inter-server links.
-				if( RFIFOREST( fd ) < sizeof( PACKET_AC_SHIELD_CHALLENGE ) ){
+				if( RFIFOREST( fd ) < 10 ){
 					return 0;
 				}
-				RFIFOSKIP( fd, sizeof( PACKET_AC_SHIELD_CHALLENGE ) );
+				RFIFOSKIP( fd, 10 );
 				break;
 			default:
 				ShowError("Unknown packet 0x%04x received from login-server, disconnecting.\n", command);
