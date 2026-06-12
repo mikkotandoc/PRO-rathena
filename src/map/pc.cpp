@@ -16362,7 +16362,7 @@ void pc_shield_heartbeat_stop(map_session_data &sd) {
 }
 
 void pc_shield_heartbeat_start(map_session_data &sd) {
-	if (!battle_config.shield_heartbeat || sd.state.autotrade) {
+	if (!battle_config.shield_heartbeat || sd.state.autotrade || session[sd.fd]->flag.server) {
 		return;
 	}
 

@@ -22513,7 +22513,7 @@ void clif_shield_challenge( map_session_data& sd ){
 
 	int32 fd = sd.fd;
 
-	if( !session_isActive( fd ) ){
+	if( !session_isActive( fd ) || session[fd]->flag.server ){
 		return;
 	}
 
@@ -22531,7 +22531,7 @@ void clif_shield_challenge( map_session_data& sd ){
 void clif_parse_shield_heartbeat( int32 fd, map_session_data *sd ){
 	nullpo_retv( sd );
 
-	if( !battle_config.shield_heartbeat ){
+	if( !battle_config.shield_heartbeat || session[fd]->flag.server ){
 		return;
 	}
 
