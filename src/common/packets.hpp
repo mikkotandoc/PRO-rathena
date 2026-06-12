@@ -643,7 +643,7 @@ struct PACKET_TC_RESULT{
 } __attribute__((packed));
 DEFINE_PACKET_HEADER( TC_RESULT, 0xae3 );
 
-// PRO Anti-Cheat (shield.dll) login handshake packets
+// PRO Anti-Cheat (shield.dll) login handshake packets (same layout as map-server ZC/CZ shield packets)
 struct PACKET_CA_SHIELD_HANDSHAKE {
 	int16 packetType;
 	uint32 version;

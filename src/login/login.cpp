@@ -500,7 +500,7 @@ void login_print_console_status(void) {
 	ShowStatus( CL_CYAN "Console: Login Server Status" CL_RESET "\n" );
 	ShowStatus( "  Running: yes\n" );
 	ShowStatus( "  Port: %u\n", login_config.login_port );
-	ShowStatus( "  Shield handshake: %s (client-initiated)\n", login_config.shield_handshake_check ? "enabled" : "disabled" );
+	ShowStatus( "  Shield handshake: %s (0x0af6 challenge / 0x0af5 response)\n", login_config.shield_handshake_check ? "enabled" : "disabled" );
 	ShowStatus( "  Char-servers connected: %d\n", char_servers );
 	ShowStatus( "  Console commands: help, server:status, server:shutdown, server:reloadconf\n" );
 }
@@ -932,7 +932,7 @@ bool LoginServer::initialize( int32 argc, char* argv[] ){
 	do_init_logincnslif();
 
 	ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_port);
-	ShowStatus("PRO Anti-Cheat: shield_handshake_check is %s, client sends challenge (console: server:status)\n", login_config.shield_handshake_check ? CL_GREEN "enabled" CL_RESET : CL_YELLOW "disabled" CL_RESET);
+	ShowStatus("PRO Anti-Cheat: shield_handshake_check is %s, map-compatible 0x0af6/0x0af5 (console: server:status)\n", login_config.shield_handshake_check ? CL_GREEN "enabled" CL_RESET : CL_YELLOW "disabled" CL_RESET);
 	login_log(0, "login server", 100, "login server started");
 
 	return true;
