@@ -63,7 +63,7 @@ int32 cnslif_parse(const char* buf){
 				global_core->signal_shutdown();
 			}
 			else if( strcmpi("alive", command) == 0 || strcmpi("status", command) == 0 )
-				ShowInfo(CL_CYAN "Console: " CL_BOLD "I'm Alive." CL_RESET"\n");
+				login_print_console_status();
 			else if( strcmpi("reloadconf", command) == 0 ) {
 				ShowInfo("Reloading config file \"%s\"\n", LOGIN_CONF_NAME);
 				login_config_read(LOGIN_CONF_NAME, false);
@@ -91,7 +91,8 @@ int32 cnslif_parse(const char* buf){
 	else if( strcmpi("help", type) == 0 ){
 		ShowInfo("Available commands:\n");
 		ShowInfo("\t server:shutdown => Stops the server.\n");
-		ShowInfo("\t server:alive => Checks if the server is running.\n");
+		ShowInfo("\t server:status => Shows login-server and anti-cheat status.\n");
+		ShowInfo("\t server:alive => Alias for server:status.\n");
 		ShowInfo("\t server:reloadconf => Reload config file: \"%s\"\n", LOGIN_CONF_NAME);
 		ShowInfo("\t create:<username> <password> <sex:M|F> => Creates a new account.\n");
 	}

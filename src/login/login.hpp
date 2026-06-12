@@ -58,6 +58,7 @@ struct login_session_data {
 		uint32 challenge;
 		bool verified;
 		bool challenge_sent;
+		bool login_hold_notice;
 	} shield;
 
 	int32 fd;				///socket of client
@@ -247,5 +248,7 @@ int32 login_mmo_auth_new(const char* userid, const char* pass, const char sex, c
 int32 login_mmo_auth(struct login_session_data* sd, bool isServer);
 
 int32 login_get_usercount( int32 users );
+
+void login_print_console_status(void);
 
 #endif /* LOGIN_HPP */

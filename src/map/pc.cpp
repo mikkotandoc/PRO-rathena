@@ -16406,6 +16406,8 @@ void pc_shield_heartbeat_on_packet(map_session_data &sd, uint32 version, uint32 
 	sd.shield.missed = 0;
 	sd.shield.active = true;
 
+	ShowStatus( "Shield heartbeat: verified for %s (AID:%d CID:%d)\n", sd.status.name, sd.status.account_id, sd.status.char_id );
+
 	sd.shield.challenge = pc_shield_next_challenge();
 	clif_shield_challenge(sd);
 }

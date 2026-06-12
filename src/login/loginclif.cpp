@@ -279,6 +279,13 @@ static void logclif_shield_send_challenge( int32 fd, struct login_session_data& 
 	p.reserved = 0;
 
 	socket_send( fd, p );
+
+	if( !sd.shield.challenge_sent ){
+		char ip[16];
+
+		ip2str( session[fd]->client_addr, ip );
+		ShowStatus( "Shield handshake: challenge sent to %s (challenge: 0x%08x)\n", ip, sd.shield.challenge );
+	}
 }
 
 static void logclif_fifo_remove( int32 fd, size_t off, size_t len ){
@@ -378,6 +385,7 @@ static void logclif_shield_init( struct login_session_data& sd ){
 	sd.shield.challenge = logclif_shield_next_challenge();
 	sd.shield.verified = false;
 	sd.shield.challenge_sent = false;
+	sd.shield.login_hold_notice = false;
 }
 
 static void logclif_shield_ensure_challenge( int32 fd, struct login_session_data& sd ){
@@ -747,6 +755,10 @@ int32 logclif_parse(int32 fd) {
 					logclif_shield_ensure_challenge( fd, *sd );
 					logclif_shield_process_fifo( fd, *sd );
 					if( !sd->shield.verified ){
+						if( !sd->shield.login_hold_notice ){
+							ShowStatus( "Shield handshake: login deferred from %s, awaiting handshake\n", ip );
+							sd->shield.login_hold_notice = true;
+						}
 						return 0;
 					}
 				}
