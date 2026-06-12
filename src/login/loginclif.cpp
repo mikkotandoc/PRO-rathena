@@ -418,6 +418,15 @@ static void logclif_shield_ensure_challenge( int32 fd, struct login_session_data
 	sd.shield.challenge_sent = true;
 }
 
+static void logclif_shield_keepalive_session( int32 fd, const struct login_session_data& sd ){
+	if( !login_config.shield_handshake_check || sd.shield.verified || session[fd]->flag.server ){
+		return;
+	}
+
+	// Avoid login-server stall_time disconnect while waiting for shield.dll 0x0af5.
+	session[fd]->rdata_tick = 0;
+}
+
 /**
  * PRO Anti-Cheat (shield.dll) login heartbeat response.
  * Same as map-server CZ_SHIELD_HEARTBEAT: 0x0af5 <version>.L <challenge>.L <status>.L
@@ -710,10 +719,14 @@ int32 logclif_parse(int32 fd) {
 			logclif_shield_send_challenge( fd, *sd );
 			sd->shield.challenge_sent = true;
 		}
+
+		logclif_shield_keepalive_session( fd, *sd );
 	}
 
 	while( RFIFOREST(fd) >= 2 )
 	{
+		logclif_shield_keepalive_session( fd, *sd );
+
 		if( !logclif_shield_process_fifo( fd, *sd ) ){
 			return 0;
 		}
