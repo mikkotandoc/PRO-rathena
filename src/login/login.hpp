@@ -55,9 +55,8 @@ struct login_session_data {
 	int32 has_client_hash;		///client ha sent an hash
 
 	struct s_login_shield_handshake {
-		uint32 challenge;
+		uint32 challenge; ///< client-provided challenge from shield.dll
 		bool verified;
-		bool challenge_sent;
 		bool login_hold_notice;
 	} shield;
 
