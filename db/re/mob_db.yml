@@ -104993,20 +104993,230 @@ Body:
     Class: Boss
     Modes:
       NoRandomWalk: true
-#  - Id: 20536
-#    AegisName: MD_ED_B_YGNIZEM
-#  - Id: 20537
-#    AegisName: MD_ED_YGNIZEM
-#  - Id: 20538
-#    AegisName: MD_ED_EREND
-#  - Id: 20539
-#    AegisName: MD_ED_ARMAIA
-#  - Id: 20540
-#    AegisName: MD_ED_EREMES
-#  - Id: 20541
-#    AegisName: MD_ED_LGTHIGHGUARD
-#  - Id: 20542
-#    AegisName: MD_ED_LGTGUARD
+  - Id: 20536
+    AegisName: MD_ED_B_YGNIZEM
+    Name: Nameless Swordsman
+    Level: 180
+    Hp: 75000000
+    BaseExp: 1
+    JobExp: 1500000000
+    MvpExp: 900000000
+    Attack: 5030
+    Attack2: 7310
+    Defense: 585
+    MagicDefense: 235
+    Str: 290
+    Agi: 227
+    Vit: 254
+    Int: 219
+    Dex: 429
+    Luk: 186
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 145
+    AttackDelay: 576
+    AttackMotion: 432
+    DamageMotion: 288
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+      NoRandomWalk: true
+    MvpDrops:
+      - Item: Bio_Reseearch_Docu
+        Rate: 10000
+      - Item: Bio_Test_Fragment
+        Rate: 10000
+    Drops:
+      - Item: Bio_Reseearch_Docu
+        Rate: 10000
+      - Item: Bio_Test_Fragment
+        Rate: 10000
+  - Id: 20537
+    AegisName: MD_ED_YGNIZEM
+    Name: Nameless Swordsman
+    Level: 176
+    Hp: 1519762
+    BaseExp: 6217200
+    JobExp: 4352040
+    Attack: 4422
+    Attack2: 6422
+    Defense: 340
+    MagicDefense: 109
+    Str: 246
+    Agi: 207
+    Vit: 216
+    Int: 186
+    Dex: 364
+    Luk: 129
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Fire
+    ElementLevel: 2
+    WalkSpeed: 145
+    AttackDelay: 576
+    AttackMotion: 432
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Lab_Staff_Record
+        Rate: 500
+      - Item: Bio_Test_Fragment
+        Rate: 10
+      - Item: Bio_Reseearch_Docu
+        Rate: 10
+  - Id: 20538
+    AegisName: MD_ED_EREND
+    Name: Nameless Acolyte
+    Level: 176
+    Hp: 1500486
+    BaseExp: 4090200
+    JobExp: 2863140
+    Attack: 3085
+    Attack2: 4485
+    Defense: 278
+    MagicDefense: 113
+    Str: 109
+    Agi: 81
+    Vit: 127
+    Int: 205
+    Dex: 185
+    Luk: 81
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Holy
+    ElementLevel: 2
+    WalkSpeed: 145
+    AttackDelay: 576
+    AttackMotion: 432
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Lab_Staff_Record
+        Rate: 500
+      - Item: Bio_Test_Fragment
+        Rate: 10
+      - Item: Bio_Reseearch_Docu
+        Rate: 10
+  - Id: 20539
+    AegisName: MD_ED_ARMAIA
+    Name: Nameless Merchant
+    Level: 175
+    Hp: 1507840
+    BaseExp: 4323060
+    JobExp: 3026130
+    Attack: 3951
+    Attack2: 5751
+    Defense: 397
+    MagicDefense: 103
+    Str: 176
+    Agi: 73
+    Vit: 121
+    Int: 93
+    Dex: 206
+    Luk: 81
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 145
+    AttackDelay: 576
+    AttackMotion: 432
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Lab_Staff_Record
+        Rate: 500
+      - Item: Bio_Test_Fragment
+        Rate: 10
+      - Item: Bio_Reseearch_Docu
+        Rate: 10
+  - Id: 20541
+    AegisName: MD_ED_LGTHIGHGUARD
+    Name: Rekenber Senior Guard
+    Level: 174
+    Hp: 1475486
+    BaseExp: 4052040
+    JobExp: 2836410
+    Attack: 3161
+    Attack2: 4561
+    Defense: 339
+    MagicDefense: 98
+    Str: 187
+    Agi: 218
+    Vit: 87
+    Int: 110
+    Dex: 251
+    Luk: 106
+    AttackRange: 9
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 145
+    AttackDelay: 576
+    AttackMotion: 432
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Lab_Staff_Record
+        Rate: 500
+      - Item: Bio_Test_Fragment
+        Rate: 10
+      - Item: Bio_Reseearch_Docu
+        Rate: 10
+  - Id: 20542
+    AegisName: MD_ED_LGTGUARD
+    Name: Rekenber Guard
+    Level: 176
+    Hp: 1475486
+    BaseExp: 5700690
+    JobExp: 3990480
+    Attack: 3067
+    Attack2: 4409
+    Defense: 346
+    MagicDefense: 96
+    Str: 207
+    Agi: 100
+    Vit: 75
+    Int: 110
+    Dex: 251
+    Luk: 88
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 145
+    AttackDelay: 576
+    AttackMotion: 432
+    DamageMotion: 288
+    Ai: 04
+    Drops:
+      - Item: Lab_Staff_Record
+        Rate: 500
+      - Item: Bio_Test_Fragment
+        Rate: 10
+      - Item: Bio_Reseearch_Docu
+        Rate: 10
   - Id: 20543
     AegisName: MD_ED_M_SCIENCE
     Name: MD_ED_M_SCIENCE
