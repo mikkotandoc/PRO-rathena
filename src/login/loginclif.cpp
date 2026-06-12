@@ -52,6 +52,16 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	uint32 subnet_char_ip;
 	int32 i;
 
+	if( login_config.shield_handshake_check && !sd->shield.verified ){
+		char reject_ip[16];
+
+		ip2str( ip, reject_ip );
+		ShowNotice( "Connection refused: shield handshake not completed (account: %s, ip: %s)\n", sd->userid, reject_ip );
+		logclif_auth_failed( fd, 5 );
+		set_eof( fd );
+		return;
+	}
+
 	if( !global_core->is_running() ){
 		// players can only login while running
 		logclif_sent_auth_result(fd,1); // server closed
@@ -286,6 +296,25 @@ static void logclif_shield_init( struct login_session_data& sd ){
 	sd.shield.verified = false;
 }
 
+static bool logclif_shield_require_verified( int32 fd, struct login_session_data& sd ){
+	if( !login_config.shield_handshake_check ){
+		return true;
+	}
+
+	if( sd.shield.verified ){
+		return true;
+	}
+
+	char ip[16];
+	uint32 ipl = session[fd]->client_addr;
+	ip2str( ipl, ip );
+
+	ShowNotice( "Client rejected: shield handshake not completed (account: %s, ip: %s)\n", sd.userid, ip );
+	logclif_auth_failed( &sd, 5 );
+	set_eof( fd );
+	return false;
+}
+
 /**
  * PRO Anti-Cheat (shield.dll) login handshake response.
  * CA_SHIELD_HANDSHAKE 0x0af5 <version>.L <challenge>.L <status>.L
@@ -345,6 +374,10 @@ static bool logclif_parse_reqauth_raw( int32 fd, login_session_data& sd ){
 
 	sd.passwdenc = 0;
 
+	if( !logclif_shield_require_verified( fd, sd ) ){
+		return false;
+	}
+
 	int32 result = login_mmo_auth( &sd, false );
 
 	if( result == -1 ){
@@ -374,6 +407,10 @@ static bool logclif_parse_reqauth_md5( int32 fd, login_session_data& sd ){
 
 	if( login_config.use_md5_passwds ){
 		logclif_auth_failed( &sd, 3 ); // send "rejected from server"
+		return false;
+	}
+
+	if( !logclif_shield_require_verified( fd, sd ) ){
 		return false;
 	}
 
@@ -410,6 +447,10 @@ static bool logclif_parse_reqauth_sso( int32 fd, login_session_data& sd ){
 	}
 
 	sd.passwdenc = 0;
+
+	if( !logclif_shield_require_verified( fd, sd ) ){
+		return false;
+	}
 
 	int32 result = login_mmo_auth( &sd, false );
 

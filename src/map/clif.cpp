@@ -10730,6 +10730,8 @@ void clif_parse_WantToConnection(int32 fd, map_session_data* sd)
 
 	pc_setnewpc(sd, account_id, char_id, login_id1, client_tick, sex, fd);
 
+	pc_shield_heartbeat_start( *sd );
+
 #if PACKETVER < 20070521
 	WFIFOHEAD(fd,4);
 	WFIFOL(fd,0) = sd->id;
@@ -11183,7 +11185,12 @@ void clif_parse_LoadEndAck(int32 fd,map_session_data *sd)
 	}
 #endif
 
-	pc_shield_heartbeat_start( *sd );
+	if( battle_config.shield_heartbeat && !sd->state.autotrade && !sd->shield.active &&
+		DIFF_TICK( gettick(), sd->shield.start_tick ) >= battle_config.shield_heartbeat_grace ){
+		ShowWarning( "Shield heartbeat: map entry denied for %s (AID:%d CID:%d, no shield.dll response).\n", sd->status.name, sd->status.account_id, sd->status.char_id );
+		set_eof( fd );
+		return;
+	}
 
 	sd->state.connect_new = 0;
 	sd->state.changemap = false;
