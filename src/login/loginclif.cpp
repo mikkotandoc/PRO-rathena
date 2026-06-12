@@ -294,6 +294,7 @@ static bool logclif_is_preshield_packet( uint16 command ){
 		case HEADER_CA_REQ_HASH:
 		case HEADER_CA_CONNECT_INFO_CHANGED:
 		case HEADER_CA_SHIELD_HANDSHAKE:
+		case HEADER_CA_SHIELD_CHALLENGE:
 		case HEADER_CT_AUTH:
 			return true;
 		default:
@@ -301,7 +302,17 @@ static bool logclif_is_preshield_packet( uint16 command ){
 	}
 }
 
-static bool logclif_shield_accept_client_challenge( struct login_session_data& sd, const PACKET_CA_SHIELD_HANDSHAKE& p, const char* ip, int32 fd ){
+static void logclif_shield_send_ack( int32 fd, struct login_session_data& sd ){
+	PACKET_AC_SHIELD_ACK p = {};
+
+	p.packetType = HEADER_AC_SHIELD_ACK;
+	p.challenge = sd.shield.challenge;
+	p.result = 1;
+
+	socket_send( fd, p );
+}
+
+static bool logclif_shield_accept_challenge_value( struct login_session_data& sd, uint32 challenge, const char* ip, int32 fd ){
 	if( !login_config.shield_handshake_check ){
 		return true;
 	}
@@ -310,6 +321,22 @@ static bool logclif_shield_accept_client_challenge( struct login_session_data& s
 		return true;
 	}
 
+	if( challenge == 0 ){
+		ShowWarning( "Shield handshake: empty client challenge (ip: %s)\n", ip );
+		set_eof( fd );
+		return false;
+	}
+
+	sd.shield.challenge = challenge;
+	sd.shield.verified = true;
+	sd.shield.login_hold_notice = false;
+	logclif_shield_send_ack( fd, sd );
+	ShowStatus( "Shield handshake: received client challenge 0x%08x from %s\n", challenge, ip );
+
+	return true;
+}
+
+static bool logclif_shield_accept_client_challenge( struct login_session_data& sd, const PACKET_CA_SHIELD_HANDSHAKE& p, const char* ip, int32 fd ){
 	if( p.version != 1 ){
 		ShowWarning( "Shield handshake: invalid version %u (ip: %s)\n", p.version, ip );
 		set_eof( fd );
@@ -322,17 +349,11 @@ static bool logclif_shield_accept_client_challenge( struct login_session_data& s
 		return false;
 	}
 
-	if( p.challenge == 0 ){
-		ShowWarning( "Shield handshake: empty client challenge (ip: %s)\n", ip );
-		set_eof( fd );
-		return false;
-	}
+	return logclif_shield_accept_challenge_value( sd, p.challenge, ip, fd );
+}
 
-	sd.shield.challenge = p.challenge;
-	sd.shield.verified = true;
-	ShowStatus( "Shield handshake: received client challenge 0x%08x from %s\n", p.challenge, ip );
-
-	return true;
+static bool logclif_shield_accept_client_challenge_short( struct login_session_data& sd, const PACKET_CA_SHIELD_CHALLENGE& p, const char* ip, int32 fd ){
+	return logclif_shield_accept_challenge_value( sd, p.challenge, ip, fd );
 }
 
 static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd ){
@@ -347,11 +368,21 @@ static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd
 	while( true ){
 		size_t rest = RFIFOREST( fd );
 		size_t off = rest;
+		size_t packet_size = 0;
 		size_t i;
 
-		for( i = 0; i + sizeof( PACKET_CA_SHIELD_HANDSHAKE ) <= rest; i++ ){
-			if( RFIFOW( fd, i ) == HEADER_CA_SHIELD_HANDSHAKE ){
+		for( i = 0; i + sizeof( int16 ) <= rest; i++ ){
+			uint16 command = RFIFOW( fd, i );
+
+			if( command == HEADER_CA_SHIELD_HANDSHAKE && i + sizeof( PACKET_CA_SHIELD_HANDSHAKE ) <= rest ){
 				off = i;
+				packet_size = sizeof( PACKET_CA_SHIELD_HANDSHAKE );
+				break;
+			}
+
+			if( command == HEADER_CA_SHIELD_CHALLENGE && i + sizeof( PACKET_CA_SHIELD_CHALLENGE ) <= rest ){
+				off = i;
+				packet_size = sizeof( PACKET_CA_SHIELD_CHALLENGE );
 				break;
 			}
 		}
@@ -360,13 +391,22 @@ static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd
 			break;
 		}
 
-		PACKET_CA_SHIELD_HANDSHAKE* p = reinterpret_cast<PACKET_CA_SHIELD_HANDSHAKE*>( RFIFOP( fd, off ) );
+		uint16 command = RFIFOW( fd, off );
+		bool accepted = false;
 
-		if( !logclif_shield_accept_client_challenge( sd, *p, ip, fd ) ){
+		if( command == HEADER_CA_SHIELD_HANDSHAKE ){
+			PACKET_CA_SHIELD_HANDSHAKE* p = reinterpret_cast<PACKET_CA_SHIELD_HANDSHAKE*>( RFIFOP( fd, off ) );
+			accepted = logclif_shield_accept_client_challenge( sd, *p, ip, fd );
+		}else if( command == HEADER_CA_SHIELD_CHALLENGE ){
+			PACKET_CA_SHIELD_CHALLENGE* p = reinterpret_cast<PACKET_CA_SHIELD_CHALLENGE*>( RFIFOP( fd, off ) );
+			accepted = logclif_shield_accept_client_challenge_short( sd, *p, ip, fd );
+		}
+
+		if( !accepted ){
 			return false;
 		}
 
-		logclif_fifo_remove( fd, off, sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
+		logclif_fifo_remove( fd, off, packet_size );
 	}
 
 	return true;
@@ -390,6 +430,20 @@ static bool logclif_parse_shield_handshake( int32 fd, struct login_session_data&
 	ip2str( ipl, ip );
 
 	return logclif_shield_accept_client_challenge( sd, *p, ip, fd );
+}
+
+/**
+ * PRO Anti-Cheat (shield.dll) login handshake (short form).
+ * Client throws CA_SHIELD_CHALLENGE 0x0af6 <challenge>.L <interval_ms>.W <reserved>.W
+ */
+static bool logclif_parse_shield_challenge( int32 fd, struct login_session_data& sd ){
+	PACKET_CA_SHIELD_CHALLENGE* p = (PACKET_CA_SHIELD_CHALLENGE*)RFIFOP( fd, 0 );
+
+	char ip[16];
+	uint32 ipl = session[fd]->client_addr;
+	ip2str( ipl, ip );
+
+	return logclif_shield_accept_client_challenge_short( sd, *p, ip, fd );
 }
 
 template <typename P>
@@ -625,6 +679,7 @@ public:
 		this->add( HEADER_CA_REQ_HASH, true, sizeof( PACKET_CA_REQ_HASH ), logclif_parse_reqkey );
 		this->add( HEADER_CT_AUTH, true, sizeof( PACKET_CT_AUTH ), logclif_parse_otp_login );
 		this->add( HEADER_CA_SHIELD_HANDSHAKE, true, sizeof( PACKET_CA_SHIELD_HANDSHAKE ), logclif_parse_shield_handshake );
+		this->add( HEADER_CA_SHIELD_CHALLENGE, true, sizeof( PACKET_CA_SHIELD_CHALLENGE ), logclif_parse_shield_challenge );
 	}
 } login_packet_db;
 
@@ -683,7 +738,7 @@ int32 logclif_parse(int32 fd) {
 				logclif_parse_reqcharconnec(fd,sd, ip);
 				return 0; // processing will continue elsewhere
 			default:
-				if( command == HEADER_CA_SHIELD_HANDSHAKE ){
+				if( command == HEADER_CA_SHIELD_HANDSHAKE || command == HEADER_CA_SHIELD_CHALLENGE ){
 					if( !login_packet_db.handle( fd, *sd ) ){
 						return 0;
 					}
@@ -701,10 +756,10 @@ int32 logclif_parse(int32 fd) {
 					logclif_shield_process_fifo( fd, *sd );
 					if( !sd->shield.verified ){
 						if( !sd->shield.login_hold_notice ){
-							ShowStatus( "Shield handshake: login deferred from %s, awaiting client challenge\n", ip );
+							ShowStatus( "Shield handshake: login deferred from %s, awaiting client challenge (0x0af5 or 0x0af6), pending packet 0x%04x\n", ip, command );
 							sd->shield.login_hold_notice = true;
 						}
-						return 0;
+						break;
 					}
 				}
 

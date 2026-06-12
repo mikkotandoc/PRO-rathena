@@ -652,13 +652,20 @@ struct PACKET_CA_SHIELD_HANDSHAKE {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER( CA_SHIELD_HANDSHAKE, 0x0af5 );
 
-struct PACKET_AC_SHIELD_CHALLENGE {
+struct PACKET_CA_SHIELD_CHALLENGE {
 	int16 packetType;
 	uint32 challenge;
 	uint16 interval_ms;
 	uint16 reserved;
 } __attribute__((packed));
-DEFINE_PACKET_HEADER( AC_SHIELD_CHALLENGE, 0x0af6 );
+DEFINE_PACKET_HEADER( CA_SHIELD_CHALLENGE, 0x0af6 );
+
+struct PACKET_AC_SHIELD_ACK {
+	int16 packetType;
+	uint32 challenge;
+	uint32 result;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER( AC_SHIELD_ACK, 0x0af7 );
 
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )
