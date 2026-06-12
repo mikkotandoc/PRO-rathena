@@ -400,7 +400,7 @@ static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd
 
 static void logclif_shield_init( struct login_session_data& sd ){
 	sd.shield.challenge = logclif_shield_next_challenge();
-	sd.shield.verified = false;
+	sd.shield.verified = !login_config.shield_handshake_check;
 	sd.shield.challenge_sent = false;
 	sd.shield.login_hold_notice = false;
 }
@@ -715,20 +715,28 @@ int32 logclif_parse(int32 fd) {
 		sd->fd = fd;
 		logclif_shield_init( *sd );
 
-		if( RFIFOREST( fd ) < 2 || RFIFOW( fd, 0 ) != 0x2710 ){
+		if( login_config.shield_handshake_check && ( RFIFOREST( fd ) < 2 || RFIFOW( fd, 0 ) != 0x2710 ) ){
 			logclif_shield_send_challenge( fd, *sd );
 			sd->shield.challenge_sent = true;
 		}
 
-		logclif_shield_keepalive_session( fd, *sd );
+		if( login_config.shield_handshake_check ){
+			logclif_shield_keepalive_session( fd, *sd );
+		}
 	}
 
 	while( RFIFOREST(fd) >= 2 )
 	{
-		logclif_shield_keepalive_session( fd, *sd );
+		if( login_config.shield_handshake_check ){
+			logclif_shield_keepalive_session( fd, *sd );
+		}
 
 		if( !logclif_shield_process_fifo( fd, *sd ) ){
 			return 0;
+		}
+
+		if( RFIFOREST( fd ) < 2 ){
+			break;
 		}
 
 		uint16 command = RFIFOW(fd,0);
@@ -742,6 +750,17 @@ int32 logclif_parse(int32 fd) {
 				return 0; // processing will continue elsewhere
 			default:
 				if( command == HEADER_CA_SHIELD_HANDSHAKE ){
+					if( sd->shield.verified ){
+						if( RFIFOREST( fd ) >= sizeof( PACKET_CA_SHIELD_HANDSHAKE ) ){
+							RFIFOSKIP( fd, sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
+						}
+						continue;
+					}
+
+					if( RFIFOREST( fd ) < sizeof( PACKET_CA_SHIELD_HANDSHAKE ) ){
+						break;
+					}
+
 					if( !login_packet_db.handle( fd, *sd ) ){
 						return 0;
 					}
