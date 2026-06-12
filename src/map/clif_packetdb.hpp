@@ -2058,4 +2058,8 @@
 	packet(HEADER_ZC_EMOTION2_EXPANTION_LIST, -1);
 #endif
 
+// PRO Anti-Cheat (shield.dll) heartbeat
+parseable_packet(HEADER_CZ_SHIELD_HEARTBEAT, sizeof(PACKET_CZ_SHIELD_HEARTBEAT), clif_parse_shield_heartbeat, 0);
+packet(HEADER_ZC_SHIELD_CHALLENGE, sizeof(PACKET_ZC_SHIELD_CHALLENGE));
+
 #endif /* CLIF_PACKETDB_HPP */

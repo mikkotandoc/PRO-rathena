@@ -2327,6 +2327,7 @@ int32 map_quit(map_session_data *sd) {
 	pc_clean_skilltree(sd);
 	pc_crimson_marker_clear(sd);
 	pc_macro_detector_disconnect(*sd);
+	pc_shield_heartbeat_stop(*sd);
 	chrif_save(sd, CSAVE_QUIT|CSAVE_INVENTORY|CSAVE_CART);
 	unit_free_pc(sd);
 	return 0;

@@ -162,6 +162,15 @@ struct s_macro_detect {
 	int32 timer;
 };
 
+struct s_shield_heartbeat {
+	uint32 challenge;
+	t_tick last_tick;
+	t_tick start_tick;
+	int32 missed;
+	int32 timer = INVALID_TIMER;
+	bool active = false;
+};
+
 enum e_macro_detect_status : uint8 {
 	MCD_TIMEOUT = 0,
 	MCD_INCORRECT = 1,
@@ -941,6 +950,8 @@ public:
 	} captcha_upload;
 
 	s_macro_detect macro_detect;
+
+	s_shield_heartbeat shield;
 
 	std::vector<uint32> party_booking_requests;
 
@@ -1836,6 +1847,11 @@ void pc_macro_captcha_register_upload(map_session_data & sd, uint16 upload_size,
 TIMER_FUNC(pc_macro_detector_timeout);
 void pc_macro_detector_process_answer(map_session_data &sd, const char captcha_answer[CAPTCHA_ANSWER_SIZE_MAX]);
 void pc_macro_detector_disconnect(map_session_data &sd);
+
+TIMER_FUNC(pc_shield_heartbeat_timeout);
+void pc_shield_heartbeat_start(map_session_data &sd);
+void pc_shield_heartbeat_stop(map_session_data &sd);
+void pc_shield_heartbeat_on_packet(map_session_data &sd, uint32 version, uint32 challenge, uint32 status);
 
 // Macro Reporter
 void pc_macro_reporter_area_select(map_session_data &sd, const int16 x, const int16 y, const int8 radius);

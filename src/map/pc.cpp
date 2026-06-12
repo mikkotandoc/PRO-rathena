@@ -16344,6 +16344,111 @@ void pc_macro_detector_disconnect(map_session_data &sd) {
 		pc_macro_punishment(sd, MCD_TIMEOUT);
 }
 
+static uint32 pc_shield_next_challenge() {
+	return ( static_cast<uint32>( rnd() ) << 16 ) ^ static_cast<uint32>( rnd() ) ^ static_cast<uint32>( gettick() );
+}
+
+void pc_shield_heartbeat_stop(map_session_data &sd) {
+	if (sd.shield.timer != INVALID_TIMER) {
+		delete_timer(sd.shield.timer, pc_shield_heartbeat_timeout);
+		sd.shield.timer = INVALID_TIMER;
+	}
+
+	sd.shield.challenge = 0;
+	sd.shield.last_tick = 0;
+	sd.shield.start_tick = 0;
+	sd.shield.missed = 0;
+	sd.shield.active = false;
+}
+
+void pc_shield_heartbeat_start(map_session_data &sd) {
+	if (!battle_config.shield_heartbeat || sd.state.autotrade) {
+		return;
+	}
+
+	pc_shield_heartbeat_stop(sd);
+
+	sd.shield.challenge = pc_shield_next_challenge();
+	sd.shield.last_tick = gettick();
+	sd.shield.start_tick = gettick();
+	sd.shield.missed = 0;
+	sd.shield.active = false;
+
+	clif_shield_challenge(sd);
+
+	sd.shield.timer = add_timer(gettick() + battle_config.shield_heartbeat_interval, pc_shield_heartbeat_timeout, sd.id, 0);
+}
+
+void pc_shield_heartbeat_on_packet(map_session_data &sd, uint32 version, uint32 challenge, uint32 status) {
+	if (!battle_config.shield_heartbeat) {
+		return;
+	}
+
+	if (version != 1) {
+		ShowWarning("Shield heartbeat: invalid version %u from %s (AID:%d CID:%d).\n", version, sd.status.name, sd.status.account_id, sd.status.char_id);
+		set_eof(sd.fd);
+		return;
+	}
+
+	if (status != 1) {
+		ShowWarning("Shield heartbeat: failed local scan from %s (AID:%d CID:%d).\n", sd.status.name, sd.status.account_id, sd.status.char_id);
+		set_eof(sd.fd);
+		return;
+	}
+
+	if (challenge != sd.shield.challenge) {
+		ShowWarning("Shield heartbeat: invalid challenge from %s (AID:%d CID:%d).\n", sd.status.name, sd.status.account_id, sd.status.char_id);
+		set_eof(sd.fd);
+		return;
+	}
+
+	sd.shield.last_tick = gettick();
+	sd.shield.missed = 0;
+	sd.shield.active = true;
+
+	sd.shield.challenge = pc_shield_next_challenge();
+	clif_shield_challenge(sd);
+}
+
+TIMER_FUNC(pc_shield_heartbeat_timeout) {
+	map_session_data *sd = map_id2sd(id);
+
+	nullpo_ret(sd);
+
+	sd->shield.timer = INVALID_TIMER;
+
+	if (!battle_config.shield_heartbeat) {
+		return 0;
+	}
+
+	if (sd->state.autotrade) {
+		return 0;
+	}
+
+	if (battle_config.shield_heartbeat_grace > 0 &&
+		DIFF_TICK(gettick(), sd->shield.start_tick) < battle_config.shield_heartbeat_grace) {
+		clif_shield_challenge(*sd);
+		sd->shield.timer = add_timer(gettick() + battle_config.shield_heartbeat_interval, pc_shield_heartbeat_timeout, sd->id, 0);
+		return 0;
+	}
+
+	if (DIFF_TICK(gettick(), sd->shield.last_tick) >= battle_config.shield_heartbeat_interval) {
+		sd->shield.missed++;
+
+		if (sd->shield.missed >= battle_config.shield_heartbeat_max_miss) {
+			ShowWarning("Shield heartbeat: timeout disconnect for %s (AID:%d CID:%d).\n", sd->status.name, sd->status.account_id, sd->status.char_id);
+			set_eof(sd->fd);
+			return 0;
+		}
+
+		// Re-send so clients that install hooks after map load can still respond.
+		clif_shield_challenge(*sd);
+	}
+
+	sd->shield.timer = add_timer(gettick() + battle_config.shield_heartbeat_interval, pc_shield_heartbeat_timeout, sd->id, 0);
+	return 0;
+}
+
 /**
  * Save a list of players from an area select via /macro_detector.
  */
@@ -16575,6 +16680,7 @@ void do_init_pc(void) {
 	add_timer_func_list(pc_autotrade_timer, "pc_autotrade_timer");
 	add_timer_func_list(pc_on_expire_active, "pc_on_expire_active");
 	add_timer_func_list(pc_macro_detector_timeout, "pc_macro_detector_timeout");
+	add_timer_func_list(pc_shield_heartbeat_timeout, "pc_shield_heartbeat_timeout");
 
 	add_timer(gettick() + autosave_interval, pc_autosave, 0, 0);
 

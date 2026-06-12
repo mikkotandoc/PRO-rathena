@@ -755,6 +755,11 @@ struct Battle_Config
 	int32 macro_detection_punishment_time;
 	int32 macrochecker_delay;
 
+	int32 shield_heartbeat;
+	int32 shield_heartbeat_interval;
+	int32 shield_heartbeat_max_miss;
+	int32 shield_heartbeat_grace;
+
 	int32 feature_dynamicnpc_timeout;
 	int32 feature_dynamicnpc_rangex;
 	int32 feature_dynamicnpc_rangey;

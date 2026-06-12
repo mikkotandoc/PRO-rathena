@@ -989,6 +989,8 @@ void clif_playBGM( const map_session_data& sd, const char* name );
 void clif_soundeffect( const block_list& bl, const char* name, int32 type, enum send_target target );
 void clif_parse_ActionRequest_sub( map_session_data& sd, uint8 action_type, int32 target_id, t_tick tick );
 void clif_parse_LoadEndAck( int32 fd,map_session_data* sd );
+void clif_shield_challenge( map_session_data& sd );
+void clif_parse_shield_heartbeat( int32 fd, map_session_data *sd );
 void clif_hotkeys_send( const map_session_data* sd, int32 tab );
 
 // trade

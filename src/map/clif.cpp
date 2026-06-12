@@ -11183,6 +11183,8 @@ void clif_parse_LoadEndAck(int32 fd,map_session_data *sd)
 	}
 #endif
 
+	pc_shield_heartbeat_start( *sd );
+
 	sd->state.connect_new = 0;
 	sd->state.changemap = false;
 }
@@ -22494,6 +22496,41 @@ void clif_ping( map_session_data* sd ){
 
 	clif_send( &p, sizeof( p ), sd, SELF );
 #endif
+}
+
+/// Sends a shield.dll heartbeat challenge (ZC_SHIELD_CHALLENGE).
+void clif_shield_challenge( map_session_data& sd ){
+	if( !battle_config.shield_heartbeat ){
+		return;
+	}
+
+	int32 fd = sd.fd;
+
+	if( !session_isActive( fd ) ){
+		return;
+	}
+
+	PACKET_ZC_SHIELD_CHALLENGE p = {};
+
+	p.packetType = HEADER_ZC_SHIELD_CHALLENGE;
+	p.challenge = sd.shield.challenge;
+	p.interval_ms = static_cast<uint16>( battle_config.shield_heartbeat_interval );
+	p.reserved = 0;
+
+	clif_send( &p, sizeof( p ), &sd, SELF );
+}
+
+/// shield.dll heartbeat response (CZ_SHIELD_HEARTBEAT).
+void clif_parse_shield_heartbeat( int32 fd, map_session_data *sd ){
+	nullpo_retv( sd );
+
+	if( !battle_config.shield_heartbeat ){
+		return;
+	}
+
+	const PACKET_CZ_SHIELD_HEARTBEAT *p = reinterpret_cast<PACKET_CZ_SHIELD_HEARTBEAT *>( RFIFOP( fd, 0 ) );
+
+	pc_shield_heartbeat_on_packet( *sd, p->version, p->challenge, p->status );
 }
 
 int32 clif_ping_timer_sub( map_session_data *sd, va_list ap ){
