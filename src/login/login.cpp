@@ -408,7 +408,7 @@ int32 login_mmo_auth(struct login_session_data* sd, bool isServer) {
 
 	if( login_config.shield_handshake_check && !isServer ) {
 		if( !sd->shield.verified ) {
-			ShowNotice("Client didn't complete shield handshake (account: %s, ip: %s)\n", sd->userid, ip);
+			ShowStatus("Client didn't complete shield handshake (account: %s, ip: %s)\n", sd->userid, ip);
 			return 5;
 		}
 	}
@@ -486,6 +486,23 @@ bool login_check_password( struct login_session_data& sd, struct mmo_account& ac
 	}
 
 	return false;
+}
+
+void login_print_console_status(void) {
+	int32 i, char_servers = 0;
+
+	for( i = 0; i < ARRAYLENGTH(ch_server); ++i ){
+		if( session_isActive( ch_server[i].fd ) ){
+			char_servers++;
+		}
+	}
+
+	ShowStatus( CL_CYAN "Console: Login Server Status" CL_RESET "\n" );
+	ShowStatus( "  Running: yes\n" );
+	ShowStatus( "  Port: %u\n", login_config.login_port );
+	ShowStatus( "  Shield handshake: %s\n", login_config.shield_handshake_check ? "enabled" : "disabled" );
+	ShowStatus( "  Char-servers connected: %d\n", char_servers );
+	ShowStatus( "  Console commands: help, server:status, server:shutdown, server:reloadconf\n" );
 }
 
 int32 login_get_usercount( int32 users ){
@@ -915,6 +932,7 @@ bool LoginServer::initialize( int32 argc, char* argv[] ){
 	do_init_logincnslif();
 
 	ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_port);
+	ShowStatus("PRO Anti-Cheat: shield_handshake_check is %s (console: server:status)\n", login_config.shield_handshake_check ? CL_GREEN "enabled" CL_RESET : CL_YELLOW "disabled" CL_RESET);
 	login_log(0, "login server", 100, "login server started");
 
 	return true;

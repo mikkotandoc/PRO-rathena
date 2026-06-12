@@ -4095,6 +4095,16 @@ int32 parse_console(const char* buf){
 		if( strcmpi("shutdown", command) == 0 || strcmpi("exit", command) == 0 || strcmpi("quit", command) == 0 ){
 			global_core->signal_shutdown();
 		}
+		else if( strcmpi("alive", command) == 0 || strcmpi("status", command) == 0 ){
+			ShowStatus( CL_CYAN "Console: Map Server Status" CL_RESET "\n" );
+			ShowStatus( "  Running: yes\n" );
+			ShowStatus( "  Shield heartbeat: %s\n", battle_config.shield_heartbeat ? "enabled" : "disabled" );
+			ShowStatus( "  Shield interval: %d ms\n", battle_config.shield_heartbeat_interval );
+			ShowStatus( "  Shield grace: %d ms\n", battle_config.shield_heartbeat_grace );
+			ShowStatus( "  Shield max miss: %d\n", battle_config.shield_heartbeat_max_miss );
+			ShowStatus( "  Char-server: %s\n", chrif_isconnected() ? "connected" : "disconnected" );
+			ShowStatus( "  Console commands: help, server:status, server:shutdown, admin:@<command>\n" );
+		}
 	}
 	else if( strcmpi("ers_report", type) == 0 ){
 		ers_report();
@@ -4103,6 +4113,8 @@ int32 parse_console(const char* buf){
 		ShowInfo("Available commands:\n");
 		ShowInfo("\t admin:@<atcommand> => Uses an atcommand. Do NOT use commands requiring an attached player.\n");
 		ShowInfo("\t admin:map:<map> <x> <y> => Changes the map from which console commands are executed.\n");
+		ShowInfo("\t server:status => Shows map-server and anti-cheat status.\n");
+		ShowInfo("\t server:alive => Alias for server:status.\n");
 		ShowInfo("\t server:shutdown => Stops the server.\n");
 		ShowInfo("\t ers_report => Displays database usage.\n");
 	}
@@ -5460,6 +5472,7 @@ bool MapServer::initialize( int32 argc, char *argv[] ){
 
 #ifndef MAP_GENERATOR
 	ShowStatus("Server is '" CL_GREEN "ready" CL_RESET "' and listening on port '" CL_WHITE "%d" CL_RESET "'.\n\n", map_port);
+	ShowStatus("PRO Anti-Cheat: shield_heartbeat is %s (console: server:status)\n", battle_config.shield_heartbeat ? CL_GREEN "enabled" CL_RESET : CL_YELLOW "disabled" CL_RESET);
 #else
 	// depending on gen_options, generate the correct things
 	if (gen_options.navi)
