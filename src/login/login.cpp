@@ -406,6 +406,13 @@ int32 login_mmo_auth(struct login_session_data* sd, bool isServer) {
 		}
 	}
 
+	if( login_config.shield_handshake_check && !isServer ) {
+		if( !sd->shield.verified ) {
+			ShowNotice("Client didn't complete shield handshake (account: %s, ip: %s)\n", sd->userid, ip);
+			return 5;
+		}
+	}
+
 	ShowNotice("Authentication accepted (account: %s, id: %d, ip: %s)\n", sd->userid, acc.account_id, ip);
 
 	// update session data
@@ -664,6 +671,8 @@ bool login_config_read(const char* cfgName, bool normal) {
 			login_config.ip_sync_interval = (uint32)1000*60*atoi(w2); //w2 comes in minutes.
 		else if(!strcmpi(w1, "client_hash_check"))
 			login_config.client_hash_check = config_switch(w2);
+		else if(!strcmpi(w1, "shield_handshake_check"))
+			login_config.shield_handshake_check = config_switch(w2);
 		else if(!strcmpi(w1, "use_web_auth_token"))
 			login_config.use_web_auth_token = config_switch(w2);
 		else if (!strcmpi(w1, "disable_webtoken_delay"))
@@ -779,6 +788,7 @@ void login_set_defaults() {
 
 	login_config.client_hash_check = 0;
 	login_config.client_hash_nodes = nullptr;
+	login_config.shield_handshake_check = 0;
 	login_config.usercount_disable = false;
 	login_config.usercount_low = 200;
 	login_config.usercount_medium = 500;
