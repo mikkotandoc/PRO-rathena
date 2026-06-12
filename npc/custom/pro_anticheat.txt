@@ -3,28 +3,30 @@
 //===== Description: =========================================
 //= Invisible NPC that verifies shield.dll on player login and
 //= disconnects clients that fail the map-server heartbeat.
+//= Runs independently of the shield_heartbeat battle flag.
 //============================================================
 
 -	script	ProAntiCheat	-1,{
 	end;
 
 OnPCLoginEvent:
-	if (!getbattleflag("shield_heartbeat"))
-		end;
-
 	// Skip autotrade vendors and inter-server links.
 	if (checkvending(strcharinfo(0)) & 2)
 		end;
 
+	// When map-server heartbeat is disabled, issue a script-side challenge.
+	shieldstart();
+
 	.@grace = getbattleflag("shield_heartbeat_grace");
 	.@interval = getbattleflag("shield_heartbeat_interval");
+	if (.@grace <= 0)
+		.@grace = 30000;
+	if (.@interval <= 0)
+		.@interval = 5000;
 	addtimer .@grace + .@interval, strnpcinfo(0) + "::OnShieldCheck";
 	end;
 
 OnShieldCheck:
-	if (!getbattleflag("shield_heartbeat"))
-		end;
-
 	if (shieldactive())
 		end;
 

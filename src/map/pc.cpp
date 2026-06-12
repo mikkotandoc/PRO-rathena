@@ -16359,6 +16359,7 @@ void pc_shield_heartbeat_stop(map_session_data &sd) {
 	sd.shield.start_tick = 0;
 	sd.shield.missed = 0;
 	sd.shield.active = false;
+	sd.shield.enforce = false;
 }
 
 void pc_shield_heartbeat_start(map_session_data &sd) {
@@ -16379,8 +16380,29 @@ void pc_shield_heartbeat_start(map_session_data &sd) {
 	sd.shield.timer = add_timer(gettick() + battle_config.shield_heartbeat_interval, pc_shield_heartbeat_timeout, sd.id, 0);
 }
 
+void pc_shield_heartbeat_start_force(map_session_data &sd) {
+	if (sd.state.autotrade || session[sd.fd]->flag.server) {
+		return;
+	}
+
+	if (battle_config.shield_heartbeat) {
+		return;
+	}
+
+	pc_shield_heartbeat_stop(sd);
+
+	sd.shield.enforce = true;
+	sd.shield.challenge = pc_shield_next_challenge();
+	sd.shield.last_tick = gettick();
+	sd.shield.start_tick = gettick();
+	sd.shield.missed = 0;
+	sd.shield.active = false;
+
+	clif_shield_challenge(sd);
+}
+
 void pc_shield_heartbeat_on_packet(map_session_data &sd, uint32 version, uint32 challenge, uint32 status) {
-	if (!battle_config.shield_heartbeat) {
+	if (!battle_config.shield_heartbeat && !sd.shield.enforce) {
 		return;
 	}
 

@@ -169,6 +169,7 @@ struct s_shield_heartbeat {
 	int32 missed;
 	int32 timer = INVALID_TIMER;
 	bool active = false;
+	bool enforce = false;
 };
 
 enum e_macro_detect_status : uint8 {
@@ -1850,6 +1851,7 @@ void pc_macro_detector_disconnect(map_session_data &sd);
 
 TIMER_FUNC(pc_shield_heartbeat_timeout);
 void pc_shield_heartbeat_start(map_session_data &sd);
+void pc_shield_heartbeat_start_force(map_session_data &sd);
 void pc_shield_heartbeat_stop(map_session_data &sd);
 void pc_shield_heartbeat_on_packet(map_session_data &sd, uint32 version, uint32 challenge, uint32 status);
 

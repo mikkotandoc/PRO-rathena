@@ -18830,13 +18830,27 @@ BUILDIN_FUNC(shieldactive)
 	if (!script_charid2sd(2, sd))
 		return SCRIPT_CMD_FAILURE;
 
-	if (!battle_config.shield_heartbeat || sd->state.autotrade ||
-		(session_isValid(sd->fd) && session[sd->fd]->flag.server)) {
+	if (sd->state.autotrade || (session_isValid(sd->fd) && session[sd->fd]->flag.server)) {
 		script_pushint(st, 1);
 		return SCRIPT_CMD_SUCCESS;
 	}
 
 	script_pushint(st, sd->shield.active ? 1 : 0);
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/**
+ * Sends a shield.dll heartbeat challenge when map-server enforcement is disabled.
+ * shieldstart({<char_id>})
+ */
+BUILDIN_FUNC(shieldstart)
+{
+	map_session_data *sd = nullptr;
+
+	if (!script_charid2sd(2, sd))
+		return SCRIPT_CMD_FAILURE;
+
+	pc_shield_heartbeat_start_force(*sd);
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -28772,6 +28786,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(isdead, "?"),
 	BUILDIN_DEF(macro_detector, "?"),
 	BUILDIN_DEF(shieldactive, "?"),
+	BUILDIN_DEF(shieldstart, "?"),
 	BUILDIN_DEF(has_autoloot,"?"),
 	BUILDIN_DEF(autoloot,"??"),
 	BUILDIN_DEF(opentips, "i?"),

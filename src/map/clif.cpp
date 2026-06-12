@@ -22507,7 +22507,7 @@ void clif_ping( map_session_data* sd ){
 
 /// Sends a shield.dll heartbeat challenge (ZC_SHIELD_CHALLENGE).
 void clif_shield_challenge( map_session_data& sd ){
-	if( !battle_config.shield_heartbeat ){
+	if( !battle_config.shield_heartbeat && !sd.shield.enforce ){
 		return;
 	}
 
@@ -22531,7 +22531,7 @@ void clif_shield_challenge( map_session_data& sd ){
 void clif_parse_shield_heartbeat( int32 fd, map_session_data *sd ){
 	nullpo_retv( sd );
 
-	if( !battle_config.shield_heartbeat || session[fd]->flag.server ){
+	if( ( !battle_config.shield_heartbeat && !sd->shield.enforce ) || session[fd]->flag.server ){
 		return;
 	}
 
