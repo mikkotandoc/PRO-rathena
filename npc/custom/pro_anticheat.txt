@@ -1,0 +1,34 @@
+//===== rAthena Script =======================================
+//= PRO Anti-Cheat (shield.dll) Login Enforcement
+//===== Description: =========================================
+//= Invisible NPC that verifies shield.dll on player login and
+//= disconnects clients that fail the map-server heartbeat.
+//============================================================
+
+-	script	ProAntiCheat	-1,{
+	end;
+
+OnPCLoginEvent:
+	if (!getbattleflag("shield_heartbeat"))
+		end;
+
+	// Skip autotrade vendors and inter-server links.
+	if (checkvending(strcharinfo(0)) & 2)
+		end;
+
+	.@grace = getbattleflag("shield_heartbeat_grace");
+	.@interval = getbattleflag("shield_heartbeat_interval");
+	addtimer .@grace + .@interval, strnpcinfo(0) + "::OnShieldCheck";
+	end;
+
+OnShieldCheck:
+	if (!getbattleflag("shield_heartbeat"))
+		end;
+
+	if (shieldactive())
+		end;
+
+	dispbottom "PRO Anti-Cheat (shield.dll) is required to play on this server.";
+	kick();
+	end;
+}
