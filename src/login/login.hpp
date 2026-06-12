@@ -54,6 +54,11 @@ struct login_session_data {
 	uint8 client_hash[16];		///hash of client
 	int32 has_client_hash;		///client ha sent an hash
 
+	struct s_login_shield_handshake {
+		uint32 challenge;
+		bool verified;
+	} shield;
+
 	int32 fd;				///socket of client
 
 	char web_auth_token[WEB_AUTH_TOKEN_LENGTH]; /// web authentication token
@@ -107,6 +112,8 @@ struct Login_Config {
 
 	int32 client_hash_check;							/// flags for checking client md5
 	struct client_hash_node *client_hash_nodes;		/// linked list containing md5 hash for each gm group
+
+	int32 shield_handshake_check;						/// require shield.dll login handshake
 
 	bool usercount_disable;							/// Disable colorization and description in general?
 	int32 usercount_low;								/// Amount of users that will display in green

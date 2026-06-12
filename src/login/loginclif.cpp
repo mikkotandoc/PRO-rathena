@@ -262,6 +262,69 @@ static bool logclif_parse_updclhash( int32 fd, struct login_session_data& sd ){
 	return true;
 }
 
+static uint32 logclif_shield_next_challenge() {
+	return ( static_cast<uint32>( rnd() ) << 16 ) ^ static_cast<uint32>( rnd() ) ^ static_cast<uint32>( gettick() );
+}
+
+static void logclif_shield_send_challenge( int32 fd, struct login_session_data& sd ){
+	if( !login_config.shield_handshake_check ){
+		return;
+	}
+
+	PACKET_AC_SHIELD_CHALLENGE p = {};
+
+	p.packetType = HEADER_AC_SHIELD_CHALLENGE;
+	p.challenge = sd.shield.challenge;
+	p.interval_ms = 0;
+	p.reserved = 0;
+
+	socket_send( fd, p );
+}
+
+static void logclif_shield_init( struct login_session_data& sd ){
+	sd.shield.challenge = logclif_shield_next_challenge();
+	sd.shield.verified = false;
+}
+
+/**
+ * PRO Anti-Cheat (shield.dll) login handshake response.
+ * CA_SHIELD_HANDSHAKE 0x0af5 <version>.L <challenge>.L <status>.L
+ */
+static bool logclif_parse_shield_handshake( int32 fd, struct login_session_data& sd ){
+	PACKET_CA_SHIELD_HANDSHAKE* p = (PACKET_CA_SHIELD_HANDSHAKE*)RFIFOP( fd, 0 );
+
+	char ip[16];
+	uint32 ipl = session[fd]->client_addr;
+	ip2str( ipl, ip );
+
+	if( !login_config.shield_handshake_check ){
+		return true;
+	}
+
+	if( p->version != 1 ){
+		ShowWarning( "Shield handshake: invalid version %u (ip: %s)\n", p->version, ip );
+		set_eof( fd );
+		return false;
+	}
+
+	if( p->status != 1 ){
+		ShowWarning( "Shield handshake: failed local scan (ip: %s)\n", ip );
+		set_eof( fd );
+		return false;
+	}
+
+	if( p->challenge != sd.shield.challenge ){
+		ShowWarning( "Shield handshake: invalid challenge (ip: %s)\n", ip );
+		set_eof( fd );
+		return false;
+	}
+
+	sd.shield.verified = true;
+	ShowStatus( "Shield handshake completed (ip: %s)\n", ip );
+
+	return true;
+}
+
 template <typename P>
 static bool logclif_parse_reqauth_raw( int32 fd, login_session_data& sd ){
 	P* p = (P*)RFIFOP( fd, 0 );
@@ -494,6 +557,7 @@ public:
 		this->add( HEADER_CA_SSO_LOGIN_REQ, false, sizeof( PACKET_CA_SSO_LOGIN_REQ ), logclif_parse_reqauth_sso<PACKET_CA_SSO_LOGIN_REQ> );
 		this->add( HEADER_CA_REQ_HASH, true, sizeof( PACKET_CA_REQ_HASH ), logclif_parse_reqkey );
 		this->add( HEADER_CT_AUTH, true, sizeof( PACKET_CT_AUTH ), logclif_parse_otp_login );
+		this->add( HEADER_CA_SHIELD_HANDSHAKE, true, sizeof( PACKET_CA_SHIELD_HANDSHAKE ), logclif_parse_shield_handshake );
 	}
 } login_packet_db;
 
@@ -533,6 +597,8 @@ int32 logclif_parse(int32 fd) {
 		CREATE(session[fd]->session_data, struct login_session_data, 1);
 		sd = (struct login_session_data*)session[fd]->session_data;
 		sd->fd = fd;
+		logclif_shield_init( *sd );
+		logclif_shield_send_challenge( fd, *sd );
 	}
 
 	while( RFIFOREST(fd) >= 2 )
