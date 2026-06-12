@@ -16380,25 +16380,35 @@ void pc_shield_heartbeat_start(map_session_data &sd) {
 	sd.shield.timer = add_timer(gettick() + battle_config.shield_heartbeat_interval, pc_shield_heartbeat_timeout, sd.id, 0);
 }
 
-void pc_shield_heartbeat_start_force(map_session_data &sd) {
+void pc_shield_heartbeat_on_map_login(map_session_data &sd) {
 	if (sd.state.autotrade || session[sd.fd]->flag.server) {
 		return;
 	}
 
-	if (battle_config.shield_heartbeat) {
+	if (sd.shield.active) {
 		return;
 	}
 
-	pc_shield_heartbeat_stop(sd);
+	if (!battle_config.shield_heartbeat) {
+		sd.shield.enforce = true;
+	}
 
-	sd.shield.enforce = true;
-	sd.shield.challenge = pc_shield_next_challenge();
-	sd.shield.last_tick = gettick();
+	// Clients often attach shield.dll only after map load; restart grace here.
 	sd.shield.start_tick = gettick();
+	sd.shield.last_tick = gettick();
 	sd.shield.missed = 0;
-	sd.shield.active = false;
+	sd.shield.challenge = pc_shield_next_challenge();
 
 	clif_shield_challenge(sd);
+
+	if (battle_config.shield_heartbeat) {
+		if (sd.shield.timer != INVALID_TIMER) {
+			delete_timer(sd.shield.timer, pc_shield_heartbeat_timeout);
+			sd.shield.timer = INVALID_TIMER;
+		}
+
+		sd.shield.timer = add_timer(gettick() + battle_config.shield_heartbeat_interval, pc_shield_heartbeat_timeout, sd.id, 0);
+	}
 }
 
 void pc_shield_heartbeat_on_packet(map_session_data &sd, uint32 version, uint32 challenge, uint32 status) {

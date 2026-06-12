@@ -10986,6 +10986,7 @@ void clif_parse_LoadEndAck(int32 fd,map_session_data *sd)
 		}
 
 		if (!sd->state.autotrade) { // Don't trigger NPC event or opening vending/buyingstore will be failed
+			pc_shield_heartbeat_on_map_login( *sd );
 			npc_script_event( *sd, NPCE_LOGIN );
 		}
 
