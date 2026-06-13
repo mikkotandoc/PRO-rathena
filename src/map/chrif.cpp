@@ -1792,7 +1792,7 @@ int32 chrif_parse(int32 fd) {
 			case 0x2b27: chrif_authfail(fd); break;
 			case 0x2b2b: chrif_parse_ack_vipActive(fd); break;
 			case 0x2b2f: chrif_bsdata_received(fd); break;
-			case 0x0af6:
+			case 0x0af9:
 				// Anti-cheat handshake packet; ignored on inter-server links.
 				if( (int32)RFIFOREST( fd ) < packet_len ){
 					return 0;

@@ -323,7 +323,7 @@ static void logclif_shield_send_challenge( int32 fd, struct login_session_data& 
 		char ip[16];
 
 		ip2str( session[fd]->client_addr, ip );
-		ShowStatus( "Shield handshake: challenge 0x%08x sent to %s (AC_SHIELD_CHALLENGE 0x0af6)\n", sd.shield.challenge, ip );
+		ShowStatus( "Shield handshake: challenge 0x%08x sent to %s (AC_SHIELD_CHALLENGE 0x0af9)\n", sd.shield.challenge, ip );
 	}
 }
 
@@ -423,13 +423,13 @@ static void logclif_shield_keepalive_session( int32 fd, const struct login_sessi
 		return;
 	}
 
-	// Avoid login-server stall_time disconnect while waiting for shield.dll 0x0af5.
+	// Avoid login-server stall_time disconnect while waiting for shield.dll 0x0af4.
 	session[fd]->rdata_tick = 0;
 }
 
 /**
  * PRO Anti-Cheat (shield.dll) login heartbeat response.
- * Same as map-server CZ_SHIELD_HEARTBEAT: 0x0af5 <version>.L <challenge>.L <status>.L
+ * Same as map-server CZ_SHIELD_HEARTBEAT: 0x0af4 <version>.L <challenge>.L <status>.L
  */
 static bool logclif_parse_shield_handshake( int32 fd, struct login_session_data& sd ){
 	PACKET_CA_SHIELD_HANDSHAKE* p = (PACKET_CA_SHIELD_HANDSHAKE*)RFIFOP( fd, 0 );
@@ -780,7 +780,7 @@ int32 logclif_parse(int32 fd) {
 					logclif_shield_process_fifo( fd, *sd );
 					if( !sd->shield.verified ){
 						if( !sd->shield.login_hold_notice ){
-							ShowStatus( "Shield handshake: login deferred from %s, awaiting 0x0af5 heartbeat (pending 0x%04x)\n", ip, command );
+							ShowStatus( "Shield handshake: login deferred from %s, awaiting 0x0af4 heartbeat (pending 0x%04x)\n", ip, command );
 							sd->shield.login_hold_notice = true;
 						}
 						break;

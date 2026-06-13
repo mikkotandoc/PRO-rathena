@@ -644,13 +644,14 @@ struct PACKET_TC_RESULT{
 DEFINE_PACKET_HEADER( TC_RESULT, 0xae3 );
 
 // PRO Anti-Cheat (shield.dll) login handshake packets (same layout as map-server ZC/CZ shield packets)
+// NOTE: Do not use 0x0af6 for AC_SHIELD_CHALLENGE; the client treats it as ZC_ACK_RANKING2.
 struct PACKET_CA_SHIELD_HANDSHAKE {
 	int16 packetType;
 	uint32 version;
 	uint32 challenge;
 	uint32 status;
 } __attribute__((packed));
-DEFINE_PACKET_HEADER( CA_SHIELD_HANDSHAKE, 0x0af5 );
+DEFINE_PACKET_HEADER( CA_SHIELD_HANDSHAKE, 0x0af4 );
 
 struct PACKET_AC_SHIELD_CHALLENGE {
 	int16 packetType;
@@ -658,7 +659,7 @@ struct PACKET_AC_SHIELD_CHALLENGE {
 	uint32 interval_ms;
 	uint16 reserved;
 } __attribute__((packed));
-DEFINE_PACKET_HEADER( AC_SHIELD_CHALLENGE, 0x0af6 );
+DEFINE_PACKET_HEADER( AC_SHIELD_CHALLENGE, 0x0af9 );
 
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #if !defined( sun ) && ( !defined( __NETBSD__ ) || __NetBSD_Version__ >= 600000000 )
