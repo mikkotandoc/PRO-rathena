@@ -16468,11 +16468,10 @@ TIMER_FUNC(pc_shield_heartbeat_timeout) {
 
 	if (DIFF_TICK(gettick(), sd->shield.last_tick) >= battle_config.shield_heartbeat_interval) {
 		sd->shield.missed++;
+		sd->shield.active = false;
 
 		if (sd->shield.missed >= battle_config.shield_heartbeat_max_miss) {
-			ShowWarning("Shield heartbeat: timeout disconnect for %s (AID:%d CID:%d).\n", sd->status.name, sd->status.account_id, sd->status.char_id);
-			set_eof(sd->fd);
-			return 0;
+			ShowWarning("Shield heartbeat: missed %d intervals for %s (AID:%d CID:%d, awaiting NPC enforcement).\n", sd->shield.missed, sd->status.name, sd->status.account_id, sd->status.char_id);
 		}
 
 		// Re-send so clients that install hooks after map load can still respond.

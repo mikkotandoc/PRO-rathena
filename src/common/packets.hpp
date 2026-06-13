@@ -656,7 +656,7 @@ DEFINE_PACKET_HEADER( CA_SHIELD_HANDSHAKE, 0x0af4 );
 struct PACKET_AC_SHIELD_CHALLENGE {
 	int16 packetType;
 	uint32 challenge;
-	uint16 interval_ms;
+	uint32 interval_ms;
 	uint16 reserved;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER( AC_SHIELD_CHALLENGE, 0x0af9 );

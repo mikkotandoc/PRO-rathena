@@ -22522,7 +22522,7 @@ void clif_shield_challenge( map_session_data& sd ){
 
 	p.packetType = HEADER_ZC_SHIELD_CHALLENGE;
 	p.challenge = sd.shield.challenge;
-	p.interval_ms = static_cast<uint16>( battle_config.shield_heartbeat_interval );
+	p.interval_ms = static_cast<uint32>( battle_config.shield_heartbeat_interval );
 	p.reserved = 0;
 
 	clif_send( &p, sizeof( p ), &sd, SELF );
