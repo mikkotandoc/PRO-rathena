@@ -11186,13 +11186,6 @@ void clif_parse_LoadEndAck(int32 fd,map_session_data *sd)
 	}
 #endif
 
-	if( battle_config.shield_heartbeat && !sd->state.autotrade && !sd->shield.active &&
-		DIFF_TICK( gettick(), sd->shield.start_tick ) >= battle_config.shield_heartbeat_grace ){
-		ShowWarning( "Shield heartbeat: map entry denied for %s (AID:%d CID:%d, no shield.dll response).\n", sd->status.name, sd->status.account_id, sd->status.char_id );
-		set_eof( fd );
-		return;
-	}
-
 	sd->state.connect_new = 0;
 	sd->state.changemap = false;
 }
@@ -22522,7 +22515,7 @@ void clif_shield_challenge( map_session_data& sd ){
 
 	p.packetType = HEADER_ZC_SHIELD_CHALLENGE;
 	p.challenge = sd.shield.challenge;
-	p.interval_ms = static_cast<uint32>( battle_config.shield_heartbeat_interval );
+	p.interval_ms = static_cast<uint16>( battle_config.shield_heartbeat_interval );
 	p.reserved = 0;
 
 	clif_send( &p, sizeof( p ), &sd, SELF );

@@ -5912,7 +5912,7 @@ DEFINE_PACKET_HEADER(CZ_SHIELD_HEARTBEAT, 0x0af5);
 struct PACKET_ZC_SHIELD_CHALLENGE {
 	int16 packetType;
 	uint32 challenge;
-	uint32 interval_ms;
+	uint16 interval_ms;
 	uint16 reserved;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_SHIELD_CHALLENGE, 0x0af9);

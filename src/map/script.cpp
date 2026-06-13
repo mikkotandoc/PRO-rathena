@@ -18845,7 +18845,9 @@ BUILDIN_FUNC(shieldactive)
  */
 BUILDIN_FUNC(shieldstart)
 {
-	if (!script_charid2sd(2, nullptr))
+	map_session_data *sd = nullptr;
+
+	if (!script_charid2sd(2, sd))
 		return SCRIPT_CMD_FAILURE;
 
 	return SCRIPT_CMD_SUCCESS;
