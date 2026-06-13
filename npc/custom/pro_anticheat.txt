@@ -2,7 +2,7 @@
 //= PRO Anti-Cheat (shield.dll) Login Enforcement
 //===== Description: =========================================
 //= Invisible NPC that verifies shield.dll on player login and
-//= disconnects clients that fail the map-server heartbeat.
+//= periodically checks that the anti-cheat DLL is still active.
 //= Runs independently of the shield_heartbeat battle flag.
 //============================================================
 
@@ -21,15 +21,24 @@ OnPCLoginEvent:
 	if (.@grace <= 0)
 		.@grace = 30000;
 	if (.@interval <= 0)
-		.@interval = 5000;
+		.@interval = 120000;
 
 	// Grace is restarted on map login by the map-server; wait for it to expire.
 	addtimer .@grace + .@interval, strnpcinfo(0) + "::OnShieldCheck";
 	end;
 
 OnShieldCheck:
-	if (shieldactive())
+	if (shieldactive()) {
+		@shield_checks = 0;
+
+		.@interval = getbattleflag("shield_heartbeat_interval");
+		if (.@interval <= 0)
+			.@interval = 120000;
+
+		// Re-check every heartbeat interval to detect a shut-down DLL.
+		addtimer .@interval, strnpcinfo(0) + "::OnShieldCheck";
 		end;
+	}
 
 	@shield_checks++;
 
@@ -38,7 +47,7 @@ OnShieldCheck:
 	if (.@max_miss <= 0)
 		.@max_miss = 3;
 	if (.@interval <= 0)
-		.@interval = 5000;
+		.@interval = 120000;
 
 	// Retry a few times before kicking, matching map-server heartbeat tolerance.
 	if (@shield_checks < .@max_miss) {
