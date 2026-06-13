@@ -314,7 +314,7 @@ static void logclif_shield_send_challenge( int32 fd, struct login_session_data& 
 
 	p.packetType = HEADER_AC_SHIELD_CHALLENGE;
 	p.challenge = sd.shield.challenge;
-	p.interval_ms = 5000;
+	p.interval_ms = 120000;
 	p.reserved = 0;
 
 	socket_send( fd, p );

@@ -8906,7 +8906,7 @@ static const struct _battle_data {
 	{ "macro_detection_punishment_time",    &battle_config.macro_detection_punishment_time, 0,      0,      INT_MAX,        },
 	{ "macrochecker_delay",                 &battle_config.macrochecker_delay,              600000, 0,      INT_MAX,        },
 	{ "shield_heartbeat",                   &battle_config.shield_heartbeat,                1,      0,      1,              },
-	{ "shield_heartbeat_interval",          &battle_config.shield_heartbeat_interval,       5000,   1000,   INT_MAX,        },
+	{ "shield_heartbeat_interval",          &battle_config.shield_heartbeat_interval,      120000,   1000,   INT_MAX,        },
 	{ "shield_heartbeat_max_miss",          &battle_config.shield_heartbeat_max_miss,         3,      1,      INT_MAX,        },
 	{ "shield_heartbeat_grace",             &battle_config.shield_heartbeat_grace,           30000, 0,      INT_MAX,        },
 

@@ -18835,7 +18835,13 @@ BUILDIN_FUNC(shieldactive)
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	script_pushint(st, sd->shield.active ? 1 : 0);
+	if (!sd->shield.active)
+		script_pushint(st, 0);
+	else if (battle_config.shield_heartbeat_interval > 0 &&
+		DIFF_TICK(gettick(), sd->shield.last_tick) >= battle_config.shield_heartbeat_interval)
+		script_pushint(st, 0);
+	else
+		script_pushint(st, 1);
 	return SCRIPT_CMD_SUCCESS;
 }
 
