@@ -74,8 +74,6 @@ yuno,216,345,3	script	Sierra#yuno	4_F_SCIENCE,{
 			setquest 16400;
 			@documents = 0;
 			@weapon = 0;
-			if (getcharid(1))
-				set_instance_var("party_id", getcharid(1));
 			mapannounce "yuno", strcharinfo(0) + " is entering " + .instance_name$ + ".", bc_map, "0x00ff99", FW_NORMAL, 12;
 			end;
 		}
@@ -117,11 +115,11 @@ OnInstanceInit:
 	set_instance_var("floor8_clear", 0);
 	set_instance_var("floor8_started", 0);
 	set_instance_var("floor_cleaned", 0);
-	'combat_started = 0;
-	'mvpAlive$ = 0;
-	'canLeave$ = 0;
+	set_instance_var("combat_started", 0);
+	set_instance_var("mvp_alive", 0);
+	set_instance_var("can_leave", 0);
 
-	hideonnpc instance_mapname("Sierra#mvp");
+	hideonnpc instance_npcname("Sierra#mvp");
 	hideonnpc instance_npcname("Box#mvp");
 
 	for (.@i = 1; .@i <= 38; .@i++)
@@ -858,16 +856,25 @@ OnMyMobDead:
 1@gol2,47,62,5	script	block#s1b16	1309,{}
 // mob spawn: 44 58
 1@gol2,50,25,3	script	Sierra#premvp	4_F_SCIENCE,{
-	hideonnpc instance_mapname("Sierra#premvp");
-	hideoffnpc instance_mapname("Sierra#mvp");
+	mes "[Sierra]";
+	mes "We've reached the heart of the biolab record.";
+	mes "The final combat simulation is just ahead.";
+	next;
+	mes "[Sierra]";
+	mes "I'll move to the arena control point to the south.";
+	mes "Talk to me there when you're ready to begin.";
+	close2;
+	hideonnpc instance_npcname("Sierra#premvp");
+	hideoffnpc instance_npcname("Sierra#mvp");
 	end;
 }
 
 1@gol2,49,65,3	script	Sierra#mvp	4_F_SCIENCE,{
 	.@npc$ = instance_npcname("Sierra#mvp");
+	.@map$ = instance_mapname("1@gol2");
 	.@boss_event$ = .@npc$ + "::OnMyMobDead";
 
-	if('canLeave$) {
+	if (get_instance_var("can_leave")) {
 		mes "[Sierra]";
 		mes "Excellent work. Take these research materials before you leave.";
 		next;
@@ -881,10 +888,10 @@ OnMyMobDead:
 	}
 
 	// Recover if the boss died without firing the kill event.
-	if('combat_started && 'mvpAlive$ && !mobcount(instance_mapname("1@gol2"),.@boss_event$))
+	if (get_instance_var("combat_started") && get_instance_var("mvp_alive") && !mobcount(.@map$, .@boss_event$))
 		donpcevent .@npc$ + "::OnMyMobDead";
 
-	if('combat_started && 'mvpAlive$) {
+	if (get_instance_var("combat_started") && get_instance_var("mvp_alive")) {
 		mes "[Sierra]";
 		mes "The combat simulation is still running.";
 		mes "Defeat the Nameless Swordsman to finish.";
@@ -898,45 +905,52 @@ OnMyMobDead:
 	if(select("Begin combat simulation.:Not yet.") == 2)
 		close;
 
+	instance_warpall "1@gol2", 49, 65;
 	donpcevent .@npc$ + "::OnStartCombat";
 	mes "[Sierra]";
 	mes "I'll monitor from here. Good luck.";
 	close;
 
 OnStartCombat:
-	if('combat_started)
+	if (get_instance_var("combat_started"))
 		end;
-	'combat_started = 1;
+	.@map$ = instance_mapname("1@gol2");
+	.@boss_event$ = instance_npcname("Sierra#mvp") + "::OnMyMobDead";
+	set_instance_var("combat_started", 1);
 	hideoffnpc instance_npcname("block#37");
 	hideoffnpc instance_npcname("block#38");
-	setcell instance_mapname("1@gol2"),50,44,52,44,cell_walkable,0;
+	setcell .@map$,50,44,52,44,cell_walkable,0;
+	monster .@map$,50,60,"Nameless Swordsman",20536,1,.@boss_event$;
+	if (!mobcount(.@map$, .@boss_event$)) {
+		set_instance_var("combat_started", 0);
+		mapannounce .@map$, "[Sierra]: Combat simulation failed to initialize. Please try again.", bc_map, 0xFF0000;
+		end;
+	}
+	set_instance_var("mvp_alive", 1);
 	hideonnpc instance_npcname("Sierra#mvp");
-	'mvpAlive$ = 1;
-	warpparty instance_mapname("1@gol2"),49,65,get_instance_var("party_id"),instance_mapname("1@gol2");
-	monster instance_mapname("1@gol2"),50,60,"Nameless Swordsman",20536,1,instance_npcname("Sierra#mvp")+"::OnMyMobDead";
 	donpcevent instance_npcname("Sierra#mvp") + "::OnWaveLoop";
 	end;
 
 OnWaveLoop:
 	.@map$ = instance_mapname("1@gol2");
 	.@tele_event$ = instance_npcname("Sierra#mvp") + "::OnTele";
-	while('mvpAlive$){
-		'wave_spawned$ = 0;
-		for(.@i = 1; .@i <= 16; .@i++){
-			if(.@i == 4){
+	while (get_instance_var("mvp_alive")) {
+		.@wave_spawned = 0;
+		for (.@i = 1; .@i <= 16; .@i++) {
+			if (.@i == 4) {
 				setcell .@map$,48,62,48,54,cell_walkable,0;
 				setcell .@map$,51,62,51,54,cell_walkable,0;
 				setcell .@map$,48,65,48,73,cell_walkable,0;
 				setcell .@map$,51,65,51,73,cell_walkable,0;
-				if (!'wave_spawned$) {
-					'wave_spawned$ = 1;
+				if (!.@wave_spawned) {
+					.@wave_spawned = 1;
 					areamonster .@map$,42,56,46,60,"Rekenber Guard",20542,1,.@tele_event$;
 					areamonster .@map$,53,56,57,60,"Regenschirm Scientist",20543,1,.@tele_event$;
 					areamonster .@map$,42,68,46,72,"Rekenber Senior Guard",20541,1,.@tele_event$;
 					areamonster .@map$,53,68,57,72,"Nameless Swordsman",20537,1,.@tele_event$;
 					mapannounce .@map$, "Hostile memory signatures detected inside the crystal cages!", bc_map, 0xFF0000;
 				}
-			} else if (.@i == 8){
+			} else if (.@i == 8) {
 				setcell instance_mapname("1@gol2"),48,54,40,54,cell_walkable,0;
 				setcell instance_mapname("1@gol2"),51,54,59,54,cell_walkable,0;
 				setcell instance_mapname("1@gol2"),48,73,40,73,cell_walkable,0;
@@ -960,9 +974,9 @@ OnWaveLoop:
 			sleep 500;
 		}
 		sleep 5000;
-		if('mvpAlive$){
-			killmonster instance_mapname("1@gol2"),.@tele_event$;
-			warpparty instance_mapname("1@gol2"),49,65,get_instance_var("party_id"),instance_mapname("1@gol2");
+		if (get_instance_var("mvp_alive")) {
+			killmonster .@map$, .@tele_event$;
+			instance_warpall "1@gol2", 49, 65;
 		}
 		for(.@i = 1; .@i <= 16; .@i++){
 			hideonnpc instance_npcname("block#s1b"+.@i);
@@ -991,16 +1005,42 @@ OnWaveLoop:
 	end;
 
 OnMyMobDead:
+	.@map$ = instance_mapname("1@gol2");
 	@weapon = 0;
-	'mvpAlive$ = 0;
-	'canLeave$ = 1;
-	killmonster instance_mapname("1@gol2"),instance_npcname("Sierra#mvp")+"::OnTele";
+	set_instance_var("mvp_alive", 0);
+	set_instance_var("can_leave", 1);
+	killmonster .@map$, instance_npcname("Sierra#mvp")+"::OnTele";
 	hideoffnpc instance_npcname("Sierra#mvp");
 	hideoffnpc instance_npcname("Box#mvp");
-	mapannounce instance_mapname("1@gol2"),"Sierra : The combat simulation is complete. Talk to me to collect your rewards.",bc_map,0x00FF99;
+	mapannounce .@map$, "Sierra : The combat simulation is complete. Talk to me to collect your rewards.", bc_map, 0x00FF99;
 	end;
 
 OnTele:
+	end;
+}
+
+// Recovers players stuck after combat started but the boss never spawned,
+// and reveals Sierra#mvp if the arena was reached without the north intro.
+1@gol2,49,65,0	script	#mvp_recovery	HIDDEN_NPC,12,12,{
+	end;
+
+OnTouch:
+	.@map$ = instance_mapname("1@gol2");
+	if (!get_instance_var("combat_started") && !get_instance_var("can_leave")) {
+		hideonnpc instance_npcname("Sierra#premvp");
+		hideoffnpc instance_npcname("Sierra#mvp");
+		mapannounce .@map$, "[Sierra]: I'll operate the arena controls from here. Talk to me when you're ready.", bc_map, 0x00FF99;
+		end;
+	}
+	if (!get_instance_var("combat_started") || get_instance_var("can_leave"))
+		end;
+	.@boss_event$ = instance_npcname("Sierra#mvp") + "::OnMyMobDead";
+	if (mobcount(.@map$, .@boss_event$))
+		end;
+	set_instance_var("combat_started", 0);
+	set_instance_var("mvp_alive", 0);
+	hideoffnpc instance_npcname("Sierra#mvp");
+	mapannounce .@map$, "[Sierra]: Combat simulation reset. Please speak to me to try again.", bc_map, 0xFFFF00;
 	end;
 }
 
@@ -1126,7 +1166,9 @@ S_RecheckFloor6:
 	.@event$ = instance_npcname("Floor#8") + "::OnMyMobDead";
 	if (get_instance_var("floor8_clear") || ((get_instance_var("floor8_started") || get_instance_var("floor7_clear")) && !mobcount(.@map$, .@event$))) {
 		set_instance_var("floor8_clear", 1);
-		warp instance_mapname("1@gol2"),49,20;
+		.@map2$ = instance_mapname("1@gol2");
+		mapannounce .@map2$, "[Sierra]: Head north first, or meet me in the arena when you're ready for the final fight.", bc_map, 0x00FF99;
+		warp .@map2$,49,20;
 		end;
 	}
 	mes "[Sierra]";

@@ -126,6 +126,44 @@ Body:
           - Index: 0
             Item: Sapa_Feat_Cert
             Amount: 10
+  - Name: para_edencoin10
+    Items:
+      - Index: 0
+        Item: White_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 2
+      - Index: 1
+        Item: Blue_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 3
+      - Index: 2
+        Item: Wing_Of_Fly
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 1
+      - Index: 3
+        Item: Wing_Of_Butterfly
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 5
+      - Index: 4
+        Item: White_Slim_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 5
+      - Index: 5
+        Item: Kafra_Card
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 20
   - Name: para_orbs10
     Items:
       - Index: 0

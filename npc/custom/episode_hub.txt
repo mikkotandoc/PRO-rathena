@@ -1,0 +1,119 @@
+//============================================================
+// Episode Guide - Quick access to official episode NPC hubs
+// Official quest/enchant scripts are already loaded via
+// npc/re/scripts_athena.conf (quests_17_1, enchan_*, etc.)
+//============================================================
+
+prontera,165,175,3	script	Episode Guide	4_F_EDEN_OFFICER,{
+	mes "[Episode Guide]";
+	mes "I can escort you to official episode service areas.";
+	mes "Storyline NPCs and instances are already active on this server.";
+	next;
+	switch( select( "Episode 17.1 Hubs", "Episode 17.2 Hubs", "Episode 18-19 Hubs", "Episode Quest Starts", "Cancel" ) ) {
+	case 1:
+		mes "[Episode Guide]";
+		mes "Episode 17.1 - Dawn, Illusion";
+		next;
+		switch( select( "Cor Operation Base (sp_cor)", "Rudus Facility (sp_rudus)", "OS Occupation Area (sp_os)", "Lighthalzen (story)", "Cancel" ) ) {
+		case 1:
+			mes "Warping to Cor Operation Base...";
+			mes "NPCs: Grace Operator, Butterfly Merchant, RS26 Enchanter, Elyumina";
+			close2;
+			warp "sp_cor", 136, 156;
+			end;
+		case 2:
+			mes "Warping to Rudus...";
+			mes "NPCs: Elena Volkova, Morning, Rebellion crews, instance entrances";
+			close2;
+			warp "sp_rudus", 184, 360;
+			end;
+		case 3:
+			mes "Warping to Special Border OS area...";
+			close2;
+			warp "sp_os", 252, 359;
+			end;
+		case 4:
+			mes "Warping to Lighthalzen (main 17.1 story hub)...";
+			close2;
+			warp "lighthalzen", 55, 278;
+			end;
+		case 5:
+			close;
+		}
+		break;
+	case 2:
+		mes "[Episode Guide]";
+		mes "Episode 17.2 - Sage's Legacy";
+		next;
+		switch( select( "Baggot Laboratory Interior (merchants)", "Pax's Employment (ba_pw01)", "Cor Operation (sp_cor)", "Cancel" ) ) {
+		case 1:
+			mes "Warping to Baggot Lab merchant row...";
+			mes "NPCs: Lisa, Spiera, Yeoncheong, Yecheon, Child Manager, Cube Lane";
+			close2;
+			warp "ba_in01", 87, 376;
+			end;
+		case 2:
+			mes "Warping to Pax's Employment area...";
+			close2;
+			warp "ba_pw01", 30, 150;
+			end;
+		case 3:
+			mes "Warping to Cor Operation (17.2 epilogue area)...";
+			close2;
+			warp "sp_cor", 258, 285;
+			end;
+		case 4:
+			close;
+		}
+		break;
+	case 3:
+		mes "[Episode Guide]";
+		mes "Later episode service hubs";
+		next;
+		switch( select( "Episode 18 - Wolf Village (wolfvill)", "Episode 19 - Ice Castle (icas_in)", "Episode 20 - Yggdrasil (jor_nest)", "Cancel" ) ) {
+		case 1:
+			mes "Warping to Wolf Village (Emmet / Asad merchants)...";
+			close2;
+			warp "wolfvill", 164, 137;
+			end;
+		case 2:
+			mes "Warping to Ice Castle traders (Hoyoyo, Maram, Forr)...";
+			close2;
+			warp "icas_in", 180, 61;
+			end;
+		case 3:
+			mes "Warping to Yggdrasil HQ (Episode 20)...";
+			close2;
+			warp "jor_nest", 40, 274;
+			end;
+		case 4:
+			close;
+		}
+		break;
+	case 4:
+		mes "[Episode Guide]";
+		mes "New Operation Base prologue start (17.1):";
+		mes "prt_cas_q - speak with Nihil M. Heine";
+		next;
+		switch( select( "Warp to Episode 17.1 Start", "Warp to Episode 16.2 Area (Einbroch)", "Warp to Episode 15 (Rachel)", "Cancel" ) ) {
+		case 1:
+			close2;
+			warp "prt_cas_q", 21, 39;
+			end;
+		case 2:
+			close2;
+			warp "einbroch", 51, 197;
+			end;
+		case 3:
+			close2;
+			warp "rachel", 125, 144;
+			end;
+		case 4:
+			close;
+		}
+		break;
+	case 5:
+		close;
+	}
+	end;
+}

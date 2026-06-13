@@ -201,6 +201,6 @@ L_RewardQuest:
 
     completequest .@q_id;
     getexp .@b_exp, .@j_exp;
-    getitem 6223, .@coin; // Eden Coin ID: 6223
+    getitem 25223, .@coin; // Eden Group Coin
     return;
 }

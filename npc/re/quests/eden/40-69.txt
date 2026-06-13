@@ -109,12 +109,11 @@ moc_para01,37,38,3	script	Mission [40~69]	4_BOARD3,{
             mes "Checking your quest progress...";
             next;
             
-            // Loop cleanly tracks across the full 80024 ~ 80050 range boundaries
-            for (.@i = 80030; .@i <= 80056; .@i++) {
+            // Loop across the full 80024 ~ 80050 hunting quest range
+            for (.@i = 80024; .@i <= 80050; .@i++) {
                 if (checkquest(.@i, HUNTING) == 2) {
                     
-                    // Non-jumping index math tracks directly (Hunting ID + 27)
-                    // Maps 80030 strictly to 80051, up to 80077 mapping to 80083
+                    // Hunting ID + 27 maps to cooldown (80024 -> 80051, 80050 -> 80077)
                     .@cd_id = .@i + 27;
 
                     callsub L_RewardQuest, .@i;
@@ -173,38 +172,38 @@ L_RewardQuest:
     .@q_id = getarg(0);
     
     switch(.@q_id) {
-        case 80030: .@b_exp = 8600;  .@j_exp = 9600;  break; // Pirate Skeleton
-        case 80031: .@b_exp = 6500;  .@j_exp = 6500;  break; // Kukre
-        case 80032: .@b_exp = 8400;  .@j_exp = 8380;  break; // Aster
-        case 80033: .@b_exp = 8400;  .@j_exp = 8380;  break; // Crab
-        case 80034: .@b_exp = 14350; .@j_exp = 13700; break; // Orc Skeleton
-        case 80035: .@b_exp = 14350; .@j_exp = 13700; break; // Orc Zombie
+        // Shipwreck & Lighthouse & Orc
+        case 80024: .@b_exp = 8600;  .@j_exp = 9600;  break; // Pirate Skeleton
+        case 80025: .@b_exp = 6500;  .@j_exp = 6500;  break; // Kukre
+        case 80026: .@b_exp = 8400;  .@j_exp = 8380;  break; // Aster
+        case 80027: .@b_exp = 8400;  .@j_exp = 8380;  break; // Crab
+        case 80028: .@b_exp = 14350; .@j_exp = 13700; break; // Orc Skeleton
+        case 80029: .@b_exp = 14350; .@j_exp = 13700; break; // Orc Zombie
         // Izlude Dungeon
-        case 80036: .@b_exp = 8400;  .@j_exp = 8380;  break; // Magnolia/Metaller
-        case 80037: .@b_exp = 9600;  .@j_exp = 8380;  break; // Marina/Plankton
-        case 80038: .@b_exp = 7800;  .@j_exp = 8380;  break; // Vadon
-        case 80039: .@b_exp = 12400; .@j_exp = 14380; break; // Swordfish/Marc
-        case 80040: .@b_exp = 10640; .@j_exp = 10240; break; // Marse
-        case 80041: .@b_exp = 9600;  .@j_exp = 9600;  break; // Obeanue
-        case 80042: .@b_exp = 17200; .@j_exp = 15600; break; // Stouf/Merman
+        case 80030: .@b_exp = 8400;  .@j_exp = 8380;  break; // Magnolia/Metaller
+        case 80031: .@b_exp = 9600;  .@j_exp = 8380;  break; // Marina/Plankton
+        case 80032: .@b_exp = 7800;  .@j_exp = 8380;  break; // Vadon
+        case 80033: .@b_exp = 12400; .@j_exp = 14380; break; // Swordfish/Marc
+        case 80034: .@b_exp = 10640; .@j_exp = 10240; break; // Marse
+        case 80035: .@b_exp = 9600;  .@j_exp = 9600;  break; // Obeanue
+        case 80036: .@b_exp = 17200; .@j_exp = 15600; break; // Stouf/Merman
         // Morroc
-        case 80043: .@b_exp = 7200;  .@j_exp = 7800;  break; // Mummy
-        case 80044: .@b_exp = 12000; .@j_exp = 12800; break; // Verit/Minorous
-        case 80045: .@b_exp = 16740; .@j_exp = 17880; break; // Isis
-        case 80046: .@b_exp = 19450; .@j_exp = 20090; break; // Zerom/Requiem
-        case 80047: .@b_exp = 25640; .@j_exp = 24210; break; // Marduk/Pasana
-        case 80048: .@b_exp = 10800; .@j_exp = 9600;  break; // Sandman
-        // Payon Dungeon
-        case 80049: .@b_exp = 13200; .@j_exp = 12300; break; // Munak/Bongun
-        case 80050: .@b_exp = 9600;  .@j_exp = 9600;  break; // Purified Bottles
-        case 80051: .@b_exp = 10480; .@j_exp = 12400; break; // Sohee
-        // Geffen Dungeon
-        case 80052: .@b_exp = 8000;  .@j_exp = 6800;  break; // Hunter Fly
-        case 80053: .@b_exp = 14800; .@j_exp = 13600; break; // Ghoul/Jakk
+        case 80037: .@b_exp = 7200;  .@j_exp = 7800;  break; // Mummy
+        case 80038: .@b_exp = 12000; .@j_exp = 12800; break; // Verit/Minorous
+        case 80039: .@b_exp = 16740; .@j_exp = 17880; break; // Isis
+        case 80040: .@b_exp = 19450; .@j_exp = 20090; break; // Zerom/Requiem
+        case 80041: .@b_exp = 25640; .@j_exp = 24210; break; // Marduk/Pasana
+        case 80042: .@b_exp = 10800; .@j_exp = 9600;  break; // Sandman
+        // Payon & Geffen Dungeons
+        case 80043: .@b_exp = 13200; .@j_exp = 12300; break; // Munak/Bongun
+        case 80044: .@b_exp = 9600;  .@j_exp = 9600;  break; // Purified Bottles
+        case 80045: .@b_exp = 10480; .@j_exp = 12400; break; // Sohee
+        case 80046: .@b_exp = 8000;  .@j_exp = 6800;  break; // Hunter Fly
+        case 80047: .@b_exp = 14800; .@j_exp = 13600; break; // Ghoul/Jakk
         // Comodo
-        case 80054: .@b_exp = 10000; .@j_exp = 10000; break; // Seal/Sea-Otter
-        case 80055: .@b_exp = 20000; .@j_exp = 20000; break; // Golem Trio
-        case 80056: .@b_exp = 15000; .@j_exp = 15000; break; // Grove/Alligator
+        case 80048: .@b_exp = 10000; .@j_exp = 10000; break; // Seal/Sea-Otter
+        case 80049: .@b_exp = 20000; .@j_exp = 20000; break; // Golem Trio
+        case 80050: .@b_exp = 15000; .@j_exp = 15000; break; // Grove/Alligator
     }
 
     .@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / 220;

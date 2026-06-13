@@ -16390,7 +16390,7 @@ void pc_shield_heartbeat_on_map_login(map_session_data &sd) {
 	}
 
 	if (!battle_config.shield_heartbeat) {
-		sd.shield.enforce = true;
+		return;
 	}
 
 	// Clients often attach shield.dll only after map load; restart grace here.

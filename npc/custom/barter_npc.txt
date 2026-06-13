@@ -1,247 +1,172 @@
+//============================================================
+// Instance & Episode Barter Merchant (Prontera)
+// Aggregates barter shops defined in npc/re/merchants/barters/
+//============================================================
+
 prontera,164,172,3	script	Instance & EP Merchant	4_M_HUMERCHANT,{
 	mes "[Instance Merchant]";
-	mes "I can exchange instance drops directly. Tell me what instance you need.";
+	mes "I can exchange instance drops and episode tokens directly.";
+	mes "Tell me what you need.";
 	next;
 	switch( select( "Illusion Instances", "Episodes", "Cancel" ) ) {
 	case 1:
 		mes "[Instance Merchant]";
-		mes "So, what do you want?";
+		mes "Which illusion exchange do you need?";
 		next;
-		switch( select( "Illusion Vampire", "Illusion Underwater", "Illusion Teddy", "Resonance Stone", "Illusion Moonlight", "Illusion Frozen", "Illusion Turtle", "Illusion Luanda", "Illusion Teddy", "Cancel" ) ) {
-		case 1:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_vampire" );
-			end;
-		case 2:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_underwater" );
-			end;
-		case 3:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_twins" );
-			end;
-		case 4:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "resonance_stone_barter" );
-			end;
-		case 5:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_moonlight" );
-			end;
-		case 6:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_frozen" );
-			end;
-		case 7:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_turtle" );
-			end;
-		case 8:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_luanda" );
-			end;
-		case 9:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Use it well and come see me later if you find more Illusion Stones! *Chuckle*";
-			close2;
-			callshop( "barter_ill_teddy" );
-			end;
-		case 10:
-			mes "[Instance Merchant]";
-			mes "Did you find anything you liked? If you need anything, please let me know at any time.";
-			close;
-	}
+		switch( select( "Illusion Vampire", "Illusion Underwater", "Illusion Twins", "Resonance Stone", "Illusion Moonlight", "Illusion Frozen", "Illusion Turtle", "Illusion Luanda", "Illusion Teddy Bear", "Cancel" ) ) {
+		case 1:  callsub L_OpenShop, "barter_ill_vampire";
+		case 2:  callsub L_OpenShop, "barter_ill_underwater";
+		case 3:  callsub L_OpenShop, "barter_ill_twins";
+		case 4:  callsub L_OpenShop, "resonance_stone_barter";
+		case 5:  callsub L_OpenShop, "barter_ill_moonlight";
+		case 6:  callsub L_OpenShop, "barter_ill_frozen";
+		case 7:  callsub L_OpenShop, "barter_ill_turtle";
+		case 8:  callsub L_OpenShop, "barter_ill_luanda";
+		case 9:  callsub L_OpenShop, "barter_ill_teddy";
+		case 10: close;
+		}
+		break;
 
 	case 2:
 		mes "[Instance Merchant]";
-		mes "So, what do you want?";
+		mes "Which episode exchange do you need?";
 		next;
 		switch( select( "Episode 14", "Episode 15", "Episode 16.1", "Episode 16.2", "Episode 17.1", "Episode 17.2", "Episode 18", "Episode 19", "Episode 20", "Episode 21", "Cancel" ) ) {
 		case 1:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
 			mes "[Instance Merchant]";
-			mes "**14 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 2:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**15 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 3:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "Episode 16.1 Extended Shop";
-			mes "So, what do you want?";
-			next;
-			switch( select( "Guillotine Cross", "Ranger", "Shadow Chaser", "Rune Knight", "Arch Bishop", "Genetic", "Summoner", "Warlock", "Sorcerer", "Soul Reaper", "Rebellion", "Royal Guard", "Sura", "Kagerou", "Star Emperor", "Ministrel", "Ext. Super Novice", "Mechanic", "Cancel" ) ) {
-			case 1:
-				callshop( "shop_ext161_JOB_GUILLOTINE_CROSS" );
-				end;
-			case 2:
-				callshop( "shop_ext161_JOB_RANGER" );
-				end;
-			case 3:
-				callshop( "shop_ext161_JOB_SHADOW_CHASER" );
-				end;
-			case 4:
-				callshop( "shop_ext161_JOB_RUNE_KNIGHT" );
-				end;
-			case 5:
-				callshop( "shop_ext161_JOB_ARCH_BISHOP" );
-				end;
-			case 6:
-				callshop( "shop_ext161_JOB_GENETIC" );
-				end;
-			case 7:
-				callshop( "shop_ext161_JOB_SUMMONER" );
-				end;
-			case 8:
-				callshop( "shop_ext161_JOB_WARLOCK" );
-				end;
-			case 9:
-				callshop( "shop_ext161_JOB_SORCERER" );
-				end;
-			case 10:
-				callshop( "shop_ext161_JOB_SOUL_REAPER" );
-				end;
-			case 11:
-				callshop( "shop_ext161_JOB_REBELLION" );
-				end;
-			case 12:
-				callshop( "shop_ext161_JOB_ROYAL_GUARD" );
-				end;
-			case 13:
-				callshop( "shop_ext161_JOB_SURA" );
-				end;
-			case 14:
-				callshop( "shop_ext161_JOB_KAGEROU" );
-				end;
-			case 15:
-				callshop( "shop_ext161_JOB_STAR_EMPEROR" );
-				end;
-			case 16:
-				callshop( "shop_ext161_JOB_MINSTREL" );
-				end;
-			case 17:
-				callshop( "shop_ext161_JOB_SUPER_NOVICE_E" );
-				end;
-			case 18:
-				callshop( "shop_ext161_JOB_MECHANIC" );
-				end;
-			case 19:
-				mes "[Instance Merchant]";
-				mes "Did you find anything you liked? If you need anything, please let me know at any time.";
-				close;
-				end;
-			}
-		case 4:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**16.2 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 5:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**17.1 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 6:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**17.2 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 7:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**18 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 8:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**19 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 9:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**20 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 10:
-			specialeffect EF_HFLIMOON3;
-			emotion ET_BEST;
-			mes "[Instance Merchant]";
-			mes "**21 NOT YET IMPLEMENTED**";
-			close2;
-//			callshop( "barter_ill_vampire" );
-			end;
-		case 11:
-			mes "[Instance Merchant]";
-			mes "Did you find anything you liked? If you need anything, please let me know at any time.";
+			mes "Episode 14 (Phantasmagorika) rewards are handled by quest NPCs during the storyline.";
+			mes "Key areas: Geffen, glastheim01, 1@gl_prq instance.";
+			mes "Use the ^0000FFEpisode Guide^000000 in Prontera (165,175) to warp to Geffen.";
 			close;
-			end;
-	}
+		case 2:
+			mes "[Instance Merchant]";
+			mes "Episode 15 (Phantasmagorika Part 2) uses quest NPCs and Eden HQ cameos.";
+			mes "Progress through quests_15_1.txt / quests_15_2.txt content in Lighthalzen and related maps.";
+			mes "Use the ^0000FFEpisode Guide^000000 for Lighthalzen access.";
+			close;
+		case 3:
+			mes "[Instance Merchant]";
+			mes "Episode 16.1 Grace Equipment Exchange";
+			next;
+			callsub L_GraceShop, "shop_ext161_";
+			break;
+		case 4:
+			mes "[Instance Merchant]";
+			mes "Episode 16.2 Exchange";
+			next;
+			switch( select( "Rebellion Supply Shop", "Grace Equipment (by Job)", "Cancel" ) ) {
+			case 1: callsub L_OpenShop, "shop_rebel_in";
+			case 2: callsub L_GraceShop, "shop_ext162_";
+			case 3: close;
+			}
+			break;
+		case 5:
+			mes "[Instance Merchant]";
+			mes "Episode 17.1 (Dawn, Illusion) Exchange";
+			next;
+			switch( select( "Grace Equipment (by Job)", "Illusion Teleport Ticket", "Cancel" ) ) {
+			case 1: callsub L_GraceShop, "shop_ext171_";
+			case 2: callsub L_OpenShop, "shop_sp_cor";
+			case 3: close;
+			}
+			break;
+		case 6:
+			mes "[Instance Merchant]";
+			mes "Episode 17.2 (Sage's Legacy) Exchange";
+			next;
+			switch( select( "Episode Points Exchange", "Automatic Equipment Exchange", "Automatic Accessory Exchange", "Admin Accessories", "Teleport Ticket", "Reinforcement Cubes", "Cloud Cotton", "Cancel" ) ) {
+			case 1: callsub L_OpenShop, "barter_EP17_2_EP";
+			case 2: callsub L_OpenShop, "barter_auto_equip_1";
+			case 3: callsub L_OpenShop, "barter_auto_equip_2";
+			case 4: callsub L_OpenShop, "barter_Ep_17_2_C_Admin_Acc";
+			case 5: callsub L_OpenShop, "barter_Teleport_Ep17_02";
+			case 6: callsub L_OpenShop, "ep172cubeshop00";
+			case 7: callsub L_OpenShop, "ep172littlemanager00";
+			case 8: close;
+			}
+			break;
+		case 7:
+			mes "[Instance Merchant]";
+			mes "Episode 18 (Spirit of the Cold) Exchange";
+			next;
+			switch( select( "Wolf Exchange I", "Wolf Exchange II", "Wolf Exchange III", "Cancel" ) ) {
+			case 1: callsub L_OpenShop, "barter_ep18_1";
+			case 2: callsub L_OpenShop, "barter_ep18_2";
+			case 3: callsub L_OpenShop, "barter_ep18_3";
+			case 4: close;
+			}
+			break;
+		case 8:
+			mes "[Instance Merchant]";
+			mes "Episode 19 (Frozen Iceberg) Exchange";
+			next;
+			switch( select( "Rgan Scroll", "Snow Stone", "Reputation Shop I", "Reputation Shop II", "Snow Armor", "New Content Materials", "Basic Supply", "Dim Glacier Melee", "Dim Glacier Range", "Cancel" ) ) {
+			case 1:  callsub L_OpenShop, "barter_Ep19_Rgan_Scroll";
+			case 2:  callsub L_OpenShop, "barter_ep19_snow_stone";
+			case 3:  callsub L_OpenShop, "barter_ep19_repu_1";
+			case 4:  callsub L_OpenShop, "barter_ep19_repu_2";
+			case 5:  callsub L_OpenShop, "barter_ep19_snow_armor";
+			case 6:  callsub L_OpenShop, "barter_ep19_new_content";
+			case 7:  callsub L_OpenShop, "ep19_basic_supply";
+			case 8:  callsub L_OpenShop, "ep19_glacier_melee";
+			case 9:  callsub L_OpenShop, "ep19_glacier_range";
+			case 10: close;
+			}
+			break;
+		case 9:
+			mes "[Instance Merchant]";
+			mes "Episode 20 (The Age of Heroes) has no centralized barter shop.";
+			mes "Rewards and exchanges are handled by storyline NPCs in quests_20.txt.";
+			mes "Use the ^0000FFEpisode Guide^000000 to reach Yggdrasil HQ (jor_nest).";
+			close;
+		case 10:
+			mes "[Instance Merchant]";
+			mes "Episode 21 content is not yet available in this rAthena revision.";
+			close;
+		case 11:
+			close;
+		}
+		break;
+
 	case 3:
-		mes "[Instance Merchant]";
-		mes "Did you find anything you liked? If you need anything, please let me know at any time.";
 		close;
-		end;
 	}
-end;
+	end;
+
+L_OpenShop:
+	specialeffect EF_HFLIMOON3;
+	emotion ET_BEST;
+	mes "[Instance Merchant]";
+	mes "Opening exchange shop...";
+	close2;
+	callshop getarg(0);
+	end;
+
+L_GraceShop:
+	.@prefix$ = getarg(0);
+	mes "[Instance Merchant]";
+	mes "Select equipment for your job class:";
+	next;
+	switch( select( "Guillotine Cross", "Ranger", "Shadow Chaser", "Rune Knight", "Arch Bishop", "Genetic", "Summoner", "Warlock", "Sorcerer", "Soul Reaper", "Rebellion", "Royal Guard", "Sura", "Kagerou", "Star Emperor", "Minstrel", "Ext. Super Novice", "Mechanic", "Cancel" ) ) {
+	case 1:  callsub L_OpenShop, .@prefix$ + "JOB_GUILLOTINE_CROSS";
+	case 2:  callsub L_OpenShop, .@prefix$ + "JOB_RANGER";
+	case 3:  callsub L_OpenShop, .@prefix$ + "JOB_SHADOW_CHASER";
+	case 4:  callsub L_OpenShop, .@prefix$ + "JOB_RUNE_KNIGHT";
+	case 5:  callsub L_OpenShop, .@prefix$ + "JOB_ARCH_BISHOP";
+	case 6:  callsub L_OpenShop, .@prefix$ + "JOB_GENETIC";
+	case 7:  callsub L_OpenShop, .@prefix$ + "JOB_SUMMONER";
+	case 8:  callsub L_OpenShop, .@prefix$ + "JOB_WARLOCK";
+	case 9:  callsub L_OpenShop, .@prefix$ + "JOB_SORCERER";
+	case 10: callsub L_OpenShop, .@prefix$ + "JOB_SOUL_REAPER";
+	case 11: callsub L_OpenShop, .@prefix$ + "JOB_REBELLION";
+	case 12: callsub L_OpenShop, .@prefix$ + "JOB_ROYAL_GUARD";
+	case 13: callsub L_OpenShop, .@prefix$ + "JOB_SURA";
+	case 14: callsub L_OpenShop, .@prefix$ + "JOB_KAGEROU";
+	case 15: callsub L_OpenShop, .@prefix$ + "JOB_STAR_EMPEROR";
+	case 16: callsub L_OpenShop, .@prefix$ + "JOB_MINSTREL";
+	case 17: callsub L_OpenShop, .@prefix$ + "JOB_SUPER_NOVICE_E";
+	case 18: callsub L_OpenShop, .@prefix$ + "JOB_MECHANIC";
+	case 19: close;
+	}
+	end;
 }

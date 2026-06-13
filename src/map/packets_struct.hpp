@@ -5900,6 +5900,7 @@ DEFINE_PACKET_HEADER(CZ_ADVENTURER_AGENCY_JOIN_RESULT, 0x0af8);
 #endif  // PACKETVER_MAIN_NUM >= 20191218 || PACKETVER_RE_NUM >= 20191211 || PACKETVER_ZERO_NUM >= 20191224
 
 // PRO Anti-Cheat (shield.dll) heartbeat packets
+// NOTE: Do not use 0x0af6 for ZC_SHIELD_CHALLENGE; the client treats it as ZC_ACK_RANKING2.
 struct PACKET_CZ_SHIELD_HEARTBEAT {
 	int16 packetType;
 	uint32 version;
@@ -5914,7 +5915,7 @@ struct PACKET_ZC_SHIELD_CHALLENGE {
 	uint16 interval_ms;
 	uint16 reserved;
 } __attribute__((packed));
-DEFINE_PACKET_HEADER(ZC_SHIELD_CHALLENGE, 0x0af6);
+DEFINE_PACKET_HEADER(ZC_SHIELD_CHALLENGE, 0x0af9);
 
 #if !defined(sun) && (!defined(__NETBSD__) || __NetBSD_Version__ >= 600000000) // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #pragma pack(pop)

@@ -1,0 +1,124 @@
+//============================================================
+// Eden Group Event Quest Board
+// Daily hunting events rewarding Eden Group Coins (25223)
+// Quest IDs 70289 ~ 70300 (client: OngoingQuests.lub)
+// Cooldown IDs 70309 ~ 70320 (+24h per quest)
+//============================================================
+
+moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
+
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "[Eden Event Coordinator]";
+		mes "These special event assignments are reserved for registered Eden Group members.";
+		close;
+	}
+
+	mes "[Eden Event Coordinator]";
+	mes "Welcome! I coordinate limited-time hunting events for Eden members.";
+	mes "Complete assignments to earn generous EXP and Eden Group Coins.";
+	next;
+
+	switch(select("Browse Event Quests:Turn In Completed Quests:Cancel")) {
+	case 1:
+		mes "[Eden Event Coordinator]";
+		mes "Select an event assignment:";
+		next;
+		switch(select("[Event] Poring Extermination:[Event] Ant Egg Collection:[Event] Skeleton Warriors:[Event] Orc Zombie Cleanup:[Event] Mi Gao Extermination:[Event] Anubis Guardian Trial:[Event] Illusion of Moonlight:[Event] Illusion of Vampire:[Event] Illusion of Teddy Bear:[Event] Illusion of Abyss:[Event] Illusion of Twins:[Event] Illusion of Labyrinth:Cancel")) {
+			case 1:  callsub L_Assign, 70289, 70309, "Poring Extermination";
+			case 2:  callsub L_Assign, 70290, 70310, "Ant Egg Collection";
+			case 3:  callsub L_Assign, 70291, 70311, "Skeleton Warriors";
+			case 4:  callsub L_Assign, 70292, 70312, "Orc Zombie Cleanup";
+			case 5:  callsub L_Assign, 70293, 70313, "Mi Gao Extermination";
+			case 6:  callsub L_Assign, 70294, 70314, "Anubis Guardian Trial";
+			case 7:  callsub L_Assign, 70295, 70315, "Illusion of Moonlight";
+			case 8:  callsub L_Assign, 70296, 70316, "Illusion of Vampire";
+			case 9:  callsub L_Assign, 70297, 70317, "Illusion of Teddy Bear";
+			case 10: callsub L_Assign, 70298, 70318, "Illusion of Abyss";
+			case 11: callsub L_Assign, 70299, 70319, "Illusion of Twins";
+			case 12: callsub L_Assign, 70300, 70320, "Illusion of Labyrinth";
+			case 13: close;
+		}
+		break;
+
+	case 2:
+		mes "[Eden Event Coordinator]";
+		mes "Checking your completed event assignments...";
+		next;
+
+		for (.@i = 70289; .@i <= 70300; .@i++) {
+			if (checkquest(.@i, HUNTING) == 2) {
+				.@cd_id = .@i + 20;
+				callsub L_Reward, .@i;
+				setquest .@cd_id;
+				.@rewarded = 1;
+			}
+		}
+
+		if (!.@rewarded) {
+			mes "[Eden Event Coordinator]";
+			mes "You do not have any completed event quests to turn in.";
+			close;
+		}
+
+		mes "[Eden Event Coordinator]";
+		mes "Rewards have been issued. This event quest is now on a 24-hour cooldown.";
+		close;
+
+	case 3:
+		close;
+	}
+	end;
+
+L_Assign:
+	.@q_id = getarg(0);
+	.@cd_id = getarg(1);
+	.@name$ = getarg(2);
+
+	if (checkquest(.@cd_id) == 0 || checkquest(.@cd_id) == 1) {
+		mes "[Eden Event Coordinator]";
+		mes "^ff0000" + .@name$ + "^000000 is on a 24-hour cooldown.";
+		close;
+	}
+	if (checkquest(.@cd_id) == 2)
+		erasequest .@cd_id;
+
+	.@state = checkquest(.@q_id);
+	if (.@state == 0 || .@state == 1) {
+		mes "[Eden Event Coordinator]";
+		mes "You are already tracking ^0000ff" + .@name$ + "^000000.";
+		close;
+	}
+
+	setquest .@q_id;
+	mes "[Eden Event Coordinator]";
+	mes "Event registered: ^0000ff" + .@name$ + "^000000.";
+	mes "Check your Quest Window for hunt details, then return here when finished.";
+	close;
+
+L_Reward:
+	.@q_id = getarg(0);
+
+	switch (.@q_id) {
+		case 70289: .@b_exp = 1000000000;  .@j_exp = 500000000;   .@coin = 10; break;
+		case 70290: .@b_exp = 2000000000;  .@j_exp = 1000000000;  .@coin = 15; break;
+		case 70291: .@b_exp = 5000000000;  .@j_exp = 2500000000;  .@coin = 20; break;
+		case 70292: .@b_exp = 10000000000; .@j_exp = 5000000000;  .@coin = 25; break;
+		case 70293: .@b_exp = 15000000000; .@j_exp = 7500000000;  .@coin = 30; break;
+		case 70294: .@b_exp = 20000000000; .@j_exp = 10000000000; .@coin = 40; break;
+		case 70295: .@b_exp = 30000000000; .@j_exp = 15000000000; .@coin = 50; break;
+		case 70296: .@b_exp = 40000000000; .@j_exp = 20000000000; .@coin = 60; break;
+		case 70297: .@b_exp = 40000000000; .@j_exp = 20000000000; .@coin = 60; break;
+		case 70298: .@b_exp = 50000000000; .@j_exp = 25000000000; .@coin = 75; break;
+		case 70299:
+		case 70300:
+			.@b_exp = 50000000 * BaseLevel;
+			.@j_exp = 25000000 * BaseLevel;
+			.@coin = 75;
+			break;
+	}
+
+	completequest .@q_id;
+	getexp .@b_exp, .@j_exp;
+	getitem 25223, .@coin;
+	return;
+}

@@ -1403,6 +1403,38 @@ paramk,53,104,3	script	Dus the Smith#ref02	2_M_OLDBLSMITH,{
 }
 
 // =========================================================
+// Paradise Market - Eden Group Coin Exchange
+// =========================================================
+paramk,97,58,4	script	Eden Coin Trader#paramk	4_F_KAFRA7,{
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "[Eden Coin Trader]";
+		mes "The Eden Group Coin exchange is available only to registered Eden members.";
+		close;
+	}
+
+	mes "[Eden Coin Trader]";
+	mes "Welcome to the Eden Group Coin exchange counter.";
+	mes "Trade your Eden Group Coins earned from missions for useful supplies.";
+	next;
+
+	if (select("Open Exchange Shop:Cancel") == 2) {
+		mes "[Eden Coin Trader]";
+		mes "Come back anytime you have Eden Group Coins to spend.";
+		close;
+	}
+
+	if (!getbattleflag("feature.barter")) {
+		mes "[Eden Coin Trader]";
+		mes "The barter system is currently disabled on this server.";
+		close;
+	}
+
+	close2;
+	callshop "para_edencoin10", 1;
+	end;
+}
+
+// =========================================================
 // Eden Para Market - Red Hugo (Armor & Weapon Extraction)
 // =========================================================
 

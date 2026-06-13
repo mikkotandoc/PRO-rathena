@@ -18835,22 +18835,19 @@ BUILDIN_FUNC(shieldactive)
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	script_pushint(st, sd->shield.active ? 1 : 0);
+	script_pushint(st, 0);
 	return SCRIPT_CMD_SUCCESS;
 }
 
 /**
- * Refreshes the shield.dll heartbeat challenge from map login.
+ * shieldstart is disabled; shield.dll runs client-side only.
  * shieldstart({<char_id>})
  */
 BUILDIN_FUNC(shieldstart)
 {
-	map_session_data *sd = nullptr;
-
-	if (!script_charid2sd(2, sd))
+	if (!script_charid2sd(2, nullptr))
 		return SCRIPT_CMD_FAILURE;
 
-	pc_shield_heartbeat_on_map_login(*sd);
 	return SCRIPT_CMD_SUCCESS;
 }
 

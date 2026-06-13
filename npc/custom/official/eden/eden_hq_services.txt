@@ -1,0 +1,143 @@
+//============================================================
+// Eden Group HQ - Service & Guide NPCs
+// Fills gaps for warehouse, coin exchange, and navigation
+//============================================================
+
+// 2F landing guide (top of main staircase)
+moc_para01,48,166,4	script	Eden HQ Guide#2f	4_F_EDEN_OFFICER,{
+	mes "[Eden HQ Guide]";
+	mes "Welcome to the ^0000FFEden Group Headquarters 2nd Floor^000000.";
+	mes "How may I direct you?";
+	next;
+	switch(select("Mission Tutorial Wing:Equipment & Storage Wing:Return to 1st Floor:Cancel")) {
+	case 1:
+		mes "[Eden HQ Guide]";
+		mes "The ^0000FFTutorial Wing^000000 is to the west.";
+		mes "Speak with the Tutorial Instructor to learn Eden systems.";
+		close2;
+		warp "moc_para01",34,178;
+		end;
+	case 2:
+		mes "[Eden HQ Guide]";
+		mes "The ^0000FFEquipment Wing^000000 holds mission boards, Paradise gear,";
+		mes "Blacksmith Thorn, Weapons Expert BK, and storage cabinets.";
+		close2;
+		warp "moc_para01",109,33;
+		end;
+	case 3:
+		close2;
+		warp "moc_para01",47,18;
+		end;
+	case 4:
+		close;
+	}
+	end;
+}
+
+// Main lobby information desk
+moc_para01,32,40,4	script	Eden HQ Guide#1f	4_F_EDEN_OFFICER,{
+	mes "[Eden HQ Guide]";
+	mes "Welcome to the ^0000FFEden Group Headquarters^000000.";
+	mes "I can point you to our services or escort you there directly.";
+	next;
+	switch(select("List HQ Services:Escort Me:Cancel")) {
+	case 1:
+		mes "[Eden HQ Guide]";
+		mes "^0000FF-- Registration & Instructors --^000000";
+		mes "Secretary Lime Evenor (27,35) - Join Eden Group";
+		mes "Instructor Boya (25,35) - Beginner training";
+		mes "Instructor Ur (23,35) - Advanced 2nd job training";
+		next;
+		mes "[Eden HQ Guide]";
+		mes "^0000FF-- Mission Boards (2nd Floor) --^000000";
+		mes "Boards at (35~45, 38) - Hunting missions by level";
+		mes "Eden Event Coordinator (46,36) - Daily event hunts";
+		next;
+		mes "[Eden HQ Guide]";
+		mes "^0000FF-- Equipment & Rewards --^000000";
+		mes "Mala / Reno / Lumin / Lucy (110,79~) - Paradise gear";
+		mes "Blacksmith Thorn (114,83) - Eden armor & enhance";
+		mes "Weapons Expert BK (114,79) - Eden weapon enhance";
+		mes "Administrator Michael (112,96) - Training supplies";
+		next;
+		mes "[Eden HQ Guide]";
+		mes "^0000FF-- Member Services --^000000";
+		mes "Eat Gear Mimic (53,37) - Feed refined gear";
+		mes "Eve Natalia (53,33) - MVP item exchange";
+		mes "Eden Coin Trader (108,35) - Spend Eden Coins";
+		mes "Market Hustler (106,38) - Paradise Market";
+		mes "Goods Cabinets (105,92 / 170,120) - Storage";
+		close;
+	case 2:
+		mes "[Eden HQ Guide]";
+		mes "Where would you like to go?";
+		next;
+		switch(select("Join Eden Group (Lime Evenor):Mission Boards (2F):Paradise Gear Warehouse:Paradise Market:Eden Coin Trader:Event Quests:Cancel")) {
+		case 1:
+			mes "[Eden HQ Guide]";
+			mes "Lime Evenor handles membership at the front desk.";
+			close2;
+			warp "moc_para01",27,35;
+			end;
+		case 2:
+			close2;
+			warp "moc_para01",41,38;
+			end;
+		case 3:
+			close2;
+			warp "moc_para01",110,83;
+			end;
+		case 4:
+			close2;
+			warp "moc_para01",106,38;
+			end;
+		case 5:
+			close2;
+			warp "moc_para01",108,35;
+			end;
+		case 6:
+			close2;
+			warp "moc_para01",46,36;
+			end;
+		case 7:
+			close;
+		}
+	case 3:
+		close;
+	}
+	end;
+}
+
+// Eden Coin exchange at HQ (same shop as Paradise Market)
+moc_para01,108,35,4	script	Eden Coin Trader#hq	4_F_KAFRA7,{
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "[Eden Coin Trader]";
+		mes "The Eden Group Coin exchange is for registered members only.";
+		close;
+	}
+
+	mes "[Eden Coin Trader]";
+	mes "Trade Eden Group Coins earned from missions for supplies.";
+	mes "A second counter is also open at the Paradise Market.";
+	next;
+
+	if (select("Open Exchange Shop:Cancel") == 2) {
+		mes "[Eden Coin Trader]";
+		mes "Come back when you have coins to spend.";
+		close;
+	}
+
+	if (!getbattleflag("feature.barter")) {
+		mes "[Eden Coin Trader]";
+		mes "The barter system is currently disabled.";
+		close;
+	}
+
+	close2;
+	callshop "para_edencoin10", 1;
+	end;
+}
+
+// Warehouse-area storage (warp destination 105,92)
+moc_para01,105,92,0	duplicate(pggc)	Goods Cabinet#03	111
+moc_para01,108,92,0	duplicate(pggc)	Goods Cabinet#04	111

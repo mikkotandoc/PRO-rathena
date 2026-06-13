@@ -15832,314 +15832,454 @@ Body:
     TimeLimit: +4h
 
   - Id: 80700
-    Title: "Eden Quest Board : Hunt Goat"
+    Title: "Eden Quest Board: Hunt ecl_fild01"
     Targets:
-      - Mob: PIRATE_SKEL
-        Count: 10
+      - Id: 0
+        Count: 60
+        Location: ecl_fild01
     TimeLimit: 4h
   - Id: 80701
-    Title: "Eden Quest Board : Hunt Sleeper"
+    Title: "Eden Quest Board: Hunt ba_bath"
     Targets:
-      - Mob: MD_KUKRE
-        Count: 10
+      - Id: 0
+        Count: 60
+        Location: ba_bath
     TimeLimit: 4h
   - Id: 80702
-    Title: "Eden Quest Board: Hunt Alarm "
+    Title: "Eden Quest Board: Hunt ba_lib"
     Targets:
-      - Mob: ASTER
-        Count: 10
+      - Id: 0
+        Count: 60
+        Location: ba_lib
     TimeLimit: 4h
   - Id: 80703
-    Title: "Eden Quest Board: Hunt Punk"
+    Title: "Eden Quest Board: Hunt ba_pw02"
     Targets:
-      - Mob: CRAB
-        Count: 10
+      - Id: 0
+        Count: 60
+        Location: ba_pw02
     TimeLimit: 4h
   - Id: 80704
-    Title: "Eden Quest Board: Hunt Injustice"
+    Title: "Eden Quest Board: Hunt ba_pw01"
     Targets:
-      - Mob: ORC_SKELETON
-        Count: 20
+      - Id: 0
+        Count: 60
+        Location: ba_pw01
     TimeLimit: 4h
   - Id: 80705
-    Title: "Eden Quest Board: Hunt Wraith"
+    Title: "Eden Quest Board: Hunt lasa_dun02"
     Targets:
-      - Mob: ORC_ZOMBIE
-        Count: 20
+      - Id: 0
+        Count: 60
+        Location: lasa_dun02
     TimeLimit: 4h
   - Id: 80706
-    Title: "Eden Quest Board: Hunt Sky Petite"
+    Title: "Eden Quest Board: Hunt Cenere & Antique Book"
     Targets:
-      - Mob: MAGNOLIA
-        Count: 10
-      - Mob: METALLER
-        Count: 10
+      - Mob: CENERE
+        Count: 30
+      - Mob: ANTIQUE_BOOK
+        Count: 30
     TimeLimit: 4h
   - Id: 80707
-    Title: "Eden Quest Board: Hunt Ground Petite"
+    Title: "Eden Quest Board: Hunt lasa_dun03"
     Targets:
-      - Mob: MAGNOLIA
-        Count: 10
-      - Mob: METALLER
-        Count: 10
+      - Id: 0
+        Count: 120
+        Location: lasa_dun03
     TimeLimit: 4h
   - Id: 80708
-    Title: "Eden Quest Board: Hunt Marionette & Deviruchi"
+    Title: "Eden Quest Board: Hunt prt_prison"
     Targets:
-      - Mob: MUKA
-        Count: 10
+      - Id: 0
+        Count: 120
+        Location: prt_prison
     TimeLimit: 4h
   - Id: 80709
-    Title: "Eden Quest Board: Hunt Nightmare"
+    Title: "Eden Quest Board: Hunt prt_q"
     Targets:
-      - Mob: MAGNOLIA
-        Count: 10
-      - Mob: METALLER
-        Count: 10
+      - Id: 0
+        Count: 120
+        Location: prt_q
     TimeLimit: 4h
   - Id: 80710
-    Title: "Eden Quest Board: Hunt Metaling & Holden"
+    Title: "Eden Quest Board: Hunt rockmi1"
     Targets:
-      - Mob: HYDRA
-        Count: 10
+      - Id: 0
+        Count: 120
+        Location: rockmi1
     TimeLimit: 4h
   - Id: 80711
-    Title: "Eden Quest Board: Hunt Noxious"
+    Title: "Eden Quest Board: Hunt Wanderer (Nightmare)"
     Targets:
-      - Mob: MEGALODON
-        Count: 10
+      - Mob: C1_NG_WANDER_MAN
+        Count: 30
     TimeLimit: 4h
   - Id: 80712
-    Title: "Eden Quest Board : Hunt Venomous"
+    Title: "Eden Quest Board: Hunt Smelly Zombie"
     Targets:
-      - Mob: MAGNOLIA
-        Count: 10
-      - Mob: METALLER
-        Count: 10
+      - Mob: ZOMBIE_H
+        Count: 30
     TimeLimit: 4h
   - Id: 80713
-    Title: "Eden Quest Board : Hunt Teddy Bear"
+    Title: "Eden Quest Board: Hunt Repair Robot & Green Cenere"
     Targets:
-      - Mob: SNAKE
-        Count: 5
+      - Mob: REPAIR_ROBOT
+        Count: 20
+      - Mob: CENERE_G
+        Count: 30
     TimeLimit: 4h
   - Id: 80714
-    Title: "Eden Quest Board: Hunt Pitman"
+    Title: "Eden Quest Board: Hunt Big Ben & Neo-Punk"
     Targets:
-      - Mob: WORM_TAIL
-        Count: 5
+      - Mob: BIG_BEN
+        Count: 40
+      - Mob: NEO_PUNK
+        Count: 40
     TimeLimit: 4h
   - Id: 80715
-    Title: "Eden Quest Board: Hunt Waste Stove"
+    Title: "Eden Quest Board: Hunt ba_lost"
     Targets:
-      - Mob: SPORE
-        Count: 10
+      - Id: 0
+        Count: 160
+        Location: ba_lost
     TimeLimit: 4h
   - Id: 80716
-    Title: "Eden Quest Board: Hunt Mineral & Obsidian"
+    Title: "Eden Quest Board: Hunt Big Bell"
     Targets:
-      - Mob: HORNET
-        Count: 10
+      - Mob: BIG_BELL
+        Count: 50
     TimeLimit: 4h
   - Id: 80717
-    Title: "Eden Quest Board: Hunt Rafflesia"
+    Title: "Eden Quest Board: Hunt Grey Goat & Wolf Baby"
     Targets:
-      - Mob: ROCKER
-        Count: 10
+      - Mob: EP18_GREY_GOAT
+        Count: 40
+      - Mob: EP18_GREY_WOLF_BABY
+        Count: 40
     TimeLimit: 4h
   - Id: 80718
-    Title: "Eden Quest Board: Hunt Stem Worm"
+    Title: "Eden Quest Board: Hunt sp_rudus2"
     Targets:
-      - Mob: AMBERNITE
-        Count: 10
+      - Id: 0
+        Count: 80
+        Location: sp_rudus2
     TimeLimit: 4h
   - Id: 80719
-    Title: "Eden Quest Board: Hunt Breeze"
+    Title: "Eden Quest Board: Hunt Recon Robot"
     Targets:
-      - Mob: ZOMBIE
-        Count: 10
-      - Mob: SKELETON
-        Count: 20
+      - Mob: RECON_ROBOT
+        Count: 50
     TimeLimit: 4h
   - Id: 80720
-    Title: "Eden Quest Board: Hunt Dragon Tail & Spring Rabbit"
+    Title: "Eden Quest Board: Hunt Exploration Rover Duo"
     Targets:
-      - Mob: MUKA
-        Count: 10
-      - Mob: PECOPECO
-        Count: 20
+      - Mob: EXPLORATION_ROVER
+        Count: 40
+      - Mob: EXPLORATION_ROVER_T
+        Count: 40
     TimeLimit: 4h
   - Id: 80721
-    Title: "Eden Quest Board: Hunt Turtle Dungeon Group"
+    Title: "Eden Quest Board: Hunt ba_2whs01"
     Targets:
-      - Mob: SOHEE
-        Count: 10
+      - Id: 0
+        Count: 160
+        Location: ba_2whs01
     TimeLimit: 4h
   - Id: 80722
-    Title: "Eden Quest Board: Hunt Assaulter"
+    Title: "Eden Quest Board: Hunt oz_dun01"
     Targets:
-      - Mob: HUNTER_FLY
-        Count: 10
+      - Id: 0
+        Count: 80
+        Location: oz_dun01
     TimeLimit: 4h
   - Id: 80723
-    Title: "Eden Quest Board: Hunt Tamruan"
+    Title: "Eden Quest Board: Hunt sp_rudus3"
     Targets:
-      - Mob: MEGALODON
-        Count: 10
+      - Id: 0
+        Count: 160
+        Location: sp_rudus3
     TimeLimit: 4h
   - Id: 80724
-    Title: "Eden Quest Board: Hunt Toucan"
+    Title: "Eden Quest Board: Hunt mag_dun03"
     Targets:
-      - Mob: THARA_FROG
-        Count: 10
+      - Id: 0
+        Count: 160
+        Location: mag_dun03
     TimeLimit: 4h
   - Id: 80725
-    Title: "Eden Quest Board: Hunt Headless Mule"
+    Title: "Eden Quest Board: Hunt ba_2whs02"
     Targets:
-      - Mob: HYDRA
-        Count: 10
+      - Id: 0
+        Count: 160
+        Location: ba_2whs02
     TimeLimit: 4h
   - Id: 80726
-    Title: "Eden Quest Board: Hunt Uzhas"
+    Title: "Eden Quest Board: Hunt gl_cas01_"
     Targets:
-      - Mob: MEGALODON
-        Count: 10
+      - Id: 0
+        Count: 160
+        Location: gl_cas01_
     TimeLimit: 4h
   - Id: 80727
-    Title: "Eden Quest Board : Hunt Baba Yaga"
+    Title: "Eden Quest Board: Hunt gw_fild01"
     Targets:
-      - Mob: PIRATE_SKEL
-        Count: 10
+      - Id: 0
+        Count: 80
+        Location: gw_fild01
     TimeLimit: 4h
   - Id: 80728
-    Title: "Eden Quest Board : Hunt Increase Soil"
+    Title: "Eden Quest Board: Hunt gw_fild02"
     Targets:
-      - Mob: MD_KUKRE
-        Count: 10
+      - Id: 0
+        Count: 80
+        Location: gw_fild02
     TimeLimit: 4h
   - Id: 80729
-    Title: "Eden Quest Board: Hunt Hyegun & Jing Guai"
+    Title: "Eden Quest Board: Hunt ein_dun03"
     Targets:
-      - Mob: ASTER
-        Count: 10
+      - Id: 0
+        Count: 160
+        Location: ein_dun03
     TimeLimit: 4h
   - Id: 80730
-    Title: "Eden Quest Board: Hunt Miyabi"
+    Title: "Eden Quest Board: Hunt odin_past"
     Targets:
-      - Mob: CRAB
-        Count: 10
+      - Id: 0
+        Count: 240
+        Location: odin_past
     TimeLimit: 4h
   - Id: 80731
-    Title: "Eden Quest Board: Hunt Antique Firelock"
+    Title: "Eden Quest Board: Hunt abyss_04"
     Targets:
-      - Mob: ORC_SKELETON
-        Count: 20
+      - Id: 0
+        Count: 240
+        Location: abyss_04
     TimeLimit: 4h
   - Id: 80732
-    Title: "Eden Quest Board: Hunt Shinobi"
+    Title: "Eden Quest Board: Hunt ba_pw03"
+    Targets:
+      - Id: 0
+        Count: 240
+        Location: ba_pw03
+    TimeLimit: 4h
+  - Id: 80733
+    Title: "Eden Quest Board: Hunt ecl_fild01 - Waiting"
+    TimeLimit: +4h
+  - Id: 80734
+    Title: "Eden Quest Board: Hunt ba_bath - Waiting"
+    TimeLimit: +4h
+  - Id: 80735
+    Title: "Eden Quest Board: Hunt ba_lib - Waiting"
+    TimeLimit: +4h
+  - Id: 80736
+    Title: "Eden Quest Board: Hunt ba_pw02 - Waiting"
+    TimeLimit: +4h
+  - Id: 80737
+    Title: "Eden Quest Board: Hunt ba_pw01 - Waiting"
+    TimeLimit: +4h
+  - Id: 80738
+    Title: "Eden Quest Board: Hunt lasa_dun02 - Waiting"
+    TimeLimit: +4h
+  - Id: 80739
+    Title: "Eden Quest Board: Hunt Cenere & Antique Book - Waiting"
+    TimeLimit: +4h
+  - Id: 80740
+    Title: "Eden Quest Board: Hunt lasa_dun03 - Waiting"
+    TimeLimit: +4h
+  - Id: 80741
+    Title: "Eden Quest Board: Hunt prt_prison - Waiting"
+    TimeLimit: +4h
+  - Id: 80742
+    Title: "Eden Quest Board: Hunt prt_q - Waiting"
+    TimeLimit: +4h
+  - Id: 80743
+    Title: "Eden Quest Board: Hunt rockmi1 - Waiting"
+    TimeLimit: +4h
+  - Id: 80744
+    Title: "Eden Quest Board: Hunt Wanderer (Nightmare) - Waiting"
+    TimeLimit: +4h
+  - Id: 80745
+    Title: "Eden Quest Board: Hunt Smelly Zombie - Waiting"
+    TimeLimit: +4h
+  - Id: 80746
+    Title: "Eden Quest Board: Hunt Repair Robot & Green Cenere - Waiting"
+    TimeLimit: +4h
+  - Id: 80747
+    Title: "Eden Quest Board: Hunt Big Ben & Neo-Punk - Waiting"
+    TimeLimit: +4h
+  - Id: 80748
+    Title: "Eden Quest Board: Hunt ba_lost - Waiting"
+    TimeLimit: +4h
+  - Id: 80749
+    Title: "Eden Quest Board: Hunt Big Bell - Waiting"
+    TimeLimit: +4h
+  - Id: 80750
+    Title: "Eden Quest Board: Hunt Grey Goat & Wolf Baby - Waiting"
+    TimeLimit: +4h
+  - Id: 80751
+    Title: "Eden Quest Board: Hunt sp_rudus2 - Waiting"
+    TimeLimit: +4h
+  - Id: 80752
+    Title: "Eden Quest Board: Hunt Recon Robot - Waiting"
+    TimeLimit: +4h
+  - Id: 80753
+    Title: "Eden Quest Board: Hunt Exploration Rover Duo - Waiting"
+    TimeLimit: +4h
+  - Id: 80754
+    Title: "Eden Quest Board: Hunt ba_2whs01 - Waiting"
+    TimeLimit: +4h
+  - Id: 80755
+    Title: "Eden Quest Board: Hunt oz_dun01 - Waiting"
+    TimeLimit: +4h
+  - Id: 80756
+    Title: "Eden Quest Board: Hunt sp_rudus3 - Waiting"
+    TimeLimit: +4h
+  - Id: 80757
+    Title: "Eden Quest Board: Hunt mag_dun03 - Waiting"
+    TimeLimit: +4h
+  - Id: 80758
+    Title: "Eden Quest Board: Hunt ba_2whs02 - Waiting"
+    TimeLimit: +4h
+  - Id: 80759
+    Title: "Eden Quest Board: Hunt gl_cas01_ - Waiting"
+    TimeLimit: +4h
+  - Id: 80760
+    Title: "Eden Quest Board: Hunt gw_fild01 - Waiting"
+    TimeLimit: +4h
+  - Id: 80761
+    Title: "Eden Quest Board: Hunt gw_fild02 - Waiting"
+    TimeLimit: +4h
+  - Id: 80762
+    Title: "Eden Quest Board: Hunt ein_dun03 - Waiting"
+    TimeLimit: +4h
+  - Id: 80763
+    Title: "Eden Quest Board: Hunt odin_past - Waiting"
+    TimeLimit: +4h
+  - Id: 80764
+    Title: "Eden Quest Board: Hunt abyss_04 - Waiting"
+    TimeLimit: +4h
+  - Id: 80765
+    Title: "Eden Quest Board: Hunt ba_pw03 - Waiting"
+    TimeLimit: +4h
+
+  # Eden Group Event Quests (70289-70300)
+  - Id: 70289
+    Title: "[Event] Poring Extermination"
+    Targets:
+      - Mob: PORING
+        Count: 10
+    TimeLimit: 4h
+  - Id: 70290
+    Title: "[Event] Ant Egg Collection"
+    Targets:
+      - Mob: ANT_EGG
+        Count: 20
+    TimeLimit: 4h
+  - Id: 70291
+    Title: "[Event] Skeleton Warriors"
+    Targets:
+      - Mob: SOLDIER_SKELETON
+        Count: 30
+    TimeLimit: 4h
+  - Id: 70292
+    Title: "[Event] Orc Zombie Cleanup"
     Targets:
       - Mob: ORC_ZOMBIE
-        Count: 20
+        Count: 40
     TimeLimit: 4h
-  - Id: 80700
-    Title: "Eden Quest Board : Hunt Goat - Waiting"
-    TimeLimit: +4h
-  - Id: 80701
-    Title: "Eden Quest Board : Hunt Sleeper - Waiting"
-    TimeLimit: +4h
-  - Id: 80702
-    Title: "Eden Quest Board : Hunt Alarm - Waiting"
-    TimeLimit: +4h
-  - Id: 80703
-    Title: "Eden Quest Board : Hunt Punk - Waiting"
-    TimeLimit: +4h
-  - Id: 80704
-    Title: "Eden Quest Board : Hunt Injustice - Waiting"
-    TimeLimit: +4h
-  - Id: 80705
-    Title: "Eden Quest Board : Hunt Wraith - Waiting"
-    TimeLimit: +4h
-  - Id: 80706
-    Title: "Eden Quest Board : Hunt Sky Petite - Waiting"
-    TimeLimit: +4h
-  - Id: 80707
-    Title: "Eden Quest Board : Hunt Ground Petite - Waiting"
-    TimeLimit: +4h
-  - Id: 80708
-    Title: "Eden Quest Board : Hunt Marionette & Deviruchi - Waiting"
-    TimeLimit: +4h
-  - Id: 80709
-    Title: "Eden Quest Board : Hunt Nightmare - Waiting"
-    TimeLimit: +4h
-  - Id: 80710
-    Title: "Eden Quest Board : Hunt Metaling & Holden - Waiting"
-    TimeLimit: +4h
-  - Id: 80711
-    Title: "Eden Quest Board : Hunt Noxious - Waiting"
-    TimeLimit: +4h
-  - Id: 80712
-    Title: "Eden Quest Board : Hunt Venomous - Waiting"
-    TimeLimit: +4h
-  - Id: 80713
-    Title: "Eden Quest Board : Hunt Teddy Bear - Waiting"
-    TimeLimit: +4h
-  - Id: 80714
-    Title: "Eden Quest Board : Hunt Pitman - Waiting"
-    TimeLimit: +4h
-  - Id: 80715
-    Title: "Eden Quest Board : Hunt Waste Stove - Waiting"
-    TimeLimit: +4h
-  - Id: 80716
-    Title: "Eden Quest Board : Hunt Mineral & Obsidian - Waiting"
-    TimeLimit: +4h
-  - Id: 80717
-    Title: "Eden Quest Board : Hunt Rafflesia - Waiting"
-    TimeLimit: +4h
-  - Id: 80718
-    Title: "Eden Quest Board : Hunt Stem Worm - Waiting"
-    TimeLimit: +4h
-  - Id: 80719
-    Title: "Eden Quest Board : Hunt Breeze - Waiting"
-    TimeLimit: +4h
-  - Id: 80720
-    Title: "Eden Quest Board : Hunt Dragon Tail & Spring Rabbit - Waiting"
-    TimeLimit: +4h
-  - Id: 80721
-    Title: "Eden Quest Board : Hunt Turtle Dungeon Group - Waiting"
-    TimeLimit: +4h
-  - Id: 80722
-    Title: "Eden Quest Board : Hunt Assaulter - Waiting"
-    TimeLimit: +4h
-  - Id: 80723
-    Title: "Eden Quest Board : Hunt Tamruan - Waiting"
-    TimeLimit: +4h
-  - Id: 80724
-    Title: "Eden Quest Board : Hunt Toucan - Waiting"
-    TimeLimit: +4h
-  - Id: 80725
-    Title: "Eden Quest Board : Hunt Headless Mule - Waiting"
-    TimeLimit: +4h
-  - Id: 80726
-    Title: "Eden Quest Board : Hunt Uzhas - Waiting"
-    TimeLimit: +4h
-  - Id: 80727
-    Title: "Eden Quest Board : Hunt Baba Yaga - Waiting"
-    TimeLimit: +4h
-  - Id: 80728
-    Title: "Eden Quest Board : Hunt Increase Soil - Waiting"
-    TimeLimit: +4h
-  - Id: 80729
-    Title: "Eden Quest Board : Hunt Hyegun & Jing Guai - Waiting"
-    TimeLimit: +4h
-  - Id: 80730
-    Title: "Eden Quest Board : Hunt Miyabi - Waiting"
-    TimeLimit: +4h
-  - Id: 80731
-    Title: "Eden Quest Board : Hunt Antique Firelock - Waiting"
-    TimeLimit: +4h
-  - Id: 80732
-    Title: "Eden Quest Board : Hunt Shinobi - Waiting"
-    TimeLimit: +4h
+  - Id: 70293
+    Title: "[Event] Mi Gao Extermination"
+    Targets:
+      - Mob: INCREASE_SOIL
+        Count: 50
+    TimeLimit: 4h
+  - Id: 70294
+    Title: "[Event] Anubis Guardian Trial"
+    Targets:
+      - Mob: ANUBIS
+        Count: 60
+    TimeLimit: 4h
+  - Id: 70295
+    Title: "[Event] Illusion of Moonlight"
+    Targets:
+      - Id: 0
+        Count: 100
+        Location: pay_d03_i
+    TimeLimit: 4h
+  - Id: 70296
+    Title: "[Event] Illusion of Vampire"
+    Targets:
+      - Id: 0
+        Count: 200
+        Location: gef_d01_i
+    TimeLimit: 4h
+  - Id: 70297
+    Title: "[Event] Illusion of Teddy Bear"
+    Targets:
+      - Id: 0
+        Count: 200
+        Location: ein_d02_i
+    TimeLimit: 4h
+  - Id: 70298
+    Title: "[Event] Illusion of Abyss"
+    Targets:
+      - Id: 0
+        Count: 300
+        Location: tur_d03_i
+    TimeLimit: 4h
+  - Id: 70299
+    Title: "[Event] Illusion of Twins"
+    Targets:
+      - Id: 0
+        Count: 300
+        Location: ant_d02_i
+    TimeLimit: 4h
+  - Id: 70300
+    Title: "[Event] Illusion of Labyrinth"
+    Targets:
+      - Id: 0
+        Count: 300
+        Location: lhz_d03_i
+    TimeLimit: 4h
+
+  # Eden Group Event Quest Cooldowns (70309-70320)
+  - Id: 70309
+    Title: "[Event] Poring Extermination - Waiting"
+    TimeLimit: +24h
+  - Id: 70310
+    Title: "[Event] Ant Egg Collection - Waiting"
+    TimeLimit: +24h
+  - Id: 70311
+    Title: "[Event] Skeleton Warriors - Waiting"
+    TimeLimit: +24h
+  - Id: 70312
+    Title: "[Event] Orc Zombie Cleanup - Waiting"
+    TimeLimit: +24h
+  - Id: 70313
+    Title: "[Event] Mi Gao Extermination - Waiting"
+    TimeLimit: +24h
+  - Id: 70314
+    Title: "[Event] Anubis Guardian Trial - Waiting"
+    TimeLimit: +24h
+  - Id: 70315
+    Title: "[Event] Illusion of Moonlight - Waiting"
+    TimeLimit: +24h
+  - Id: 70316
+    Title: "[Event] Illusion of Vampire - Waiting"
+    TimeLimit: +24h
+  - Id: 70317
+    Title: "[Event] Illusion of Teddy Bear - Waiting"
+    TimeLimit: +24h
+  - Id: 70318
+    Title: "[Event] Illusion of Abyss - Waiting"
+    TimeLimit: +24h
+  - Id: 70319
+    Title: "[Event] Illusion of Twins - Waiting"
+    TimeLimit: +24h
+  - Id: 70320
+    Title: "[Event] Illusion of Labyrinth - Waiting"
+    TimeLimit: +24h
 
   - Id: 90001
     Title: "Silvervine Hunt: Angeling"

@@ -792,7 +792,7 @@ int32 chlogif_parse(int32 fd) {
 			case 0x2734: next = chlogif_parse_askkick(fd); break;
 			case 0x2735: next = chlogif_parse_updip(fd); break;
 			case 0x2743: next = chlogif_parse_vipack(fd); break;
-			case 0x0af6:
+			case 0x0af9:
 				// Anti-cheat handshake packet; ignored on inter-server links.
 				if( RFIFOREST( fd ) < 10 ){
 					return 0;
