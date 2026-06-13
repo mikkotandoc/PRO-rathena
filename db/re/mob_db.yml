@@ -84636,7 +84636,7 @@ Body:
         Rate: 500
   - Id: 3141
     AegisName: MG_GHOUL_H
-    Name: Grand Chamberlain in pain
+    Name: Grand Chamberlain Pain
     JapaneseName: Grand Chamberlain
     Level: 162
     Hp: 416200
@@ -84807,8 +84807,8 @@ Body:
         Rate: 200
   - Id: 3145
     AegisName: MG_KNIGHT_OF_ABYSS_H
-    Name: Corrupted Abysmal Knight
-    JapaneseName: Corrupted Knight of Abyss
+    Name: Corrupt Abyss Knight
+    JapaneseName: Corrupt Abyss Knight
     Level: 172
     Hp: 451578
     BaseExp: 58584

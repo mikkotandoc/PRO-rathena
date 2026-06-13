@@ -3738,7 +3738,7 @@ spl_fild02,377,149,3	script	Dispatched Instructor#08	4_M_DST_MASTER,{
 	close;
 }
 
-moc_para01,114,83,3	script Blacksmith Thorn#2nd10 2_M_OLDBLSMITH,{
+moc_para01,114,83,3	script	Blacksmith Thorn#2nd10	2_M_OLDBLSMITH,{
 	if (checkweight(2571,5) == 0) {
 	mes "- You have too many items in your inventory to continue -";
 	close;
@@ -4098,7 +4098,7 @@ S_Enchant:
 	close;
 }
 
-moc_para01,114,79,3	script Weapons Expert BK#2nd11 4_M_REPAIR,{
+moc_para01,114,79,3	script	Weapons Expert BK#2nd11	4_M_REPAIR,{
 	setarray .@wplist[0],
 	1197, // P_Slayer3
 	13434, // P_Saber3

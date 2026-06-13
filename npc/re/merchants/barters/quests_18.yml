@@ -131,3 +131,209 @@ Body:
           - Index: 0
             Item: Ep18_Amethyst_Fragment
             Amount: 2250
+  - Name: barter_ep18_repu_2
+    Items:
+      - Index: 0
+        Item: Viva_Adul_Hat_WL1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 1
+        Item: Viva_Adul_Hat_WL2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 2
+        Item: Viva_Adul_Hat_SR1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 3
+        Item: Viva_Adul_Hat_SR2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 4
+        Item: Viva_Adul_Hat_AB1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 5
+        Item: Viva_Adul_Hat_AB2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 6
+        Item: Viva_Adul_Hat_SC1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 7
+        Item: Viva_Adul_Hat_SC2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 8
+        Item: Viva_Adul_Hat_RA1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 9
+        Item: Viva_Adul_Hat_RA2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 10
+        Item: Viva_Adul_Hat_LG1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 11
+        Item: Viva_Adul_Hat_LG2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 12
+        Item: Viva_Adul_Hat_GC1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 13
+        Item: Viva_Adul_Hat_GC2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 14
+        Item: Viva_Adul_Hat_SO1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 15
+        Item: Viva_Adul_Hat_SO2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 16
+        Item: Viva_Adul_Hat_RK1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 17
+        Item: Viva_Adul_Hat_RK2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 18
+        Item: Viva_Adul_Hat_WM1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 19
+        Item: Viva_Adul_Hat_WM2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 20
+        Item: Viva_Adul_Hat_NC1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 21
+        Item: Viva_Adul_Hat_NC2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 22
+        Item: Viva_Adul_Hat_GN1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 23
+        Item: Viva_Adul_Hat_GN2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 24
+        Item: Viva_Adul_Hat_KO1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 25
+        Item: Viva_Adul_Hat_KO2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 26
+        Item: Viva_Adul_Hat_RL1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 27
+        Item: Viva_Adul_Hat_RL2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 28
+        Item: Viva_Adul_Hat_SP1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 29
+        Item: Viva_Adul_Hat_SP2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 30
+        Item: Viva_Adul_Hat_SJ1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 31
+        Item: Viva_Adul_Hat_SJ2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 32
+        Item: Viva_Adul_Hat_SU1
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250
+      - Index: 33
+        Item: Viva_Adul_Hat_SU2
+        RequiredItems:
+          - Index: 0
+            Item: Ep18_Amethyst_Fragment
+            Amount: 1250

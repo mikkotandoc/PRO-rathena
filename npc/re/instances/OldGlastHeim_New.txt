@@ -154,6 +154,7 @@ glast_01,204,273,5	script	Hugin	4_M_SAGE_C,{
 				close;
 			case IE_OK:
 				mapannounce "glast_01", "" + getpartyname( getcharid(1) ) + " party member " + strcharinfo(0) + " enters the " + .@md_name$ + ".", bc_map,0x00FF99;
+				set @OGH_Mode, .@diff;
 				setquest .@quest_id[0];// Trace of Time Travel
 				// warp "1@gl_k",150,20;
 				end;
@@ -199,6 +200,8 @@ glast_01,204,273,5	script	Hugin	4_M_SAGE_C,{
 // Floor 1
 //============================================================
 1@gl_k,149,41,5	script	Varmundt#0	4_M_BARMUND,{
+	if ('OGH_Mode == 0 && @OGH_Mode > 0)
+		set 'OGH_Mode, @OGH_Mode;
 	if (is_party_leader() == false) {
 		mes "[Varmundt]";
 		mes "Where's your leader? I need his help.";
@@ -1615,7 +1618,7 @@ OnTimer5000:
 		donpcevent instance_npcname("Varmundt's Ghost#Buff3") + "::OnEvent";
 		if('OGH_Mode == 1) // Normal Mode
 			areamonster 'map_name$[1],140,220,175,255,"Abysmal Knight",2470,6, instance_npcname("#ghmemorialmob08") + "::OnMobDead";
-		else if('OGH_Mode == 1) // Hard Mode
+		else if('OGH_Mode == 2) // Hard Mode
 			areamonster 'map_name$[1],140,220,175,255,"Abysmal Knight",3145,6, instance_npcname("#ghmemorialmob08") + "::OnMobDead";
 		break;
 	case 6:
@@ -1812,7 +1815,7 @@ OnTimer10000:
 // Treasure Room
 //============================================================
 1@gl_k,165,136,3	script	Strange crack#2	CLEAR_NPC,{
-	if ('OGH_Mode == 1 && isbegin_quest(12322) == 0 || 'OGH_Mode == 2 && isbegin_quest(12335) == 0) {// Space Distortion
+	if ( ('OGH_Mode == 1 && isbegin_quest(12322) == 0) || ('OGH_Mode == 2 && isbegin_quest(12335) == 0) ) {// Space Distortion
 		mes "The crack looks suspicious but nothing more to check.";
 		close;
 	}

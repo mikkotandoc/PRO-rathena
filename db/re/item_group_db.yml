@@ -40917,6 +40917,7 @@ Body:
         List:
           - Index: 0
             Item: Bloody_Knight_Shield
+            RandomOptionGroup: Bloody_Knight_Shield
   - Group: BS_SHA_M_S_3
     SubGroups:
       - SubGroup: 1
@@ -45221,20 +45222,20 @@ Body:
         List:
           - Index: 0
             Item: Corruption_Boots_K
-#  - Group: BS_ITEM_M_S_57
-#    SubGroups:
-#      - SubGroup: 0
-#        Algorithm: All
-#        List:
-#          - Index: 0
-#            Item: Beast_Leather_Shoes
-#  - Group: BS_ITEM_M_S_58
-#    SubGroups:
-#      - SubGroup: 0
-#        Algorithm: All
-#        List:
-#          - Index: 0
-#            Item: Pirate_Captain_Coat
+  - Group: BS_ITEM_M_S_57
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Beast_Leather_Shoes
+  - Group: BS_ITEM_M_S_58
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Pirate_Captain_Coat
 #  - Group: BS_ITEM_M_S_59
 #    SubGroups:
 #      - SubGroup: 0
@@ -45256,13 +45257,13 @@ Body:
 #        List:
 #          - Index: 0
 #            Item: Beelzebub_Crown_K
-#  - Group: BS_ITEM_M_S_62
-#    SubGroups:
-#      - SubGroup: 0
-#        Algorithm: All
-#        List:
-#          - Index: 0
-#            Item: Vesper_H_Gear_K
+  - Group: BS_ITEM_M_S_62
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Vesper_H_Gear_K
   - Group: ENCHANT_STONE_BOX28
     SubGroups:
       - SubGroup: 6

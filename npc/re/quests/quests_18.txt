@@ -4553,7 +4553,7 @@ wolfvill,140,112,5	script(CLOAKED)	Suad#sms01	4_EP18_SUAD,{
 		next;
 		cutin "ep18_maram_01.png",2;
 		mes "[Maram]";
-		mes "Let's go together. I know where it is! <NAVI>[어디에]<INFO>wolfvill,131,257,0,101,0</INFO></NAVI>Adventure, come with us. I have a feeling that we might need a third-party witness!";
+		mes "Let's go together. I know where it is! <NAVI>[???]<INFO>wolfvill,131,257,0,101,0</INFO></NAVI>Adventure, come with us. I have a feeling that we might need a third-party witness!";
 		erasequest 16580;
 		setquest 17517;
 		ep18_main = 48;
@@ -5056,7 +5056,7 @@ rachel,116,200,5	script	Niren#sms01	4_F_MADAME,{
 		next;
 		cutin "ep18_miriam_01.png",1;
 		mes "[Miriam]";
-		mes "Let's go, adventurer. Before heading to the villa, there's someone who will accompany us. Let's meet at <NAVI>[오즈의 미로]<INFO>oz_dun01,223,116,0,101,0</INFO></NAVI>";
+		mes "Let's go, adventurer. Before heading to the villa, there's someone who will accompany us. Let's meet at <NAVI>[?????? ???]<INFO>oz_dun01,223,116,0,101,0</INFO></NAVI>";
 		erasequest 17521;
 		setquest 17525;
 		ep18_main = 53;
@@ -12180,7 +12180,7 @@ rachel,72,133,4	script(CLOAKED)	Half Flower#E18_6	4_EP18_HALFFLOWER,{
 		next;
 		npctalk "Mejai: Shall we start by cutting the stems of the Half Flowers?", "Mejai#E18_5", bc_self;
 		next;
-		if (select( "Cut at 10° angle.", "Cut at 20° angle.", "Cut at 30° angle.", "Cut at 40° angle." ) != .@good_answer[0])
+		if (select( "Cut at 10?? angle.", "Cut at 20?? angle.", "Cut at 30?? angle.", "Cut at 40?? angle." ) != .@good_answer[0])
 			.@time /= 2;
 		progressbar "FFFF00",1;
 		npctalk "Mejai: Thank you for your decision. Let's start by cutting the stem first.", "Mejai#E18_5", bc_self;
@@ -12417,7 +12417,7 @@ gw_fild01,325,376,1	script	Half Flower#EP18_R01	4_EP18_HALFFLOWER,7,7,{
 	next;
 	unittalk getcharid(3), "" + strcharinfo(0) + " : What angle should I cut the stem?", bc_self;
 	next;
-	if (select("Cut at 10° angle", "Cut at 20° angle", "Cut at 30° angle", "Cut at 40° angle" ) != .@good_answer[0])
+	if (select("Cut at 10?? angle", "Cut at 20?? angle", "Cut at 30?? angle", "Cut at 40?? angle" ) != .@good_answer[0])
 		.@time /= 2;
 	progressbar "FFFF00",1;
 	unittalk getcharid(3), "" + strcharinfo(0) + " : How many leaves should I leave?", bc_self;
@@ -12908,13 +12908,15 @@ wolfvill,167,135,3	script	Asad#asad	4_EP18_GW_MAN01,{
 	}
 	next;
 	.@amethyst_name$ = getitemname(1000405);
-	if (.@reputation >= 4000)
+	if (.@reputation >= 4000) {
 		.@menu$[2] = "Exchange Smelting Box for " + .@amethyst_name$;
+		.@menu$[3] = "Exchange Helm of Faith for " + .@amethyst_name$;
+	}
 	else if (.@reputation >= 3000)
 		.@menu$[1] = "Exchange Smelting Box for " + .@amethyst_name$;
 	if (.@reputation >= 2000)
 		.@menu$[0] = "Request space movement.";
-	switch( select( "Use the Storage.", "Use the store.", .@menu$[0], .@menu$[1], .@menu$[2] ) ) {
+	switch( select( "Use the Storage.", "Use the store.", .@menu$[0], .@menu$[1], .@menu$[2], .@menu$[3] ) ) {
 	case 1:
 		mes "[Asad]";
 		mes "The Storage fee is 200z.";
@@ -12978,6 +12980,13 @@ wolfvill,167,135,3	script	Asad#asad	4_EP18_GW_MAN01,{
 		mes "You can exchange them for a smelting box..";
 		close2;
 		callshop "barter_ep18_3",1;
+		end;
+	case 6:
+		mes "[Asad]";
+		mes "Amethyst shop?";
+		mes "You can exchange them for a Helm of Faith.";
+		close2;
+		callshop "barter_ep18_repu_2",1;
 		end;
 	}
 	end;

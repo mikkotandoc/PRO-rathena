@@ -89,11 +89,12 @@ prontera,164,172,3	script	Instance & EP Merchant	4_M_HUMERCHANT,{
 			mes "[Instance Merchant]";
 			mes "Episode 18 (Spirit of the Cold) Exchange";
 			next;
-			switch( select( "Wolf Exchange I", "Wolf Exchange II", "Wolf Exchange III", "Cancel" ) ) {
+			switch( select( "Wolf Exchange I", "Wolf Exchange II", "Wolf Exchange III", "Reputation Shop II (Helm of Faith)", "Cancel" ) ) {
 			case 1: callsub L_OpenShop, "barter_ep18_1";
 			case 2: callsub L_OpenShop, "barter_ep18_2";
 			case 3: callsub L_OpenShop, "barter_ep18_3";
-			case 4: close;
+			case 4: callsub L_OpenShop, "barter_ep18_repu_2";
+			case 5: close;
 			}
 			break;
 		case 8:

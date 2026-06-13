@@ -9839,12 +9839,26 @@ Body:
   - Id: 12456
     Title: Aftereffects that eliminated the aftereffects that saved the world
     TimeLimit: +6h
+  - Id: 12457
+    Title: Moment of downfall
+  - Id: 12458
+    Title: Orb's backstory
+  - Id: 12459
+    Title: Rest in the King's thoughts
+    Targets:
+      - Mob: MD_GH_KING_SCHMIDT_N
+        Count: 1
   - Id: 12460
     Title: Aftereffects of the Fall
     TimeLimit: 4h
   - Id: 12461
     Title: The aftereffects of powerful death
     TimeLimit: 3d 4h
+  - Id: 12462
+    Title: Rest in the King's thoughts (Hard)
+    Targets:
+      - Mob: MD_GH_KING_SCHMIDT_H
+        Count: 1
   - Id: 12470
     Title: "[Daily] Andrea's Revenge I"
     Targets:
@@ -15834,42 +15848,42 @@ Body:
   - Id: 80700
     Title: "Eden Quest Board: Hunt ecl_fild01"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 60
         Location: ecl_fild01
     TimeLimit: 4h
   - Id: 80701
     Title: "Eden Quest Board: Hunt ba_bath"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 60
         Location: ba_bath
     TimeLimit: 4h
   - Id: 80702
     Title: "Eden Quest Board: Hunt ba_lib"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 60
         Location: ba_lib
     TimeLimit: 4h
   - Id: 80703
     Title: "Eden Quest Board: Hunt ba_pw02"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 60
         Location: ba_pw02
     TimeLimit: 4h
   - Id: 80704
     Title: "Eden Quest Board: Hunt ba_pw01"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 60
         Location: ba_pw01
     TimeLimit: 4h
   - Id: 80705
     Title: "Eden Quest Board: Hunt lasa_dun02"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 60
         Location: lasa_dun02
     TimeLimit: 4h
@@ -15884,28 +15898,28 @@ Body:
   - Id: 80707
     Title: "Eden Quest Board: Hunt lasa_dun03"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 120
         Location: lasa_dun03
     TimeLimit: 4h
   - Id: 80708
     Title: "Eden Quest Board: Hunt prt_prison"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 120
         Location: prt_prison
     TimeLimit: 4h
   - Id: 80709
     Title: "Eden Quest Board: Hunt prt_q"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 120
         Location: prt_q
     TimeLimit: 4h
   - Id: 80710
     Title: "Eden Quest Board: Hunt rockmi1"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 120
         Location: rockmi1
     TimeLimit: 4h
@@ -15940,7 +15954,7 @@ Body:
   - Id: 80715
     Title: "Eden Quest Board: Hunt ba_lost"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 160
         Location: ba_lost
     TimeLimit: 4h
@@ -15961,7 +15975,7 @@ Body:
   - Id: 80718
     Title: "Eden Quest Board: Hunt sp_rudus2"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 80
         Location: sp_rudus2
     TimeLimit: 4h
@@ -15982,84 +15996,84 @@ Body:
   - Id: 80721
     Title: "Eden Quest Board: Hunt ba_2whs01"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 160
         Location: ba_2whs01
     TimeLimit: 4h
   - Id: 80722
     Title: "Eden Quest Board: Hunt oz_dun01"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 80
         Location: oz_dun01
     TimeLimit: 4h
   - Id: 80723
     Title: "Eden Quest Board: Hunt sp_rudus3"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 160
         Location: sp_rudus3
     TimeLimit: 4h
   - Id: 80724
     Title: "Eden Quest Board: Hunt mag_dun03"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 160
         Location: mag_dun03
     TimeLimit: 4h
   - Id: 80725
     Title: "Eden Quest Board: Hunt ba_2whs02"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 160
         Location: ba_2whs02
     TimeLimit: 4h
   - Id: 80726
     Title: "Eden Quest Board: Hunt gl_cas01_"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 160
         Location: gl_cas01_
     TimeLimit: 4h
   - Id: 80727
     Title: "Eden Quest Board: Hunt gw_fild01"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 80
         Location: gw_fild01
     TimeLimit: 4h
   - Id: 80728
     Title: "Eden Quest Board: Hunt gw_fild02"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 80
         Location: gw_fild02
     TimeLimit: 4h
   - Id: 80729
     Title: "Eden Quest Board: Hunt ein_dun03"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 160
         Location: ein_dun03
     TimeLimit: 4h
   - Id: 80730
     Title: "Eden Quest Board: Hunt odin_past"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 240
         Location: odin_past
     TimeLimit: 4h
   - Id: 80731
     Title: "Eden Quest Board: Hunt abyss_04"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 240
         Location: abyss_04
     TimeLimit: 4h
   - Id: 80732
     Title: "Eden Quest Board: Hunt ba_pw03"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 240
         Location: ba_pw03
     TimeLimit: 4h
@@ -16203,44 +16217,44 @@ Body:
   - Id: 70295
     Title: "[Event] Illusion of Moonlight"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 100
         Location: pay_d03_i
     TimeLimit: 4h
   - Id: 70296
     Title: "[Event] Illusion of Vampire"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 200
         Location: gef_d01_i
     TimeLimit: 4h
   - Id: 70297
     Title: "[Event] Illusion of Teddy Bear"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 200
         Location: ein_d02_i
     TimeLimit: 4h
   - Id: 70298
     Title: "[Event] Illusion of Abyss"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 300
-        Location: tur_d03_i
+        Location: tur_d04_i
     TimeLimit: 4h
   - Id: 70299
     Title: "[Event] Illusion of Twins"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 300
         Location: ant_d02_i
     TimeLimit: 4h
   - Id: 70300
     Title: "[Event] Illusion of Labyrinth"
     Targets:
-      - Id: 0
+      - Id: 1
         Count: 300
-        Location: lhz_d03_i
+        Location: prt_mz03_i
     TimeLimit: 4h
 
   # Eden Group Event Quest Cooldowns (70309-70320)

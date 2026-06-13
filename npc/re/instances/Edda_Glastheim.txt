@@ -182,9 +182,10 @@ glast_01,241,290,5	script	Oscar#gh_fall	4_ED_OSCAR,{
 						mes "Only registered members can enter the " + .@md_name$ + " instance.";
 						end;
 						
-					case IE_OK:
-						mapannounce "glast_01", strcharinfo(0) + " of the party, "+ .@party_name$ +", is entering the " + .@md_name$ + ".", bc_map, "0x00FF99";
-						end;
+			case IE_OK:
+				.@party_name$ = getpartyname(getcharid(1));
+				mapannounce "glast_01", strcharinfo(0) + " of the party, "+ .@party_name$ +", is entering the " + .@md_name$ + ".", bc_map, "0x00FF99";
+				end;
 				}			
 		}
 	}
@@ -300,9 +301,9 @@ glast_01,241,290,5	script	Oscar#gh_fall	4_ED_OSCAR,{
 		mes "^0000CDWe've purified enough for today.^000000 You need to rest up your body to do another dimensional travel. Come back again at dawn, adventurer.";
 		close3;	
 	}
-	switch(select("Enter",((is_party_leader() == true && .@normal == true)?"Create Glastheim Purification":""),((is_party_leader() == true && BaseLevel >= 180 && .@hard == true)?"Create Glastheim Purification Hard":""))){
+	switch(select("Enter",((is_party_leader() == true && .@normal == true)?"Create Glastheim Purification":""),((is_party_leader() == true && BaseLevel >= 170 && .@hard == true)?"Create Glastheim Purification Hard":""))){
 		case 1:
-			if(select("Purification of Glastheim",((BaseLevel >= 180)?"^CC0000Purification of Glastheim Hard^000000":"")) == 1){
+			if(select("Purification of Glastheim",((BaseLevel >= 170)?"^CC0000Purification of Glastheim Hard^000000":"")) == 1){
 				.@md_name$ = "Glastheim Purification";
 				.@cooldown = 12460;
 				.@hunt = 12459;
@@ -333,6 +334,7 @@ glast_01,241,290,5	script	Oscar#gh_fall	4_ED_OSCAR,{
 					close3;
 					
 				case IE_OK:
+					.@party_name$ = getpartyname(getcharid(1));
 					mapannounce "glast_01", strcharinfo(0) + " of the party, "+ .@party_name$ +", is entering the " + .@md_name$ + ".", bc_map, "0x00FF99";
 					if(isbegin_quest(.@hunt))
 						erasequest .@hunt;
@@ -413,6 +415,10 @@ glast_01,241,290,5	script	Oscar#gh_fall	4_ED_OSCAR,{
 					close3;
 			}		
 	}
+	
+OnInit:
+	cloaknpc(strnpcinfo(0),true);
+	end;
 }
 
 glast_01,241,296,5	script	OSC1198#edda_fogh	2_DROP_MACHINE,{
@@ -1828,10 +1834,10 @@ OnEvent:
 		instance_hide("#schmidt_dummy_" + .@i,false);
 	sleep 200;
 	for(.@i = 0; .@i < 44; .@i++)
-		instance_effect("#schmidt_dummy_" + .@i,EF_REDBODY);
+		instance_effect(EF_REDBODY,"#schmidt_dummy_" + .@i);
 	sleep 200;
 	for(.@i = 0; .@i < 44; .@i++)
-		instance_effect("#schmidt_dummy_" + .@i,EF_CLOAKING);
+		instance_effect(EF_CLOAKING,"#schmidt_dummy_" + .@i);
 	sleep 300;
 	for(.@i = 0; .@i < 44; .@i++){
 		instance_hide("#schmidt_dummy_" + .@i,true);
@@ -1939,7 +1945,7 @@ end;
 1@gl_prq,52,270,4	script	Oscar#gh_fall_2	4_ED_OSCAR,2,2,{
 	.@var = get_instance_var("gh_fall");
 	if(.@var == 19){
-		cutin "OSCAR01",0;
+		cutin "oscar01",0;
 		mes "[ Oscar ]";
 		mes "He used all his energy to the dimensional orb and destroyed it, but the energy waves that it created were so huge, that it almost swept everyone nearby.";
 		next;
@@ -2150,11 +2156,9 @@ end;
 	mes "Oh, I think this dimension will start to collapse. Let's get out first.";
 	if(checkquest(.@var,HUNTING) == 2){
 		if(!.@mode)
-			getitem 25739,9;
-		else {
-			getitem 25739,5;
+			getitem 25739,3;
+		else
 			getitem 25740,6;
-		}
 		erasequest .@var;
 	}
 	close2;

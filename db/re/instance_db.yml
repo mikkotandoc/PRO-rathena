@@ -391,13 +391,22 @@ Body:
       X: 150
       Y: 20
   - Id: 51
-    Name: Fall of Glast Heim (Normal)
+    Name: Glastheim Fall
+    TimeLimit: 3600
     Enter:
       Map: 1@gl_prq
       X: 299
       Y: 19
   - Id: 52
-    Name: Fall of Glast Heim (Advanced)
+    Name: Glastheim Purification
+    TimeLimit: 3600
+    Enter:
+      Map: 1@gl_prq
+      X: 79
+      Y: 22
+  - Id: 122
+    Name: Glastheim Purification Hard
+    TimeLimit: 3600
     Enter:
       Map: 1@gl_prq
       X: 79
@@ -609,11 +618,11 @@ Body:
   - Id: 121
     Name: Old Glast Heim Hard
     Enter:
-      Map: 1@gl_k2
+      Map: 1@gl_k
       X: 150
       Y: 20
     AdditionalMaps:
-      2@gl_k2: true
+      2@gl_k: true
   - Id: 130
     Name: Maze of Oz
     TimeLimit: 7200

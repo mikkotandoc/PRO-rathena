@@ -4526,22 +4526,22 @@ Body:
 #        Amount: 150
 #      - Item: Shadowdecon
 #        Amount: 150
-#  - Item: Bs_Item_M_S_57
-#    RewardGroup: BS_ITEM_M_S_57
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: Tiger's_Skin
-#        Amount: 50
-#      - Item: Zelunium
-#        Amount: 250
-#  - Item: Bs_Item_M_S_58
-#    RewardGroup: BS_ITEM_M_S_58
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: Will_Of_Darkness_
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
+  - Item: Bs_Item_M_S_57
+    RewardGroup: BS_ITEM_M_S_57
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: Tiger's_Skin
+        Amount: 50
+      - Item: Zelunium
+        Amount: 250
+  - Item: Bs_Item_M_S_58
+    RewardGroup: BS_ITEM_M_S_58
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: Will_Of_Darkness_
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
 #  - Item: Bs_Item_M_S_59
 #    RewardGroup: BS_ITEM_M_S_59
 #    RequiredRequirementsCount: 2
@@ -4566,14 +4566,14 @@ Body:
 #        Amount: 30
 #      - Item: Zelunium
 #        Amount: 250
-#  - Item: Bs_Item_M_S_62
-#    RewardGroup: BS_ITEM_M_S_62
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: EP19_Luminant
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
+  - Item: Bs_Item_M_S_62
+    RewardGroup: BS_ITEM_M_S_62
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: EP19_Luminant
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
 #  - Item: Mocadas_Slabs1
 #    RewardGroup: MOCADAS_SLABS1
 #    RequiredRequirementsCount: 3

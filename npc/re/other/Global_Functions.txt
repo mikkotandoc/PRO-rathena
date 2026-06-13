@@ -196,6 +196,7 @@ function	script	SprintIndex	{
 //instance_warning(<TYPE>);
 //instance_hide(<NPC Name>,<bool>);
 //instance_enable(<NPC Name>,<bool>);
+//instance_effect(<Effect ID>,<NPC Name>);
 //instance_disable(<NPC Name>);
 //instance_event(<NPC Name>,<Event Name>,<Attach Player Bool>);
 //*/
@@ -256,6 +257,15 @@ function	script	instance_event	{
 		doevent instance_npcname(getarg(0)) + "::" + getarg(1);
 	else
 		donpcevent instance_npcname(getarg(0)) + "::" + getarg(1);
+	return;
+}
+
+function	script	instance_effect	{
+	.@effect = getarg(0);
+	.@npc$ = getarg(1);
+	if (substr(.@npc$, 0, 4) != "dup_")
+		.@npc$ = instance_npcname(.@npc$);
+	specialeffect .@effect, AREA, .@npc$;
 	return;
 }
 
