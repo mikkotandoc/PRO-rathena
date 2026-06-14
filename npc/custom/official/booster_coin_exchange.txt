@@ -1,0 +1,144 @@
+//============================================================
+// Booster Coin Exchange NPCs
+// Centro  - Promotional Item Exchange (prontera)
+// Yves    - Promotional Costume Enchantment (malangdo)
+// RS26-1  - Illusion Equipment (Bound) Enchantment (sp_cor)
+//============================================================
+
+prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 1000) {
+		mes "[Centro]";
+		mes "Your inventory is too full to continue.";
+		mes "Please make some room and try again.";
+		close;
+	}
+	mes "[Centro]";
+	mes "Welcome! I exchange ^0000FF" + mesitemlink(1000254) + "^000000";
+	mes "for various promotional booster products.";
+	next;
+	if (select("Open Exchange Shop:Cancel") == 2) {
+		mes "[Centro]";
+		mes "Come back when you have coins to spend.";
+		close;
+	}
+	if (!getbattleflag("feature.barter")) {
+		mes "[Centro]";
+		mes "The exchange service is currently unavailable.";
+		close;
+	}
+	close2;
+	callshop "mega00", 1;
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Promotional Item Exchange>";
+	end;
+}
+
+malangdo,150,135,0	script	Yves Life Malang	4_F_02,{
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 1000) {
+		mes "[Yves Life Malang]";
+		mes "Your inventory is too full to continue.";
+		mes "Please make some room and try again.";
+		close;
+	}
+	mes "[Yves Life Malang]";
+	mes "I can enchant promotional booster costumes";
+	mes "using " + mesitemlink(1000254) + " exchange vouchers.";
+	next;
+	if (BaseLevel < 100) {
+		mes "[Yves Life Malang]";
+		mes "You must be at least ^0000FFBase Level 100^000000 to use";
+		mes "promotional costume enchantment.";
+		close;
+	}
+	mes "[Yves Life Malang]";
+	mes "Which costume part would you like to enchant?";
+	next;
+	switch (select("Costume Headgear Enchantment:Costume Garment Enchantment:Cancel")) {
+	case 1:
+		mes "[Yves Life Malang]";
+		mes "Opening booster costume headgear enchantment.";
+		close2;
+		item_enchant(37);
+		end;
+	case 2:
+		mes "[Yves Life Malang]";
+		mes "Opening booster costume garment enchantment.";
+		close2;
+		item_enchant(38);
+		end;
+	case 3:
+		mes "[Yves Life Malang]";
+		mes "Return when you are ready.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Promotional Costume Exchange>";
+	end;
+}
+
+sp_cor,98,136,4	script	RS26-1	4_SYS_MSG,{
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 1000) {
+		mes "[RS26-1]";
+		mes "You can't proceed because you are carrying too many items.";
+		mes "Please organize your inventory and try again.";
+		close;
+	}
+	mes "[RS26-1]";
+	mes "Welcome. I am RS26-1, a Regenschirm robotic machine.";
+	mes "I can enchant ^0000FFIllusion Equipment (Bound)^000000.";
+	next;
+	if (BaseLevel < 130) {
+		mes "[RS26-1]";
+		mes "You must be at least ^0000FFBase Level 130^000000 to use";
+		mes "Illusion Equipment (Bound) enchantment.";
+		close;
+	}
+	mes "[RS26-1]";
+	mes "Select the equipment part you want to enchant.";
+	next;
+	switch (select("(Bound) Illusion Armor A/B:(Bound) Illusion Engine Wing A/B:(Bound) Illusion Leg A/B:(Bound) Illusion Booster R / Battle Chip R:(Bound) Illusion Booster L / Battle Chip L:Cancel")) {
+	case 1:
+		mes "[RS26-1]";
+		mes "Enchanting Illusion Armor (Bound).";
+		close2;
+		item_enchant(34);
+		end;
+	case 2:
+		mes "[RS26-1]";
+		mes "Enchanting Illusion Engine Wing (Bound).";
+		close2;
+		item_enchant(39);
+		end;
+	case 3:
+		mes "[RS26-1]";
+		mes "Enchanting Illusion Leg (Bound).";
+		close2;
+		item_enchant(40);
+		end;
+	case 4:
+		mes "[RS26-1]";
+		mes "Enchanting Illusion Booster R / Battle Chip R (Bound).";
+		close2;
+		item_enchant(42);
+		end;
+	case 5:
+		mes "[RS26-1]";
+		mes "Enchanting Illusion Booster L / Battle Chip L (Bound).";
+		close2;
+		item_enchant(43);
+		end;
+	case 6:
+		mes "[RS26-1]";
+		mes "Please visit again when you need my help.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Illusion Equipment (Bound) Enchantment>";
+	end;
+}

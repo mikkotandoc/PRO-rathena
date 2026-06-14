@@ -4936,6 +4936,15 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 			pc_bonus(sd, SP_ATK_RATE, sc->getSCE(SC_SHRIMP)->val2);
 			pc_bonus(sd, SP_MATK_RATE, sc->getSCE(SC_SHRIMP)->val2);
 		}
+		if (sc->getSCE(SC_VIGOR)) {
+			int32 lv = sc->getSCE(SC_VIGOR)->val1;
+
+			// Melee physical damage bonus (kRO: +115% at Lv1, +15% per level)
+			sd->bonus.short_attack_atk_rate += 100 + lv * 15;
+			// Extra damage vs Demi-Human and Angel (kRO: +10% per level)
+			pc_bonus2(sd, SP_ADDRACE, RC_DEMIHUMAN, lv * 10);
+			pc_bonus2(sd, SP_ADDRACE, RC_ANGEL, lv * 10);
+		}
 		if (sc->getSCE(SC_INCMATKRATE))
 			pc_bonus(sd, SP_MATK_RATE, sc->getSCE(SC_INCMATKRATE)->val1);
 		if (sc->getSCE(SC_MINDBREAKER))
@@ -12841,21 +12850,6 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		case SC_VIGOR:
 			val2 = 100 - 10 * (val1 - 1); // HP consumption with each attack is reduced by skill lvl
 			val2 = max(val2, 0);
-#ifdef MAP_SERVER
-			if (sd != nullptr) {
-				// General Damage: +115% at Lv1, +15% per level up to +250% at Lv10
-				int general_damage = 100 + (val1 * 15);
-				sd->bonus.atk_rate += general_damage;
-				sd->bonus.matk_rate += general_damage;
-
-				// Racial Damage: +10% per level
-				int race_bonus = val1 * 10;
-				sd->bonus.add_race[RC_DEMIHUMAN] += race_bonus;
-				sd->bonus.add_race[RC_ANGEL] += race_bonus;
-				sd->bonus.add_magic_race[RC_DEMIHUMAN] += race_bonus;
-				sd->bonus.add_magic_race[RC_ANGEL] += race_bonus;
-			}
-#endif
 			break;
 		case SC_POWERFUL_FAITH:
 			val2 = 5 + 5 * val1;// ATK Increase

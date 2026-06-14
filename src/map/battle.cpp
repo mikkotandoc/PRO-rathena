@@ -7395,15 +7395,6 @@ enum damage_lv battle_weapon_attack(block_list* src, block_list* target, t_tick 
 		if (sc->getSCE(SC_GIANTGROWTH) && (wd.flag&BF_SHORT) && rnd()%100 < sc->getSCE(SC_GIANTGROWTH)->val2 && !is_infinite_defense(target, wd.flag) && !vellum_damage)
 			wd.damage += wd.damage * 150 / 100; // 2.5 times damage
 
-		if( sc->getSCE( SC_VIGOR ) && ( wd.flag&BF_SHORT ) && !is_infinite_defense( target, wd.flag ) && !vellum_damage ){
-			int32 mod = 100 + sc->getSCE(SC_VIGOR)->val1 * 15;
-
-			if (tstatus->race == RC_DEMIHUMAN || tstatus->race == RC_ANGEL)
-				mod += sc->getSCE(SC_VIGOR)->val1 * 10;
-
-			wd.damage += wd.damage * mod / 100;
-		}
-
 		if( sd && battle_config.arrow_decrement && sc->getSCE(SC_FEARBREEZE) && sc->getSCE(SC_FEARBREEZE)->val4 > 0) {
 			int16 idx = sd->equip_index[EQI_AMMO];
 			if (idx >= 0 && sd->inventory.u.items_inventory[idx].amount >= sc->getSCE(SC_FEARBREEZE)->val4) {

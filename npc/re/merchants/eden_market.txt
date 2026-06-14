@@ -3,7 +3,7 @@
 //===== By: ==================================================
 //= Anity99
 //===== Current Version: =====================================
-//= 1.0.4
+//= 1.0.5
 //===== Compatible With: =====================================
 //= rAthena Project
 //===== Description: =========================================
@@ -20,13 +20,54 @@
 //= 1.0.2 Convert to rAthena [Anity99]
 //= 1.0.3 Fix typos and update marketshop [Anity99]
 //= 1.0.4 Fixed item id typo [Everade]
+//= 1.0.5 kRO schedule: Wed 04:00 restock/holiday, 04:00 day roll, Sat 21:00~Sun 24:00 late weekend [PRO]
 //============================================================
 
-// $event_paramk, 0 // Holiday Wednesday
-// $event_paramk, 1 // Monday, Tuesday, Thursday, Friday, Saturday, Sunday
-// $event_paramk, 2 // Friday, Saturday, Sunday
-// $event_paramk, 3 // Saturday, Sunday
-// $event_paramk, 4 // Late Saturday, Sunday
+// $event_paramk schedule (mirrors F_ParaMarketSchedule for debug; NPCs call the function directly)
+// 0 // Wednesday holiday (Wed 04:00 - Thu 04:00)
+// 1 // Mon, Tue, Thu weekdays
+// 2 // Fri-Sun specials (weapons, Mora drinks)
+// 3 // Sat-Sun specials (costume)
+// 4 // Sat 21:00 - Sun 24:00 (Oridecon/Elunium, clock keys, etc.)
+
+// Returns the active Para Market schedule tier (kRO).
+function	script	F_ParaMarketSchedule	{
+	.@hour = gettime(DT_HOUR);
+	.@dow = gettime(DT_DAYOFWEEK);
+
+	// Market day rolls at 04:00 server time.
+	if (.@hour < 4) {
+		switch (.@dow) {
+		case SUNDAY:    .@mday = SATURDAY; break;
+		case MONDAY:    .@mday = SUNDAY; break;
+		case TUESDAY:   .@mday = MONDAY; break;
+		case WEDNESDAY: .@mday = TUESDAY; break;
+		case THURSDAY:  .@mday = WEDNESDAY; break;
+		case FRIDAY:    .@mday = THURSDAY; break;
+		case SATURDAY:  .@mday = FRIDAY; break;
+		default:        .@mday = .@dow; break;
+		}
+	} else
+		.@mday = .@dow;
+
+	// Weekly market holiday (kRO: every Wednesday).
+	if (.@mday == WEDNESDAY)
+		return 0;
+
+	// Mineral coalition weekend special (kRO: Sat 21:00 ~ Sun 24:00).
+	if ((.@dow == SATURDAY && .@hour >= 21) || .@dow == SUNDAY)
+		return 4;
+
+	// Costume shop special (kRO: Sat-Sun).
+	if (.@mday == SATURDAY || .@mday == SUNDAY)
+		return 3;
+
+	// Weapon / Mora drink specials (kRO: Fri-Sun).
+	if (.@mday == FRIDAY || .@mday == SATURDAY || .@mday == SUNDAY)
+		return 2;
+
+	return 1;
+}
 
 function	script	F_CoolDown	{
 	if (@cd_marketshop + getarg(0) > gettimetick(2))
@@ -83,10 +124,9 @@ function	script	F_CoolDown	{
 -	marketshop	red_hugo01	FAKE_NPC,100381:2000000:4,100382:3000000:2,100383:4000000:2,100384:6000000:1,100385:2000000:4,100386:3000000:2,100387:4000000:2
 
 
-// Update Market Shop
+// Update Market Shop (kRO: limited stock restocks on Wed maintenance, 04:00 server time)
 -	script	Update_Shop	-1,{
-OnInit:
-OnClock0000:
+OnWed0400:
 	npcshopupdate "para_coin10",6304,0,1;
 	npcshopupdate "para_coin10",6080,0,1;
 	npcshopupdate "para_coin10",6081,0,1;
@@ -257,32 +297,13 @@ OnClock0000:
 
 -	shop	para_unm01	FAKE_NPC,25231:1000,25232:1000,25233:1000,25377:10000,11616:1400,537:-1,643:-1,10013:-1,10014:-1,6113:-1,6114:-1,6115:-1,6110:-1,6100:-1,6098:-1,6112:-1,6104:-1,6108:-1,6111:-1,6095:-1,7824:-1,6097:-1,6107:-1,6105:-1,6099:-1,6016:-1
 
-// setting map-variable
+// Sync $event_paramk with kRO schedule (NPCs use F_ParaMarketSchedule directly).
 -	script	MV_Eden Market Group	FAKE_NPC,{
 OnInit:
-OnClock0000:
-	switch( gettime(DT_DAYOFWEEK) ) {
-	case WEDNESDAY:
-		$event_paramk = 0;
-		break;
-	case FRIDAY:
-		$event_paramk = 2;
-		break;
-	case SATURDAY:
-		if (gettime(DT_HOUR) > 21)
-			$event_paramk = 4;
-		else
-			$event_paramk = 3;
-		break;
-	case THURSDAY:
-	default:
-		$event_paramk = 1;
-		break;
-	}
-	end;
-
-OnSat2200:
-	$event_paramk = 4;
+OnClock0400:
+OnSat2100:
+OnMon0000:
+	$event_paramk = callfunc("F_ParaMarketSchedule");
 	end;
 }
 
@@ -509,7 +530,7 @@ OnTouch:
 
 // Leria
 paramk,74,15,0	script	Leria#coin	4_M_BIBI,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Leria]";
 		mes "I sell coins that I have collected from alternate dimensions.";
 		mes "Purchase whatever catches your eye.";
@@ -539,7 +560,7 @@ paramk,74,15,0	script	Leria#coin	4_M_BIBI,{
 
 // Heimhunter
 paramk,71,15,3	script	Heimhunter#hei	4_GEFFEN_11,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Heimhunter]";
 		mes "Ah, are you the customer that wants 'that' from the ancient castle?";
 		mes "I can only get one per day, but I will sell it.";
@@ -566,7 +587,7 @@ paramk,71,15,3	script	Heimhunter#hei	4_GEFFEN_11,{
 
 // Zephet
 paramk,68,15,0	script	Zephet#key	4_M_HUMERCHANT,{
-	if ($event_paramk > 3) {
+	if (callfunc("F_ParaMarketSchedule") > 3) {
 		mes "[Zephet]";
 		mes "Do you need keys?";
 		mes "I may have some extra keys for the clock tower?..";
@@ -605,7 +626,7 @@ paramk,72,33,0	script	[Strong Friends]#wp00	HIDDEN_NPC,{
 
 // Miffy
 paramk,65,31,3	script	Miffy#wp01	4_F_LGTGIRL,{
-	if ($event_paramk > 1) {
+	if (callfunc("F_ParaMarketSchedule") > 1) {
 		mes "[Miffy]";
 		mes "A limited collection, only available on fiery Friday, Saturday and Sunday!";
 		mes "We offer an assortment of ancient weapons that adventurers have retrieved from dungeons!";
@@ -705,7 +726,7 @@ paramk,84,33,3	script	[Handsome Friends]#cst00	HIDDEN_NPC,{
 
 // Minho Doh
 paramk,90,31,3	script	Minho Doh#cst01	4W_M_01,{
-	if ($event_paramk > 2) {
+	if (callfunc("F_ParaMarketSchedule") > 2) {
 		mes "[Minho Doh]";
 		mes "Limited item collection, only available on weekends!";
 		mes "Only one item. If you want it, purchase quickly! You know the drill.";
@@ -780,7 +801,7 @@ paramk,96,33,3	script	[Meds for Pharma]#ptn00	HIDDEN_NPC,{
 
 // Head Pharmacist
 paramk,100,30,3	script	Head Pharmacist#ptn01	4_F_SCIENCE,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Head Pharmacist]";
 		mes "Potent poisons that will knock you out with one sip, meds that will protect your body and spirit, meds that will temporarily grant supernatural speed.";
 		mes "We have them all.";
@@ -850,7 +871,7 @@ paramk,106,32,3	script	Johanna#ptn02	4_M_BRZ_JACI,{
 
 // Wyn, independent contractor || Name is too long
 paramk,106,27,3	script	Brewer Wyn#ptn03	4_M_ALCHE_A,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Wyn]";
 		mes "..Hello...";
 		mes "This is 'For Meds Pharmacists'....";
@@ -897,7 +918,7 @@ paramk,108,33,3	script	[WeHaveEverything]#itm00	HIDDEN_NPC,{
 
 // Is-this-your-lucky-day Napeed#itm01
 paramk,114,30,3	script	Lucky Day Napeed#itm01	4_F_03,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Napeed]";
 		mes "Thank you for visiting during the weekend sale.";
 		mes "100 random item packages, sold on weekends only! Only one hundred available!";
@@ -925,7 +946,7 @@ paramk,114,30,3	script	Lucky Day Napeed#itm01	4_F_03,{
 
 // Parayo
 paramk,118,31,3	script	Manager Parayo#itm02	4_F_KHELLISIA,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Parayo]";
 		mes "Thank you for coming to 'We-Have-Everything'.";
 		mes "We sell assorted elemental quivers and traps.";
@@ -977,7 +998,7 @@ paramk,122,33,3	script	[Malangdonya]#seed00	HIDDEN_NPC,{
 
 // Whiteberry
 paramk,126,34,3	script	Whiteberry#seed01	4_CAT_SAILOR1,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Whiteberry]";
 		mes "Purr~ Welcome.";
 		mes "The Catpaw merchant group is pleased to welcome you. We sell special products from Malangdo, purr~";
@@ -1012,7 +1033,7 @@ paramk,126,34,3	script	Whiteberry#seed01	4_CAT_SAILOR1,{
 
 // Blackphone
 paramk,129,33,3	script	Blackphone#seed02	4_M_MERCAT2,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Blackphone]";
 		mes "Meow~ Welcome";
 		mes "Meow~ The Malangdonya Catpaw merchant group welcomes you.";
@@ -1311,7 +1332,7 @@ paramk,75,86,3	script	Pomegranate#mora01	4_F_RAFLE_PK,{
 
 // Cocktail Master
 paramk,65,86,3	script	Cocktail Master#mora01	4_M_RAFLE_VI,{
-	if ($event_paramk > 1) {
+	if (callfunc("F_ParaMarketSchedule") > 1) {
 		mes "[Cocktail Master]";
 		mes "Welcome to Mora Cafe.";
 		mes "We offer fruits and drinksfrom Mora.";
@@ -1338,9 +1359,9 @@ paramk,65,86,3	script	Cocktail Master#mora01	4_M_RAFLE_VI,{
 
 
 // Forge
-// Hans of the miner coalition
+// Hans of the miner coalition (kRO: basic ores daily except Wednesday)
 paramk,49,103,3	script	Hans #ref01	1_M_SIGNMCNT,{
-	if ($event_paramk > 3) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Hans]";
 		mes "We sell metal ores mined by our coalition.";
 		mes "If you need iron, steel, coal, or iron ores, look around.";
@@ -1368,7 +1389,7 @@ paramk,49,103,3	script	Hans #ref01	1_M_SIGNMCNT,{
 
 // Dus the Smith
 paramk,53,104,3	script	Dus the Smith#ref02	2_M_OLDBLSMITH,{
-	if ($event_paramk > 3) {
+	if (callfunc("F_ParaMarketSchedule") > 3) {
 		mes "[Dus the Smith]";
 		mes "Oridecon, Elunium, and Anvils here.";
 		mes "Not a lot, but handcrafted, you'll see.";
@@ -1615,7 +1636,7 @@ paramk,63,98,3	script	[Rain-of-Gems]#jw	HIDDEN_NPC,{
 
 // Aurora
 paramk,69,102,3	script	Aurora#jew01	4_F_02,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Aurora]";
 		mes "Welcome~";
 		mes "This is 'Rain of Gems'. Our items range from pure gold to uncut gemstones like rosestone!";
@@ -1674,7 +1695,7 @@ paramk,73,98,3	script	[Alchemical Cat]#alc00	HIDDEN_NPC,{
 
 // Dye the Alchemist
 paramk,75,102,3	script	Dye the Alchemist#alc01	4_M_ALCHE_C,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Dye the Alchemist]";
 		mes "Reagents for alchemy!";
 		mes "We sell Alcohol, Karvodailnirol, and Detrimindexta!";
@@ -1702,7 +1723,7 @@ paramk,75,102,3	script	Dye the Alchemist#alc01	4_M_ALCHE_C,{
 
 // Earl the Alchemist
 paramk,80,104,3	script	Earl the Alchemist#alc02	4_TOWER_16,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Earl the Alchemist]";
 		mes "Ingredients to make reagents, potions, ";
 		mes "and elemental stones for magical experiements, all sold here!";
@@ -1758,7 +1779,7 @@ paramk,83,98,3	script	[Manbok Groceries]#fod00	HIDDEN_NPC,{
 
 // Manbok
 paramk,87,101,3	script	Manbok#fod01	1_M_03,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Manbok]";
 		mes "Welcome.";
 		mes "If you need cooking ingredients, you have come to the right place.";
@@ -1819,7 +1840,7 @@ paramk,93,98,3	script	Ma-Ma-Ma-Ma#mag	HIDDEN_NPC,{
 
 // Madoha
 paramk,95,102,3	script	Madoha#mag01	4_M_SAGE_A,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Madoha]";
 		mes "Welcome.";
 		mes "This is Ma-Ma-Ma-Ma the Magical Store, run by the Ma brothers, helping non-Mages use magic.";
@@ -1866,7 +1887,7 @@ paramk,95,102,3	script	Madoha#mag01	4_M_SAGE_A,{
 
 // Magiha
 paramk,100,102,3	script	Magiha#mag02	4_M_SAGE_C,{
-	if ($event_paramk > 0) {
+	if (callfunc("F_ParaMarketSchedule") > 0) {
 		mes "[Magiha]";
 		mes "Welcome tooooooo.";
 		mes "Ma-Ma-Ma-Ma, the Magical Store.";
@@ -2162,7 +2183,7 @@ paramk,130,98,3	script	Mist the Hunter#unm03	4_M_JOB_HUNTER,{
 
 // Instance Seller
 paramk,119,102,3	script	Manager Parayo	679,{
-	if ($event_paramk > 3) {
+	if (callfunc("F_ParaMarketSchedule") > 3) {
     		mes "[Manager Parayo]";
 		mes "Welcome, adventurer! The market stalls are open.";
 		mes "I source specialized instance loot from across the kingdom.";

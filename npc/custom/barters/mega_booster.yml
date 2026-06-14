@@ -1,0 +1,74 @@
+# Booster Coin promotional exchange (Centro - mega00)
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: mega00
+    Items:
+      - Index: 0
+        Item: Booster_Hat_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 50
+      - Index: 1
+        Item: Booster_Back_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 50
+      - Index: 2
+        Item: Metal_W_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+      - Index: 3
+        Item: Booster_W_Ticket
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+      - Index: 4
+        Item: Booster_W_Up_3
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 5
+        Item: Boost_C_Enchant_1
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 6
+        Item: Boost_C_Enchant_2
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 20
+      - Index: 7
+        Item: Memento_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 150
+      - Index: 8
+        Item: P_Memento_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 300
+      - Index: 9
+        Item: EP17_1_A_Ticket
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 10
+        Item: E_ILL_Up
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5

@@ -7837,10 +7837,11 @@ Body:
     Icon: EFST_VIGOR
     DurationLookup: DK_VIGOR
     CalcFlags:
-      All: true
+      Watk: true
     Flags:
       BlEffect: true
       DisplayPc: true
+      SendVal1: true
   - Status: Deadly_Defeasance
     Icon: EFST_DEADLY_DEFEASANCE
     DurationLookup: AG_DEADLY_PROJECTION
