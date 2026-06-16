@@ -4,6 +4,7 @@
 #include "tetravortex.hpp"
 
 #include "map/pc.hpp"
+#include "map/skill.hpp"
 #include "map/status.hpp"
 
 // WL_TETRAVORTEX
@@ -13,6 +14,9 @@ SkillTetraVortex::SkillTetraVortex() : SkillImpl(WL_TETRAVORTEX) {
 void SkillTetraVortex::castendDamageId(block_list *src, block_list *target, uint16 skill_lv, t_tick tick, int32& flag) const {
 	status_change *sc = status_get_sc(src);
 	map_session_data* sd = BL_CAST(BL_PC, src);
+
+	if (skill_block_gtb_magic(src, target, getSkillId(), skill_lv, tick))
+		return;
 
 	if (sd == nullptr) { // Monster usage
 		uint8 i = 0;

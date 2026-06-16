@@ -2678,6 +2678,30 @@ void skill_attack_blow(block_list *src, block_list *dsrc, block_list *target, ui
 	clif_fixpos( *target );
 }
 
+/**
+ * Block magic skills on targets with full magic immunity (e.g. Golden Thief Bug card).
+ * @return true if the skill was blocked and the miss effect was displayed
+ */
+bool skill_block_gtb_magic(block_list *src, block_list *bl, uint16 skill_id, uint16 skill_lv, t_tick tick)
+{
+	if (!skill_id || skill_id == AG_DEADLY_PROJECTION || skill_get_type(skill_id) != BF_MAGIC)
+		return false;
+
+	if (skill_get_inf2(skill_id, INF2_IGNOREGTB))
+		return false;
+
+	if (bl->type != BL_PC || status_isimmune(bl) != 100)
+		return false;
+
+	sc_type sct = skill_get_sc(skill_id);
+
+	if (sct != SC_NONE)
+		status_change_end(bl, sct);
+
+	clif_skill_damage( *src, *bl, tick, status_get_amotion(src), status_get_dmotion(bl), 0, 1, skill_id, skill_lv, skill_get_hit(skill_id));
+	return true;
+}
+
 /*
  * =========================================================================
  * Does a skill attack with the given properties.
@@ -2716,6 +2740,9 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 	nullpo_ret(src);	//Source is the master behind the attack (player/mob/pet)
 	nullpo_ret(dsrc);	//dsrc is the actual originator of the damage, can be the same as src, or a skill casted by src.
 	nullpo_ret(bl);		//Target to be attacked.
+
+	if ((attack_type & BF_MAGIC) && skill_block_gtb_magic(src, bl, skill_id, skill_lv, tick))
+		return 0;
 
 	if (status_bl_has_mode(bl,MD_SKILLIMMUNE) || (status_get_class(bl) == MOBID_EMPERIUM && !skill_get_inf2(skill_id, INF2_TARGETEMPERIUM)))
 		return 0;
@@ -3833,6 +3860,8 @@ TIMER_FUNC(skill_timerskill){
 				case WL_TETRAVORTEX_WATER:
 				case WL_TETRAVORTEX_WIND:
 				case WL_TETRAVORTEX_GROUND:
+					if (skill_block_gtb_magic(src, target, skl->skill_id, skl->skill_lv, tick))
+						break;
 					clif_skill_nodamage(src,*target,skl->skill_id,skl->skill_lv);
 					skill_attack(BF_MAGIC,src,src,target,skl->skill_id,skl->skill_lv,tick,skl->flag|SD_LEVEL|SD_ANIMATION);
 					if (skl->type >= 3) { // Final Hit
@@ -4197,14 +4226,8 @@ int32 skill_castend_damage_id (block_list* src, block_list *bl, uint16 skill_id,
 	if (status_isdead(*bl))
 		return 1;
 
-	if (skill_id && skill_id != AG_DEADLY_PROJECTION && skill_get_type(skill_id) == BF_MAGIC && status_isimmune(bl) == 100)
-	{	//GTB makes all targetted magic display miss with a single bolt.
-		sc_type sct = skill_get_sc(skill_id);
-		if(sct != SC_NONE)
-			status_change_end(bl, sct);
-		clif_skill_damage( *src, *bl, tick, status_get_amotion(src), status_get_dmotion(bl), 0, 1, skill_id, skill_lv, skill_get_hit(skill_id));
+	if (skill_block_gtb_magic(src, bl, skill_id, skill_lv, tick))
 		return 1;
-	}
 
 	sc = status_get_sc(src);
 	tsc = status_get_sc(bl);

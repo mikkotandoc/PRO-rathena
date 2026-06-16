@@ -22491,11 +22491,26 @@ void clif_ping( map_session_data* sd ){
 		return;
 	}
 
+	sd->ping_sent_tick = gettick();
+
 	PACKET_ZC_PING_LIVE p = {};
 
 	p.packetType = HEADER_ZC_PING_LIVE;
 
 	clif_send( &p, sizeof( p ), sd, SELF );
+#endif
+}
+
+void clif_parse_ping_live( int32 fd, map_session_data *sd ){
+#if PACKETVER_MAIN_NUM >= 20190227 || PACKETVER_RE_NUM >= 20190220 || PACKETVER_ZERO_NUM >= 20190220
+	nullpo_retv( sd );
+
+	(void)fd;
+
+	if( sd->ping_sent_tick > 0 ){
+		sd->ping = static_cast<int32>( DIFF_TICK( gettick(), sd->ping_sent_tick ) );
+		sd->ping_sent_tick = 0;
+	}
 #endif
 }
 

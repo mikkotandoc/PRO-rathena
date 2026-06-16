@@ -1944,7 +1944,7 @@
 #endif
 
 #if PACKETVER_MAIN_NUM >= 20190227 || PACKETVER_RE_NUM >= 20190220 || PACKETVER_ZERO_NUM >= 20190220
-	parseable_packet( HEADER_CZ_PING_LIVE, sizeof( struct PACKET_CZ_PING_LIVE ), clif_parse_dull, 0 );
+	parseable_packet( HEADER_CZ_PING_LIVE, sizeof( struct PACKET_CZ_PING_LIVE ), clif_parse_ping_live, 0 );
 #endif
 
 #if PACKETVER_MAIN_NUM >= 20190522 || PACKETVER_RE_NUM >= 20190522 || PACKETVER_ZERO_NUM >= 20190515

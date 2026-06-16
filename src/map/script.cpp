@@ -10498,6 +10498,37 @@ BUILDIN_FUNC(getgmlevel)
 	return SCRIPT_CMD_SUCCESS;
 }
 
+/// Sends a ping request to the attached player.
+///
+/// requestping();
+BUILDIN_FUNC(requestping)
+{
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	clif_ping( sd );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/// Returns the last measured round-trip latency in milliseconds.
+/// Returns -1 if no measurement is available yet.
+///
+/// getping();
+BUILDIN_FUNC(getping)
+{
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, sd->ping );
+	return SCRIPT_CMD_SUCCESS;
+}
+
 /// Returns the group ID of the player.
 ///
 /// getgroupid({<char_id>}) -> <int>
@@ -28199,6 +28230,8 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(basicskillcheck,""),
 	BUILDIN_DEF(getgmlevel,"?"),
 	BUILDIN_DEF(getgroupid,"?"),
+	BUILDIN_DEF(requestping,""),
+	BUILDIN_DEF(getping,""),
 	BUILDIN_DEF(end,""),
 	BUILDIN_DEF(checkoption,"i?"),
 	BUILDIN_DEF(setoption,"i??"),

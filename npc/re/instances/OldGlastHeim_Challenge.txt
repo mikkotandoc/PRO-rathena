@@ -28,23 +28,23 @@ function	script	F_OGHCM_Reward	{
 
 	.@circlet_min = 1 + (.@level / 3);
 	.@circlet_max = min(.@level + 4, 10);
-	getitem 25864, rand(.@circlet_min, .@circlet_max); // Sealed Temporal Circlet
+	getitem 25864, rand(.@circlet_min, .@circlet_max); // S_Circlet_Of_Time
 
 	.@frag_max = 15 + (.@level * 3);
-	getitem 25867, rand(1, .@frag_max); // Temporal Fragment
+	getitem 25867, rand(1, min(.@frag_max, 30)); // Fragment_Of_Time
 
 	if (.@level >= 3)
-		getitem 25865, rand(1, min(.@level - 1, 7)); // Temporal Gemstone
+		getitem 25865, rand(1, min(.@level - 1, 7)); // Jewel_Of_Time_Ore
 	if (.@level >= 5)
-		getitem 25866, rand(1, min(.@level, 28)); // Temporal Spell
+		getitem 25866, rand(1, min(.@level, 28)); // Spell_Of_Time
 	if (.@bonus_root)
-		getitem 25864, 1;
+		getitem 25864, 1;// S_Circlet_Of_Time
 	if (.@bonus_slave)
-		getitem 25864, 1;
+		getitem 25864, 1;// S_Circlet_Of_Time
 	if (.@bonus_clean)
-		getitem 25864, 1;
+		getitem 25864, 1;// S_Circlet_Of_Time
 	if (.@level >= 8)
-		getitem 25866, 1;
+		getitem 25866, 1;// Spell_Of_Time
 	return;
 }
 
@@ -54,6 +54,16 @@ glast_01,139,285,5	script	Oscar#oghcm	4_ED_OSCAR,{
 		mes "This contaminated time zone is too dangerous for you.";
 		mes "Come back after reaching Base Level 170.";
 		close;
+	}
+	if (!#OGHCM_Unlocked) {
+		#OGHCM_Unlocked = 1;
+		mes "[Oscar]";
+		mes "Since you've found this time gap, I'll introduce you to Huginn and Muninn nearby.";
+		mes "They can craft Temporal Circlets, exchange cards, and trade Royal or Guardian weapons.";
+		next;
+		mes "[Oscar]";
+		mes "You don't need to clear the instance to use their services. Walk around and they'll assist you.";
+		next;
 	}
 	.@md_name$ = "Old Glast Heim (Challenge Mode)";
 	.@max_level = callfunc("F_OGHCM_MaxLevel");

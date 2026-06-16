@@ -1,15 +1,19 @@
+// Player ping command - type @ping in chat to check your latency.
 -	script	ping_cmd	-1,{
-
-// When a player types !ping or @ping in the chat
 OnCall:
-	// Calculate the delay using the internal server tick
-	// Note: This measures the round-trip from the client's last packet
-	dispbottom "Your current latency is: " + (gettimetick(2) % 1000) + "ms";
+	.@ms = getping();
+	if( .@ms < 0 ){
+		requestping();
+		sleep2 300;
+		.@ms = getping();
+	}
+	if( .@ms < 0 )
+		dispbottom "Unable to measure your latency. Please try again.";
+	else
+		dispbottom "Your current latency is: " + .@ms + " ms.";
 	end;
 
 OnInit:
-	// This binds the command to the script
-	// Change "ping" to "latency" or whatever you prefer
-	bindatcmd "ping", "ping_cmd::OnCall";
+	bindatcmd "ping", strnpcinfo(0)+"::OnCall", 0, 99;
 	end;
 }

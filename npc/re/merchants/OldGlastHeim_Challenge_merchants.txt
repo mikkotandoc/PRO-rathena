@@ -1,0 +1,198 @@
+//===== rAthena Script =======================================
+//= Old Glast Heim Challenge Mode - Merchants
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= kRO/iRO Glast Heim Challenge Mode exchange NPCs.
+//= Huginn (circlet/card), Muninn (weapons), Oscar (enchant).
+//===== Changelog: ===========================================
+//= 1.0 Initial release. [PRO-rathena]
+//============================================================
+
+function	script	F_OGHCM_UnlockCheck	{
+	if (#OGHCM_Unlocked)
+		return 1;
+	mes "[Notice]";
+	mes "You must speak with Oscar about the Challenge Mode time gap before using these services.";
+	close;
+}
+
+function	script	F_OGHCM_SealedConvert	{
+	if (countitem(25864) < 1) {// S_Circlet_Of_Time
+		mes "You need a ^0000CDSealed Temporal Circlet^000000.";
+		return 0;
+	}
+	if (checkweight(1201,1) == 0) {
+		mes "Your bag is too full. Please free up some space.";
+		return 0;
+	}
+	delitem 25864,1;
+	.@conversions = 1;
+	.@roll = rand(1,1000);
+	if (.@roll <= 611)
+		.@conversions = 1;
+	else if (.@roll <= 984)
+		.@conversions = 2;
+	else if (.@roll <= 999)
+		.@conversions = 3;
+	else
+		.@conversions = 4;
+	for (.@i = 0; .@i < .@conversions; .@i++) {
+		.@reward = rand(1,100000);
+		if (.@reward <= 78930) {
+			switch (rand(1,4)) {
+			case 1: getitem 25867,4; break;// Fragment_Of_Time
+			case 2: getitem 25867,8; break;
+			case 3: getitem 25867,12; break;
+			default: getitem 25867,16; break;
+			}
+		}
+		else if (.@reward <= 84817)
+			getitem 25865,1;// Jewel_Of_Time_Ore
+		else if (.@reward <= 86152)
+			getitem 25865,2;
+		else if (.@reward <= 86486)
+			getitem 25865,3;
+		else if (.@reward <= 86557)
+			getitem 25865,4;
+		else if (.@reward <= 86757)
+			getitem 25866,1;// Spell_Of_Time
+		else if (.@reward <= 86827)
+			getitem 25866,2;
+		else if (.@reward <= 86894)
+			getitem 25866,3;
+		else
+			getitem 25866,4;
+	}
+	return 1;
+}
+
+glast_01,141,291,3	script	Huginn#oghcm	4_M_SAGE_C,{
+	disable_items;
+	if (MaxWeight - Weight < 1000) {
+		mes "[Huginn]";
+		mes "Your bag is too heavy. Reduce some weight and come back.";
+		close;
+	}
+	callfunc("F_OGHCM_UnlockCheck");
+	mes "[Huginn]";
+	mes "I can exchange your temporal materials for ^0000CDTemporal Circlets^000000, cards, or break down ^0000CDSealed Temporal Circlets^000000.";
+	next;
+	switch( select( "Exchange Temporal Circlet", "Exchange Cards", "Sealed Circlet Conversion", "Cancel" ) ) {
+	case 1:
+		mes "[Huginn]";
+		mes "Each Temporal Circlet costs ^0000CD5 Sealed Temporal Circlets^000000.";
+		close2;
+		callshop "barter_ogh_huginn_circlet";
+		end;
+	case 2:
+		mes "[Huginn]";
+		mes "Mutated White Knight Card: ^0000CD50 Temporal Spell^000000";
+		mes "Mutated Khalitzburg Card: ^0000CD70 Temporal Spell^000000";
+		close2;
+		callshop "barter_ogh_huginn_cards";
+		end;
+	case 3:
+		mes "[Huginn]";
+		mes "Trade ^0000CD1 Sealed Temporal Circlet^000000 for random temporal materials.";
+		mes "You may receive up to four conversion rewards at once.";
+		next;
+		if (select( "Cancel", "Convert" ) == 1) {
+			mes "[Huginn]";
+			mes "Come back whenever you want.";
+			close;
+		}
+		if (callfunc("F_OGHCM_SealedConvert") == 0)
+			close;
+		mes "[Huginn]";
+		mes "The sealed circlet has been converted.";
+		close;
+	case 4:
+		close;
+	}
+	end;
+}
+
+glast_01,139,291,3	script	Muninn#oghcm	4_M_SAGEOLD,{
+	disable_items;
+	if (MaxWeight - Weight < 1000) {
+		mes "[Muninn]";
+		mes "Your bag is too heavy. Reduce some weight and come back.";
+		close;
+	}
+	callfunc("F_OGHCM_UnlockCheck");
+	mes "[Muninn]";
+	mes "I trade ^0000CDRoyal and Guardian weapons^000000 for temporal materials from the Challenge Mode.";
+	next;
+	switch( select( "Select a weapon (10 Temporal Spell)", "Random weapon (2 Gemstone, 20 Fragment)", "Cancel" ) ) {
+	case 1:
+		mes "[Muninn]";
+		mes "Choose the weapon you want. Each costs ^0000CD10 Temporal Spell^000000.";
+		close2;
+		callshop "barter_ogh_muninn_weapon";
+		end;
+	case 2:
+		if (countitem(25865) < 2) {// Jewel_Of_Time_Ore
+			mes "[Muninn]";
+			mes "You need ^0000CD2 Temporal Gemstone^000000.";
+			close;
+		}
+		if (countitem(25867) < 20) {// Fragment_Of_Time
+			mes "[Muninn]";
+			mes "You need ^0000CD20 Temporal Fragment^000000.";
+			close;
+		}
+		if (checkweight(1201,1) == 0) {
+			mes "[Muninn]";
+			mes "Your bag is too full. Please free up some space.";
+			close;
+		}
+		delitem 25865,2;
+		delitem 25867,20;
+		setarray .@weapon[0],
+			1336, 1870, 2060, 13347, 18191, 18198, 21055, 26165, 26166, 26172,
+			26216, 28046, 28141, 28636, 28774, 28775, 28776, 32027, 32111, 32304,
+			32353, 32401, 32402, 32403;
+		getitem .@weapon[ rand( getarraysize(.@weapon) ) ],1;
+		mes "[Muninn]";
+		mes "Here is your weapon. Use it well.";
+		close;
+	case 3:
+		close;
+	}
+	end;
+}
+
+glast_01,137,291,3	script	Oscar#oghcm_enchant	4_ED_OSCAR,{
+	disable_items;
+	if (MaxWeight - Weight < 1000) {
+		mes "[Oscar]";
+		mes "Your bag is too heavy. Reduce some weight and come back.";
+		close;
+	}
+	callfunc("F_OGHCM_UnlockCheck");
+	mes "[Oscar]";
+	mes "I can enchant your equipped ^0000CDTemporal Circlet^000000 using materials from the Challenge Mode.";
+	next;
+	switch( select( "Temporal Circlet Enchantment", "How does it work?", "Cancel" ) ) {
+	case 1:
+		mes "[Oscar]";
+		mes "Make sure the Temporal Circlet is ^0000FFequipped^000000 before continuing.";
+		close2;
+		item_enchant(169);
+		end;
+	case 2:
+		mes "[Oscar]";
+		mes "4th slot: ^0000CD10 Temporal Fragment^000000";
+		mes "3rd slot: ^0000CD20 Temporal Fragment^000000 or ^0000CD2 Temporal Gemstone^000000 (Temporal Jewel)";
+		mes "2nd slot: ^0000CD2 Temporal Spell^000000";
+		next;
+		mes "[Oscar]";
+		mes "Special 2nd-slot enchants can be leveled with additional Temporal Spell.";
+		mes "Reset costs ^0000CD500,000 zeny^000000 with a 70% success rate.";
+		mes "On failure the circlet may be destroyed.";
+		close;
+	case 3:
+		close;
+	}
+	end;
+}

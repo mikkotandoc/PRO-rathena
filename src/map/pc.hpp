@@ -954,6 +954,9 @@ public:
 
 	s_shield_heartbeat shield;
 
+	t_tick ping_sent_tick = 0;
+	int32 ping = -1;
+
 	std::vector<uint32> party_booking_requests;
 
 	void update_look( _look look );

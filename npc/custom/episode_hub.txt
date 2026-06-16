@@ -17,7 +17,7 @@ prontera,165,175,3	script	Episode Guide	4_F_EDEN_OFFICER,{
 		switch( select( "Cor Operation Base (sp_cor)", "Rudus Facility (sp_rudus)", "OS Occupation Area (sp_os)", "Lighthalzen (story)", "Cancel" ) ) {
 		case 1:
 			mes "Warping to Cor Operation Base...";
-			mes "NPCs: Grace Operator, Butterfly Merchant, RS26 Enchanter, RS26-1 (Bound), Elyumina";
+			mes "NPCs: Grace Operator (equipment + enchant), Butterfly Merchant, RS26 Enchanter, RS26-1 (Bound), Elyumina";
 			close2;
 			warp "sp_cor", 136, 156;
 			end;

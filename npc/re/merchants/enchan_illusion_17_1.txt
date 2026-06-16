@@ -7,6 +7,7 @@
 //= 1.0 Initial release [crazyarashi]
 //= 1.1 Optimizations and cleanup [Everade]
 //= 1.2 iRO conversion for 2 NPCs [Capuche, Everade]
+//= 1.3 Added Grace equipment enchant menu and permit exchange [PRO-rathena]
 //============================================================
 
 sp_cor,152,158,4	script	Butterfly Merchant#sp_cor	4_M_ORIENT01,{
@@ -19,11 +20,75 @@ sp_cor,152,158,4	script	Butterfly Merchant#sp_cor	4_M_ORIENT01,{
 }
 
 sp_cor,136,156,3	script	Grace Operator#ext162	4_M_REPAIR,{
+	if (checkweight(1201,3) == 0) {
+		mes "[Grace Operator]";
+		mes "Your bag is too full. Please free up some space and try again.";
+		close;
+	}
+	disable_items;
 	mes "[Grace Operator]";
 	mes "Hello.";
-	mes "We have ^4d4dffGrace^000000 equipment that can be exchanged for " + mesitemlink( 25723 ) + ".";
-	mes "I will guide you to exchange items according to your job.";
-	close2;
+	mes "We offer ^4d4dffGrace^000000 equipment in exchange for " + mesitemlink(25669) + " and " + mesitemlink(25723) + ".";
+	mes "Grace armor and garments can also be enchanted with modification permits.";
+	next;
+	switch( select( "Exchange Grace Equipment", "Grace Equipment Enchantment", "Cancel" ) ) {
+	case 1:
+		mes "[Grace Operator]";
+		mes "I will guide you to exchange items according to your job.";
+		close2;
+		callsub( S_GraceShop );
+		end;
+	case 2:
+		if (BaseLevel < 150) {
+			mes "[Grace Operator]";
+			mes "Grace modification permits require Base Level 150 or higher.";
+			close;
+		}
+		mes "[Grace Operator]";
+		mes "Grace armor and garments can be enchanted with ^4d4dffModification Permits^000000.";
+		mes "Each permit applies ^0000CDtwo random option enchants^000000 and can overwrite previous ones.";
+		next;
+		mes "[Grace Operator]";
+		mes "After receiving a permit, use it on the Grace equipment you have equipped.";
+		mes "Which permit would you like? Each costs 10 " + mesitemlink(25669) + ".";
+		next;
+		setarray .@permit[0],100133,100134,100137,100138;
+		.@s = select(
+			"Grace Physical Modification Permit (Garment)",
+			"Grace Magical Modification Permit (Garment)",
+			"Grace Physical Modification Permit (Armor)",
+			"Grace Magical Modification Permit (Armor)",
+			"Cancel"
+		) - 1;
+		if (.@s == 4) {
+			mes "[Grace Operator]";
+			mes "Come back whenever you need a modification permit.";
+			close;
+		}
+		if (countitem(25669) < 10) {
+			mes "[Grace Operator]";
+			mes "You need 10 " + mesitemlink(25669) + " for this permit.";
+			close;
+		}
+		if (checkweight(.@permit[.@s],1) == 0) {
+			mes "[Grace Operator]";
+			mes "Your bag is too full. Please free up some space and try again.";
+			close;
+		}
+		delitem 25669,10; // EP17_1_EVT02
+		getitem .@permit[.@s],1;
+		mes "[Grace Operator]";
+		mes "Here is your " + mesitemlink(.@permit[.@s], false) + ".";
+		mes "Equip the Grace item you want to modify, then use the permit from your inventory.";
+		close;
+	case 3:
+		mes "[Grace Operator]";
+		mes "Come back anytime.";
+		close;
+	}
+	end;
+
+S_GraceShop:
 	switch( eaclass() & EAJ_THIRDMASK ) {
 	case EAJ_RUNE_KNIGHT:
 		.@str$ = "JOB_RUNE_KNIGHT";
@@ -100,7 +165,9 @@ sp_cor,136,156,3	script	Grace Operator#ext162	4_M_REPAIR,{
 			.@str$ = "JOB_SOUL_REAPER";
 			break;
 		default:
-			end;
+			mes "[Grace Operator]";
+			mes "Sorry, I don't have Grace equipment available for your job.";
+			close;
 		}
 		break;
 	}

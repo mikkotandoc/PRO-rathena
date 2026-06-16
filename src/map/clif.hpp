@@ -902,6 +902,7 @@ uint32 clif_getip(void);
 uint32 clif_refresh_ip(void);
 uint16 clif_getport(void);
 
+void clif_ping( map_session_data* sd );
 void clif_authok( const map_session_data* sd);
 void clif_authrefuse(int32 fd, uint8 error_code);
 void clif_authfail_fd(int32 fd, int32 type);

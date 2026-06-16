@@ -690,6 +690,7 @@ TIMER_FUNC(skill_blockmerc_end);
 	((id) >= CG_LONGINGFREEDOM && (id) <= CG_TAROTCARD)     || ((id) >= WA_SWING_DANCE && (id) <= WM_UNLIMITED_HUMMING_VOICE))
 
 // Skill action, (return dmg,heal)
+bool skill_block_gtb_magic(block_list *src, block_list *bl, uint16 skill_id, uint16 skill_lv, t_tick tick);
 int64 skill_attack( int32 attack_type, block_list* src, block_list *dsrc,block_list *bl,uint16 skill_id,uint16 skill_lv,t_tick tick,int32 flag );
 int32 skill_attack_area(struct block_list *bl,va_list ap);
 
