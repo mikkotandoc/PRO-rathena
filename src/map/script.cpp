@@ -18866,12 +18866,12 @@ BUILDIN_FUNC(shieldactive)
 		return SCRIPT_CMD_SUCCESS;
 	}
 
-	script_pushint(st, 0);
+	script_pushint(st, sd->shield.active ? 1 : 0);
 	return SCRIPT_CMD_SUCCESS;
 }
 
 /**
- * shieldstart is disabled; shield.dll runs client-side only.
+ * Starts the PRO Anti-Cheat (shield.dll) heartbeat challenge for a player.
  * shieldstart({<char_id>})
  */
 BUILDIN_FUNC(shieldstart)
@@ -18881,6 +18881,7 @@ BUILDIN_FUNC(shieldstart)
 	if (!script_charid2sd(2, sd))
 		return SCRIPT_CMD_FAILURE;
 
+	pc_shield_heartbeat_start(*sd);
 	return SCRIPT_CMD_SUCCESS;
 }
 

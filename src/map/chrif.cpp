@@ -1794,10 +1794,11 @@ int32 chrif_parse(int32 fd) {
 			case 0x2b2f: chrif_bsdata_received(fd); break;
 			case 0x0af9:
 				// Anti-cheat handshake packet; ignored on inter-server links.
-				if( (int32)RFIFOREST( fd ) < packet_len ){
+				// AC_SHIELD_CHALLENGE (login-server): 12 bytes (2+4+4+2).
+				if( (int32)RFIFOREST( fd ) < 12 ){
 					return 0;
 				}
-				RFIFOSKIP( fd, packet_len );
+				RFIFOSKIP( fd, 12 );
 				break;
 			default:
 				ShowError("chrif_parse : unknown packet (session #%d): 0x%x. Disconnecting.\n", fd, cmd);

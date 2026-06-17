@@ -793,11 +793,12 @@ int32 chlogif_parse(int32 fd) {
 			case 0x2735: next = chlogif_parse_updip(fd); break;
 			case 0x2743: next = chlogif_parse_vipack(fd); break;
 			case 0x0af9:
-				// Anti-cheat handshake packet; ignored on inter-server links.
-				if( RFIFOREST( fd ) < 10 ){
+				// AC_SHIELD_CHALLENGE from login-server; ignored on inter-server links.
+				// Packet is 12 bytes: int16 type + uint32 challenge + uint32 interval_ms + uint16 reserved.
+				if( RFIFOREST( fd ) < 12 ){
 					return 0;
 				}
-				RFIFOSKIP( fd, 10 );
+				RFIFOSKIP( fd, 12 );
 				break;
 			default:
 				ShowError("Unknown packet 0x%04x received from login-server, disconnecting.\n", command);

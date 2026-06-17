@@ -314,17 +314,15 @@ static void logclif_shield_send_challenge( int32 fd, struct login_session_data& 
 
 	p.packetType = HEADER_AC_SHIELD_CHALLENGE;
 	p.challenge = sd.shield.challenge;
-	p.interval_ms = 120000;
+	p.interval_ms = 120000; // 120 s; stored by shield.dll as initial heartbeat interval until map overrides
 	p.reserved = 0;
 
 	socket_send( fd, p );
 
-	if( !sd.shield.challenge_sent ){
-		char ip[16];
-
-		ip2str( session[fd]->client_addr, ip );
-		ShowStatus( "Shield handshake: challenge 0x%08x sent to %s (AC_SHIELD_CHALLENGE 0x0af9)\n", sd.shield.challenge, ip );
-	}
+	char ip[16];
+	ip2str( session[fd]->client_addr, ip );
+	ShowStatus( "[Shield][Login] challenge 0x%08x sent to %s (0x0af9, %u bytes, interval_ms=%u)\n",
+	            sd.shield.challenge, ip, (unsigned)sizeof(p), (unsigned)p.interval_ms );
 }
 
 static bool logclif_shield_accept_heartbeat( struct login_session_data& sd, const PACKET_CA_SHIELD_HANDSHAKE& p, const char* ip, int32 fd ){
@@ -336,27 +334,30 @@ static bool logclif_shield_accept_heartbeat( struct login_session_data& sd, cons
 		return true;
 	}
 
+	ShowStatus( "[Shield][Login] 0x0af4 received from %s – version=%u status=%u challenge_recv=0x%08x challenge_expected=0x%08x\n",
+	            ip, (unsigned)p.version, (unsigned)p.status, (unsigned)p.challenge, (unsigned)sd.shield.challenge );
+
 	if( p.version != 1 ){
-		ShowWarning( "Shield handshake: invalid version %u (ip: %s)\n", p.version, ip );
+		ShowWarning( "[Shield][Login] REJECT – invalid version %u (ip: %s)\n", p.version, ip );
 		set_eof( fd );
 		return false;
 	}
 
 	if( p.status != 1 ){
-		ShowWarning( "Shield handshake: failed local scan (ip: %s)\n", ip );
+		ShowWarning( "[Shield][Login] REJECT – failed local scan status=%u (ip: %s)\n", p.status, ip );
 		set_eof( fd );
 		return false;
 	}
 
 	if( p.challenge != sd.shield.challenge ){
-		ShowWarning( "Shield handshake: challenge mismatch (expected 0x%08x, got 0x%08x, ip: %s)\n", sd.shield.challenge, p.challenge, ip );
+		ShowWarning( "[Shield][Login] REJECT – challenge mismatch (expected 0x%08x, got 0x%08x, ip: %s)\n", sd.shield.challenge, p.challenge, ip );
 		set_eof( fd );
 		return false;
 	}
 
 	sd.shield.verified = true;
 	sd.shield.login_hold_notice = false;
-	ShowStatus( "Shield handshake: heartbeat accepted from %s (challenge 0x%08x)\n", ip, p.challenge );
+	ShowStatus( "[Shield][Login] ACCEPTED from %s (challenge 0x%08x verified)\n", ip, p.challenge );
 
 	return true;
 }
@@ -369,6 +370,15 @@ static bool logclif_shield_process_fifo( int32 fd, struct login_session_data& sd
 	char ip[16];
 	uint32 ipl = session[fd]->client_addr;
 	ip2str( ipl, ip );
+
+	const size_t fifo_total = RFIFOREST( fd );
+	if( fifo_total > 0 ){
+		ShowDebug( "[Shield][Login] process_fifo: fd=%d ip=%s fifo_bytes=%zu first_word=0x%04x\n",
+		           fd, ip, fifo_total, (unsigned)RFIFOW( fd, 0 ) );
+	} else {
+		ShowDebug( "[Shield][Login] process_fifo: fd=%d ip=%s FIFO EMPTY (waiting for 0x%04x)\n",
+		           fd, ip, (unsigned)HEADER_CA_SHIELD_HANDSHAKE );
+	}
 
 	while( true ){
 		size_t rest = RFIFOREST( fd );
@@ -423,8 +433,11 @@ static void logclif_shield_keepalive_session( int32 fd, const struct login_sessi
 		return;
 	}
 
-	// Avoid login-server stall_time disconnect while waiting for shield.dll 0x0af4.
-	session[fd]->rdata_tick = 0;
+	// Reset the stall timer so the server doesn't close the connection
+	// while waiting for shield.dll to respond with 0x0af4.
+	session[fd]->rdata_tick = gettick();
+	ShowDebug( "[Shield][Login] keepalive: fd=%d rdata_tick reset (verified=%d challenge_sent=%d)\n",
+	           fd, (int)sd.shield.verified, (int)sd.shield.challenge_sent );
 }
 
 /**
@@ -715,11 +728,9 @@ int32 logclif_parse(int32 fd) {
 		sd->fd = fd;
 		logclif_shield_init( *sd );
 
-		if( login_config.shield_handshake_check && ( RFIFOREST( fd ) < 2 || RFIFOW( fd, 0 ) != 0x2710 ) ){
-			logclif_shield_send_challenge( fd, *sd );
-			sd->shield.challenge_sent = true;
-		}
-
+		// Challenge is deferred until the login packet arrives (see logclif_shield_ensure_challenge).
+		// Sending early is unsafe: shield.dll's pump_socket_recv cannot intercept a challenge that
+		// arrives before the client's send thread has entered perform_post_login_handshake.
 		if( login_config.shield_handshake_check ){
 			logclif_shield_keepalive_session( fd, *sd );
 		}
@@ -749,49 +760,56 @@ int32 logclif_parse(int32 fd) {
 				logclif_parse_reqcharconnec(fd,sd, ip);
 				return 0; // processing will continue elsewhere
 			default:
-				if( command == HEADER_CA_SHIELD_HANDSHAKE ){
-					if( sd->shield.verified ){
-						if( RFIFOREST( fd ) >= sizeof( PACKET_CA_SHIELD_HANDSHAKE ) ){
-							RFIFOSKIP( fd, sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
-						}
-						continue;
-					}
-
-					if( RFIFOREST( fd ) < sizeof( PACKET_CA_SHIELD_HANDSHAKE ) ){
-						break;
-					}
-
-					if( !login_packet_db.handle( fd, *sd ) ){
-						return 0;
+			if( command == HEADER_CA_SHIELD_HANDSHAKE ){
+				ShowDebug( "[Shield][Login] 0x0af4 in parse loop fd=%d verified=%d fifo=%zu\n",
+				           fd, (int)sd->shield.verified, RFIFOREST( fd ) );
+				if( sd->shield.verified ){
+					if( RFIFOREST( fd ) >= sizeof( PACKET_CA_SHIELD_HANDSHAKE ) ){
+						RFIFOSKIP( fd, sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
 					}
 					continue;
 				}
 
-				if( logclif_is_preshield_packet( command ) ){
-					logclif_shield_ensure_challenge( fd, *sd );
-					if( !login_packet_db.handle( fd, *sd ) ){
-						return 0;
-					}
-					continue;
+				if( RFIFOREST( fd ) < sizeof( PACKET_CA_SHIELD_HANDSHAKE ) ){
+					ShowDebug( "[Shield][Login] 0x0af4 partial (%zu < %zu), waiting\n",
+					           RFIFOREST( fd ), sizeof( PACKET_CA_SHIELD_HANDSHAKE ) );
+					break;
 				}
 
-				if( login_config.shield_handshake_check && !sd->shield.verified && logclif_is_login_packet( command ) ){
-					logclif_shield_ensure_challenge( fd, *sd );
-					logclif_shield_process_fifo( fd, *sd );
-					if( !sd->shield.verified ){
-						if( !sd->shield.login_hold_notice ){
-							ShowStatus( "Shield handshake: login deferred from %s, awaiting 0x0af4 heartbeat (pending 0x%04x)\n", ip, command );
-							sd->shield.login_hold_notice = true;
-						}
-						break;
-					}
+				if( !login_packet_db.handle( fd, *sd ) ){
+					return 0;
 				}
+				continue;
+			}
 
+			if( logclif_is_preshield_packet( command ) ){
 				logclif_shield_ensure_challenge( fd, *sd );
 				if( !login_packet_db.handle( fd, *sd ) ){
 					return 0;
 				}
-				break;
+				continue;
+			}
+
+			if( login_config.shield_handshake_check && logclif_is_login_packet( command ) ){
+				// Send challenge so shield.dll can initialise its state.
+				// Do NOT defer login – the map server enforces heartbeats.
+				// Process any 0x0af4 that arrived in the same TCP segment (invalid = disconnect).
+				ShowStatus( "[Shield][Login] Login packet 0x%04x from %s – ensuring challenge (verified=%d)\n",
+				            command, ip, (int)sd->shield.verified );
+				logclif_shield_ensure_challenge( fd, *sd );
+				if( !logclif_shield_process_fifo( fd, *sd ) ){
+					return 0;
+				}
+				if( !sd->shield.verified ){
+					ShowStatus( "[Shield][Login] challenge issued, proceeding with auth (map will enforce)\n" );
+				}
+			}
+
+			logclif_shield_ensure_challenge( fd, *sd );
+			if( !login_packet_db.handle( fd, *sd ) ){
+				return 0;
+			}
+			break;
 		}
 	}
 

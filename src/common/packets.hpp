@@ -653,10 +653,12 @@ struct PACKET_CA_SHIELD_HANDSHAKE {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER( CA_SHIELD_HANDSHAKE, 0x0af4 );
 
+// Login server → client (12 bytes). Different from ZC_SHIELD_CHALLENGE (map, 10 bytes).
+// shield.dll AcShieldChallenge static_assert: sizeof == 12, uint32 interval_ms.
 struct PACKET_AC_SHIELD_CHALLENGE {
 	int16 packetType;
 	uint32 challenge;
-	uint32 interval_ms;
+	uint32 interval_ms; // uint32 — login challenge; map ZC_SHIELD_CHALLENGE uses uint16
 	uint16 reserved;
 } __attribute__((packed));
 DEFINE_PACKET_HEADER( AC_SHIELD_CHALLENGE, 0x0af9 );
