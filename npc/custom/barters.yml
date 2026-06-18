@@ -51,6 +51,5 @@ Footer:
   - Path: npc/re/merchants/barters.yml
     Mode: Renewal
   - Path: npc/custom/barters/mega_booster.yml
-  - Path: npc/custom/barters/centro_weapon_voucher.yml
   - Path: npc/custom/barters/episode_clear.yml
   - Path: npc/custom/barters/cash_coin_costumes.yml
