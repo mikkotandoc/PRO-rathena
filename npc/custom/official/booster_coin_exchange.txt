@@ -1,6 +1,7 @@
 //============================================================
 // Booster Coin Exchange NPCs
 // Centro  - Promotional Item Exchange (prontera)
+// After updating barter data, run @reloadbarterdb or restart map-server.
 // Yves    - Promotional Costume Enchantment (malangdo)
 // RS26-1  - Illusion Equipment (Bound) Enchantment (sp_cor)
 //============================================================
@@ -26,50 +27,21 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 	case 1:
 		mes "[Centro]";
 		mes "Opening the promotional item exchange shop.";
-		close2;
-		callshop "mega00", 1;
-		end;
+		callsub L_OpenShop, "mega00";
 	case 2:
 		mes "[Centro]";
 		mes "Which job class weapons would you like to browse?";
 		next;
 		switch (select("Swordsman Jobs:Merchant Jobs:Thief Jobs:Wizard Jobs:Acolyte Jobs:Archer Jobs:Star Emperor / Soul Link Jobs:Summoner / Ninja Jobs:Novice / Gunslinger Jobs:Cancel")) {
-		case 1:
-			close2;
-			callshop "mega04", 1;
-			end;
-		case 2:
-			close2;
-			callshop "mega05", 1;
-			end;
-		case 3:
-			close2;
-			callshop "mega06", 1;
-			end;
-		case 4:
-			close2;
-			callshop "mega07", 1;
-			end;
-		case 5:
-			close2;
-			callshop "mega08", 1;
-			end;
-		case 6:
-			close2;
-			callshop "mega09", 1;
-			end;
-		case 7:
-			close2;
-			callshop "mega10", 1;
-			end;
-		case 8:
-			close2;
-			callshop "mega11", 1;
-			end;
-		case 9:
-			close2;
-			callshop "mega12", 1;
-			end;
+		case 1:  callsub L_OpenShop, "mega04"; break;
+		case 2:  callsub L_OpenShop, "mega05"; break;
+		case 3:  callsub L_OpenShop, "mega06"; break;
+		case 4:  callsub L_OpenShop, "mega07"; break;
+		case 5:  callsub L_OpenShop, "mega08"; break;
+		case 6:  callsub L_OpenShop, "mega09"; break;
+		case 7:  callsub L_OpenShop, "mega10"; break;
+		case 8:  callsub L_OpenShop, "mega11"; break;
+		case 9:  callsub L_OpenShop, "mega12"; break;
 		case 10:
 			mes "[Centro]";
 			mes "Come back when you have a voucher ready.";
@@ -81,6 +53,11 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 		mes "Come back when you have something to exchange.";
 		close;
 	}
+	end;
+
+L_OpenShop:
+	close2;
+	callshop getarg(0);
 	end;
 
 OnInit:
