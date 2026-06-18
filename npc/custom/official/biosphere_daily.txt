@@ -117,7 +117,8 @@ function	script	F_BiosphereTicket_Info	{
 }
 
 // Quest window markers (matches OngoingQuests.lub 90500-90513)
--	script	BiosphereDailyInfo	-1,{
+// questinfo requires a map-attached NPC (nd->m != -1)
+ba_in01,252,353,0	script	BiosphereDailyInfo#01	-1,{
 OnInit:
 	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90500,HUNTING) == -1 && checkquest(90501,PLAYTIME) == -1");
 	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90502,HUNTING) == -1 && checkquest(90503,PLAYTIME) == -1");
@@ -135,3 +136,5 @@ OnInit:
 	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90512,HUNTING) == 2");
 	end;
 }
+
+ba_in01,237,301,0	duplicate(BiosphereDailyInfo#01)	BiosphereDailyInfo#02	-1
