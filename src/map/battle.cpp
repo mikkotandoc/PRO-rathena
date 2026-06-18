@@ -1966,13 +1966,13 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 			switch (skill_id) {
 				case HN_SHIELD_CHAIN_RUSH:
 				case HN_DOUBLEBOWLINGBASH:
-					damage += damage * 120 / 100; 
+					damage += damage * 70 / 100;
 					break;
 				case HN_MEGA_SONIC_BLOW:
 					damage *= 2;
 					break;
 				case HN_SPIRAL_PIERCE_MAX:
-					damage += damage * 130 / 100; 
+					damage += damage * 100 / 100;
 					break;
 			}
 		}
@@ -2726,6 +2726,22 @@ static int32 battle_range_type(const block_list* src, const block_list* target, 
 			if( sd != nullptr && ( sd->status.weapon == W_1HSPEAR || sd->status.weapon == W_2HSPEAR ) ){
 				return BF_LONG;
 			}
+
+			break;
+		}
+		case DK_MADNESS_CRUSHER: {
+			const map_session_data* sd = BL_CAST(BL_PC, src);
+
+			if (sd != nullptr && (sd->status.weapon == W_2HSWORD || sd->status.weapon == W_1HSPEAR || sd->status.weapon == W_2HSPEAR))
+				return BF_LONG;
+
+			break;
+		}
+		case DK_STORMSLASH: {
+			const map_session_data* sd = BL_CAST(BL_PC, src);
+
+			if (sd != nullptr && (sd->status.weapon == W_2HSWORD || sd->status.weapon == W_2HAXE))
+				return BF_SHORT;
 
 			break;
 		}
@@ -8900,6 +8916,8 @@ static const struct _battle_data {
 	{ "shield_heartbeat_interval",          &battle_config.shield_heartbeat_interval,       15000,  1000,   INT_MAX,        },
 	{ "shield_heartbeat_max_miss",          &battle_config.shield_heartbeat_max_miss,         3,      1,      INT_MAX,        },
 	{ "shield_heartbeat_grace",             &battle_config.shield_heartbeat_grace,           45000, 0,      INT_MAX,        },
+	{ "shield_heartbeat_punishment",        &battle_config.shield_heartbeat_punishment,       0,      0,      1,              },
+	{ "shield_heartbeat_punishment_time",   &battle_config.shield_heartbeat_punishment_time, 0,      0,      INT_MAX,        },
 
 	{ "feature.dynamicnpc_timeout",         &battle_config.feature_dynamicnpc_timeout,      1000,   60000,  INT_MAX,        },
 	{ "feature.dynamicnpc_rangex",          &battle_config.feature_dynamicnpc_rangex,       2,      0,      INT_MAX,        },

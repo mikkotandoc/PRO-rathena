@@ -1,0 +1,23 @@
+//===== rAthena Script =======================================
+//= Warps - Episode 20 field / safety zone maps
+//===== Description: =========================================
+//= Ancient Ice Gorge fields and Safe Place travel routes.
+//===== Changelogs: ==========================================
+//= 1.0 Initial release.
+//============================================================
+
+// Frozen Scale Glacier -> Frozen Scale Beach
+jor_back3,63,330,0	warp2	#to_jor_back4_from3	2,2,jor_back4,101,265
+jor_back4,101,260,0	warp2	#to_jor_back3_from4	2,2,jor_back3,63,325
+
+// Frozen Scale Beach -> Ancient Ice Canyon East
+jor_back4,350,70,0	warp2	#to_jor_back5_from4	2,2,jor_back5,350,70
+jor_back5,350,70,0	warp2	#to_jor_back4_from5	2,2,jor_back4,350,75
+
+// Ancient Ice Canyon East <-> Safe Place (north route)
+jor_back5,350,380,0	warp2	#to_jor_safty1_A	2,2,jor_safty1,64,325
+jor_safty1,64,320,0	warp2	#to_jor_back5_B	2,2,jor_back5,350,375
+
+// Safe Place north route <-> south camps
+jor_safty1,195,330,0	warp2	#to_jor_safty1_south_A	2,2,jor_safty1,195,158
+jor_safty1,195,158,0	warp2	#to_jor_safty1_north_A	2,2,jor_safty1,195,325

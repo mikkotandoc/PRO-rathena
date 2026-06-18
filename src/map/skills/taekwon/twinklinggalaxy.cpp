@@ -27,7 +27,7 @@ void SkillTwinklingGalaxy::calculateSkillRatio(const Damage* wd, const block_lis
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 250 + 600 * skill_lv;
+	skillratio += -100 + 250 + 530 * skill_lv;
 	skillratio += pc_checkskill(sd, SKE_SKY_MASTERY) * 3 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 

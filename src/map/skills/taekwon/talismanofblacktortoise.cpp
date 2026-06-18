@@ -16,7 +16,7 @@ void SkillTalismanOfBlackTortoise::calculateSkillRatio(const Damage *wd, const b
 	const status_change *sc = status_get_sc(src);
 	const map_session_data* sd = BL_CAST( BL_PC, src );
 
-	skillratio += -100 + 2150 + 1600 * skill_lv;
+	skillratio += -100 + 2150 + 1620 * skill_lv;
 	skillratio += pc_checkskill(sd, SOA_TALISMAN_MASTERY) * 15 * skill_lv;
 	skillratio += 5 * sstatus->spl;
 	if (sc != nullptr && sc->getSCE(SC_T_FIFTH_GOD) != nullptr)

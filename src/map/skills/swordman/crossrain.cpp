@@ -23,9 +23,9 @@ void SkillCrossRain::calculateSkillRatio(const Damage* wd, const block_list* src
 	const status_change* sc = status_get_sc(src);
 
 	if( sc && sc->getSCE( SC_HOLY_S ) ){
-		skillratio += -100 + ( 650 + 15 * pc_checkskill( sd, IG_SPEAR_SWORD_M ) ) * skill_lv;
+		skillratio += -100 + ( 650 + 23 * pc_checkskill( sd, IG_SPEAR_SWORD_M ) ) * skill_lv;
 	}else{
-		skillratio += -100 + ( 450 + 10 * pc_checkskill( sd, IG_SPEAR_SWORD_M ) ) * skill_lv;
+		skillratio += -100 + ( 450 + 20 * pc_checkskill( sd, IG_SPEAR_SWORD_M ) ) * skill_lv;
 	}
 	skillratio += 7 * sstatus->spl;
 	RE_LVL_DMOD(100);

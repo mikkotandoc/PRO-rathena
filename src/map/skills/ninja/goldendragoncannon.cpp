@@ -17,7 +17,7 @@ void SkillGoldenDragonCannon::calculateSkillRatio(const Damage *wd, const block_
 	const status_change *sc = status_get_sc(src);
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	skillratio += -100 + 800 + 1500 * skill_lv;
+	skillratio += -100 + 800 + 915 * skill_lv;
 	skillratio += 15 * pc_checkskill( sd, SS_ANTENPOU ) * skill_lv;
 	skillratio += 5 * sstatus->spl;
 

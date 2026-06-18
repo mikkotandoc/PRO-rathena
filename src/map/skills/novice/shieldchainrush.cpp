@@ -20,7 +20,7 @@ void SkillShieldChainRush::calculateSkillRatio(const Damage *wd, const block_lis
 	const status_data* sstatus = status_get_status_data(*src);
 	const map_session_data* sd = BL_CAST( BL_PC, src );
 
-	skillratio += -100 + 600 + 1300 * skill_lv;
+	skillratio += -100 + 600 + 520 * skill_lv;
 	skillratio += pc_checkskill(sd, HN_SELFSTUDY_TATICS) * 3 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 

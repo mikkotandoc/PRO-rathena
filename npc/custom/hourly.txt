@@ -69,10 +69,19 @@ prontera,144,178,3	script	Cash Coin Point Shop	627,{
 		end;
 	case 2:
 		mes "[Earl]";
-		mes "Hi!";
-		mes "Good items sold in exhcange of your PRO-Asia Coins.";
-		close2;
-		callshop( "barter_pro_coins" );
+		mes "Trade your PRO-Asia Coins here.";
+		mes "Costumes are vanity-only — no zeny sales.";
+		next;
+		switch (select("General Supplies:Costume Shop")) {
+		case 1:
+			close2;
+			callshop( "barter_pro_coins" );
+			end;
+		case 2:
+			close2;
+			callshop( "barter_pro_costumes" );
+			end;
+		}
 		end;
 	case 3:
 		mes "[Earl]";

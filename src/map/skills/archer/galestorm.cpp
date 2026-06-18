@@ -17,7 +17,7 @@ void SkillGaleStorm::calculateSkillRatio(const Damage *wd, const block_list *src
 	const status_data* tstatus = status_get_status_data(*target);
 	const status_change *sc = status_get_sc(src);
 
-	skillratio += -100 + 1350 * skill_lv;
+	skillratio += -100 + 1010 * skill_lv;
 	skillratio += 10 * sstatus->con;
 	RE_LVL_DMOD(100);
 	if (sc && sc->getSCE(SC_CALAMITYGALE) && (tstatus->race == RC_BRUTE || tstatus->race == RC_FISH))

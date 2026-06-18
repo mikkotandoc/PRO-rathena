@@ -6,6 +6,7 @@
 #include <config/core.hpp>
 
 #include "map/clif.hpp"
+#include "map/pc.hpp"
 #include "map/skill.hpp"
 #include "map/status.hpp"
 
@@ -29,7 +30,7 @@ void SkillAxeStomp::castendNoDamageId(block_list* src, block_list* target, uint1
 void SkillAxeStomp::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& skillratio, int32 mflag) const {
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 450 + 1150 * skill_lv;
+	skillratio += -100 + 450 + 940 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	RE_LVL_DMOD(100);
 }

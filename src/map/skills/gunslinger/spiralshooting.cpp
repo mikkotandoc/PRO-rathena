@@ -42,11 +42,11 @@ void SkillSpiralShooting::calculateSkillRatio(const Damage* wd, const block_list
 	const status_change* sc = status_get_sc(src);
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 1200 + 1700 * skill_lv;
+	skillratio += -100 + 1200 + 1660 * skill_lv;
 	skillratio += 5 * sstatus->con;
 	if (sc && sc->getSCE(SC_INTENSIVE_AIM_COUNT))
 		skillratio += sc->getSCE(SC_INTENSIVE_AIM_COUNT)->val1 * 150 * skill_lv;
 	if (sd && sd->weapontype1 == W_RIFLE)
-		skillratio += 200 + 1100 * skill_lv;
+		skillratio += 200 + 980 * skill_lv;
 	RE_LVL_DMOD(100);
 }

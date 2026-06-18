@@ -7,7 +7,7 @@
 
 function	script	F_ep20_immortal_clear	{
 	if (ep20_main == 29 && isbegin_quest(17728) == 1) {
-		completequest 17728;
+		callfunc("F_ep20_completequest", 17728);
 		ep20_main = 30;
 		callfunc("F_ep20_reward", 30, 100);
 	}

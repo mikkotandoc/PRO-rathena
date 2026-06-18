@@ -32,11 +32,11 @@ void SkillMagazineForOne::calculateSkillRatio(const Damage* wd, const block_list
 	const status_change* sc = status_get_sc(src);
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 250 + 500 * skill_lv;
+	skillratio += -100 + 250 + 620 * skill_lv;
 	skillratio += 5 * sstatus->con;
 	if (sc && sc->getSCE(SC_INTENSIVE_AIM_COUNT))
 		skillratio += sc->getSCE(SC_INTENSIVE_AIM_COUNT)->val1 * 100 * skill_lv;
 	if (sd && sd->weapontype1 == W_REVOLVER)
-		skillratio += 50 + 300 * skill_lv;
+		skillratio += 50 + 310 * skill_lv;
 	RE_LVL_DMOD(100);
 }

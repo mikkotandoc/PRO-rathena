@@ -15,7 +15,7 @@ ba_in01,252,353,5	script	Admin beta#ms01	4_EP17_BASIC_B,{
 	mes "[Admin beta]";
 	mes "Inside this door is the biosphere, an artificial habitat created by Varmundt for ecological research, and the bathhouse, Meditatio.";
 	next;
-	switch( select( "Information on artificial habitats", "Information on the baths" ) ) {
+	switch( select( "Information on artificial habitats", "Information on the baths", "Daily habitat hunts", "About Barmil Tickets" ) ) {
 	case 1:
 		mes "[Admin beta]";
 		mes "Are you curious about artificial habitats?";
@@ -156,6 +156,12 @@ ba_in01,252,353,5	script	Admin beta#ms01	4_EP17_BASIC_B,{
 		mes "[Admin beta]";
 		mes "Go to the <NAVI>[gentleman]<INFO>ba_in01,384,38,0,101,0</INFO></NAVI> who manages it, and you will get directions.";
 		close;
+	case 3:
+		callfunc("F_BiosphereDaily_Menu");
+		end;
+	case 4:
+		callfunc("F_BiosphereTicket_Info");
+		end;
 	}
 	end;
 }
@@ -402,11 +408,20 @@ ba_in01,237,301,5	script	Admin Beta#ms02	4_EP17_BASIC_B,{
 	mes "Do you need guidance on the artificial habitat?";
 	mes "Inside this hallway is the Biosphere, an artificial habitat created by Varmundt for ecological research.";
 	next;
-	if (select( "Artificial habitat guide", "No guide needed" ) == 2) {
+	.@menu = select( "Artificial habitat guide", "Daily habitat hunts", "About Barmil Tickets", "No guide needed" );
+	if (.@menu == 4) {
 		mes "[Admin Beta]";
 		mes "I see. I understand.";
 		mes "I hope you have a comfortable time at Varmundt's mansion.";
 		close;
+	}
+	if (.@menu == 2) {
+		callfunc("F_BiosphereDaily_Menu");
+		end;
+	}
+	if (.@menu == 3) {
+		callfunc("F_BiosphereTicket_Info");
+		end;
 	}
 	mes "[Admin Beta]";
 	mes "You're curious about artificial habitats.";

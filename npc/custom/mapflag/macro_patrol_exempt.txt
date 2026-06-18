@@ -1,0 +1,67 @@
+//===== rAthena Script =======================================
+//= Mapflag: Macro patrol exemptions (nomacrochecker)
+//===== Description: =========================================
+//= Blocks @macrochecker and automatic macro patrol on safe maps.
+//= Farming maps with Play_RO_Gold_Coin_ drops are NOT listed here;
+//= see npc/custom/macro_patrol.txt for the patrol whitelist.
+//============================================================
+
+// ----- Towns (pre-renewal) -----
+prontera	mapflag	nomacrochecker
+izlude	mapflag	nomacrochecker
+moc_ruins	mapflag	nomacrochecker
+geffen	mapflag	nomacrochecker
+payon	mapflag	nomacrochecker
+pay_arche	mapflag	nomacrochecker
+alberta	mapflag	nomacrochecker
+aldebaran	mapflag	nomacrochecker
+yuno	mapflag	nomacrochecker
+lighthalzen	mapflag	nomacrochecker
+einbroch	mapflag	nomacrochecker
+einbech	mapflag	nomacrochecker
+comodo	mapflag	nomacrochecker
+umbala	mapflag	nomacrochecker
+amatsu	mapflag	nomacrochecker
+gonryun	mapflag	nomacrochecker
+ayothaya	mapflag	nomacrochecker
+louyang	mapflag	nomacrochecker
+hugel	mapflag	nomacrochecker
+rachel	mapflag	nomacrochecker
+veins	mapflag	nomacrochecker
+brasilis	mapflag	nomacrochecker
+
+// ----- Towns (renewal) -----
+dewata	mapflag	nomacrochecker
+dicastes01	mapflag	nomacrochecker
+eclage	mapflag	nomacrochecker
+izlude_a	mapflag	nomacrochecker
+izlude_b	mapflag	nomacrochecker
+izlude_c	mapflag	nomacrochecker
+izlude_d	mapflag	nomacrochecker
+malangdo	mapflag	nomacrochecker
+malaya	mapflag	nomacrochecker
+mora	mapflag	nomacrochecker
+lasagna	mapflag	nomacrochecker
+wolfvill	mapflag	nomacrochecker
+
+// ----- Hubs / services -----
+moc_para01	mapflag	nomacrochecker
+
+// ----- Jail / penal maps -----
+sec_pri	mapflag	nomacrochecker
+sec_in02	mapflag	nomacrochecker
+
+// ----- Custom MVP / event maps -----
+vis_h01	mapflag	nomacrochecker
+vis_h02	mapflag	nomacrochecker
+vis_h03	mapflag	nomacrochecker
+
+// ----- Battlegrounds -----
+bat_c01	mapflag	nomacrochecker
+bat_c02	mapflag	nomacrochecker
+bat_c03	mapflag	nomacrochecker
+bat_b01	mapflag	nomacrochecker
+bat_b02	mapflag	nomacrochecker
+bat_a01	mapflag	nomacrochecker
+bat_a02	mapflag	nomacrochecker
+guild_vs3	mapflag	nomacrochecker

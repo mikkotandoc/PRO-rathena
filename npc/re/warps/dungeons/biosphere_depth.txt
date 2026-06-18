@@ -1,0 +1,194 @@
+//===== rAthena Script =======================================
+//= Varmundt's Biosphere Depth
+//===== Description: =========================================
+//= Warps for Depth 1 (bl_depth1) and Depth 2 (bl_depth2).
+//= Portal coords sourced from kRO / iRO references.
+//============================================================
+
+//============================================================
+// Deep Research Manager - unlock depth portals
+//============================================================
+ba_in01,292,105,5	script	Deep Research Manager#bs_depth	4_EP17_BASIC_B,{
+	if (BaseLevel < 250) {
+		mes "[Deep Research Manager]";
+		mes "The depth habitats are only accessible to adventurers with base level 250 or higher.";
+		close;
+	}
+	mes "[Deep Research Manager]";
+	mes "Welcome. I manage research into the deeper specimen layers beneath the artificial habitats.";
+	next;
+	if (#biosphere_depth1) {
+		mes "[Deep Research Manager]";
+		mes "You are already registered for depth research.";
+		mes "Use the depth portals inside any open habitat, or visit the Chess Garden for the abyss survey.";
+		close;
+	}
+	mes "[Deep Research Manager]";
+	mes "Would you like to register for depth habitat research?";
+	mes "Once registered, depth portals in each biome will open for you.";
+	next;
+	if (select("Register", "Not now") == 2) {
+		mes "[Deep Research Manager]";
+		mes "Come back when you are ready.";
+		close;
+	}
+	set #biosphere_depth1, 1;
+	mes "[Deep Research Manager]";
+	mes "Registration complete.";
+	mes "Depth portals are now active in every artificial habitat.";
+	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Depth Research>";
+	end;
+}
+
+//============================================================
+// Biome habitats -> Depth 1
+//============================================================
+bl_death,65,121,0	script	#depth_from_death	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth1Enter";
+	end;
+}
+
+bl_grass,131,365,0	script	#depth_from_grass	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth1Enter";
+	end;
+}
+
+bl_ice,198,268,0	script	#depth_from_ice	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth1Enter";
+	end;
+}
+
+bl_lava,151,263,0	script	#depth_from_lava	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth1Enter";
+	end;
+}
+
+bl_soul,300,292,0	script	#depth_from_soul	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth1Enter";
+	end;
+}
+
+bl_temple,272,331,0	script	#depth_from_temple	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth1Enter";
+	end;
+}
+
+bl_venom,182,250,0	script	#depth_from_venom	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth1Enter";
+	end;
+}
+
+function	script	F_BiosphereDepth1Enter	{
+	if (BaseLevel < 250) {
+		mes "^0000cdThis portal is only open to those with a base level of 250 or higher.^000000";
+		close;
+	}
+	if (!#biosphere_depth1) {
+		mes "^0000cdYou must register with the Deep Research Manager in Varmundt's Mansion first.^000000";
+		mes "^777777(ba_in01 292, 105)^000000";
+		close;
+	}
+	warp "bl_depth1", 180, 180;
+	end;
+}
+
+//============================================================
+// Depth 1 -> Research room
+//============================================================
+bl_depth1,180,180,0	script	#depth1_to_mansion	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp "ba_in01", 292, 108;
+	end;
+}
+
+//============================================================
+// Mansion garden -> Chess Garden (Depth 2 hub)
+//============================================================
+ba_maison,242,122,0	script	#depth2_chess_in	WARPNPC,1,1,{
+	end;
+OnTouch:
+	if (BaseLevel < 250) {
+		mes "^0000cdThis passage is only open to those with a base level of 250 or higher.^000000";
+		close;
+	}
+	if (!#biosphere_depth1) {
+		mes "^0000cdYou must register for depth research with the Deep Research Manager first.^000000";
+		close;
+	}
+	warp "ba_chess", 24, 24;
+	end;
+}
+
+ba_chess,24,8,0	warp2	#chess_to_maison	1,1,ba_maison,242,118
+
+//============================================================
+// Chess Garden -> Depth 2 (four spawn points)
+//============================================================
+ba_chess,8,24,0	script	#depth2_enter_a	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth2Enter", 194, 188;
+	end;
+}
+
+ba_chess,40,24,0	script	#depth2_enter_b	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth2Enter", 190, 64;
+	end;
+}
+
+ba_chess,8,40,0	script	#depth2_enter_c	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth2Enter", 57, 87;
+	end;
+}
+
+ba_chess,40,40,0	script	#depth2_enter_d	WARPNPC,1,1,{
+	end;
+OnTouch:
+	callfunc "F_BiosphereDepth2Enter", 90, 202;
+	end;
+}
+
+function	script	F_BiosphereDepth2Enter	{
+	if (BaseLevel < 250) {
+		mes "^0000cdThis portal is only open to those with a base level of 250 or higher.^000000";
+		close;
+	}
+	if (!#biosphere_depth1) {
+		mes "^0000cdYou must register for depth research with the Deep Research Manager first.^000000";
+		close;
+	}
+	warp "bl_depth2", getarg(0), getarg(1);
+	end;
+}
+
+//============================================================
+// Depth 2 -> Chess Garden
+//============================================================
+bl_depth2,140,140,0	script	#depth2_to_chess	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp "ba_chess", 24, 24;
+	end;
+}

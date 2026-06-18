@@ -17,7 +17,7 @@ void SkillRedFlameCannon::calculateSkillRatio(const Damage *wd, const block_list
 	const status_change *sc = status_get_sc(src);
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	skillratio += -100 + 600 + 1100 * skill_lv;
+	skillratio += -100 + 600 + 1000 * skill_lv;
 	skillratio += 70 * pc_checkskill( sd, SS_ANTENPOU ) * skill_lv;
 	skillratio += 5 * sstatus->spl;
 

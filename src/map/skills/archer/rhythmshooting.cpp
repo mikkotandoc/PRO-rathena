@@ -24,7 +24,7 @@ void SkillRhythmShooting::calculateSkillRatio(const Damage* wd, const block_list
 	const status_data* sstatus = status_get_status_data(*src);
 	const status_data* tstatus = status_get_status_data(*target);
 
-	skillratio += -100 + 550 + 950 * skill_lv;
+	skillratio += -100 + 550 + 650 * skill_lv;
 
 	if (sd && pc_checkskill(sd, TR_STAGE_MANNER) > 0)
 		skillratio += 5 * sstatus->con;

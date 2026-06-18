@@ -84,6 +84,11 @@ prt_cas,373,77,3	script	Balheele#episkip	4_F_VALKYRIE,{
 		case 7: callfunc("F_EpDesc", 19); callfunc("F_EpClearSkip", 19); break;
 		case 8: callfunc("F_EpDesc", 20); callfunc("F_EpClearSkip", 20); break;
 		case 9:
+			if (!getbattleflag("feature.barter")) {
+				mes "[Balheele]";
+				mes "The exchange service is currently unavailable.";
+				close;
+			}
 			if (checkquest(20008, PLAYTIME) == 2) {
 				mes "[Balheele]";
 				mes "You've completed the main quest of the latest Episode 20!";
@@ -95,9 +100,8 @@ prt_cas,373,77,3	script	Balheele#episkip	4_F_VALKYRIE,{
 				mes "^FF0000This is a shop where items are exchanged for Silvervine Fruit.^000000";
 				mes "^FF0000Items exchanged above are not included in withdrawal targets, and re-exchange for Silvervine Fruit is also impossible.^000000";
 				close2;
-				npcshopattach "balheele_20";
-				callshop "balheele_20",1;
-				break;
+				callshop "balheele_20";
+				end;
 			} else {
 				mes "[Balheele]";
 				mes "As you wish.";
@@ -108,9 +112,8 @@ prt_cas,373,77,3	script	Balheele#episkip	4_F_VALKYRIE,{
 				mes "^FF0000This is a shop where items are exchanged for Silvervine Fruit.^000000";
 				mes "^FF0000Items exchanged above are not included in withdrawal targets, and re-exchange for Silvervine Fruit is also impossible.^000000";
 				close2;
-				npcshopattach "balheele";
-				callshop "balheele",1;
-				break;
+				callshop "balheele";
+				end;
 			}
 			close;
 		case 10:
@@ -147,12 +150,26 @@ function	script	F_CheckQuestState	{
 	return "Incomplete";
 }
 
+function	script	F_EpForceComplete	{
+	.@id = getarg(0);
+
+	if (checkquest(.@id) != -1)
+		erasequest .@id;
+
+	setquest .@id;
+
+	.@state = checkquest(.@id);
+	if (.@state >= 0 && .@state < 2)
+		completequest .@id;
+	return;
+}
+
 function	script	F_EpClearSkip	{
 	.@ep = getarg(0);
 	setarray .@require_ep[14], 13013;
 	setarray .@require_ep[15], 14002;
 	setarray .@require_ep[17], 18219;
-	setarray .@require_ep[18], 17108;
+	setarray .@require_ep[18], 18020;
 	setarray .@require_ep[19], 18014;
 	setarray .@require_ep[20], 19010;
 	setarray .@area_name$[14], "El-Dicastes";
@@ -242,9 +259,7 @@ function	script	F_EpClearSkip	{
 			}
 
 			for (.@i = 0; .@i < getarraysize(.@ids); .@i++) {
-				if (checkquest(.@ids[.@i], PLAYTIME) != 0) erasequest(.@ids[.@i]);
-				setquest(.@ids[.@i]);
-				completequest(.@ids[.@i]);
+				callfunc("F_EpForceComplete", .@ids[.@i]);
 				if (.@i == getarraysize(.@ids) - 1) {
 					switch (.@ep) {
 						case 16: terra_gloria_main = 25; break;
@@ -288,7 +303,7 @@ function	script	F_Ep17	{
 			mes "Come again when you need it~";
 			close;
 		case 2:
-			if (checkquest(.@ids[getarraysize(.@ids)-1], PLAYTIME) == 2) {
+			if (checkquest(.@ids[.@end], PLAYTIME) == 2) {
 				mes "[Balheele]";
 				mes "Seems like you already know all the necessary stories?";
 				mes "There's no need for more effort.";
@@ -307,28 +322,26 @@ function	script	F_Ep17	{
 				close;
 			}
 
-			if (.@require_ep[.@ep] && checkquest(.@require_ep[.@ep], PLAYTIME) != 2) {
-					mes "[Balheele]";
-					mes "There's an order to organizing every story.";
-					mes "You haven't collected the story related to ^4d4dff" + .@area_name$[.@ep] + "^000000 yet.";
-					next;
-					mes "[Balheele]";
-					mes "Could you come back after ^4d4dffcompleting Episode " + (.@ep - 1) + "^000000?";
-					close;
+			if (.@part == 2 && checkquest(17006, PLAYTIME) != 2) {
+				mes "[Balheele]";
+				mes "There's an order to organizing every story.";
+				mes "You haven't collected the story related to ^4d4dffEpisode 17.1^000000 yet.";
+				next;
+				mes "[Balheele]";
+				mes "Could you come back after ^4d4dffcompleting Episode 17.1^000000?";
+				close;
 			}
 
-			for (.@i = 0; .@i < getarraysize(.@ids); .@i++) {
-				if (checkquest(.@ids[.@i], PLAYTIME) != 0) erasequest(.@ids[.@i]);
-				setquest(.@ids[.@i]);
-				completequest(.@ids[.@i]);
-			}
+			for (.@i = .@start; .@i <= .@end; .@i++)
+				callfunc("F_EpForceComplete", .@ids[.@i]);
+
+			if (.@part == 2)
+				ep17_2_main = 36;
 
 			mes "[Balheele]";
 			mes "Story organization is complete.";
 			mes "Now, you can start a new story.";
-			ep17_2_main = 36;
 			close;
 	}
 	end;
 }
--	shop	balheele	FAKE_NPC,1000284:1000000,1000285:1000000,1000286:1000000,1000282:1000000,1000287:4000000,1000288:9000000;

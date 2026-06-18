@@ -22,7 +22,7 @@ void SkillExplosivePowder::calculateSkillRatio(const Damage *wd, const block_lis
 	const status_data* sstatus = status_get_status_data(*src);
 	const status_change *sc = status_get_sc(src);
 
-	skillratio += -100 + 500 + 650 * skill_lv;
+	skillratio += -100 + 500 + 530 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	if (sc && sc->getSCE(SC_RESEARCHREPORT))
 		skillratio += 100 * skill_lv;

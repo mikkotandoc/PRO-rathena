@@ -510,3 +510,17 @@ ant_d02_i	mapflag	nomemo
 // Cash Mall
 //============================================================
 itemmall	mapflag	nomemo
+
+//============================================================
+// Varmundt's Biosphere (bl_*)
+//============================================================
+bl_death	mapflag	nomemo
+bl_grass	mapflag	nomemo
+bl_ice	mapflag	nomemo
+bl_lava	mapflag	nomemo
+bl_soul	mapflag	nomemo
+bl_temple	mapflag	nomemo
+bl_venom	mapflag	nomemo
+bl_depth1	mapflag	nomemo
+bl_depth2	mapflag	nomemo
+ba_chess	mapflag	nomemo

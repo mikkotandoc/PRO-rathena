@@ -211,3 +211,15 @@ Body:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 5
+      - Index: 27
+        Item: Shadow_Random_Mix
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 28
+        Item: Skill_Sha_R_M_Magic
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 15

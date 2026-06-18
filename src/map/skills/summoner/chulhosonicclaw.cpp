@@ -17,7 +17,7 @@ void SkillChulhoSonicClaw::calculateSkillRatio(const Damage *wd, const block_lis
 	const status_change *sc = status_get_sc(src);
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	skillratio += -100 + 1100 + 2200 * skill_lv;
+	skillratio += -100 + 1100 + 1620 * skill_lv;
 	skillratio += 50 * pc_checkskill(sd, SH_MYSTICAL_CREATURE_MASTERY);
 	skillratio += 5 * sstatus->pow;
 

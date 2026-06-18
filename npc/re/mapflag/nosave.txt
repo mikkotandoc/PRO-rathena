@@ -103,3 +103,17 @@ rockmi2	mapflag	nosave	SavePoint
 // Old Training Ground
 //============================================================
 tra_fild	mapflag	nosave	SavePoint
+
+//============================================================
+// Varmundt's Biosphere (bl_*)
+//============================================================
+bl_death	mapflag	nosave	SavePoint
+bl_grass	mapflag	nosave	SavePoint
+bl_ice	mapflag	nosave	SavePoint
+bl_lava	mapflag	nosave	SavePoint
+bl_soul	mapflag	nosave	SavePoint
+bl_temple	mapflag	nosave	SavePoint
+bl_venom	mapflag	nosave	SavePoint
+bl_depth1	mapflag	nosave	SavePoint
+bl_depth2	mapflag	nosave	SavePoint
+ba_chess	mapflag	nosave	SavePoint

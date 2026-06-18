@@ -1,14 +1,25 @@
 // Player ping command - type @ping in chat to check your latency.
+// Requires a client that supports the live-ping packet (ZC_PING_LIVE),
+// i.e. 2019-02-13 (Main) / 2019-02-20 (RE/Zero) or newer.
 -	script	ping_cmd	-1,{
 OnCall:
+	// A recent measurement (kept fresh by the server's ping timer) is shown instantly.
 	.@ms = getping();
-	if( .@ms < 0 ){
-		requestping();
-		sleep2 300;
-		.@ms = getping();
+	if( .@ms >= 0 ){
+		dispbottom "Your current latency is: " + .@ms + " ms.";
+		end;
 	}
+	// Otherwise request a fresh round-trip and report once the client answers.
+	// addtimer is used instead of sleep2 because it reliably defers execution
+	// of a bindatcmd handler while keeping the player attached.
+	requestping();
+	addtimer 700, strnpcinfo(0)+"::OnResult";
+	end;
+
+OnResult:
+	.@ms = getping();
 	if( .@ms < 0 )
-		dispbottom "Unable to measure your latency. Please try again.";
+		dispbottom "Unable to measure your latency. Please try again in a moment.";
 	else
 		dispbottom "Your current latency is: " + .@ms + " ms.";
 	end;

@@ -14,7 +14,7 @@ SkillSparkBlaster::SkillSparkBlaster() : SkillImplRecursiveDamageSplash(MT_SPARK
 void SkillSparkBlaster::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& skillratio, int32 mflag) const {
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 600 + 1400 * skill_lv;
+	skillratio += -100 + 600 + 875 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	RE_LVL_DMOD(100);
 }

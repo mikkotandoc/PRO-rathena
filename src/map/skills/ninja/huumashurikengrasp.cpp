@@ -19,7 +19,7 @@ void SkillHuumaShurikenGrasp::calculateSkillRatio(const Damage *wd, const block_
 	const status_data* sstatus = status_get_status_data(*src);
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	skillratio += -100 + 850 + 350 * skill_lv;
+	skillratio += -100 + 850 + 360 * skill_lv;
 	skillratio += pc_checkskill( sd, SS_FUUMAKOUCHIKU ) * 5 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	RE_LVL_DMOD(100);

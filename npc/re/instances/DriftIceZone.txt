@@ -7,7 +7,7 @@
 
 function	script	F_ep20_drift_clear	{
 	if (ep20_main == 21 && isbegin_quest(17721) == 1) {
-		completequest 17721;
+		callfunc("F_ep20_completequest", 17721);
 		ep20_main = 22;
 		callfunc("F_ep20_reward", 20, 90);
 	}

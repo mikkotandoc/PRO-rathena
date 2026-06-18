@@ -1,110 +1,117 @@
 prontera,153,191,4	script	Silvervine Quester	4_M_MERCAT1,{
 
-    // ==========================================
-    // DIALOGUE CORE LOGIC
-    // ==========================================
-    mes "[Silvervine Quester]";
-    mes "Greetings! I hand out rewards to players who can take down elusive mini-bosses.";
-    next;
+	// ==========================================
+	// DIALOGUE CORE LOGIC
+	// ==========================================
+	mes "[Silvervine Quester]";
+	mes "Greetings! I hand out rewards to players who can take down elusive mini-bosses.";
+	next;
 
-    // Daily Limit Check & Reset
-    if (#Silvervine_LastDate != gettime(DT_YYYYMMDD)) {
-        #Silvervine_LastDate = gettime(DT_YYYYMMDD);
-        #Silvervine_DailyCount = 0;
-    }
+	// Daily Limit Check & Reset
+	if (#Silvervine_LastDate != gettime(DT_YYYYMMDD)) {
+		#Silvervine_LastDate = gettime(DT_YYYYMMDD);
+		#Silvervine_DailyCount = 0;
+	}
 
-    // Check if the player currently has an assigned hunt target stored
-    if (SilvQuest_ID > 0) {
-        
-        // Use the explicit HUNTING parameter from your documentation
-        // Returns 2 = You have killed all of the target monsters
-        .@hunt_status = checkquest(SilvQuest_ID, HUNTING);
+	// Check if the player currently has an assigned hunt target stored
+	if (SilvQuest_ID > 0) {
+		.@known = 0;
+		for (.@i = 0; .@i < .quest_count; .@i++) {
+			if (.quest_id[.@i] == SilvQuest_ID) {
+				.@known = 1;
+				break;
+			}
+		}
+		if (!.@known) {
+			if (isbegin_quest(SilvQuest_ID))
+				erasequest SilvQuest_ID;
+			SilvQuest_ID = 0;
+		}
+	}
 
-        if (.@hunt_status == 2) {
-            mes "[Silvervine Quester]";
-            mes "Superb work! You successfully hunted down the target.";
-            
-            erasequest SilvQuest_ID; // Remove from client quest log UI
-            SilvQuest_ID = 0;       // Clear character tracking flag
-            
-            getitem .reward_item, .reward_amount;
-            #Silvervine_DailyCount = #Silvervine_DailyCount + 1;
-            
-            mes "Received: ^00FF00" + .reward_amount + "x Silvervine Fruit^000000";
-            mes "Completed Today: ^00FF00" + #Silvervine_DailyCount + "/" + .max_daily_quests + "^000000";
-            close;
-        }
-        
-        // Lookup the monster name string from our internal array block to display
-        .@active_name$ = "Unknown Target";
-        for (.@i = 0; .@i < .quest_count; .@i = .@i + 1) {
-            if (.quests[.@i * 2] == SilvQuest_ID) {
-                .@active_name$ = .quests[(.@i * 2) + 1];
-                break;
-            }
-        }
+	if (SilvQuest_ID > 0) {
+		.@hunt_status = checkquest(SilvQuest_ID, HUNTING);
 
-        mes "[Silvervine Quester]";
-        mes "Your current target is: ^FF0000" + .@active_name$ + "^000000.";
-        mes "Please eliminate them and check back with me.";
-        close;
-    }
+		if (.@hunt_status == 2) {
+			mes "[Silvervine Quester]";
+			mes "Superb work! You successfully hunted down the target.";
 
-    // Enforce daily hard ceiling limit
-    if (#Silvervine_DailyCount >= .max_daily_quests) {
-        mes "[Silvervine Quester]";
-        mes "You have reached your limit of ^FF0000" + .max_daily_quests + " hunts^000000 for today.";
-        mes "Come back tomorrow after midnight server time!";
-        close;
-    }
+			erasequest SilvQuest_ID;
+			SilvQuest_ID = 0;
 
-    // Roll a new contract
-    mes "[Silvervine Quester]";
-    mes "Are you ready to hunt a random mini-boss?";
-    mes "Progress today: " + #Silvervine_DailyCount + " / " + .max_daily_quests;
-    next;
+			getitem .reward_item, .reward_amount;
+			#Silvervine_DailyCount = #Silvervine_DailyCount + 1;
 
-    if (select("Give me a target!:Maybe later.") == 2) {
-        mes "[Silvervine Quester]";
-        mes "Be safe out there.";
-        close;
-    }
+			mes "Received: ^00FF00" + .reward_amount + "x Silvervine Fruit^000000";
+			mes "Completed Today: ^00FF00" + #Silvervine_DailyCount + "/" + .max_daily_quests + "^000000";
+			close;
+		}
 
-    // Select a secure random assignment mapping
-    .@rand = rand(.quest_count);
-    SilvQuest_ID = .quests[.@rand * 2]; // Keep record of the Quest ID directly on the character data
-    .@monster_name$ = .quests[(.@rand * 2) + 1];
+		.@active_name$ = "Unknown Target";
+		for (.@i = 0; .@i < .quest_count; .@i++) {
+			if (.quest_id[.@i] == SilvQuest_ID) {
+				.@active_name$ = getmonsterinfo(.quest_mob$[.@i], MOB_NAME);
+				break;
+			}
+		}
 
-    setquest SilvQuest_ID;
+		mes "[Silvervine Quester]";
+		mes "Your current target is: ^FF0000" + .@active_name$ + "^000000.";
+		mes "Please eliminate them and check back with me.";
+		close;
+	}
 
-    mes "[Silvervine Quester]";
-    mes "Your new assignment: ^FF0000" + .@monster_name$ + "^000000.";
-    mes "Track your kill status directly inside your ^0000FFQuest Log (Alt+U)^000000.";
-    close;
+	// Enforce daily hard ceiling limit
+	if (#Silvervine_DailyCount >= .max_daily_quests) {
+		mes "[Silvervine Quester]";
+		mes "You have reached your limit of ^FF0000" + .max_daily_quests + " hunts^000000 for today.";
+		mes "Come back tomorrow after midnight server time!";
+		close;
+	}
+
+	// Roll a new contract
+	mes "[Silvervine Quester]";
+	mes "Are you ready to hunt a random mini-boss?";
+	mes "Progress today: " + #Silvervine_DailyCount + " / " + .max_daily_quests;
+	next;
+
+	if (select("Give me a target!:Maybe later.") == 2) {
+		mes "[Silvervine Quester]";
+		mes "Be safe out there.";
+		close;
+	}
+
+	.@rand = rand(.quest_count);
+	SilvQuest_ID = .quest_id[.@rand];
+	.@monster_name$ = getmonsterinfo(.quest_mob$[.@rand], MOB_NAME);
+
+	setquest SilvQuest_ID;
+
+	mes "[Silvervine Quester]";
+	mes "Your new assignment: ^FF0000" + .@monster_name$ + "^000000.";
+	mes "Track your kill status directly inside your ^0000FFQuest Log (Alt+U)^000000.";
+	close;
 
 OnInit:
-    // ==========================================
-    // CONFIGURATION
-    // ==========================================
-    .max_daily_quests = 10;
-    .reward_item = 6417; // Silvervine Fruit ID
-    .reward_amount = 5;  // 5 Silvervine Reward per your list
+	// ==========================================
+	// CONFIGURATION
+	// ==========================================
+	.max_daily_quests = 10;
+	.reward_item = 6417; // Silvervine Fruit
+	.reward_amount = 5;
 
-    // Unified Clean Array Layout (IDs updated to 99001+ to avoid client UI overlapping conflicts)
-    setarray .quests[0], 
-        90001, "Angeling",
-        90002, "Archangelig",
-        90003, "Cat O' Nine Tails",
-        90004, "Deviling",
-        90005, "Dragon Fly",
-        90006, "Eclipse",
-        90007, "Ghostring",
-        90008, "Mastering",
-        90009, "Maya Purple",
-        90010, "Toad",
-        90011, "Vagabond Wolf",
-        90012, "Vocal";
+	// Quest IDs must match db/re/quest_db.yml and SystemEN/OngoingQuests.lub.
+	// 62928-62939 = original client Silvervine hunts; 63004-63016 = custom extensions.
+	setarray .quest_id[0],
+		62928, 62929, 62930, 62931, 62932, 62933, 62934, 62935, 62936, 62937, 62938, 62939,
+		63004, 63005, 63006, 63007, 63008, 63009, 63010, 63011, 63012, 63013, 63014, 63015, 63016;
 
-    .quest_count = getarraysize(.quests) / 2;
-    end;
+	setarray .quest_mob$[0],
+		"ANGELING", "ARCHANGELING", "CAT_O_NINE_TAIL", "DEVILING", "DRAGON_FLY", "ECLIPSE",
+		"GHOSTRING", "MASTERING", "MAYA_PUPLE", "TOAD", "VAGABOND_WOLF", "VOCAL",
+		"GRYPHON", "MUTANT_DRAGON", "CHIMERA", "BLOODY_KNIGHT", "DARK_ILLUSION", "EXECUTIONER",
+		"MYSTELTAINN", "TIRFING", "OWL_BARON", "A_MOBSTER", "GALION", "NECROMANCER", "G_RANDGRIS";
+
+	.quest_count = getarraysize(.quest_id);
+	end;
 }

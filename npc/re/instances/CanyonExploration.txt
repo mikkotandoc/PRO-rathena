@@ -7,7 +7,7 @@
 
 function	script	F_ep20_canyon_clear	{
 	if (ep20_main == 13 && isbegin_quest(17713) == 1) {
-		completequest 17713;
+		callfunc("F_ep20_completequest", 17713);
 		ep20_main = 14;
 		callfunc("F_ep20_reward", 20, 90);
 	}

@@ -1,0 +1,279 @@
+# Cash Coin costume barter — vanity only, priced in Play_RO_Gold_Coin_ (PRO-Asia Coins).
+# Curated from test costume selection; no zeny sales.
+
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: barter_pro_costumes
+    Items:
+      # --- Upper (classic picks) ---
+      - Index: 0
+        Item: C_Skarlet_Band_EXE
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 12
+      - Index: 1
+        Item: C_VesperHeadGear_J
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 7
+      - Index: 2
+        Item: C_Neko_Mimi_Kafra
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      - Index: 3
+        Item: C_Deviling_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 7
+      - Index: 4
+        Item: C_Darkness_Helm
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 7
+      - Index: 5
+        Item: C_Angeling_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      - Index: 6
+        Item: C_Reginleif_Hairband
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 7
+        Item: C_Heart_Wing_Hairband
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 8
+        Item: C_Full_Bloom_Hairpin
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 7
+      - Index: 9
+        Item: C_Freyja_Crown_J
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 10
+      - Index: 10
+        Item: C_Mistress_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 9
+      - Index: 11
+        Item: C_Water_Lily_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 7
+      - Index: 12
+        Item: C_Oldman's_Romance
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      - Index: 13
+        Item: C_Little_Angel_Doll
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      # --- Upper (newer picks) ---
+      - Index: 14
+        Item: C_Pink_Drooping_Kitty
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      - Index: 15
+        Item: C_White_Rose_Princess
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 16
+        Item: C_Marin_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 5
+      - Index: 17
+        Item: C_Red_Baby_Dragon
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 18
+        Item: C_Doram_Balloon
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 19
+        Item: C_Exploding_Wave_Red
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 10
+      # --- Middle ---
+      - Index: 20
+        Item: C_Flutter_Butterfly
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 5
+      - Index: 21
+        Item: C_Angel_Veil
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 5
+      - Index: 22
+        Item: C_Gothic_Heart_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 23
+        Item: C_Rainbow_Wing_Ears
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 24
+        Item: C_Ice_Wing_Ear
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 7
+      - Index: 25
+        Item: C_Butterfly_Hairpin
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 5
+      - Index: 26
+        Item: C_Reginleif_Wings_J
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 27
+        Item: C_Pecopeco_Wing_Ears
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      - Index: 28
+        Item: C_First_Love_Cheek
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 5
+      - Index: 29
+        Item: C_SavageB_On_Shoulder
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      - Index: 30
+        Item: C_Angelic_Chain
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 5
+      # --- Lower ---
+      - Index: 31
+        Item: C_Blue_Rear_Ribbon
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 4
+      # --- Garment ---
+      - Index: 32
+        Item: C_Mechanic_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 33
+        Item: C_Devil_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 34
+        Item: C_Cupid_Wing_Pink
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 9
+      - Index: 35
+        Item: C_PinkButterfly_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 9
+      - Index: 36
+        Item: C_Poring_Bag
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
+      - Index: 37
+        Item: C_Bloody_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 12
+      - Index: 38
+        Item: C_Wings_of_Gabriel
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 14
+      - Index: 39
+        Item: C_Shining_Angel_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 15
+      - Index: 40
+        Item: C_Magic_Circle
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 12
+      - Index: 41
+        Item: C_Digital_Space
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 12
+      - Index: 42
+        Item: C_GiantCatBag_TW
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 10
+      - Index: 43
+        Item: C_Magic_Circle_Rainbow
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 14

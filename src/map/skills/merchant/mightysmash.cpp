@@ -27,11 +27,11 @@ void SkillMightySmash::calculateSkillRatio(const Damage* wd, const block_list* s
 	const status_data* sstatus = status_get_status_data(*src);
 	const status_change* sc = status_get_sc(src);
 
-	skillratio += -100 + 80 + 240 * skill_lv;
+	skillratio += -100 + 80 + 185 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	if (sc && sc->getSCE(SC_AXE_STOMP)) {
 		skillratio += 20;
-		skillratio += 5 * sstatus->pow;
+		skillratio += 10 * sstatus->pow;
 	}
 	RE_LVL_DMOD(100);
 }

@@ -25,10 +25,10 @@ void SkillOnlyOneBullet::calculateSkillRatio(const Damage* wd, const block_list*
 	const status_change* sc = status_get_sc(src);
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 1200 + 3000 * skill_lv;
+	skillratio += -100 + 1200 + 2910 * skill_lv;
 	skillratio += 5 * sstatus->con;
 	if (sc && sc->getSCE(SC_INTENSIVE_AIM_COUNT))
-		skillratio += sc->getSCE(SC_INTENSIVE_AIM_COUNT)->val1 * 350 * skill_lv;
+		skillratio += sc->getSCE(SC_INTENSIVE_AIM_COUNT)->val1 * 400 * skill_lv;
 	if (sd && sd->weapontype1 == W_REVOLVER) {
 		skillratio += 400 * skill_lv;
 	}

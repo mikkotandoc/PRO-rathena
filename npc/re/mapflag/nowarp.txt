@@ -56,3 +56,9 @@ que_swat	mapflag	nowarp
 //============================================================
 un_myst	mapflag	nowarp
 rockmi2	mapflag	nowarp
+
+//============================================================
+// Varmundt's Biosphere Depth (bl_depth*)
+//============================================================
+bl_depth1	mapflag	nowarp
+bl_depth2	mapflag	nowarp

@@ -1,0 +1,105 @@
+Job,Skill,KRO Q1 2026 Change,rAthena PR,rAthena / Fork Change,PRO-rathena Status
+Dragon Knight,Dragonic Breath,"ATK 3550%→4250% (Lv10); MaxSP factor 50%→100%",#9980,Same as KRO,Done
+Dragon Knight,Servant Weapon,—,#9999,Sphere interval 1s→0.5s (Lv5),Done
+Dragon Knight,Hack and Slasher,Weapon-type hit rules (2H Sword melee / 2H Spear ranged),#9999,Damage 8550%→10500% ATK (Lv10); spear=long range in battle.cpp,Partial
+Dragon Knight,Madness Crusher,Weapon-type: 2H Sword/Spear = ranged,#9999,Damage 20000%→23000% ATK (Lv5); 2H sword/spear=long in battle.cpp,Partial
+Dragon Knight,Storm Slash,Weapon-type: 2H Sword/Axe = melee,—,2H sword/axe forced melee in battle.cpp,Done
+Dragon Knight,Dragonic Pierce,—,#9999,4550%/5000% ATK per hit (Lv5 with Aura),Done
+Dragon Knight,Dragonic Aura,—,#9999,AP 150→120,Done
+Imperial Guard,Shield Shooting,"AoE 7×7; range 11→9; base 11900%→14900%; Shield Mastery ×75→×250; POW ×5→×7; refine ×4→×25",#9981,KRO formula applied (was Attack Stance PR only),Done
+Imperial Guard,Overslash,"Base 1200%→1600%; Spear&Sword M ×100→×250; POW ×5→×7 (Lv10)",—,KRO formula in overslash.cpp,Done
+Imperial Guard,Cross Rain,"CD/duration 4.5s→2.4s; mastery weights; SPL ×5→×7; AP recovery 7→4",—,Formula + GiveAp 4 in skill_db.yml,Done
+Arch Mage,Rain of Crystal,"AoE 19×19→13×13; SP 100→125 (Lv5)",—,skill_db AoE/SP already matched KRO,Done
+Arch Mage,Crimson Arrow,"SP 94→90; line 1500%→1750%; explosion 3000%→3500% Matk",—,KRO formula in crimsonarrow.cpp,Done
+Arch Mage,Storm Cannon,"SP 94→88; damage 4750/6250%→6000/7500% Matk",—,KRO formula in stormcannon.cpp,Done
+Arch Mage,Rock Down,"SP 94→88; damage 4750/6250%→6000/7500% Matk",—,KRO formula in rockdown.cpp,Done
+Arch Mage,Frozen Slash,"SP 96→115; damage 4750/6650%→4900/6800% Matk",—,Formula already matched KRO,Done
+Arch Mage,Destructive Hurricane,"CD 2→2.5s; base 14250%→14850%; Climax Lv3/Lv5 tweaks; SP 132→186",#10003,KRO base 14850% + open PR SPL×10; Climax in battle.cpp,Done
+Arch Mage,Crystal Impact,"AoE 15×15→13×13; Climax Lv5 AoE cap; SP 132→186",#10003,Open PR damage + KRO AoE/SP in skill_db,Done
+Arch Mage,Astral Strike,—,"#9984, #10003",AP 25→15; initial hit 18300%→26700% Matk (Lv10),Done
+Arch Mage,Energy Conversion,—,#9984,AP 10→5; SP gain 600→1200 (Lv5),Done
+Arch Mage,Mystical Amplification,—,#10003,Duration 60s→180s,Done
+Arch Mage,Soul Vulcan Strike,—,#10003,1500%→1700% Matk per hit (Lv5),Done
+Meister,Axe Stomp,"SP 74→85; base 4600%→5150% ATK (Lv5)",—,KRO formula in axestomp.cpp,Done
+Meister,Mighty Smash,"CD 0.3→0.5s; +GCD 0.25s; SP 78→95; dmg 3100/3150%→1825/1850%; hits 3/5→5/7; POW×7→×10 under Axe Stomp",—,KRO formula + 5/7 hits in skill_db.yml,Done
+Meister,Spark Blaster,"CD 0.7→0.5s; base 7750%→9250% ATK (Lv10)",—,KRO formula in sparkblaster.cpp,Done
+Meister,Triple Laser,"CD 0.25→0.35s; +GCD 0.25s; base 3300%→5050%; POW ×10→×12",—,KRO formula in triplelaser.cpp,Done
+Meister,Attack Machine,"Rework: target AoE 3650% ATK ×4 crit-capable; cast/CD/GCD/SP changes",#9997,Buff→direct attack; Infinity skips capsule,Done
+Meister,Madogear support,Chemical Protection / Strip / Heal work on Madogear,#9997,Strip & heal restrictions removed in skill.cpp,Done
+Meister,ABR Infinity,—,#9997,AP 200→180/160/140/120 by level,Done
+Meister,Rush Quake,—,#9997,Cooldown 60s→30s,Done
+Meister,ABR summons,—,#9997,Battle Warrior/Dual Cannon/Mother Net/Infinity damage taken ÷10,Partial
+Biolo,Mayhemic Thorns,"Research Report: 5→4 hits; dmg 2700/3250%→3200/3350%",#10001,KRO formula; 4 hits under Research Report,Done
+Biolo,Explosive Powder,"SP 74→97; dmg 2650/3150%→3150/3650% (Lv5)",—,KRO formula in explosivepowder.cpp,Done
+Biolo,Dust Explosion,—,#10001,3450/4450%→3600/4700% per hit,Done
+Biolo,Summons (Creeper etc.),—,#9982,Damage taken ÷10,Partial
+Cardinal,Framen,"4000/4500%→4750/5250% Matk (Lv5)",—,KRO formula in framen.cpp,Done
+Cardinal,Arbitrium,"CD 1.5→1s; SP 112→125; +AP +2; AoE 12500%→17500%; Fidus Animus ×100→×500; SPL ×7→×10",#9986,KRO AoE formula; rAthena rework CD 0.75s retained,Partial
+Cardinal,Petitio,"AoE 9×9→7×7; Mace&Book Mastery ×100→×500",#9986,KRO mastery weight ×500; rAthena damage 12000% retained,Partial
+Cardinal,Effligo,—,#9986,Mace = long range; 16500/18000%→18000/20000%,Done
+Cardinal,Pneumaticus Procella,—,#9986,AP 20→15 (Lv10),Done
+Inquisitor,Oleum Sanctum,"CD 2→1.5s; no Holy Water; AoE 11×11→9×9",#9987,Crit at user CRI; skill_db CD/AoE matched KRO,Partial
+Inquisitor,Explosion Blaster,"+GCD 1s; SP 90→125; AoE shrink; dmg rebalance; POW weight change",—,KRO formula + GCD/AoE/SP in skill_db,Done
+Inquisitor,Massive Flame Blaster,"+GCD 0.5s; AoE 11×11→9×9; dmg 21500/23000%→23000/24500%",—,KRO formula in massiveflameblaster.cpp,Done
+Inquisitor,First Brand / Second Faith,—,#9987,Apply crit at user CRI,Done
+Inquisitor,Second Judgement,—,#9987,Split→cumulative hits; 13150%→4500% ATK/hit,Done
+Inquisitor,Third Consecration,—,#9987,3500%→6000% ATK/hit; CD 1→0.7s; no HP/SP heal,Done
+Shadow Cross,Savage Impact,"CD 1→0.7s; AoE 5×5→7×7; +AP +2",#10002,KRO AP +2; formula + splash/CD in skill_db,Done
+Shadow Cross,Shadow Stab,"2 hits; Cloaking Exceed: 3 hits + POW×7; base 1500%→1750/2000%",#9983,KRO formula + 2/3 hits in shadowstab.cpp,Done
+Shadow Cross,Impact Crater,—,"#9983, #9998, #10002",Katar crit rules; 400%→1000% ATK/hit; SP/GCD P1,Done
+Shadow Cross,Shadow Exceed,—,#10002,AP 125→120 (Lv10),Done
+Shadow Cross,Fatal Shadow Crow,—,#10002,AP 150→120,Done
+Abyss Chaser,Abyss Dagger,"CD 0.3→0.4s; SP 64→76; 2600%→4600% ATK",—,KRO formula in abyssdagger.cpp,Done
+Abyss Chaser,Deft Stab,No repeat proc; SP/CD/dmg/hit-type changes,—,KRO formula; repeat proc removal pending,Partial
+Abyss Chaser,Frenzy Shot,"CD 0.2→0.35s; SP 55→65; 2 hits; 4000%→6150%; CON ×5→×15",#10010,KRO formula + 2 hits in frenzyshot.cpp,Done
+Abyss Chaser,From the Abyss,—,#10010,Sphere interval 1s→0.5s,Done
+Abyss Chaser,Abyss Square,—,#10010,3750+(MSM×200)%→4500+(MSM×250)% Matk,Done
+Abyss Chaser,Chasing Shot,—,#10010,5000/5250%→6000/6250% ATK,Done
+Abyss Chaser,Chain Reaction Shot,—,#10010,13550%→14200%; chasing bonus 700%→1100%,Done
+Windhawk,No Limits (Ranger),No longer removed by Dispel/Clearance,—,NoDispell/NoClearance already in status.yml,Done
+Windhawk,Calamity Gale,"Duration 60→180s; CD 300→180s; dispel immune; not removed by No Limits",#10012,180s duration/CD + dispel immune; AP 120 from open PR,Done
+Windhawk,Gale Storm,"CD 1.5→1.2s; SP 100→120; dmg 9500%→10000%; AoE 11×11→9×9; CON ×5→×10",—,KRO formula + CD/SP in skill_db.yml,Done
+Windhawk,Crescive Bolt,"CD 0.15→0.35s; GCD 0.3→0.7s; dmg 3400%→9400%",#10012,KRO formula + AP recovery 2 from open PR,Done
+Troubadour/Trouvere,Rhythm Shooting,"CD 0.15→0.35s; dmg 800/1400%→3700/4550%; CON ×3→×5 (×7 on Sound Brand)",—,KRO formula in rhythmshooting.cpp,Done
+Troubadour/Trouvere,Metallic Fury,"Rework: 9×9 AoE; CD/GCD up; keeps Sound Brand; dmg & SPL weight changes",—,KRO formula; 9×9 splash targeting rework pending,Partial
+Night Watch,The Vigilante at Night,"SP 65→88; gatling AoE 13×13→11×11",—,skill_db SP/AoE pending verify,Partial
+Night Watch,Only One Bullet,"CD 0.3→0.35s; 7550/8300%→16200/18200%",—,KRO formula in onlyonebullet.cpp,Done
+Night Watch,Spiral Shooting,"8500/9700%→9700/15400% ATK",—,KRO formula in spiralshooting.cpp,Done
+Night Watch,Magazine for One,"1950/2400%→2750/4300% ATK",—,KRO formula in magazineforone.cpp,Done
+Night Watch,Wild Fire,"13250/12500%→17500/16500% ATK",—,KRO formula in wildfire.cpp,Done
+Night Watch,Basic Grenade,5750%→12000% ATK,—,KRO formula in basicgrenade.cpp,Done
+Night Watch,Hasty Fire in the Hole,6750%→9000% ATK,—,KRO formula in hastyfireinthehole.cpp,Done
+Shinkiro/Shiranui,Shadow Hunting,4500%→9600% ATK (Lv10),—,KRO formula in shadowhunting.cpp,Done
+Shinkiro/Shiranui,Shadow Dance,"CD 0.5→0.4s; SP 65→82; AoE 9×9→7×7; dmg 5900%→8050%",—,KRO damage formula; CD/SP/AoE in skill_db pending,Partial
+Shinkiro/Shiranui,Shadow Flash,"Rework: ground target 7×7; crit; range 1→2; dmg & formula changes",—,KRO formula; ground target/crit rework pending,Partial
+Shinkiro/Shiranui,Huuma Grasp,2700%→4350% ATK,—,KRO formula in huumashurikengrasp.cpp,Done
+Shinkiro/Shiranui,Huuma Construct,"Rework: ground 9×9; range 1→9; dmg buff",—,KRO formula; ground 9×9 targeting pending,Partial
+Shinkiro/Shiranui,Red/Cold/Thunder/Golden Cannons,Target rework; range/AoE/SP/dmg changes per cannon,—,KRO damage formulas; ground target rework pending,Partial
+Sky Emperor,Power (Taekwon),Damage bonus 85%→100% (Lv5),—,Renewal TK_POWER 20×level = 100% at Lv5,Done
+Sky Emperor,Wrath of Sun/Moon/Star,Max bonus cap = skill level × 25%,—,Already min(skillratio; 25×level) in battle.cpp,Done
+Sky Emperor,Twinkling Galaxy,"2200%→2800%; duration 4.5→3.5s; interval 0.3→0.5s; SP 84→124",#9988,KRO formula; duration/interval/SP in skill_db pending,Partial
+Sky Emperor,Star Cannon,"CD 5→3.5s; dmg 2700%→3000%; duration/hits/AoE/SP changes",#9988,KRO formula; timing/AoE in skill_db pending,Partial
+Sky Emperor,Star Light Kick,—,#9988,CD 1→0.75s,Done
+Sky Emperor,All in the Sky,"AP 35→70; dmg 23000%→12250%",—,Formula matched KRO; AP 70 in skill_db,Done
+Elemental Master,Summon Elementals,—,#9985,Damage taken ÷10,Done
+Elemental Master,Psychic Stream,—,"#9985, #10011",CD 2.5→2s; dmg 18500%→21000%; SPL ×5→×12,Done
+Elemental Master,Diamond Storm,—,#10011,12500%→15600%; spirit 20800%→21600%,Done
+Elemental Master,Terra Drive,—,#10011,Same pattern as Diamond Storm,Done
+Soul Ascetic,Talisman of Blue Dragon,"Range 9→11; dmg 7500/8600%→9100/11600%",—,KRO formula; range 11 in skill_db pending,Partial
+Soul Ascetic,Talisman of White Tiger,"SP 92→118; dmg 5100/7100%→5400/7400%",—,KRO formula matched; SP in skill_db pending,Partial
+Soul Ascetic,Talisman of Red Phoenix,5500/7700%→7450/9650% Matk,—,KRO formula in talismanofredphoenix.cpp,Done
+Soul Ascetic,Talisman of Black Tortoise,9400/11550%→10150/12800% Matk,—,KRO formula in talismanofblacktortoise.cpp,Done
+Soul Ascetic,Circle of Directions,"AP 25→35; buff no dispel/clearance",—,AP 35 + T_Fifth_God NoDispell in status.yml,Done
+Hyper Novice,Double Bowling Bash,"Knockback 2→1 cell; 2650%→3200% ATK",—,KRO formula; Knockback 1 in skill_db,Done
+Hyper Novice,Mega Sonic Blow,"CD 0.3→0.35s; 5350%→8400% ATK",—,KRO formula in megasonicblow.cpp,Done
+Hyper Novice,Shield Chain Rush,"CD 0.3→0.35s; 5100%→5700% ATK",#9989,KRO formula 5700% at Lv10,Done
+Hyper Novice,Spiral Pierce Max,"CD 0.3→0.35s; 4050%→8700% ATK",#9989,KRO formula 8700% at Lv10,Done
+Hyper Novice,Hell's Drive,SP 98→115,—,skill_db SP pending,Partial
+Hyper Novice,Ground Gravitation,SP 100→120,—,skill_db SP pending,Partial
+Hyper Novice,Breaking Limit,"MSB/SPM bonus 70%→100%; DBB/SCR 50%→70%",—,battle.cpp bonuses updated to KRO,Done
+Spirit Handler,Chulho Sonic Claw,"Range 9→11; 5650/6450%→12400/15200%",—,KRO formula; range 11 in skill_db pending,Partial
+Spirit Handler,Howling of Chulho,SP 68→72,—,skill_db SP pending,Partial
+Spirit Handler,Hogogong Strike,SP 72→85,—,skill_db SP pending,Partial
+Spirit Handler,Kisul Rampage,AP recovery 3/6→2/4,—,skill_db GiveAp pending,Partial
+Spirit Handler,Hyunrok Breeze,"4800/6300%→5900/7400% Matk",—,Formula already matched KRO,Done
+Spirit Handler,Hyunrok Cannon,"Range 9→11; SP 74→65; 7350/8500%→11900/14000%",—,KRO formula; range/SP in skill_db pending,Partial

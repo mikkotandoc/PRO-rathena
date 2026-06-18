@@ -1,0 +1,589 @@
+//===== rAthena Script =======================================
+//= Corridor of Phantoms
+//===== Description: =========================================
+//= Public MVP hunting maps based on iRO/kRO Corridor of
+//= Phantoms. Shared maps (not instances) — all players see
+//= each other. MVPs take 95% damage reduction (5% damage taken).
+//=
+//= Maps: vis_h01 (1F), vis_h02 (2F), vis_h03 (3F)
+//= Entry: Phantom's Spirit (comodo 214,186) for passes
+//=        Corridor Portal   (comodo 208,187) to enter
+//=
+//= Map rules (official):
+//=   Teleport / Warp Portal / Convenio disabled
+//=   Logout returns to save point
+//=   Ticket-only entry (no memo / external warp)
+//=   MVP loot disabled — flowers granted by script only
+//= 1.2 Halved flower drops, ticket-exclusive access enforced.
+//= Items: 25503 Flower, 25504 Seal, 1000391 Invitation,
+//=         1000392-1000394 floor tickets (official IDs)
+//= 1.3 MVPs use 95% damage reduction instead of 100x HP.
+//============================================================
+
+// Apply Corridor phantom toughness to a spawned MVP (GID)
+function	script	F_COP_BuffMob	{
+	setunitdata getarg(0), UMOB_DAMAGETAKEN, 5;
+	return;
+}
+
+// Shared ticket validation (returns 1 if valid, 0 and ejects if not)
+function	script	F_COP_HasTicket	{
+	if (cop_expiry > gettimetick(2))
+		return 1;
+	dispbottom "[Corridor] Access denied — a valid ticket is required.";
+	warp "comodo", 214, 186;
+	return 0;
+}
+
+// Halved flower rewards per floor (script-only drops)
+function	script	F_COP_GiveFlowers	{
+	switch (getarg(0)) {
+	case 1:
+		if (rand(100) < 50) getitem 25503, 1;
+		if (rand(100) < 15) getitem 25503, 1;
+		break;
+	case 2:
+		if (rand(100) < 50) getitem 25503, 1;
+		if (rand(100) < 25) getitem 25503, 1;
+		break;
+	case 3:
+		getitem 25503, 1;
+		if (rand(100) < 40) getitem 25503, 1;
+		break;
+	}
+	return;
+}
+
+// -------------------------------------------------------
+// Phantom's Spirit -- Passes, Exchange, Info
+// -------------------------------------------------------
+comodo,214,186,5	script	Phantom's Spirit#cop	4_GHOSTRING,{
+	mes "[Phantom's Spirit]";
+	mes "Greetings, adventurer.";
+	mes "Beyond the black portal lies the ^FF0000Corridor of Phantoms^000000,";
+	mes "a realm where MVP echoes shrug off ^FF000095%^000000 of all damage.";
+	mes "You will share the hunt with other adventurers there.";
+	next;
+
+	clear;
+	mes "[Phantom's Spirit]";
+
+	if (cop_expiry > gettimetick(2)) {
+		.@timeleft = cop_expiry - gettimetick(2);
+		.@hours = .@timeleft / 3600;
+		.@mins = (.@timeleft % 3600) / 60;
+		mes "^33AA33Active pass:^000000 " + .@hours + "h " + .@mins + "m remaining.";
+		mes "Use the ^777777Corridor Portal^000000 south of me to enter.";
+		next;
+		clear;
+	}
+
+	switch(select(
+		"Request a Phantom's Seal [3-day cooldown]",
+		"Purchase Phantom's Invitation [daily]",
+		"Exchange Flowers for Rewards",
+		"What rewards can I get?",
+		"Cancel"
+	)) {
+	case 1: callsub S_Seal; break;
+	case 2: callsub S_BuyInvite; break;
+	case 3: callsub S_Exchange; break;
+	case 4:
+		mes "[Phantom's Spirit]";
+		mes "MVPs inside drop ^FF9900Flowers Left by Phantom^000000 instead";
+		mes "of their usual loot. Bring ^FF990010 Flowers^000000 here for";
+		mes "a chance at boss cards, including rare sealed MVP cards.";
+		next;
+		clear;
+		mes "[Phantom's Spirit]";
+		mes "Floor 3 phantoms are the deadliest, but they leave the";
+		mes "most flowers behind. Teleport skills cannot be used inside.";
+		close;
+	case 5:
+		close;
+	}
+	end;
+
+S_Seal:
+	if (cop_expiry > gettimetick(2)) {
+		mes "[Phantom's Spirit]";
+		mes "You already hold an active Corridor pass.";
+		mes "Use the portal while it lasts.";
+		close;
+	}
+	if (countitem(25504) >= 1) {
+		mes "[Phantom's Spirit]";
+		mes "You already hold a ^33AA33Phantom's Seal^000000.";
+		mes "Activate it at the Corridor Portal.";
+		close;
+	}
+	if (cop_cooldown > gettimetick(2)) {
+		.@timeleft = cop_cooldown - gettimetick(2);
+		.@hours = .@timeleft / 3600;
+		.@mins = (.@timeleft % 3600) / 60;
+		mes "[Phantom's Spirit]";
+		mes "The spirits are resting. You must wait:";
+		mes "^FF0000" + .@hours + " hour(s) and " + .@mins + " minute(s)^000000.";
+		close;
+	}
+	set cop_cooldown, gettimetick(2) + 259200;
+	getitem 25504, 1;
+	mes "[Phantom's Spirit]";
+	mes "You receive a ^33AA33Phantom's Seal^000000!";
+	mes "Take it to the Corridor Portal to begin your hunt.";
+	close;
+
+S_BuyInvite:
+	if (cop_expiry > gettimetick(2)) {
+		mes "[Phantom's Spirit]";
+		mes "You already hold an active Corridor pass.";
+		close;
+	}
+	if (countitem(1000391) >= 1 || countitem(25504) >= 1) {
+		mes "[Phantom's Spirit]";
+		mes "You already hold a Corridor ticket.";
+		mes "Activate it at the Corridor Portal first.";
+		close;
+	}
+	if (cop_invite_cd > gettimetick(2)) {
+		.@timeleft = cop_invite_cd - gettimetick(2);
+		.@hours = .@timeleft / 3600;
+		.@mins = (.@timeleft % 3600) / 60;
+		mes "[Phantom's Spirit]";
+		mes "You may purchase another invitation in:";
+		mes "^FF0000" + .@hours + " hour(s) and " + .@mins + " minute(s)^000000.";
+		close;
+	}
+	mes "[Phantom's Spirit]";
+	mes "A ^33AA33Phantom's Invitation^000000 grants ^FF00002 hours^000000";
+	mes "inside the Corridor. Cost: ^FF0000100,000 Zeny^000000.";
+	next;
+	if (select("Purchase:Cancel") == 2) close;
+	if (Zeny < 100000) {
+		mes "[Phantom's Spirit]";
+		mes "You do not have enough zeny.";
+		close;
+	}
+	set Zeny, Zeny - 100000;
+	set cop_invite_cd, gettimetick(2) + 86400;
+	getitem 1000391, 1;
+	mes "[Phantom's Spirit]";
+	mes "You receive a ^33AA33Phantom's Invitation^000000!";
+	mes "Present it at the Corridor Portal to enter.";
+	close;
+
+S_Exchange:
+	mes "[Phantom's Spirit]";
+	.@flowers = countitem(25503);
+	if (.@flowers < 10) {
+		mes "You need ^FF990010 Flowers Left by Phantom^000000.";
+		mes "You currently hold: ^FF9900" + .@flowers + " flower(s)^000000.";
+		close;
+	}
+	mes "You hold ^FF9900" + .@flowers + " Flowers^000000.";
+	mes "Sacrifice ^FF990010 Flowers^000000 for a chance at a rare reward?";
+	next;
+	if (select("Offer the Flowers:No, keep them") == 2) close;
+
+	delitem 25503, 10;
+
+	.@roll = rand(100);
+	if (.@roll < 5) {
+		setarray .@pool[0], 4399, 4403, 4147, 4128, 4131, 4132;
+		getitem .@pool[rand(6)], 1;
+		mes "[Phantom's Spirit]";
+		mes "The phantoms bow before your strength!";
+		mes "A ^FF0000rare MVP Card^000000 materialises before you.";
+	} else if (.@roll < 25) {
+		setarray .@pool[0], 4147, 4399, 4403, 4131, 4132, 4123;
+		getitem .@pool[rand(6)], 1;
+		mes "[Phantom's Spirit]";
+		mes "A powerful card emerges from the phantom realm.";
+	} else {
+		setarray .@pool[0], 4135, 4168, 4137, 4121, 4146, 4142, 4143, 4318;
+		getitem .@pool[rand(8)], 1;
+		mes "[Phantom's Spirit]";
+		mes "A boss card drifts to you from beyond the veil.";
+	}
+	close;
+
+OnKickOut:
+	if (compare(strcharinfo(3), "vis_h")) {
+		dispbottom "[Corridor] Your ticket has expired.";
+		warp "comodo", 214, 186;
+	}
+	end;
+}
+
+// -------------------------------------------------------
+// Corridor Portal -- Entry (official: comodo 208, 187)
+// -------------------------------------------------------
+comodo,208,187,0	script	Corridor Portal#cop	4_BULLETIN_BOARD2,{
+	mes "[Corridor Portal]";
+	mes "A dark rift hums before you, leading into the";
+	mes "^FF0000Corridor of Phantoms^000000.";
+	next;
+
+	if (cop_expiry > gettimetick(2)) {
+		.@timeleft = cop_expiry - gettimetick(2);
+		.@hours = .@timeleft / 3600;
+		.@mins = (.@timeleft % 3600) / 60;
+		mes "[Corridor Portal]";
+		mes "Your pass is still active.";
+		mes "Time remaining: ^33AA33" + .@hours + "h " + .@mins + "m^000000";
+		next;
+		mes "[Corridor Portal]";
+		mes "Which floor do you wish to enter?";
+		next;
+		switch(select("1st Floor [vis_h01]:2nd Floor [vis_h02]:3rd Floor [vis_h03]:Cancel")) {
+		case 1:
+			if (!callfunc("F_COP_HasTicket")) end;
+			warp "vis_h01", 100, 100;
+			end;
+		case 2:
+			if (!callfunc("F_COP_HasTicket")) end;
+			warp "vis_h02", 100, 100;
+			end;
+		case 3:
+			if (!callfunc("F_COP_HasTicket")) end;
+			warp "vis_h03", 100, 100;
+			end;
+		case 4: close;
+		}
+	}
+
+	mes "[Corridor Portal]";
+	mes "You need a ^33AA33Phantom's Seal^000000, ^33AA33Phantom's Invitation^000000,";
+	mes "or a ^33AA33Corridor floor ticket^000000 to cross.";
+	mes "Request a free seal from the Phantom's Spirit.";
+	next;
+
+	.@duration = 0;
+	.@map$ = "vis_h01";
+
+	if (countitem(25504) >= 1) {
+		delitem 25504, 1;
+		.@duration = 3600;
+		mes "[Corridor Portal]";
+		mes "The ^33AA33Phantom's Seal^000000 dissolves into the rift...";
+	} else if (countitem(1000391) >= 1) {
+		delitem 1000391, 1;
+		.@duration = 7200;
+		mes "[Corridor Portal]";
+		mes "One ^33AA33Phantom's Invitation^000000 is consumed...";
+	} else if (countitem(1000392) >= 1) {
+		delitem 1000392, 1;
+		.@duration = 7200;
+		mes "[Corridor Portal]";
+		mes "Your ^33AA331F Corridor Ticket^000000 is consumed...";
+	} else if (countitem(1000393) >= 1) {
+		delitem 1000393, 1;
+		.@duration = 7200;
+		.@map$ = "vis_h02";
+		mes "[Corridor Portal]";
+		mes "Your ^33AA332F Corridor Ticket^000000 is consumed...";
+	} else if (countitem(1000394) >= 1) {
+		delitem 1000394, 1;
+		.@duration = 7200;
+		.@map$ = "vis_h03";
+		mes "[Corridor Portal]";
+		mes "Your ^33AA333F Corridor Ticket^000000 is consumed...";
+	} else {
+		mes "[Corridor Portal]";
+		mes "You have no valid pass.";
+		close;
+	}
+	next;
+
+	set cop_expiry, gettimetick(2) + .@duration;
+	deltimer "Phantom's Spirit#cop::OnKickOut";
+	addtimer .@duration * 1000, "Phantom's Spirit#cop::OnKickOut";
+
+	.@hours = .@duration / 3600;
+	mes "[Corridor Portal]";
+	mes "Your pass is active for ^FF0000" + .@hours + " hour(s)^000000.";
+	mes "Only ticket holders may enter or move between floors.";
+	mes "You may re-enter through the portal until it expires.";
+	next;
+	warp .@map$, 100, 100;
+	end;
+}
+
+// -------------------------------------------------------
+// Access Guard -- kicks players without a valid pass
+// -------------------------------------------------------
+vis_h01,1,1,0	script	#cop_access_guard	HIDDEN_WARP_NPC,{
+	end;
+
+OnPCLoadMapEvent:
+	if (!compare(strcharinfo(3), "vis_h")) end;
+	if (cop_expiry > gettimetick(2)) end;
+	dispbottom "[Corridor] Access denied — enter through the Corridor Portal with a valid ticket.";
+	sleep2 500;
+	warp "comodo", 214, 186;
+	end;
+}
+
+vis_h02,1,1,0	duplicate(#cop_access_guard)	#cop_access_guard2	HIDDEN_WARP_NPC
+vis_h03,1,1,0	duplicate(#cop_access_guard)	#cop_access_guard3	HIDDEN_WARP_NPC
+
+// -------------------------------------------------------
+// Floor warps & exits
+// -------------------------------------------------------
+vis_h01,150,100,4	script	#cop_warp_1to2	PORTAL,{
+	if (!callfunc("F_COP_HasTicket")) end;
+	mes "[Corridor Passage]";
+	mes "Descend to the ^FF99002nd Floor^000000 of the Corridor?";
+	next;
+	if (select("Enter Floor 2:Stay") == 2) close;
+	warp "vis_h02", 100, 100;
+	end;
+}
+
+vis_h02,150,100,4	script	#cop_warp_2to3	PORTAL,{
+	if (!callfunc("F_COP_HasTicket")) end;
+	mes "[Corridor Passage]";
+	mes "Descend to the ^FF00003rd Floor^000000 of the Corridor?";
+	mes "The phantoms there are far deadlier.";
+	next;
+	if (select("Enter Floor 3:Stay") == 2) close;
+	warp "vis_h03", 100, 100;
+	end;
+}
+
+vis_h02,50,100,4	script	#cop_warp_2to1	PORTAL,{
+	if (!callfunc("F_COP_HasTicket")) end;
+	mes "[Corridor Passage]";
+	mes "Return to the ^33AA331st Floor^000000?";
+	next;
+	if (select("Go up:Stay") == 2) close;
+	warp "vis_h01", 100, 100;
+	end;
+}
+
+vis_h03,50,100,4	script	#cop_warp_3to2	PORTAL,{
+	if (!callfunc("F_COP_HasTicket")) end;
+	mes "[Corridor Passage]";
+	mes "Return to the ^FF99002nd Floor^000000?";
+	next;
+	if (select("Go up:Stay") == 2) close;
+	warp "vis_h02", 100, 100;
+	end;
+}
+
+vis_h01,50,55,0	script	#cop_exit1	WARPNPC,{
+	mes "[Corridor Exit]";
+	mes "Leave the Corridor and return to Comodo?";
+	next;
+	if (select("Leave:Stay") == 2) close;
+	warp "comodo", 214, 186;
+	end;
+}
+
+vis_h02,50,55,0	duplicate(#cop_exit1)	#cop_exit2	WARPNPC
+vis_h03,50,55,0	duplicate(#cop_exit1)	#cop_exit3	WARPNPC
+
+// -------------------------------------------------------
+// Floor 1 MVP Spawner -- vis_h01
+// -------------------------------------------------------
+vis_h01,2,2,0	script	#cop_spawner_f1	HIDDEN_WARP_NPC,{
+	end;
+
+OnInit:
+	sleep 5000;
+	callsub S_SpawnAll;
+	end;
+
+S_SpawnAll:
+	.@map$ = "vis_h01";
+	.@ev$ = strnpcinfo(0) + "::OnBossKill";
+
+	// mob id, count per type
+	setarray .@mobs[0],
+		1038, 3,	// Osiris
+		1039, 3,	// Baphomet
+		1086, 2,	// Golden Thief Bug
+		1087, 2,	// Orc Hero
+		1112, 3,	// Drake
+		1115, 2,	// Eddga
+		1147, 2,	// Maya
+		1150, 2,	// Moonlight Flower
+		1159, 2,	// Phreeoni
+		1190, 2,	// Orc Lord
+		1272, 2,	// Dark Lord
+		1059, 2;	// Mistress
+
+	.@size = getarraysize(.@mobs);
+	for (.@i = 0; .@i < .@size; .@i += 2) {
+		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++) {
+			.@gid = monster(.@map$, 0, 0, "--ja--", .@mobs[.@i], 1, .@ev$);
+			if (.@gid > 0)
+				callfunc "F_COP_BuffMob", .@gid;
+		}
+	}
+	return;
+
+OnBossKill:
+	callfunc "F_COP_GiveFlowers", 1;
+
+	getunitdata killedrid, .@ud;
+	.@idx = getarraysize(.respawn_queue);
+	.respawn_queue[.@idx] = .@ud[UMOB_ID];
+	if (!.respawn_timer) {
+		.respawn_timer = 1;
+		initnpctimer;
+	}
+	end;
+
+OnTimer180000:
+	if (getarraysize(.respawn_queue) > 0) {
+		.@mid = .respawn_queue[0];
+		deletearray .respawn_queue[0], 1;
+		.@gid = monster("vis_h01", 0, 0, "--ja--", .@mid, 1, strnpcinfo(0) + "::OnBossKill");
+		if (.@gid > 0)
+			callfunc "F_COP_BuffMob", .@gid;
+	}
+	if (getarraysize(.respawn_queue) > 0)
+		initnpctimer;
+	else {
+		.respawn_timer = 0;
+		stopnpctimer;
+	}
+	end;
+}
+
+// -------------------------------------------------------
+// Floor 2 MVP Spawner -- vis_h02
+// -------------------------------------------------------
+vis_h02,2,2,0	script	#cop_spawner_f2	HIDDEN_WARP_NPC,{
+	end;
+
+OnInit:
+	sleep 5000;
+	callsub S_SpawnAll;
+	end;
+
+S_SpawnAll:
+	.@map$ = "vis_h02";
+	.@ev$ = strnpcinfo(0) + "::OnBossKill";
+
+	setarray .@mobs[0],
+		1046, 3,	// Doppelganger
+		1251, 2,	// Stormy Knight
+		1252, 2,	// Hatii / Garm
+		1312, 2,	// Turtle General
+		1373, 2,	// Lord of Death
+		1389, 2,	// Dracula
+		1418, 2,	// Evil Snake Lord
+		1492, 2,	// Samurai Specter
+		1511, 2,	// Amon Ra
+		1583, 2,	// Tao Gunka
+		1623, 2,	// RSX-0806
+		1688, 2,	// Lady Tanee
+		1785, 2;	// Atroce
+
+	.@size = getarraysize(.@mobs);
+	for (.@i = 0; .@i < .@size; .@i += 2) {
+		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++) {
+			.@gid = monster(.@map$, 0, 0, "--ja--", .@mobs[.@i], 1, .@ev$);
+			if (.@gid > 0)
+				callfunc "F_COP_BuffMob", .@gid;
+		}
+	}
+	return;
+
+OnBossKill:
+	callfunc "F_COP_GiveFlowers", 2;
+
+	getunitdata killedrid, .@ud;
+	.@idx = getarraysize(.respawn_queue);
+	.respawn_queue[.@idx] = .@ud[UMOB_ID];
+	if (!.respawn_timer) {
+		.respawn_timer = 1;
+		initnpctimer;
+	}
+	end;
+
+OnTimer180000:
+	if (getarraysize(.respawn_queue) > 0) {
+		.@mid = .respawn_queue[0];
+		deletearray .respawn_queue[0], 1;
+		.@gid = monster("vis_h02", 0, 0, "--ja--", .@mid, 1, strnpcinfo(0) + "::OnBossKill");
+		if (.@gid > 0)
+			callfunc "F_COP_BuffMob", .@gid;
+	}
+	if (getarraysize(.respawn_queue) > 0)
+		initnpctimer;
+	else {
+		.respawn_timer = 0;
+		stopnpctimer;
+	}
+	end;
+}
+
+// -------------------------------------------------------
+// Floor 3 MVP Spawner -- vis_h03
+// -------------------------------------------------------
+vis_h03,2,2,0	script	#cop_spawner_f3	HIDDEN_WARP_NPC,{
+	end;
+
+OnInit:
+	sleep 5000;
+	callsub S_SpawnAll;
+	end;
+
+S_SpawnAll:
+	.@map$ = "vis_h03";
+	.@ev$ = strnpcinfo(0) + "::OnBossKill";
+
+	setarray .@mobs[0],
+		1658, 2,	// Egnigem Cenia
+		1685, 2,	// Vesper
+		1708, 3,	// Thanatos Phantom
+		1719, 2,	// Detale
+		1734, 3,	// Kiel D-01
+		1751, 2,	// Valkyrie Randgris
+		1768, 2,	// Gloom Under Night
+		1779, 2,	// Ktullanux
+		1832, 2,	// Ifrit
+		1871, 2,	// Fallen Bishop
+		1873, 3;	// Beelzebub
+
+	.@size = getarraysize(.@mobs);
+	for (.@i = 0; .@i < .@size; .@i += 2) {
+		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++) {
+			.@gid = monster(.@map$, 0, 0, "--ja--", .@mobs[.@i], 1, .@ev$);
+			if (.@gid > 0)
+				callfunc "F_COP_BuffMob", .@gid;
+		}
+	}
+	return;
+
+OnBossKill:
+	callfunc "F_COP_GiveFlowers", 3;
+
+	getunitdata killedrid, .@ud;
+	.@idx = getarraysize(.respawn_queue);
+	.respawn_queue[.@idx] = .@ud[UMOB_ID];
+	if (!.respawn_timer) {
+		.respawn_timer = 1;
+		initnpctimer;
+	}
+	end;
+
+OnTimer180000:
+	if (getarraysize(.respawn_queue) > 0) {
+		.@mid = .respawn_queue[0];
+		deletearray .respawn_queue[0], 1;
+		.@gid = monster("vis_h03", 0, 0, "--ja--", .@mid, 1, strnpcinfo(0) + "::OnBossKill");
+		if (.@gid > 0)
+			callfunc "F_COP_BuffMob", .@gid;
+	}
+	if (getarraysize(.respawn_queue) > 0)
+		initnpctimer;
+	else {
+		.respawn_timer = 0;
+		stopnpctimer;
+	}
+	end;
+}

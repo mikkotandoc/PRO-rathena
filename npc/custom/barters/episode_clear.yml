@@ -1,0 +1,83 @@
+# Episode Clear Ticket exchange (Balheele - prt_cas)
+# Currency: Silvervine Fruit (Silvervine / 6417)
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: balheele
+    Items:
+      - Index: 0
+        Item: EpisodClear13
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 20
+      - Index: 1
+        Item: EpisodClear14
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 20
+      - Index: 2
+        Item: EpisodClear15
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 20
+      - Index: 3
+        Item: EpisodClear16
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 42
+      - Index: 4
+        Item: EpisodClear17
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 28
+      - Index: 5
+        Item: EpisodClear18
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 80
+      - Index: 6
+        Item: EpisodClear19
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 100
+      - Index: 7
+        Item: EpisodClear20
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 120
+  - Name: balheele_20
+    Items:
+      - Index: 0
+        Item: EpisodClear16
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 21
+      - Index: 1
+        Item: EpisodClear17
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 14
+      - Index: 2
+        Item: EpisodClear18
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 40
+      - Index: 3
+        Item: EpisodClear19
+        RequiredItems:
+          - Index: 0
+            Item: Silvervine
+            Amount: 50

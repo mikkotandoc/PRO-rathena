@@ -35,6 +35,33 @@ bl_ice	monster	--ja--	21569,25	//  ECO_ANGELGOLT
 bl_ice	monster	--ja--	21570,15	//  ECO_RHYNCHO
 bl_ice	boss_monster	--ja--	21571,1,21600000,600000,0	//  ECO_KTULLANUX
 
+bl_temple	monster	--ja--	21920,35	//  ECO_RUDO
+bl_temple	monster	--ja--	21921,35	//  ECO_ARCHANGELING
+bl_temple	monster	--ja--	21922,35	//  ECO_FAKE_ANGEL
+bl_temple	monster	--ja--	21923,30	//  ECO_PLASMA_P
+bl_temple	monster	--ja--	21924,35	//  ECO_SOLACE
+bl_temple	monster	--ja--	21925,40	//  ECO_ANOPHELES
+bl_temple	monster	--ja--	21926,25	//  ECO_GRYPHON
+bl_temple	boss_monster	--ja--	21927,1,21600000,600000,0	//  ECO_RANDGRIS
+
+bl_venom	monster	--ja--	21928,40	//  ECO_COMODO
+bl_venom	monster	--ja--	21929,35	//  ECO_POISON_TOAD
+bl_venom	monster	--ja--	21930,35	//  ECO_SIDE_WINDER
+bl_venom	monster	--ja--	21931,40	//  ECO_CRAMP
+bl_venom	monster	--ja--	21932,35	//  ECO_KUKRE
+bl_venom	monster	--ja--	21933,30	//  ECO_NEPENTHES
+bl_venom	monster	--ja--	21934,25	//  ECO_ANGRA_MANTIS
+bl_venom	boss_monster	--ja--	21935,1,21600000,600000,0	//  ECO_VENOM_KIMERA
+
+bl_soul	monster	--ja--	21936,35	//  ECO_NIGHTMARE
+bl_soul	monster	--ja--	21937,40	//  ECO_WHISPER
+bl_soul	monster	--ja--	21938,35	//  ECO_MARIONETTE
+bl_soul	monster	--ja--	21939,30	//  ECO_NOXIOUS
+bl_soul	monster	--ja--	21940,35	//  ECO_THE_PAPER
+bl_soul	monster	--ja--	21941,35	//  ECO_GAJOMART
+bl_soul	monster	--ja--	21942,25	//  ECO_ODIUM
+bl_soul	boss_monster	--ja--	21943,1,21600000,600000,0	//  ECO_GLOOMUNDERNIGHT
+
 bl_lava	monster	--ja--	21556,40	//  ECO_EXPLOSION
 bl_lava	monster	--ja--	21557,40	//  ECO_DELETER
 bl_lava	monster	--ja--	21558,30	//  ECO_JAKK
@@ -43,3 +70,15 @@ bl_lava	monster	--ja--	21560,30	//  ECO_MAJORUROS
 bl_lava	monster	--ja--	21561,15	//  ECO_HYDRO
 bl_lava	monster	--ja--	21562,35	//  ECO_ACIDUS
 bl_lava	boss_monster	--ja--	21563,1,21600000,600000,0	//  ECO_DETALE
+
+// Varmundt's Biosphere Depth 2 (bl_depth2)
+bl_depth2	monster	--ja--	22252,30	//  BIO_DUNEYRR
+bl_depth2	monster	--ja--	22253,30	//  BIO_NAGA
+bl_depth2	monster	--ja--	22254,30	//  BIO_ANCIENT_TREE
+bl_depth2	monster	--ja--	22255,30	//  BIO_DOLLOCARIS
+bl_depth2	monster	--ja--	22256,30	//  BIO_ICE_GARGOYLE
+bl_depth2	monster	--ja--	22257,30	//  BIO_FLAME_GHOST
+bl_depth2	monster	--ja--	22258,30	//  BIO_ACIDUS_
+bl_depth2	monster	--ja--	22259,30	//  BIO_MOROCC_1
+bl_depth2	monster	--ja--	22260,30	//  BIO_SALAMANDER
+bl_depth2	monster	--ja--	22261,30	//  BIO_MOSKILLO

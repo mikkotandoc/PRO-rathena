@@ -7,9 +7,9 @@
 
 function	script	F_ep20_twig_clear	{
 	if (ep20_main == 25 && isbegin_quest(17724) == 1) {
-		completequest 17724;
+		callfunc("F_ep20_completequest", 17724);
 		ep20_main = 26;
-		setquest 17725;
+		callfunc("F_ep20_setquest", 17725);
 		callfunc("F_ep20_reward", 10, 70);
 	}
 	return;

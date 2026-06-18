@@ -342,6 +342,18 @@ Body:
           - Index: 0
             Item: Cachua_Coupon
             Amount: 15
+      - Index: 24
+        Item: Shadow_Random_Mix
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 5
+      - Index: 25
+        Item: Skill_Sha_R_M_Magic
+        RequiredItems:
+          - Index: 0
+            Item: Cachua_Coupon
+            Amount: 10
   - Name: CachuaCoupon03
     Items:
       - Index: 0

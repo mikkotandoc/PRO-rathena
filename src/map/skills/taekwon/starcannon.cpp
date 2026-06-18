@@ -67,7 +67,7 @@ void SkillStarCannon::calculateSkillRatio(const Damage* wd, const block_list* sr
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 150 + 650 * skill_lv;
+	skillratio += -100 + 150 + 590 * skill_lv;
 	skillratio += pc_checkskill(sd, SKE_SKY_MASTERY) * 5 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 

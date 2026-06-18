@@ -16,15 +16,15 @@ void SkillShieldShooting::calculateSkillRatio(const Damage* wd, const block_list
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 1000 + 3500 * skill_lv;
-	skillratio += 10 * sstatus->pow;
-	skillratio += skill_lv * 150 * pc_checkskill(sd, IG_SHIELD_MASTERY);
-	if (sd) { // Damage affected by the shield's weight and refine. Need official formula. [Rytech]
+	skillratio += -100 + 1000 + 2780 * skill_lv;
+	skillratio += 7 * sstatus->pow;
+	skillratio += skill_lv * 250 * pc_checkskill(sd, IG_SHIELD_MASTERY);
+	if (sd) {
 		int16 index = sd->equip_index[EQI_HAND_L];
 
 		if (index >= 0 && sd->inventory_data[index] && sd->inventory_data[index]->type == IT_ARMOR) {
 			skillratio += (sd->inventory_data[index]->weight * 7 / 6) / 10;
-			skillratio += sd->inventory.u.items_inventory[index].refine * 100;
+			skillratio += sd->inventory.u.items_inventory[index].refine * 625;
 		}
 	}
 	RE_LVL_DMOD(100);

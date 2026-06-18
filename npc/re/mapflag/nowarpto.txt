@@ -441,3 +441,17 @@ wolfvill	mapflag	nowarpto
 // Illusion of Twins
 //============================================================
 ant_d02_i	mapflag	nowarpto
+
+//============================================================
+// Varmundt's Biosphere (bl_*)
+//============================================================
+bl_death	mapflag	nowarpto
+bl_grass	mapflag	nowarpto
+bl_ice	mapflag	nowarpto
+bl_lava	mapflag	nowarpto
+bl_soul	mapflag	nowarpto
+bl_temple	mapflag	nowarpto
+bl_venom	mapflag	nowarpto
+bl_depth1	mapflag	nowarpto
+bl_depth2	mapflag	nowarpto
+ba_chess	mapflag	nowarpto

@@ -1,0 +1,231 @@
+//===== rAthena Script =======================================
+//= GM Debug - Episode Clear / Reset
+//===== Description: =========================================
+//= Visible only to GM staff (group 99 or GM level 99+).
+//= Clears or resets episode quest progress for testing.
+//============================================================
+
+function	script	F_GM_IsAdmin	{
+	return (getgroupid() >= 99 || getgmlevel() >= 99);
+}
+
+function	script	F_GM_RefreshDebugVis	{
+	if (callfunc("F_GM_IsAdmin"))
+		cloakoffnpc "Debug Episode#gm", getcharid(0);
+	else
+		cloakonnpc "Debug Episode#gm", getcharid(0);
+	return;
+}
+
+function	script	F_GM_RefreshDebugVisMap	{
+	.@cnt = getmapunits(BL_PC, getarg(0), .@gid[0]);
+	for (.@i = 0; .@i < .@cnt; .@i++) {
+		if (attachrid(.@gid[.@i])) {
+			callfunc "F_GM_RefreshDebugVis";
+			detachrid;
+		}
+	}
+	return;
+}
+
+function	script	F_GM_EpSetVars	{
+	.@ep = getarg(0);
+	.@part = getarg(1, 0);
+	.@mode$ = getarg(2); // "complete" or "reset"
+
+	switch (.@ep) {
+	case 16:
+		if (.@mode$ == "complete") terra_gloria_main = 25;
+		else if (.@mode$ == "reset") terra_gloria_main = 0;
+		break;
+	case 17:
+		if (.@part == 2) {
+			if (.@mode$ == "complete") ep17_2_main = 36;
+			else if (.@mode$ == "reset") ep17_2_main = 0;
+		}
+		break;
+	case 18:
+		if (.@mode$ == "complete") {
+			ep18_main = 57;
+			#Ep18_Manual_Clear = 1;
+		} else if (.@mode$ == "reset") {
+			ep18_main = 0;
+			#Ep18_Manual_Clear = 0;
+		}
+		break;
+	case 19:
+		if (.@mode$ == "complete") ep19_main = 100;
+		else if (.@mode$ == "reset") ep19_main = 0;
+		break;
+	case 20:
+		if (.@mode$ == "complete") ep20_main = 100;
+		else if (.@mode$ == "reset") ep20_main = 0;
+		break;
+	}
+	return;
+}
+
+function	script	F_GM_EpManage	{
+	.@mode$ = getarg(0); // "complete" or "reset"
+	.@ep = getarg(1);
+	.@part = getarg(2, 0);
+
+	switch (.@ep) {
+	case 13:
+		setarray .@ids[0], 13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013;
+		break;
+	case 14:
+		setarray .@ids[0], 14000,14001,14002;
+		break;
+	case 15:
+		setarray .@ids[0], 15000,15001,15002,15003,15004;
+		break;
+	case 16:
+		setarray .@ids[0], 7682,7698,7703,7736,14599,14602,14615,12374,18219;
+		break;
+	case 17:
+		if (.@part == 2)
+			setarray .@ids[0], 18001,11615,11616,11617,11618,11620,11621,11638,11639;
+		else
+			setarray .@ids[0], 17000,17001,17002,17003,17004,17005,17006;
+		break;
+	case 18:
+		setarray .@ids[0], 18000,18001,18002,18003,18004,18005,18006,18007,18008,18009,18010,18011,18012,18013,18014;
+		break;
+	case 19:
+		setarray .@ids[0], 19000,19001,19002,19003,19004,19005,19006,19007,19008,19009,19010;
+		break;
+	case 20:
+		setarray .@ids[0], 20000,20001,20003,20004,20005,20006,20007,20008;
+		break;
+	default:
+		return;
+	}
+
+	for (.@i = 0; .@i < getarraysize(.@ids); .@i++) {
+		if (isbegin_quest(.@ids[.@i]) > 0)
+			erasequest .@ids[.@i];
+		if (.@mode$ == "complete")
+			callfunc "F_EpForceComplete", .@ids[.@i];
+	}
+	if (.@mode$ == "complete") {
+		if (.@ep == 17 && .@part == 2)
+			callfunc "F_EpForceComplete", 18020;
+		callfunc "F_GM_EpSetVars", .@ep, .@part, "complete";
+	} else if (.@mode$ == "reset") {
+		if (.@ep == 17 && .@part == 2 && isbegin_quest(18020) > 0)
+			erasequest 18020;
+		callfunc "F_GM_EpSetVars", .@ep, .@part, "reset";
+	}
+	return;
+}
+
+function	script	F_GM_EpResetAll	{
+	for (.@ep = 13; .@ep <= 20; .@ep++) {
+		callfunc "F_GM_EpManage", "reset", .@ep, 1;
+		callfunc "F_GM_EpManage", "reset", .@ep, 2;
+	}
+	terra_gloria_main = 0;
+	ep17_2_main = 0;
+	ep18_main = 0;
+	ep19_main = 0;
+	ep20_main = 0;
+	#Ep18_Manual_Clear = 0;
+	return;
+}
+
+// Floating script — handles login visibility (required for cloak to work)
+-	script	GM_Debug_Vis#cop	-1,{
+OnPCLoginEvent:
+	callfunc "F_GM_RefreshDebugVis";
+	end;
+}
+
+// -------------------------------------------------------
+prontera,167,173,3	script	Debug Episode#gm	4_M_MANAGER,{
+	if (!callfunc("F_GM_IsAdmin")) {
+		end;
+	}
+
+	mes "[Debug Episode]";
+	mes "GM episode tools — target: ^0000FF" + strcharinfo(0) + "^000000";
+	mes "Group ID: ^0000FF" + getgroupid() + "^000000  GM Level: ^0000FF" + getgmlevel() + "^000000";
+	next;
+
+	switch (select(
+		"Complete Episode",
+		"Reset Episode",
+		"Reset ALL episodes",
+		"Cancel"
+	)) {
+	case 1:
+		callsub S_SelectEpisode, "complete";
+		break;
+	case 2:
+		callsub S_SelectEpisode, "reset";
+		break;
+	case 3:
+		mes "[Debug Episode]";
+		mes "Reset ^FF0000all^000000 episode quests and progress variables?";
+		next;
+		if (select("Proceed:Cancel") == 2) close;
+		callfunc "F_GM_EpResetAll";
+		mes "[Debug Episode]";
+		mes "All episode progress has been reset.";
+		close;
+	case 4:
+		close;
+	}
+	end;
+
+S_SelectEpisode:
+	.@mode$ = getarg(0);
+	mes "[Debug Episode]";
+	if (.@mode$ == "complete")
+		mes "Which episode should be ^0000FFcompleted^000000?";
+	else
+		mes "Which episode should be ^FF0000reset^000000?";
+	mes "^777777Complete = mark all quests done and set episode flags.^000000";
+	mes "^777777Reset = remove quests and zero episode flags.^000000";
+	next;
+	switch (select(
+		"Episode 13", "Episode 14", "Episode 15", "Episode 16",
+		"Episode 17.1", "Episode 17.2",
+		"Episode 18", "Episode 19", "Episode 20",
+		"Cancel"
+	)) {
+	case 1: .@ep = 13; .@part = 0; .@label$ = "13"; break;
+	case 2: .@ep = 14; .@part = 0; .@label$ = "14"; break;
+	case 3: .@ep = 15; .@part = 0; .@label$ = "15"; break;
+	case 4: .@ep = 16; .@part = 0; .@label$ = "16"; break;
+	case 5: .@ep = 17; .@part = 1; .@label$ = "17.1"; break;
+	case 6: .@ep = 17; .@part = 2; .@label$ = "17.2"; break;
+	case 7: .@ep = 18; .@part = 0; .@label$ = "18"; break;
+	case 8: .@ep = 19; .@part = 0; .@label$ = "19"; break;
+	case 9: .@ep = 20; .@part = 0; .@label$ = "20"; break;
+	case 10: close;
+	}
+
+	mes "[Debug Episode]";
+	if (.@mode$ == "complete")
+		mes "^0000FFComplete^000000 Episode " + .@label$ + " for this character?";
+	else
+		mes "^FF0000Reset^000000 Episode " + .@label$ + " for this character?";
+	next;
+	if (select("Proceed:Cancel") == 2) close;
+
+	callfunc "F_GM_EpManage", .@mode$, .@ep, .@part;
+
+	mes "[Debug Episode]";
+	if (.@mode$ == "complete")
+		mes "Episode " + .@label$ + " has been ^0000FFcompleted^000000.";
+	else
+		mes "Episode " + .@label$ + " has been ^FF0000reset^000000.";
+	close;
+
+OnInit:
+	cloakonnpc "Debug Episode#gm";
+	sleep 1000;
+	callfunc "F_GM_RefreshDebugVisMap", "prontera";
+	end;
+}

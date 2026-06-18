@@ -1,0 +1,37 @@
+//===== rAthena Script =======================================
+//= Mapflags: Corridor of Phantoms (vis_h01 - vis_h03)
+//===== Description: =========================================
+//= Ticket-exclusive public MVP maps.
+//=   noteleport  - Teleport, Fly Wing, Convenio disabled
+//=   nowarp      - Warp Portal disabled
+//=   nosave      - Logout returns to save point
+//=   nowarpto    - Blocks external warps into the map
+//=   nomemo      - Memo / Butterfly Wing to save point blocked
+//=   nomvploot   - Normal MVP drops disabled (script flowers only)
+//=   loadevent   - Ticket check on map entry
+//= MVPs spawned by script use UMOB_DAMAGETAKEN 5 (95% reduction)
+//============================================================
+
+vis_h01	mapflag	noteleport
+vis_h01	mapflag	nowarp
+vis_h01	mapflag	nosave	SavePoint
+vis_h01	mapflag	nowarpto
+vis_h01	mapflag	nomemo
+vis_h01	mapflag	nomvploot
+vis_h01	mapflag	loadevent
+
+vis_h02	mapflag	noteleport
+vis_h02	mapflag	nowarp
+vis_h02	mapflag	nosave	SavePoint
+vis_h02	mapflag	nowarpto
+vis_h02	mapflag	nomemo
+vis_h02	mapflag	nomvploot
+vis_h02	mapflag	loadevent
+
+vis_h03	mapflag	noteleport
+vis_h03	mapflag	nowarp
+vis_h03	mapflag	nosave	SavePoint
+vis_h03	mapflag	nowarpto
+vis_h03	mapflag	nomemo
+vis_h03	mapflag	nomvploot
+vis_h03	mapflag	loadevent

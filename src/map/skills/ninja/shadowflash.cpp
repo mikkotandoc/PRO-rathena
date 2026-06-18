@@ -15,8 +15,8 @@ void SkillShadowFlash::calculateSkillRatio(const Damage *wd, const block_list *s
 	const status_data* sstatus = status_get_status_data(*src);
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	skillratio += -100 + 1500 + 950 * skill_lv;
-	skillratio += pc_checkskill( sd, SS_KAGENOMAI ) * 150 * skill_lv;
+	skillratio += -100 + 1500 + 760 * skill_lv;
+	skillratio += pc_checkskill( sd, SS_KAGENOMAI ) * 75 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	RE_LVL_DMOD(100);
 	if (wd->miscflag & SKILL_ALTDMG_FLAG)

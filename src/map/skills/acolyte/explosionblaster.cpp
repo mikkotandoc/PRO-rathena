@@ -20,11 +20,11 @@ void SkillExplosionBlaster::calculateSkillRatio(const Damage* wd, const block_li
 	const status_data* sstatus = status_get_status_data(*src);
 	const status_change* tsc = status_get_sc(target);
 
-	skillratio += -100 + 450 + 2600 * skill_lv;
+	skillratio += -100 + 450 + 2310 * skill_lv;
 	skillratio += 10 * sstatus->pow;
 
 	if (tsc != nullptr && tsc->getSCE(SC_HOLY_OIL)) {
-		skillratio += 950 * skill_lv;
+		skillratio += 880 * skill_lv;
 	}
 
 	RE_LVL_DMOD(100);

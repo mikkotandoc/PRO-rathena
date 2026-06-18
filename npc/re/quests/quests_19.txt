@@ -10685,57 +10685,6 @@ icecastle,27,126,3	script(CLOAKED)	Horuru#if19msdq	4_EP19_IWIN,{
 		end;
 	}
 
-	// Episode 20 - The Immortal
-	if (ep20_main == 0) {
-		callfunc("F_ep20_startHoruru");
-		end;
-	}
-	if (ep20_main > 0 && ep20_main < 100) {
-		callfunc("F_ep20_horuruProgress");
-		end;
-	}
-
-	// daily
-	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
-		mes "You cannot proceed with the conversation due to the large number of items you have.";
-		mes "Please clean up your items and try again.";
-		close;
-	}
-	switch( checkquest(17662,PLAYTIME) ) {
-	case -1:
-		break;
-	case 0:
-	case 1:
-		cutin "ep19_iwin06.png",2;
-		mes "[Horuru]";
-		mes "Adventurer, have you rested for a while? But why are you here? If you're asking for a " + getitemname(1000842) + ", you don't have to worry. The battery is still a long way off. You'd better get some rest.";
-		close3;
-	case 2:
-		cutin "ep19_iwin06.png",2;
-		mes "[Horuru]";
-		mes "Are you an adventurer? I want to replace the battery of the " + getitemname(1000842) + " before it runs out. Can you help me today?";
-		next;
-		if (select( "Okay.", "It just happened." ) == 2) {
-			mes "[Horuru]";
-			mes "Is that so? You caught my busy man. Then go for a walk. Have a nice day!";
-			close3;
-		}
-		mes "[Horuru]";
-		mes "Thanks for the help. Then bury this in the ^0000cd10 locations^000000 marked on ^0000cd Frozen Scale Plains and Glaciers^000000. Both are where the gangs used to enter and exit.";
-		erasequest 17662;
-		setquest 17651;
-		setquest 17652;
-		setquest 17653;
-		setquest 17654;
-		setquest 17655;
-		setquest 17656;
-		setquest 17657;
-		setquest 17658;
-		setquest 17659;
-		setquest 17660;
-		getitem 1000842,10;	// Ep19_HS_FEELER
-		close3;
-	}
 	if (isbegin_quest(17650) == 1) {	// Side quest : Surveillance for an Underground Hideout (2)
 		cutin "ep19_iwin06.png",2;
 		mes "[Horuru]";
@@ -10914,6 +10863,58 @@ icecastle,27,126,3	script(CLOAKED)	Horuru#if19msdq	4_EP19_IWIN,{
 		setquest 17660;
 		getitem 1000842,10;	// Ep19_HS_FEELER
 		add_reputation_points( REPUTATION_EP19, 5 );
+		close3;
+	}
+
+	// Episode 20 - The Immortal
+	if (ep20_main == 0) {
+		callfunc("F_ep20_startHoruru");
+		end;
+	}
+	if (ep20_main > 0 && ep20_main < 100) {
+		callfunc("F_ep20_horuruProgress");
+		end;
+	}
+
+	// daily
+	if (checkweight(1000608,3) == 0) {	// Ep19_Snow_Flower
+		mes "You cannot proceed with the conversation due to the large number of items you have.";
+		mes "Please clean up your items and try again.";
+		close;
+	}
+	switch( checkquest(17662,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "Adventurer, have you rested for a while? But why are you here? If you're asking for a " + getitemname(1000842) + ", you don't have to worry. The battery is still a long way off. You'd better get some rest.";
+		close3;
+	case 2:
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "Are you an adventurer? I want to replace the battery of the " + getitemname(1000842) + " before it runs out. Can you help me today?";
+		next;
+		if (select( "Okay.", "It just happened." ) == 2) {
+			mes "[Horuru]";
+			mes "Is that so? You caught my busy man. Then go for a walk. Have a nice day!";
+			close3;
+		}
+		mes "[Horuru]";
+		mes "Thanks for the help. Then bury this in the ^0000cd10 locations^000000 marked on ^0000cd Frozen Scale Plains and Glaciers^000000. Both are where the gangs used to enter and exit.";
+		erasequest 17662;
+		setquest 17651;
+		setquest 17652;
+		setquest 17653;
+		setquest 17654;
+		setquest 17655;
+		setquest 17656;
+		setquest 17657;
+		setquest 17658;
+		setquest 17659;
+		setquest 17660;
+		getitem 1000842,10;	// Ep19_HS_FEELER
 		close3;
 	}
 	if (F_queststatus_between(17651,17660) != 0) {

@@ -1,6 +1,7 @@
 //============================================================
 // Booster Coin Exchange NPCs
 // Centro  - Promotional Item Exchange (prontera)
+// Guarani - Booster Weapon Voucher Exchange (prontera)
 // Yves    - Promotional Costume Enchantment (malangdo)
 // RS26-1  - Illusion Equipment (Bound) Enchantment (sp_cor)
 //============================================================
@@ -32,6 +33,36 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 
 OnInit:
 	setunittitle getnpcid(0), "<Promotional Item Exchange>";
+	end;
+}
+
+prontera,148,282,0	script	Guarani	4_M_HUMERCHANT,{
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 1000) {
+		mes "[Guarani]";
+		mes "Your inventory is too full to continue.";
+		mes "Please make some room and try again.";
+		close;
+	}
+	mes "[Guarani]";
+	mes "Welcome! I can exchange a ^0000FF" + mesitemlink(1000005) + "^000000";
+	mes "for one Booster Weapon of your choice.";
+	next;
+	if (select("Open Weapon Exchange:Cancel") == 2) {
+		mes "[Guarani]";
+		mes "Come back when you have a voucher ready.";
+		close;
+	}
+	if (!getbattleflag("feature.barter")) {
+		mes "[Guarani]";
+		mes "The exchange service is currently unavailable.";
+		close;
+	}
+	close2;
+	callshop "guarani_weapon", 1;
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Booster Weapon Exchange>";
 	end;
 }
 

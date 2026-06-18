@@ -170,6 +170,7 @@ struct s_shield_heartbeat {
 	int32 timer = INVALID_TIMER;
 	bool active = false;
 	bool enforce = false;
+	bool punished = false;
 };
 
 enum e_macro_detect_status : uint8 {

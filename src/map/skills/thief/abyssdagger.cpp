@@ -21,7 +21,7 @@ void SkillAbyssDagger::castendNoDamageId(block_list* src, block_list* target, ui
 void SkillAbyssDagger::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& skillratio, int32 mflag) const {
 	const status_data* sstatus = status_get_status_data(*src);
 
-	skillratio += -100 + 350 + 1400 * skill_lv;
+	skillratio += -100 + 350 + 910 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	RE_LVL_DMOD(100);
 }

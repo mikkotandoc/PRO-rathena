@@ -485,3 +485,17 @@ for_dun01	mapflag	noteleport
 // Forgotten Area 2
 //============================================================
 for_dun02	mapflag	noteleport
+
+//============================================================
+// Varmundt's Biosphere (bl_*)
+//============================================================
+bl_death	mapflag	noteleport
+bl_grass	mapflag	noteleport
+bl_ice	mapflag	noteleport
+bl_lava	mapflag	noteleport
+bl_soul	mapflag	noteleport
+bl_temple	mapflag	noteleport
+bl_venom	mapflag	noteleport
+bl_depth1	mapflag	noteleport
+bl_depth2	mapflag	noteleport
+ba_chess	mapflag	noteleport

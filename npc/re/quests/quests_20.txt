@@ -34,6 +34,47 @@ function	script	F_ep20_reward	{
 	return;
 }
 
+function	script	F_ep20_setquest	{
+	if (isbegin_quest(getarg(0)) == 0)
+		setquest getarg(0);
+	return;
+}
+
+function	script	F_ep20_completequest	{
+	if (isbegin_quest(getarg(0)) == 1)
+		completequest getarg(0);
+	return;
+}
+
+function	script	F_ep20_safetyMenu	{
+	mes "[Safety Zone Portal]";
+	mes "Select a destination.";
+	next;
+	switch( select( "Safety Zone 1 (64, 328)", "Safety Zone 2 (195, 327)", "Safety Zone 3 (330, 327)", "Southern Camp (195, 155)", "Deep Camp (328, 150)", "Ancient Ice Gorge East", "Cancel" ) ) {
+	case 1:
+		warp "jor_safty1", 64, 328;
+		end;
+	case 2:
+		warp "jor_safty1", 195, 327;
+		end;
+	case 3:
+		warp "jor_safty1", 330, 327;
+		end;
+	case 4:
+		warp "jor_safty1", 195, 155;
+		end;
+	case 5:
+		warp "jor_safty1", 328, 150;
+		end;
+	case 6:
+		warp "jor_back5", 350, 75;
+		end;
+	case 7:
+		close;
+	}
+	end;
+}
+
 function	script	F_ep20_canStart	{
 	return (ep19_main == 100 && BaseLevel >= 215 && isbegin_quest(17650) == 2);
 }
@@ -44,6 +85,12 @@ function	script	F_ep20_startHoruru	{
 		mes "Please clean up your items and try again.";
 		close;
 	}
+	if (isbegin_quest(17700) >= 1) {
+		if (ep20_main == 0)
+			ep20_main = 1;
+		callfunc("F_ep20_horuruProgress");
+		end;
+	}
 	if (!callfunc("F_ep20_canStart")) {
 		cutin "ep19_iwin06.png",2;
 		mes "[Horuru]";
@@ -53,9 +100,12 @@ function	script	F_ep20_startHoruru	{
 		} else if (BaseLevel < 215) {
 			mes "The Ancient Ice Gorge is too harsh for you right now.";
 			mes "Come back when you reach Base Level 215.";
+		} else if (isbegin_quest(17650) == 1) {
+			mes "You accepted the surveillance request but haven't finished the briefing outside yet.";
+			mes "Meet me at ^0000CDIce Castle (27, 126)^000000 to continue.";
 		} else {
 			mes "Please help us with the surveillance around the snake's nest first.";
-			mes "Talk to me when you're done.";
+			mes "Talk to me at the ^0000CDrestaurant in Ice Castle^000000 to begin.";
 		}
 		close3;
 	}
@@ -76,8 +126,8 @@ function	script	F_ep20_startHoruru	{
 	mes "[Horuru]";
 	mes "Thank you. Leon is gathering everyone in the castle.";
 	mes "Meet us at the conference room.";
-	setquest 20000;
-	setquest 17700;
+	callfunc("F_ep20_setquest", 20000);
+	callfunc("F_ep20_setquest", 17700);
 	ep20_main = 1;
 	callfunc("F_ep20_reward", 20, 90);
 	close3;
@@ -110,8 +160,8 @@ icas_in,262,202,3	script	Leon Petit#ep20ms01	4_EP19_LEON,{
 		mes "[Leon]";
 		mes "Lehar is already scouting the eastern route.";
 		mes "Meet him at ^0000CDAncient Ice Gorge East^000000.";
-		completequest 17700;
-		setquest 17701;
+		callfunc("F_ep20_completequest", 17700);
+		callfunc("F_ep20_setquest", 17701);
 		ep20_main = 2;
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
@@ -120,6 +170,9 @@ icas_in,262,202,3	script	Leon Petit#ep20ms01	4_EP19_LEON,{
 		cutin "ep19_leon01.png",0;
 		mes "[Leon]";
 		mes "Lehar is waiting at the gorge. Follow the navigation.";
+		next;
+		if (select( "Warp to Ancient Ice Gorge East.", "I'll go on my own." ) == 1)
+			warp "jor_back5", 350, 75;
 		close3;
 	}
 	cutin "ep19_leon01.png",0;
@@ -133,6 +186,31 @@ OnInit:
 }
 
 // Main Quest: Steps 3-8 - Lehar in gorge / safety maps
+jor_safty1,60,325,0	script	Safety Zone Portal#ep20s1	GATE_SKYBLUE,2,2,{
+	if (ep20_main < 2)
+		end;
+	callfunc("F_ep20_safetyMenu");
+	end;
+}
+
+jor_safty1,192,325,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s2	GATE_SKYBLUE,2,2
+jor_safty1,327,325,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s3	GATE_SKYBLUE,2,2
+jor_safty1,192,152,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s4	GATE_SKYBLUE,2,2
+jor_safty1,325,148,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s5	GATE_SKYBLUE,2,2
+jor_back5,348,73,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s6	GATE_SKYBLUE,2,2
+jor_back5,350,354,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s7	GATE_SKYBLUE,2,2
+
+jor_back5,353,73,3	script	Lehar#ep20warp01	4_EP19_LEHAR,{
+	if (ep20_main < 2)
+		end;
+	cutin "ep19_lehar01.png",2;
+	mes "[Lehar]";
+	mes "Need to move between the safety zones? I can open a portal for you.";
+	next;
+	callfunc("F_ep20_safetyMenu");
+	end;
+}
+
 jor_back5,350,75,3	script	Lehar#ep20ms01	4_EP19_LEHAR,{
 	if (ep20_main < 2) end;
 	if (ep20_main == 2) {
@@ -143,15 +221,29 @@ jor_back5,350,75,3	script	Lehar#ep20ms01	4_EP19_LEHAR,{
 		next;
 		mes "[Lehar]";
 		mes "Follow me to the safety zone. Stay close!";
-		completequest 17701;
-		setquest 17702;
+		callfunc("F_ep20_completequest", 17701);
+		callfunc("F_ep20_setquest", 17702);
 		ep20_main = 3;
-		close3;
+		next;
+		mes "[Lehar]";
+		mes "I'll send you to ^0000CDSafety Zone 1 (64, 328)^000000 now.";
+		mes "Use the blue portals later if you need to move between camps.";
+		close2;
+		cutin "",255;
+		warp "jor_safty1", 64, 328;
+		end;
 	}
 	if (ep20_main == 3) {
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "Keep going north to the safety zone at ^0000CD(64, 328)^000000.";
+		next;
+		if (select( "Warp to Safety Zone 1.", "I'll walk." ) == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_safty1", 64, 328;
+			end;
+		}
 		close3;
 	}
 	cutin "ep19_lehar01.png",2;
@@ -173,8 +265,8 @@ jor_safty1,64,328,3	script	Lehar#ep20ms02	4_EP19_LEHAR,{
 		next;
 		mes "[Lehar]";
 		mes "Miriam should be scouting ahead. Let's regroup.";
-		completequest 17702;
-		setquest 17703;
+		callfunc("F_ep20_completequest", 17702);
+		callfunc("F_ep20_setquest", 17703);
 		ep20_main = 4;
 		close3;
 	}
@@ -182,6 +274,13 @@ jor_safty1,64,328,3	script	Lehar#ep20ms02	4_EP19_LEHAR,{
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "Meet me again at ^0000CD(195, 327)^000000 in this safety zone.";
+		next;
+		if (select( "Warp to Safety Zone 2.", "I'll walk." ) == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_safty1", 195, 327;
+			end;
+		}
 		close3;
 	}
 	end;
@@ -200,8 +299,8 @@ jor_safty1,195,327,3	script	Lehar#ep20ms03	4_EP19_LEHAR,{
 		next;
 		mes "[Lehar]";
 		mes "We need to report to Miriam near the snake nest entrance.";
-		completequest 17703;
-		setquest 17704;
+		callfunc("F_ep20_completequest", 17703);
+		callfunc("F_ep20_setquest", 17704);
 		ep20_main = 5;
 		close3;
 	}
@@ -209,6 +308,13 @@ jor_safty1,195,327,3	script	Lehar#ep20ms03	4_EP19_LEHAR,{
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "Miriam is at ^0000CDjor_back5 (353, 357)^000000.";
+		next;
+		if (select( "Warp to the gorge field.", "I'll walk." ) == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_back5", 353, 357;
+			end;
+		}
 		close3;
 	}
 	end;
@@ -227,9 +333,16 @@ jor_back5,353,357,3	script	Miriam#ep20ms01	4_EP18_MIRIAM,{
 		next;
 		mes "[Miriam]";
 		mes "Meet me at the safety zone ^0000CD(330, 327)^000000 before we return to the castle.";
-		completequest 17704;
-		setquest 17705;
+		callfunc("F_ep20_completequest", 17704);
+		callfunc("F_ep20_setquest", 17705);
 		ep20_main = 6;
+		next;
+		if (select( "Warp to Safety Zone 3.", "I'll walk." ) == 1) {
+			close2;
+			cutin "",255;
+			warp "jor_safty1", 330, 327;
+			end;
+		}
 		close3;
 	}
 	end;
@@ -248,10 +361,10 @@ jor_safty1,330,327,3	script	Miriam#ep20ms02	4_EP18_MIRIAM,{
 		next;
 		mes "[Miriam]";
 		mes "Horuru and Leon need to hear this.";
-		completequest 17705;
-		completequest 20000;
-		setquest 20001;
-		setquest 17706;
+		callfunc("F_ep20_completequest", 17705);
+		callfunc("F_ep20_completequest", 20000);
+		callfunc("F_ep20_setquest", 20001);
+		callfunc("F_ep20_setquest", 17706);
 		ep20_main = 7;
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
@@ -274,8 +387,8 @@ icas_in,259,219,3	script	Horuru#ep20ms02	4_EP19_IWIN,{
 		next;
 		mes "[Horuru]";
 		mes "We suspect spies inside the castle. Talk to ^0000CDToreru^000000 near the bird statue.";
-		completequest 17706;
-		setquest 17707;
+		callfunc("F_ep20_completequest", 17706);
+		callfunc("F_ep20_setquest", 17707);
 		ep20_main = 8;
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
@@ -297,8 +410,8 @@ icas_in,113,41,3	script	Toreru#ep20ms01	4_EP19_IWIN,{
 		next;
 		mes "[Toreru]";
 		mes "Talk to ^0000CDCharuru^000000 at (92, 113).";
-		completequest 17707;
-		setquest 17708;
+		callfunc("F_ep20_completequest", 17707);
+		callfunc("F_ep20_setquest", 17708);
 		ep20_main = 9;
 		close3;
 	}
@@ -319,8 +432,8 @@ icas_in,92,113,3	script	Charuru#ep20ms01	4_EP19_IWIN,{
 		next;
 		mes "[Charuru]";
 		mes "Check the ^0000CDdark alley^000000 at icecastle (209, 243).";
-		completequest 17708;
-		setquest 17709;
+		callfunc("F_ep20_completequest", 17708);
+		callfunc("F_ep20_setquest", 17709);
 		ep20_main = 10;
 		close3;
 	}
@@ -339,8 +452,8 @@ icecastle,209,243,3	script	Dark Alley#ep20ms01	4_BULLETIN_BOARD2,{
 		mes "There is a note: ^777777'Tell Horuru the eastern gorge route is compromised.'^000000";
 		next;
 		mes "You should report this to Horuru inside the castle.";
-		completequest 17709;
-		setquest 17710;
+		callfunc("F_ep20_completequest", 17709);
+		callfunc("F_ep20_setquest", 17710);
 		ep20_main = 11;
 		close;
 	}
@@ -360,8 +473,8 @@ icas_in,259,219,3	script	Horuru#ep20ms03	4_EP19_IWIN,{
 		next;
 		mes "[Horuru]";
 		mes "Vellgunde analyzed the device. Meet her, then prepare at the fortress gate.";
-		completequest 17710;
-		setquest 17711;
+		callfunc("F_ep20_completequest", 17710);
+		callfunc("F_ep20_setquest", 17711);
 		ep20_main = 12;
 		close3;
 	}
@@ -378,10 +491,10 @@ icas_in,141,216,3	script	Vellgunde#ep20ms01	4_EP19_VELLGUNDE,{
 		next;
 		mes "[Vellgunde]";
 		mes "Meet Lehar at the ^0000CDfortress gate^000000. The canyon exploration begins now.";
-		completequest 17711;
-		completequest 20001;
-		setquest 20003;
-		setquest 17712;
+		callfunc("F_ep20_completequest", 17711);
+		callfunc("F_ep20_completequest", 20001);
+		callfunc("F_ep20_setquest", 20003);
+		callfunc("F_ep20_setquest", 17712);
 		ep20_main = 13;
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
@@ -412,8 +525,8 @@ icecastle,201,171,3	script	Lehar#ep20ms04	4_EP19_LEHAR,{
 			mes "Form a solo party first, then talk to me again.";
 			close3;
 		}
-		completequest 17712;
-		setquest 17713;
+		callfunc("F_ep20_completequest", 17712);
+		callfunc("F_ep20_setquest", 17713);
 		doevent "Canyon Exploration#ep20::OnStart";
 		close3;
 	}
@@ -439,10 +552,10 @@ icas_in,259,200,3	script	Miriam#ep20ms03	4_EP18_MIRIAM,{
 		next;
 		mes "[Miriam]";
 		mes "Horuru found a way for us to disguise as Rgans. Meet at ^0000CDjor_nest (40, 274)^000000.";
-		completequest 17713;
-		completequest 20003;
-		setquest 20004;
-		setquest 17714;
+		callfunc("F_ep20_completequest", 17713);
+		callfunc("F_ep20_completequest", 20003);
+		callfunc("F_ep20_setquest", 20004);
+		callfunc("F_ep20_setquest", 17714);
 		ep20_main = 15;
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
@@ -465,8 +578,8 @@ jor_nest,40,274,3	script	Horuru#ep20ms04	4_EP19_IWIN,{
 		transform 21530,1800000;
 		mes "[Horuru]";
 		mes "Enter ^0000CDSnake God's Root^000000 and find the shaman at (32, 34).";
-		completequest 17714;
-		setquest 17715;
+		callfunc("F_ep20_completequest", 17714);
+		callfunc("F_ep20_setquest", 17715);
 		ep20_main = 16;
 		close3;
 	}
@@ -485,9 +598,9 @@ jor_root1,32,34,3	script	Rgan Shaman#ep20ms01	4_EP19_RGAN_SR2,{
 		mes "An outsider?! Die!";
 		next;
 		mes "You defeat the shaman. Lazy arrives shortly after.";
-		completequest 17715;
-		setquest 17716;
-		setquest 17717;
+		callfunc("F_ep20_completequest", 17715);
+		callfunc("F_ep20_setquest", 17716);
+		callfunc("F_ep20_setquest", 17717);
 		ep20_main = 17;
 		close;
 	}
@@ -495,8 +608,8 @@ jor_root1,32,34,3	script	Rgan Shaman#ep20ms01	4_EP19_RGAN_SR2,{
 		if (checkquest(17717,HUNTING) == 2) {
 			mes "[Lazy]";
 			mes "Good hunting. Let's talk inside the sanctuary.";
-			completequest 17717;
-			setquest 17718;
+			callfunc("F_ep20_completequest", 17717);
+			callfunc("F_ep20_setquest", 17718);
 			ep20_main = 18;
 			close;
 		}
@@ -523,10 +636,10 @@ jor_sanct,162,86,3	script	Rgan Guide#ep20ms01	4_EP19_RGAN_R3,{
 		next;
 		mes "[Lazy]";
 		mes "Leave this to me. I'll scout ahead.";
-		completequest 17718;
-		completequest 20004;
-		setquest 20005;
-		setquest 17719;
+		callfunc("F_ep20_completequest", 17718);
+		callfunc("F_ep20_completequest", 20004);
+		callfunc("F_ep20_setquest", 20005);
+		callfunc("F_ep20_setquest", 17719);
 		ep20_main = 19;
 		callfunc("F_ep20_reward", 20, 90);
 		close;
@@ -550,8 +663,8 @@ jor_sanct,157,171,3	script	Serekgand#ep20ms01	4_EP19_RGAN_SR1,{
 	if (ep20_main == 19) {
 		mes "[Serekgand]";
 		mes "You seem useful. The supervisor at ^0000CD(22, 283)^000000 needs help in the maze.";
-		completequest 17719;
-		setquest 17720;
+		callfunc("F_ep20_completequest", 17719);
+		callfunc("F_ep20_setquest", 17720);
 		ep20_main = 20;
 		callfunc("F_ep20_reward", 10, 60);
 		close;
@@ -569,10 +682,10 @@ jor_sanct,22,283,3	script	Supervisor#ep20ms01	4_EP19_RGAN_SR2,{
 	if (ep20_main == 20) {
 		mes "[Supervisor]";
 		mes "The maze leads to their hideout. Enter and find the swaying wall at ^0000CDjor_maze (140, 72)^000000.";
-		completequest 17720;
-		completequest 20005;
-		setquest 20006;
-		setquest 17721;
+		callfunc("F_ep20_completequest", 17720);
+		callfunc("F_ep20_completequest", 20005);
+		callfunc("F_ep20_setquest", 20006);
+		callfunc("F_ep20_setquest", 17721);
 		ep20_main = 21;
 		callfunc("F_ep20_reward", 10, 60);
 		close;
@@ -616,10 +729,10 @@ jor_back1,365,226,3	script	Lehar#ep20ms05	4_EP19_LEHAR,{
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "We survived the drift ice. Cororo can take us to the deep sea next.";
-		completequest 17721;
-		completequest 20006;
-		setquest 20007;
-		setquest 17722;
+		callfunc("F_ep20_completequest", 17721);
+		callfunc("F_ep20_completequest", 20006);
+		callfunc("F_ep20_setquest", 20007);
+		callfunc("F_ep20_setquest", 17722);
 		ep20_main = 23;
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
@@ -652,8 +765,8 @@ icecastle,141,212,3	script	Cororo#ep20ms01	4_EP19_IWIN,{
 		delitem 1000832,3;
 		mes "[Cororo]";
 		mes "Good. Now hunt ^0000CD5 Shining Seaweed^000000 and bring ^0000CD3 Shiny Seaweed Stem^000000.";
-		completequest 17722;
-		setquest 17723;
+		callfunc("F_ep20_completequest", 17722);
+		callfunc("F_ep20_setquest", 17723);
 		ep20_main = 24;
 		callfunc("F_ep20_reward", 15, 60);
 		close3;
@@ -667,8 +780,8 @@ icecastle,141,212,3	script	Cororo#ep20ms01	4_EP19_IWIN,{
 		delitem 1000831,3;
 		mes "[Cororo]";
 		mes "I'll warp you to the drift ice zone. Meet Lehar there.";
-		completequest 17723;
-		setquest 17724;
+		callfunc("F_ep20_completequest", 17723);
+		callfunc("F_ep20_setquest", 17724);
 		ep20_main = 25;
 		callfunc("F_ep20_reward", 15, 60);
 		warp "jor_safty1",195,155;
@@ -725,14 +838,14 @@ jor_safty1,328,150,3	script	Aurelie#ep20ms01	4_EP19_AURELIE,{
 		if (checkquest(17725,HUNTING) == 2) {
 			mes "[Aurelie]";
 			mes "Well done. Miriam has more work for you in the maze.";
-			completequest 17725;
-			setquest 17726;
+			callfunc("F_ep20_completequest", 17725);
+			callfunc("F_ep20_setquest", 17726);
 			ep20_main = 27;
 			callfunc("F_ep20_reward", 20, 90);
 			close3;
 		}
 		if (isbegin_quest(17725) == 0) {
-			setquest 17725;
+			callfunc("F_ep20_setquest", 17725);
 			mes "[Aurelie]";
 			mes "Hunt the targets, then return to me.";
 			close3;
@@ -755,10 +868,10 @@ jor_maze,198,33,3	script	Miriam#ep20ms04	4_EP18_MIRIAM,{
 		cutin "ep18_miriam_01.png",0;
 		mes "[Miriam]";
 		mes "We found Lasgand's trail. The white cat Nyar is at ^0000CDjor_back1 (364, 222)^000000.";
-		completequest 17726;
-		completequest 20007;
-		setquest 20008;
-		setquest 17727;
+		callfunc("F_ep20_completequest", 17726);
+		callfunc("F_ep20_completequest", 20007);
+		callfunc("F_ep20_setquest", 20008);
+		callfunc("F_ep20_setquest", 17727);
 		ep20_main = 28;
 		callfunc("F_ep20_reward", 10, 40);
 		close3;
@@ -778,8 +891,8 @@ jor_back1,364,222,3	script	Nyar#ep20ms01	4_EP20_NYAR,{
 		next;
 		mes "[Lazy]";
 		mes "Then we stop him in the ^0000CDIsolated Sanctuary^000000 before he becomes a god.";
-		completequest 17727;
-		setquest 17728;
+		callfunc("F_ep20_completequest", 17727);
+		callfunc("F_ep20_setquest", 17728);
 		ep20_main = 29;
 		close;
 	}
@@ -836,8 +949,8 @@ icas_in,248,112,3	script	Voglinde#ep20ms01	4_EP19_VOGLINDE,{
 		next;
 		mes "[Aurelie]";
 		mes "Episode 20 ends here, for now. Thank you, adventurer.";
-		completequest 17728;
-		completequest 20008;
+		callfunc("F_ep20_completequest", 17728);
+		callfunc("F_ep20_completequest", 20008);
 		ep20_main = 100;
 		callfunc("F_ep20_reward", 100, 100);
 		getexp2 150000000,0;

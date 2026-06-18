@@ -49,3 +49,8 @@ Body:
     Name: Isgard
     ReputeList:
       - 4
+  - Id: 4
+    ScriptName: WhiteCat
+    Name: White Cat Alliance
+    ReputeList:
+      - 5

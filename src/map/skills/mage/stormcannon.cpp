@@ -15,7 +15,7 @@ void SkillStormCannon::calculateSkillRatio(const Damage *wd, const block_list *s
 	const status_data* sstatus = status_get_status_data(*src);
 	const status_change *sc = status_get_sc(src);
 
-	skillratio += -100 + 1550 * skill_lv + 5 * sstatus->spl;
+	skillratio += -100 + 1220 * skill_lv + 5 * sstatus->spl;
 
 	if( sc != nullptr && sc->getSCE( SC_CLIMAX ) ){
 		skillratio += 300 * skill_lv;

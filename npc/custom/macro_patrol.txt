@@ -1,0 +1,128 @@
+//============================================================
+// Automatic macro detector patrol
+// Only patrols maps that drop Play_RO_Gold_Coin_ (db/re/map_drops.yml).
+// Regenerate the farm map list: node tools/sync_macro_patrol_maps.js
+//============================================================
+-	script	MacroPatrol	-1,{
+	end;
+
+OnInit:
+	.interval_ms = 600000;   // Run every 10 minutes
+	.max_checks = 5;          // Players challenged per cycle
+	.min_baselevel = 30;     // Skip low-level/new chars
+	.player_cooldown_ms = 1800000; // 30 minutes before same char is checked again
+	.gm_skip_level = 1;       // Skip staff at or above this GM level
+
+	// Maps with Play_RO_Gold_Coin_ in GlobalDrops (db/re/map_drops.yml)
+	setarray .farm_maps$,
+		"amicitia1", "amicitia2", "ba_bath", "ba_lib", "ba_maison",
+		"bif_fild01", "bif_fild02", "com_d02_i", "dic_fild01", "dic_fild02",
+		"ecl_fild01", "gef_d01_i", "gl_prison1", "gw_fild01", "gw_fild02",
+		"ice_d03_i", "ice_dun03", "iz_d04_i", "iz_d05_i", "jor_ab01",
+		"jor_ab02", "jor_back1", "jor_back2", "jor_back3", "jor_dun01",
+		"jor_dun02", "jor_tail", "juperos_01", "kh_dun01", "kh_dun02",
+		"lasa_dun02", "lhz_dun02", "lhz_dun03", "lhz_dun04", "lou_dun03",
+		"mag_dun02", "nif_dun01", "nif_dun02", "odin_past", "odin_tem02",
+		"odin_tem03", "orcsdun02", "oz_dun01", "oz_dun02", "pay_d03_i",
+		"pay_dun04", "ra_fild01", "ra_fild10", "ra_fild11", "sp_rudus4",
+		"spl_fild02", "tha_t01", "tha_t02", "tha_t03", "tha_t04",
+		"tha_t05", "tha_t06", "tur_d03_i", "tur_d04_i", "ve_fild03";
+
+	for (.@i = 0; .@i < getarraysize(.farm_maps$); .@i++)
+		removemapflag .farm_maps$[.@i], mf_nomacrochecker;
+
+	bindatcmd "macropatrol", strnpcinfo(0)+"::OnManualRun", 80, 99;
+	initnpctimer;
+	end;
+
+OnManualRun:
+	doevent strnpcinfo(0)+"::OnPatrol";
+	end;
+
+OnTimer600000:
+	doevent strnpcinfo(0)+"::OnPatrol";
+	initnpctimer;
+	end;
+
+OnPatrol:
+	if (getbattleflag("macro_detection_punishment") != 1) {
+		debugmes "MacroPatrol: macro_detection_punishment is not set to jail (1).";
+		end;
+	}
+
+	.@player_count = 0;
+	for (.@m = 0; .@m < getarraysize(.farm_maps$); .@m++) {
+		.@found = getmapunits(BL_PC, .farm_maps$[.@m], .@aid[.@player_count]);
+		.@player_count += .@found;
+	}
+
+	if (.@player_count <= 0)
+		end;
+
+	.@checked = 0;
+	.@attempts = 0;
+	.@max_attempts = .@player_count * 3;
+
+	while (.@checked < .max_checks && .@attempts < .@max_attempts) {
+		.@attempts++;
+		.@idx = rand(.@player_count);
+		.@target_aid = .@aid[.@idx];
+
+		if (.@target_aid <= 0)
+			continue;
+
+		if (!attachrid(.@target_aid)) {
+			detachrid;
+			continue;
+		}
+
+		if (callsub(OnEligible) == 0) {
+			detachrid;
+			continue;
+		}
+
+		#macro_patrol_next = gettimetick(2) + .player_cooldown_ms;
+		macro_detector getcharid(3);
+		detachrid;
+
+		.@checked++;
+	}
+
+	if (.@checked > 0)
+		debugmes "MacroPatrol: started macro detection on " + .@checked + " player(s) on Play_RO_Gold_Coin_ farming maps.";
+	end;
+
+OnEligible:
+	if (getgmlevel() >= .gm_skip_level)
+		return 0;
+
+	if (BaseLevel < .min_baselevel)
+		return 0;
+
+	if (strcharinfo(3) == "sec_pri")
+		return 0;
+
+	if (getmapflag(strcharinfo(3), mf_nomacrochecker))
+		return 0;
+
+	if (getmapflag(strcharinfo(3), mf_town))
+		return 0;
+
+	if (getmapflag(strcharinfo(3), mf_battleground))
+		return 0;
+
+	if (compare(strcharinfo(3), "@"))
+		return 0;
+
+	if (inarray(.farm_maps$, strcharinfo(3)) < 0)
+		return 0;
+
+	if (checkvending(strcharinfo(0)) == 2)
+		return 0;
+
+	if (#macro_patrol_next > gettimetick(2))
+		return 0;
+
+	return 1;
+}
+

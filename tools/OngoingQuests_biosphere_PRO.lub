@@ -1,0 +1,26 @@
+-- PRO Asia client quest UI snippet for Varmundt Biosphere
+-- Merge into SystemEN/OngoingQuests.lub (quest IDs must match db/import/quest_db.yml)
+--
+-- Barmil Tickets (item 1000103): bath dailies 17376/17379 (Boiler/Sweep in ba_bath)
+-- Official kRO 500-kill biosphere quests use IDs 17608-17615 and 70270-70274 (separate system)
+
+-- PRO Varmundt Biosphere Daily Quests (90500-90517)
+	[90500] = {
+		Title = "Biosphere - Grassland Daily Hunt",
+		IconName = "ico_ev.bmp",
+		Description = {
+			"Defeat 100 monsters in the Grassland habitat, then report to <NAVI>[Admin Beta]<INFO>ba_in01,252,353,0,101,0</INFO></NAVI> inside Varmundt's Mansion.",
+			"^0000cdReward:^000000 5 <ITEM>[Glade Runes]<INFO>1000640</INFO></ITEM>, 2 Essence, 80,000,000 Base / 48,000,000 Job EXP"
+		},
+		Summary = "Hunt 100 monsters"
+	},
+	[90501] = {
+		Title = "[Standby] Biosphere - Grassland Daily Hunt",
+		IconName = "ico_ev.bmp",
+		Description = {
+			"You have completed today's Grassland daily hunt. Return after the daily reset. - <NAVI>[Admin Beta]<INFO>ba_in01,252,353,0,101,0</INFO></NAVI>"
+		},
+		Summary = "Reset at 04:00",
+		CoolTimeQuest = 1
+	},
+-- ... (see client SystemEN/OngoingQuests.lub lines 90502-90517 for full block)

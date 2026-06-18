@@ -33,19 +33,181 @@ Header:
   Version: 1
 
 Body:
- - Tab: New
-   Items:
-     - Item: Copper_Coin_Moneybag
-       Price: 5
-     - Item: White_Gold_Coin
-       Price: 5
-     - Item: Four_Leaf_Clover
-       Price: 3
- - Tab: Limited
-   Items:
-     - Item: White_Gold_Coin
-       Price: 5
-     - Item: Copper_Coin_Moneybag
-       Price: 5
-     - Item: Four_Leaf_Clover
-       Price: 3
+  - Tab: Hot
+    Items:
+      - Item: Battle_Manual_Box
+        Price: 800
+      - Item: Bubble_Gum_Box
+        Price: 800
+      - Item: HE_Battle_Manual_Box
+        Price: 350
+      - Item: HE_Bubble_Gum_Box
+        Price: 350
+      - Item: Insurance_Package
+        Price: 250
+  - Tab: Consumables
+    Items:
+      - Item: Str_Dish_Box
+        Price: 120
+      - Item: Agi_Dish_Box
+        Price: 120
+      - Item: Int_Dish_Box
+        Price: 120
+      - Item: Dex_Dish_Box
+        Price: 120
+      - Item: Luk_Dish_Box
+        Price: 120
+      - Item: Vit_Dish_Box
+        Price: 120
+  - Tab: Scrolls
+    Items:
+      - Item: Blessing_10_Scroll_Box
+        Price: 150
+      - Item: Inc_Agi_10_Scroll_Box
+        Price: 150
+      - Item: Aspersio_5_Scroll_Box
+        Price: 125
+      - Item: Assumptio_5_Scroll_Box
+        Price: 175
+      - Item: Wind_Walk_10_Scroll_Box
+        Price: 175
+      - Item: Adrenaline_Scroll_Box
+        Price: 125
+  - Tab: Other
+    Items:
+      - Item: Kafra_Card_Box
+        Price: 125
+      - Item: Giant_Fly_Wing_Box
+        Price: 125
+      - Item: Neuralizer_Box
+        Price: 2000
+      - Item: Token_Of_Siegfried_Box
+        Price: 175
+      - Item: Dun_Tele_Scroll1_Box
+        Price: 75
+      - Item: Max_Weight_Up_Box
+        Price: 100
+      - Item: Enriched_Elunium
+        Price: 150
+      - Item: Enriched_Oridecon
+        Price: 150
+      - Item: Enriched_Elunium_Box
+        Price: 400
+      - Item: Enriched_Oridecon_Box
+        Price: 400
+  - Tab: New
+    Items:
+      - Item: Comin_Actor_Box
+        Price: 350
+      - Item: Hen_Set_Box
+        Price: 350
+      - Item: Yellow_Hat_Box
+        Price: 200
+      - Item: Singing_Bird_Box
+        Price: 200
+      - Item: Red_Minicrown_Box
+        Price: 225
+      - Item: Butterfly_ear_Box
+        Price: 225
+      - Item: Stuckhead_Screw_Box
+        Price: 225
+      - Item: Weather_Report_Box
+        Price: 300
+      - Item: F_Chick_Hat_Box
+        Price: 300
+      - Item: F_Cat_Hat_Box
+        Price: 300
+      - Item: F_Rabbit_Ear_Hat_Box
+        Price: 300
+      - Item: F_Love_Angel_Box
+        Price: 325
+      - Item: F_Twin_Ribbon_Box
+        Price: 275
+      - Item: F_Little_Angel_Doll_Box
+        Price: 350
+      - Item: F_Triple_Poring_Hat_Box
+        Price: 300
+      - Item: F_Santa_Poring_Hat_Box
+        Price: 325
+      - Item: F_Dark_Blindfold_Box
+        Price: 350
+      - Item: F_K_Drooping_Kitty_Box
+        Price: 375
+      - Item: F_Masquerade_Box
+        Price: 350
+      - Item: F_Diadem_Box
+        Price: 400
+      - Item: F_Pecopeco_Hairband_Box
+        Price: 275
+      - Item: Yggdrasil_Crown_Box
+        Price: 250
+      - Item: Leaf_Cat_Hat_Box
+        Price: 350
+      - Item: Rabbit_Magic_Hat_Box
+        Price: 375
+      - Item: Bunny_Band_Box
+        Price: 275
+      - Item: C_Green_FoxtailBox
+        Price: 275
+      - Item: Ball_Mask_Box
+        Price: 300
+      - Item: Ice_Wing_Ear_Box
+        Price: 325
+  - Tab: Permanent
+    Items:
+      - Item: Red_Glasses_Box
+        Price: 250
+      - Item: Flying_Angel_Box
+        Price: 300
+      - Item: Evil_Wing_Ears_Box
+        Price: 300
+      - Item: Santa_Poring_Hat_Box
+        Price: 350
+      - Item: Tiger_Mask_Box
+        Price: 450
+      - Item: C_Hockey_Mask_Box
+        Price: 450
+      - Item: Spiritual_Ring_Box
+        Price: 500
+      - Item: Robo_Eye_Box
+        Price: 550
+      - Item: Bell_Ribbon_Box
+        Price: 550
+      - Item: Whisper_Mask_Box
+        Price: 600
+      - Item: Fish_Head_Hat_Box
+        Price: 650
+      - Item: C_Sylphid_Manteau_Box
+        Price: 750
+      - Item: F_Refresh_Shoes_Box
+        Price: 800
+      - Item: C_Upg_Manteau_Box
+        Price: 700
+      - Item: C_Upg_Saint_Robe_Box
+        Price: 800
+      - Item: Angel_Spirit_Box
+        Price: 900
+      - Item: F_Orc_Hero_Helm_Box
+        Price: 1000
+      - Item: Aquarius_Crown_Box
+        Price: 850
+      - Item: Leo_Crown_Box
+        Price: 850
+      - Item: Gemini_Crown_Box
+        Price: 900
+      - Item: Virgo_Crown_Box
+        Price: 900
+      - Item: "Sigrun's_Wing_Box"
+        Price: 1100
+      - Item: Freyja_Crown_Box
+        Price: 1400
+      - Item: F_Recuperative_Box
+        Price: 1300
+      - Item: F_Shelter_Resist_Box
+        Price: 1400
+      - Item: F_All_In_One_Ring_Box
+        Price: 2200
+      - Item: Mask_Of_Ifrit_Box
+        Price: 2800
+      - Item: F_Spritual_Tunic_Box
+        Price: 3500

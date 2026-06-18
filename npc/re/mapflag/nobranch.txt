@@ -412,3 +412,17 @@ que_thr	mapflag	nobranch
 // Cash Mall
 //============================================================
 itemmall	mapflag	nobranch
+
+//============================================================
+// Varmundt's Biosphere (bl_*)
+//============================================================
+bl_death	mapflag	nobranch
+bl_grass	mapflag	nobranch
+bl_ice	mapflag	nobranch
+bl_lava	mapflag	nobranch
+bl_soul	mapflag	nobranch
+bl_temple	mapflag	nobranch
+bl_venom	mapflag	nobranch
+bl_depth1	mapflag	nobranch
+bl_depth2	mapflag	nobranch
+ba_chess	mapflag	nobranch

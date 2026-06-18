@@ -1,0 +1,137 @@
+//===== rAthena Script =======================================
+//= Varmundt's Biosphere - Daily Hunts (official iRO/kRO)
+//===== Description: =========================================
+//= Functions for Admin Beta daily habitat hunts.
+//= Reward: 5 runes + 2 essence + 80M/48M EXP per biome.
+//= Cooldown: 4 hours (quest PLAYTIME).
+//============================================================
+
+function	script	F_BiosphereDaily_Menu	{
+	if (BaseLevel < 240) {
+		mes "[Admin Beta]";
+		mes "The artificial habitats are only open to adventurers with base level 240 or higher.";
+		close;
+	}
+	mes "[Admin Beta]";
+	mes "During Biosphere exploration you can complete one daily hunt per habitat.";
+	mes "Eliminate ^0000cd100^000000 monsters in the chosen zone, then report back.";
+	mes "Rewards: runes, essence, and experience. Resets every 4 hours.";
+	next;
+	switch (select(
+		"Grass Field (bl_grass)",
+		"Fire Field (bl_lava)",
+		"Ice Field (bl_ice)",
+		"Death Field (bl_death)",
+		"Soul Field (bl_soul)",
+		"Venom Field (bl_venom)",
+		"Temple Field (bl_temple)",
+		"Cancel"
+	)) {
+	case 1: callfunc("F_BiosphereDaily_Do", 0);
+	case 2: callfunc("F_BiosphereDaily_Do", 1);
+	case 3: callfunc("F_BiosphereDaily_Do", 2);
+	case 4: callfunc("F_BiosphereDaily_Do", 3);
+	case 5: callfunc("F_BiosphereDaily_Do", 4);
+	case 6: callfunc("F_BiosphereDaily_Do", 5);
+	case 7: callfunc("F_BiosphereDaily_Do", 6);
+	case 8:
+		mes "[Admin Beta]";
+		mes "Come back whenever you are ready.";
+		close;
+	}
+	end;
+}
+
+function	script	F_BiosphereDaily_Do	{
+	.@i = getarg(0);
+	setarray .@hunt_q[0], 90500, 90502, 90504, 90506, 90508, 90510, 90512;
+	setarray .@wait_q[0], 90501, 90503, 90505, 90507, 90509, 90511, 90513;
+	setarray .@biome_name$[0], "Grassland", "Fire", "Ice", "Death", "Soul", "Venom", "Temple";
+	setarray .@rune_item$[0], "Plain_Barmund_Rune2", "Flame_Barmund_Rune2", "Ice_Barmund_Rune2", "Death_Barmund_Rune2", "Soul_Barmund_Rune2", "Venom_Barmund_Rune2", "Temple_Barmund_Rune2";
+	setarray .@essence_item$[0], "Barmund_Plain_Essence", "Barmund_Flame_Essence", "Barmund_Ice_Essence", "Barmund_Death_Essence", "Barmund_Soul_Essence", "Barmund_Venom_Essence", "Barmund_Temple_Essence";
+
+	.@hunt = .@hunt_q[.@i];
+	.@wait = .@wait_q[.@i];
+	.@name$ = .@biome_name$[.@i];
+	.@rune$ = .@rune_item$[.@i];
+	.@essence$ = .@essence_item$[.@i];
+
+	if (checkquest(.@wait, PLAYTIME) == 2) {
+		mes "[Admin Beta]";
+		mes "You have already completed the ^0000cd" + .@name$ + "^000000 daily hunt today.";
+		mes "Please come back after the reset.";
+		close;
+	}
+	if (checkquest(.@wait, PLAYTIME) == 0)
+		erasequest .@wait;
+
+	switch (checkquest(.@hunt, HUNTING)) {
+	case -1:
+		mes "[Admin Beta]";
+		mes "The ^0000cd" + .@name$ + "^000000 habitat needs thinning out.";
+		mes "Defeat ^0000cd100^000000 monsters inside the zone, then report back to me.";
+		next;
+		if (select("Accept", "Decline") == 2) {
+			mes "[Admin Beta]";
+			mes "Understood.";
+			close;
+		}
+		setquest .@hunt;
+		mes "[Admin Beta]";
+		mes "Good luck. Any monster in that habitat counts toward the goal.";
+		close;
+	case 0:
+	case 1:
+		mes "[Admin Beta]";
+		mes "Keep hunting in the ^0000cd" + .@name$ + "^000000 habitat until you reach 100 kills.";
+		close;
+	case 2:
+		mes "[Admin Beta]";
+		mes "Excellent work in the ^0000cd" + .@name$ + "^000000 habitat.";
+		next;
+		erasequest .@hunt;
+		setquest .@wait;
+		getitem .@rune$, 5;
+		getitem .@essence$, 2;
+		getexp 80000000, 48000000;
+		mes "[Admin Beta]";
+		mes "Here are your runes and essence. The same habitat will be available again after the daily reset.";
+		close;
+	}
+	end;
+}
+
+function	script	F_BiosphereTicket_Info	{
+	mes "[Admin Beta]";
+	mes "^0000cdBarmil Tickets^000000 are used to enchant and reform upgraded Varmundt rune equipment.";
+	next;
+	mes "[Admin Beta]";
+	mes "You can earn tickets from the Meditatio bathhouse dailies in Varmundt's Mansion.";
+	mes "Speak with ^0000cdBoiler^000000 or ^0000cdSweep^000000 in the bath (ba_bath) after completing the bathhouse questline.";
+	next;
+	mes "[Admin Beta]";
+	mes "Use your tickets at the equipment NPCs near the rune exchange:";
+	mes "- Beta (reform / upgraded enchant)";
+	mes "- Beta (modified equipment enchant)";
+	close;
+}
+
+// Quest window markers (matches OngoingQuests.lub 90500-90513)
+-	script	BiosphereDailyInfo	-1,{
+OnInit:
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90500,HUNTING) == -1 && checkquest(90501,PLAYTIME) == -1");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90502,HUNTING) == -1 && checkquest(90503,PLAYTIME) == -1");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90504,HUNTING) == -1 && checkquest(90505,PLAYTIME) == -1");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90506,HUNTING) == -1 && checkquest(90507,PLAYTIME) == -1");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90508,HUNTING) == -1 && checkquest(90509,PLAYTIME) == -1");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90510,HUNTING) == -1 && checkquest(90511,PLAYTIME) == -1");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90512,HUNTING) == -1 && checkquest(90513,PLAYTIME) == -1");
+	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90500,HUNTING) == 2");
+	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90502,HUNTING) == 2");
+	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90504,HUNTING) == 2");
+	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90506,HUNTING) == 2");
+	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90508,HUNTING) == 2");
+	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90510,HUNTING) == 2");
+	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90512,HUNTING) == 2");
+	end;
+}

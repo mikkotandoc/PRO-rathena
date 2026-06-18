@@ -112,7 +112,7 @@ glast_01,141,291,3	script	Huginn#oghcm	4_M_SAGE_C,{
 	end;
 }
 
-glast_01,139,291,3	script	Muninn#oghcm	4_M_SAGEOLD,{
+glast_01,139,291,3	script	Muninn#oghcm	2_M_SAGE_OLD,{
 	disable_items;
 	if (MaxWeight - Weight < 1000) {
 		mes "[Muninn]";

@@ -18,7 +18,7 @@ void SkillColdBloodedCannon::calculateSkillRatio(const Damage *wd, const block_l
 	const status_change *sc = status_get_sc(src);
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	skillratio += -100 + 450 + 950 * skill_lv;
+	skillratio += -100 + 450 + 840 * skill_lv;
 	skillratio += 40 * pc_checkskill( sd, SS_ANTENPOU ) * skill_lv;
 	skillratio += 5 * sstatus->spl;
 

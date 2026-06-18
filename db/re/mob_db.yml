@@ -121637,6 +121637,10 @@ Body:
         Rate: 1500
       - Item: Fresh_Pear
         Rate: 2000
+      - Item: Plain_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Plain_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -121680,6 +121684,10 @@ Body:
         Rate: 2000
       - Item: Elder_Branch
         Rate: 250
+      - Item: Plain_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Plain_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -121725,6 +121733,10 @@ Body:
         Rate: 50
       - Item: Ectoplasmic_Stone
         Rate: 2000
+      - Item: Plain_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Plain_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -121770,6 +121782,10 @@ Body:
         Rate: 5
       - Item: Grasshopper_Doll
         Rate: 10
+      - Item: Plain_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Plain_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -121813,6 +121829,10 @@ Body:
         Rate: 2000
       - Item: Savage_Meat
         Rate: 25
+      - Item: Plain_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Plain_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -121856,6 +121876,10 @@ Body:
         Rate: 2000
       - Item: Leaflet_Of_Aloe
         Rate: 25
+      - Item: Plain_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Plain_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -121899,6 +121923,10 @@ Body:
         Rate: 1500
       - Item: Shining_Crystal
         Rate: 2000
+      - Item: Plain_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Plain_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -121996,6 +122024,10 @@ Body:
         Rate: 1100
       - Item: Hot_Hair
         Rate: 1600
+      - Item: Flame_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Flame_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122039,6 +122071,10 @@ Body:
         Rate: 1300
       - Item: Shining_Crystal
         Rate: 2000
+      - Item: Flame_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Flame_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122082,6 +122118,10 @@ Body:
         Rate: 2000
       - Item: Pumpkin
         Rate: 500
+      - Item: Flame_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Flame_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122125,6 +122165,10 @@ Body:
         Rate: 1843
       - Item: Blaze_Stone
         Rate: 2000
+      - Item: Flame_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Flame_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122168,6 +122212,10 @@ Body:
         Rate: 500
       - Item: Whittling
         Rate: 2000
+      - Item: Flame_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Flame_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122211,6 +122259,10 @@ Body:
         Rate: 2000
       - Item: Tri_Headed_Dragon_Head
         Rate: 1940
+      - Item: Flame_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Flame_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122254,6 +122306,10 @@ Body:
         Rate: 500
       - Item: Dragon_Scale
         Rate: 750
+      - Item: Flame_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Flame_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122351,6 +122407,10 @@ Body:
         Rate: 2000
       - Item: Cold_Ice
         Rate: 250
+      - Item: Ice_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Ice_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122394,6 +122454,10 @@ Body:
         Rate: 2000
       - Item: Cold_Ice
         Rate: 125
+      - Item: Ice_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Ice_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122437,6 +122501,10 @@ Body:
         Rate: 500
       - Item: Crystal_Blue
         Rate: 150
+      - Item: Ice_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Ice_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122482,6 +122550,10 @@ Body:
         Rate: 2500
       - Item: Solid_Shell
         Rate: 1250
+      - Item: Ice_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Ice_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122525,6 +122597,10 @@ Body:
         Rate: 2500
       - Item: Starsand_Of_Witch
         Rate: 1250
+      - Item: Ice_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Ice_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122568,6 +122644,10 @@ Body:
         Rate: 2000
       - Item: Stone_Of_Intelligence_
         Rate: 15
+      - Item: Ice_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Ice_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122611,6 +122691,10 @@ Body:
         Rate: 2000
       - Item: Starsand_Of_Witch
         Rate: 1250
+      - Item: Ice_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Ice_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122708,6 +122792,10 @@ Body:
         Rate: 2000
       - Item: Silver_Ring
         Rate: 50
+      - Item: Death_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Death_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122751,6 +122839,10 @@ Body:
         Rate: 2000
       - Item: Transparent_Cloth
         Rate: 500
+      - Item: Death_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Death_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122794,6 +122886,10 @@ Body:
         Rate: 2250
       - Item: Evil_Minded_Ruby
         Rate: 2000
+      - Item: Death_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Death_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122837,6 +122933,10 @@ Body:
         Rate: 500
       - Item: Black_Jewelry
         Rate: 2000
+      - Item: Death_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Death_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122882,6 +122982,10 @@ Body:
         Rate: 2000
       - Item: Mementos
         Rate: 250
+      - Item: Death_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Death_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122927,6 +123031,10 @@ Body:
         Rate: 750
       - Item: Evil_Minded_Ruby
         Rate: 2000
+      - Item: Death_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Death_Essence
+        Rate: 300
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122970,6 +123078,10 @@ Body:
         Rate: 15
       - Item: Evil_Black_Bid
         Rate: 2000
+      - Item: Death_Barmund_Rune
+        Rate: 1500
+      - Item: Barmund_Death_Essence
+        Rate: 300
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -125126,59 +125238,8 @@ Body:
 #    AegisName: AB_YEMOB_131
 #  - Id: 22139
 #    AegisName: AB_YEMOB_132
-  - Id: 22140
-    AegisName: BIO_ANOLIAN
-    Name: Bio Anolian
-    Level: 263
-    Hp: 107320500
-    BaseExp: 5440652
-    JobExp: 3789414
-    Attack: 32536
-    Attack2: 48488
-    Defense: 229
-    MagicDefense: 115
-    Str: 369
-    Agi: 254
-    Vit: 293
-    Int: 236
-    Dex: 423
-    Luk: 323
-    AttackRange: 1
-    SkillRange: 9
-    ChaseRange: 12
-    Size: Medium
-    Race: Fish
-    Element: Water
-    ElementLevel: 3
-    WalkSpeed: 160
-    AttackDelay: 1100
-    DamageMotion: 250
-    Modes:
-    Aggressive: true
-    CanMove: true
-    CanAttack: true
-    AttackRange: 5
-    SkillRange: 12
-    ChaseRange: 12
-    DamageTaken: 10
-    Ai: 04
-    Modes:
-      Detector: true
-    Drops:
-      - Item: Bar_D_Ic_Energy
-        Rate: 500
-      - Item: Bar_D_Ic_Crystal
-        Rate: 50
-      - Item: Etel_Dust
-        Rate: 150
-      - Item: Ice_Barmund_Rune
-        Rate: 80
-      - Item: Ice_Barmund_Rune2
-        Rate: 20
-      - Item: Barmund_Ice_Essence
-        Rate: 30
-      - Item: Bar_D_Ic_Specimen
-        Rate: 2500
+#  - Id: 22140
+#    AegisName: BIO_ANOLIAN
 #  - Id: 22141
 #    AegisName: BIO_SKEL_ARCHER
 #  - Id: 22142
@@ -125199,56 +125260,6 @@ Body:
 #    AegisName: BIO_HOLY_SKOGUL
 #  - Id: 22150
 #    AegisName: BIO_KAPHA
-  - Id: 22150
-    AegisName: BIO_KAPHA
-    Name: Bio Kapha
-    Level: 263
-    Hp: 105899670
-    BaseExp: 5440652
-    JobExp: 3789414
-    Attack: 31020
-    Attack2: 46214
-    Defense: 299
-    MagicDefense: 115
-    Str: 369
-    Agi: 254
-    Vit: 293
-    Int: 236
-    Dex: 423
-    Luk: 395
-    AttackRange: 1
-    SkillRange: 9
-    ChaseRange: 12
-    Size: Medium
-    Race: Fish
-    Element: Water
-    ElementLevel: 3
-    WalkSpeed: 140
-    AttackDelay: 1160
-    DamageMotion: 250
-    Modes:
-    Aggressive: true
-    CanMove: true
-    CanAttack: true
-    DamageTaken: 10
-    Ai: 04
-    Modes:
-      Detector: true
-    Drops:
-      - Item: Bar_D_Ic_Energy
-        Rate: 500
-      - Item: Bar_D_Ic_Crystal
-        Rate: 50
-      - Item: Etel_Dust
-        Rate: 150
-      - Item: Ice_Barmund_Rune
-        Rate: 80
-      - Item: Ice_Barmund_Rune2
-        Rate: 20
-      - Item: Barmund_Ice_Essence
-        Rate: 30
-      - Item: Bar_D_Ic_Specimen
-        Rate: 2500
 #  - Id: 22151
 #    AegisName: BIO_SKEL_SOLDIER
 #  - Id: 22152

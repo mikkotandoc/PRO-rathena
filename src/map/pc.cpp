@@ -16360,6 +16360,7 @@ void pc_shield_heartbeat_stop(map_session_data &sd) {
 	sd.shield.missed = 0;
 	sd.shield.active = false;
 	sd.shield.enforce = false;
+	sd.shield.punished = false;
 }
 
 void pc_shield_heartbeat_start(map_session_data &sd) {
@@ -16471,7 +16472,14 @@ TIMER_FUNC(pc_shield_heartbeat_timeout) {
 		sd->shield.active = false;
 
 		if (sd->shield.missed >= battle_config.shield_heartbeat_max_miss) {
-			ShowWarning("Shield heartbeat: missed %d intervals for %s (AID:%d CID:%d, awaiting NPC enforcement).\n", sd->shield.missed, sd->status.name, sd->status.account_id, sd->status.char_id);
+			ShowWarning("Shield heartbeat: missed %d intervals for %s (AID:%d CID:%d).\n", sd->shield.missed, sd->status.name, sd->status.account_id, sd->status.char_id);
+
+			if (battle_config.shield_heartbeat_punishment == 1 && !sd->shield.punished) {
+				int32 duration = battle_config.shield_heartbeat_punishment_time;
+
+				sd->shield.punished = true;
+				pc_jail(*sd, (duration == 0 ? INT_MAX : duration));
+			}
 		}
 
 		// Re-send so clients that install hooks after map load can still respond.
@@ -16521,6 +16529,10 @@ void pc_macro_reporter_area_select(map_session_data &sd, const int16 x, const in
  */
 void pc_macro_reporter_process(map_session_data &sd, int32 reporter_account_id) {
 	if (captcha_db.empty())
+		return;
+
+	// Already undergoing a macro check.
+	if (sd.macro_detect.cd != nullptr)
 		return;
 
 	// Pick a random image from the database.

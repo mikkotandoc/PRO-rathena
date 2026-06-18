@@ -22,7 +22,7 @@ void SkillDoubleBowlingBash::calculateSkillRatio(const Damage *wd, const block_l
 	const status_data* sstatus = status_get_status_data(*src);
 	const map_session_data* sd = BL_CAST( BL_PC, src );
 
-	skillratio += -100 + 250 + 400 * skill_lv;
+	skillratio += -100 + 250 + 305 * skill_lv;
 	skillratio += pc_checkskill(sd, HN_SELFSTUDY_TATICS) * 3 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	RE_LVL_DMOD(100);

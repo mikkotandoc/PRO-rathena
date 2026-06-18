@@ -4102,6 +4102,7 @@ int32 parse_console(const char* buf){
 			ShowStatus( "  Shield interval: %d ms\n", battle_config.shield_heartbeat_interval );
 			ShowStatus( "  Shield grace: %d ms\n", battle_config.shield_heartbeat_grace );
 			ShowStatus( "  Shield max miss: %d\n", battle_config.shield_heartbeat_max_miss );
+			ShowStatus( "  Shield punishment: %s\n", battle_config.shield_heartbeat_punishment ? "jail" : "none" );
 			ShowStatus( "  Char-server: %s\n", chrif_isconnected() ? "connected" : "disconnected" );
 			ShowStatus( "  Console commands: help, server:status, server:shutdown, admin:@<command>\n" );
 		}

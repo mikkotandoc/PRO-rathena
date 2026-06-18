@@ -16,7 +16,7 @@ void SkillCresciveBolt::calculateSkillRatio(const Damage *wd, const block_list *
 	const status_data* tstatus = status_get_status_data(*target);
 	const status_change *sc = status_get_sc(src);
 
-	skillratio += -100 + 500 + 1300 * skill_lv;
+	skillratio += -100 + 500 + 900 * skill_lv;
 	skillratio += 5 * sstatus->con;
 	RE_LVL_DMOD(100);
 	if (sc) {

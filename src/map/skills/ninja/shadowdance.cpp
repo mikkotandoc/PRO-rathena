@@ -17,7 +17,7 @@ void SkillShadowDance::calculateSkillRatio(const Damage *wd, const block_list *s
 	const status_data* sstatus = status_get_status_data(*src);
 	const map_session_data* sd = BL_CAST(BL_PC, src);
 
-	skillratio += -100 + 750 + 900 * skill_lv;
+	skillratio += -100 + 750 + 810 * skill_lv;
 	skillratio += pc_checkskill( sd, SS_KAGEGARI ) * 70 * skill_lv;
 	skillratio += 5 * sstatus->pow;
 	RE_LVL_DMOD(100);

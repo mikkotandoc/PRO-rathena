@@ -7837,11 +7837,16 @@ Body:
     Icon: EFST_VIGOR
     DurationLookup: DK_VIGOR
     CalcFlags:
-      Watk: true
+      All: true
     Flags:
       BlEffect: true
       DisplayPc: true
       SendVal1: true
+    Script: |
+      .@lv = getstatus(SC_VIGOR, 1);
+      bonus bShortAtkRate, 100 + .@lv * 15;
+      bonus2 bAddRace, RC_DemiHuman, .@lv * 10;
+      bonus2 bAddRace, RC_Angel, .@lv * 10;
   - Status: Deadly_Defeasance
     Icon: EFST_DEADLY_DEFEASANCE
     DurationLookup: AG_DEADLY_PROJECTION
@@ -7895,6 +7900,8 @@ Body:
     Flags:
       BlEffect: true
       DisplayPc: true
+      NoDispell: true
+      NoClearance: true
   - Status: Mediale
     Icon: EFST_MEDIALE
     DurationLookup: CD_MEDIALE_VOTUM
@@ -7951,12 +7958,6 @@ Body:
   - Status: Axe_Stomp
     Icon: EFST_AXE_STOMP
     DurationLookup: MT_AXE_STOMP
-  - Status: A_Machine
-    Icon: EFST_A_MACHINE
-    DurationLookup: MT_A_MACHINE
-    Flags:
-      BlEffect: true
-      DisplayPc: true
   - Status: D_Machine
     Icon: EFST_D_MACHINE
     DurationLookup: MT_D_MACHINE
