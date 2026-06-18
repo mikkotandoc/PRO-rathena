@@ -9,7 +9,7 @@
 
 // Main Quest: Step 70
 jor_que,32,37,5	script	Lehar#i19ms21	EP19_RGAN_D,5,5,{
-	if (ep19_main == 59) {
+	if (ep19_main == 59 && ep19_main < 100) {
 		mes "[Lehar]";
 		mes "You came just in time!!!";
 		next;
@@ -126,7 +126,7 @@ jor_que,32,37,5	script	Lehar#i19ms21	EP19_RGAN_D,5,5,{
 		ep19_main = 60;
 		close;
 	}
-	if (ep19_main == 60) {
+	if (ep19_main >= 60) {
 		.@md_name$ = "Confused Snake's Nest";
 		mes "[Lehar]";
 		mes "Are you ready? When you are ready, I will send you a signal to confirm that the person who entered has moved.";

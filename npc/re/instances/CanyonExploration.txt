@@ -18,7 +18,7 @@ icecastle,201,171,3	script	Canyon Exploration#ep20	4_BULLETIN_BOARD2,{
 	end;
 
 OnStart:
-	if (ep20_main != 13) end;
+	if (ep20_main < 13) end;
 	if (instance_create("Canyon Exploration") < 0) {
 		mes "[System]";
 		mes "Party leader must create the instance.";
@@ -31,7 +31,7 @@ OnStart:
 1@20cn1,100,100,0	script	#ep20cn_evt01	HIDDEN_WARP_NPC,5,5,{
 	end;
 OnTouch:
-	if (ep20_main != 13) end;
+	if (ep20_main < 13) end;
 	cutin "ep19_lehar01.png",2;
 	mes "[Lehar]";
 	mes "Follow the road. Watch for suspicious Iwin ahead.";

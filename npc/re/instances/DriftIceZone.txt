@@ -18,7 +18,7 @@ jor_maze,140,72,3	script	Drift Ice Zone#ep20	4_BULLETIN_BOARD2,{
 	end;
 
 OnStart:
-	if (ep20_main != 21) end;
+	if (ep20_main < 21) end;
 	if (instance_create("Drift Ice Zone") < 0) {
 		mes "Party leader must create the instance.";
 		close;

@@ -5291,7 +5291,7 @@ OnTouch:
 		cloakoffnpcself( "#warp_ep19re1" );
 		end;
 	}
-	if (ep19_main == 49 || ep19_main == 50) {
+	if (ep19_main == 49 || ep19_main == 50 || ep19_main >= 100) {
 		cloakoffnpcself( "#warp_ep19re1" );
 		end;
 	}
@@ -5317,7 +5317,7 @@ OnTouch:
 		cloakoffnpcself( "Pile of Papers#ep19re4" );
 		end;
 	}
-	if (ep19_main == 49 || ep19_main == 50) {
+	if (ep19_main == 49 || ep19_main == 50 || ep19_main >= 100) {
 		warp "jor_dun03",58,52;
 		end;
 	}
@@ -5342,7 +5342,7 @@ OnTouch:
 		cloakoffnpcself( "Pile of Papers#ep19re4" );
 		end;
 	}
-	if (ep19_main == 49 || ep19_main == 50) {	// Step 57
+	if (ep19_main == 49 || ep19_main == 50 || ep19_main >= 100) {	// Step 57
 		cloakoffnpcself( "Juncea#ep19re2" );
 		end;
 	}
@@ -8065,7 +8065,7 @@ jor_que,36,38,3	script	Rgan#i19ms20	EP19_RGAN_D,5,5,{
 	npctalk "No, please don't hurt me...", "Rgan#i19ms20", bc_self;
 	end;
 OnTouch:
-	if (ep19_main == 59 || ep19_main == 60) {
+	if (ep19_main >= 59) {
 		cloakoffnpcself( "Lehar#i19ms21" );
 		cloakoffnpcself( "Lazy#i19ms21" );
 		end;

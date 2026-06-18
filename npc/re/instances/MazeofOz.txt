@@ -21,7 +21,7 @@ ra_fild10,179,176,5	script	Merchant#ep18_gorge	4_EP18_MERCHANT,{
 		ep18_main = 30;
 		close3;
 	}
-	if (ep18_main == 30) {
+	if (ep18_main >= 30) {
 		mes "[Disguised Miriam]";
 		mes "Then let's head to ^e5555e" + .@md_name$ + "^000000";
 		next;

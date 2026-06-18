@@ -9,7 +9,7 @@
 
 // Main Quest: Step 61.
 oz_dun01,219,117,5	script(CLOAKED)	Ira#c12_01	4_M_BRZ_JACI,{
-	if (ep18_main == 54) {
+	if (ep18_main >= 54) {
 		.@md_name$ = "High Priest's Villa";
 
 		mes "[Ira]";
@@ -92,7 +92,7 @@ OnInstanceInit:
 		mes "Are you all gathered?";
 		close;
 	}
-	if (ep18_main != 54)
+	if (ep18_main < 54)
 		end;
 	if ('adv_step == 0) {
 		'adv_step = 1;

@@ -536,6 +536,21 @@ icecastle,201,171,3	script	Lehar#ep20ms04	4_EP19_LEHAR,{
 		mes "Good work in the canyon. Report to Miriam inside the castle.";
 		close3;
 	}
+	if (ep20_main >= 100) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "You can still enter the ^0000CDCanyon Exploration^000000 memorial dungeon from here.";
+		next;
+		if (select( "Enter Canyon Exploration.", "Cancel." ) == 2)
+			close3;
+		if (getcharid(1) < 1) {
+			mes "[Lehar]";
+			mes "Form a solo party first, then talk to me again.";
+			close3;
+		}
+		doevent "Canyon Exploration#ep20::OnStart";
+		close3;
+	}
 	end;
 
 OnInit:
@@ -716,6 +731,18 @@ jor_maze,140,72,3	script	Swaying Wall#ep20ms01	4_ROPEPILE,{
 		mes "The passage to the drift ice zone remains open.";
 		close;
 	}
+	if (ep20_main >= 100) {
+		mes "A hidden passage opens. You can enter the Drift Ice Zone instance.";
+		next;
+		if (select( "Enter Drift Ice Zone.", "Leave." ) == 2)
+			close;
+		if (getcharid(1) < 1) {
+			mes "Form a party first.";
+			close;
+		}
+		doevent "Drift Ice Zone#ep20::OnStart";
+		close;
+	}
 	end;
 
 OnInit:
@@ -821,6 +848,20 @@ jor_twice,164,244,3	script	Lehar#ep20ms06	4_EP19_LEHAR,{
 		mes "Report to Aurelie at ^0000CD(328, 150)^000000 in the safety zone.";
 		close3;
 	}
+	if (ep20_main >= 100) {
+		cutin "ep19_lehar01.png",2;
+		mes "[Lehar]";
+		mes "The ^0000CDNest of Twigs^000000 memorial dungeon entrance is still available.";
+		next;
+		if (select( "Enter Nest of Twigs.", "Not yet." ) == 2)
+			close3;
+		if (getcharid(1) < 1) {
+			mes "Form a party first.";
+			close3;
+		}
+		doevent "Nest of Twigs#ep20::OnStart";
+		close3;
+	}
 	end;
 
 OnInit:
@@ -914,6 +955,20 @@ jor_twig,140,153,3	script	Aurelie#ep20ms02	4_EP19_AURELIE,{
 		cutin "ep19_aurelie01.png",1;
 		mes "[Aurelie]";
 		mes "This is the final battle. Stop Lasgand before the absorption completes.";
+		next;
+		if (select( "Enter The Immortal.", "Prepare." ) == 2)
+			close3;
+		if (getcharid(1) < 1) {
+			mes "Form a party first.";
+			close3;
+		}
+		doevent "The Immortal#ep20::OnStart";
+		close3;
+	}
+	if (ep20_main >= 100) {
+		cutin "ep19_aurelie01.png",1;
+		mes "[Aurelie]";
+		mes "You can still challenge ^0000CDThe Immortal^000000 memorial dungeon.";
 		next;
 		if (select( "Enter The Immortal.", "Prepare." ) == 2)
 			close3;

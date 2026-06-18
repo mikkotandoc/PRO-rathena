@@ -16,6 +16,12 @@
 ba_maison,120,320,0	script	#herbs_chk	HIDDEN_WARP_NPC,3,3,{
 	end;
 OnTouch:
+	// Episode clear ticket: reveal instance managers without story warp touch.
+	if (ep17_2_main >= 36) {
+		cloakoffnpcself( "#he_admin1" );
+		cloakoffnpcself( "#he_admin2" );
+		end;
+	}
 	//You can start this quest without registering on alpha
 	if (isbegin_quest(12497) == 0) {	// story
 		cloakoffnpcself( "#he_admin1" );
@@ -79,7 +85,7 @@ ba_maison,120,321,5	script(CLOAKED)	#he_admin1	MD_ASSISTANT,{
 ba_maison,120,321,5	script(CLOAKED)	#he_admin2	MD_ASSISTANT,{
 	if (ep17_2_main < 1)
 		end;
-	if (isbegin_quest(12497) != 2)
+	if (isbegin_quest(12497) != 2 && ep17_2_main < 36)
 		end;
 	switch( checkquest(12498,PLAYTIME) ) {
 	case -1:

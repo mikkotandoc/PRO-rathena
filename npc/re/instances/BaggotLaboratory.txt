@@ -26,7 +26,7 @@ jor_dun03,57,63,3	script(CLOAKED)	Juncea#ep19re2	4_EP19_JUNCEA,{
 		ep19_main = 50;
 		close;
 	}
-	if (ep19_main == 50) {
+	if (ep19_main >= 50) {
 		if (is_party_leader() == false) {
 			mes "[Juncea]";
 			mes "I can only open the secret passage for party leaders. Please have your party leader talk to me.";
@@ -99,7 +99,7 @@ OnInstanceInit:
 	end;
 OnTouch:
 	disablenpc();
-	if (ep19_main == 50) {
+	if (ep19_main >= 50) {
 		if ('event != 0)
 			end;
 		if (is_party_leader() == false)
@@ -112,7 +112,7 @@ OnTouch:
 
 // Main Quest: Step 59
 1@jorlab,58,67,3	script	Juncea#ep19re3	4_EP19_JUNCEA,{
-	if (ep19_main != 50)
+	if (ep19_main < 50)
 		end;
 	if (is_party_leader() == false)
 		end;
