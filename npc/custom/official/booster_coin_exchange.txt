@@ -1,7 +1,6 @@
 //============================================================
 // Booster Coin Exchange NPCs
 // Centro  - Promotional Item Exchange (prontera)
-// Guarani - Booster Weapon Voucher Exchange (prontera)
 // Yves    - Promotional Costume Enchantment (malangdo)
 // RS26-1  - Illusion Equipment (Bound) Enchantment (sp_cor)
 //============================================================
@@ -13,56 +12,79 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 		mes "Please make some room and try again.";
 		close;
 	}
-	mes "[Centro]";
-	mes "Welcome! I exchange ^0000FF" + mesitemlink(1000254) + "^000000";
-	mes "for various promotional booster products.";
-	next;
-	if (select("Open Exchange Shop:Cancel") == 2) {
-		mes "[Centro]";
-		mes "Come back when you have coins to spend.";
-		close;
-	}
 	if (!getbattleflag("feature.barter")) {
 		mes "[Centro]";
 		mes "The exchange service is currently unavailable.";
 		close;
 	}
-	close2;
-	callshop "mega00", 1;
+	mes "[Centro]";
+	mes "Welcome! I can exchange ^0000FF" + mesitemlink(1000254) + "^000000";
+	mes "for promotional booster products, or trade a";
+	mes "^0000FF" + mesitemlink(1000253) + "^000000 for Booster Weapons.";
+	next;
+	switch (select("Exchange Promotional Items:Exchange Booster Weapons:Cancel")) {
+	case 1:
+		mes "[Centro]";
+		mes "Opening the promotional item exchange shop.";
+		close2;
+		callshop "mega00", 1;
+		end;
+	case 2:
+		mes "[Centro]";
+		mes "Which job class weapons would you like to browse?";
+		next;
+		switch (select("Swordsman Jobs:Merchant Jobs:Thief Jobs:Wizard Jobs:Acolyte Jobs:Archer Jobs:Star Emperor / Soul Link Jobs:Summoner / Ninja Jobs:Novice / Gunslinger Jobs:Cancel")) {
+		case 1:
+			close2;
+			callshop "mega04", 1;
+			end;
+		case 2:
+			close2;
+			callshop "mega05", 1;
+			end;
+		case 3:
+			close2;
+			callshop "mega06", 1;
+			end;
+		case 4:
+			close2;
+			callshop "mega07", 1;
+			end;
+		case 5:
+			close2;
+			callshop "mega08", 1;
+			end;
+		case 6:
+			close2;
+			callshop "mega09", 1;
+			end;
+		case 7:
+			close2;
+			callshop "mega10", 1;
+			end;
+		case 8:
+			close2;
+			callshop "mega11", 1;
+			end;
+		case 9:
+			close2;
+			callshop "mega12", 1;
+			end;
+		case 10:
+			mes "[Centro]";
+			mes "Come back when you have a voucher ready.";
+			close;
+		}
+		end;
+	case 3:
+		mes "[Centro]";
+		mes "Come back when you have something to exchange.";
+		close;
+	}
 	end;
 
 OnInit:
 	setunittitle getnpcid(0), "<Promotional Item Exchange>";
-	end;
-}
-
-prontera,148,282,0	script	Guarani	4_M_HUMERCHANT,{
-	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 1000) {
-		mes "[Guarani]";
-		mes "Your inventory is too full to continue.";
-		mes "Please make some room and try again.";
-		close;
-	}
-	mes "[Guarani]";
-	mes "Welcome! I can exchange a ^0000FF" + mesitemlink(1000005) + "^000000";
-	mes "for one Booster Weapon of your choice.";
-	next;
-	if (select("Open Weapon Exchange:Cancel") == 2) {
-		mes "[Guarani]";
-		mes "Come back when you have a voucher ready.";
-		close;
-	}
-	if (!getbattleflag("feature.barter")) {
-		mes "[Guarani]";
-		mes "The exchange service is currently unavailable.";
-		close;
-	}
-	close2;
-	callshop "guarani_weapon", 1;
-	end;
-
-OnInit:
-	setunittitle getnpcid(0), "<Booster Weapon Exchange>";
 	end;
 }
 
