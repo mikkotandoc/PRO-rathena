@@ -16445,3 +16445,84 @@ Body:
       - Mob: G_RANDGRIS
         Count: 1
     TimeLimit: 4h
+  - Id: 90500
+    Title: "Biosphere - Grassland Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: bl_grass
+  - Id: 90501
+    Title: "[Standby] Biosphere - Grassland Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90502
+    Title: "Biosphere - Fire Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: bl_lava
+  - Id: 90503
+    Title: "[Standby] Biosphere - Fire Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90504
+    Title: "Biosphere - Ice Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: bl_ice
+  - Id: 90505
+    Title: "[Standby] Biosphere - Ice Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90506
+    Title: "Biosphere - Death Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: bl_death
+  - Id: 90507
+    Title: "[Standby] Biosphere - Death Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90508
+    Title: "Biosphere - Soul Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: bl_soul
+  - Id: 90509
+    Title: "[Standby] Biosphere - Soul Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90510
+    Title: "Biosphere - Venom Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: bl_venom
+  - Id: 90511
+    Title: "[Standby] Biosphere - Venom Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90512
+    Title: "Biosphere - Temple Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: bl_temple
+  - Id: 90513
+    Title: "[Standby] Biosphere - Temple Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90514
+    Title: "Biosphere Depth - Level 1 Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: bl_depth1
+  - Id: 90515
+    Title: "[Standby] Biosphere Depth - Level 1 Daily Hunt"
+    TimeLimit: 4h
+  - Id: 90516
+    Title: "Biosphere Depth - Level 2 Daily Hunt"
+    Targets:
+      - Id: 1
+        Count: 450
+        Location: bl_depth2
+  - Id: 90517
+    Title: "[Standby] Biosphere Depth - Level 2 Daily Hunt"
+    TimeLimit: 4h
