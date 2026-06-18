@@ -1,0 +1,366 @@
+# Official kRO/iRO Mega Booster promotion barter shops (mega01-mega03, mega13-mega15)
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: mega01
+    Items:
+      - Index: 0
+        Item: Metal_W_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+      - Index: 1
+        Item: Booster_W_Ticket
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+      - Index: 2
+        Item: Booster_W_Up_3
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 3
+        Item: Boost_C_Enchant_1
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 4
+        Item: Memento_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 150
+      - Index: 5
+        Item: P_Memento_Box
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 300
+  - Name: mega02
+    Items:
+      - Index: 0
+        Item: S_Ignition_Cube
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 1
+        Item: S_W_Breath_Cube
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 2
+        Item: S_F_Breath_Cube
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+  - Name: mega03
+    Items:
+      - Index: 0
+        Item: Special_Coin_Pack
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 1
+      - Index: 1
+        Item: K_Secret_Key
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 1
+      - Index: 2
+        Item: Blacksmith_Bless_Box_3
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 7
+      - Index: 3
+        Item: Shadow_Hammer_Box_3
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 7
+      - Index: 4
+        Item: C_Cons_Of_Light_Dark_
+        RequiredItems:
+          - Index: 0
+            Item: Booster_M_Ticket
+            Amount: 20
+  - Name: mega13
+    Items:
+      - Index: 0
+        Item: S_Booster_Armor
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 1
+        Item: S_Booster_Shield
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 2
+        Item: S_Booster_Shoes
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 3
+        Item: S_Booster_Earing
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 4
+        Item: S_Booster_Pandent
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 5
+        Item: S_RK_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 6
+        Item: S_LG_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 7
+        Item: S_NC_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 8
+        Item: S_GN_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 9
+        Item: S_GC_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 10
+        Item: S_SC_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 11
+        Item: S_WL_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 12
+        Item: S_SO_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 13
+        Item: S_AB_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 14
+        Item: S_SR_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 15
+        Item: S_RA_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 16
+        Item: S_WM_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 17
+        Item: S_SU_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 18
+        Item: S_SJ_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 19
+        Item: S_KO_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+  - Name: mega14
+    Items:
+      - Index: 0
+        Item: E_Illusion_Armor_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 1
+        Item: E_Illusion_Armor_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 2
+        Item: E_Illusion_Engine_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 3
+        Item: E_Illusion_Engine_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 4
+        Item: E_Illusion_Leg_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 5
+        Item: E_Illusion_Leg_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 6
+        Item: E_Illusion_B_R
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 7
+        Item: E_Illusion_B_L
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 8
+        Item: E_Illusion_BC_R
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 9
+        Item: E_Illusion_BC_L
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 10
+        Item: EP17_1_A_Ticket
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 11
+        Item: E_ILL_Up
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
+  - Name: mega15
+    Items:
+      - Index: 0
+        Item: E_Auto_Armor_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 1
+        Item: E_Auto_Armor_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 2
+        Item: E_Auto_Engine_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 3
+        Item: E_Auto_Engine_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 4
+        Item: E_Auto_Leg_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 5
+        Item: E_Auto_Leg_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 6
+        Item: E_Auto_B_R
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 7
+        Item: E_Auto_B_L
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 8
+        Item: E_Auto_BC_R
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 9
+        Item: E_Auto_BC_L
+        RequiredItems:
+          - Index: 0
+            Item: EP17_2_A_Ticket
+            Amount: 1
+      - Index: 10
+        Item: EP17_2_A_Ticket
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 11
+        Item: E_Auto_Up
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5

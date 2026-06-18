@@ -68502,7 +68502,7 @@ Body:
   - Id: 100337
     AegisName: Booster_Call
     Name: Booster Call
-    Type: Usable
+    Type: DelayConsume
     Trade:
       NoDrop: true
       NoTrade: true
@@ -68513,7 +68513,7 @@ Body:
       NoMail: true
       NoAuction: true
     Script: |
-      /* TODO */
+      duplicate_dynamic("mega");
   - Id: 100338
     AegisName: Booster_W_Up_1
     Name: Booster Weapon Phase 1 Upgrade Package
@@ -74268,7 +74268,7 @@ Body:
   - Id: 101473
     AegisName: P_Booster_Call
     Name: Premium Booster Call    # !todo check english name
-    Type: Usable
+    Type: DelayConsume
     Trade:
       NoDrop: true
       NoTrade: true
@@ -74278,8 +74278,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
-#   Script: |
-#     /* TODO */
+    Script: |
+      duplicate_dynamic("mega");
   - Id: 101474
     AegisName: Booster_B_M_1
     Name: Booster Combat Manual    # !todo check english name
