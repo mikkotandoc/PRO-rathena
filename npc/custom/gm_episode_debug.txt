@@ -35,31 +35,34 @@ function	script	F_GM_EpSetVars	{
 
 	switch (.@ep) {
 	case 16:
-		if (.@mode$ == "complete") terra_gloria_main = 25;
+		if (.@mode$ == "complete")
+			callfunc("F_EpClearApply", 16, 0);
 		else if (.@mode$ == "reset") terra_gloria_main = 0;
 		break;
 	case 17:
 		if (.@part == 2) {
-			if (.@mode$ == "complete") ep17_2_main = 36;
+			if (.@mode$ == "complete")
+				callfunc("F_EpClearApply", 17, 2);
 			else if (.@mode$ == "reset") ep17_2_main = 0;
 		}
 		break;
 	case 18:
 		if (.@mode$ == "complete") {
-			ep18_main = 57;
+			callfunc("F_EpClearApply", 18, 0);
 			#Ep18_Manual_Clear = 1;
-			cloakoffnpcself( "Aira#con" );
 		} else if (.@mode$ == "reset") {
 			ep18_main = 0;
 			#Ep18_Manual_Clear = 0;
 		}
 		break;
 	case 19:
-		if (.@mode$ == "complete") ep19_main = 100;
+		if (.@mode$ == "complete")
+			callfunc("F_EpClearApply", 19, 0);
 		else if (.@mode$ == "reset") ep19_main = 0;
 		break;
 	case 20:
-		if (.@mode$ == "complete") ep20_main = 100;
+		if (.@mode$ == "complete")
+			callfunc("F_EpClearApply", 20, 0);
 		else if (.@mode$ == "reset") ep20_main = 0;
 		break;
 	}

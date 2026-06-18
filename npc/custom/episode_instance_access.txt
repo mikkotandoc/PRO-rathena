@@ -1,0 +1,137 @@
+//===== rAthena Script =======================================
+//= Episode Clear - Instance NPC access helpers
+//===== Description: =========================================
+//= Uncloaks memorial-dungeon entrance NPCs and sets any extra
+//= variables when players use Balheele episode clear tickets.
+//= Map load handlers fix visibility for characters already cleared.
+//============================================================
+
+function	script	F_EpClearApply	{
+	.@ep = getarg(0);
+	.@part = getarg(1, 0);
+
+	switch (.@ep) {
+	case 16:
+		if (terra_gloria_main < 25)
+			terra_gloria_main = 25;
+		break;
+	case 17:
+		if (.@part == 2) {
+			if (ep17_2_main < 36)
+				ep17_2_main = 36;
+			if (ep172_watergarden < 3)
+				ep172_watergarden = 3;
+			callfunc("F_EpForceComplete", 12497);
+		}
+		break;
+	case 18:
+		if (ep18_main < 57)
+			ep18_main = 57;
+		break;
+	case 19:
+		if (ep19_main < 100)
+			ep19_main = 100;
+		callfunc("F_EpForceComplete", 17637);
+		break;
+	case 20:
+		if (ep20_main < 100)
+			ep20_main = 100;
+		break;
+	}
+	callfunc("F_EpUncloakInstances", .@ep, .@part);
+	return;
+}
+
+function	script	F_EpUncloakInstances	{
+	.@ep = getarg(0);
+	.@part = getarg(1, 0);
+
+	if (.@ep == 17 && .@part == 2 && ep17_2_main >= 1) {
+		cloakoffnpcself( "#he_admin1" );
+		cloakoffnpcself( "#he_admin2" );
+	}
+	if (.@ep == 18 && ep18_main >= 52) {
+		cloakoffnpcself( "Priest#sms01" );
+		if (ep18_main >= 54) {
+			cloakoffnpcself( "Ira#c12_01" );
+			cloakoffnpcself( "Miriam#c12_01" );
+			cloakoffnpcself( "Maram#c12_01" );
+			cloakoffnpcself( "Suad#c12_01" );
+		}
+		if (ep18_main >= 57)
+			cloakoffnpcself( "Aira#con" );
+	}
+	if (.@ep == 19 && ep19_main >= 50) {
+		cloakoffnpcself( "Juncea#ep19re2" );
+		cloakoffnpcself( "#warp_ep19re1" );
+	}
+	if (.@ep == 19 && ep19_main >= 59) {
+		cloakoffnpcself( "Lehar#i19ms21" );
+		cloakoffnpcself( "Lazy#i19ms21" );
+		cloakoffnpcself( "Aurelie#i19ms21" );
+		cloakoffnpcself( "Horuru#i19ms21" );
+		cloakoffnpcself( "Horr#i19ms21" );
+		cloakoffnpcself( "Voglinde#i19ms21" );
+		cloakoffnpcself( "Leon#i19ms21" );
+		cloakoffnpcself( "Miriam#i19ms21" );
+		cloakoffnpcself( "Iwin#i19ms21" );
+		cloakoffnpcself( "Iwin#i19ms22" );
+	}
+	if (.@ep == 19 && ep19_main >= 100)
+		cloakoffnpcself( "Arolong#ep19re2" );
+	return;
+}
+
+function	script	F_EpUncloakOnMapLoad	{
+	.@map$ = strcharinfo(3);
+
+	if (.@map$ == "ba_maison" && ep17_2_main >= 1) {
+		cloakoffnpcself( "#he_admin1" );
+		cloakoffnpcself( "#he_admin2" );
+	}
+	if (.@map$ == "wolfvill" && ep18_main >= 57)
+		cloakoffnpcself( "Aira#con" );
+	if (.@map$ == "rachel" && ep18_main >= 52)
+		cloakoffnpcself( "Priest#sms01" );
+	if (.@map$ == "oz_dun01" && ep18_main >= 54) {
+		cloakoffnpcself( "Ira#c12_01" );
+		cloakoffnpcself( "Miriam#c12_01" );
+		cloakoffnpcself( "Maram#c12_01" );
+		cloakoffnpcself( "Suad#c12_01" );
+	}
+	if (.@map$ == "jor_dun03" && ep19_main >= 50)
+		cloakoffnpcself( "Juncea#ep19re2" );
+	if (.@map$ == "jor_nest" && ep19_main >= 50)
+		cloakoffnpcself( "#warp_ep19re1" );
+	if (.@map$ == "jor_nest" && ep19_main >= 100)
+		cloakoffnpcself( "Arolong#ep19re2" );
+	if (.@map$ == "jor_que" && ep19_main >= 59) {
+		cloakoffnpcself( "Lehar#i19ms21" );
+		cloakoffnpcself( "Lazy#i19ms21" );
+		cloakoffnpcself( "Aurelie#i19ms21" );
+		cloakoffnpcself( "Horuru#i19ms21" );
+		cloakoffnpcself( "Horr#i19ms21" );
+		cloakoffnpcself( "Voglinde#i19ms21" );
+		cloakoffnpcself( "Leon#i19ms21" );
+		cloakoffnpcself( "Miriam#i19ms21" );
+		cloakoffnpcself( "Iwin#i19ms21" );
+		cloakoffnpcself( "Iwin#i19ms22" );
+	}
+	return;
+}
+
+-	script	EpisodeInstanceAccess	-1,{
+	end;
+OnPCLoadMapEvent:
+	callfunc("F_EpUncloakOnMapLoad");
+	end;
+}
+
+// Map flags for OnPCLoadMapEvent (episode instance hub maps)
+ba_maison	mapflag	loadevent
+wolfvill	mapflag	loadevent
+rachel	mapflag	loadevent
+oz_dun01	mapflag	loadevent
+jor_dun03	mapflag	loadevent
+jor_nest	mapflag	loadevent
+jor_que	mapflag	loadevent

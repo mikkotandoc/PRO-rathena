@@ -232,10 +232,7 @@ function	script	F_EpClearSkip	{
 			close;
 		case 2:
 			if (checkquest(.@ids[getarraysize(.@ids)-1], PLAYTIME) == 2) {
-				if (.@ep == 18 && ep18_main < 57) {
-					ep18_main = 57;
-					cloakoffnpcself( "Aira#con" );
-				}
+				callfunc("F_EpClearApply", .@ep, 0);
 				mes "[Balheele]";
 				mes "Seems like you already know all the necessary stories?";
 				mes "There's no need for more effort.";
@@ -262,20 +259,9 @@ function	script	F_EpClearSkip	{
 					close;
 			}
 
-			for (.@i = 0; .@i < getarraysize(.@ids); .@i++) {
+			for (.@i = 0; .@i < getarraysize(.@ids); .@i++)
 				callfunc("F_EpForceComplete", .@ids[.@i]);
-				if (.@i == getarraysize(.@ids) - 1) {
-					switch (.@ep) {
-						case 16: terra_gloria_main = 25; break;
-						case 18:
-							ep18_main = 57;
-							cloakoffnpcself( "Aira#con" );
-							break;
-						case 19: ep19_main = 100; break;
-						case 20: ep20_main = 100; break;
-					}
-				}
-			}
+			callfunc("F_EpClearApply", .@ep, 0);
 
 			mes "[Balheele]";
 			mes "Story organization is complete.";
@@ -311,6 +297,7 @@ function	script	F_Ep17	{
 			close;
 		case 2:
 			if (checkquest(.@ids[.@end], PLAYTIME) == 2) {
+				callfunc("F_EpClearApply", 17, .@part);
 				mes "[Balheele]";
 				mes "Seems like you already know all the necessary stories?";
 				mes "There's no need for more effort.";
@@ -341,9 +328,7 @@ function	script	F_Ep17	{
 
 			for (.@i = .@start; .@i <= .@end; .@i++)
 				callfunc("F_EpForceComplete", .@ids[.@i]);
-
-			if (.@part == 2)
-				ep17_2_main = 36;
+			callfunc("F_EpClearApply", 17, .@part);
 
 			mes "[Balheele]";
 			mes "Story organization is complete.";

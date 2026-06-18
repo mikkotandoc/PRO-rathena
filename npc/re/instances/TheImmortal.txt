@@ -18,7 +18,7 @@ jor_twig,140,153,3	script	The Immortal#ep20	4_BULLETIN_BOARD2,{
 	end;
 
 OnStart:
-	if (ep20_main != 29) end;
+	if (ep20_main < 29) end;
 	if (instance_create("The Immortal") < 0) {
 		mes "Party leader must create the instance.";
 		close;

@@ -19,7 +19,7 @@ jor_twice,164,244,3	script	Nest of Twigs#ep20	4_BULLETIN_BOARD2,{
 	end;
 
 OnStart:
-	if (ep20_main != 25) end;
+	if (ep20_main < 25) end;
 	if (instance_create("Nest of Twigs") < 0) {
 		mes "Party leader must create the instance.";
 		close;

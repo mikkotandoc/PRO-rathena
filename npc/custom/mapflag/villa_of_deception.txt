@@ -1,8 +1,0 @@
-//===== rAthena Script =======================================
-//= Villa of Deception - wolfvill access handler
-//===== Description: =========================================
-//= Enables OnPCLoadMapEvent for uncloaking Aira#con when
-//= Episode 18 is complete (including episode clear ticket).
-//============================================================
-
-wolfvill	mapflag	loadevent
