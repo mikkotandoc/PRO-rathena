@@ -48,6 +48,7 @@ function	script	F_GM_EpSetVars	{
 		if (.@mode$ == "complete") {
 			ep18_main = 57;
 			#Ep18_Manual_Clear = 1;
+			cloakoffnpcself( "Aira#con" );
 		} else if (.@mode$ == "reset") {
 			ep18_main = 0;
 			#Ep18_Manual_Clear = 0;

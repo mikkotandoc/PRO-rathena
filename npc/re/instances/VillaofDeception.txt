@@ -13,6 +13,17 @@
 //= 1.0 First version. [Capuche]
 //============================================================
 
+wolfvill,1,1,0	script	#villa_deception_access	-1,{
+	end;
+OnPCLoadMapEvent:
+	if (strcharinfo(3) != "wolfvill")
+		end;
+	if (ep18_main < 57)
+		end;
+	cloakoffnpcself( "Aira#con" );
+	end;
+}
+
 wolfvill,79,260,0	script	#con_wp11	HIDDEN_WARP_NPC,4,4,{
 	end;
 OnTouch:
