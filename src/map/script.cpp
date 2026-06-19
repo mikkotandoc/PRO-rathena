@@ -26069,6 +26069,66 @@ BUILDIN_FUNC(achievementexists) {
 }
 
 /**
+ * Add an official title to the player's owned title list.
+ * addtitle <title ID>{,<char ID>};
+ */
+BUILDIN_FUNC(addtitle) {
+	map_session_data *sd;
+	int32 title_id = script_getnum(st, 2);
+
+	if (!script_charid2sd(3, sd)) {
+		script_pushint(st, 0);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if (!sd->state.pc_loaded)
+		return SCRIPT_CMD_SUCCESS;
+
+	script_pushint(st, pc_title_add(sd, title_id) ? 1 : 0);
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/**
+ * Remove an official title from the player's owned title list.
+ * deltitle <title ID>{,<char ID>};
+ */
+BUILDIN_FUNC(deltitle) {
+	map_session_data *sd;
+	int32 title_id = script_getnum(st, 2);
+
+	if (!script_charid2sd(3, sd)) {
+		script_pushint(st, 0);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if (!sd->state.pc_loaded)
+		return SCRIPT_CMD_SUCCESS;
+
+	script_pushint(st, pc_title_remove(sd, title_id) ? 1 : 0);
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/**
+ * Equip an official title by ID (0 to clear).
+ * setchartitle <title ID>{,<char ID>};
+ */
+BUILDIN_FUNC(setchartitle) {
+	map_session_data *sd;
+	int32 title_id = script_getnum(st, 2);
+
+	if (!script_charid2sd(3, sd)) {
+		script_pushint(st, 0);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if (!sd->state.pc_loaded)
+		return SCRIPT_CMD_SUCCESS;
+
+	script_pushint(st, pc_title_set(sd, title_id) ? 1 : 0);
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/**
  * Updates an achievement's value.
  * achievementupdate(<achievement ID>,<type>,<value>{,<char ID>});
  */
@@ -28757,6 +28817,9 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(achievementremove,"i?"),
 	BUILDIN_DEF(achievementcomplete,"i?"),
 	BUILDIN_DEF(achievementexists,"i?"),
+	BUILDIN_DEF(addtitle,"i?"),
+	BUILDIN_DEF(deltitle,"i?"),
+	BUILDIN_DEF(setchartitle,"i?"),
 	BUILDIN_DEF(achievementupdate,"iii?"),
 
 	BUILDIN_DEF(getequiprefinecost,"iii?"),

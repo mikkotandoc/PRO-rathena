@@ -66,7 +66,7 @@ enum e_achievement_info {
 enum e_title_table : uint16 {
 	TITLE_NONE = 0,
 	TITLE_BASE = 1000,
-	TITLE_MAX = 1046,
+	TITLE_MAX = 1047, // 1047 = custom event title (e.g. PVP Ladder Apex Predator)
 };
 
 struct achievement_target {
@@ -144,6 +144,9 @@ int32 achievement_check_progress( const map_session_data* sd, int32 achievement_
 int32 *achievement_level(map_session_data *sd, bool flag);
 bool achievement_check_condition(struct script_code* condition, map_session_data* sd);
 void achievement_get_titles(uint32 char_id);
+bool pc_title_add(map_session_data *sd, int32 title_id);
+bool pc_title_remove(map_session_data *sd, int32 title_id);
+bool pc_title_set(map_session_data *sd, int32 title_id);
 void achievement_update_objective(map_session_data *sd, enum e_achievement_group group, uint8 arg_count, ...);
 int32 achievement_update_objective_sub(block_list *bl, va_list ap);
 void achievement_read_db(void);

@@ -754,6 +754,74 @@ void achievement_get_titles(uint32 char_id)
 }
 
 /**
+ * Add an official title ID to the player's owned title list.
+ * @return true on success, false if invalid or already owned
+ */
+bool pc_title_add(map_session_data *sd, int32 title_id)
+{
+	nullpo_retr(false, sd);
+
+	if (title_id < TITLE_BASE || title_id > TITLE_MAX)
+		return false;
+
+	if (std::find(sd->titles.begin(), sd->titles.end(), title_id) != sd->titles.end())
+		return true;
+
+	sd->titles.push_back(title_id);
+	clif_achievement_list_all(sd);
+	return true;
+}
+
+/**
+ * Remove an official title ID from the player's owned title list.
+ * @return true on success, false if not owned
+ */
+bool pc_title_remove(map_session_data *sd, int32 title_id)
+{
+	nullpo_retr(false, sd);
+
+	auto it = std::find(sd->titles.begin(), sd->titles.end(), title_id);
+
+	if (it == sd->titles.end())
+		return false;
+
+	sd->titles.erase(it);
+
+	if (sd->status.title_id == title_id)
+		pc_title_set(sd, 0);
+
+	clif_achievement_list_all(sd);
+	return true;
+}
+
+/**
+ * Equip an official title by ID (0 clears the equipped title).
+ * @return true on success, false if invalid or not owned
+ */
+bool pc_title_set(map_session_data *sd, int32 title_id)
+{
+	nullpo_retr(false, sd);
+
+	if (title_id == 0) {
+		sd->status.title_id = 0;
+		clif_name_area(sd);
+		clif_change_title_ack(sd, 0, 0);
+		return true;
+	}
+
+	if (title_id < TITLE_BASE || title_id > TITLE_MAX)
+		return false;
+
+	if (std::find(sd->titles.begin(), sd->titles.end(), title_id) == sd->titles.end())
+		return false;
+
+	sd->status.title_id = title_id;
+	clif_name_area(sd);
+	clif_change_title_ack(sd, 0, title_id);
+	return true;
+}
+
+/**
  * Frees the player's data for achievements
  * @param sd: Player's session
  */
