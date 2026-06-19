@@ -204,7 +204,7 @@ function	script	F_EpClearSkip	{
 	} else if (.@ep == 16) {
 		setarray .@names$[0], "Banquet for Heroes", "Geoborg's Story", "Wigneur's Story", "Walter's Story", "Roegenburg's Story", "Why Do I Have to Prepare the Banquet?", "Terra Gloria", "Between Negotiation and Fraud", "Grudge";
 		setarray .@ids[0], 7682, 7698, 7703, 7736, 14599, 14602, 14615, 12374, 18219;
-		setarray .@tickets[0], 1001260, 1000282;
+		setarray .@tickets[0], 1000283, 1001260, 1000282;
 	} else if (.@ep == 18) {
 		setarray .@names$[0], "To the Church State", "Niren's Request", "Children of Gray", "Oz's Maze and the Merchant", "Daily Bread to Be Thankful For", "Sacred Relic for Essence", "Belated Migration", "I Can't Sleep", "This Is Not That Place", "Where Is My Home", "There Are No Bad Beasts in the World", "Gray Village Governor Candidate", "Great Meeting in Gray Wolf Forest", "Wolf in Sheep's Clothing", "Sacred Deception";
 		setarray .@ids[0], 18000,18001,18002,18003,18004,18005,18006,18007,18008,18009,18010,18011,18012,18013,18014;
@@ -239,12 +239,21 @@ function	script	F_EpClearSkip	{
 				close;
 			}
 
-			if (countitem(.@tickets[0]) > 0) delitem(.@tickets[0], 1);
-			else if (countitem(.@tickets[1]) > 0) delitem(.@tickets[1], 1);
-			else {
+			.@consumed = 0;
+			for (.@t = 0; .@t < getarraysize(.@tickets); .@t++) {
+				if (countitem(.@tickets[.@t]) > 0) {
+					delitem .@tickets[.@t], 1;
+					.@consumed = 1;
+					break;
+				}
+			}
+			if (!.@consumed) {
 				mes "Hmm...";
 				mes "Don't you have any of these tickets?";
-				mes "^i[" + .@tickets[0] + "] ^i[" + .@tickets[1] + "]";
+				.@icon$ = "";
+				for (.@t = 0; .@t < getarraysize(.@tickets); .@t++)
+					.@icon$ += " ^i[" + .@tickets[.@t] + "]";
+				mes .@icon$;
 				mes "I consume one ticket, but I can exchange it for you.";
 				close;
 			}
@@ -304,14 +313,21 @@ function	script	F_Ep17	{
 				close;
 			}
 
-			if (countitem(.@tickets[0]) > 0) {
-				delitem(.@tickets[0], 1);
-			} else if (countitem(.@tickets[1]) > 0) {
-				delitem(.@tickets[1], 1);
-			} else {
+			.@consumed = 0;
+			for (.@t = 0; .@t < getarraysize(.@tickets); .@t++) {
+				if (countitem(.@tickets[.@t]) > 0) {
+					delitem .@tickets[.@t], 1;
+					.@consumed = 1;
+					break;
+				}
+			}
+			if (!.@consumed) {
 				mes "Hmm...";
 				mes "Don't you have any of these tickets?";
-				mes "^i[" + .@tickets[0] + "] ^i[" + .@tickets[1] + "]";
+				.@icon$ = "";
+				for (.@t = 0; .@t < getarraysize(.@tickets); .@t++)
+					.@icon$ += " ^i[" + .@tickets[.@t] + "]";
+				mes .@icon$;
 				mes "I consume one ticket, but I can exchange it for you.";
 				close;
 			}
