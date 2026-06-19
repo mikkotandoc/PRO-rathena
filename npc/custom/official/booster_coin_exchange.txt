@@ -13,22 +13,25 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 		mes "Please make some room and try again.";
 		close;
 	}
-	if (!getbattleflag("feature.barter")) {
-		mes "[Centro]";
-		mes "The exchange service is currently unavailable.";
-		close;
-	}
 	mes "[Centro]";
-	mes "Welcome! I can exchange ^0000FF" + mesitemlink(1000254) + "^000000";
-	mes "for promotional booster products, or trade a";
-	mes "^0000FF" + mesitemlink(1000253) + "^000000 for Booster Weapons.";
+	mes "Welcome! How can I help you today?";
 	next;
-	switch (select("Exchange Promotional Items:Exchange Booster Weapons:Cancel")) {
+	switch (select("Exchange Promotional Items:Exchange Booster Weapons:Booster Costume Enchantment:Use Level Up Ticket:Cancel")) {
 	case 1:
+		if (!getbattleflag("feature.barter")) {
+			mes "[Centro]";
+			mes "The exchange service is currently unavailable.";
+			close;
+		}
 		mes "[Centro]";
 		mes "Opening the promotional item exchange shop.";
 		callsub L_OpenShop, "mega00";
 	case 2:
+		if (!getbattleflag("feature.barter")) {
+			mes "[Centro]";
+			mes "The exchange service is currently unavailable.";
+			close;
+		}
 		mes "[Centro]";
 		mes "Which job class weapons would you like to browse?";
 		next;
@@ -49,8 +52,56 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 		}
 		end;
 	case 3:
+		if (BaseLevel < 100) {
+			mes "[Centro]";
+			mes "You must be at least ^0000FFBase Level 100^000000 to use";
+			mes "booster costume enchantment.";
+			close;
+		}
 		mes "[Centro]";
-		mes "Come back when you have something to exchange.";
+		mes "Booster costume enchantment uses";
+		mes mesitemlink(25924) + " or " + mesitemlink(1000995) + ".";
+		mes "Which part would you like to enchant?";
+		next;
+		switch (select("Costume Headgear Enchantment:Costume Garment Enchantment:Cancel")) {
+		case 1:
+			mes "[Centro]";
+			mes "Opening booster costume headgear enchantment.";
+			close2;
+			item_enchant(37);
+			end;
+		case 2:
+			mes "[Centro]";
+			mes "Opening booster costume garment enchantment.";
+			close2;
+			item_enchant(38);
+			end;
+		case 3:
+			mes "[Centro]";
+			mes "Return when you are ready.";
+			close;
+		}
+		end;
+	case 4:
+		mes "[Centro]";
+		mes "Select the Level Up Ticket you want to use.";
+		mes "Each ticket raises your Base Level by 1.";
+		next;
+		switch (select("Level Up Ticket (80~89):Level Up Ticket (90~98):Level Up Ticket (150~169):Level Up Ticket (170~189):Level Up Ticket (230~239):Cancel")) {
+		case 1: callsub L_LevelUpTicket, 80, 89, 1000989; break;
+		case 2: callsub L_LevelUpTicket, 90, 98, 1000990; break;
+		case 3: callsub L_LevelUpTicket, 150, 169, 1000991; break;
+		case 4: callsub L_LevelUpTicket, 170, 189, 1000992; break;
+		case 5: callsub L_LevelUpTicket, 230, 239, 1000993; break;
+		case 6:
+			mes "[Centro]";
+			mes "Come back when you have a ticket ready.";
+			close;
+		}
+		end;
+	case 5:
+		mes "[Centro]";
+		mes "Come back when you need assistance.";
 		close;
 	}
 	end;
@@ -60,8 +111,27 @@ L_OpenShop:
 	callshop getarg(0);
 	end;
 
+L_LevelUpTicket:
+	if (BaseLevel < getarg(0) || BaseLevel > getarg(1)) {
+		mes "[Centro]";
+		mes "This ticket can only be used while you are";
+		mes "between ^0000FFBase Level " + getarg(0) + " and " + getarg(1) + "^000000.";
+		close;
+	}
+	if (countitem(getarg(2)) < 1) {
+		mes "[Centro]";
+		mes "You don't have " + mesitemlink(getarg(2)) + ".";
+		close;
+	}
+	delitem getarg(2), 1;
+	BaseLevel = BaseLevel + 1;
+	mes "[Centro]";
+	mes "Your Base Level has increased by 1.";
+	mes "Current Base Level: ^0000FF" + BaseLevel + "^000000.";
+	close;
+
 OnInit:
-	setunittitle getnpcid(0), "<Promotional Item Exchange>";
+	setunittitle getnpcid(0), "<Booster Assistant>";
 	end;
 }
 
@@ -172,3 +242,6 @@ OnInit:
 	setunittitle getnpcid(0), "<Illusion Equipment (Bound) Enchantment>";
 	end;
 }
+
+// Base NPC for Booster Call (100337) / Premium Booster Call (101473)
+prontera,1,1,0	duplicate(Centro)	mega	4_M_HUMERCHANT

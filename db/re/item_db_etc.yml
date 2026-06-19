@@ -92216,6 +92216,62 @@ Body:
     Name: Melee Stone (Lower)
     Type: Etc
     Weight: 100
+  - Id: 1000391
+    AegisName: Visionary_invitation
+    Name: Phantom's Invitation
+    Type: Etc
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 1000392
+    AegisName: Visionary_invitation_1F
+    Name: Corridor of Phantom 1F Ticket
+    Type: Etc
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 1000393
+    AegisName: Visionary_invitation_2F
+    Name: Corridor of Phantom 2F Ticket
+    Type: Etc
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 1000394
+    AegisName: Visionary_invitation_3F
+    Name: Corridor of Phantom 3F Ticket
+    Type: Etc
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
   - Id: 1000395
     AegisName: Jellopy_Essence_TW
     Name: Jellopy Essence

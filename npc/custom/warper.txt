@@ -1340,6 +1340,7 @@ OnInit:
 // --------------------------------------------------
 alb2trea,57,70,6	duplicate(Warper)	Warper#tre	811
 alberta,28,240,4	duplicate(Warper)	Warper#alb	811
+e_tower,74,112,4	duplicate(Warper)	Warper#etower	811
 aldebaran,145,118,4	duplicate(Warper)	Warper#alde	811
 amatsu,203,87,4	duplicate(Warper)	Warper#ama	811
 ayothaya,209,169,6	duplicate(Warper)	Warper#ayo	811

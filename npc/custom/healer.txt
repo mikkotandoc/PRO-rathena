@@ -3,7 +3,7 @@
 //===== By: ==================================================
 //= Euphy
 //===== Current Version: =====================================
-//= 1.1
+//= 1.2
 //===== Compatible With: =====================================
 //= rAthena Project
 //===== Description: =========================================
@@ -11,6 +11,7 @@
 //===== Additional Comments: =================================
 //= 1.0 Initial script.
 //= 1.1 Aligned coordinates with @go.
+//= 1.2 NPC buff strength uses BuffRate (separate from player acolyte skills).
 //============================================================
 
 -	script	Healer	-1,{
@@ -18,6 +19,15 @@
 	.@Price = 0;	// Zeny required for heal
 	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
 	.@Delay = 3;	// Heal delay, in seconds
+
+	// NPC healer buff strength (% of max skill effect). Player acolyte skills use acolyte_support_rate in battle_conf.txt.
+	.@BuffRate = 80;
+	.@MaxBlessLv = 10;
+	.@MaxMidLv = 5;
+	.@BlessLv = .@MaxBlessLv * .@BuffRate / 100;
+	.@MidLv = .@MaxMidLv * .@BuffRate / 100;
+	.@GloriaLuk = 30 * .@BuffRate / 100;
+	.@MagniSpRegen = 100 * .@BuffRate / 100;
 
 	if (@HD > gettimetick(2))
 		end;
@@ -33,14 +43,14 @@
 	percentheal 100,100;
 	if (.@Buffs) {
 		specialeffect2 EF_INCAGILITY;
-		sc_start SC_INCREASEAGI,600000,10;
+		sc_start SC_INCREASEAGI,600000,.@BlessLv;
 		specialeffect2 EF_BLESSING;
-		sc_start SC_BLESSING,600000,10;
-		sc_start SC_ANGELUS, 600000, 10;
-		sc_start SC_ASSUMPTIO, 600000, 5;
-		sc_start SC_MAGNIFICAT, 600000, 5;
-		sc_start SC_GLORIA, 600000, 5;
-		sc_start SC_SUFFRAGIUM, 600000, 5;
+		sc_start SC_BLESSING,600000,.@BlessLv;
+		sc_start SC_ANGELUS, 600000, .@BlessLv;
+		sc_start SC_ASSUMPTIO, 600000, .@MidLv;
+		sc_start2 SC_MAGNIFICAT, 600000, .@MidLv, .@MagniSpRegen;
+		sc_start2 SC_GLORIA, 600000, .@MidLv, .@GloriaLuk;
+		sc_start SC_SUFFRAGIUM, 600000, .@MidLv;
 		specialeffect2 EF_INCALLSTATUS;
 		// --- Auto-Magnify Function ---
 		// This identifies all unidentified items in the player's inventory

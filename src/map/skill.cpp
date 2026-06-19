@@ -506,6 +506,18 @@ bool skill_pos_maxcount_check(block_list *src, int16 x, int16 y, uint16 skill_id
 	return true;
 }
 
+static bool skill_is_acolyte_support_heal(uint16 skill_id)
+{
+	switch (skill_id) {
+		case AL_HEAL:
+		case PR_SANCTUARY:
+		case AB_CHEAL:
+		case AB_HIGHNESSHEAL:
+			return true;
+	}
+	return false;
+}
+
 /**
  * Calculates heal value of skill's effect
  * @param src: Unit casting heal
@@ -761,6 +773,14 @@ int32 skill_calc_heal(block_list *src, block_list *target, uint16 skill_id, uint
 			hp -= hp * penalty / 100;
 #endif
 		}
+	}
+
+	if (sd && battle_config.acolyte_support_rate != 100 && skill_is_acolyte_support_heal(skill_id)) {
+#ifdef RENEWAL
+		global_bonus *= battle_config.acolyte_support_rate / 100.f;
+#else
+		hp = hp * battle_config.acolyte_support_rate / 100;
+#endif
 	}
 
 #ifdef RENEWAL

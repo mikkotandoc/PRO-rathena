@@ -98,7 +98,7 @@ e_tower,72,115,2	script	Oscar#Con1	4_ED_OSCAR,{
 }
 
 //for start
-1@ch_t,46,187,3	script	Oscar#Con2	4_ED_OSCAR,{
+1@ch_t,18,74,3	script	Oscar#Con2	4_ED_OSCAR,{
 	cutin "oscar01",2;
 	mes "[Oscar]";
 	if(getcharid(0)!= getpartyleader(getcharid(1),2)){
@@ -122,13 +122,13 @@ e_tower,72,115,2	script	Oscar#Con1	4_ED_OSCAR,{
 	}
 }
 
-1@ch_t,12,222,0	script	Start Device#HRO_JumpingDevice	10007,{
+1@ch_t,5,88,0	script	Start Device#HRO_JumpingDevice	10007,{
 	if(checkquest(30059) == 1)
 		completequest 30059;
 	if(checkquest(30060) == -1)
 		setquest 30060;
 	'TotalPlayer = getmapusers(instance_mapname("1@ch_t"));
-	warp instance_mapname("1@ch_t"),48,13;
+	warp instance_mapname("1@ch_t"),19,5;
 	'CountPlayer = 'CountPlayer + 1;
 	if('CountPlayer == 'TotalPlayer) {
 		hideonnpc instance_npcname(strnpcinfo(0));
@@ -160,16 +160,17 @@ OnInstanceInit:
 	set 'map_3$, instance_mapname("3@ch_t");
 		'floor_LV = 0; //
 
+		// 5x5 floor grid for 1@ch_t (160x160 client map; original script used ~400x400 coords)
 		.@k = 0;
 	for(.@i = 0 ;.@i < 5 ;.@i++){
 		for(.@j = 0 ;.@j < 5 ;.@j++){
-		'point_x1[.@k] = 7 + 84*.@j ;
-		'point_y1[.@k] = 7 +86*.@i ;
-		'point_x2[.@k] = 34 + 84*.@j ;
-		'point_y2[.@k] = 48 +86*.@i ;
+		'point_x1[.@k] = 3 + 34*.@j ;
+		'point_y1[.@k] = 3 + 34*.@i ;
+		'point_x2[.@k] = 14 + 34*.@j ;
+		'point_y2[.@k] = 19 + 34*.@i ;
 
-		'point_start_x[.@k] = 53 + 84*.@j ;
-		'point_start_y[.@k] = 12 +86*.@i ;
+		'point_start_x[.@k] = 21 + 34*.@j ;
+		'point_start_y[.@k] = 5 + 34*.@i ;
 		.@k++;
 		}
 	}
@@ -179,8 +180,9 @@ OnInstanceInit:
 	//æ¯å±¤BOSSæ•¸é‡
 	'mob_mvp_count = 3;
 
-	//Chance of mobs dropping meteorite fragments
-	'droprate=40;
+	//Chance of mobs dropping meteorite dust (1000372)
+	'droprate=10;
+	'mvp_droprate=25;
 
 	//Floor jump props and final BOSS enhancement props ID Default: 1000372
 	'Fenwei= 1000372 ;
@@ -276,7 +278,7 @@ function	script	#FinalAward	{
 		next_dropitem_special -1,0,DROPEFFECT_BLUE_PILLAR;
 		makeitem 1000373,1,'map_3$,.@x+rand(-3,3),.@y+rand(-3,3);
 	}
-	.@rand = rand(2,35);
+	.@rand = rand(1,6);
 	for(.@i= 0;.@i<.@rand;.@i++){
 		next_dropitem_special -1,0,DROPEFFECT_BLUE_PILLAR;
 		makeitem 1000372,1,'map_3$,.@x+rand(-3,3),.@y+rand(-3,3);
@@ -595,7 +597,7 @@ OnEnable:
 	enablenpc instance_npcname(strnpcinfo(0));
 	end;
 OnMyMVPMobDead:
-	callfunc "get_item",100;
+	callfunc "get_item",'mvp_droprate;
 	goto MyMobNormalDead;
 OnMyMobDead:
 	callfunc "get_item",'droprate;
@@ -616,109 +618,109 @@ OnTimer1000:
 	end;
 }
 
-1@ch_t,12,52,0	duplicate(0FJumping Device)	1FJumping Device	10007
-1@ch_t,96,52,0	duplicate(0FJumping Device)	2FJumping Device	10007
-1@ch_t,184,52,0	duplicate(0FJumping Device)	3FJumping Device	10007
-1@ch_t,270,52,0	duplicate(0FJumping Device)	4FJumping Device	10007
-1@ch_t,354,52,0	duplicate(0FJumping Device)	5FJumping Device	10007
-1@ch_t,12,138,0	duplicate(0FJumping Device)	6FJumping Device	10007
-1@ch_t,96,138,0	duplicate(0FJumping Device)	7FJumping Device	10007
-1@ch_t,184,138,0	duplicate(0FJumping Device)	8FJumping Device	10007
-1@ch_t,270,138,0	duplicate(0FJumping Device)	9FJumping Device	10007
-1@ch_t,354,138,0	duplicate(0FJumping Device)	10FJumping Device	10007
-1@ch_t,12,222,0	duplicate(0FJumping Device)	11FJumping Device	10007
-1@ch_t,96,222,0	duplicate(0FJumping Device)	12FJumping Device	10007
-1@ch_t,184,222,0	duplicate(0FJumping Device)	13FJumping Device	10007
-1@ch_t,270,222,0	duplicate(0FJumping Device)	14FJumping Device	10007
-1@ch_t,354,222,0	duplicate(0FJumping Device)	15FJumping Device	10007
-1@ch_t,12,310,0	duplicate(0FJumping Device)	16FJumping Device	10007
-1@ch_t,96,310,0	duplicate(0FJumping Device)	17FJumping Device	10007
-1@ch_t,184,310,0	duplicate(0FJumping Device)	18FJumping Device	10007
-1@ch_t,270,310,0	duplicate(0FJumping Device)	19FJumping Device	10007
-1@ch_t,354,310,0	duplicate(0FJumping Device)	20FJumping Device	10007
-1@ch_t,12,394,0	duplicate(0FJumping Device)	21FJumping Device	10007
-1@ch_t,96,394,0	duplicate(0FJumping Device)	22FJumping Device	10007
-1@ch_t,184,394,0	duplicate(0FJumping Device)	23FJumping Device	10007
-1@ch_t,270,394,0	duplicate(0FJumping Device)	24FJumping Device	10007
-1@ch_t,354,394,0	duplicate(0FJumping Device)	25FJumping Device	10007
+1@ch_t,5,21,0	duplicate(0FJumping Device)	1FJumping Device	10007
+1@ch_t,38,21,0	duplicate(0FJumping Device)	2FJumping Device	10007
+1@ch_t,73,21,0	duplicate(0FJumping Device)	3FJumping Device	10007
+1@ch_t,108,21,0	duplicate(0FJumping Device)	4FJumping Device	10007
+1@ch_t,141,21,0	duplicate(0FJumping Device)	5FJumping Device	10007
+1@ch_t,5,55,0	duplicate(0FJumping Device)	6FJumping Device	10007
+1@ch_t,38,55,0	duplicate(0FJumping Device)	7FJumping Device	10007
+1@ch_t,73,55,0	duplicate(0FJumping Device)	8FJumping Device	10007
+1@ch_t,108,55,0	duplicate(0FJumping Device)	9FJumping Device	10007
+1@ch_t,141,55,0	duplicate(0FJumping Device)	10FJumping Device	10007
+1@ch_t,5,88,0	duplicate(0FJumping Device)	11FJumping Device	10007
+1@ch_t,38,88,0	duplicate(0FJumping Device)	12FJumping Device	10007
+1@ch_t,73,88,0	duplicate(0FJumping Device)	13FJumping Device	10007
+1@ch_t,108,88,0	duplicate(0FJumping Device)	14FJumping Device	10007
+1@ch_t,141,88,0	duplicate(0FJumping Device)	15FJumping Device	10007
+1@ch_t,5,124,0	duplicate(0FJumping Device)	16FJumping Device	10007
+1@ch_t,38,124,0	duplicate(0FJumping Device)	17FJumping Device	10007
+1@ch_t,73,124,0	duplicate(0FJumping Device)	18FJumping Device	10007
+1@ch_t,108,124,0	duplicate(0FJumping Device)	19FJumping Device	10007
+1@ch_t,141,124,0	duplicate(0FJumping Device)	20FJumping Device	10007
+1@ch_t,5,157,0	duplicate(0FJumping Device)	21FJumping Device	10007
+1@ch_t,38,157,0	duplicate(0FJumping Device)	22FJumping Device	10007
+1@ch_t,73,157,0	duplicate(0FJumping Device)	23FJumping Device	10007
+1@ch_t,108,157,0	duplicate(0FJumping Device)	24FJumping Device	10007
+1@ch_t,141,157,0	duplicate(0FJumping Device)	25FJumping Device	10007
 
-1@ch_t,12,52,0	duplicate(0FJumping Device)	26FJumping Device	10007
-1@ch_t,96,52,0	duplicate(0FJumping Device)	27FJumping Device	10007
-1@ch_t,184,52,0	duplicate(0FJumping Device)	28FJumping Device	10007
-1@ch_t,270,52,0	duplicate(0FJumping Device)	29FJumping Device	10007
-1@ch_t,354,52,0	duplicate(0FJumping Device)	30FJumping Device	10007
-1@ch_t,12,138,0	duplicate(0FJumping Device)	31FJumping Device	10007
-1@ch_t,96,138,0	duplicate(0FJumping Device)	32FJumping Device	10007
-1@ch_t,184,138,0	duplicate(0FJumping Device)	33FJumping Device	10007
-1@ch_t,270,138,0	duplicate(0FJumping Device)	34FJumping Device	10007
-1@ch_t,354,138,0	duplicate(0FJumping Device)	35FJumping Device	10007
-1@ch_t,12,222,0	duplicate(0FJumping Device)	36FJumping Device	10007
-1@ch_t,96,222,0	duplicate(0FJumping Device)	37FJumping Device	10007
-1@ch_t,184,222,0	duplicate(0FJumping Device)	38FJumping Device	10007
-1@ch_t,270,222,0	duplicate(0FJumping Device)	39FJumping Device	10007
-1@ch_t,354,222,0	duplicate(0FJumping Device)	40FJumping Device	10007
-1@ch_t,12,310,0	duplicate(0FJumping Device)	41FJumping Device	10007
-1@ch_t,96,310,0	duplicate(0FJumping Device)	42FJumping Device	10007
-1@ch_t,184,310,0	duplicate(0FJumping Device)	43FJumping Device	10007
-1@ch_t,270,310,0	duplicate(0FJumping Device)	44FJumping Device	10007
-1@ch_t,354,310,0	duplicate(0FJumping Device)	45FJumping Device	10007
-1@ch_t,12,394,0	duplicate(0FJumping Device)	46FJumping Device	10007
-1@ch_t,96,394,0	duplicate(0FJumping Device)	47FJumping Device	10007
-1@ch_t,184,394,0	duplicate(0FJumping Device)	48FJumping Device	10007
-1@ch_t,270,394,0	duplicate(0FJumping Device)	49FJumping Device	10007
-1@ch_t,354,394,0	duplicate(0FJumping Device)	50FJumping Device	10007
+1@ch_t,5,21,0	duplicate(0FJumping Device)	26FJumping Device	10007
+1@ch_t,38,21,0	duplicate(0FJumping Device)	27FJumping Device	10007
+1@ch_t,73,21,0	duplicate(0FJumping Device)	28FJumping Device	10007
+1@ch_t,108,21,0	duplicate(0FJumping Device)	29FJumping Device	10007
+1@ch_t,141,21,0	duplicate(0FJumping Device)	30FJumping Device	10007
+1@ch_t,5,55,0	duplicate(0FJumping Device)	31FJumping Device	10007
+1@ch_t,38,55,0	duplicate(0FJumping Device)	32FJumping Device	10007
+1@ch_t,73,55,0	duplicate(0FJumping Device)	33FJumping Device	10007
+1@ch_t,108,55,0	duplicate(0FJumping Device)	34FJumping Device	10007
+1@ch_t,141,55,0	duplicate(0FJumping Device)	35FJumping Device	10007
+1@ch_t,5,88,0	duplicate(0FJumping Device)	36FJumping Device	10007
+1@ch_t,38,88,0	duplicate(0FJumping Device)	37FJumping Device	10007
+1@ch_t,73,88,0	duplicate(0FJumping Device)	38FJumping Device	10007
+1@ch_t,108,88,0	duplicate(0FJumping Device)	39FJumping Device	10007
+1@ch_t,141,88,0	duplicate(0FJumping Device)	40FJumping Device	10007
+1@ch_t,5,124,0	duplicate(0FJumping Device)	41FJumping Device	10007
+1@ch_t,38,124,0	duplicate(0FJumping Device)	42FJumping Device	10007
+1@ch_t,73,124,0	duplicate(0FJumping Device)	43FJumping Device	10007
+1@ch_t,108,124,0	duplicate(0FJumping Device)	44FJumping Device	10007
+1@ch_t,141,124,0	duplicate(0FJumping Device)	45FJumping Device	10007
+1@ch_t,5,157,0	duplicate(0FJumping Device)	46FJumping Device	10007
+1@ch_t,38,157,0	duplicate(0FJumping Device)	47FJumping Device	10007
+1@ch_t,73,157,0	duplicate(0FJumping Device)	48FJumping Device	10007
+1@ch_t,108,157,0	duplicate(0FJumping Device)	49FJumping Device	10007
+1@ch_t,141,157,0	duplicate(0FJumping Device)	50FJumping Device	10007
 
-1@ch_t,12,52,0	duplicate(0FJumping Device)	51FJumping Device	10007
-1@ch_t,96,52,0	duplicate(0FJumping Device)	52FJumping Device	10007
-1@ch_t,184,52,0	duplicate(0FJumping Device)	53FJumping Device	10007
-1@ch_t,270,52,0	duplicate(0FJumping Device)	54FJumping Device	10007
-1@ch_t,354,52,0	duplicate(0FJumping Device)	55FJumping Device	10007
-1@ch_t,12,138,0	duplicate(0FJumping Device)	56FJumping Device	10007
-1@ch_t,96,138,0	duplicate(0FJumping Device)	57FJumping Device	10007
-1@ch_t,184,138,0	duplicate(0FJumping Device)	58FJumping Device	10007
-1@ch_t,270,138,0	duplicate(0FJumping Device)	59FJumping Device	10007
-1@ch_t,354,138,0	duplicate(0FJumping Device)	60FJumping Device	10007
-1@ch_t,12,222,0	duplicate(0FJumping Device)	61FJumping Device	10007
-1@ch_t,96,222,0	duplicate(0FJumping Device)	62FJumping Device	10007
-1@ch_t,184,222,0	duplicate(0FJumping Device)	63FJumping Device	10007
-1@ch_t,270,222,0	duplicate(0FJumping Device)	64FJumping Device	10007
-1@ch_t,354,222,0	duplicate(0FJumping Device)	65FJumping Device	10007
-1@ch_t,12,310,0	duplicate(0FJumping Device)	66FJumping Device	10007
-1@ch_t,96,310,0	duplicate(0FJumping Device)	67FJumping Device	10007
-1@ch_t,184,310,0	duplicate(0FJumping Device)	68FJumping Device	10007
-1@ch_t,270,310,0	duplicate(0FJumping Device)	69FJumping Device	10007
-1@ch_t,354,310,0	duplicate(0FJumping Device)	70FJumping Device	10007
-1@ch_t,12,394,0	duplicate(0FJumping Device)	71FJumping Device	10007
-1@ch_t,96,394,0	duplicate(0FJumping Device)	72FJumping Device	10007
-1@ch_t,184,394,0	duplicate(0FJumping Device)	73FJumping Device	10007
-1@ch_t,270,394,0	duplicate(0FJumping Device)	74FJumping Device	10007
-1@ch_t,354,394,0	duplicate(0FJumping Device)	75FJumping Device	10007
+1@ch_t,5,21,0	duplicate(0FJumping Device)	51FJumping Device	10007
+1@ch_t,38,21,0	duplicate(0FJumping Device)	52FJumping Device	10007
+1@ch_t,73,21,0	duplicate(0FJumping Device)	53FJumping Device	10007
+1@ch_t,108,21,0	duplicate(0FJumping Device)	54FJumping Device	10007
+1@ch_t,141,21,0	duplicate(0FJumping Device)	55FJumping Device	10007
+1@ch_t,5,55,0	duplicate(0FJumping Device)	56FJumping Device	10007
+1@ch_t,38,55,0	duplicate(0FJumping Device)	57FJumping Device	10007
+1@ch_t,73,55,0	duplicate(0FJumping Device)	58FJumping Device	10007
+1@ch_t,108,55,0	duplicate(0FJumping Device)	59FJumping Device	10007
+1@ch_t,141,55,0	duplicate(0FJumping Device)	60FJumping Device	10007
+1@ch_t,5,88,0	duplicate(0FJumping Device)	61FJumping Device	10007
+1@ch_t,38,88,0	duplicate(0FJumping Device)	62FJumping Device	10007
+1@ch_t,73,88,0	duplicate(0FJumping Device)	63FJumping Device	10007
+1@ch_t,108,88,0	duplicate(0FJumping Device)	64FJumping Device	10007
+1@ch_t,141,88,0	duplicate(0FJumping Device)	65FJumping Device	10007
+1@ch_t,5,124,0	duplicate(0FJumping Device)	66FJumping Device	10007
+1@ch_t,38,124,0	duplicate(0FJumping Device)	67FJumping Device	10007
+1@ch_t,73,124,0	duplicate(0FJumping Device)	68FJumping Device	10007
+1@ch_t,108,124,0	duplicate(0FJumping Device)	69FJumping Device	10007
+1@ch_t,141,124,0	duplicate(0FJumping Device)	70FJumping Device	10007
+1@ch_t,5,157,0	duplicate(0FJumping Device)	71FJumping Device	10007
+1@ch_t,38,157,0	duplicate(0FJumping Device)	72FJumping Device	10007
+1@ch_t,73,157,0	duplicate(0FJumping Device)	73FJumping Device	10007
+1@ch_t,108,157,0	duplicate(0FJumping Device)	74FJumping Device	10007
+1@ch_t,141,157,0	duplicate(0FJumping Device)	75FJumping Device	10007
 
-1@ch_t,12,52,0	duplicate(0FJumping Device)	76FJumping Device	10007
-1@ch_t,96,52,0	duplicate(0FJumping Device)	77FJumping Device	10007
-1@ch_t,184,52,0	duplicate(0FJumping Device)	78FJumping Device	10007
-1@ch_t,270,52,0	duplicate(0FJumping Device)	79FJumping Device	10007
-1@ch_t,354,52,0	duplicate(0FJumping Device)	80FJumping Device	10007
-1@ch_t,12,138,0	duplicate(0FJumping Device)	81FJumping Device	10007
-1@ch_t,96,138,0	duplicate(0FJumping Device)	82FJumping Device	10007
-1@ch_t,184,138,0	duplicate(0FJumping Device)	83FJumping Device	10007
-1@ch_t,270,138,0	duplicate(0FJumping Device)	84FJumping Device	10007
-1@ch_t,354,138,0	duplicate(0FJumping Device)	85FJumping Device	10007
-1@ch_t,12,222,0	duplicate(0FJumping Device)	86FJumping Device	10007
-1@ch_t,96,222,0	duplicate(0FJumping Device)	87FJumping Device	10007
-1@ch_t,184,222,0	duplicate(0FJumping Device)	88FJumping Device	10007
-1@ch_t,270,222,0	duplicate(0FJumping Device)	89FJumping Device	10007
-1@ch_t,354,222,0	duplicate(0FJumping Device)	90FJumping Device	10007
-1@ch_t,12,310,0	duplicate(0FJumping Device)	91FJumping Device	10007
-1@ch_t,96,310,0	duplicate(0FJumping Device)	92FJumping Device	10007
-1@ch_t,184,310,0	duplicate(0FJumping Device)	93FJumping Device	10007
-1@ch_t,270,310,0	duplicate(0FJumping Device)	94FJumping Device	10007
-1@ch_t,354,310,0	duplicate(0FJumping Device)	95FJumping Device	10007
-1@ch_t,12,394,0	duplicate(0FJumping Device)	96FJumping Device	10007
-1@ch_t,96,394,0	duplicate(0FJumping Device)	97FJumping Device	10007
-1@ch_t,184,394,0	duplicate(0FJumping Device)	98FJumping Device	10007
-1@ch_t,270,394,0	duplicate(0FJumping Device)	99FJumping Device	10007
-1@ch_t,354,394,0	duplicate(0FJumping Device)	100FJumping Device	10007
+1@ch_t,5,21,0	duplicate(0FJumping Device)	76FJumping Device	10007
+1@ch_t,38,21,0	duplicate(0FJumping Device)	77FJumping Device	10007
+1@ch_t,73,21,0	duplicate(0FJumping Device)	78FJumping Device	10007
+1@ch_t,108,21,0	duplicate(0FJumping Device)	79FJumping Device	10007
+1@ch_t,141,21,0	duplicate(0FJumping Device)	80FJumping Device	10007
+1@ch_t,5,55,0	duplicate(0FJumping Device)	81FJumping Device	10007
+1@ch_t,38,55,0	duplicate(0FJumping Device)	82FJumping Device	10007
+1@ch_t,73,55,0	duplicate(0FJumping Device)	83FJumping Device	10007
+1@ch_t,108,55,0	duplicate(0FJumping Device)	84FJumping Device	10007
+1@ch_t,141,55,0	duplicate(0FJumping Device)	85FJumping Device	10007
+1@ch_t,5,88,0	duplicate(0FJumping Device)	86FJumping Device	10007
+1@ch_t,38,88,0	duplicate(0FJumping Device)	87FJumping Device	10007
+1@ch_t,73,88,0	duplicate(0FJumping Device)	88FJumping Device	10007
+1@ch_t,108,88,0	duplicate(0FJumping Device)	89FJumping Device	10007
+1@ch_t,141,88,0	duplicate(0FJumping Device)	90FJumping Device	10007
+1@ch_t,5,124,0	duplicate(0FJumping Device)	91FJumping Device	10007
+1@ch_t,38,124,0	duplicate(0FJumping Device)	92FJumping Device	10007
+1@ch_t,73,124,0	duplicate(0FJumping Device)	93FJumping Device	10007
+1@ch_t,108,124,0	duplicate(0FJumping Device)	94FJumping Device	10007
+1@ch_t,141,124,0	duplicate(0FJumping Device)	95FJumping Device	10007
+1@ch_t,5,157,0	duplicate(0FJumping Device)	96FJumping Device	10007
+1@ch_t,38,157,0	duplicate(0FJumping Device)	97FJumping Device	10007
+1@ch_t,73,157,0	duplicate(0FJumping Device)	98FJumping Device	10007
+1@ch_t,108,157,0	duplicate(0FJumping Device)	99FJumping Device	10007
+1@ch_t,141,157,0	duplicate(0FJumping Device)	100FJumping Device	10007
 
 //=======================Middle BOSS
 

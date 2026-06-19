@@ -211,7 +211,14 @@ e_tower,81,105,0	script	Tower Protection Stone	406,{
 	set .@etower_timer2,checkquest(60201,PLAYTIME); // 4 hours
 
 	if (!instance_check_party(.@party_id,2)) {
-		mes "Make or join a party with more than 1 member and try again.";
+		mes "Make or join a party with more than 1 member to enter the Endless Tower.";
+		next;
+		if (select("Return to Alberta.:Stay here.") == 1) {
+			mes "I will move you to Alberta.";
+			close2;
+			warp "alberta",223,36;
+			end;
+		}
 		close;
 	}
 	switch(.@etower_timer) {

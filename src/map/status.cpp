@@ -123,6 +123,39 @@ static uint32 status_calc_maxap_pc( map_session_data& sd );
 static int32 status_get_sc_interval(enum sc_type type);
 static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_type type, int32 val1, int32 val2, int32 val3, int32 val4, int32 tick, uint8 flag);
 
+/**
+ * Player-cast support buffs from the Acolyte/Priest/Archbishop skill lines.
+ * NPC/script buffs (SCSTART_NOAVOID) and unrelated skills are excluded elsewhere.
+ */
+static bool status_is_acolyte_support_buff(uint16 skill_id)
+{
+	switch (skill_id) {
+		case AL_BLESSING:
+		case AL_INCAGI:
+		case AL_ANGELUS:
+		case AL_PNEUMA:
+		case PR_IMPOSITIO:
+		case PR_SUFFRAGIUM:
+		case PR_ASPERSIO:
+		case PR_BENEDICTIO:
+		case PR_KYRIE:
+		case PR_MAGNIFICAT:
+		case PR_GLORIA:
+		case PR_SLOWPOISON:
+		case PR_LEXAETERNA:
+		case HP_ASSUMPTIO:
+		case HP_BASILICA:
+		case AB_EPICLESIS:
+		case AB_RENOVATIO:
+		case AB_EXPIATIO:
+		case AB_DUPLELIGHT:
+		case AB_SECRAMENT:
+		case AB_OFFERTORIUM:
+			return true;
+	}
+	return false;
+}
+
 static bool status_change_isDisabledOnMap_(sc_type type, bool mapIsVS, bool mapIsPVP, bool mapIsGVG, bool mapIsBG, uint32 mapZone, bool mapIsTE);
 #define status_change_isDisabledOnMap(type, m) ( status_change_isDisabledOnMap_((type), mapdata_flag_vs2((m)), m->getMapFlag(MF_PVP) != 0, mapdata_flag_gvg2_no_te((m)), m->getMapFlag(MF_BATTLEGROUND) != 0, (m->zone << 3) != 0, mapdata_flag_gvg2_te((m))) )
 
@@ -5436,8 +5469,11 @@ void status_calc_regen_rate(block_list *bl, struct regen_data *regen, status_cha
 		}
 	}
 
-	if (sc->getSCE(SC_MAGNIFICAT))
-		regen->rate.sp += 100;
+	if (sc->getSCE(SC_MAGNIFICAT)) {
+		status_change_entry *sce = sc->getSCE(SC_MAGNIFICAT);
+
+		regen->rate.sp += (sce->val2 > 0 ? sce->val2 : 100);
+	}
 
 	if (sc->getSCE(SC_REGENERATION)) {
 		const struct status_change_entry *sce = sc->getSCE(SC_REGENERATION);
@@ -7127,7 +7163,7 @@ static uint16 status_calc_luk(block_list *bl, status_change *sc, int32 luk)
 	if(sc->getSCE(SC_TRUESIGHT))
 		luk += 5;
 	if(sc->getSCE(SC_GLORIA))
-		luk += 30;
+		luk += (sc->getSCE(SC_GLORIA)->val2 > 0 ? sc->getSCE(SC_GLORIA)->val2 : 30);
 	if(sc->getSCE(SC_MARIONETTE))
 		luk -= sc->getSCE(SC_MARIONETTE)->val4&0xFF;
 	if(sc->getSCE(SC_MARIONETTE2))
@@ -11828,6 +11864,14 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val2 = 15 * val1; // Speed cast decrease
 #endif
 			break;
+		case SC_MAGNIFICAT:
+			if (!val2)
+				val2 = 100; // SP regen bonus (%)
+			break;
+		case SC_GLORIA:
+			if (!val2)
+				val2 = 30; // LUK bonus
+			break;
 		case SC_INCHEALRATE:
 			if (val1 < 1)
 				val1 = 1;
@@ -13125,6 +13169,26 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 				tick = tick_time + max(val4, 0);
 				break;
 		}
+
+	// Player-cast acolyte support buff bonus. NPC/script buffs use SCSTART_NOAVOID and are tuned in healer.txt.
+	if (!(flag & (SCSTART_LOADED | SCSTART_NOAVOID))
+		&& battle_config.acolyte_support_rate != 100
+		&& src != nullptr && src->type == BL_PC
+		&& status_is_acolyte_support_buff(scdb->skill_id)) {
+		if (val2)
+			val2 = val2 * battle_config.acolyte_support_rate / 100;
+		if (val3)
+			val3 = val3 * battle_config.acolyte_support_rate / 100;
+		switch (type) {
+			case SC_BLESSING:
+			case SC_ASSUMPTIO:
+			case SC_ANGELUS:
+				val1 = max(1, val1 * battle_config.acolyte_support_rate / 100);
+				break;
+			default:
+				break;
+		}
+	}
 
 	if (sd && current_equip_combo_pos > 0 && tick == INFINITE_TICK) {
 		ShowWarning("sc_start: Item combo of item #%u contains an INFINITE_TICK duration. Skipping bonus.\n", sd->inventory_data[pc_checkequip(sd, current_equip_combo_pos)]->nameid);

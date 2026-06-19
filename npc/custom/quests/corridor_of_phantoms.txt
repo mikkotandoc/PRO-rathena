@@ -126,8 +126,14 @@ S_Seal:
 		mes "^FF0000" + .@hours + " hour(s) and " + .@mins + " minute(s)^000000.";
 		close;
 	}
-	set cop_cooldown, gettimetick(2) + 259200;
 	getitem 25504, 1;
+	if (countitem(25504) < 1) {
+		mes "[Phantom's Spirit]";
+		mes "Something went wrong — your seal could not be created.";
+		mes "Check that you have inventory space and try again.";
+		close;
+	}
+	set cop_cooldown, gettimetick(2) + 259200;
 	mes "[Phantom's Spirit]";
 	mes "You receive a ^33AA33Phantom's Seal^000000!";
 	mes "Take it to the Corridor Portal to begin your hunt.";
@@ -164,9 +170,15 @@ S_BuyInvite:
 		mes "You do not have enough zeny.";
 		close;
 	}
+	getitem 1000391, 1;
+	if (countitem(1000391) < 1) {
+		mes "[Phantom's Spirit]";
+		mes "Something went wrong — your invitation could not be created.";
+		mes "Check that you have inventory space and try again.";
+		close;
+	}
 	set Zeny, Zeny - 100000;
 	set cop_invite_cd, gettimetick(2) + 86400;
-	getitem 1000391, 1;
 	mes "[Phantom's Spirit]";
 	mes "You receive a ^33AA33Phantom's Invitation^000000!";
 	mes "Present it at the Corridor Portal to enter.";
@@ -238,15 +250,15 @@ comodo,208,187,0	script	Corridor Portal#cop	4_BULLETIN_BOARD2,{
 		switch(select("1st Floor [vis_h01]:2nd Floor [vis_h02]:3rd Floor [vis_h03]:Cancel")) {
 		case 1:
 			if (!callfunc("F_COP_HasTicket")) end;
-			warp "vis_h01", 100, 100;
+			warp "vis_h01", 136, 118;
 			end;
 		case 2:
 			if (!callfunc("F_COP_HasTicket")) end;
-			warp "vis_h02", 100, 100;
+			warp "vis_h02", 136, 118;
 			end;
 		case 3:
 			if (!callfunc("F_COP_HasTicket")) end;
-			warp "vis_h03", 100, 100;
+			warp "vis_h03", 136, 118;
 			end;
 		case 4: close;
 		}

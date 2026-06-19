@@ -127,19 +127,19 @@ Body:
               - Item: Wolf_Orb_Mdef_1
                 Chance: 9900
               - Item: Wolf_Orb_Mdef_2
-                Chance: 2499
+                Chance: 2500
               - Item: Wolf_Orb_Ran_1
-                Chance: 234
+                Chance: 230
               - Item: Wolf_Orb_War_1
-                Chance: 234
+                Chance: 230
               - Item: Wolf_Orb_Mag_1
-                Chance: 234
+                Chance: 230
               - Item: Wolf_Orb_Ran_2
-                Chance: 33
+                Chance: 30
               - Item: Wolf_Orb_War_2
-                Chance: 33
+                Chance: 30
               - Item: Wolf_Orb_Mag_2
-                Chance: 33
+                Chance: 30
       - Slot: 2
         Price: 150000
         Materials:
@@ -149,17 +149,17 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_Str_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_Dex_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_Agi_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_Int_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_Vit_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_luk_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_Str_2
                 Chance: 2000
               - Item: Wolf_Orb_Dex_2
@@ -185,15 +185,15 @@ Body:
               - Item: Wolf_Orb_luk_3
                 Chance: 400
               - Item: Wolf_Orb_Def_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_Def_2
-                Chance: 2001
+                Chance: 2000
               - Item: Wolf_Orb_Def_3
                 Chance: 400
               - Item: Wolf_Orb_Mdef_1
-                Chance: 10001
+                Chance: 10000
               - Item: Wolf_Orb_Mdef_2
-                Chance: 2001
+                Chance: 2000
               - Item: Wolf_Orb_Mdef_3
                 Chance: 400
               - Item: Wolf_Orb_Ran_1
@@ -225,115 +225,115 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_R_Reject_1
-                Chance: 1848
+                Chance: 1850
               - Item: Wolf_Orb_R_Reject_2
                 Chance: 500
               - Item: Wolf_Orb_R_Reject_3
                 Chance: 100
               - Item: Wolf_Orb_Force
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_1
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_2
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_3
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_4
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_5
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_6
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_7
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_8
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_9
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_10
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_11
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_12
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_13
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_14
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_15
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_16
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_17
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_18
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_19
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_20
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_21
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_22
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_23
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_24
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_25
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_26
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_27
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_28
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_29
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_30
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_31
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_32
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_33
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_34
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_35
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_36
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_37
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_38
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_39
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_40
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_41
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_42
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_43
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_44
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_45
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_46
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_47
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_48
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_49
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_50
-                Chance: 1876
+                Chance: 1880
               - Item: Wolf_Orb_Skill_51
-                Chance: 1876
+                Chance: 1880
         PerfectEnchants:
           - Item: Wolf_Orb_R_Reject_3
             Price: 10000000
@@ -625,17 +625,17 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_Str_1
-                Chance: 13666
+                Chance: 13670
               - Item: Wolf_Orb_Dex_1
-                Chance: 13667
+                Chance: 13670
               - Item: Wolf_Orb_Agi_1
-                Chance: 13667
+                Chance: 13670
               - Item: Wolf_Orb_Int_1
-                Chance: 13666
+                Chance: 13670
               - Item: Wolf_Orb_Vit_1
-                Chance: 13667
+                Chance: 13670
               - Item: Wolf_Orb_luk_1
-                Chance: 13667
+                Chance: 13670
               - Item: Wolf_Orb_Str_2
                 Chance: 2500
               - Item: Wolf_Orb_Dex_2
@@ -701,19 +701,19 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_Above_1
-                Chance: 30033
+                Chance: 30030
               - Item: Wolf_Orb_Above_2
                 Chance: 3000
               - Item: Wolf_Orb_Above_3
                 Chance: 300
               - Item: Wolf_Orb_P_Full_1
-                Chance: 30034
+                Chance: 30030
               - Item: Wolf_Orb_P_Full_2
                 Chance: 3000
               - Item: Wolf_Orb_P_Full_3
                 Chance: 300
               - Item: Wolf_Orb_M_Counter_1
-                Chance: 30033
+                Chance: 30030
               - Item: Wolf_Orb_M_Counter_2
                 Chance: 3000
               - Item: Wolf_Orb_M_Counter_3
@@ -791,19 +791,19 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_F_Cast_1
-                Chance: 30033
+                Chance: 30030
               - Item: Wolf_Orb_F_Cast_2
                 Chance: 3000
               - Item: Wolf_Orb_F_Cast_3
                 Chance: 300
               - Item: Wolf_Orb_M_F_1
-                Chance: 30034
+                Chance: 30030
               - Item: Wolf_Orb_M_F_2
                 Chance: 3000
               - Item: Wolf_Orb_M_F_3
                 Chance: 300
               - Item: Wolf_Orb_P_F_1
-                Chance: 30033
+                Chance: 30030
               - Item: Wolf_Orb_P_F_2
                 Chance: 3000
               - Item: Wolf_Orb_P_F_3
@@ -817,17 +817,17 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_Un_Vit
-                Chance: 16667
+                Chance: 16670
               - Item: Wolf_Orb_Sp_Int
-                Chance: 16667
+                Chance: 16670
               - Item: Wolf_Orb_Fi_Dex
-                Chance: 16667
+                Chance: 16670
               - Item: Wolf_Orb_Ov_Str
-                Chance: 16667
+                Chance: 16670
               - Item: Wolf_Orb_Fa_Agi
-                Chance: 16666
+                Chance: 16670
               - Item: Wolf_Orb_Lu_Luk
-                Chance: 16666
+                Chance: 16670
         PerfectEnchants:
           - Item: Wolf_Orb_Un_Vit
             Price: 10000000
@@ -883,17 +883,17 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_Str_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Dex_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Agi_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Int_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Vit_1
-                Chance: 13616
+                Chance: 13620
               - Item: Wolf_Orb_luk_1
-                Chance: 13616
+                Chance: 13620
               - Item: Wolf_Orb_Str_2
                 Chance: 2550
               - Item: Wolf_Orb_Dex_2
@@ -929,7 +929,7 @@ Body:
               - Item: Wolf_Orb_HealHP_1
                 Chance: 13800
               - Item: Wolf_Orb_HealHP_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_HealHP_3
                 Chance: 400
               - Item: Wolf_Orb_HealHP_4
@@ -937,7 +937,7 @@ Body:
               - Item: Wolf_Orb_HealSP_1
                 Chance: 13800
               - Item: Wolf_Orb_HealSP_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_HealSP_3
                 Chance: 400
               - Item: Wolf_Orb_HealSP_4
@@ -945,7 +945,7 @@ Body:
               - Item: Wolf_Orb_E_Archer_1
                 Chance: 13800
               - Item: Wolf_Orb_E_Archer_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_E_Archer_3
                 Chance: 400
               - Item: Wolf_Orb_E_Archer_4
@@ -953,7 +953,7 @@ Body:
               - Item: Wolf_Orb_Fatal_1
                 Chance: 13800
               - Item: Wolf_Orb_Fatal_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_Fatal_3
                 Chance: 400
               - Item: Wolf_Orb_Fatal_4
@@ -961,7 +961,7 @@ Body:
               - Item: Wolf_Orb_F_Spirit_1
                 Chance: 13800
               - Item: Wolf_Orb_F_Spirit_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_F_Spirit_3
                 Chance: 400
               - Item: Wolf_Orb_F_Spirit_4
@@ -969,13 +969,13 @@ Body:
               - Item: Wolf_Orb_Spell_1
                 Chance: 13800
               - Item: Wolf_Orb_Spell_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_Spell_3
                 Chance: 400
               - Item: Wolf_Orb_Spell_4
                 Chance: 50
               - Item: Wolf_Orb_A_Delay_2
-                Chance: 2008
+                Chance: 2010
               - Item: Wolf_Orb_A_Delay_3
                 Chance: 400
               - Item: Wolf_Orb_A_Delay_4
@@ -1097,17 +1097,17 @@ Body:
           - Enchantgrade: 0
             Items:
               - Item: Wolf_Orb_Str_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Dex_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Agi_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Int_1
-                Chance: 13617
+                Chance: 13620
               - Item: Wolf_Orb_Vit_1
-                Chance: 13616
+                Chance: 13620
               - Item: Wolf_Orb_luk_1
-                Chance: 13616
+                Chance: 13620
               - Item: Wolf_Orb_Str_2
                 Chance: 2550
               - Item: Wolf_Orb_Dex_2
@@ -1143,7 +1143,7 @@ Body:
               - Item: Wolf_Orb_HealHP_1
                 Chance: 13800
               - Item: Wolf_Orb_HealHP_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_HealHP_3
                 Chance: 400
               - Item: Wolf_Orb_HealHP_4
@@ -1151,7 +1151,7 @@ Body:
               - Item: Wolf_Orb_HealSP_1
                 Chance: 13800
               - Item: Wolf_Orb_HealSP_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_HealSP_3
                 Chance: 400
               - Item: Wolf_Orb_HealSP_4
@@ -1159,7 +1159,7 @@ Body:
               - Item: Wolf_Orb_E_Archer_1
                 Chance: 13800
               - Item: Wolf_Orb_E_Archer_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_E_Archer_3
                 Chance: 400
               - Item: Wolf_Orb_E_Archer_4
@@ -1167,7 +1167,7 @@ Body:
               - Item: Wolf_Orb_Fatal_1
                 Chance: 13800
               - Item: Wolf_Orb_Fatal_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_Fatal_3
                 Chance: 400
               - Item: Wolf_Orb_Fatal_4
@@ -1175,7 +1175,7 @@ Body:
               - Item: Wolf_Orb_F_Spirit_1
                 Chance: 13800
               - Item: Wolf_Orb_F_Spirit_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_F_Spirit_3
                 Chance: 400
               - Item: Wolf_Orb_F_Spirit_4
@@ -1183,13 +1183,13 @@ Body:
               - Item: Wolf_Orb_Spell_1
                 Chance: 13800
               - Item: Wolf_Orb_Spell_2
-                Chance: 2007
+                Chance: 2010
               - Item: Wolf_Orb_Spell_3
                 Chance: 400
               - Item: Wolf_Orb_Spell_4
                 Chance: 50
               - Item: Wolf_Orb_A_Delay_2
-                Chance: 2008
+                Chance: 2010
               - Item: Wolf_Orb_A_Delay_3
                 Chance: 400
               - Item: Wolf_Orb_A_Delay_4

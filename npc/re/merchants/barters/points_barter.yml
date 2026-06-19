@@ -223,3 +223,9 @@ Body:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 15
+      - Index: 29
+        Item: C_PRO_GACHA_1
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
