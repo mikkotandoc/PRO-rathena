@@ -1,0 +1,87 @@
+================================================================================
+PATCH NOTICE — Training Field Dummy Gravity Error Fix
+================================================================================
+Date:     2026-06-19
+Scope:    Training Zone (tra_fild01, tra_fild02, tra_fild03)
+Type:     Bug fix (client sprite / server view ID mismatch)
+
+--------------------------------------------------------------------------------
+ISSUE
+--------------------------------------------------------------------------------
+Players approaching training dummies in the training field received a client
+"gravity error" when the dummies entered view range. This affected most dummy
+types (size, attribute, race, and resistance variants).
+
+--------------------------------------------------------------------------------
+ROOT CAUSE
+--------------------------------------------------------------------------------
+db/import/mob_avail.yml remapped all modern training dummy mobs (S_DUMMY_*)
+to legacy sprite IDs:
+
+  - DUMMY_10      (mob ID 2408)
+  - DUMMY_50      (mob ID 2409)
+  - DUMMY_100     (mob ID 2410)
+  - DUMMY_150     (mob ID 2411)
+  - DUMMY_10_FIRE (mob ID 2413)
+
+The ProAsia / modern client ships s_dummy_* sprite assets in data.grf (for
+example s_dummy_100_small, s_dummy_100_medium) tied to mob IDs 21064+ and
+22551+. It does not include the old dummy_10 / dummy_50 / dummy_100 sprites.
+
+When the server remapped view IDs to 2408–2413, the client could not load the
+requested sprites and displayed a gravity error on approach.
+
+--------------------------------------------------------------------------------
+CHANGES
+--------------------------------------------------------------------------------
+[MODIFIED] db/import/mob_avail.yml
+  - Removed all S_DUMMY_* → DUMMY_* remappings.
+  - Body is now empty so each training dummy uses its native mob class ID from
+    mob_db.yml, matching the client's s_dummy_* sprite set.
+
+[ADDED] tools/gen_training_dummy_avail.py
+  - Audit helper that lists all 143 unique training dummy Aegis names referenced
+    in npc/re/mobs/tra_fild_123.txt and reports whether each is remapped in
+    mob_avail.yml or uses native sprites.
+
+[UNCHANGED] npc/re/mobs/tra_fild_123.txt
+  - Spawn locations and mob IDs were already correct; no script changes needed.
+
+--------------------------------------------------------------------------------
+SERVER DEPLOYMENT
+--------------------------------------------------------------------------------
+1. Deploy the updated db/import/mob_avail.yml.
+2. Restart the map-server, or run @reloadmobdb as a GM.
+3. Have players re-enter the training field and verify dummies render normally.
+
+--------------------------------------------------------------------------------
+PLAYER-FACING SUMMARY (for announcements)
+--------------------------------------------------------------------------------
+Fixed an issue where approaching training dummies in the Training Zone could
+cause a client gravity error. Training dummies now display using the correct
+modern dummy sprites.
+
+--------------------------------------------------------------------------------
+IF ISSUES PERSIST
+--------------------------------------------------------------------------------
+If specific dummies still error after this patch, the client mob_db.lub may be
+missing entries for those mob IDs even though s_dummy_* sprite files exist in
+the GRF. A client-side mob table patch would then be required.
+
+Optional server-side fallbacks for player-shaped dummies only (add to
+mob_avail.yml Body if needed):
+
+  - Mob: S_DUMMY_100_HUMANP  → Sprite: JOB_NOVICE    (Sex: Male)
+  - Mob: S_DUMMY_100_DORAMP  → Sprite: JOB_SUMMONER  (Sex: Female)
+
+--------------------------------------------------------------------------------
+RELATED FILES (reference)
+--------------------------------------------------------------------------------
+  npc/re/mobs/tra_fild_123.txt     Training dummy spawn script
+  db/re/mob_db.yml                 S_DUMMY_* mob definitions (21064+, 22551+)
+  db/import/mob_avail.yml          Server sprite alias overrides
+  Client: data.grf                 s_dummy_* sprite assets (ProAsia)
+
+================================================================================
+END OF PATCH NOTICE
+================================================================================

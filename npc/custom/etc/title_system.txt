@@ -1,0 +1,153 @@
+//===== rAthena Script =======================================
+//= Title System (Official Title IDs)
+//===== Description: =========================================
+//= Grants temporary official titles (title_id 1000+) with
+//= bonus_script stats. Uses addtitle / setchartitle commands.
+//============================================================
+
+-	script	title_system#ctrl	-1,{
+	end;
+
+OnInit:
+	// Official title IDs (must exist in client title table)
+	// 1047 = PVP Ladder "Apex Predator" (patch client title name)
+	setarray .title_id[1], 1047;
+	setarray .title_bonus$[1], "{ bonus bAllTraitStats,3; }";
+	setarray .title_duration[1], 604800; // 7 days default
+
+	.pvp_aura_id = 2000;
+	end;
+
+OnPCLoginEvent:
+	callsub L_ApplyTitle;
+	callsub L_ApplyAura;
+	end;
+
+OnTitleExpire:
+	if ( !playerattached() )
+		end;
+	callsub L_ApplyTitle;
+	end;
+
+OnAuraExpire:
+	if ( !playerattached() )
+		end;
+	callsub L_ApplyAura;
+	end;
+
+L_ApplyTitle:
+	if ( #ACTIVE_TITLE_ID <= 0 || gettimetick(2) >= #ACTIVE_TITLE_EXPIRE ) {
+		if ( #ACTIVE_TITLE_ID ) {
+			bonus_script_clear 0;
+			deltitle #ACTIVE_TITLE_ID;
+			setchartitle 0;
+			#ACTIVE_TITLE_ID = 0;
+			#ACTIVE_TITLE_EXPIRE = 0;
+		}
+		return;
+	}
+
+	.@idx = 0;
+	for ( .@i = 1; .@i <= 16; .@i++ ) {
+		if ( !.title_id[.@i] )
+			break;
+		if ( .title_id[.@i] == #ACTIVE_TITLE_ID ) {
+			.@idx = .@i;
+			break;
+		}
+	}
+	if ( !.@idx )
+		return;
+
+	.@remain = #ACTIVE_TITLE_EXPIRE - gettimetick(2);
+	if ( .@remain < 1 )
+		.@remain = 1;
+
+	addtitle #ACTIVE_TITLE_ID;
+	setchartitle #ACTIVE_TITLE_ID;
+	bonus_script .title_bonus$[.@idx], .@remain, 1024;
+	deltimer strnpcinfo(0)+"::OnTitleExpire";
+	addtimer .@remain * 1000, strnpcinfo(0)+"::OnTitleExpire";
+	return;
+
+L_ApplyAura:
+	if ( #TEMP_AURA_ID <= 0 || gettimetick(2) >= #TEMP_AURA_EXPIRE ) {
+		if ( #TEMP_AURA_ID ) {
+			aura 0;
+			#TEMP_AURA_ID = 0;
+			#TEMP_AURA_EXPIRE = 0;
+		}
+		return;
+	}
+
+	.@remain = #TEMP_AURA_EXPIRE - gettimetick(2);
+	if ( .@remain < 1 )
+		.@remain = 1;
+	deltimer strnpcinfo(0)+"::OnAuraExpire";
+	addtimer .@remain * 1000, strnpcinfo(0)+"::OnAuraExpire";
+	aura #TEMP_AURA_ID;
+	return;
+}
+
+// callfunc "F_TitleGrant", <account_id>, <char_id>, <official_title_id>{, <duration>};
+function	script	F_TitleGrant	{
+	if ( !isloggedin( getarg(0), getarg(1) ) )
+		return 0;
+	if ( !attachrid( getarg(0) ) )
+		return 0;
+
+	.@title_id = getarg(2);
+	.@duration = getarg(3, 0);
+	.@slot = 0;
+
+	for ( .@i = 1; .@i <= 16; .@i++ ) {
+		if ( !getvariableofnpc( .title_id[.@i], "title_system#ctrl" ) )
+			break;
+		if ( getvariableofnpc( .title_id[.@i], "title_system#ctrl" ) == .@title_id ) {
+			.@slot = .@i;
+			break;
+		}
+	}
+	if ( !.@slot ) {
+		debugmes "F_TitleGrant: title ID "+ .@title_id +" is not registered in title_system#ctrl.";
+		return 0;
+	}
+
+	if ( .@duration <= 0 )
+		.@duration = getvariableofnpc( .title_duration[.@slot], "title_system#ctrl" );
+
+	set #ACTIVE_TITLE_ID, .@title_id;
+	set #ACTIVE_TITLE_EXPIRE, gettimetick(2) + .@duration;
+
+	.@bonus$ = getvariableofnpc( .title_bonus$[.@slot], "title_system#ctrl" );
+	addtitle .@title_id;
+	setchartitle .@title_id;
+	bonus_script .@bonus$, .@duration, 1024;
+
+	deltimer "title_system#ctrl::OnTitleExpire";
+	addtimer .@duration * 1000, "title_system#ctrl::OnTitleExpire";
+	dispbottom "You received a temporary title! Equip or change it from the Achievement window.";
+	return 1;
+}
+
+// callfunc "F_AuraGrant", <account_id>, <char_id>, <aura_id>, <duration>;
+function	script	F_AuraGrant	{
+	if ( !isloggedin( getarg(0), getarg(1) ) )
+		return 0;
+	if ( !attachrid( getarg(0) ) )
+		return 0;
+
+	.@aura_id = getarg(2);
+	.@duration = getarg(3);
+	if ( .@duration <= 0 )
+		return 0;
+
+	set #TEMP_AURA_ID, .@aura_id;
+	set #TEMP_AURA_EXPIRE, gettimetick(2) + .@duration;
+	aura .@aura_id;
+
+	deltimer "title_system#ctrl::OnAuraExpire";
+	addtimer .@duration * 1000, "title_system#ctrl::OnAuraExpire";
+	dispbottom "You received a glowing aura for "+ ( .@duration / 86400 ) +" day(s).";
+	return 1;
+}

@@ -1,0 +1,562 @@
+//===== rAthena Script =======================================
+//= PVP Ladder Event
+//===== Description: =========================================
+//= Single-elimination PVP tournament.
+//= Players register during a sign-up window, then fight 1v1
+//= bracket matches until a champion is crowned.
+//===== Configuration: =======================================
+//= All tunables are in the OnInit block at the bottom.
+//============================================================
+
+prontera,158,185,3	script	PVP Ladder Registrar	415,{
+	function F_IsRegistered;
+	function F_PlayerName;
+
+	mes "[PVP Ladder Registrar]";
+	mes "Welcome to the ^FF0000PVP Ladder^000000!";
+	mes "Defeat opponents in a single-elimination bracket and claim the top prize.";
+	next;
+
+	if ( .state == 1 )
+		.@opt$ = "Register for the ladder.:Information.:View current status.:";
+	else
+		.@opt$ = "Information.:View current status.:";
+	if ( getgmlevel() >= .gm_level )
+		.@opt$ = .@opt$ + "GM Menu.:";
+	.@opt$ = .@opt$ + "Leave.";
+	.@menu = select( .@opt$ );
+	.@slot = 1;
+
+	if ( .state == 1 ) {
+		if ( .@menu == .@slot ) {
+			if ( BaseLevel < .min_base_level ) {
+				mes "[PVP Ladder Registrar]";
+				mes "You need at least Base Level "+ .min_base_level +" to enter.";
+				close;
+			}
+			if ( .register_cost && Zeny < .register_cost ) {
+				mes "[PVP Ladder Registrar]";
+				mes "The registration fee is "+ callfunc("F_InsertComma", .register_cost ) +" zeny.";
+				close;
+			}
+			if ( F_IsRegistered( getcharid(0) ) ) {
+				mes "[PVP Ladder Registrar]";
+				mes "You are already registered for this ladder.";
+				close;
+			}
+			if ( .reg_count >= .max_players ) {
+				mes "[PVP Ladder Registrar]";
+				mes "The ladder is full ("+ .max_players +" players).";
+				close;
+			}
+			if ( .register_cost )
+				Zeny -= .register_cost;
+			set .reg_aid[.reg_count], getcharid(3);
+			set .reg_cid[.reg_count], getcharid(0);
+			set .reg_name$[.reg_count], strcharinfo(0);
+			.reg_count++;
+			announce strcharinfo(0)+" has registered for the PVP Ladder! ["+ .reg_count +"/"+ .max_players +"]", bc_all;
+			mes "[PVP Ladder Registrar]";
+			mes "You are registered!";
+			mes "Stay in town and wait for the bracket to begin.";
+			mes "You will be warped to the arena when sign-up ends.";
+			close;
+		}
+		.@slot++;
+	}
+
+	if ( .@menu == .@slot ) {
+		mes "[PVP Ladder Registrar]";
+		mes "The PVP Ladder is a ^FF00001v1 single-elimination^000000 tournament.";
+		mes " ";
+		mes "1) Register while sign-up is open.";
+		mes "2) After the timer, all entrants are sent to the arena.";
+		mes "3) Win your matches to advance through the bracket.";
+		mes "4) The last player standing wins the grand prize!";
+		next;
+		mes "[PVP Ladder Registrar]";
+		mes "Rules:";
+		mes "- Base Level "+ .min_base_level +"+ required.";
+		if ( .register_cost )
+			mes "- Registration fee: "+ callfunc("F_InsertComma", .register_cost ) +" zeny.";
+		mes "- Minimum "+ .min_players +" players or the event is cancelled.";
+		mes "- Each match lasts up to "+ .match_timeout +" seconds.";
+		mes "- Disconnecting during a match counts as a loss.";
+		next;
+		mes "[PVP Ladder Registrar]";
+		mes "Rewards (per event):";
+		mes "1st: "+ .reward_1st_primary_amt +"x "+ getitemname(.reward_primary_id) +", "+ .reward_1st_secondary_amt +"x "+ getitemname(.reward_secondary_id);
+		mes "     + Title ID "+ .title_apex_id +" (Apex Predator, +3 All Traits)";
+		mes "2nd: "+ .reward_2nd_primary_amt +"x "+ getitemname(.reward_primary_id) +", "+ .reward_2nd_secondary_amt +"x "+ getitemname(.reward_secondary_id);
+		mes "     + 3-Day Custom Glowing Aura";
+		mes "3rd: "+ .reward_3rd_primary_amt +"x "+ getitemname(.reward_primary_id) +", "+ .reward_3rd_secondary_amt +"x "+ getitemname(.reward_secondary_id);
+		mes "     + 1-Day Custom Glowing Aura";
+		close;
+	}
+	.@slot++;
+
+	if ( .@menu == .@slot ) {
+		mes "[PVP Ladder Registrar]";
+		switch ( .state ) {
+		case 0:
+			mes "The ladder is currently ^777777inactive^000000.";
+			mes " ";
+			mes "Scheduled sign-ups:";
+			mes .schedule_text$;
+			break;
+		case 1:
+			mes "Registration is ^00FF00OPEN^000000!";
+			mes "Registered players: ^0055FF"+ .reg_count +"^000000";
+			break;
+		case 2:
+			mes "The ladder is ^FF0000IN PROGRESS^000000!";
+			mes "Round: "+ .round;
+			mes "Players remaining: "+ .bracket_count;
+			if ( .match_active )
+				mes "Match: "+ F_PlayerName(.fighter1_aid, .fighter1_cid) +" vs "+ F_PlayerName(.fighter2_aid, .fighter2_cid);
+			break;
+		}
+		close;
+	}
+	.@slot++;
+
+	if ( getgmlevel() >= .gm_level && .@menu == .@slot ) {
+		mes "[PVP Ladder Registrar]";
+		mes "GM control panel.";
+		next;
+		switch ( select( "Open registration.", "Force start now.", "Cancel event.", "Close." ) ) {
+		case 1:
+			if ( .state ) {
+				mes "The event is already active.";
+				close;
+			}
+			mes "Opening registration...";
+			close2;
+			donpcevent strnpcinfo(0)+"::OnOpenRegistration";
+			end;
+		case 2:
+			if ( .state == 2 ) {
+				mes "The tournament is already running.";
+				close;
+			}
+			if ( .state != 1 ) {
+				mes "Open registration first.";
+				close;
+			}
+			mes "Starting the bracket now...";
+			close2;
+			awake strnpcinfo(0);
+			donpcevent strnpcinfo(0)+"::OnStartTournament";
+			end;
+		case 3:
+			if ( !.state ) {
+				mes "There is no active event.";
+				close;
+			}
+			mes "Cancelling the event...";
+			close2;
+			donpcevent strnpcinfo(0)+"::OnCancelEvent";
+			end;
+		case 4:
+			break;
+		}
+		close;
+	}
+	close;
+
+function	F_IsRegistered	{
+	for ( .@i = 0; .@i < .reg_count; .@i++ )
+		if ( .reg_cid[.@i] == getarg(0) )
+			return 1;
+	return 0;
+}
+
+function	F_PlayerName	{
+	for ( .@i = 0; .@i < getarraysize(.reg_name$); .@i++ )
+		if ( .reg_aid[.@i] == getarg(0) && .reg_cid[.@i] == getarg(1) )
+			return .reg_name$[.@i];
+	return "Unknown";
+}
+
+// ----- Scheduled registration windows -----
+OnClock1800:
+OnClock2100:
+	if ( .state )
+		end;
+	donpcevent strnpcinfo(0)+"::OnOpenRegistration";
+	end;
+
+OnOpenRegistration:
+	if ( .state )
+		end;
+	.state = 1;
+	.reg_count = 0;
+	deletearray .reg_aid[0], .max_players;
+	deletearray .reg_cid[0], .max_players;
+	deletearray .reg_name$[0], .max_players;
+	announce "PVP Ladder registration is now OPEN! Sign up at Prontera ("+ .npc_x +","+ .npc_y +").", bc_all;
+	for ( .@m = .reg_minutes; .@m > 0; .@m-- ) {
+		if ( .state != 1 )
+			end;
+		if ( .@m <= 3 || .@m % 2 == 0 )
+			announce "PVP Ladder starts in "+ .@m +" minute"+( .@m == 1 ? "" : "s" )+". ["+ .reg_count +" registered]", bc_all;
+		sleep 60000;
+	}
+	if ( .state != 1 )
+		end;
+	donpcevent strnpcinfo(0)+"::OnStartTournament";
+	end;
+
+OnCancelEvent:
+	if ( .state == 1 ) {
+		awake strnpcinfo(0);
+		callsub L_RefundAll;
+		announce "The PVP Ladder has been cancelled.", bc_all;
+	}
+	else if ( .state == 2 ) {
+		awake strnpcinfo(0);
+		callsub L_CleanupArena;
+		announce "The PVP Ladder has been stopped by a GM.", bc_all;
+	}
+	.state = .reg_count = .bracket_count = .round = .match_active = 0;
+	end;
+
+OnStartTournament:
+	if ( .state != 1 )
+		end;
+	if ( .reg_count < .min_players ) {
+		announce "PVP Ladder cancelled - not enough players ("+ .reg_count +"/"+ .min_players +" required).", bc_all;
+		callsub L_RefundAll;
+		.state = 0;
+		.reg_count = 0;
+		end;
+	}
+	.state = 2;
+	.round = 1;
+	callsub L_BuildBracket;
+	announce "PVP Ladder is starting with "+ .bracket_count +" entrants! Prepare for battle!", bc_all;
+	callsub L_WarpAllToWaiting;
+	sleep 5000;
+
+	while ( .bracket_count > 1 ) {
+		deletearray .next_aid[0], .max_players;
+		deletearray .next_cid[0], .max_players;
+		.next_count = 0;
+		.@matches = .bracket_count / 2;
+
+		for ( .@m = 0; .@m < .@matches; .@m++ ) {
+			.fighter1_aid = .bracket_aid[.@m * 2];
+			.fighter1_cid = .bracket_cid[.@m * 2];
+			.fighter2_aid = .bracket_aid[.@m * 2 + 1];
+			.fighter2_cid = .bracket_cid[.@m * 2 + 1];
+
+			if ( !.fighter1_aid && !.fighter2_aid )
+				continue;
+			if ( !.fighter1_aid ) {
+				callsub L_AdvanceWinner, .fighter2_aid, .fighter2_cid;
+				continue;
+			}
+			if ( !.fighter2_aid ) {
+				callsub L_AdvanceWinner, .fighter1_aid, .fighter1_cid;
+				continue;
+			}
+
+			.final_match = ( .bracket_count == 2 );
+			.third_place = ( .bracket_count == 4 );
+
+			callsub L_RunMatch;
+
+			if ( .final_match && .loser_aid )
+				callsub L_GiveReward, 2, .loser_aid, .loser_cid;
+			else if ( .third_place && .loser_aid )
+				callsub L_GiveReward, 3, .loser_aid, .loser_cid;
+
+			callsub L_AdvanceWinner, .winner_aid, .winner_cid;
+		}
+
+		copyarray .bracket_aid[0], .next_aid[0], .next_count;
+		copyarray .bracket_cid[0], .next_cid[0], .next_count;
+		.bracket_count = .next_count;
+		.round++;
+		if ( .bracket_count > 1 ) {
+			mapannounce .arena_map$, "PVP Ladder - Round "+ .round +" begins!", bc_map;
+			sleep 5000;
+		}
+	}
+
+	if ( .bracket_count == 1 ) {
+		callsub L_GiveReward, 1, .bracket_aid[0], .bracket_cid[0];
+		announce "PVP Ladder Champion: "+ F_PlayerName(.bracket_aid[0], .bracket_cid[0]) +"!", bc_all;
+	}
+
+	callsub L_CleanupArena;
+	.state = .reg_count = .bracket_count = .round = 0;
+	end;
+
+L_BuildBracket:
+	// Fisher-Yates shuffle of registered players.
+	for ( .@i = .reg_count - 1; .@i > 0; .@i-- ) {
+		.@j = rand(0, .@i);
+		.@ta = .reg_aid[.@i];
+		.@tc = .reg_cid[.@i];
+		.reg_aid[.@i] = .reg_aid[.@j];
+		.reg_cid[.@i] = .reg_cid[.@j];
+		.reg_aid[.@j] = .@ta;
+		.reg_cid[.@j] = .@tc;
+	}
+	.@size = 1;
+	while ( .@size < .reg_count )
+		.@size *= 2;
+	.bracket_count = .@size;
+	for ( .@i = 0; .@i < .bracket_count; .@i++ ) {
+		if ( .@i < .reg_count ) {
+			.bracket_aid[.@i] = .reg_aid[.@i];
+			.bracket_cid[.@i] = .reg_cid[.@i];
+		} else {
+			.bracket_aid[.@i] = 0;
+			.bracket_cid[.@i] = 0;
+		}
+	}
+	return;
+
+L_WarpAllToWaiting:
+	for ( .@i = 0; .@i < .reg_count; .@i++ )
+		callsub L_WarpPlayer, .reg_aid[.@i], .reg_cid[.@i], .arena_map$, .wait_x, .wait_y;
+	return;
+
+L_RunMatch:
+	.winner_aid = .winner_cid = .loser_aid = .loser_cid = 0;
+	.match_active = 0;
+
+	if ( !isloggedin(.fighter1_aid, .fighter1_cid) ) {
+		.winner_aid = .fighter2_aid;
+		.winner_cid = .fighter2_cid;
+		.loser_aid = .fighter1_aid;
+		.loser_cid = .fighter1_cid;
+		callsub L_RemoveLoser;
+		return;
+	}
+	if ( !isloggedin(.fighter2_aid, .fighter2_cid) ) {
+		.winner_aid = .fighter1_aid;
+		.winner_cid = .fighter1_cid;
+		.loser_aid = .fighter2_aid;
+		.loser_cid = .fighter2_cid;
+		callsub L_RemoveLoser;
+		return;
+	}
+
+	callsub L_WarpPlayer, .fighter1_aid, .fighter1_cid, .arena_map$, .spawn1_x, .spawn1_y;
+	callsub L_WarpPlayer, .fighter2_aid, .fighter2_cid, .arena_map$, .spawn2_x, .spawn2_y;
+	callsub L_HealPlayer, .fighter1_aid, .fighter1_cid;
+	callsub L_HealPlayer, .fighter2_aid, .fighter2_cid;
+
+	announce "PVP Ladder match: "+ F_PlayerName(.fighter1_aid, .fighter1_cid) +" vs "+ F_PlayerName(.fighter2_aid, .fighter2_cid) +"!", bc_all;
+	mapannounce .arena_map$, "Match begins in 10 seconds...", bc_map;
+	sleep 10000;
+	mapannounce .arena_map$, "FIGHT!", bc_map;
+	.match_active = 1;
+	sleep .match_timeout * 1000;
+
+	if ( .match_active ) {
+		.match_active = 0;
+		callsub L_MatchTimeout;
+	}
+	callsub L_RemoveLoser;
+	if ( .winner_aid )
+		callsub L_WarpPlayer, .winner_aid, .winner_cid, .arena_map$, .wait_x, .wait_y;
+	sleep .match_delay * 1000;
+	return;
+
+L_MatchTimeout:
+	.@hp1 = 0;
+	.@hp2 = 0;
+	if ( isloggedin(.fighter1_aid, .fighter1_cid) ) {
+		attachrid .fighter1_aid;
+		if ( strcharinfo(3) == .arena_map$ && maxhp )
+			.@hp1 = hp * 100 / maxhp;
+	}
+	if ( isloggedin(.fighter2_aid, .fighter2_cid) ) {
+		attachrid .fighter2_aid;
+		if ( strcharinfo(3) == .arena_map$ && maxhp )
+			.@hp2 = hp * 100 / maxhp;
+	}
+	mapannounce .arena_map$, "Time is up! Judging by remaining HP...", bc_map;
+	if ( .@hp1 == .@hp2 ) {
+		if ( rand(2) )
+			callsub L_SetWinner, .fighter2_aid, .fighter2_cid, .fighter1_aid, .fighter1_cid;
+		else
+			callsub L_SetWinner, .fighter1_aid, .fighter1_cid, .fighter2_aid, .fighter2_cid;
+	}
+	else if ( .@hp1 > .@hp2 )
+		callsub L_SetWinner, .fighter1_aid, .fighter1_cid, .fighter2_aid, .fighter2_cid;
+	else
+		callsub L_SetWinner, .fighter2_aid, .fighter2_cid, .fighter1_aid, .fighter1_cid;
+	return;
+
+L_SetWinner:
+	.winner_aid = getarg(0);
+	.winner_cid = getarg(1);
+	.loser_aid = getarg(2);
+	.loser_cid = getarg(3);
+	mapannounce .arena_map$, F_PlayerName(.winner_aid, .winner_cid) +" wins the match!", bc_map;
+	return;
+
+L_AdvanceWinner:
+	.next_aid[.next_count] = getarg(0);
+	.next_cid[.next_count] = getarg(1);
+	.next_count++;
+	return;
+
+L_RemoveLoser:
+	if ( .loser_aid && isloggedin(.loser_aid, .loser_cid) ) {
+		attachrid .loser_aid;
+		if ( strcharinfo(3) == .arena_map$ )
+			warp .exit_map$, .exit_x, .exit_y;
+	}
+	return;
+
+L_WarpPlayer:
+	if ( !isloggedin(getarg(0), getarg(1)) )
+		return;
+	attachrid getarg(0);
+	warp getarg(2), getarg(3), getarg(4);
+	return;
+
+L_HealPlayer:
+	if ( !isloggedin(getarg(0), getarg(1)) )
+		return;
+	attachrid getarg(0);
+	percentheal 100, 100;
+	sc_end SC_ALL;
+	return;
+
+L_GiveReward:
+	.@aid = getarg(1);
+	.@cid = getarg(2);
+	if ( !isloggedin(.@aid, .@cid) )
+		return;
+	attachrid .@aid;
+
+	switch ( getarg(0) ) {
+	case 1:
+		getitem .reward_primary_id, .reward_1st_primary_amt;
+		getitem .reward_secondary_id, .reward_1st_secondary_amt;
+		callfunc( "F_TitleGrant", .@aid, .@cid, .title_apex_id, .title_apex_duration );
+		mapannounce .arena_map$, "Congratulations, Champion!", bc_map;
+		break;
+	case 2:
+		getitem .reward_primary_id, .reward_2nd_primary_amt;
+		getitem .reward_secondary_id, .reward_2nd_secondary_amt;
+		callfunc( "F_AuraGrant", .@aid, .@cid, .aura_reward_id, .aura_2nd_duration );
+		mapannounce .arena_map$, "Runner-up! Enjoy your glowing aura.", bc_map;
+		break;
+	case 3:
+		getitem .reward_primary_id, .reward_3rd_primary_amt;
+		getitem .reward_secondary_id, .reward_3rd_secondary_amt;
+		callfunc( "F_AuraGrant", .@aid, .@cid, .aura_reward_id, .aura_3rd_duration );
+		mapannounce .arena_map$, "3rd place! Enjoy your glowing aura.", bc_map;
+		break;
+	}
+	warp .exit_map$, .exit_x, .exit_y;
+	return;
+
+L_RefundAll:
+	for ( .@i = 0; .@i < .reg_count; .@i++ ) {
+		if ( !isloggedin(.reg_aid[.@i], .reg_cid[.@i]) )
+			continue;
+		attachrid .reg_aid[.@i];
+		if ( .register_cost )
+			Zeny += .register_cost;
+		if ( strcharinfo(3) == .arena_map$ )
+			warp .exit_map$, .exit_x, .exit_y;
+	}
+	return;
+
+L_CleanupArena:
+	mapwarp .arena_map$, .exit_map$, .exit_x, .exit_y;
+	.match_active = 0;
+	return;
+
+OnPCDieEvent:
+	if ( !.match_active || .state != 2 )
+		end;
+	if ( strcharinfo(3) != .arena_map$ )
+		end;
+	.@aid = getcharid(3);
+	.@cid = getcharid(0);
+	if ( .@aid != .fighter1_aid && .@aid != .fighter2_aid )
+		end;
+	if ( .@aid == .fighter1_aid )
+		callsub L_SetWinner, .fighter2_aid, .fighter2_cid, .fighter1_aid, .fighter1_cid;
+	else
+		callsub L_SetWinner, .fighter1_aid, .fighter1_cid, .fighter2_aid, .fighter2_cid;
+	.match_active = 0;
+	awake strnpcinfo(0);
+	end;
+
+OnPCLogoutEvent:
+	if ( !.match_active || .state != 2 )
+		end;
+	.@aid = getcharid(3);
+	.@cid = getcharid(0);
+	if ( .@aid != .fighter1_aid && .@aid != .fighter2_aid )
+		end;
+	if ( .@aid == .fighter1_aid )
+		callsub L_SetWinner, .fighter2_aid, .fighter2_cid, .fighter1_aid, .fighter1_cid;
+	else
+		callsub L_SetWinner, .fighter1_aid, .fighter1_cid, .fighter2_aid, .fighter2_cid;
+	.match_active = 0;
+	awake strnpcinfo(0);
+	end;
+
+OnInit:
+//	===== Event timing ===================================================
+	set .reg_minutes, 5;          // Sign-up window length (minutes)
+	set .schedule_text$, "18:00 and 21:00 server time (or GM start).";
+
+//	===== Entry requirements ===============================================
+	set .min_players, 4;          // Minimum entrants (power-of-2 bracket padded with byes)
+	set .max_players, 32;         // Maximum entrants
+	set .min_base_level, 70;      // Minimum base level
+	set .register_cost, 50000;    // Zeny fee (0 = free)
+
+//	===== Match settings ===================================================
+	set .match_timeout, 180;      // Seconds per match before HP tiebreak
+	set .match_delay, 5;          // Seconds between matches
+
+//	===== Arena map ========================================================
+	set .arena_map$, "pvp_y_8-1";
+	set .wait_x, 50;
+	set .wait_y, 50;
+	set .spawn1_x, 48;
+	set .spawn1_y, 75;
+	set .spawn2_x, 52;
+	set .spawn2_y, 25;
+
+//	===== Reward items =====================================================
+	set .reward_primary_id, 6635;        // Blacksmith Blessing
+	set .reward_secondary_id, 1001217;  // Sacred Cat Whiskers
+
+	set .reward_1st_primary_amt, 5;
+	set .reward_1st_secondary_amt, 50;
+	set .reward_2nd_primary_amt, 3;
+	set .reward_2nd_secondary_amt, 30;
+	set .reward_3rd_primary_amt, 1;
+	set .reward_3rd_secondary_amt, 15;
+
+//	===== Prestige rewards (Title System / Aura) =============================
+	set .title_apex_id, 1047;          // Official title ID (patch client name -> Apex Predator)
+	set .title_apex_duration, 604800;  // 7 days (0 = use title_system default)
+	set .aura_reward_id, 2000;        // db/import/aura_db.yml
+	set .aura_2nd_duration, 259200;   // 3 days
+	set .aura_3rd_duration, 86400;    // 1 day
+
+//	===== Staff ============================================================
+	set .gm_level, 60;
+
+//	===== Internal / exit warp =============================================
+	getmapxy .exit_map$, .exit_x, .exit_y, BL_NPC;
+	set .npc_x, .exit_x;
+	set .npc_y, .exit_y;
+	end;
+}
