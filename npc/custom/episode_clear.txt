@@ -201,6 +201,94 @@ function	script	F_EpForceComplete	{
 	return;
 }
 
+function	script	F_EpClearConfirm	{
+	.@ep = getarg(0);
+	.@part = getarg(1, 0);
+	.@ticket = getarg(2, 0);
+
+	deletearray .@names$;
+	if (.@ep == 13) {
+		setarray .@names$[0], "Other World Entry Related Quest", "Adapting to New Environment", "Conflict of Three Nations Alliance Investigation Team", "Report to the Continent", "Dandelion's Request", "Attitude Towards New Things", "Gaining Trust from Cat Hand", "Translator", "Messenger", "Continuing Research", "Homesickness", "To El Dicastes!", "Doha's Secret Order", "Fred's Request";
+	} else if (.@ep == 14) {
+		setarray .@names$[0], "Ep14.1 Bifrost", "Ep14.2 Eclage", "Ep14.3 Final Battle";
+	} else if (.@ep == 15) {
+		setarray .@names$[0], "Arunafeltz Excavation Team", "Regenerating Memory", "To Phantasmagorica!", "Traces", "Monthly Brigan";
+	} else if (.@ep == 16) {
+		setarray .@names$[0], "Banquet for Heroes", "Geoborg's Story", "Wigneur's Story", "Walter's Story", "Roegenburg's Story", "Why Do I Have to Prepare the Banquet?", "Terra Gloria", "Between Negotiation and Fraud", "Grudge";
+	} else if (.@ep == 17) {
+		if (.@part == 2)
+			setarray .@names$[0], "Ep17.2 Mansion's Doghole", "Straggler in the Sewer", "Cannot Find Network", "I Want to Know That", "Pest Extermination Operation", "Attending the Coronation", "Water Garden", "Be Quiet in the Library", "Bathhouse, Strange Creature and Me";
+		else
+			setarray .@names$[0], "Ep17.1 New Operation Base", "Pax's Employment Journey", "Regenscrhirm Recapture Operation", "Old Memories", "Sky Seen from the Well", "Pure Mischievous Child", "Pax's Employment Journey 2";
+	} else if (.@ep == 18) {
+		setarray .@names$[0], "To the Church State", "Niren's Request", "Children of Gray", "Oz's Maze and the Merchant", "Daily Bread to Be Thankful For", "Sacred Relic for Essence", "Belated Migration", "I Can't Sleep", "This Is Not That Place", "Where Is My Home", "There Are No Bad Beasts in the World", "Gray Village Governor Candidate", "Great Meeting in Gray Wolf Forest", "Wolf in Sheep's Clothing", "Sacred Deception";
+	} else if (.@ep == 19) {
+		setarray .@names$[0], "Guest Who Came on the North Wind", "Patrol with Awin", "Encounter with Experiment Subject 210426", "Infiltration of Rgan's Dwelling", "Finding Clues", "Accumulating Suspicions", "Confused Snake's Nest", "Finding Underground Hideout from the Surface", "Airship Destruction Operation", "Saint of Purification", "Frozen Sea";
+	} else if (.@ep == 20) {
+		setarray .@names$[0], "Natives of the Ancient Ice Gorge", "Era of Cold War and Espionage", "More Expert Than Any Awin", "Kopo's Secret Base", "Infiltration of Rgans' Hideout", "Where the End of the Maze Leads", "Deep Ancient Sea", "The Undying One";
+	}
+
+	mes "[Balheele]";
+	mes "Story organization is complete.";
+	mes "Let me confirm everything that was applied to your adventure log.";
+	next;
+
+	if (.@ticket > 0) {
+		mes "[Balheele]";
+		mes "^777777Clear ticket consumed:^000000";
+		mes "^i[" + .@ticket + "]";
+		next;
+	}
+
+	mes "[Balheele]";
+	if (.@ep == 17)
+		mes "^4d4dffEpisode " + (.@part == 2 ? "17.2" : "17.1") + "^000000 quests marked ^0000ffCompleted^000000:";
+	else
+		mes "^4d4dffEpisode " + .@ep + "^000000 quests marked ^0000ffCompleted^000000:";
+	for (.@i = 0; .@i < getarraysize(.@names$); .@i++)
+		mes " - " + .@names$[.@i];
+	next;
+
+	mes "[Balheele]";
+	mes "^777777Progress adjustments:^000000";
+	switch (.@ep) {
+	case 16:
+		mes " - ^4d4dffterra_gloria_main^000000 set to ^0000ff25^000000";
+		mes " - ^4d4dffep16_royal^000000 set to ^0000ff24^000000";
+		mes " - Hidden Episode 16 NPCs restored to visible";
+		break;
+	case 17:
+		if (.@part == 2) {
+			mes " - ^4d4dffep17_2_main^000000 set to at least ^0000ff36^000000";
+			mes " - ^4d4dffep172_watergarden^000000 set to at least ^0000ff3^000000";
+			mes " - Hidden Garden instance NPCs restored to visible";
+		}
+		break;
+	case 18:
+		mes " - ^4d4dffep18_main^000000 set to at least ^0000ff57^000000";
+		mes " - Episode 18 instance entrance NPCs restored to visible";
+		break;
+	case 19:
+		mes " - ^4d4dffep19_main^000000 set to at least ^0000ff100^000000";
+		mes " - Episode 19 instance entrance NPCs restored to visible";
+		break;
+	case 20:
+		mes " - ^4d4dffep20_main^000000 set to at least ^0000ff100^000000";
+		break;
+	default:
+		mes " - Episode " + .@ep + " story flags updated";
+		break;
+	}
+	next;
+
+	mes "[Balheele]";
+	mes "^ff0000[Reminder]^000000";
+	mes "^ff0000Quest rewards, experience, and achievements from natural episode progress were not granted.^000000";
+	mes "You may now continue to the next episode content.";
+	close;
+	return;
+}
+
 function	script	F_EpClearSkip	{
 	.@ep = getarg(0);
 	setarray .@require_ep[14], 13013;
@@ -277,8 +365,10 @@ function	script	F_EpClearSkip	{
 			}
 
 			.@consumed = 0;
+			.@ticket_used = 0;
 			for (.@t = 0; .@t < getarraysize(.@tickets); .@t++) {
 				if (countitem(.@tickets[.@t]) > 0) {
+					.@ticket_used = .@tickets[.@t];
 					delitem .@tickets[.@t], 1;
 					.@consumed = 1;
 					break;
@@ -308,11 +398,8 @@ function	script	F_EpClearSkip	{
 			for (.@i = 0; .@i < getarraysize(.@ids); .@i++)
 				callfunc("F_EpForceComplete", .@ids[.@i]);
 			callfunc("F_EpClearApply", .@ep, 0);
-
-			mes "[Balheele]";
-			mes "Story organization is complete.";
-			mes "Now, you can start a new story.";
-			close;
+			callfunc("F_EpClearConfirm", .@ep, 0, .@ticket_used);
+			end;
 	}
 }
 
@@ -351,8 +438,10 @@ function	script	F_Ep17	{
 			}
 
 			.@consumed = 0;
+			.@ticket_used = 0;
 			for (.@t = 0; .@t < getarraysize(.@tickets); .@t++) {
 				if (countitem(.@tickets[.@t]) > 0) {
+					.@ticket_used = .@tickets[.@t];
 					delitem .@tickets[.@t], 1;
 					.@consumed = 1;
 					break;
@@ -382,11 +471,8 @@ function	script	F_Ep17	{
 			for (.@i = .@start; .@i <= .@end; .@i++)
 				callfunc("F_EpForceComplete", .@ids[.@i]);
 			callfunc("F_EpClearApply", 17, .@part);
-
-			mes "[Balheele]";
-			mes "Story organization is complete.";
-			mes "Now, you can start a new story.";
-			close;
+			callfunc("F_EpClearConfirm", 17, .@part, .@ticket_used);
+			end;
 	}
 	end;
 }
