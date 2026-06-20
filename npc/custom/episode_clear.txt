@@ -40,6 +40,7 @@ prt_cas,373,77,3	script	Balheele#episkip	4_F_VALKYRIE,{
 		"Use Episode 19 Clear Ticket",
 		"Use Episode 20 Clear Ticket",
 		"Purchase Episode Clear Ticket",
+		"[Debug] Repair hidden episode NPCs",
 		"Cancel")) {
 		case 1: callfunc("F_EpDesc", 13); callfunc("F_EpClearSkip", 13); break;
 		case 2: callfunc("F_EpDesc", 14); callfunc("F_EpClearSkip", 14); break;
@@ -119,6 +120,23 @@ prt_cas,373,77,3	script	Balheele#episkip	4_F_VALKYRIE,{
 			}
 			close;
 		case 10:
+			mes "[Balheele]";
+			mes "Let me scan your adventure log for episode NPCs that should be visible but are still hidden...";
+			next;
+			.@fixed = callfunc("F_EpRepairHiddenNpcs");
+			if (.@fixed == 0) {
+				mes "[Balheele]";
+				mes "Everything looks in order.";
+				mes "No missing NPCs were found for your current episode progress.";
+			} else {
+				mes "[Balheele]";
+				mes "I found and restored ^0000ff" + .@fixed + "^000000 hidden NPC(s):";
+				for (.@i = 0; .@i < getarraysize(@ep_repair_names$); .@i++)
+					mes " - ^777777" + @ep_repair_names$[.@i] + "^000000";
+				mes "Visit the related maps if those NPCs are elsewhere.";
+			}
+			close;
+		case 11:
 			mes "[Balheele]";
 			mes "Come again when you need it~";
 			close;

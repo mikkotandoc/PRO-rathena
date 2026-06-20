@@ -82,6 +82,57 @@ function	script	F_EpUncloakInstances	{
 	return;
 }
 
+function	script	F_EpRepairTry	{
+	.@name$ = getarg(0);
+
+	if (getnpcid(0, .@name$) == 0)
+		return 0;
+	if (!isnpccloaked(.@name$))
+		return 0;
+	cloakoffnpcself(.@name$);
+	@ep_repair_names$[getarraysize(@ep_repair_names$)] = .@name$;
+	return 1;
+}
+
+function	script	F_EpRepairHiddenNpcs	{
+	deletearray @ep_repair_names$;
+	.@fixed = 0;
+
+	if (ep17_2_main >= 1) {
+		.@fixed += callfunc("F_EpRepairTry", "#he_admin1");
+		.@fixed += callfunc("F_EpRepairTry", "#he_admin2");
+	}
+	if (ep18_main >= 52)
+		.@fixed += callfunc("F_EpRepairTry", "Priest#sms01");
+	if (ep18_main >= 54) {
+		.@fixed += callfunc("F_EpRepairTry", "Ira#c12_01");
+		.@fixed += callfunc("F_EpRepairTry", "Miriam#c12_01");
+		.@fixed += callfunc("F_EpRepairTry", "Maram#c12_01");
+		.@fixed += callfunc("F_EpRepairTry", "Suad#c12_01");
+	}
+	if (ep18_main >= 57)
+		.@fixed += callfunc("F_EpRepairTry", "Aira#con");
+	if (ep19_main >= 50) {
+		.@fixed += callfunc("F_EpRepairTry", "Juncea#ep19re2");
+		.@fixed += callfunc("F_EpRepairTry", "#warp_ep19re1");
+	}
+	if (ep19_main >= 59) {
+		.@fixed += callfunc("F_EpRepairTry", "Lehar#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Lazy#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Aurelie#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Horuru#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Horr#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Voglinde#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Leon#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Miriam#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Iwin#i19ms21");
+		.@fixed += callfunc("F_EpRepairTry", "Iwin#i19ms22");
+	}
+	if (ep19_main >= 100)
+		.@fixed += callfunc("F_EpRepairTry", "Arolong#ep19re2");
+	return .@fixed;
+}
+
 function	script	F_EpUncloakOnMapLoad	{
 	.@map$ = strcharinfo(3);
 
