@@ -14,6 +14,8 @@ function	script	F_EpClearApply	{
 	case 16:
 		if (terra_gloria_main < 25)
 			terra_gloria_main = 25;
+		if (ep16_royal < 24)
+			ep16_royal = 24;
 		break;
 	case 17:
 		if (.@part == 2) {
@@ -42,10 +44,77 @@ function	script	F_EpClearApply	{
 	return;
 }
 
+function	script	F_EpUncloakNpcForce	{
+	.@name$ = getarg(0);
+
+	if (getnpcid(0, .@name$) == 0)
+		return 0;
+	cloakoffnpcself(.@name$);
+	return 1;
+}
+
+function	script	F_EpUncloakEp16	{
+	.@repair = getarg(0, 0);
+	.@fixed = 0;
+
+	setarray .@npc$[0],
+		"#16negofire", "Arivero Yurhik#TFQ02", "Arivero Yurhik#TFQ04", "Arivero Yurhik#TFQ07",
+		"Arivero Yurhik#TFQ10", "Arivero Yurhik#TFQ13", "Bodyguard Crux#ep16_room01",
+		"Chamberlain Bell#ep16_01", "Chamberlain Bell#ep16_02", "Chamberlain Bell#ep16_03",
+		"Chamberlain#ep16_01", "Charity#16.2rm", "Charity#16.2rmb2", "Charity#16.2rmb3",
+		"Collapsed person#16nego", "Court Mage Nillem#ep16_wiz01", "Crux#ep162_02",
+		"Crux#ep162_03", "Crux#ep162_04", "Crux#ep162_05", "Crux Findel#ep16_02",
+		"Cyan#16nego01", "Cyan#16nego02", "Daryl#16nego01", "Denny#16nego01",
+		"Denny#16nego02", "Denny#16nego03", "Dien#162gmbs2", "Dimension Warper MkII#ep16_lib",
+		"Enormous stack#16nego01", "#ep16_7689_01", "#ep16_7689_02", "Eri#16nego01",
+		"Eryus#EP161BU01", "Eryus#EP161BU02", "Female#EP161BU03", "Female#EP161BU04",
+		"Giant Beast Manager#ep16_s02", "Girl#EP161GU01", "Girl#EP161GU03", "Girl#EP161GU06",
+		"Gonie#16nego02", "Gonie#16nego03", "Gonie#16nego04", "Helmut Roegenburg#ep16lug",
+		"Ian Walther#ep16_lib01", "Ilya Lebedev#16.2rms", "Isaac Wigner#ep16wig",
+		"Jana Levedeva#16.2rms", "#job_rmA", "Jurgen Wigner#ep16wig", "Jurgen Wigner#ep16wig00",
+		"Kafra Employee#ep16_s01", "Kalbern#ep16lug", "Katrin Wigner#ep16wig",
+		"Kronecker G. Heine#ep16_01_lib01", "Kronecker G. Heine#ep16_01_lib02",
+		"Kronecker G. Heine#ep162", "Lazy#16nego01", "Lazy#16nego02", "Lazy#16nego03",
+		"Lazy#16nego04", "Lazy#16nego06", "Lazy#ep162_01", "Levuiere Wigner#ep16_lib01",
+		"Lucky#16nego01", "Magenta#16nego01", "Maid#ep16wig01", "Man#ep162_01",
+		"Man#ep162_02", "Maximilian Roegenburg#ep16_lib01", "Morana Rudel#16.2rm",
+		"Myer Roegenburg#ep16lug", "Mysterious Guest#ep16_01", "Mysterious Person#ep16wal",
+		"Nemi#16nego01", "Nice Looking Gun#16.2rm", "Nihil#ep162_02", "Nihil M. Heine#ep162_01",
+		"Nyhill#ep16_7686", "Nyhill M. Heine#ep16_01", "Nyhill M. Heine#ep16_02",
+		"Nyhill M. Heine#ep16_lib01", "Nyhill M. Heine#ep16_nroom01", "Ordinary Man#ep16lug02",
+		"Peter Heine#ep16_01", "Peter Heine#ep16_02", "Philopontess#ep162_01",
+		"Philopontess#ep162_02", "Philopontess#ep162_03", "Rebellion Guard leader#1",
+		"Rebellion Guard leader#3", "Rebellion Guard leader#4", "Rebellion leader#TFQ15",
+		"Rookie#16nego02", "Rookie#ep162_01", "Room of Consciousness#evt_gate01",
+		"Rosa Erinin#EP161GU07", "Royal Chamberlain#ep16_02", "Scared researcher#ep162",
+		"Scientist#ep162_01", "Senior#16nego01", "Senior#16nego02", "Senior#16nego03",
+		"Senior#16nego04", "Skia#ep162_03", "Skia#ep162_04", "Skia#ep162_05", "Skia#ep162_06",
+		"Skia#ep162_07", "Skia#ep16_7686", "Skia Nerius#ep162_01", "Skia Nerius#ep162_02",
+		"Skia Nerius#ep16_7689", "Skia Nerius#ep16_7690", "Skia Nerius#ep16_room01",
+		"Soldier#EP161HU01", "Soldier#EP161HU02", "Soldier#EP161HU03", "Spica Nerius#ep16_02",
+		"Spica Nerius#ep162_01", "Spica Nerius#ep162_02", "Spica Nerius#ep16_room01",
+		"Spica Nerius#ep16_room02", "Suspicious mercenary#ep", "Swaying Space#evt_gate02",
+		"Teleport Prohibition equipment#1", "Teleport Prohibition equipment#2",
+		"Teleport Prohibition equipment#3", "Teleport Prohibition equipment#4",
+		"Trainee#16nego01", "Trainee#16nego02", "Unstable Nyhill#ep16_7690",
+		"Unusual person#16nego01", "Very small hole#16nego0", "Village Lad#EP161HO01",
+		"Village Lad#EP161HO03", "Violeta#ep16_02";
+
+	for (.@i = 0; .@i < getarraysize(.@npc$); .@i++) {
+		if (.@repair)
+			.@fixed += callfunc("F_EpRepairTry", .@npc$[.@i]);
+		else
+			callfunc("F_EpUncloakNpcForce", .@npc$[.@i]);
+	}
+	return .@fixed;
+}
+
 function	script	F_EpUncloakInstances	{
 	.@ep = getarg(0);
 	.@part = getarg(1, 0);
 
+	if (.@ep == 16 && terra_gloria_main >= 25)
+		callfunc("F_EpUncloakEp16", 0);
 	if (.@ep == 17 && .@part == 2 && ep17_2_main >= 1) {
 		cloakoffnpcself( "#he_admin1" );
 		cloakoffnpcself( "#he_admin2" );
@@ -98,6 +167,8 @@ function	script	F_EpRepairHiddenNpcs	{
 	deletearray @ep_repair_names$;
 	.@fixed = 0;
 
+	if (terra_gloria_main >= 25)
+		.@fixed += callfunc("F_EpUncloakEp16", 1);
 	if (ep17_2_main >= 1) {
 		.@fixed += callfunc("F_EpRepairTry", "#he_admin1");
 		.@fixed += callfunc("F_EpRepairTry", "#he_admin2");
@@ -136,6 +207,10 @@ function	script	F_EpRepairHiddenNpcs	{
 function	script	F_EpUncloakOnMapLoad	{
 	.@map$ = strcharinfo(3);
 
+	if (terra_gloria_main >= 25) {
+		if (.@map$ == "rebel_in" || .@map$ == "ein_fild04" || .@map$ == "slabw01" || .@map$ == "prt_cas_q")
+			callfunc("F_EpUncloakEp16", 0);
+	}
 	if (.@map$ == "ba_maison" && ep17_2_main >= 1) {
 		cloakoffnpcself( "#he_admin1" );
 		cloakoffnpcself( "#he_admin2" );
@@ -179,6 +254,10 @@ OnPCLoadMapEvent:
 }
 
 // Map flags for OnPCLoadMapEvent (episode instance hub maps)
+rebel_in	mapflag	loadevent
+ein_fild04	mapflag	loadevent
+slabw01	mapflag	loadevent
+prt_cas_q	mapflag	loadevent
 ba_maison	mapflag	loadevent
 wolfvill	mapflag	loadevent
 rachel	mapflag	loadevent
