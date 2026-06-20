@@ -229303,6 +229303,18 @@ Body:
       bonus2 bSkillAtk,"SH_CHUL_HO_SONIC_CLAW",BaseLevel/10;
       bonus2 bSkillAtk,"SH_HOWLING_OF_CHUL_HO",BaseLevel/10;
       bonus2 bSkillAtk,"SH_HOGOGONG_STRIKE",BaseLevel/10;
+  - Id: 490657
+    AegisName: C_San_Goku
+    Name: Costume San Goku
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 2601
+    Script: |
+      hateffect HAT_EF_GOLD_SHOWER,true;
+    UnEquipScript: |
+      hateffect HAT_EF_GOLD_SHOWER,false;
   - Id: 490656
     AegisName: Relic_Lantern
     Name: Relic Lantern

@@ -1,0 +1,91 @@
+//===== rAthena Script =======================================
+//= Account Storage (@storage commands)
+//===== Description: =========================================
+//= Regular players: Storage 1-3 (main + storage2 + storage3)
+//= VIP players:     Storage 1-6
+//============================================================
+
+function	script	F_AccountStorageCount	{
+	.@count = 3;
+	if (vip_status(VIP_STATUS_ACTIVE))
+		.@count = 6;
+	return .@count;
+}
+
+function	script	F_AccountStorageSelect	{
+	.@max = callfunc("F_AccountStorageCount");
+	.@menu$ = "";
+	for (.@i = 0; .@i < .@max; .@i++)
+		.@menu$ += "Storage " + (.@i + 1) + ":";
+	.@menu$ += "Cancel";
+	.@choice = select(.@menu$);
+	if (.@choice > .@max)
+		return 0;
+	return .@choice;
+}
+
+function	script	F_AccountStorageOpen	{
+	.@slot = getarg(0);
+
+	if (.@slot < 1 || .@slot > callfunc("F_AccountStorageCount")) {
+		dispbottom "That storage is not available to you.";
+		return 0;
+	}
+
+	if (.@slot == 1) {
+		openstorage;
+		return 1;
+	}
+
+	if (!openstorage2(.@slot - 1, STOR_MODE_GET|STOR_MODE_PUT))
+		dispbottom "Unable to open storage. Close your current storage window first.";
+	return 0;
+}
+
+-	script	AccountStorage	-1,{
+OnStorage:
+	if (.@atcmd_numparameters) {
+		callfunc("F_AccountStorageOpen", atoi(.@atcmd_parameters$[0]));
+		end;
+	}
+	mes "[Storage]";
+	mes "Select a storage to open:";
+	next;
+	.@choice = callfunc("F_AccountStorageSelect");
+	if (!.@choice) {
+		mes "Cancelled.";
+		close;
+	}
+	close2;
+	callfunc("F_AccountStorageOpen", .@choice);
+	end;
+
+OnStorage2:
+	callfunc("F_AccountStorageOpen", 2);
+	end;
+
+OnStorage3:
+	callfunc("F_AccountStorageOpen", 3);
+	end;
+
+OnStorage4:
+	callfunc("F_AccountStorageOpen", 4);
+	end;
+
+OnStorage5:
+	callfunc("F_AccountStorageOpen", 5);
+	end;
+
+OnStorage6:
+	callfunc("F_AccountStorageOpen", 6);
+	end;
+
+OnInit:
+	bindatcmd "storage", strnpcinfo(0)+"::OnStorage", 0, 99;
+	bindatcmd "storage2", strnpcinfo(0)+"::OnStorage2", 0, 99;
+	bindatcmd "storage3", strnpcinfo(0)+"::OnStorage3", 0, 99;
+	bindatcmd "storage4", strnpcinfo(0)+"::OnStorage4", 0, 99;
+	bindatcmd "storage5", strnpcinfo(0)+"::OnStorage5", 0, 99;
+	bindatcmd "storage6", strnpcinfo(0)+"::OnStorage6", 0, 99;
+	end;
+}

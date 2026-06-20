@@ -1026,25 +1026,89 @@ ACMD_FUNC(speed)
 }
 
 /*==========================================
- *
+ * Open account storage slot 1-6.
+ * @return 0 on success, -1 on failure
  *------------------------------------------*/
-ACMD_FUNC(storage)
+static int32 atcommand_open_account_storage(map_session_data *sd, int32 fd, int32 slot)
 {
 	nullpo_retr(-1, sd);
 
 	if (sd->npc_id || sd->state.vending || sd->state.buyingstore || sd->state.trading || sd->state.storage_flag)
 		return -1;
 
-	if (storage_storageopen(sd) == 1)
-	{	//Already open.
-		clif_displaymessage(fd, msg_txt(sd,250)); // You have already opened your storage. Close it first.
+	if (slot < 1 || slot > 6)
 		return -1;
+
+	if (slot > 3) {
+#ifdef VIP_ENABLE
+		if (!pc_isvip(sd)) {
+			clif_displaymessage(fd, "VIP subscription is required for storages 4-6.");
+			return -1;
+		}
+#else
+		clif_displaymessage(fd, "That storage is not available.");
+		return -1;
+#endif
+	}
+
+	if (slot == 1) {
+		if (storage_storageopen(sd) == 1) {
+			clif_displaymessage(fd, msg_txt(sd,250)); // You have already opened your storage. Close it first.
+			return -1;
+		}
+	} else {
+		if (!storage_exists(slot - 1)) {
+			clif_displaymessage(fd, "That storage is not configured on this server.");
+			return -1;
+		}
+
+		if (!storage_premiumStorage_load(sd, slot - 1, STOR_MODE_ALL)) {
+			clif_displaymessage(fd, msg_txt(sd,250)); // You have already opened your storage. Close it first.
+			return -1;
+		}
 	}
 
 	clif_displaymessage(fd, msg_txt(sd,919)); // Storage opened.
+	return 0;
+}
+
+/*==========================================
+ *
+ *------------------------------------------*/
+ACMD_FUNC(storage)
+{
+	int32 slot = 1;
+
+	nullpo_retr(-1, sd);
+
+	if (message[0] != '\0') {
+		if (sscanf(message, "%11d", &slot) != 1 || slot < 1 || slot > 6) {
+			clif_displaymessage(fd, "Usage: @storage {<1-6>}");
+			return -1;
+		}
+	}
+
+	if (atcommand_open_account_storage(sd, fd, slot) != 0)
+		return -1;
 
 	return 0;
 }
+
+#define ACMD_ACCOUNT_STORAGE(slot_num) \
+ACMD_FUNC(storage ## slot_num) { \
+	nullpo_retr(-1, sd); \
+	if (atcommand_open_account_storage(sd, fd, slot_num) != 0) \
+		return -1; \
+	return 0; \
+}
+
+ACMD_ACCOUNT_STORAGE(2)
+ACMD_ACCOUNT_STORAGE(3)
+ACMD_ACCOUNT_STORAGE(4)
+ACMD_ACCOUNT_STORAGE(5)
+ACMD_ACCOUNT_STORAGE(6)
+
+#undef ACMD_ACCOUNT_STORAGE
 
 
 /*==========================================
@@ -11589,6 +11653,11 @@ void atcommand_basecommands(void) {
 		ACMD_DEF(load),
 		ACMD_DEF(speed),
 		ACMD_DEF(storage),
+		ACMD_DEF(storage2),
+		ACMD_DEF(storage3),
+		ACMD_DEF(storage4),
+		ACMD_DEF(storage5),
+		ACMD_DEF(storage6),
 		ACMD_DEF(guildstorage),
 		ACMD_DEF(option),
 		ACMD_DEF(hide), // + /hide

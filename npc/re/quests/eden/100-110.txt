@@ -183,8 +183,8 @@ L_RewardQuest:
         case 80325: .@b_exp = 300000; .@j_exp = 250000; .@coin = 1; break; // Green/Red Dimik
     }
 
-    .@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / 100;
-    .@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / 100;
+    .@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / 150;
+    .@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / 150;
 
     completequest .@q_id;
     getexp .@b_exp, .@j_exp;

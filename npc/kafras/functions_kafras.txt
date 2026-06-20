@@ -227,6 +227,16 @@ function	script	F_KafStor	{
 		mes "use the Storage Service.";
 		return;
 	}
+	// Multi-storage selection (normal Kafra storage only)
+	.@stor_slot = 1;
+	if (.@type == 0 && callfunc("F_AccountStorageCount") > 1) {
+		mes "[Kafra Employee]";
+		mes "Which storage would you like to access?";
+		.@stor_slot = callfunc("F_AccountStorageSelect");
+		if (!.@stor_slot)
+			return;
+	}
+
 	// Accessing Normal Storage (Skipped if accessing Storage from Guild castle)
 	if (.@type != 2) {
 		// Consume "Free Ticket for Kafra Storage" if available.
@@ -276,7 +286,7 @@ function	script	F_KafStor	{
 	}
 	callfunc("F_CheckKafCode");	//check your storage password, if set
 	close2;
-	openstorage;
+	callfunc("F_AccountStorageOpen", .@stor_slot);
 	cutin "", 255;
 	end;
 }

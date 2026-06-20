@@ -2,6 +2,7 @@
 // Booster Coin Exchange NPCs
 // Centro  - Promotional Item Exchange (prontera)
 // After updating barter data, run @reloadbarterdb or restart map-server.
+// Booster Operator - Illusion Equipment Voucher exchange (prt_in)
 // Yves    - Promotional Costume Enchantment (malangdo)
 // RS26-1  - Illusion Equipment (Bound) Enchantment (sp_cor)
 //============================================================
@@ -16,7 +17,7 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 	mes "[Centro]";
 	mes "Welcome! How can I help you today?";
 	next;
-	switch (select("Exchange Promotional Items:Exchange Booster Weapons:Booster Costume Enchantment:Use Level Up Ticket:Cancel")) {
+	switch (select("Exchange Promotional Items:Exchange Booster Weapons:Booster Costume Enchantment:Use Level Up Ticket:Exchange Illusion Equipment (Bound):Cancel")) {
 	case 1:
 		if (!getbattleflag("feature.barter")) {
 			mes "[Centro]";
@@ -100,6 +101,22 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 		}
 		end;
 	case 5:
+		if (!getbattleflag("feature.barter")) {
+			mes "[Centro]";
+			mes "The exchange service is currently unavailable.";
+			close;
+		}
+		if (BaseLevel < 130) {
+			mes "[Centro]";
+			mes "You must be at least ^0000FFBase Level 130^000000 to exchange";
+			mes "Illusion Equipment (Bound).";
+			close;
+		}
+		mes "[Centro]";
+		mes "Opening the Illusion Equipment (Bound) exchange shop.";
+		mes "Each piece costs one " + mesitemlink(1000994) + ".";
+		callsub L_OpenShop, "mega14";
+	case 6:
 		mes "[Centro]";
 		mes "Come back when you need assistance.";
 		close;
@@ -239,9 +256,54 @@ sp_cor,98,136,4	script	RS26-1	4_SYS_MSG,{
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Illusion Equipment (Bound) Enchantment>";
+	setunittitle getnpcid(0), "<Booster Enchant Enchanter (Illusion)>";
+	end;
+}
+
+prt_in,40,95,4	script	Booster Operator	4_M_MERCAT1,{
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 1000) {
+		mes "[Booster Operator]";
+		mes "Your inventory is too full to continue.";
+		mes "Please make some room and try again.";
+		close;
+	}
+	mes "[Booster Operator]";
+	mes "Welcome! I handle Illusion Equipment (Bound) exchanges";
+	mes "for booster promotion participants.";
+	next;
+	if (!getbattleflag("feature.barter")) {
+		mes "[Booster Operator]";
+		mes "The exchange service is currently unavailable.";
+		close;
+	}
+	if (BaseLevel < 130) {
+		mes "[Booster Operator]";
+		mes "You must be at least ^0000FFBase Level 130^000000 to exchange";
+		mes "Illusion Equipment (Bound).";
+		close;
+	}
+	mes "[Booster Operator]";
+	mes "Trade your " + mesitemlink(1000994) + " for bound Illusion gear.";
+	mes "Which exchange would you like?";
+	next;
+	switch (select("Exchange Illusion Equipment (Bound):Cancel")) {
+	case 1:
+		mes "[Booster Operator]";
+		mes "Opening the Illusion Equipment (Bound) exchange shop.";
+		close2;
+		callshop "mega14";
+		end;
+	case 2:
+		mes "[Booster Operator]";
+		mes "Come back when you have a voucher ready.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Booster Operator>";
 	end;
 }
 
 // Base NPC for Booster Call (100337) / Premium Booster Call (101473)
-prontera,1,1,0	duplicate(Centro)	mega	4_M_HUMERCHANT
+prontera,1,1,0	duplicate(Centro)	Jinny::mega	4_M_GENIE

@@ -473,8 +473,8 @@ Body:
     Name: Constellation Tower
     Enter:
       Map: 1@ch_t
-      X: 19
-      Y: 73
+      X: 45
+      Y: 100
     AdditionalMaps:
        2@ch_t: true
        3@ch_t: true

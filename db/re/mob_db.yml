@@ -105422,6 +105422,9 @@ Body:
         Rate: 10000
       - Item: Bio_Test_Fragment
         Rate: 10000
+      - Item: Unknown_Swordman_Card
+        Rate: 1
+        StealProtected: true
   - Id: 20537
     AegisName: MD_ED_YGNIZEM
     Name: Nameless Swordsman
@@ -105566,6 +105569,9 @@ Body:
         Rate: 10
       - Item: Bio_Reseearch_Docu
         Rate: 10
+      - Item: Reken_H_Guard_Card
+        Rate: 1
+        StealProtected: true
   - Id: 20542
     AegisName: MD_ED_LGTGUARD
     Name: Rekenber Guard
@@ -105602,6 +105608,9 @@ Body:
         Rate: 10
       - Item: Bio_Reseearch_Docu
         Rate: 10
+      - Item: Reken_Guard_Card
+        Rate: 1
+        StealProtected: true
   - Id: 20543
     AegisName: MD_ED_M_SCIENCE
     Name: MD_ED_M_SCIENCE
@@ -122023,9 +122032,9 @@ Body:
       - Item: Fresh_Pear
         Rate: 2000
       - Item: Plain_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Plain_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122070,9 +122079,9 @@ Body:
       - Item: Elder_Branch
         Rate: 250
       - Item: Plain_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Plain_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122119,9 +122128,9 @@ Body:
       - Item: Ectoplasmic_Stone
         Rate: 2000
       - Item: Plain_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Plain_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122168,9 +122177,9 @@ Body:
       - Item: Grasshopper_Doll
         Rate: 10
       - Item: Plain_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Plain_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122215,9 +122224,9 @@ Body:
       - Item: Savage_Meat
         Rate: 25
       - Item: Plain_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Plain_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122262,9 +122271,9 @@ Body:
       - Item: Leaflet_Of_Aloe
         Rate: 25
       - Item: Plain_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Plain_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122309,9 +122318,9 @@ Body:
       - Item: Shining_Crystal
         Rate: 2000
       - Item: Plain_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Plain_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122410,9 +122419,9 @@ Body:
       - Item: Hot_Hair
         Rate: 1600
       - Item: Flame_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Flame_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122457,9 +122466,9 @@ Body:
       - Item: Shining_Crystal
         Rate: 2000
       - Item: Flame_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Flame_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122504,9 +122513,9 @@ Body:
       - Item: Pumpkin
         Rate: 500
       - Item: Flame_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Flame_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122551,9 +122560,9 @@ Body:
       - Item: Blaze_Stone
         Rate: 2000
       - Item: Flame_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Flame_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122598,9 +122607,9 @@ Body:
       - Item: Whittling
         Rate: 2000
       - Item: Flame_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Flame_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122645,9 +122654,9 @@ Body:
       - Item: Tri_Headed_Dragon_Head
         Rate: 1940
       - Item: Flame_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Flame_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122692,9 +122701,9 @@ Body:
       - Item: Dragon_Scale
         Rate: 750
       - Item: Flame_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Flame_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122793,9 +122802,9 @@ Body:
       - Item: Cold_Ice
         Rate: 250
       - Item: Ice_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Ice_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122840,9 +122849,9 @@ Body:
       - Item: Cold_Ice
         Rate: 125
       - Item: Ice_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Ice_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122887,9 +122896,9 @@ Body:
       - Item: Crystal_Blue
         Rate: 150
       - Item: Ice_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Ice_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -122936,9 +122945,9 @@ Body:
       - Item: Solid_Shell
         Rate: 1250
       - Item: Ice_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Ice_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -122983,9 +122992,9 @@ Body:
       - Item: Starsand_Of_Witch
         Rate: 1250
       - Item: Ice_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Ice_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -123030,9 +123039,9 @@ Body:
       - Item: Stone_Of_Intelligence_
         Rate: 15
       - Item: Ice_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Ice_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -123077,9 +123086,9 @@ Body:
       - Item: Starsand_Of_Witch
         Rate: 1250
       - Item: Ice_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Ice_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -123178,9 +123187,9 @@ Body:
       - Item: Silver_Ring
         Rate: 50
       - Item: Death_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Death_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -123225,9 +123234,9 @@ Body:
       - Item: Transparent_Cloth
         Rate: 500
       - Item: Death_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Death_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -123272,9 +123281,9 @@ Body:
       - Item: Evil_Minded_Ruby
         Rate: 2000
       - Item: Death_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Death_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -123319,9 +123328,9 @@ Body:
       - Item: Black_Jewelry
         Rate: 2000
       - Item: Death_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Death_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -123368,9 +123377,9 @@ Body:
       - Item: Mementos
         Rate: 250
       - Item: Death_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Death_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore
@@ -123417,9 +123426,9 @@ Body:
       - Item: Evil_Minded_Ruby
         Rate: 2000
       - Item: Death_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Death_Essence
-        Rate: 300
+        Rate: 225
       - Item: Shadowdecon
         Rate: 17
       - Item: Shadowdecon_Ore
@@ -123464,9 +123473,9 @@ Body:
       - Item: Evil_Black_Bid
         Rate: 2000
       - Item: Death_Barmund_Rune
-        Rate: 1500
+        Rate: 1125
       - Item: Barmund_Death_Essence
-        Rate: 300
+        Rate: 225
       - Item: Zelunium
         Rate: 17
       - Item: Zelunium_Ore

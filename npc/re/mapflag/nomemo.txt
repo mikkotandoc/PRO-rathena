@@ -107,6 +107,7 @@ moc_prydn1	mapflag	nomemo
 moc_prydn2	mapflag	nomemo
 c_tower2_	mapflag	nomemo
 c_tower3_	mapflag	nomemo
+clock_01	mapflag	nomemo
 gl_chyard_	mapflag	nomemo
 gl_cas02_	mapflag	nomemo
 

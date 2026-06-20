@@ -103,7 +103,7 @@ prontera,155,199,4	script	Gacha Machine	2_VENDING_MACHINE1,{
 OnInit:
     .npc_name$ = "^0000FF[Costume Recycler]^000000";
     .coins_reward = 1; // Number of coins given per costume
-    .coin_id = 50003;  // Your Gacha Coin ID
+    .coin_id = 50008;  // Gacha Coin ID
 
     // Add the numerical Item IDs of all valid costumes here
     setarray .valid_costumes[0], 

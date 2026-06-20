@@ -94716,7 +94716,7 @@ Body:
       NoAuction: true
   - Id: 1000994
     AegisName: EP17_1_A_Ticket
-    Name: Illusion Equipment Coupon    # !todo check english name
+    Name: Illusion Equipment Voucher
     Type: Etc
     Trade:
       NoDrop: true

@@ -54,178 +54,190 @@ Body:
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 4
+            Amount: 6
       - Index: 1
         Item: Enriched_Elunium_Box5
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 2
+            Amount: 3
       - Index: 2
         Item: Enriched_Elunium_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 4
+            Amount: 6
       - Index: 3
         Item: Shadowdecon_Ore_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 2
+            Amount: 3
       - Index: 4
         Item: Amethyst_Fragment_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 2
+            Amount: 3
       - Index: 5
         Item: GrayWolf_7_Ticket
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 18
+            Amount: 27
       - Index: 6
         Item: Bs_Sha_M_S_3
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 20
+            Amount: 30
       - Index: 7
         Item: Bs_Sha_M_S_4
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 20
+            Amount: 30
       - Index: 8
         Item: HE_Bubble_Gum
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 1
+            Amount: 2
       - Index: 9
         Item: Bubble_Gum_Green
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 1
+            Amount: 2
       - Index: 10
         Item: Bubble_Gum_Yellow
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 1
+            Amount: 2
       - Index: 11
         Item: Bubble_Gum_Orange
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 1
+            Amount: 2
       - Index: 12
         Item: Bubble_Gum_Red
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 1
+            Amount: 2
       - Index: 13
         Item: HE_Battle_Manual
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 1
+            Amount: 2
       - Index: 14
         Item: Shadow_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 10
+            Amount: 15
       - Index: 15
         Item: Physical_S_Package
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 10
+            Amount: 15
       - Index: 16
         Item: Magical_S_Package
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 10
+            Amount: 15
       - Index: 17
         Item: Up_Hero_Weapon_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 10
+            Amount: 15
       - Index: 18
         Item: Comp_Power_Booster
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 5
+            Amount: 8
       - Index: 19
         Item: E_Red_Booster
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 10
+            Amount: 15
       - Index: 20
         Item: Comp_Almighty
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 5
+            Amount: 8
       - Index: 21
         Item: E_Infinity_Drink
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 10
+            Amount: 15
       - Index: 22
         Item: Shadow_Refine_Hammer
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 4
+            Amount: 6
       - Index: 23
         Item: All_Shadow_Cube
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 20
+            Amount: 30
       - Index: 24
         Item: FullPeneShadow_Mix
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 45
+            Amount: 68
       - Index: 25
         Item: FullTempShadow_Mix
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 45
+            Amount: 68
       - Index: 26
         Item: Convex_Mirror
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 5
+            Amount: 8
       - Index: 27
         Item: Shadow_Random_Mix
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 8
+            Amount: 12
       - Index: 28
         Item: Skill_Sha_R_M_Magic
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 15
+            Amount: 23
       - Index: 29
         Item: C_PRO_GACHA_1
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 6
+            Amount: 9
+      - Index: 30
+        Item: Visionary_invitation_2F
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 30
+      - Index: 31
+        Item: Visionary_invitation_3F
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 60

@@ -196,8 +196,8 @@ L_RewardQuest:
         case 80732: .@b_exp = 63975339;.@j_exp = 44782794;.@coin = 4; break; // ba_pw03
     }
 
-    .@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / 100;
-    .@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / 100;
+    .@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / 200;
+    .@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / 200;
 
     completequest .@q_id;
     getexp .@b_exp, .@j_exp;

@@ -1447,6 +1447,7 @@ void clif_SelectCart( const map_session_data* sd );
 void clif_achievement_list_all( map_session_data *sd );
 void clif_achievement_update( map_session_data *sd, const achievement *ach, int32 count );
 void clif_achievement_reward_ack(int32 fd, unsigned char result, int32 ach_id);
+void clif_change_title_ack(map_session_data *sd, unsigned char result, unsigned long title_id);
 
 /// Attendance System
 enum in_ui_type : int8 {

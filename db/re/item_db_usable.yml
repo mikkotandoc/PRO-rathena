@@ -88692,3 +88692,42 @@ Body:
     Script: |
       getgroupitem(IG_C_PRO_GACHA_1);
       specialeffect2 EF_FIREWORK;
+  - Id: 50003
+    AegisName: C_PRO_GACHA_2
+    Name: PRO Ragnarok Asia Costume Gacha Egg II
+    Type: Usable
+    Flags:
+      Container: true
+    Script: |
+      getgroupitem(IG_C_PRO_GACHA_2);
+      specialeffect2 EF_FIREWORK;
+  - Id: 50004
+    AegisName: Hugo_8Refine_Armor_Hammer
+    Name: +8 Armor Refine Permission Exchange Hammer
+    Type: Etc
+    Weight: 10
+  - Id: 50005
+    AegisName: Hugo_9Refine_Armor_Hammer
+    Name: +9 Armor Refine Permission Exchange Hammer
+    Type: Etc
+    Weight: 10
+  - Id: 50006
+    AegisName: Hugo_10Refine_Armor_Hammer
+    Name: +10 Armor Refine Permission Exchange Hammer
+    Type: Etc
+    Weight: 10
+  - Id: 50007
+    AegisName: Hugo_11Refine_Armor_Hammer
+    Name: +11 Armor Refine Permission Exchange Hammer
+    Type: Etc
+    Weight: 10
+  - Id: 50008
+    AegisName: PRO_GACHA_COIN
+    Name: Gacha Coin
+    Type: Etc
+    Weight: 10
+  - Id: 50031
+    AegisName: Hugo_12Refine_Armor_Hammer
+    Name: +12 Armor Refine Permission Exchange Hammer
+    Type: Etc
+    Weight: 10

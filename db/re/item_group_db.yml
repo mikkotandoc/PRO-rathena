@@ -133803,3 +133803,127 @@ Body:
             Item: C_Shining_Angel_Wing
             Amount: 1
             Rate: 4
+  - Group: C_PRO_GACHA_2
+    SubGroups:
+      - SubGroup: 0
+        List:
+          - Index: 0
+            Item: C_Valkyrie_Circlet
+            Amount: 1
+            Rate: 50
+          - Index: 1
+            Item: C_Imperial_Feather
+            Amount: 1
+            Rate: 50
+          - Index: 2
+            Item: C_Anemos_Mask
+            Amount: 1
+            Rate: 50
+          - Index: 3
+            Item: C_Chick_Hat
+            Amount: 1
+            Rate: 50
+          - Index: 4
+            Item: C_Mini_Propeller
+            Amount: 1
+            Rate: 50
+          - Index: 5
+            Item: C_Sahkkat
+            Amount: 1
+            Rate: 50
+          - Index: 6
+            Item: C_Ramen_Hat
+            Amount: 1
+            Rate: 50
+          - Index: 7
+            Item: C_Marionette_Doll
+            Amount: 1
+            Rate: 50
+          - Index: 8
+            Item: C_Mini_Glasses
+            Amount: 1
+            Rate: 50
+          - Index: 9
+            Item: C_Cat_Ear_Hat
+            Amount: 1
+            Rate: 50
+          - Index: 10
+            Item: C_Minions_Of_Devil
+            Amount: 1
+            Rate: 50
+          - Index: 11
+            Item: C_Helm_Of_Sun
+            Amount: 1
+            Rate: 50
+          - Index: 12
+            Item: C_Magical_Booster
+            Amount: 1
+            Rate: 20
+          - Index: 13
+            Item: C_Aura_Quartz_Crown
+            Amount: 1
+            Rate: 20
+          - Index: 14
+            Item: C_Wing_Of_Spider
+            Amount: 1
+            Rate: 20
+          - Index: 15
+            Item: C_Wing_Of_Eutaxy
+            Amount: 1
+            Rate: 20
+          - Index: 16
+            Item: C_Wing_Of_Happiness
+            Amount: 1
+            Rate: 20
+          - Index: 17
+            Item: C_Subject_Aura_Red
+            Amount: 1
+            Rate: 20
+          - Index: 18
+            Item: C_Flowerpot_Mask_V
+            Amount: 1
+            Rate: 20
+          - Index: 19
+            Item: C_Helm_Of_Sun_V
+            Amount: 1
+            Rate: 20
+          - Index: 20
+            Item: C_Flutter_Butterfly
+            Amount: 1
+            Rate: 7
+          - Index: 21
+            Item: C_Magical_Feather
+            Amount: 1
+            Rate: 7
+          - Index: 22
+            Item: C_Wing_Of_Angel_Move_GR
+            Amount: 1
+            Rate: 7
+          - Index: 23
+            Item: C_Popping_Poring_Aura
+            Amount: 1
+            Rate: 7
+          - Index: 24
+            Item: C_Ghost_Effect
+            Amount: 1
+            Rate: 7
+          - Index: 25
+            Item: C_Aura_Of_Ghost_S
+            Amount: 1
+            Rate: 1
+          - Index: 26
+            Item: C_Fluttering_Haze
+            Amount: 1
+            Rate: 1
+          - Index: 27
+            Item: C_San_Goku
+            Amount: 1
+            Rate: 1
+          - Index: 28
+            Item: C_Dark_Lord_Manteau
+            Amount: 1
+            Rate: 2
+          - Index: 29
+            Item: C_Dark_Lord_Cloak
+            Amount: 1
+            Rate: 4

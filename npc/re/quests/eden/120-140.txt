@@ -226,8 +226,8 @@ L_RewardQuest:
         case 80543: .@b_exp = 850000;  .@j_exp = 850000;  .@coin = 1; break;
     }
 
-    .@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / 100;
-    .@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / 100;
+    .@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / 200;
+    .@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / 200;
 
     completequest .@q_id;
     getexp .@b_exp, .@j_exp;

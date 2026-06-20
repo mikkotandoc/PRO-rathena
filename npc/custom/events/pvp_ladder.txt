@@ -8,7 +8,7 @@
 //= All tunables are in the OnInit block at the bottom.
 //============================================================
 
-prontera,158,185,3	script	PVP Ladder Registrar	415,{
+lighthalzen,154,106,3	script	PVP Ladder Registrar	415,{
 	function F_IsRegistered;
 	function F_PlayerName;
 
@@ -124,7 +124,7 @@ prontera,158,185,3	script	PVP Ladder Registrar	415,{
 		mes "[PVP Ladder Registrar]";
 		mes "GM control panel.";
 		next;
-		switch ( select( "Open registration.", "Force start now.", "Cancel event.", "Close." ) ) {
+		switch ( select( "Open registration.", "Force start now.", "Cancel event.", "Test title reward.", "Close." ) ) {
 		case 1:
 			if ( .state ) {
 				mes "The event is already active.";
@@ -158,6 +158,63 @@ prontera,158,185,3	script	PVP Ladder Registrar	415,{
 			donpcevent strnpcinfo(0)+"::OnCancelEvent";
 			end;
 		case 4:
+			mes "[PVP Ladder Registrar]";
+			mes "^FF0000GM Title Test^000000";
+			mes "Title ID: ^0055FF"+ .title_apex_id +"^000000 (Apex Predator)";
+			mes "Watch the map-server console for script or core errors.";
+			next;
+			switch ( select(
+				"Grant title (60s test).",
+				"Grant title (7 days).",
+				"Show title status.",
+				"Clear active title.",
+				"Step: addtitle only.",
+				"Step: setchartitle only.",
+				"Step: deltitle only.",
+				"Back."
+			) ) {
+			case 1:
+				.@r = callfunc( "F_TitleGrant", getcharid(3), getcharid(0), .title_apex_id, 60 );
+				mes "F_TitleGrant (60s): "+ ( .@r ? "^00FF00OK^000000" : "^FF0000FAILED^000000" );
+				mes "Active ID: "+ #ACTIVE_TITLE_ID;
+				mes "Expire tick: "+ #ACTIVE_TITLE_EXPIRE;
+				mes "Remaining: "+ max( 0, #ACTIVE_TITLE_EXPIRE - gettimetick(2) ) +" sec";
+				close;
+			case 2:
+				.@r = callfunc( "F_TitleGrant", getcharid(3), getcharid(0), .title_apex_id, .title_apex_duration );
+				mes "F_TitleGrant (7d): "+ ( .@r ? "^00FF00OK^000000" : "^FF0000FAILED^000000" );
+				mes "Active ID: "+ #ACTIVE_TITLE_ID;
+				mes "Expire tick: "+ #ACTIVE_TITLE_EXPIRE;
+				close;
+			case 3:
+				mes "Active title ID: "+ ( #ACTIVE_TITLE_ID ? #ACTIVE_TITLE_ID : "^777777none^000000" );
+				if ( #ACTIVE_TITLE_ID ) {
+					mes "Expire tick: "+ #ACTIVE_TITLE_EXPIRE;
+					mes "Remaining: "+ max( 0, #ACTIVE_TITLE_EXPIRE - gettimetick(2) ) +" sec";
+					mes "Equipped (status): check Achievement window.";
+				}
+				close;
+			case 4:
+				callfunc( "F_TitleClear", getcharid(3) );
+				mes "Title cleared.";
+				close;
+			case 5:
+				.@r = addtitle( .title_apex_id );
+				mes "addtitle "+ .title_apex_id +": "+ ( .@r ? "^00FF00OK^000000" : "^FF0000FAILED^000000" );
+				close;
+			case 6:
+				.@r = setchartitle( .title_apex_id );
+				mes "setchartitle "+ .title_apex_id +": "+ ( .@r ? "^00FF00OK^000000" : "^FF0000FAILED^000000" );
+				close;
+			case 7:
+				.@r = deltitle( .title_apex_id );
+				mes "deltitle "+ .title_apex_id +": "+ ( .@r ? "^00FF00OK^000000" : "^FF0000FAILED^000000" );
+				close;
+			case 8:
+				break;
+			}
+			close;
+		case 5:
 			break;
 		}
 		close;
@@ -194,7 +251,7 @@ OnOpenRegistration:
 	deletearray .reg_aid[0], .max_players;
 	deletearray .reg_cid[0], .max_players;
 	deletearray .reg_name$[0], .max_players;
-	announce "PVP Ladder registration is now OPEN! Sign up at Prontera ("+ .npc_x +","+ .npc_y +").", bc_all;
+	announce "PVP Ladder registration is now OPEN! Sign up at Lighthalzen ("+ .npc_x +","+ .npc_y +").", bc_all;
 	for ( .@m = .reg_minutes; .@m > 0; .@m-- ) {
 		if ( .state != 1 )
 			end;

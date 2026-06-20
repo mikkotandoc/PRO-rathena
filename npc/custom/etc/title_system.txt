@@ -130,6 +130,25 @@ function	script	F_TitleGrant	{
 	return 1;
 }
 
+// callfunc "F_TitleClear", <account_id>;
+function	script	F_TitleClear	{
+	if ( !getarg(0) )
+		return 0;
+	if ( !attachrid( getarg(0) ) )
+		return 0;
+
+	if ( #ACTIVE_TITLE_ID ) {
+		bonus_script_clear 0;
+		deltitle #ACTIVE_TITLE_ID;
+		setchartitle 0;
+		deltimer "title_system#ctrl::OnTitleExpire";
+		#ACTIVE_TITLE_ID = 0;
+		#ACTIVE_TITLE_EXPIRE = 0;
+		dispbottom "Active title cleared.";
+	}
+	return 1;
+}
+
 // callfunc "F_AuraGrant", <account_id>, <char_id>, <aura_id>, <duration>;
 function	script	F_AuraGrant	{
 	if ( !isloggedin( getarg(0), getarg(1) ) )

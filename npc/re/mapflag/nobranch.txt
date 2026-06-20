@@ -86,6 +86,7 @@ ma_zif09	mapflag	nobranch
 1@ma_b	mapflag	nobranch
 c_tower2_	mapflag	nobranch
 c_tower3_	mapflag	nobranch
+clock_01	mapflag	nobranch
 gl_chyard_	mapflag	nobranch
 gl_cas02_	mapflag	nobranch
 

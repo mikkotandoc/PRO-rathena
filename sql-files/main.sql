@@ -1124,6 +1124,36 @@ CREATE TABLE IF NOT EXISTS `storage` (
 ) ENGINE=MyISAM;
 
 --
+-- Table structure for table `storage2`
+--
+
+CREATE TABLE IF NOT EXISTS `storage2` LIKE `storage`;
+
+--
+-- Table structure for table `storage3`
+--
+
+CREATE TABLE IF NOT EXISTS `storage3` LIKE `storage`;
+
+--
+-- Table structure for table `storage4`
+--
+
+CREATE TABLE IF NOT EXISTS `storage4` LIKE `storage`;
+
+--
+-- Table structure for table `storage5`
+--
+
+CREATE TABLE IF NOT EXISTS `storage5` LIKE `storage`;
+
+--
+-- Table structure for table `storage6`
+--
+
+CREATE TABLE IF NOT EXISTS `storage6` LIKE `storage`;
+
+--
 -- Table structure for table `vending_items`
 --
 

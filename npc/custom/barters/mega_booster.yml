@@ -320,3 +320,77 @@ Body:
           - Index: 0
             Item: Booster_W_Ticket
             Amount: 1
+  - Name: mega14
+    Items:
+      - Index: 0
+        Item: E_Illusion_Armor_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 1
+        Item: E_Illusion_Armor_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 2
+        Item: E_Illusion_Engine_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 3
+        Item: E_Illusion_Engine_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 4
+        Item: E_Illusion_Leg_A
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 5
+        Item: E_Illusion_Leg_B
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 6
+        Item: E_Illusion_B_R
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 7
+        Item: E_Illusion_B_L
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 8
+        Item: E_Illusion_BC_R
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 9
+        Item: E_Illusion_BC_L
+        RequiredItems:
+          - Index: 0
+            Item: EP17_1_A_Ticket
+            Amount: 1
+      - Index: 10
+        Item: EP17_1_A_Ticket
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 11
+        Item: E_ILL_Up
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 5
