@@ -10,9 +10,9 @@ prt_cas,373,77,3	script	Balheele#episkip	4_F_VALKYRIE,{
 	mes "Of course, it's not free. I have to make a living too, don't I?";
 	next;
 
-	if (countitem(1000283) > 0) {
-		delitem 1000283, 1;
-	} else if (#Ep18_Manual_Clear == 0) {
+	if (countitem(1000283) > 0)
+		.@event_skip = 1;
+	else if (#Ep18_Manual_Clear == 0) {
 		mes "[Balheele]";
 		mes "I'm sorry, but my records show no one on this account has completed the journey.";
 		mes "At least ^ff0000one character on this account^000000 must manually complete Episode 18 first.";
@@ -27,6 +27,23 @@ prt_cas,373,77,3	script	Balheele#episkip	4_F_VALKYRIE,{
 	mes "^4d4dffYou can complete all quests available in a specific episode to proceed to the next episode.^000000";
 	mes "^4d4dffQuests that don't require separate prerequisites or single-completion quests are not eligible.";
 	next;
+
+	if (.@event_skip) {
+		mes "^4d4dffYour event ticket can only be used to skip Episode 16.^000000";
+		next;
+		switch(select("Skip Episode 16", "Cancel")) {
+			case 1:
+				callfunc("F_EpDesc", 16);
+				callfunc("F_EpClearSkip", 16);
+				break;
+			case 2:
+				mes "[Balheele]";
+				mes "Come again when you need it~";
+				close;
+		}
+		end;
+	}
+
 	mes "^4d4dffIf you have an event ticket or pass ticket, the event ticket or pass ticket will be consumed first.^000000";
 	next;
 
