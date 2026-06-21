@@ -4558,14 +4558,14 @@ Body:
 #        Amount: 30
 #      - Item: Zelunium
 #        Amount: 250
-#  - Item: Bs_Item_M_S_61
-#    RewardGroup: BS_ITEM_M_S_61
-#    RequiredRequirementsCount: 2
-#    Requirements:
-#      - Item: Will_Of_Darkness_
-#        Amount: 30
-#      - Item: Zelunium
-#        Amount: 250
+  - Item: Bs_Item_M_S_61
+    RewardGroup: BS_ITEM_M_S_61
+    RequiredRequirementsCount: 2
+    Requirements:
+      - Item: Will_Of_Darkness_
+        Amount: 30
+      - Item: Zelunium
+        Amount: 250
   - Item: Bs_Item_M_S_62
     RewardGroup: BS_ITEM_M_S_62
     RequiredRequirementsCount: 2

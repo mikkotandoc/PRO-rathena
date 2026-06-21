@@ -12,6 +12,8 @@ moc_para01,39,38,3	script	Mission [70~99]	4_BOARD3,{
         close;
     }
 
+    callfunc "F_CleanupEdenBoardCooldown", 80141, 80181;
+
     if (BaseLevel < 70) {
         mes "[Mission Board 70~99]";
         mes "This board contains missions for advanced adventurers.";
@@ -162,12 +164,12 @@ L_AssignQuest:
     .@mob_name$ = getarg(2);
     .@count = getarg(3);
 
-    if (checkquest(.@cd_id) == 0 || checkquest(.@cd_id) == 1) {
+    if (checkquest(.@cd_id, PLAYTIME) == 0 || checkquest(.@cd_id, PLAYTIME) == 1) {
         mes "[Mission Board 70~99]";
         mes "This mission is currently on an active 24-hour cooldown lock.";
         close;
     }
-    if (checkquest(.@cd_id) == 2) {
+    if (checkquest(.@cd_id, PLAYTIME) == 2) {
         erasequest .@cd_id;
     }
 

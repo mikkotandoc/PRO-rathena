@@ -54,9 +54,9 @@ Body:
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 6
+            Amount: 4
       - Index: 1
-        Item: Enriched_Elunium_Box5
+        Item: Enriched_Oridecon_Box5
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_

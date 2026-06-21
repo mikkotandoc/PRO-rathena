@@ -100696,6 +100696,319 @@ Body:
 #    AegisName: VH_ENTWEIHEN_S
 #  - Id: 20254
 #    AegisName: VH_MIMIC
+  - Id: 20118
+    AegisName: GOBLIN_KING
+    Name: Goblin King
+    Level: 255
+    Hp: 343542229
+    BaseExp: 12269365
+    JobExp: 8179577
+    Attack: 9068
+    Attack2: 1669
+    Defense: 670
+    MagicDefense: 104
+    Resistance: 500
+    MagicResistance: 500
+    Str: 170
+    Agi: 201
+    Vit: 84
+    Int: 160
+    Dex: 170
+    Luk: 70
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    RaceGroups:
+      Clocktower: true
+    Element: Wind
+    ElementLevel: 3
+    WalkSpeed: 110
+    AttackDelay: 624
+    AttackMotion: 624
+    ClientAttackMotion: 432
+    DamageMotion: 360
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Etel_Stone
+        Rate: 2000
+      - Item: Old_Card_Album
+        Rate: 1500
+    Drops:
+      - Item: Shadowdecon
+        Rate: 1000
+      - Item: Zelunium
+        Rate: 1000
+      - Item: Goblin_Mask_04
+        Rate: 500
+      - Item: Goblin_King_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20175
+    AegisName: EXTRA_JOKER
+    Name: Extra Joker
+    Level: 255
+    Hp: 39326510
+    BaseExp: 755552
+    JobExp: 527566
+    Attack: 12380
+    Attack2: 3088
+    Defense: 288
+    MagicDefense: 158
+    Resistance: 241
+    MagicResistance: 200
+    Str: 217
+    Agi: 255
+    Vit: 142
+    Int: 182
+    Dex: 233
+    Luk: 223
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    RaceGroups:
+      Clocktower: true
+    Element: Wind
+    ElementLevel: 4
+    WalkSpeed: 100
+    AttackDelay: 432
+    AttackMotion: 864
+    ClientAttackMotion: 312
+    DamageMotion: 432
+    Ai: 21
+    Drops:
+      - Item: Zargon
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 5
+      - Item: Shadowdecon_Ore
+        Rate: 400
+      - Item: Shadowdecon
+        Rate: 35
+      - Item: WitchsBroomStick
+        Rate: 3
+      - Item: Oridecon
+        Rate: 250
+      - Item: Jokers_Wild
+        Rate: 2500
+      - Item: Extra_Joker_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20176
+    AegisName: ERZSEBET
+    Name: Erzsebet
+    Level: 254
+    Hp: 37709580
+    BaseExp: 748788
+    JobExp: 523891
+    Attack: 9244
+    Attack2: 4007
+    Defense: 277
+    MagicDefense: 291
+    Resistance: 240
+    MagicResistance: 375
+    Str: 131
+    Agi: 141
+    Vit: 147
+    Int: 199
+    Dex: 177
+    Luk: 199
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    RaceGroups:
+      Clocktower: true
+    Element: Dark
+    ElementLevel: 1
+    WalkSpeed: 100
+    AttackDelay: 840
+    AttackMotion: 840
+    ClientAttackMotion: 480
+    DamageMotion: 432
+    Ai: 04
+    Drops:
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Starsand_Of_Witch
+        Rate: 3500
+      - Item: Witchs_White_Shirt
+        Rate: 3
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium
+        Rate: 25
+      - Item: Cute_Broom
+        Rate: 2200
+      - Item: Erzsebet_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20177
+    AegisName: JENIFFER
+    Name: Jennifer
+    Level: 255
+    Hp: 40978470
+    BaseExp: 755552
+    JobExp: 527566
+    Attack: 11150
+    Attack2: 2553
+    Defense: 264
+    MagicDefense: 140
+    Resistance: 191
+    MagicResistance: 153
+    Str: 150
+    Agi: 176
+    Vit: 98
+    Int: 126
+    Dex: 207
+    Luk: 154
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Fish
+    RaceGroups:
+      Clocktower: true
+    Element: Dark
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 432
+    AttackMotion: 864
+    ClientAttackMotion: 480
+    DamageMotion: 432
+    Ai: 04
+    Drops:
+      - Item: Coral_Reef
+        Rate: 7500
+      - Item: Tentacle
+        Rate: 7500
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Zelunium
+        Rate: 25
+      - Item: Showy_Coral_Reef
+        Rate: 2100
+      - Item: Jeniffer_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20178
+    AegisName: GENERAL_ORC
+    Name: General Orc
+    Level: 255
+    Hp: 48805390
+    BaseExp: 767150
+    JobExp: 533799
+    Attack: 9908
+    Attack2: 2748
+    Defense: 528
+    MagicDefense: 231
+    Resistance: 468
+    MagicResistance: 277
+    Str: 140
+    Agi: 136
+    Vit: 191
+    Int: 165
+    Dex: 170
+    Luk: 157
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demihuman
+    RaceGroups:
+      Clocktower: true
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 864
+    AttackMotion: 864
+    ClientAttackMotion: 480
+    DamageMotion: 432
+    Ai: 04
+    Drops:
+      - Item: Steel
+        Rate: 225
+      - Item: Green_Crystal_Fragment
+        Rate: 2300
+      - Item: Elunium
+        Rate: 133
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Zelunium
+        Rate: 25
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: General_Orc_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20179
+    AegisName: SIEGLOUSE
+    Name: Sieglouse
+    Level: 253
+    Hp: 39324220
+    BaseExp: 742800
+    JobExp: 518662
+    Attack: 11186
+    Attack2: 2828
+    Defense: 289
+    MagicDefense: 159
+    Resistance: 242
+    MagicResistance: 201
+    Str: 219
+    Agi: 257
+    Vit: 143
+    Int: 184
+    Dex: 235
+    Luk: 225
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Insect
+    RaceGroups:
+      Clocktower: true
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 100
+    AttackDelay: 960
+    AttackMotion: 960
+    ClientAttackMotion: 480
+    DamageMotion: 432
+    Ai: 04
+    Drops:
+      - Item: Round_Shell
+        Rate: 8750
+      - Item: Solid_Shell
+        Rate: 2000
+      - Item: C_Garden_Knife
+        Rate: 3
+      - Item: Red_Gemstone
+        Rate: 750
+      - Item: Shining_Round_Shell
+        Rate: 2000
+      - Item: Shadowdecon_Ore
+        Rate: 250
+      - Item: Shadowdecon
+        Rate: 30
+      - Item: Sieglouse_Card
+        Rate: 1
+        StealProtected: true
   - Id: 20255
     AegisName: ILL_TEDDY_BEAR_R
     Name: Red Teddy Bear
@@ -105764,26 +106077,533 @@ Body:
 #    AegisName: SAECOM
 #  - Id: 20571
 #    AegisName: ORK_HERO2
-#  - Id: 20572
-#    AegisName: MD_C_HEMEL
-#  - Id: 20573
-#    AegisName: MD_C_AMDARAIS
-#  - Id: 20574
-#    AegisName: MD_C_WHITEKNIGHT
-#  - Id: 20575
-#    AegisName: MD_C_CORRUPTION_ROOT
-#  - Id: 20576
-#    AegisName: MD_C_KHALITZBURG
-#  - Id: 20577
-#    AegisName: MD_C_RAYDRIC
-#  - Id: 20578
-#    AegisName: MD_C_RAYDRIC_ARCHER
-#  - Id: 20579
-#    AegisName: MD_C_ZOMBIE
-#  - Id: 20580
-#    AegisName: MD_C_GHOUL
-#  - Id: 20581
-#    AegisName: MD_C_THORN
+  - Id: 20572
+    AegisName: MD_C_HEMEL
+    Name: Phantom Himmelmez
+    Level: 195
+    Hp: 600000000
+    BaseExp: 5371570
+    JobExp: 3760099
+    Attack: 13233
+    Attack2: 6066
+    Defense: 514
+    MagicDefense: 92
+    Str: 636
+    Agi: 280
+    Vit: 208
+    Int: 328
+    Dex: 380
+    Luk: 66
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 1351
+    AttackMotion: 1200
+    DamageMotion: 432
+    Ai: 21
+    Class: Boss
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+      Mvp: true
+    MvpDrops:
+      - Item: Magic_Card_Album
+        Rate: 5000
+      - Item: Old_Violet_Box
+        Rate: 2500
+    Drops:
+      - Item: S_Circlet_Of_Time
+        Rate: 10000
+      - Item: S_Circlet_Of_Time
+        Rate: 5000
+      - Item: S_Circlet_Of_Time
+        Rate: 1000
+      - Item: Spell_Of_Time
+        Rate: 1000
+      - Item: Old_Card_Album
+        Rate: 5000
+      - Item: Old_Violet_Box
+        Rate: 5000
+      - Item: M_Dimension_Essence
+        Rate: 5
+      - Item: C_Himel_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20573
+    AegisName: MD_C_AMDARAIS
+    Name: Phantom Amdarais
+    Level: 192
+    Hp: 600000000
+    BaseExp: 5281387
+    JobExp: 3696971
+    Attack: 7565
+    Attack2: 3914
+    Defense: 446
+    MagicDefense: 82
+    Str: 365
+    Agi: 328
+    Vit: 175
+    Int: 211
+    Dex: 437
+    Luk: 168
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    RaceGroups:
+      Ogh_Atk_Def: true
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 120
+    AttackDelay: 1205
+    AttackMotion: 1200
+    DamageMotion: 432
+    Ai: 21
+    Class: Boss
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+      Mvp: true
+    MvpDrops:
+      - Item: Old_Violet_Box
+        Rate: 1000
+      - Item: Magic_Card_Album
+        Rate: 3000
+    Drops:
+      - Item: Old_Card_Album
+        Rate: 5000
+      - Item: Old_Violet_Box
+        Rate: 5000
+      - Item: Patriotism_Marks
+        Rate: 10000
+      - Item: Spell_Of_Time
+        Rate: 500
+      - Item: S_Circlet_Of_Time
+        Rate: 3000
+      - Item: S_Circlet_Of_Time
+        Rate: 500
+      - Item: M_Dimension_Essence
+        Rate: 3
+      - Item: C_Amdarais_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20574
+    AegisName: MD_C_WHITEKNIGHT
+    Name: Mutating White Knight
+    Level: 188
+    Hp: 2450483
+    BaseExp: 175034
+    JobExp: 122524
+    Attack: 7415
+    Attack2: 3231
+    Defense: 802
+    MagicDefense: 77
+    Str: 365
+    Agi: 229
+    Vit: 354
+    Int: 176
+    Dex: 346
+    Luk: 109
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Undead
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 300
+    AttackDelay: 1754
+    AttackMotion: 864
+    DamageMotion: 480
+    Ai: 21
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+    Drops:
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Reins
+        Rate: 5000
+      - Item: Glast_Decayed_Nail
+        Rate: 3000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 1500
+      - Item: Patriotism_Marks
+        Rate: 30
+      - Item: C_White_Knight_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20575
+    AegisName: MD_C_CORRUPTION_ROOT
+    Name: Prime Corruption Root
+    Level: 190
+    Hp: 36760359
+    BaseExp: 2625740
+    JobExp: 1838018
+    Attack: 6089
+    Attack2: 7543
+    Defense: 667
+    MagicDefense: 98
+    Str: 295
+    Agi: 187
+    Vit: 286
+    Int: 421
+    Dex: 654
+    Luk: 66
+    AttackRange: 5
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    RaceGroups:
+      Ogh_Atk_Def: true
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 300
+    AttackDelay: 769
+    AttackMotion: 672
+    DamageMotion: 480
+    Ai: 21
+    Class: Boss
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+    Drops:
+      - Item: Jewel_Of_Time_Ore
+        Rate: 10000
+      - Item: Fragment_Of_Time
+        Rate: 2500
+      - Item: Jewel_Of_Time_Ore
+        Rate: 750
+      - Item: Fragment_Of_Time
+        Rate: 200
+      - Item: Fragment_Of_Time
+        Rate: 50
+      - Item: Jewel_Of_Time_Ore
+        Rate: 25
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: C_CorruptionRoot_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20576
+    AegisName: MD_C_KHALITZBURG
+    Name: Mutating Khalitzburg
+    Level: 185
+    Hp: 2401358
+    BaseExp: 171526
+    JobExp: 120068
+    Attack: 8609
+    Attack2: 7553
+    Defense: 671
+    MagicDefense: 85
+    Str: 432
+    Agi: 389
+    Vit: 289
+    Int: 280
+    Dex: 311
+    Luk: 97
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 200
+    AttackDelay: 1538
+    AttackMotion: 1000
+    DamageMotion: 396
+    Ai: 21
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+    Drops:
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Glast_Decayed_Nail
+        Rate: 3000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 1500
+      - Item: Patriotism_Marks
+        Rate: 30
+      - Item: C_Khaliz_Knight_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20577
+    AegisName: MD_C_RAYDRIC
+    Name: Cursed Raydric
+    Level: 182
+    Hp: 2362114
+    BaseExp: 168722
+    JobExp: 118106
+    Attack: 7311
+    Attack2: 4719
+    Defense: 665
+    MagicDefense: 77
+    Str: 288
+    Agi: 359
+    Vit: 287
+    Int: 193
+    Dex: 391
+    Luk: 132
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 150
+    AttackDelay: 781
+    AttackMotion: 780
+    DamageMotion: 420
+    Ai: 21
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+    Drops:
+      - Item: Glast_Decayed_Nail
+        Rate: 2000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 2000
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Brigan
+        Rate: 5000
+      - Item: C_Raydric_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20578
+    AegisName: MD_C_RAYDRIC_ARCHER
+    Name: Cursed Raydric Archer
+    Level: 186
+    Hp: 2394654
+    BaseExp: 171047
+    JobExp: 119733
+    Attack: 6281
+    Attack2: 7699
+    Defense: 417
+    MagicDefense: 86
+    Str: 311
+    Agi: 481
+    Vit: 162
+    Int: 287
+    Dex: 576
+    Luk: 77
+    AttackRange: 9
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Dark
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 1250
+    AttackMotion: 1152
+    DamageMotion: 480
+    Ai: 21
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+      Detector: true
+    Drops:
+      - Item: Glast_Decayed_Nail
+        Rate: 2000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 2000
+      - Item: Fragment_Of_Time
+        Rate: 500
+      - Item: Brigan
+        Rate: 5000
+      - Item: C_Raydric_Archer_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 20579
+    AegisName: MD_C_ZOMBIE
+    Name: Cursed Butler
+    Level: 180
+    Hp: 2306607
+    BaseExp: 168616
+    JobExp: 118031
+    Attack: 4132
+    Attack2: 3300
+    Defense: 308
+    MagicDefense: 76
+    Str: 208
+    Agi: 221
+    Vit: 90
+    Int: 188
+    Dex: 321
+    Luk: 66
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 300
+    AttackDelay: 909
+    AttackMotion: 912
+    DamageMotion: 504
+    Ai: 21
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+      Angry: true
+    Drops:
+      - Item: Glast_Decayed_Nail
+        Rate: 1000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 1000
+      - Item: Old_White_Cloth
+        Rate: 1000
+      - Item: Fragment_Of_Time
+        Rate: 250
+      - Item: C_Cursed_Butler
+        Rate: 1
+        StealProtected: true
+  - Id: 20580
+    AegisName: MD_C_GHOUL
+    Name: Cursed Servant
+    Level: 184
+    Hp: 2360625
+    BaseExp: 168616
+    JobExp: 118031
+    Attack: 5131
+    Attack2: 3166
+    Defense: 308
+    MagicDefense: 76
+    Str: 255
+    Agi: 267
+    Vit: 108
+    Int: 176
+    Dex: 380
+    Luk: 66
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Undead
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 300
+    AttackDelay: 813
+    AttackMotion: 912
+    DamageMotion: 504
+    Ai: 21
+    Modes:
+      Aggressive: true
+      CanAttack: true
+      CanMove: true
+      CastSensorChase: true
+      CastSensorIdle: true
+      ChangeChase: true
+      ChangeTargetChase: true
+      ChangeTargetMelee: true
+      Angry: true
+    Drops:
+      - Item: Glast_Decayed_Nail
+        Rate: 1000
+      - Item: Glast_Horrendous_Mouth
+        Rate: 1000
+      - Item: Old_White_Cloth
+        Rate: 1000
+      - Item: Fragment_Of_Time
+        Rate: 250
+      - Item: C_Cursed_Butler
+        Rate: 1
+        StealProtected: true
+  - Id: 20581
+    AegisName: MD_C_THORN
+    Name: Mutated Thorn
+    Level: 185
+    Hp: 50
+    BaseExp: 0
+    JobExp: 0
+    Attack: 186
+    Attack2: 187
+    Defense: 71
+    MagicDefense: 66
+    Str: 1
+    Agi: 1
+    Vit: 1
+    Int: 1
+    Dex: 1
+    Luk: 1
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Formless
+    Element: Fire
+    ElementLevel: 3
+    WalkSpeed: 1000
+    AttackDelay: 288
+    AttackMotion: 288
+    DamageMotion: 288
+    Ai: 02
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+      SkillImmune: true
 #  - Id: 20582
 #    AegisName: MD_MANHOLE4
 #  - Id: 20583
@@ -114484,7 +115304,7 @@ Body:
     AegisName: MD_BETELGEUSE
     Name: Betelgeuse
     Level: 250
-    Hp: 200000000
+    Hp: 100000000
     Attack: 5000
     Attack2: 8000
     Defense: 346
@@ -114508,7 +115328,7 @@ Body:
     AttackDelay: 300
     AttackMotion: 280
     DamageMotion: 380
-    DamageTaken: 1
+    DamageTaken: 10
     Ai: 05
     Class: Boss
     Modes:
@@ -114556,7 +115376,7 @@ Body:
     AegisName: MD_NAGHT_SIEGER
     Name: Naght Sieger
     Level: 250
-    Hp: 200000000
+    Hp: 100000000
     Attack: 1500
     Attack2: 1800
     Defense: 410
@@ -122031,14 +122851,6 @@ Body:
         Rate: 1500
       - Item: Fresh_Pear
         Rate: 2000
-      - Item: Plain_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Plain_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21549
     AegisName: ECO_PINGUICULA
     Name: Verdant Pinguicula
@@ -122078,14 +122890,6 @@ Body:
         Rate: 2000
       - Item: Elder_Branch
         Rate: 250
-      - Item: Plain_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Plain_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21550
     AegisName: ECO_HUNTER_FLY
     Name: Verdant Hunter Fly
@@ -122127,14 +122931,6 @@ Body:
         Rate: 50
       - Item: Ectoplasmic_Stone
         Rate: 2000
-      - Item: Plain_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Plain_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21551
     AegisName: ECO_ROCKER
     Name: Verdant Rocker
@@ -122176,14 +122972,6 @@ Body:
         Rate: 5
       - Item: Grasshopper_Doll
         Rate: 10
-      - Item: Plain_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Plain_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21552
     AegisName: ECO_SAVAGE
     Name: Verdant Savage
@@ -122223,14 +123011,6 @@ Body:
         Rate: 2000
       - Item: Savage_Meat
         Rate: 25
-      - Item: Plain_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Plain_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21553
     AegisName: ECO_FLORA
     Name: Verdant Flora
@@ -122270,14 +123050,6 @@ Body:
         Rate: 2000
       - Item: Leaflet_Of_Aloe
         Rate: 25
-      - Item: Plain_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Plain_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21554
     AegisName: ECO_HILL_WIND
     Name: Verdant Hill Wind
@@ -122317,14 +123089,6 @@ Body:
         Rate: 1500
       - Item: Shining_Crystal
         Rate: 2000
-      - Item: Plain_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Plain_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21555
     AegisName: ECO_MISTRESS
     Name: Verdant Mistress
@@ -122418,14 +123182,6 @@ Body:
         Rate: 1100
       - Item: Hot_Hair
         Rate: 1600
-      - Item: Flame_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Flame_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21557
     AegisName: ECO_DELETER
     Name: Blazing Sky Deleter
@@ -122465,14 +123221,6 @@ Body:
         Rate: 1300
       - Item: Shining_Crystal
         Rate: 2000
-      - Item: Flame_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Flame_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21558
     AegisName: ECO_JAKK
     Name: Blazing Jakk
@@ -122512,14 +123260,6 @@ Body:
         Rate: 2000
       - Item: Pumpkin
         Rate: 500
-      - Item: Flame_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Flame_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21559
     AegisName: ECO_LAVA_GOLEM
     Name: Blazing Lava Golem
@@ -122559,14 +123299,6 @@ Body:
         Rate: 1843
       - Item: Blaze_Stone
         Rate: 2000
-      - Item: Flame_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Flame_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21560
     AegisName: ECO_MAJORUROS
     Name: Blazing Majoruros
@@ -122606,14 +123338,6 @@ Body:
         Rate: 500
       - Item: Whittling
         Rate: 2000
-      - Item: Flame_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Flame_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21561
     AegisName: ECO_HYDRO
     Name: Blazing Hydrolancer
@@ -122653,14 +123377,6 @@ Body:
         Rate: 2000
       - Item: Tri_Headed_Dragon_Head
         Rate: 1940
-      - Item: Flame_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Flame_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21562
     AegisName: ECO_ACIDUS
     Name: Blazing Black Acidus
@@ -122700,14 +123416,6 @@ Body:
         Rate: 500
       - Item: Dragon_Scale
         Rate: 750
-      - Item: Flame_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Flame_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21563
     AegisName: ECO_DETALE
     Name: Blazing Detardeurus
@@ -122801,14 +123509,6 @@ Body:
         Rate: 2000
       - Item: Cold_Ice
         Rate: 250
-      - Item: Ice_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Ice_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21565
     AegisName: ECO_SIROMA
     Name: Glacial Siroma
@@ -122848,14 +123548,6 @@ Body:
         Rate: 2000
       - Item: Cold_Ice
         Rate: 125
-      - Item: Ice_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Ice_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21566
     AegisName: ECO_SNOWIER
     Name: Glacial Snowier
@@ -122895,14 +123587,6 @@ Body:
         Rate: 500
       - Item: Crystal_Blue
         Rate: 150
-      - Item: Ice_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Ice_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21567
     AegisName: ECO_CENTIPEDE
     Name: Glacial Centipede
@@ -122944,14 +123628,6 @@ Body:
         Rate: 2500
       - Item: Solid_Shell
         Rate: 1250
-      - Item: Ice_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Ice_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21568
     AegisName: ECO_AQUA_ELEMENTAL
     Name: Glacial Aqua Elemental
@@ -122991,14 +123667,6 @@ Body:
         Rate: 2500
       - Item: Starsand_Of_Witch
         Rate: 1250
-      - Item: Ice_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Ice_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21569
     AegisName: ECO_ANGELGOLT
     Name: Glacial Angelgolt
@@ -123038,14 +123706,6 @@ Body:
         Rate: 2000
       - Item: Stone_Of_Intelligence_
         Rate: 15
-      - Item: Ice_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Ice_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21570
     AegisName: ECO_RHYNCHO
     Name: Glacial Rhyncho
@@ -123085,14 +123745,6 @@ Body:
         Rate: 2000
       - Item: Starsand_Of_Witch
         Rate: 1250
-      - Item: Ice_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Ice_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21571
     AegisName: ECO_KTULLANUX
     Name: Glacial Ktullanux
@@ -123186,14 +123838,6 @@ Body:
         Rate: 2000
       - Item: Silver_Ring
         Rate: 50
-      - Item: Death_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Death_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21573
     AegisName: ECO_LUDE
     Name: Grave Lude
@@ -123233,14 +123877,6 @@ Body:
         Rate: 2000
       - Item: Transparent_Cloth
         Rate: 500
-      - Item: Death_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Death_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21574
     AegisName: ECO_RAGGED_ZOMBIE
     Name: Grave Ragged Zombie
@@ -123280,14 +123916,6 @@ Body:
         Rate: 2250
       - Item: Evil_Minded_Ruby
         Rate: 2000
-      - Item: Death_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Death_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21575
     AegisName: ECO_WRAITH
     Name: Grave Wraith Dead
@@ -123327,14 +123955,6 @@ Body:
         Rate: 500
       - Item: Black_Jewelry
         Rate: 2000
-      - Item: Death_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Death_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21576
     AegisName: ECO_FLAME_SKULL
     Name: Grave Flame Skull
@@ -123376,14 +123996,6 @@ Body:
         Rate: 2000
       - Item: Mementos
         Rate: 250
-      - Item: Death_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Death_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21577
     AegisName: ECO_BANSHEE
     Name: Grave Banshee
@@ -123425,14 +124037,6 @@ Body:
         Rate: 750
       - Item: Evil_Minded_Ruby
         Rate: 2000
-      - Item: Death_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Death_Essence
-        Rate: 225
-      - Item: Shadowdecon
-        Rate: 17
-      - Item: Shadowdecon_Ore
-        Rate: 180
   - Id: 21578
     AegisName: ECO_KNIGHT_OF_ABYSS
     Name: Grave Abysmal Knight
@@ -123472,14 +124076,6 @@ Body:
         Rate: 15
       - Item: Evil_Black_Bid
         Rate: 2000
-      - Item: Death_Barmund_Rune
-        Rate: 1125
-      - Item: Barmund_Death_Essence
-        Rate: 225
-      - Item: Zelunium
-        Rate: 17
-      - Item: Zelunium_Ore
-        Rate: 180
   - Id: 21579
     AegisName: ECO_LORD_OF_DEATH
     Name: Grave Lord of the Dead

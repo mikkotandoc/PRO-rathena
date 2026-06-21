@@ -17,7 +17,7 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 	mes "[Centro]";
 	mes "Welcome! How can I help you today?";
 	next;
-	switch (select("Exchange Promotional Items:Exchange Booster Weapons:Booster Costume Enchantment:Use Level Up Ticket:Exchange Illusion Equipment (Bound):Cancel")) {
+	switch (select("Exchange Promotional Items:Exchange Booster Weapons:Exchange Booster Shadow Equipment:Booster Costume Enchantment:Use Level Up Ticket:Exchange Illusion Equipment (Bound):Cancel")) {
 	case 1:
 		if (!getbattleflag("feature.barter")) {
 			mes "[Centro]";
@@ -53,6 +53,15 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 		}
 		end;
 	case 3:
+		if (!getbattleflag("feature.barter")) {
+			mes "[Centro]";
+			mes "The exchange service is currently unavailable.";
+			close;
+		}
+		mes "[Centro]";
+		mes "Opening the booster shadow equipment exchange shop.";
+		callsub L_OpenShop, "mega13";
+	case 4:
 		if (BaseLevel < 100) {
 			mes "[Centro]";
 			mes "You must be at least ^0000FFBase Level 100^000000 to use";
@@ -83,7 +92,7 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 			close;
 		}
 		end;
-	case 4:
+	case 5:
 		mes "[Centro]";
 		mes "Select the Level Up Ticket you want to use.";
 		mes "Each ticket raises your Base Level by 1.";
@@ -100,7 +109,7 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 			close;
 		}
 		end;
-	case 5:
+	case 6:
 		if (!getbattleflag("feature.barter")) {
 			mes "[Centro]";
 			mes "The exchange service is currently unavailable.";
@@ -116,7 +125,7 @@ prontera,166,300,0	script	Centro	4_M_HUMERCHANT,{
 		mes "Opening the Illusion Equipment (Bound) exchange shop.";
 		mes "Each piece costs one " + mesitemlink(1000994) + ".";
 		callsub L_OpenShop, "mega14";
-	case 6:
+	case 7:
 		mes "[Centro]";
 		mes "Come back when you need assistance.";
 		close;

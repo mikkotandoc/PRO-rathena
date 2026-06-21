@@ -18,22 +18,28 @@ function	script	F_EpClearApply	{
 			ep16_royal = 24;
 		break;
 	case 17:
-		if (.@part == 2) {
+		if (.@part == 1) {
+			callfunc("F_EpForceComplete", 16360);
+		} else if (.@part == 2) {
 			if (ep17_2_main < 36)
 				ep17_2_main = 36;
 			if (ep172_watergarden < 3)
 				ep172_watergarden = 3;
+			callfunc("F_EpForceComplete", 18000);
+			callfunc("F_EpForceComplete", 18020);
 			callfunc("F_EpForceComplete", 12497);
 		}
 		break;
 	case 18:
 		if (ep18_main < 57)
 			ep18_main = 57;
+		#Ep18_Manual_Clear = 1;
 		break;
 	case 19:
 		if (ep19_main < 100)
 			ep19_main = 100;
 		callfunc("F_EpForceComplete", 17637);
+		callfunc("F_EpForceComplete", 18132);
 		break;
 	case 20:
 		if (ep20_main < 100)

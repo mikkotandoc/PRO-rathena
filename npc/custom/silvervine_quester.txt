@@ -13,60 +13,33 @@ prontera,153,191,4	script	Silvervine Quester	4_M_MERCAT1,{
 		#Silvervine_DailyCount = 0;
 	}
 
-	// Repair stuck state from invalid or missing hunt quests
-	.@stuck = 0;
-
-	// Legacy 90001-90025 IDs were never in quest_db.yml and can strand players.
-	for (.@legacy = 90001; .@legacy <= 90025; .@legacy++) {
-		if (checkquest(.@legacy) > -1) {
-			erasequest .@legacy;
-			.@stuck = 1;
+	if (getgmlevel() >= 99 || getgroupid() >= 99) {
+		if (select("Continue", "[GM] Debug menu") == 2) {
+			callsub S_GMDebug;
+			end;
 		}
 	}
 
-	.@attached_id = 0;
-	for (.@i = 0; .@i < .quest_count; .@i++) {
-		if (checkquest(.quest_id[.@i]) > -1) {
-			if (.@attached_id == 0)
-				.@attached_id = .quest_id[.@i];
-			else if (.quest_id[.@i] != .@attached_id) {
-				erasequest .quest_id[.@i];
-				.@stuck = 1;
-			}
-		}
+	callsub S_MobsterMigration;
+	if (@SilvQuest_MobsterMigrated) {
+		mes "[Silvervine Quester]";
+		mes "Your Gangster hunt was outdated after we changed the target to Mobster.";
+		mes "I've removed that assignment so you can request a new target.";
+		next;
 	}
 
-	if (SilvQuest_ID > 0) {
-		.@known = 0;
-		for (.@i = 0; .@i < .quest_count; .@i++) {
-			if (.quest_id[.@i] == SilvQuest_ID) {
-				.@known = 1;
-				break;
-			}
-		}
-		// Clear if the stored ID is not ours, or no matching quest is on the character
-		if (!.@known || checkquest(SilvQuest_ID) == -1) {
-			if (checkquest(SilvQuest_ID) > -1)
-				erasequest SilvQuest_ID;
-			SilvQuest_ID = 0;
-			.@stuck = 1;
-		}
-	} else if (.@attached_id > 0) {
-		SilvQuest_ID = .@attached_id;
-	}
-
-	// Remove orphan Silvervine hunts still attached to the quest log
-	for (.@i = 0; .@i < .quest_count; .@i++) {
-		if (.quest_id[.@i] == SilvQuest_ID)
-			continue;
-		if (checkquest(.quest_id[.@i]) > -1) {
-			erasequest .quest_id[.@i];
-			.@stuck = 1;
-		}
-	}
-	if (.@stuck) {
+	callsub S_RepairStuck;
+	if (@SilvQuest_Repaired) {
 		mes "[Silvervine Quester]";
 		mes "I found a broken hunt record on your character and cleared it.";
+		mes "You may request a new target if you are ready.";
+		next;
+	}
+
+	callsub S_ClearExpiredHunt;
+	if (@SilvQuest_Expired) {
+		mes "[Silvervine Quester]";
+		mes "Your hunt contract has expired.";
 		mes "You may request a new target if you are ready.";
 		next;
 	}
@@ -86,6 +59,9 @@ prontera,153,191,4	script	Silvervine Quester	4_M_MERCAT1,{
 
 			mes "Received: ^00FF00" + .reward_amount + "x Silvervine Fruit^000000";
 			mes "Completed Today: ^00FF00" + #Silvervine_DailyCount + "/" + .max_daily_quests + "^000000";
+			if (#Silvervine_DailyCount >= .max_daily_quests) {
+				mes "You have reached today's hunt limit. See you after midnight!";
+			}
 			close;
 		}
 
@@ -103,7 +79,7 @@ prontera,153,191,4	script	Silvervine Quester	4_M_MERCAT1,{
 		close;
 	}
 
-	// Enforce daily hard ceiling limit
+	// Enforce daily hard ceiling limit (completions only; active hunts do not block turn-in above cap)
 	if (#Silvervine_DailyCount >= .max_daily_quests) {
 		mes "[Silvervine Quester]";
 		mes "You have reached your limit of ^FF0000" + .max_daily_quests + " hunts^000000 for today.";
@@ -141,6 +117,192 @@ prontera,153,191,4	script	Silvervine Quester	4_M_MERCAT1,{
 	mes "Track your kill status directly inside your ^0000FFQuest Log (Alt+U)^000000.";
 	close;
 
+// One-time fix for players stranded on quest 63013 after A_MOBSTER -> MOBSTER change.
+S_MobsterMigration:
+	@SilvQuest_MobsterMigrated = 0;
+
+	if (#SilvQuest_MobsterMigrated)
+		return;
+	if (checkquest(.mobster_quest_id) <= -1)
+		return;
+	if (SilvQuest_ID != .mobster_quest_id)
+		return;
+	// Only active incomplete hunts; expired ones are handled by S_ClearExpiredHunt.
+	if (checkquest(.mobster_quest_id, HUNTING) != 0)
+		return;
+
+	erasequest .mobster_quest_id;
+	SilvQuest_ID = 0;
+	#SilvQuest_MobsterMigrated = 1;
+	@SilvQuest_MobsterMigrated = 1;
+	return;
+
+// Clears 4h TimeLimit hunts that expired before the kill was finished.
+S_ClearExpiredHunt:
+	@SilvQuest_Expired = 0;
+
+	if (SilvQuest_ID > 0 && checkquest(SilvQuest_ID, HUNTING) == 1) {
+		erasequest SilvQuest_ID;
+		SilvQuest_ID = 0;
+		@SilvQuest_Expired = 1;
+	}
+
+	for (.@i = 0; .@i < .quest_count; .@i++) {
+		if (.quest_id[.@i] == SilvQuest_ID)
+			continue;
+		if (checkquest(.quest_id[.@i], HUNTING) == 1) {
+			erasequest .quest_id[.@i];
+			@SilvQuest_Expired = 1;
+		}
+	}
+	return;
+
+// Clears legacy/orphan Silvervine hunt state. Sets @SilvQuest_Repaired when anything was fixed.
+S_RepairStuck:
+	@SilvQuest_Repaired = 0;
+
+	// Corrupt quest_id 0 entries must never remain on the character.
+	if (checkquest(0) > -1) {
+		erasequest 0;
+		@SilvQuest_Repaired = 1;
+	}
+
+	// Legacy 90001-90025 IDs were never in quest_db.yml and can strand players.
+	for (.@legacy = 90001; .@legacy <= 90025; .@legacy++) {
+		if (checkquest(.@legacy) > -1) {
+			erasequest .@legacy;
+			@SilvQuest_Repaired = 1;
+		}
+	}
+
+	.@attached_id = 0;
+	for (.@i = 0; .@i < .quest_count; .@i++) {
+		if (checkquest(.quest_id[.@i]) > -1) {
+			if (.@attached_id == 0)
+				.@attached_id = .quest_id[.@i];
+			else if (.quest_id[.@i] != .@attached_id) {
+				erasequest .quest_id[.@i];
+				@SilvQuest_Repaired = 1;
+			}
+		}
+	}
+
+	if (SilvQuest_ID > 0) {
+		.@known = 0;
+		for (.@i = 0; .@i < .quest_count; .@i++) {
+			if (.quest_id[.@i] == SilvQuest_ID) {
+				.@known = 1;
+				break;
+			}
+		}
+		// Clear if the stored ID is not ours, or no matching quest is on the character
+		if (!.@known || checkquest(SilvQuest_ID) == -1) {
+			if (checkquest(SilvQuest_ID) > -1)
+				erasequest SilvQuest_ID;
+			SilvQuest_ID = 0;
+			@SilvQuest_Repaired = 1;
+		}
+	} else if (.@attached_id > 0) {
+		SilvQuest_ID = .@attached_id;
+	}
+
+	// Remove orphan Silvervine hunts still attached to the quest log
+	for (.@i = 0; .@i < .quest_count; .@i++) {
+		if (.quest_id[.@i] == SilvQuest_ID)
+			continue;
+		if (checkquest(.quest_id[.@i]) > -1) {
+			erasequest .quest_id[.@i];
+			@SilvQuest_Repaired = 1;
+		}
+	}
+	return;
+
+S_GMDebug:
+	mes "[Silvervine Quester]";
+	mes "^777777[GM Debug]^000000";
+	mes "SilvQuest_ID: ^0000FF" + SilvQuest_ID + "^000000";
+	mes "Daily count: ^0000FF" + #Silvervine_DailyCount + "/" + .max_daily_quests + "^000000";
+	mes "Last date: ^0000FF" + #Silvervine_LastDate + "^000000";
+	mes "Mobster migrated: ^0000FF" + #SilvQuest_MobsterMigrated + "^000000";
+	if (SilvQuest_ID > 0)
+		mes "Hunt status: ^0000FF" + checkquest(SilvQuest_ID, HUNTING) + "^000000";
+	next;
+
+	switch (select("Show attached quests", "Clear all Silvervine state", "Clear Mobster hunt only", "Reset daily count", "Force complete active hunt", "Clear expired hunts", "Cancel")) {
+	case 1:
+		mes "[Silvervine Quester]";
+		mes "^777777[GM Debug]^000000 Attached quest log entries:";
+		.@found = 0;
+		for (.@i = 0; .@i < .quest_count; .@i++) {
+			if (checkquest(.quest_id[.@i]) > -1) {
+				mes " - Quest " + .quest_id[.@i] + " (" + .quest_mob$[.@i] + ")";
+				.@found = 1;
+			}
+		}
+		for (.@legacy = 90001; .@legacy <= 90025; .@legacy++) {
+			if (checkquest(.@legacy) > -1) {
+				mes " - Legacy quest " + .@legacy;
+				.@found = 1;
+			}
+		}
+		if (!.@found)
+			mes " - None";
+		close;
+	case 2:
+		callsub S_GMClearAll;
+		mes "[Silvervine Quester]";
+		mes "^777777[GM Debug]^000000 Cleared all Silvervine variables and hunt quests.";
+		close;
+	case 3:
+		callsub S_GMClearMobster;
+		mes "[Silvervine Quester]";
+		mes "^777777[GM Debug]^000000 Cleared Mobster hunt (63013) only.";
+		close;
+	case 4:
+		#Silvervine_DailyCount = 0;
+		mes "[Silvervine Quester]";
+		mes "^777777[GM Debug]^000000 Daily count reset to 0.";
+		close;
+	case 5:
+		if (SilvQuest_ID <= 0 || checkquest(SilvQuest_ID) == -1) {
+			mes "[Silvervine Quester]";
+			mes "^777777[GM Debug]^000000 No active Silvervine hunt to complete.";
+			close;
+		}
+		erasequest SilvQuest_ID;
+		SilvQuest_ID = 0;
+		getitem .reward_item, .reward_amount;
+		#Silvervine_DailyCount = #Silvervine_DailyCount + 1;
+		mes "[Silvervine Quester]";
+		mes "^777777[GM Debug]^000000 Forced hunt completion and granted reward.";
+		close;
+	case 6:
+		callsub S_ClearExpiredHunt;
+		mes "[Silvervine Quester]";
+		mes "^777777[GM Debug]^000000 Cleared expired hunt(s). Expired flag: " + @SilvQuest_Expired;
+		close;
+	}
+	close;
+
+S_GMClearMobster:
+	if (checkquest(.mobster_quest_id) > -1)
+		erasequest .mobster_quest_id;
+	if (SilvQuest_ID == .mobster_quest_id)
+		SilvQuest_ID = 0;
+	return;
+
+S_GMClearAll:
+	callsub S_RepairStuck;
+	for (.@i = 0; .@i < .quest_count; .@i++) {
+		if (checkquest(.quest_id[.@i]) > -1)
+			erasequest .quest_id[.@i];
+	}
+	SilvQuest_ID = 0;
+	#Silvervine_LastDate = 0;
+	#Silvervine_DailyCount = 0;
+	#SilvQuest_MobsterMigrated = 0;
+	return;
+
 OnInit:
 	// ==========================================
 	// CONFIGURATION
@@ -148,6 +310,7 @@ OnInit:
 	.max_daily_quests = 10;
 	.reward_item = 6417; // Silvervine Fruit
 	.reward_amount = 5;
+	.mobster_quest_id = 63013;
 
 	// Quest IDs must match db/re/quest_db.yml and SystemEN/OngoingQuests.lub.
 	// 62928-62939 = original client Silvervine hunts; 63004-63016 = custom extensions.
@@ -159,7 +322,7 @@ OnInit:
 		"ANGELING", "ARCHANGELING", "CAT_O_NINE_TAIL", "DEVILING", "DRAGON_FLY", "ECLIPSE",
 		"GHOSTRING", "MASTERING", "MAYA_PUPLE", "TOAD", "VAGABOND_WOLF", "VOCAL",
 		"GRYPHON", "MUTANT_DRAGON", "CHIMERA", "BLOODY_KNIGHT", "DARK_ILLUSION", "EXECUTIONER",
-		"MYSTELTAINN", "TIRFING", "OWL_BARON", "A_MOBSTER", "GALION", "NECROMANCER", "G_RANDGRIS";
+		"MYSTELTAINN", "TIRFING", "OWL_BARON", "MOBSTER", "GALION", "NECROMANCER", "G_RANDGRIS";
 
 	.quest_count = getarraysize(.quest_id);
 	end;

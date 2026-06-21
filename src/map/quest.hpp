@@ -70,6 +70,7 @@ public:
 
 extern QuestDatabase quest_db;
 
+bool quest_pc_cleanup(map_session_data *sd);
 int32 quest_pc_login(map_session_data *sd);
 
 int32 quest_add(map_session_data *sd, int32 quest_id);

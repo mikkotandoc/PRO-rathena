@@ -6213,6 +6213,21 @@ void clif_skill_poseffect( block_list& bl, uint16 skill_id, uint16 skill_lv, uin
 	}
 }
 
+//TODO - check if needed: workaround for no animation timed castendpos skills, used for AT_TERRA_WAVE [munkrej]
+void clif_skill_poseffect_nocaster( const block_list& center, uint16 skill_id, uint16 skill_lv, uint16 x, uint16 y, t_tick tick ){
+	PACKET_ZC_NOTIFY_GROUNDSKILL packet{};
+
+	packet.PacketType = HEADER_ZC_NOTIFY_GROUNDSKILL;
+	packet.SKID = skill_id;
+	packet.AID = 0;
+	packet.level = skill_lv;
+	packet.xPos = x;
+	packet.yPos = y;
+	packet.startTime = client_tick( tick );
+
+	clif_send( &packet, sizeof( packet ), &center, AREA );
+}
+
 /// Presents a list of available warp destinations.
 /// 011c <skill id>.W { <map name>.16B }*4 (ZC_WARPLIST)
 /// 0abe <length>.W <skill id>.W { <map name>.16B }*? (ZC_WARPLIST2)
@@ -17917,6 +17932,11 @@ void clif_quest_send_list( const map_session_data* sd )
 	for (i = 0; i < limit; i++) {
 		std::shared_ptr<const s_quest_db> qi = quest_search(sd->quest_log[i].quest_id);
 
+		if (!qi) {
+			ShowError("clif_quest_send_list: invalid quest %d on character %d.\n", sd->quest_log[i].quest_id, sd->status.char_id);
+			return;
+		}
+
 		WFIFOL(fd, offset) = sd->quest_log[i].quest_id;
 		offset += 4;
 		WFIFOB(fd, offset) = sd->quest_log[i].state;
@@ -18002,6 +18022,11 @@ void clif_quest_send_mission( const map_session_data* sd )
 
 	for (int32 i = 0; i < limit; i++) {
 		const std::shared_ptr<const s_quest_db> qi = quest_search(sd->quest_log[i].quest_id);
+
+		if (!qi) {
+			ShowError("clif_quest_send_mission: invalid quest %d on character %d.\n", sd->quest_log[i].quest_id, sd->status.char_id);
+			return;
+		}
 
 		WFIFOL(fd, i*104+8) = sd->quest_log[i].quest_id;
 		WFIFOL(fd, i*104+12) = static_cast<uint32>(sd->quest_log[i].time - qi->time);
@@ -18125,6 +18150,10 @@ void clif_quest_update_objective( const map_session_data* sd, const quest* qd )
 	int32 fd = sd->fd;
 	int32 offset = 6;
 	const std::shared_ptr<const s_quest_db> qi = quest_search(qd->quest_id);
+
+	if (!qi)
+		return;
+
 	int16 len;
 	len = static_cast<decltype(len)>( qi->objectives.size() * 12 + 6 );
 #if PACKETVER >= 20150513
@@ -22436,8 +22465,7 @@ void clif_parse_StartUseSkillToId( int32 fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20181002 || PACKETVER_RE_NUM >= 20181002 || PACKETVER_ZERO_NUM >= 20181010
 	const PACKET_CZ_USE_SKILL_START* p = reinterpret_cast<PACKET_CZ_USE_SKILL_START*>( RFIFOP( fd, 0 ) );
 
-	// Only rolling cutter is supported for now
-	if( p->skillId != GC_ROLLINGCUTTER ){
+	if( p->skillId != GC_ROLLINGCUTTER && p->skillId != KR_CHOP_CHOP && p->skillId != AT_FURIOS_STORM ){
 		return;
 	}
 

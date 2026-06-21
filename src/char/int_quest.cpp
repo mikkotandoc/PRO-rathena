@@ -56,6 +56,11 @@ struct quest *mapif_quests_fromsql( uint32 char_id, size_t& count ){
 				break;
 			}
 
+			if( tmp_quest.quest_id <= 0 ) {
+				mapif_quest_delete(char_id, tmp_quest.quest_id);
+				continue;
+			}
+
 			memcpy(&questlog[i++], &tmp_quest, sizeof(tmp_quest));
 		}
 

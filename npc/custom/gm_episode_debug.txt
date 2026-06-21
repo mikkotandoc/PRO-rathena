@@ -40,10 +40,17 @@ function	script	F_GM_EpSetVars	{
 		else if (.@mode$ == "reset") terra_gloria_main = 0;
 		break;
 	case 17:
-		if (.@part == 2) {
+		if (.@part == 1) {
+			if (.@mode$ == "complete")
+				callfunc("F_EpClearApply", 17, 1);
+			else if (.@mode$ == "reset") {
+				ep17_2_main = 0;
+			}
+		} else if (.@part == 2) {
 			if (.@mode$ == "complete")
 				callfunc("F_EpClearApply", 17, 2);
-			else if (.@mode$ == "reset") ep17_2_main = 0;
+			else if (.@mode$ == "reset")
+				ep17_2_main = 0;
 		}
 		break;
 	case 18:
@@ -76,28 +83,28 @@ function	script	F_GM_EpManage	{
 
 	switch (.@ep) {
 	case 13:
-		setarray .@ids[0], 13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013;
+		setarray .@ids[0], 13210,13211,13212,13213,13214,13215,13216,13217,13218,13219,13220,13221,13222,13223;
 		break;
 	case 14:
 		setarray .@ids[0], 14000,14001,14002;
 		break;
 	case 15:
-		setarray .@ids[0], 15000,15001,15002,15003,15004;
+		setarray .@ids[0], 15009,15010,15011,15012,15013;
 		break;
 	case 16:
 		setarray .@ids[0], 7682,7698,7703,7736,14599,14602,14615,12374,18219;
 		break;
 	case 17:
 		if (.@part == 2)
-			setarray .@ids[0], 18001,11615,11616,11617,11618,11620,11621,11638,11639;
+			setarray .@ids[0], 17100,17101,17102,17103,17104,17105,17106,17107,17108;
 		else
-			setarray .@ids[0], 17000,17001,17002,17003,17004,17005,17006;
+			setarray .@ids[0], 17040,17041,17042,17043,17044,17045,17046;
 		break;
 	case 18:
-		setarray .@ids[0], 18000,18001,18002,18003,18004,18005,18006,18007,18008,18009,18010,18011,18012,18013,18014;
+		setarray .@ids[0], 18150,18151,18152,18153,18154,18155,18156,18157,18158,18159,18160,18161,18162,18163,18164;
 		break;
 	case 19:
-		setarray .@ids[0], 19000,19001,19002,19003,19004,19005,19006,19007,19008,19009,19010;
+		setarray .@ids[0], 19200,19201,19202,19203,19204,19205,19206,19207,19208,19209,19210;
 		break;
 	case 20:
 		setarray .@ids[0], 20000,20001,20003,20004,20005,20006,20007,20008;
@@ -113,12 +120,8 @@ function	script	F_GM_EpManage	{
 			callfunc "F_EpForceComplete", .@ids[.@i];
 	}
 	if (.@mode$ == "complete") {
-		if (.@ep == 17 && .@part == 2)
-			callfunc "F_EpForceComplete", 18020;
 		callfunc "F_GM_EpSetVars", .@ep, .@part, "complete";
 	} else if (.@mode$ == "reset") {
-		if (.@ep == 17 && .@part == 2 && isbegin_quest(18020) > 0)
-			erasequest 18020;
 		callfunc "F_GM_EpSetVars", .@ep, .@part, "reset";
 	}
 	return;

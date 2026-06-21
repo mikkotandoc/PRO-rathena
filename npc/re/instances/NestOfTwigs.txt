@@ -15,7 +15,7 @@ function	script	F_ep20_twig_clear	{
 	return;
 }
 
-jor_twice,164,244,3	script	Nest of Twigs#ep20	4_BULLETIN_BOARD2,{
+jor_twice,1,1,0	script(CLOAKED)	Nest of Twigs#ep20	HIDDEN_WARP_NPC,{
 	end;
 
 OnStart:

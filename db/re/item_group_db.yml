@@ -45250,13 +45250,13 @@ Body:
 #        List:
 #          - Index: 0
 #            Item: Boitata_Hat_K
-#  - Group: BS_ITEM_M_S_61
-#    SubGroups:
-#      - SubGroup: 0
-#        Algorithm: All
-#        List:
-#          - Index: 0
-#            Item: Beelzebub_Crown_K
+  - Group: BS_ITEM_M_S_61
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Beelzebub_Crown_K
   - Group: BS_ITEM_M_S_62
     SubGroups:
       - SubGroup: 0

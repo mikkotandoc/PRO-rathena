@@ -608,10 +608,23 @@ icas_in,259,219,3	script	Horuru#ep20ms02	4_EP19_IWIN,{
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
 	}
+	if (ep20_main == 11) {
+		cutin "ep19_iwin06.png",2;
+		mes "[Horuru]";
+		mes "So Bagot left a trap for us. We can't delay anymore.";
+		next;
+		mes "[Horuru]";
+		mes "Vellgunde analyzed the device. Meet her, then prepare at the fortress gate.";
+		callfunc("F_ep20_completequest", 17710);
+		callfunc("F_ep20_setquest", 17711);
+		ep20_main = 12;
+		close3;
+	}
 	end;
 
 OnInit:
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 7" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main == 11" );
 	end;
 }
 
@@ -676,23 +689,6 @@ icecastle,209,243,3	script	Dark Alley#ep20ms01	4_BULLETIN_BOARD2,{
 
 OnInit:
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 10" );
-	end;
-}
-
-icas_in,259,219,3	script	Horuru#ep20ms03	4_EP19_IWIN,{
-	if (ep20_main < 11) end;
-	if (ep20_main == 11) {
-		cutin "ep19_iwin06.png",2;
-		mes "[Horuru]";
-		mes "So Bagot left a trap for us. We can't delay anymore.";
-		next;
-		mes "[Horuru]";
-		mes "Vellgunde analyzed the device. Meet her, then prepare at the fortress gate.";
-		callfunc("F_ep20_completequest", 17710);
-		callfunc("F_ep20_setquest", 17711);
-		ep20_main = 12;
-		close3;
-	}
 	end;
 }
 
@@ -838,6 +834,7 @@ jor_root1,32,34,3	script	Rgan Shaman#ep20ms01	4_EP19_RGAN_SR2,{
 		if (checkquest(17717,HUNTING) == 2) {
 			mes "[Lazy]";
 			mes "Good hunting. Let's talk inside the sanctuary.";
+			callfunc("F_ep20_completequest", 17716);
 			callfunc("F_ep20_completequest", 17717);
 			callfunc("F_ep20_setquest", 17718);
 			ep20_main = 18;

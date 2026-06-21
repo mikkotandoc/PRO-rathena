@@ -14,7 +14,7 @@ function	script	F_ep20_drift_clear	{
 	return;
 }
 
-jor_maze,140,72,3	script	Drift Ice Zone#ep20	4_BULLETIN_BOARD2,{
+jor_maze,1,1,0	script(CLOAKED)	Drift Ice Zone#ep20	HIDDEN_WARP_NPC,{
 	end;
 
 OnStart:

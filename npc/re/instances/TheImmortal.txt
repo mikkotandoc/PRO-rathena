@@ -14,7 +14,7 @@ function	script	F_ep20_immortal_clear	{
 	return;
 }
 
-jor_twig,140,153,3	script	The Immortal#ep20	4_BULLETIN_BOARD2,{
+jor_twig,1,1,0	script(CLOAKED)	The Immortal#ep20	HIDDEN_WARP_NPC,{
 	end;
 
 OnStart:

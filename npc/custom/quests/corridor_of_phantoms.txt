@@ -36,9 +36,9 @@ function	script	F_COP_TryDrop	{
 // Warp to a Corridor floor (official entry coordinates)
 function	script	F_COP_WarpFloor	{
 	switch (getarg(0)) {
-	case 1: warp "vis_h01", 136, 118; break;
-	case 2: warp "vis_h02", 136, 118; break;
-	case 3: warp "vis_h03", 136, 118; break;
+	case 1: warp "vis_h01", 203, 203; break;
+	case 2: warp "vis_h02", 203, 203; break;
+	case 3: warp "vis_h03", 203, 203; break;
 	}
 	return;
 }
@@ -64,11 +64,20 @@ function	script	F_COP_HasPendingItem	{
 // Apply iRO phantom toughness: 100x HP (wiki), high survivability
 function	script	F_COP_BuffMob	{
 	.@gid = getarg(0);
+	if (.@gid <= 0) return;
 	getunitdata .@gid, .@ud;
 	.@hp = .@ud[UMOB_MAXHP] * 100;
 	setunitdata .@gid, UMOB_MAXHP, .@hp;
 	setunitdata .@gid, UMOB_HP, .@hp;
 	return;
+}
+
+// Spawn one Corridor MVP and apply phantom HP scaling.
+function	script	F_COP_SpawnMob	{
+	monster getarg(0), 0, 0, "--ja--", getarg(1), 1, getarg(2);
+	if (!$@mobid[0]) return 0;
+	callfunc "F_COP_BuffMob", $@mobid[0];
+	return $@mobid[0];
 }
 
 // Shared ticket validation (returns 1 if valid, 0 and ejects if not)
@@ -470,7 +479,7 @@ vis_h03,1,1,0	duplicate(#cop_access_guard)	#cop_access_guard3	HIDDEN_WARP_NPC
 // -------------------------------------------------------
 // Floor warps & exits
 // -------------------------------------------------------
-vis_h01,150,100,4	script	#cop_warp_1to2	PORTAL,{
+vis_h01,151,113,4	script	#cop_warp_1to2	PORTAL,{
 	if (!callfunc("F_COP_HasTicket")) end;
 	if (!callfunc("F_COP_AllowsFloor", 2)) end;
 	mes "[Corridor Passage]";
@@ -481,7 +490,7 @@ vis_h01,150,100,4	script	#cop_warp_1to2	PORTAL,{
 	end;
 }
 
-vis_h02,150,100,4	script	#cop_warp_2to3	PORTAL,{
+vis_h02,151,113,4	script	#cop_warp_2to3	PORTAL,{
 	if (!callfunc("F_COP_HasTicket")) end;
 	if (!callfunc("F_COP_AllowsFloor", 3)) end;
 	mes "[Corridor Passage]";
@@ -493,7 +502,7 @@ vis_h02,150,100,4	script	#cop_warp_2to3	PORTAL,{
 	end;
 }
 
-vis_h02,50,100,4	script	#cop_warp_2to1	PORTAL,{
+vis_h02,151,113,4	script	#cop_warp_2to1	PORTAL,{
 	if (!callfunc("F_COP_HasTicket")) end;
 	if (!callfunc("F_COP_AllowsFloor", 1)) end;
 	mes "[Corridor Passage]";
@@ -504,7 +513,7 @@ vis_h02,50,100,4	script	#cop_warp_2to1	PORTAL,{
 	end;
 }
 
-vis_h03,50,100,4	script	#cop_warp_3to2	PORTAL,{
+vis_h03,151,113,4	script	#cop_warp_3to2	PORTAL,{
 	if (!callfunc("F_COP_HasTicket")) end;
 	if (!callfunc("F_COP_AllowsFloor", 2)) end;
 	mes "[Corridor Passage]";
@@ -534,9 +543,18 @@ vis_h01,2,2,0	script	#cop_spawner_f1	HIDDEN_WARP_NPC,{
 	end;
 
 OnInit:
-	sleep 5000;
-	callsub S_SpawnAll;
+	callsub S_EnsureSpawn;
 	end;
+
+OnPCLoadMapEvent:
+	callsub S_EnsureSpawn;
+	end;
+
+S_EnsureSpawn:
+	if (.spawned) return;
+	.spawned = 1;
+	callsub S_SpawnAll;
+	return;
 
 S_SpawnAll:
 	.@map$ = "vis_h01";
@@ -544,26 +562,23 @@ S_SpawnAll:
 
 	// mob id, count per type
 	setarray .@mobs[0],
-		1038, 3,	// Osiris
-		1039, 3,	// Baphomet
-		1086, 2,	// Golden Thief Bug
-		1087, 2,	// Orc Hero
-		1112, 3,	// Drake
-		1115, 2,	// Eddga
-		1147, 2,	// Maya
-		1150, 2,	// Moonlight Flower
-		1159, 2,	// Phreeoni
-		1190, 2,	// Orc Lord
-		1272, 2,	// Dark Lord
-		1059, 2;	// Mistress
+		1038, 4,	// Osiris
+		1039, 4,	// Baphomet
+		1086, 3,	// Golden Thief Bug
+		1087, 3,	// Orc Hero
+		1112, 4,	// Drake
+		1115, 3,	// Eddga
+		1147, 3,	// Maya
+		1150, 3,	// Moonlight Flower
+		1159, 3,	// Phreeoni
+		1190, 3,	// Orc Lord
+		1272, 3,	// Dark Lord
+		1059, 3;	// Mistress
 
 	.@size = getarraysize(.@mobs);
 	for (.@i = 0; .@i < .@size; .@i += 2) {
-		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++) {
-			.@gid = monster(.@map$, 0, 0, "--ja--", .@mobs[.@i], 1, .@ev$);
-			if (.@gid > 0)
-				callfunc "F_COP_BuffMob", .@gid;
-		}
+		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++)
+			callfunc "F_COP_SpawnMob", .@map$, .@mobs[.@i], .@ev$;
 	}
 	return;
 
@@ -575,21 +590,21 @@ OnBossKill:
 	.respawn_queue[.@idx] = killedrid;
 	if (!.respawn_timer) {
 		.respawn_timer = 1;
+		stopnpctimer;
 		initnpctimer;
 	}
 	end;
 
-OnTimer180000:
+OnTimer120000:
 	if (getarraysize(.respawn_queue) > 0) {
 		.@mid = .respawn_queue[0];
 		deletearray .respawn_queue[0], 1;
-		.@gid = monster("vis_h01", 0, 0, "--ja--", .@mid, 1, strnpcinfo(0) + "::OnBossKill");
-		if (.@gid > 0)
-			callfunc "F_COP_BuffMob", .@gid;
+		callfunc "F_COP_SpawnMob", "vis_h01", .@mid, strnpcinfo(0) + "::OnBossKill";
 	}
-	if (getarraysize(.respawn_queue) > 0)
+	if (getarraysize(.respawn_queue) > 0) {
+		stopnpctimer;
 		initnpctimer;
-	else {
+	} else {
 		.respawn_timer = 0;
 		stopnpctimer;
 	}
@@ -603,36 +618,42 @@ vis_h02,2,2,0	script	#cop_spawner_f2	HIDDEN_WARP_NPC,{
 	end;
 
 OnInit:
-	sleep 5000;
-	callsub S_SpawnAll;
+	callsub S_EnsureSpawn;
 	end;
+
+OnPCLoadMapEvent:
+	callsub S_EnsureSpawn;
+	end;
+
+S_EnsureSpawn:
+	if (.spawned) return;
+	.spawned = 1;
+	callsub S_SpawnAll;
+	return;
 
 S_SpawnAll:
 	.@map$ = "vis_h02";
 	.@ev$ = strnpcinfo(0) + "::OnBossKill";
 
 	setarray .@mobs[0],
-		1046, 3,	// Doppelganger
-		1251, 2,	// Stormy Knight
-		1252, 2,	// Hatii / Garm
-		1312, 2,	// Turtle General
-		1373, 2,	// Lord of Death
-		1389, 2,	// Dracula
-		1418, 2,	// Evil Snake Lord
-		1492, 2,	// Samurai Specter
-		1511, 2,	// Amon Ra
-		1583, 2,	// Tao Gunka
-		1623, 2,	// RSX-0806
-		1688, 2,	// Lady Tanee
-		1785, 2;	// Atroce
+		1046, 4,	// Doppelganger
+		1251, 3,	// Stormy Knight
+		1252, 3,	// Hatii / Garm
+		1312, 3,	// Turtle General
+		1373, 3,	// Lord of Death
+		1389, 3,	// Dracula
+		1418, 3,	// Evil Snake Lord
+		1492, 3,	// Samurai Specter
+		1511, 3,	// Amon Ra
+		1583, 3,	// Tao Gunka
+		1623, 3,	// RSX-0806
+		1688, 3,	// Lady Tanee
+		1785, 3;	// Atroce
 
 	.@size = getarraysize(.@mobs);
 	for (.@i = 0; .@i < .@size; .@i += 2) {
-		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++) {
-			.@gid = monster(.@map$, 0, 0, "--ja--", .@mobs[.@i], 1, .@ev$);
-			if (.@gid > 0)
-				callfunc "F_COP_BuffMob", .@gid;
-		}
+		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++)
+			callfunc "F_COP_SpawnMob", .@map$, .@mobs[.@i], .@ev$;
 	}
 	return;
 
@@ -644,21 +665,21 @@ OnBossKill:
 	.respawn_queue[.@idx] = killedrid;
 	if (!.respawn_timer) {
 		.respawn_timer = 1;
+		stopnpctimer;
 		initnpctimer;
 	}
 	end;
 
-OnTimer180000:
+OnTimer120000:
 	if (getarraysize(.respawn_queue) > 0) {
 		.@mid = .respawn_queue[0];
 		deletearray .respawn_queue[0], 1;
-		.@gid = monster("vis_h02", 0, 0, "--ja--", .@mid, 1, strnpcinfo(0) + "::OnBossKill");
-		if (.@gid > 0)
-			callfunc "F_COP_BuffMob", .@gid;
+		callfunc "F_COP_SpawnMob", "vis_h02", .@mid, strnpcinfo(0) + "::OnBossKill";
 	}
-	if (getarraysize(.respawn_queue) > 0)
+	if (getarraysize(.respawn_queue) > 0) {
+		stopnpctimer;
 		initnpctimer;
-	else {
+	} else {
 		.respawn_timer = 0;
 		stopnpctimer;
 	}
@@ -672,34 +693,40 @@ vis_h03,2,2,0	script	#cop_spawner_f3	HIDDEN_WARP_NPC,{
 	end;
 
 OnInit:
-	sleep 5000;
-	callsub S_SpawnAll;
+	callsub S_EnsureSpawn;
 	end;
+
+OnPCLoadMapEvent:
+	callsub S_EnsureSpawn;
+	end;
+
+S_EnsureSpawn:
+	if (.spawned) return;
+	.spawned = 1;
+	callsub S_SpawnAll;
+	return;
 
 S_SpawnAll:
 	.@map$ = "vis_h03";
 	.@ev$ = strnpcinfo(0) + "::OnBossKill";
 
 	setarray .@mobs[0],
-		1658, 2,	// Egnigem Cenia
-		1685, 2,	// Vesper
-		1708, 3,	// Thanatos Phantom
-		1719, 2,	// Detale
-		1734, 3,	// Kiel D-01
-		1751, 2,	// Valkyrie Randgris
-		1768, 2,	// Gloom Under Night
-		1779, 2,	// Ktullanux
-		1832, 2,	// Ifrit
-		1871, 2,	// Fallen Bishop
-		1873, 3;	// Beelzebub
+		1658, 3,	// Egnigem Cenia
+		1685, 3,	// Vesper
+		1708, 4,	// Thanatos Phantom
+		1719, 3,	// Detale
+		1734, 4,	// Kiel D-01
+		1751, 3,	// Valkyrie Randgris
+		1768, 3,	// Gloom Under Night
+		1779, 3,	// Ktullanux
+		1832, 3,	// Ifrit
+		1871, 3,	// Fallen Bishop
+		1873, 4;	// Beelzebub
 
 	.@size = getarraysize(.@mobs);
 	for (.@i = 0; .@i < .@size; .@i += 2) {
-		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++) {
-			.@gid = monster(.@map$, 0, 0, "--ja--", .@mobs[.@i], 1, .@ev$);
-			if (.@gid > 0)
-				callfunc "F_COP_BuffMob", .@gid;
-		}
+		for (.@n = 0; .@n < .@mobs[.@i+1]; .@n++)
+			callfunc "F_COP_SpawnMob", .@map$, .@mobs[.@i], .@ev$;
 	}
 	return;
 
@@ -711,21 +738,21 @@ OnBossKill:
 	.respawn_queue[.@idx] = killedrid;
 	if (!.respawn_timer) {
 		.respawn_timer = 1;
+		stopnpctimer;
 		initnpctimer;
 	}
 	end;
 
-OnTimer180000:
+OnTimer120000:
 	if (getarraysize(.respawn_queue) > 0) {
 		.@mid = .respawn_queue[0];
 		deletearray .respawn_queue[0], 1;
-		.@gid = monster("vis_h03", 0, 0, "--ja--", .@mid, 1, strnpcinfo(0) + "::OnBossKill");
-		if (.@gid > 0)
-			callfunc "F_COP_BuffMob", .@gid;
+		callfunc "F_COP_SpawnMob", "vis_h03", .@mid, strnpcinfo(0) + "::OnBossKill";
 	}
-	if (getarraysize(.respawn_queue) > 0)
+	if (getarraysize(.respawn_queue) > 0) {
+		stopnpctimer;
 		initnpctimer;
-	else {
+	} else {
 		.respawn_timer = 0;
 		stopnpctimer;
 	}

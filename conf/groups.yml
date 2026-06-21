@@ -43,17 +43,23 @@ Header:
 Body:
   - Id: 0
     # group 0 is the default group for every new account
+    # TEST SERVER: all at/char commands enabled for every player
     Name: Player
-    Level: 0
-    Commands:
-      changedress: true
-      resurrect: true
-      storage: true
+    Level: 99
     Permissions:
-      # without this basic permissions regular players could not trade or party
       can_trade: true
       can_party: true
       attendance: true
+      command_enable: true
+      all_commands: true
+      any_warp: true
+      macro_register: true
+      item_unconditional: true
+      trade_unconditional: true
+      bypass_stat_onclone: true
+      bypass_max_stat: true
+      disable_pvm: false
+      disable_pvp: false
   - Id: 1
     Name: Super Player
     # Can do everything Players can and more

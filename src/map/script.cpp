@@ -21155,6 +21155,11 @@ BUILDIN_FUNC(setquest)
 
 	quest_id = script_getnum(st, 2);
 
+	if (quest_id <= 0) {
+		ShowError("buildin_setquest: invalid quest id %d.\n", quest_id);
+		return SCRIPT_CMD_FAILURE;
+	}
+
 	if (!script_charid2sd(3,sd))
 		return SCRIPT_CMD_FAILURE;
 
@@ -22977,6 +22982,8 @@ BUILDIN_FUNC(setmounting) {
 	} else if (sd->sc.getSCE(SC_CLOAKING) || sd->sc.getSCE(SC_CHASEWALK) || sd->sc.getSCE(SC_CLOAKINGEXCEED) || sd->sc.getSCE(SC_CAMOUFLAGE) || sd->sc.getSCE(SC_STEALTHFIELD) || sd->sc.getSCE(SC__FEINTBOMB)) {
 		// SC_HIDING, SC__INVISIBILITY, SC__SHADOWFORM, SC_SUHIDE already disable item usage
 		script_pushint(st, 0); // Silent failure
+	} else if (sd->sc.hasSCE(SC_WEREWOLF) || sd->sc.hasSCE(SC_WERERAPTOR)) {
+		script_pushint(st, 0);
 	} else {
 		if( sd->sc.getSCE(SC_ALL_RIDING) )
 			status_change_end(sd, SC_ALL_RIDING); //release mount

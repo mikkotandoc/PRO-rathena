@@ -7,23 +7,21 @@
 
 #include "map/battle.hpp"
 #include "map/clif.hpp"
-#include "map/map.hpp"
 #include "map/pc.hpp"
 #include "map/status.hpp"
 
-SkillRhythmicalWave::SkillRhythmicalWave() : SkillImpl(TR_RHYTHMICAL_WAVE) {
+SkillRhythmicalWave::SkillRhythmicalWave() : SkillImplRecursiveDamageSplash(TR_RHYTHMICAL_WAVE) {
 }
 
-void SkillRhythmicalWave::castendDamageId(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32& flag) const {
+void SkillRhythmicalWave::splashSearch(block_list* src, block_list* target, uint16 skill_lv, t_tick tick, int32 flag) const {
 	map_session_data* sd = BL_CAST(BL_PC, src);
 
-	if (flag & 1)
-		skill_attack(skill_get_type(getSkillId()), src, src, target, getSkillId(), skill_lv, tick, flag);
-	else {
-		clif_skill_nodamage(src, *target, getSkillId(), skill_lv);
-		map_foreachinallrange(skill_area_sub, target, skill_get_splash(getSkillId(), skill_lv), BL_CHAR|BL_SKILL, src, getSkillId(), skill_lv, tick, flag|BCT_ENEMY|SD_SPLASH|1, skill_castend_damage_id);
-		battle_consume_ammo(sd, getSkillId(), skill_lv); // Consume here since Magic/Misc attacks reset arrow_atk
-	}
+	clif_skill_nodamage(src, *target, getSkillId(), skill_lv);
+
+	SkillImplRecursiveDamageSplash::splashSearch(src, target, skill_lv, tick, flag);
+
+	// Consume here since magic attacks reset arrow_atk before ammo is deducted.
+	battle_consume_ammo(sd, getSkillId(), skill_lv);
 }
 
 void SkillRhythmicalWave::calculateSkillRatio(const Damage* wd, const block_list* src, const block_list* target, uint16 skill_lv, int32& skillratio, int32 mflag) const {
@@ -32,8 +30,8 @@ void SkillRhythmicalWave::calculateSkillRatio(const Damage* wd, const block_list
 	const status_data* sstatus = status_get_status_data(*src);
 
 	skillratio += -100 + 250 + 3650 * skill_lv;
-	skillratio += pc_checkskill(sd, TR_STAGE_MANNER) * 25; // !TODO: check Stage Manner ratio
-	skillratio += 5 * sstatus->spl;	// !TODO: check SPL ratio
+	skillratio += pc_checkskill(sd, TR_STAGE_MANNER) * 25;
+	skillratio += 5 * sstatus->spl;
 
 	if (sc != nullptr && sc->hasSCE(SC_MYSTIC_SYMPHONY))
 		skillratio += 200 + 1000 * skill_lv;

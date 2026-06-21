@@ -48,7 +48,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_ASSULTER
         Drops:
@@ -148,7 +148,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_ASSULTER
         Drops:
@@ -248,7 +248,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_DRAINLIAR
         Drops:
@@ -358,7 +358,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_MOONLIGHT
         Drops:
@@ -474,7 +474,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_GAZETI
         Drops:
@@ -554,7 +554,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_TRI_JOINT
         Drops:
@@ -668,7 +668,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_SROPHO
         Drops:
@@ -764,7 +764,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_SEDORA
         Drops:
@@ -854,7 +854,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: CHIMERA_LAVA
         Drops:
@@ -1008,7 +1008,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: CHIMERA_AMITERA
         Drops:
@@ -1082,7 +1082,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: GIANT_CAPUT
         Drops:
@@ -1301,7 +1301,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: GAN_CEANN
         Drops:
@@ -1387,7 +1387,7 @@ Body:
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_
-        Rate: 1000
+        Rate: 6000
     SpecificDrops:
       - Monster: DISGUISER
         Drops:
@@ -1972,6 +1972,10 @@ Body:
             Item: Sanctuary_Sudarium
             Rate: 75000
   - Map: ant_d02_i
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_ANDRE
         Drops:
@@ -2481,6 +2485,10 @@ Body:
             Item: Evilspirit_Gloves
             Rate: 8000
   - Map: ein_d02_i
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_TEDDY_BEAR_B 
         Drops:
@@ -2609,6 +2617,10 @@ Body:
             Item: S_Teddy_Bear_Box_IL
             Rate: 15000
   - Map: prt_mz03_i
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
     SpecificDrops:
       - Monster: ILL_BAPHOMET
         Drops:
@@ -2892,16 +2904,6 @@ Body:
       - Index: 0
         Item: Play_RO_Gold_Coin_
         Rate: 4000
-  - Map: orcsdun02
-    GlobalDrops:
-      - Index: 0
-        Item: Play_RO_Gold_Coin_
-        Rate: 4000
-  - Map: pay_dun04
-    GlobalDrops:
-      - Index: 0
-        Item: Play_RO_Gold_Coin_
-        Rate: 4000
   - Map: oz_dun01
     GlobalDrops:
       - Index: 0
@@ -2909,7 +2911,7 @@ Body:
         Rate: 25000
       - Index: 1
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: oz_dun02
     GlobalDrops:
       - Index: 0
@@ -2917,7 +2919,7 @@ Body:
         Rate: 25000
       - Index: 1
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: gw_fild01
     GlobalDrops:
       - Index: 0
@@ -2925,7 +2927,7 @@ Body:
         Rate: 25000
       - Index: 1
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: gw_fild02
     GlobalDrops:
       - Index: 0
@@ -2933,7 +2935,7 @@ Body:
         Rate: 25000
       - Index: 1
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: ra_fild10
     GlobalDrops:
       - Index: 0
@@ -2941,7 +2943,7 @@ Body:
         Rate: 25000
       - Index: 1
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: ra_fild11
     GlobalDrops:
       - Index: 0
@@ -2949,7 +2951,7 @@ Body:
         Rate: 25000
       - Index: 1
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: jor_tail
     GlobalDrops:
       - Index: 0
@@ -2959,8 +2961,26 @@ Body:
         Item: Etel_Dust
         Rate: 60000
       - Index: 2
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 3
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 4
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 5
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 6
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 7
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 8
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: jor_back1
     GlobalDrops:
       - Index: 0
@@ -2970,8 +2990,26 @@ Body:
         Item: Etel_Dust
         Rate: 70000
       - Index: 2
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 3
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 4
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 5
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 6
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 7
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 8
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: jor_back2
     GlobalDrops:
       - Index: 0
@@ -2981,8 +3019,26 @@ Body:
         Item: Etel_Dust
         Rate: 75000
       - Index: 2
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 3
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 4
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 5
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 6
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 7
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 8
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: jor_back3
     GlobalDrops:
       - Index: 0
@@ -2992,8 +3048,26 @@ Body:
         Item: Etel_Dust
         Rate: 80000
       - Index: 2
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 3
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 4
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 5
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 6
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 7
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 8
         Item: Play_RO_Gold_Coin_
-        Rate: 4000
+        Rate: 6000
   - Map: jor_dun01
     GlobalDrops:
       - Index: 0
@@ -3078,6 +3152,24 @@ Body:
         Item: D_Glacier_Launcher
         Rate: 1000
       - Index: 27
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 28
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 29
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 30
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 31
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 32
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 33
         Item: Play_RO_Gold_Coin_
         Rate: 6000
   - Map: jor_dun02
@@ -3164,6 +3256,24 @@ Body:
         Item: D_Glacier_Launcher
         Rate: 1000
       - Index: 27
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 28
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 29
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 30
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 31
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 32
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 33
         Item: Play_RO_Gold_Coin_
         Rate: 6000
   - Map: jor_ab01
@@ -3250,6 +3360,24 @@ Body:
         Item: D_Glacier_Launcher
         Rate: 1000
       - Index: 27
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 28
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 29
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 30
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 31
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 32
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 33
         Item: Play_RO_Gold_Coin_
         Rate: 6000
   - Map: jor_ab02
@@ -3336,6 +3464,24 @@ Body:
         Item: D_Glacier_Launcher
         Rate: 1000
       - Index: 27
+        Item: Etel_Stone
+        Rate: 2500
+      - Index: 28
+        Item: Blessed_Etel_Dust
+        Rate: 2000
+      - Index: 29
+        Item: Etel_Skyblue_Jewel
+        Rate: 1500
+      - Index: 30
+        Item: Etel_Topaz
+        Rate: 1200
+      - Index: 31
+        Item: Etel_Violet_Jewel
+        Rate: 1000
+      - Index: 32
+        Item: Etel_Amber
+        Rate: 800
+      - Index: 33
         Item: Play_RO_Gold_Coin_
         Rate: 6000
   - Map: odin_past
@@ -3347,5 +3493,364 @@ Body:
         Item: Zelunium_Ore
         Rate: 50000
       - Index: 2
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+
+  - Map: abyss_01
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: abyss_02
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: abyss_03
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: abyss_04
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: clock_01
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+    SpecificDrops:
+      - Monster: EXTRA_JOKER
+        Drops:
+          - Index: 0
+            Item: ClockTower_Gear
+            Rate: 75
+          - Index: 1
+            Item: ClockTower_Lead
+            Rate: 750
+          - Index: 2
+            Item: Etel_Dust
+            Rate: 150
+          - Index: 3
+            Item: Etel_Dust
+            Rate: 750
+          - Index: 4
+            Item: Precision_Bow
+            Rate: 30
+          - Index: 5
+            Item: Precision_Fuuma
+            Rate: 30
+          - Index: 6
+            Item: Solid_Manual
+            Rate: 30
+          - Index: 7
+            Item: Wicked_Book
+            Rate: 30
+      - Monster: ERZSEBET
+        Drops:
+          - Index: 0
+            Item: ClockTower_Gear
+            Rate: 75
+          - Index: 1
+            Item: ClockTower_Lead
+            Rate: 750
+          - Index: 2
+            Item: Etel_Dust
+            Rate: 150
+          - Index: 3
+            Item: Etel_Dust
+            Rate: 750
+          - Index: 4
+            Item: Solid_Rod
+            Rate: 30
+          - Index: 5
+            Item: Solid_Staff
+            Rate: 30
+          - Index: 6
+            Item: Solid_Wand
+            Rate: 30
+          - Index: 7
+            Item: Wicked_Cross
+            Rate: 30
+      - Monster: JENIFFER
+        Drops:
+          - Index: 0
+            Item: ClockTower_Gear
+            Rate: 75
+          - Index: 1
+            Item: ClockTower_Lead
+            Rate: 750
+          - Index: 2
+            Item: Etel_Dust
+            Rate: 150
+          - Index: 3
+            Item: Etel_Dust
+            Rate: 750
+          - Index: 4
+            Item: Precision_Lute
+            Rate: 30
+          - Index: 5
+            Item: Precision_Whip
+            Rate: 30
+          - Index: 6
+            Item: Wicked_Plant
+            Rate: 30
+      - Monster: GENERAL_ORC
+        Drops:
+          - Index: 0
+            Item: ClockTower_Gear
+            Rate: 75
+          - Index: 1
+            Item: ClockTower_Lead
+            Rate: 750
+          - Index: 2
+            Item: Etel_Dust
+            Rate: 150
+          - Index: 3
+            Item: Etel_Dust
+            Rate: 750
+          - Index: 4
+            Item: Precision_Shotgun
+            Rate: 30
+          - Index: 5
+            Item: Solid_Claymore
+            Rate: 30
+          - Index: 6
+            Item: Solid_Spear
+            Rate: 30
+          - Index: 7
+            Item: Wicked_Axe
+            Rate: 30
+          - Index: 8
+            Item: Wicked_Katar
+            Rate: 30
+      - Monster: SIEGLOUSE
+        Drops:
+          - Index: 0
+            Item: ClockTower_Gear
+            Rate: 75
+          - Index: 1
+            Item: ClockTower_Lead
+            Rate: 750
+          - Index: 2
+            Item: Etel_Dust
+            Rate: 150
+          - Index: 3
+            Item: Etel_Dust
+            Rate: 750
+          - Index: 4
+            Item: Precision_Grenade
+            Rate: 30
+          - Index: 5
+            Item: Precision_Fist
+            Rate: 30
+          - Index: 6
+            Item: Precision_Rifle
+            Rate: 30
+          - Index: 7
+            Item: Precision_Gatling
+            Rate: 30
+          - Index: 8
+            Item: Wicked_Blade
+            Rate: 30
+      - Monster: GOBLIN_KING
+        Drops:
+          - Index: 0
+            Item: ClockTower_Gear
+            Rate: 75
+          - Index: 1
+            Item: ClockTower_Lead
+            Rate: 750
+          - Index: 2
+            Item: Etel_Dust
+            Rate: 150
+          - Index: 3
+            Item: Etel_Dust
+            Rate: 750
+          - Index: 4
+            Item: Precision_Pistol
+            Rate: 30
+          - Index: 5
+            Item: Solid_Dagger
+            Rate: 30
+          - Index: 6
+            Item: Solid_Edge
+            Rate: 30
+          - Index: 7
+            Item: Wicked_Dagger
+            Rate: 30
+          - Index: 8
+            Item: Wicked_Edge
+            Rate: 30
+  - Map: ein_dun03
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_albe
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_back4
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_back5
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_back6
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_base
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_crk
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_crk_p
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_dun03
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_maze
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_mbase
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_nest
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_que
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_raise1
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_raise2
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_root1
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_root2
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_root3
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_safty1
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_safty2
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_sanct
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_sklf1
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_sklf2
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_tmple1
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_tmple2
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_twice
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: jor_twig
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: ra_fild12
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: ra_fild13
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: sp_rudus
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: sp_rudus2
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: sp_rudus3
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: tur_d04ia
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: tur_d04ib
+    GlobalDrops:
+      - Index: 0
         Item: Play_RO_Gold_Coin_
         Rate: 6000

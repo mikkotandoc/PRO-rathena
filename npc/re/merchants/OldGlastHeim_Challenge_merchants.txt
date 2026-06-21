@@ -123,7 +123,7 @@ glast_01,139,291,3	script	Muninn#oghcm	2_M_SAGE_OLD,{
 	mes "[Muninn]";
 	mes "I trade ^0000CDRoyal and Guardian weapons^000000 for temporal materials from the Challenge Mode.";
 	next;
-	switch( select( "Select a weapon (10 Temporal Spell)", "Random weapon (2 Gemstone, 20 Fragment)", "Cancel" ) ) {
+	switch( select( "Select a weapon (10 Temporal Spell)", "Random weapon (2 Sealed Circlet, 20 Fragment)", "Cancel" ) ) {
 	case 1:
 		mes "[Muninn]";
 		mes "Choose the weapon you want. Each costs ^0000CD10 Temporal Spell^000000.";
@@ -131,9 +131,9 @@ glast_01,139,291,3	script	Muninn#oghcm	2_M_SAGE_OLD,{
 		callshop "barter_ogh_muninn_weapon";
 		end;
 	case 2:
-		if (countitem(25865) < 2) {// Jewel_Of_Time_Ore
+		if (countitem(25864) < 2) {// S_Circlet_Of_Time
 			mes "[Muninn]";
-			mes "You need ^0000CD2 Temporal Gemstone^000000.";
+			mes "You need ^0000CD2 Sealed Temporal Circlets^000000.";
 			close;
 		}
 		if (countitem(25867) < 20) {// Fragment_Of_Time
@@ -146,7 +146,7 @@ glast_01,139,291,3	script	Muninn#oghcm	2_M_SAGE_OLD,{
 			mes "Your bag is too full. Please free up some space.";
 			close;
 		}
-		delitem 25865,2;
+		delitem 25864,2;
 		delitem 25867,20;
 		setarray .@weapon[0],
 			1336, 1870, 2060, 13347, 18191, 18198, 21055, 26165, 26166, 26172,
@@ -184,12 +184,11 @@ glast_01,137,291,3	script	Oscar#oghcm_enchant	4_ED_OSCAR,{
 		mes "[Oscar]";
 		mes "4th slot: ^0000CD10 Temporal Fragment^000000";
 		mes "3rd slot: ^0000CD20 Temporal Fragment^000000 or ^0000CD2 Temporal Gemstone^000000 (Temporal Jewel)";
-		mes "2nd slot: ^0000CD2 Temporal Spell^000000";
+		mes "2nd slot special enchant: ^0000CD2 Temporal Spell^000000, upgradeable with more Temporal Spell.";
 		next;
 		mes "[Oscar]";
-		mes "Special 2nd-slot enchants can be leveled with additional Temporal Spell.";
-		mes "Reset costs ^0000CD500,000 zeny^000000 with a 70% success rate.";
-		mes "On failure the circlet may be destroyed.";
+		mes "Reset all enchants for ^0000CD500,000 zeny^000000 with a 70% success rate.";
+		mes "On failure the circlet is destroyed.";
 		close;
 	case 3:
 		close;

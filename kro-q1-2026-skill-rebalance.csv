@@ -61,8 +61,8 @@ Windhawk,Calamity Gale,"Duration 60→180s; CD 300→180s; dispel immune; not re
 Windhawk,Gale Storm,"CD 1.5→1.2s; SP 100→120; dmg 9500%→10000%; AoE 11×11→9×9; CON ×5→×10",—,KRO formula + CD/SP in skill_db.yml,Done
 Windhawk,Crescive Bolt,"CD 0.15→0.35s; GCD 0.3→0.7s; dmg 3400%→9400%",#10012,KRO formula + AP recovery 2 from open PR,Done
 Troubadour/Trouvere,Rhythm Shooting,"CD 0.15→0.35s; dmg 800/1400%→3700/4550%; CON ×3→×5 (×7 on Sound Brand)",—,KRO formula in rhythmshooting.cpp,Done
-Troubadour/Trouvere,Metallic Fury,"Rework: 9×9 AoE; CD/GCD up; keeps Sound Brand; dmg & SPL weight changes",—,KRO formula; 9×9 splash targeting rework pending,Partial
-Night Watch,The Vigilante at Night,"SP 65→88; gatling AoE 13×13→11×11",—,skill_db SP/AoE pending verify,Partial
+Troubadour/Trouvere,Metallic Fury,"Rework: 9×9 AoE; CD/GCD up; keeps Sound Brand; dmg & SPL weight changes",—,KRO formula + RecursiveDamageSplash AoE in metallicfury.cpp,Done
+Night Watch,The Vigilante at Night,"SP 65→88; gatling AoE 13×13→11×11",—,skill_db SP 88 + gatling splash 11×11 in thevigilanteatnight.cpp,Done
 Night Watch,Only One Bullet,"CD 0.3→0.35s; 7550/8300%→16200/18200%",—,KRO formula in onlyonebullet.cpp,Done
 Night Watch,Spiral Shooting,"8500/9700%→9700/15400% ATK",—,KRO formula in spiralshooting.cpp,Done
 Night Watch,Magazine for One,"1950/2400%→2750/4300% ATK",—,KRO formula in magazineforone.cpp,Done

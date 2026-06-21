@@ -515,6 +515,9 @@ static int32 split_exact_quest_time(char* modif_p, int32* week, int32* day, int3
  */
 std::shared_ptr<s_quest_db> quest_search(int32 quest_id)
 {
+	if (quest_id <= 0)
+		return nullptr;
+
 	auto quest = quest_db.find(quest_id);
 
 	if (!quest)
@@ -528,8 +531,52 @@ std::shared_ptr<s_quest_db> quest_search(int32 quest_id)
  * @param sd : Player's data
  * @return 0 in case of success, nonzero otherwise (i.e. the player has no quests)
  */
+/**
+ * Removes invalid quest log entries (quest_id <= 0 or not in DB).
+ * @param sd Character's data
+ * @return true if any entry was removed
+ */
+bool quest_pc_cleanup(map_session_data *sd)
+{
+	nullpo_retr(false, sd);
+
+	int32 i, j = 0;
+	int32 before = sd->num_quests;
+
+	for (i = 0; i < sd->num_quests; i++) {
+		if (sd->quest_log[i].quest_id <= 0 || !quest_search(sd->quest_log[i].quest_id)) {
+			if (sd->quest_log[i].state != Q_COMPLETE)
+				clif_quest_delete(sd, sd->quest_log[i].quest_id);
+			continue;
+		}
+
+		if (i != j)
+			memcpy(&sd->quest_log[j], &sd->quest_log[i], sizeof(struct quest));
+
+		j++;
+	}
+
+	if (before == j)
+		return false;
+
+	sd->num_quests = j;
+	ARR_FIND(0, sd->num_quests, i, sd->quest_log[i].state == Q_COMPLETE);
+	sd->avail_quests = i;
+
+	if (sd->num_quests == 0) {
+		aFree(sd->quest_log);
+		sd->quest_log = nullptr;
+	} else
+		RECREATE(sd->quest_log, struct quest, sd->num_quests);
+
+	sd->save_quest = true;
+	return true;
+}
+
 int32 quest_pc_login(map_session_data *sd)
 {
+	quest_pc_cleanup(sd);
+
 	if (!sd->avail_quests)
 		return 1;
 
@@ -589,6 +636,11 @@ static time_t quest_time(std::shared_ptr<s_quest_db> qi)
  */
 int32 quest_add(map_session_data *sd, int32 quest_id)
 {
+	if (quest_id <= 0) {
+		ShowError("quest_add: invalid quest id %d.\n", quest_id);
+		return -1;
+	}
+
 	std::shared_ptr<s_quest_db> qi = quest_search(quest_id);
 
 	if (!qi) {
@@ -915,6 +967,9 @@ int32 quest_check( const map_session_data* sd, int32 quest_id, e_quest_check_typ
 				int32 j;
 				std::shared_ptr<s_quest_db> qi = quest_search(sd->quest_log[i].quest_id);
 
+				if (!qi)
+					return -1;
+
 				ARR_FIND(0, qi->objectives.size(), j, sd->quest_log[i].count[j] < qi->objectives[j]->count);
 				if (j == qi->objectives.size())
 					return 2;
@@ -939,31 +994,7 @@ int32 quest_check( const map_session_data* sd, int32 quest_id, e_quest_check_typ
  */
 static int32 quest_reload_check_sub(map_session_data *sd, va_list ap)
 {
-	nullpo_ret(sd);
-
-	int32 i, j = 0;
-
-	for (i = 0; i < sd->num_quests; i++) {
-		std::shared_ptr<s_quest_db> qi = quest_search(sd->quest_log[i].quest_id);
-
-		if (!qi) { //Remove no longer existing entries
-			if (sd->quest_log[i].state != Q_COMPLETE) //And inform the client if necessary
-				clif_quest_delete(sd, sd->quest_log[i].quest_id);
-			continue;
-		}
-
-		if (i != j) {
-			//Move entries if there's a gap to fill
-			memcpy(&sd->quest_log[j], &sd->quest_log[i], sizeof(struct quest));
-		}
-
-		j++;
-	}
-
-	sd->num_quests = j;
-	ARR_FIND(0, sd->num_quests, i, sd->quest_log[i].state == Q_COMPLETE);
-	sd->avail_quests = i;
-
+	quest_pc_cleanup(sd);
 	return 1;
 }
 

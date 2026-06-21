@@ -74,6 +74,18 @@ Body:
           - Index: 0
             Item: Booster_Coin
             Amount: 5
+      - Index: 11
+        Item: Booster_RandomOpt_P
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
+      - Index: 12
+        Item: Booster_RandomOpt_M
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 10
   - Name: mega04
     Items:
       - Index: 0
@@ -152,6 +164,12 @@ Body:
           - Index: 0
             Item: Booster_W_Ticket
             Amount: 1
+      - Index: 4
+        Item: CA_B_Dagger
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
   - Name: mega07
     Items:
       - Index: 0
@@ -219,24 +237,30 @@ Body:
             Item: Booster_W_Ticket
             Amount: 1
       - Index: 2
-        Item: RS_B_Violin
+        Item: RS_B_Bow
         RequiredItems:
           - Index: 0
             Item: Booster_W_Ticket
             Amount: 1
       - Index: 3
-        Item: RS_B_Whip
+        Item: RS_B_Violin
         RequiredItems:
           - Index: 0
             Item: Booster_W_Ticket
             Amount: 1
       - Index: 4
-        Item: MV_B_Violin
+        Item: RS_B_Whip
         RequiredItems:
           - Index: 0
             Item: Booster_W_Ticket
             Amount: 1
       - Index: 5
+        Item: MV_B_Violin
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 6
         Item: MV_B_Whip
         RequiredItems:
           - Index: 0
@@ -320,6 +344,140 @@ Body:
           - Index: 0
             Item: Booster_W_Ticket
             Amount: 1
+      - Index: 4
+        Item: SP_B_Saber
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+      - Index: 5
+        Item: SI_B_Saber
+        RequiredItems:
+          - Index: 0
+            Item: Booster_W_Ticket
+            Amount: 1
+  - Name: mega13
+    Items:
+      - Index: 0
+        Item: S_Booster_Armor
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 1
+        Item: S_Booster_Shield
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 2
+        Item: S_Booster_Shoes
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 3
+        Item: S_Booster_Earing
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 4
+        Item: S_Booster_Pandent
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 5
+        Item: S_RK_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 6
+        Item: S_LG_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 7
+        Item: S_NC_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 8
+        Item: S_GN_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 9
+        Item: S_GC_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 10
+        Item: S_SC_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 11
+        Item: S_WL_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 12
+        Item: S_SO_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 13
+        Item: S_AB_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 14
+        Item: S_SR_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 15
+        Item: S_RA_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 16
+        Item: S_WM_B_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 17
+        Item: S_SU_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 18
+        Item: S_SJ_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 19
+        Item: S_KO_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
   - Name: mega14
     Items:
       - Index: 0

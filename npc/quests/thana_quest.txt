@@ -283,6 +283,10 @@ tha_t01,149,78,4	script	Guide	90,{
 			close;
 		}
 	}
+	if (checkre(0) && isbegin_quest(17408) == 0) {
+		setquest 17408;
+		completequest 17408;
+	}
 	mes "[Ditze]";
 	mes "For more detailed information";
 	mes "about monster exterminations,";
@@ -396,6 +400,10 @@ L_Contract:
 			mes "Thank you, and welcome";
 			mes "to the Rekenber Corporation~";
 			set thana_tower, 1;
+			if (checkre(0)) {
+				setquest 17408;
+				completequest 17408;
+			}
 			close;
 		case 2:
 			mes "[Ditze]";
@@ -535,7 +543,7 @@ tha_t02,231,161,5	script	Entrance Guide	874,{
 		mes "Ah, you're "+strcharinfo(0)+", right?";
 		next;
 		mes "[Burled]";
-		if (getareausers("tha_t02",226,156,236,166) < 1) {
+		if (getareausers("tha_t02",226,156,236,166) < 5) {
 			mes "First, we need to wait until";
 			mes "at least 5 temps are gathered";
 			mes "to form a work group. Right";

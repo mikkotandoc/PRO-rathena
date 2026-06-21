@@ -194,24 +194,24 @@ OnInstanceInit:
 	setarray 'mvp_mob_id[0],21325,21326,21327,21328,21329,21330,21331,21332,21333,21334,21335,21336,21337,21338,21339,21340,21341,21342,21343,21344,21345,21346,21347,21348,21349,21350,21351,21352,21353,21354,21355,21356,21357,21358,21359;
 
 	//Bonus attributes for each layer of mobs
-	'C_HP_mob=10;
-	'C_ATKMIN_mob=1000;
-	'C_ATKMAX_mob=1000;
-	'C_MATKMIN_mob=1000;
-	'C_MATKMAX_mob=1000;
-	'C_DEF_mob=100;
-	'C_MDEF_mob=100;
-	'C_HIT_mob=100;
+	'C_HP_mob=8;
+	'C_ATKMIN_mob=800;
+	'C_ATKMAX_mob=800;
+	'C_MATKMIN_mob=800;
+	'C_MATKMAX_mob=800;
+	'C_DEF_mob=80;
+	'C_MDEF_mob=80;
+	'C_HIT_mob=80;
 
 	//MPV bonus attributes for each layer
-	'C_HP_mvpmob=5;
-	'C_ATKMIN_mvpmob=1000;
-	'C_ATKMAX_mvpmob=1000;
-	'C_MATKMIN_mvpmob =1000;
-	'C_MATKMAX_mvpmob =1000;
-	'C_DEF_mvpmob=100;
-	'C_MDEF_mvpmob=100;
-	'C_HIT_mvpmob=100;
+	'C_HP_mvpmob=4;
+	'C_ATKMIN_mvpmob=800;
+	'C_ATKMAX_mvpmob=800;
+	'C_MATKMIN_mvpmob =800;
+	'C_MATKMAX_mvpmob =800;
+	'C_DEF_mvpmob=80;
+	'C_MDEF_mvpmob=80;
+	'C_HIT_mvpmob=80;
 
 	//101th floor BOSS bonus attributes
 	'N_HP_par=0;
@@ -240,15 +240,17 @@ OnInstanceInit:
 	'B_MATKMIN_skillmob=1000;
 	'B_MATKMAX_skillmob=1000;
 
-	setarray 'boss_mhp,0,15,30,45,60,75;
+	setarray 'boss_mhp,0,12,25,38,50,62;
 
-	setarray 'boss_atk,0,20,40,60,80,100;
+	setarray 'boss_atk,0,15,30,45,60,75;
 
-	setarray 'boss_heal,0,30,60,90,120,150;
+	setarray 'boss_heal,0,25,50,75,100,125;
 
-	setarray 'boss_def,0,50,100,150,200,250;
+	setarray 'boss_def,0,40,80,120,160,200;
 
-	setarray 'boss_trap,0,85,170,255,340,425;
+	setarray 'boss_trap,0,70,140,210,280,350;
+
+	'boss_floor_lv = 50;
 	end;
 }
 function	script	#sumper	{
@@ -347,7 +349,7 @@ function	script	better_Monster	{
 	setunitdata .@mob_UID,UMOB_DEF,.@DEF+('C_DEF_mob+.@level*15);
 	setunitdata .@mob_UID,UMOB_MDEF,.@MDEF+('C_MDEF_mob+.@level*15);
 	setunitdata .@mob_UID,UMOB_HIT,.@HIT+('C_HIT_mob+.@level*15);
-	setunitdata .@mob_UID,UMOB_DAMAGETAKEN,(100-(.@level/10)*10);
+	setunitdata .@mob_UID,UMOB_DAMAGETAKEN,(100-(.@level/10)*8);
 
 	return;
 }
@@ -405,12 +407,13 @@ OnTimer1000:
 1@ch_t,0,0,0	script	0FJumping Device	-1,{
 	.@floorcount=atoi(replacestr(strnpcinfo(0),"FJumping Device",""));
 	if(.@floorcount== 75){
-		'boss_state_1 = 3;
-		'boss_state_2 = 3;
-		'boss_state_3 = 3;
-		'boss_state_4 = 3;
-		'boss_state_5 = 3;
-	'boss_floor_lv = 75;
+		'boss_state_1 = 2;
+		'boss_state_2 = 2;
+		'boss_state_3 = 2;
+		'boss_state_4 = 2;
+		'boss_state_5 = 2;
+		'boss_floor_lv = 75;
+		callfunc "#sumper";
 		warp 'map_3$,31,16;
 		end;
 	}
@@ -1304,6 +1307,7 @@ Challenge1:
 Challenge:
 	callsub sub_show;
 	if(select("Contribute to the meteorite's powder:Start the challenge")==2){
+		callfunc "#sumper";
 		'boss_stats_end=1;
 		enablenpc instance_npcname("#BossRoomEntrance");
 		close2;
@@ -1319,19 +1323,19 @@ Challenge:
 			end;
 		}
 		delitem 'Fenwei,20;
-		if('boss_floor_lv == 50){
-			'boss_state_1 = rand(3);
-			'boss_state_2 = rand(3);
-			'boss_state_3 = rand(3);//HERE: Marca
-			'boss_state_4 = rand(3);
-			'boss_state_5 = rand(3);
-		}
-		else if('boss_floor_lv == 75){
+		if('boss_floor_lv == 75){
 			'boss_state_1 = rand(3,5);
 			'boss_state_2 = rand(3,5);
 			'boss_state_3 = rand(3,5);
 			'boss_state_4 = rand(3,5);
 			'boss_state_5 = rand(3,5);
+		}
+		else {
+			'boss_state_1 = rand(1,3);
+			'boss_state_2 = rand(1,3);
+			'boss_state_3 = rand(1,3);
+			'boss_state_4 = rand(1,3);
+			'boss_state_5 = rand(1,3);
 		}
 
 		callfunc("#sumper");
@@ -1370,6 +1374,12 @@ OnInstanceInit:
 	'boss_state_4=0;
 	'boss_state_5=0;
 	'lvl_stats=0;
+	'sum_pt=0;
+	'sum_pt_1=0;
+	'sum_pt_2=0;
+	'sum_pt_3=0;
+	'sum_pt_4=0;
+	'sum_pt_5=0;
 	end;
 }
 
@@ -1689,6 +1699,13 @@ OnTalk:
 		end;
 	}
 
+	if(!'boss_stats_end){
+		mes "[Betelgeuse]";
+		mes "You are not prepared yet.";
+		mes "Speak with Oscar at the altar and begin the challenge before facing me.";
+		close;
+	}
+
 	if('start_boss)end;
 	'start_boss = 1;
 
@@ -1800,6 +1817,10 @@ function	script	last_boss	{
 
 	setunitdata .@mvp_UID,UMOB_RES,.@por_arr[UMOB_RES]+('sum_pt_4)*.@por_arr[UMOB_RES]/100;
 	setunitdata .@mvp_UID,UMOB_MRES,.@por_arr[UMOB_MRES]+('sum_pt_4)*.@por_arr[UMOB_MRES]/100;
+	if('boss_floor_lv == 75)
+		setunitdata .@mvp_UID,UMOB_DAMAGETAKEN,12;
+	else
+		setunitdata .@mvp_UID,UMOB_DAMAGETAKEN,25;
 	return;
 }
 
@@ -1825,13 +1846,12 @@ OnTimer1000:
 
 		getunitdata 'BossID,.@arr;
 		if(.@arr[UMOB_HP] <.@arr[UMOB_MAXHP]){
-		//unitskilluseid 'BossID,2051, 10,'BossID,-10;
-		setunitdata 'BossID,UMOB_HP,.@arr[UMOB_HP]+5000000*'boss_state_3;
+		setunitdata 'BossID,UMOB_HP,.@arr[UMOB_HP]+2000000*'boss_state_3;
 		}
-		setunitdata 'BossID,UMOB_ATKMIN,.@arr[UMOB_ATKMIN]+'boss_state_1*2;
-		setunitdata 'BossID,UMOB_ATKMAX,.@arr[UMOB_ATKMAX]+'boss_state_1*2;
-		setunitdata 'BossID,UMOB_MATKMIN,.@arr[UMOB_MATKMIN]+'boss_state_1*2;
-		setunitdata 'BossID,UMOB_MATKMAX,.@arr[UMOB_MATKMAX]+'boss_state_1*2;
+		setunitdata 'BossID,UMOB_ATKMIN,.@arr[UMOB_ATKMIN]+'boss_state_1;
+		setunitdata 'BossID,UMOB_ATKMAX,.@arr[UMOB_ATKMAX]+'boss_state_1;
+		setunitdata 'BossID,UMOB_MATKMIN,.@arr[UMOB_MATKMIN]+'boss_state_1;
+		setunitdata 'BossID,UMOB_MATKMAX,.@arr[UMOB_MATKMAX]+'boss_state_1;
 		initnpctimer;
 	}
 	else stopnpctimer;
@@ -1864,11 +1884,6 @@ OnStart1:
 	monster .@map$,157,88,"--ja--",20994,1,.@killboss$;
 	'BossID = $@mobid[0];
 	callfunc "last_boss",'BossID;
-	if('boss_floor_lv == 75){
-		setunitdata 'BossID,UMOB_DAMAGETAKEN,3;
-	}
-	else setunitdata 'BossID,UMOB_DAMAGETAKEN,15;
-
 	'bossskill = 0;
 	'fail=0;
 	donpcevent instance_npcname("#50bossarea")+"::OnEnable";
@@ -1885,10 +1900,6 @@ OnStart2:
 	monster .@map$,157,88,"--ja--",20994,1,.@killboss$;
 	'BossID = $@mobid[0];
 	callfunc "last_boss",'BossID;
-	if('boss_floor_lv == 75){
-		setunitdata 'BossID,UMOB_DAMAGETAKEN,3;
-	}
-	else setunitdata 'BossID,UMOB_DAMAGETAKEN,15;
 	'bossskill = 0;
 	'fail=0;
 	donpcevent instance_npcname("#def_mob_timer")+"::OnEnable";
@@ -1906,10 +1917,6 @@ OnStart3:
 	monster .@map$,157,88,"--ja--",20994,1,.@killboss$;
 	'BossID = $@mobid[0];
 	callfunc "last_boss",'BossID;
-	if('boss_floor_lv == 75){
-		setunitdata 'BossID,UMOB_DAMAGETAKEN,3;
-	}
-	else setunitdata 'BossID,UMOB_DAMAGETAKEN,15;
 	'bossskill = 0;
 	'fail=0;
 	donpcevent instance_npcname("#50bossarea")+"::OnEnable";
@@ -2253,7 +2260,7 @@ OnEnable:
 	end;
 OnTimer10000:
 	if('bull_stop)end;
-	setunitdata 'BossID,UMOB_DAMAGETAKEN,1;
+	setunitdata 'BossID,UMOB_DAMAGETAKEN,5;
 	mapannounce 'map_3$, "Star spirits are scattered in four places. Please break them quickly. Betelgeuse's defense has increased dramatically.",bc_map,"0x00ff00";
 	areamonster 'map_3$,126,64,185,148,"Star Soul",20995,3+'boss_state_4,instance_npcname(strnpcinfo(0))+"::OnSTARKILL";
 	stopnpctimer;
@@ -2264,7 +2271,7 @@ OnSTARKILL:
 	set .@mob_dead_num,mobcount('map_3$,instance_npcname(strnpcinfo(0))+"::OnSTARKILL");
 	if(.@mob_dead_num < 1) {
 		mapannounce 'map_3$, "All star souls have been cleared~",bc_map,"0x00ff00";
-		if('boss_floor_lv == 75){ setunitdata 'BossID,UMOB_DAMAGETAKEN,3; } else { setunitdata 'BossID,UMOB_DAMAGETAKEN,15; }
+		if('boss_floor_lv == 75){ setunitdata 'BossID,UMOB_DAMAGETAKEN,12; } else { setunitdata 'BossID,UMOB_DAMAGETAKEN,25; }
 		sleep 3000;
 		//initnpctimer;
 	}

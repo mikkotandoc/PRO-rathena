@@ -3,9 +3,17 @@
 // Daily hunting events rewarding Eden Group Coins (25223)
 // Quest IDs 70289 ~ 70300 (client: OngoingQuests.lub)
 // Cooldown IDs 70309 ~ 70320 (+24h per quest)
+// Hunt completion window: +168h (7 days) per quest_db.yml
 //============================================================
 
 moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
+
+	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 2000) {
+		mes "[Eden Event Coordinator]";
+		mes "You are carrying too much to receive event rewards.";
+		mes "Please free up inventory space and try again.";
+		close;
+	}
 
 	if (!callfunc("F_HasEdenGroupMark")) {
 		mes "[Eden Event Coordinator]";
@@ -13,9 +21,20 @@ moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
 		close;
 	}
 
+	for (.@i = 70309; .@i <= 70320; .@i++) {
+		if (checkquest(.@i, PLAYTIME) == 2)
+			erasequest .@i;
+	}
+	for (.@i = 70289; .@i <= 70300; .@i++) {
+		if (checkquest(.@i, HUNTING) == 1)
+			erasequest .@i;
+	}
+
 	mes "[Eden Event Coordinator]";
 	mes "Welcome! I coordinate limited-time hunting events for Eden members.";
-	mes "Complete assignments to earn generous EXP and Eden Group Coins.";
+	mes "Complete assignments to earn EXP and Eden Group Coins.";
+	mes "^0000ffRules:^000000 Each hunt must be finished within ^0000cd7 days^000000.";
+	mes "After turn-in, that event enters a ^0000cd24-hour cooldown^000000 before you can take it again.";
 	next;
 
 	switch(select("Browse Event Quests:Turn In Completed Quests:Cancel")) {
@@ -24,18 +43,18 @@ moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
 		mes "Select an event assignment:";
 		next;
 		switch(select("[Event] Poring Extermination:[Event] Ant Egg Collection:[Event] Skeleton Warriors:[Event] Orc Zombie Cleanup:[Event] Mi Gao Extermination:[Event] Anubis Guardian Trial:[Event] Illusion of Moonlight:[Event] Illusion of Vampire:[Event] Illusion of Teddy Bear:[Event] Illusion of Abyss:[Event] Illusion of Twins:[Event] Illusion of Labyrinth:Cancel")) {
-			case 1:  callsub L_Assign, 70289, 70309, "Poring Extermination";
-			case 2:  callsub L_Assign, 70290, 70310, "Ant Egg Collection";
-			case 3:  callsub L_Assign, 70291, 70311, "Skeleton Warriors";
-			case 4:  callsub L_Assign, 70292, 70312, "Orc Zombie Cleanup";
-			case 5:  callsub L_Assign, 70293, 70313, "Mi Gao Extermination";
-			case 6:  callsub L_Assign, 70294, 70314, "Anubis Guardian Trial";
-			case 7:  callsub L_Assign, 70295, 70315, "Illusion of Moonlight";
-			case 8:  callsub L_Assign, 70296, 70316, "Illusion of Vampire";
-			case 9:  callsub L_Assign, 70297, 70317, "Illusion of Teddy Bear";
-			case 10: callsub L_Assign, 70298, 70318, "Illusion of Abyss";
-			case 11: callsub L_Assign, 70299, 70319, "Illusion of Twins";
-			case 12: callsub L_Assign, 70300, 70320, "Illusion of Labyrinth";
+			case 1:  callsub L_Assign, 70289, 70309, "Poring Extermination"; break;
+			case 2:  callsub L_Assign, 70290, 70310, "Ant Egg Collection"; break;
+			case 3:  callsub L_Assign, 70291, 70311, "Skeleton Warriors"; break;
+			case 4:  callsub L_Assign, 70292, 70312, "Orc Zombie Cleanup"; break;
+			case 5:  callsub L_Assign, 70293, 70313, "Mi Gao Extermination"; break;
+			case 6:  callsub L_Assign, 70294, 70314, "Anubis Guardian Trial"; break;
+			case 7:  callsub L_Assign, 70295, 70315, "Illusion of Moonlight"; break;
+			case 8:  callsub L_Assign, 70296, 70316, "Illusion of Vampire"; break;
+			case 9:  callsub L_Assign, 70297, 70317, "Illusion of Teddy Bear"; break;
+			case 10: callsub L_Assign, 70298, 70318, "Illusion of Abyss"; break;
+			case 11: callsub L_Assign, 70299, 70319, "Illusion of Twins"; break;
+			case 12: callsub L_Assign, 70300, 70320, "Illusion of Labyrinth"; break;
 			case 13: close;
 		}
 		break;
@@ -46,12 +65,12 @@ moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
 		next;
 
 		for (.@i = 70289; .@i <= 70300; .@i++) {
-			if (checkquest(.@i, HUNTING) == 2) {
-				.@cd_id = .@i + 20;
-				callsub L_Reward, .@i;
-				setquest .@cd_id;
-				.@rewarded = 1;
-			}
+			if (checkquest(.@i, HUNTING) != 2)
+				continue;
+
+			.@cd_id = .@i + 20;
+			callsub L_Reward, .@i, .@cd_id;
+			.@rewarded = 1;
 		}
 
 		if (!.@rewarded) {
@@ -61,7 +80,9 @@ moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
 		}
 
 		mes "[Eden Event Coordinator]";
-		mes "Rewards have been issued. This event quest is now on a 24-hour cooldown.";
+		mes "Your completed event quests have been rewarded.";
+		mes "Each turned-in assignment is now on a ^0000cd24-hour cooldown^000000.";
+		mes "You may repeat it after the timer shown in your Quest Window expires.";
 		close;
 
 	case 3:
@@ -74,50 +95,81 @@ L_Assign:
 	.@cd_id = getarg(1);
 	.@name$ = getarg(2);
 
-	if (checkquest(.@cd_id) == 0 || checkquest(.@cd_id) == 1) {
+	if (checkquest(.@cd_id, PLAYTIME) == 0 || checkquest(.@cd_id, PLAYTIME) == 1) {
 		mes "[Eden Event Coordinator]";
-		mes "^ff0000" + .@name$ + "^000000 is on a 24-hour cooldown.";
+		mes "^ff0000" + .@name$ + "^000000 is on a ^0000cd24-hour cooldown^000000.";
+		mes "Check your Quest Window for the remaining wait time, then try again.";
 		close;
 	}
-	if (checkquest(.@cd_id) == 2)
+	if (checkquest(.@cd_id, PLAYTIME) == 2)
 		erasequest .@cd_id;
 
-	.@state = checkquest(.@q_id);
-	if (.@state == 0 || .@state == 1) {
+	if (checkquest(.@q_id, HUNTING) == 1) {
+		erasequest .@q_id;
+		mes "[Eden Event Coordinator]";
+		mes "Your previous ^0000ff" + .@name$ + "^000000 attempt expired after ^0000cd7 days^000000 and has been reset.";
+		next;
+	}
+
+	switch (checkquest(.@q_id, HUNTING)) {
+	case -1:
+		break;
+	case 2:
+		mes "[Eden Event Coordinator]";
+		mes "You have already completed ^0000ff" + .@name$ + "^000000.";
+		mes "Please select ^0000ffTurn In Completed Quests^000000 to collect your reward.";
+		close;
+	case 0:
+	case 1:
 		mes "[Eden Event Coordinator]";
 		mes "You are already tracking ^0000ff" + .@name$ + "^000000.";
+		mes "Finish the hunt within ^0000cd7 days^000000, or wait for an expired attempt to reset.";
 		close;
 	}
 
 	setquest .@q_id;
 	mes "[Eden Event Coordinator]";
 	mes "Event registered: ^0000ff" + .@name$ + "^000000.";
-	mes "Check your Quest Window for hunt details, then return here when finished.";
+	mes "You have ^0000cd7 days^000000 to complete this hunt.";
+	mes "Return here to turn it in once your Quest Window shows it as finished.";
 	close;
 
 L_Reward:
 	.@q_id = getarg(0);
+	.@cd_id = getarg(1);
 
 	switch (.@q_id) {
-		case 70289: .@b_exp = 1000000000;  .@j_exp = 500000000;   .@coin = 10; break;
-		case 70290: .@b_exp = 2000000000;  .@j_exp = 1000000000;  .@coin = 15; break;
-		case 70291: .@b_exp = 5000000000;  .@j_exp = 2500000000;  .@coin = 20; break;
-		case 70292: .@b_exp = 10000000000; .@j_exp = 5000000000;  .@coin = 25; break;
-		case 70293: .@b_exp = 15000000000; .@j_exp = 7500000000;  .@coin = 30; break;
-		case 70294: .@b_exp = 20000000000; .@j_exp = 10000000000; .@coin = 40; break;
-		case 70295: .@b_exp = 30000000000; .@j_exp = 15000000000; .@coin = 50; break;
-		case 70296: .@b_exp = 40000000000; .@j_exp = 20000000000; .@coin = 60; break;
-		case 70297: .@b_exp = 40000000000; .@j_exp = 20000000000; .@coin = 60; break;
-		case 70298: .@b_exp = 50000000000; .@j_exp = 25000000000; .@coin = 75; break;
-		case 70299:
-		case 70300:
-			.@b_exp = 50000000 * BaseLevel;
-			.@j_exp = 25000000 * BaseLevel;
-			.@coin = 75;
-			break;
+		// Mission Board 1~39 tier (div 200)
+		case 70289: .@b_exp = 3000;  .@j_exp = 2000;  .@rate = 200; .@coin = 10; break; // Spore-like
+		case 70290: .@b_exp = 3200;  .@j_exp = 3000;  .@rate = 200; .@coin = 15; break; // Zombie & Skeleton-like
+		// Mission Board 40~69 tier (div 220)
+		case 70291: .@b_exp = 14350; .@j_exp = 13700; .@rate = 220; .@coin = 20; break; // Orc Skeleton
+		case 70292: .@b_exp = 14350; .@j_exp = 13700; .@rate = 220; .@coin = 25; break; // Orc Zombie
+		// Mission Board 70~99 tier (div 220)
+		case 70293: .@b_exp = 39600; .@j_exp = 35000; .@rate = 220; .@coin = 30; break; // Increase Soil
+		case 70294: .@b_exp = 72000; .@j_exp = 72000; .@rate = 220; .@coin = 40; break; // Injustice
+		// Mission Board 100~110 tier (div 150)
+		case 70295: .@b_exp = 160000; .@j_exp = 160000; .@rate = 150; .@coin = 50; break; // Nightmare Terror
+		case 70296: .@b_exp = 300000; .@j_exp = 300000; .@rate = 150; .@coin = 60; break; // Nepenthes
+		// Mission Board 120~140 tier (div 200)
+		case 70297: .@b_exp = 800000;  .@j_exp = 800000;  .@rate = 200; .@coin = 60; break; // Dolomedes
+		case 70298: .@b_exp = 1000000; .@j_exp = 1000000; .@rate = 200; .@coin = 75; break; // Desert Canyon Duo
+		// Mission Board 130~190 tier (div 200)
+		case 70299: .@b_exp = 1110729; .@j_exp = 1413414; .@rate = 200; .@coin = 75; break; // lasa_dun02
+		case 70300: .@b_exp = 1042488; .@j_exp = 2760588; .@rate = 200; .@coin = 75; break; // ecl_fild01
+		default:
+			return;
 	}
 
-	completequest .@q_id;
+	.@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / .@rate / 2;
+	.@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / .@rate / 2;
+
+	erasequest .@q_id;
+
+	if (checkquest(.@cd_id) >= 0)
+		erasequest .@cd_id;
+
+	setquest .@cd_id;
 	getexp .@b_exp, .@j_exp;
 	getitem 25223, .@coin;
 	return;

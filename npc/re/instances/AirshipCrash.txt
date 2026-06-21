@@ -1,0 +1,482 @@
+//===== rAthena Script =======================================
+//= Airship Crash Instance
+//===== Description: =========================================
+//= Heroes' Trails - Airship Crash memorial dungeon
+//= Based on kRO / Hazy Forest instance mechanics
+//============================================================
+
+function	script	F_Aircrash_HpMult	{
+	getpartymember getcharid(1);
+	return max(1, min($@partymembercount, 10));
+}
+
+function	script	F_Aircrash_SpawnMob	{
+	.@map$ = getarg(0);
+	.@label$ = getarg(1);
+	.@mult = getarg(2);
+	setarray .@ids[0], 20886, 20887, 20888, 20889, 20890;
+	.@id = .@ids[ rand(getarraysize(.@ids)) ];
+	// Spawn in walkable cavity zones (areamonster picks valid cells).
+	switch (rand(6)) {
+	case 0: areamonster .@map$,  30,  30,  70,  70, "--ja--", .@id, 1, .@label$; break;
+	case 1: areamonster .@map$, 230,  30, 270,  70, "--ja--", .@id, 1, .@label$; break;
+	case 2: areamonster .@map$,  30, 230,  70, 270, "--ja--", .@id, 1, .@label$; break;
+	case 3: areamonster .@map$, 230, 230, 270, 270, "--ja--", .@id, 1, .@label$; break;
+	case 4: areamonster .@map$, 120,  20, 180,  60, "--ja--", .@id, 1, .@label$; break;
+	default: areamonster .@map$, 120, 240, 180, 280, "--ja--", .@id, 1, .@label$; break;
+	}
+	if (.@mult > 1 && $@mobid[0]) {
+		.@hp = getunitdata($@mobid[0], UMOB_MAXHP);
+		setunitdata $@mobid[0], UMOB_MAXHP, .@hp * .@mult;
+		setunitdata $@mobid[0], UMOB_HP, .@hp * .@mult;
+	}
+	return;
+}
+
+function	script	F_Aircrash_ResetHunt	{
+	#aircrash_hunt = 0;
+	#aircrash_kills = 0;
+	return;
+}
+
+//============================================================
+// Dimensional Gap - Entry & Services
+//============================================================
+dali02,137,86,3	script	Dr. Dulaisakstrom#mjo	PORTAL,{
+	if (BaseLevel < 215) {
+		mes "^ff0000Users below level 215 cannot enter this dungeon.^000000";
+		close;
+	}
+	if (checkquest(15073, PLAYTIME) == 2) {
+		mes "^0000ffYou may enter Airship Crash again.^000000";
+		erasequest 15073;
+	}
+	else if (checkquest(15072, PLAYTIME) == 0 || checkquest(15072, PLAYTIME) == 1) {
+		mes "^ff0000This Memorial Dungeon cannot be accessed for 3 days after your last entrance.^000000";
+		close;
+	}
+	.@party_id = getcharid(1);
+	.@md_name$ = "Airship Crash";
+	if (.@party_id < 1) {
+		mes "^ff0000To enter, you must create or join a party of 1 or more members.^000000";
+		close;
+	}
+	if (is_party_leader() == false) {
+		mes "^ff0000Only the party leader can create the memorial dungeon.^000000";
+		close;
+	}
+	switch(select("Create Memorial Dungeon:Enter Airship Crash:Cancel")) {
+	case 1:
+		if (instance_create(.@md_name$) < 0) {
+			mes "Party: " + getpartyname(.@party_id);
+			mes "^0000ff" + .@md_name$ + "^000000 - Creation failed!";
+			close;
+		}
+		mes "^ff0000Memorial dungeon created.^000000";
+		mes "^ff0000Select Enter Airship Crash to proceed.^000000";
+		close;
+	case 2:
+		switch(instance_enter(.@md_name$)) {
+		case IE_OK:
+			mapannounce "dali02", strcharinfo(0) + " of the party " + getpartyname(.@party_id) + " entered " + .@md_name$ + ".", bc_map, "0x00ff99";
+			if (isbegin_quest(15072) == 0)
+				setquest 15072;
+			end;
+		case IE_NOMEMBER:
+			mes "^ff0000To enter, you must create or join a party of 1 or more members.^000000";
+			close;
+		case IE_NOINSTANCE:
+			mes "^ff0000The party leader has not created the memorial dungeon yet.^000000";
+			close;
+		default:
+			mes "An unknown error has occurred.";
+			close;
+		}
+	case 3:
+		end;
+	}
+}
+
+dali02,134,87,3	script	Rusbald#mjo	4_M_SAGE_C,{
+	mes "[Rusbald]";
+	mes "I exchange Ymir Fragments for expedition rewards.";
+	next;
+	switch(select("Unknown Stat Boots:Ymir Beads:Contaminated Card Book:Cancel")) {
+	case 1:
+		mes "[Rusbald]";
+		mes "Each pair of Unknown Stat Boots costs ^0000cd185 Ymir Fragments^000000.";
+		next;
+		switch(select("Unknown STR Boots:Unknown DEX Boots:Unknown VIT Boots:Unknown INT Boots:Unknown AGI Boots:Unknown LUK Boots:Cancel")) {
+		case 1: .@item = 470071; break;
+		case 2: .@item = 470072; break;
+		case 3: .@item = 470073; break;
+		case 4: .@item = 470074; break;
+		case 5: .@item = 470076; break;
+		case 6: .@item = 470077; break;
+		default: close;
+		}
+		if (countitem(1000363) < 185) {
+			mes "[Rusbald]";
+			mes "You need 185 Ymir Fragments.";
+			close;
+		}
+		delitem 1000363, 185;
+		getitem .@item, 1;
+		mes "[Rusbald]";
+		mes "Here you are.";
+		close;
+	case 2:
+		if (Zeny < 150000 || countitem(1000363) < 17) {
+			mes "[Rusbald]";
+			mes "Ymir Beads cost ^0000cd150,000 zeny^000000 and ^0000cd17 Ymir Fragments^000000.";
+			close;
+		}
+		Zeny -= 150000;
+		delitem 1000363, 17;
+		getitem 100476, 1;
+		mes "[Rusbald]";
+		mes "Use these beads to enchant Unknown Stat Boots.";
+		close;
+	case 3:
+		if (countitem(1000363) < 2500) {
+			mes "[Rusbald]";
+			mes "A Contaminated Card Book costs ^0000cd2500 Ymir Fragments^000000.";
+			close;
+		}
+		delitem 1000363, 2500;
+		getitem 100462, 1;
+		mes "[Rusbald]";
+		mes "Good luck with your card pull.";
+		close;
+	case 4:
+		close;
+	}
+}
+
+dali02,131,86,5	script	Wurmm#mjo	4_M_ALCHE_C,{
+	mes "[Wurmm]";
+	mes "I can refine Ymir Ore into usable Ymir Fragments.";
+	next;
+	switch(select("Exchange Ymir Ore:Cancel")) {
+	case 1:
+		input .@amount;
+		if (.@amount < 1) close;
+		if (countitem(1000364) < .@amount) {
+			mes "[Wurmm]";
+			mes "You do not have enough Ymir Ore.";
+			close;
+		}
+		delitem 1000364, .@amount;
+		getitem 1000363, .@amount;
+		mes "[Wurmm]";
+		mes "Done. I converted " + .@amount + " ore into fragments.";
+		close;
+	case 2:
+		close;
+	}
+}
+
+//============================================================
+// Instance - Field Entrance
+//============================================================
+1@mjo1,219,379,3	script	Expedition Scientist#mjo	4_LGTSCIENCE,{
+	mes "[Scientist]";
+	mes "Welcome to the crash site.";
+	mes "The expedition team is waiting inside the cave to the northeast.";
+	mes "Follow the cave entrance marked on your minimap.";
+	next;
+	mes "[Scientist]";
+	mes "Coordinates: ^0000cd(277, 253)^000000";
+	close2;
+	viewpoint 1, 277, 253, 1, 0xFFFF00;
+	end;
+}
+
+1@mjo1,277,253,0	script	Cave Entrance#mjo	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp instance_mapname("1@mjo1"), 277, 265;
+	end;
+}
+
+1@mjo1,277,260,0	warp	Cave Exit#mjo	2,2,1@mjo1,219,375
+
+//============================================================
+// Instance - Expedition Base (Cave)
+//============================================================
+1@mjo1,277,268,3	script	Professor#mjo	4_M_SAGE_A,{
+	mes "[Professor]";
+	if ('investigation == 0) {
+		mes "We are investigating monsters mutated by scattered Ymir Stone fragments.";
+		mes "The island cave connects to their nesting grounds.";
+		next;
+		mes "[Professor]";
+		mes "When you are ready, register your party to begin the investigation.";
+		mes "^ff0000Warning: monsters will begin spawning once you register.^000000";
+		next;
+		if (select("Listen only.:Register investigation party.") == 1) {
+			mes "[Professor]";
+			mes "Take your time. Speak with my students for more details.";
+			close;
+		}
+		if (getcharid(1) == 0 || is_party_leader() == false) {
+			mes "[Professor]";
+			mes "Only the party leader may register the investigation.";
+			close;
+		}
+		'investigation = 1;
+		'hp_mult = callfunc("F_Aircrash_HpMult");
+		donpcevent instance_npcname("#AircrashCtrl") + "::OnStartSpawns";
+		mapannounce instance_mapname("1@mjo1"), "Professor: Investigation registered. Contaminated monsters will now appear!", bc_map, 0xFFFF00;
+		mes "[Professor]";
+		mes "Registration complete. Be careful out there.";
+		close;
+	}
+	if (#aircrash_hunt > 0) {
+		.@need = 0;
+		.@reward = 0;
+		switch(#aircrash_hunt) {
+		case 1: .@need = 100; .@reward = 1; break;
+		case 2: .@need = 200; .@reward = 2; break;
+		case 3: .@need = 350; .@reward = 3; break;
+		}
+		if (#aircrash_kills < .@need) {
+			mes "Progress: ^0000cd" + #aircrash_kills + " / " + .@need + "^000000 monsters eliminated.";
+			close;
+		}
+		getitem 1000363, .@reward;
+		if (#aircrash_hunt_tier < #aircrash_hunt)
+			#aircrash_hunt_tier = #aircrash_hunt;
+		callfunc "F_Aircrash_ResetHunt";
+		mes "[Professor]";
+		mes "Excellent work. Here are your Ymir Fragments.";
+		close;
+	}
+	mes "The investigation is underway.";
+	mes "Accept hunting orders from the student, then return here to claim Ymir Fragments.";
+	close;
+}
+
+1@mjo1,281,268,3	script	Student Kay#mjo	4_F_NOVICE,{
+	mes "[Student Kay]";
+	if ('investigation == 0) {
+		mes "Please speak with the Professor first.";
+		close;
+	}
+	if (#aircrash_hunt > 0) {
+		.@need = (#aircrash_hunt == 1 ? 100 : (#aircrash_hunt == 2 ? 200 : 350));
+		mes "You already have an active order.";
+		mes "Progress: ^0000cd" + #aircrash_kills + " / " + .@need + "^000000";
+		mes "Report to the Professor when finished.";
+		close;
+	}
+	mes "I can assign monster elimination orders.";
+	mes "You may only take one order at a time.";
+	next;
+	switch(select("Eliminate 100 monsters.:Eliminate 200 monsters.:Eliminate 350 monsters.:Cancel")) {
+	case 1:
+		#aircrash_hunt = 1;
+		#aircrash_kills = 0;
+		break;
+	case 2:
+		if (#aircrash_hunt_tier < 1) {
+			mes "[Student Kay]";
+			mes "Complete the 100 monster order first.";
+			close;
+		}
+		#aircrash_hunt = 2;
+		#aircrash_kills = 0;
+		break;
+	case 3:
+		if (#aircrash_hunt_tier < 2) {
+			mes "[Student Kay]";
+			mes "Complete the 200 monster order first.";
+			close;
+		}
+		#aircrash_hunt = 3;
+		#aircrash_kills = 0;
+		break;
+	default:
+		close;
+	}
+	mes "[Student Kay]";
+	mes "Order accepted. Hunt monsters in the cavity and report to the Professor.";
+	close;
+}
+
+1@mjo1,274,268,3	script	Student Rin#mjo	4_M_REPAIR,{
+	mes "[Student Rin]";
+	mes "Since you cannot teleport here, use ^0000cdRope Piles^000000 in the cavity to return to base.";
+	mes "Mobile Devices can also guide you back or toward the boss area.";
+	next;
+	switch(select("Mark rope locations on minimap.:Cancel")) {
+	case 1:
+		.@map$ = instance_mapname("1@mjo2");
+		viewpointmap .@map$, 1,  45,  45, 1, 0xFFFF00;
+		viewpointmap .@map$, 1, 255,  45, 2, 0xFFFF00;
+		viewpointmap .@map$, 1,  45, 255, 3, 0xFFFF00;
+		viewpointmap .@map$, 1, 255, 255, 4, 0xFFFF00;
+		viewpointmap .@map$, 1, 150,  30, 5, 0xFFFF00;
+		viewpointmap .@map$, 1, 150, 270, 6, 0xFFFF00;
+		mes "[Student Rin]";
+		mes "Rope locations are now marked with yellow ^ff0000+^000000 on your minimap.";
+		close;
+	case 2:
+		close;
+	}
+}
+
+1@mjo1,283,265,3	script	Ghost Zack#mjo	4_GHOST_STAND,{
+	mes "[Ghost Zack]";
+	mes "An unidentified creature lurks deeper in the cavity.";
+	mes "Bring me ^0000cd55 Ymir Fragments^000000 and I will summon it.";
+	next;
+	if ('boss_summoned) {
+		mes "[Ghost Zack]";
+		mes "It has already been summoned. Use the Mobile Device to reach it.";
+		close;
+	}
+	switch(select("Offer 55 Ymir Fragments.:Cancel")) {
+	case 1:
+		if (countitem(1000363) < 55) {
+			mes "[Ghost Zack]";
+			mes "You do not have enough Ymir Fragments.";
+			close;
+		}
+		if (getcharid(1) == 0 || is_party_leader() == false) {
+			mes "[Ghost Zack]";
+			mes "Only the party leader may perform the summoning ritual.";
+			close;
+		}
+		delitem 1000363, 55;
+		'boss_summoned = 1;
+		donpcevent instance_npcname("#AircrashCtrl") + "::OnSummonBoss";
+		mes "[Ghost Zack]";
+		mes "It is done. Use the Mobile Device to reach the summoning site immediately!";
+		close;
+	case 2:
+		close;
+	}
+}
+
+1@mjo1,285,265,3	script	Mobile Device#mjo	4_ENERGY_WHITE,{
+	mes "[Mobile Device]";
+	mes "Select a warp destination.";
+	next;
+	switch(select("Expedition base.:Boss summoning site.:Cancel")) {
+	case 1:
+		warp instance_mapname("1@mjo1"), 277, 265;
+		end;
+	case 2:
+		if (!'boss_summoned) {
+			mes "[Mobile Device]";
+			mes "Boss summoning site is not available yet.";
+			close;
+		}
+		warp instance_mapname("1@mjo2"), 150, 150;
+		end;
+	case 3:
+		close;
+	}
+}
+
+1@mjo1,280,262,0	script	Dungeon Gate#mjo	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if ('investigation == 0) {
+		mes "The cavity is sealed until the Professor registers your investigation party.";
+		close2;
+		warp instance_mapname("1@mjo1"), 277, 265;
+		end;
+	}
+	warp instance_mapname("1@mjo2"), 150, 50;
+	end;
+}
+
+1@mjo2,150,42,0	warp2	Return Gate#mjo	2,2,1@mjo1,277,265
+
+// Rope piles - quick return to expedition base
+1@mjo2,45,45,0	warp2	Rope Pile#mjo1	1,1,1@mjo1,277,265
+1@mjo2,255,45,0	warp2	Rope Pile#mjo2	1,1,1@mjo1,277,265
+1@mjo2,45,255,0	warp2	Rope Pile#mjo3	1,1,1@mjo1,277,265
+1@mjo2,255,255,0	warp2	Rope Pile#mjo4	1,1,1@mjo1,277,265
+1@mjo2,150,30,0	warp2	Rope Pile#mjo5	1,1,1@mjo1,277,265
+1@mjo2,150,270,0	warp2	Rope Pile#mjo6	1,1,1@mjo1,277,265
+
+// Failsafe in case a player gets clipped into unwalkable terrain.
+1@mjo1,276,266,3	script	Rescue Device#mjo	4_ENERGY_RED,{
+	mes "[Rescue Device]";
+	mes "Relocate to the expedition base center?";
+	next;
+	if (select("Yes.:No.") == 1)
+		warp instance_mapname("1@mjo1"), 277, 265;
+	close;
+}
+
+//============================================================
+// Instance Controller
+//============================================================
+1@mjo1,1,1,0	script	#AircrashCtrl	-1,{
+	end;
+
+OnInstanceInit:
+	'investigation = 0;
+	'boss_summoned = 0;
+	'hp_mult = 1;
+	'map2$ = instance_mapname("1@mjo2");
+	end;
+
+OnStartSpawns:
+	'map2$ = instance_mapname("1@mjo2");
+	.@label$ = instance_npcname("#AircrashCtrl") + "::OnMobDead";
+	for (.@i = 0; .@i < 40; .@i++)
+		callfunc("F_Aircrash_SpawnMob", 'map2$, .@label$, 'hp_mult);
+	mapannounce 'map2$, "Contaminated monsters have appeared in the cavity!", bc_map, 0xFFFF00;
+	end;
+
+OnSummonBoss:
+	'map2$ = instance_mapname("1@mjo2");
+	if (mobcount('map2$, instance_npcname("#AircrashCtrl") + "::OnBossDead") > 0)
+		end;
+	.@label$ = instance_npcname("#AircrashCtrl") + "::OnBossDead";
+	monster 'map2$, 150, 150, "--ja--", 20891, 1, .@label$;
+	if ('hp_mult > 1 && $@mobid[0]) {
+		.@hp = getunitdata($@mobid[0], UMOB_MAXHP);
+		setunitdata $@mobid[0], UMOB_MAXHP, .@hp * 'hp_mult;
+		setunitdata $@mobid[0], UMOB_HP, .@hp * 'hp_mult;
+	}
+	mapannounce 'map2$, "An Unidentified Creature has appeared!", bc_map, 0xFF0000;
+	end;
+
+OnMobDead:
+	if ('investigation == 0)
+		end;
+	if (playerattached()) {
+		if (#aircrash_hunt > 0 && #aircrash_kills < 350)
+			#aircrash_kills++;
+	}
+	'map2$ = instance_mapname("1@mjo2");
+	if (mobcount('map2$, instance_npcname("#AircrashCtrl") + "::OnMobDead") < 25)
+		callfunc("F_Aircrash_SpawnMob", 'map2$, instance_npcname("#AircrashCtrl") + "::OnMobDead", 'hp_mult);
+	end;
+
+OnBossDead:
+	mapannounce 'map2$, "The Unidentified Creature has been defeated!", bc_map, 0x00FF99;
+	end;
+}
+
+// Exit warp
+1@mjo1,273,262,0	script	Leave Instance#mjo	WARPNPC,2,2,{
+	end;
+OnTouch:
+	mes "Return to the Dimensional Gap?";
+	next;
+	if (select("Leave.:Stay.") == 2)
+		close;
+	if (checkquest(15072) == 1)
+		completequest 15072;
+	if (isbegin_quest(15073) == 0)
+		setquest 15073;
+	warp "dali02", 137, 86;
+	end;
+}

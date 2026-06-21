@@ -7,6 +7,7 @@
 //= 1.0 Initial release [crazyarashi]
 //= 1.1 Optimizations and cleanup [Everade]
 //= 1.2 Cleanup [Capuche]
+//= 1.3 Added bound automatic perfect orb enchant UI [PRO-rathena]
 //============================================================
 
 ba_in01,87,370,3	script	Lisa#ep172_merchant	20698,{
@@ -24,7 +25,11 @@ ba_in01,87,370,3	script	Lisa#ep172_merchant	20698,{
 		mes "If you bring automatic equipment and reinforcement modules, we can enchant the appropriate module on the equipment.";
 		next;
 		mes "[Lisa]";
-		mes "This is done according to the specification module, so the equipment will not be destroyed. However, the number of upgrades can vary depending on the module.";
+		mes "Bound automatic armor, engine, leg, and booster accessories can also receive ^0000CDperfect orb enchants^000000 using " + mesitemlink(1000103) + ".";
+		next;
+		mes "[Lisa]";
+		mes "Module enhancement never destroys equipment, but the number of upgrades varies by module grade.";
+		mes "Perfect orb enchants are permanent and cannot be reset.";
 		next;
 		mes "[Lisa]";
 		mes "Then please visit again when you need help~";
@@ -61,6 +66,41 @@ ba_in01,87,370,3	script	Lisa#ep172_merchant	20698,{
 	next;
 	mes "[Lisa]";
 	mes strcharinfo(0) + ".";
+	mes "Which enhancement method would you like?";
+	next;
+	switch( select( "Module Enhancement", "Perfect Orb Enhancement (Bound)", "Cancel" ) ) {
+	case 1:
+		break;
+	case 2:
+		switch( .@part ) {
+		case EQI_GARMENT:
+			.@enchant_id = 45;
+			break;
+		case EQI_ARMOR:
+			.@enchant_id = 44;
+			break;
+		case EQI_SHOES:
+			.@enchant_id = 46;
+			break;
+		case EQI_ACC_R:
+			.@enchant_id = 41;
+			break;
+		case EQI_ACC_L:
+			.@enchant_id = 35;
+			break;
+		}
+		mes "[Lisa]";
+		mes "Opening perfect orb enchantment for bound automatic equipment.";
+		mes "Each orb costs 25 " + mesitemlink(1000103) + ".";
+		close2;
+		item_enchant( .@enchant_id );
+		end;
+	case 3:
+		mes "[Lisa]";
+		mes "Stopping conversation.";
+		close;
+	}
+	mes "[Lisa]";
 	mes "Please select the grade of module that you want to use.";
 	next;
 	switch( select( "Cancel", "Normal Grade", "Rare Grade", "Unique Grade", "Legendary Grade", "Epic Grade 1", "Epic Grade 2", "Epic Grade 3" ) ) {
@@ -217,36 +257,40 @@ ba_in01,87,370,3	script	Lisa#ep172_merchant	20698,{
 	mes "[Lisa]";
 	mes "Woaaaah~ I can feel the power of your automatic equipment already~!";
 	close;
+
+OnInit:
+	setunittitle getnpcid(0), "<Automatic Enchanter>";
+	end;
 }
 
 //= Merchants
 -	marketshop	ep172littlemanager00	-1,1000227:172:999999
 
-ba_in01,87,386,3	script	Child Manager ©¬#ep172_pet	EP17_2_CHILD_ADMIN1,{
+ba_in01,87,386,3	script	Child Manager ??#ep172_pet	EP17_2_CHILD_ADMIN1,{
 	if (checkweight(1201,3) == 0) {
 		mes "- You have too many items.";
 		mes "Please clear your inventory and try again. -";
 		close;
 	}
-	mes "[Child Manager ©¬]";
+	mes "[Child Manager ??]";
 	mes "I have a whole bunch of little stuffs!";
 	next;
 	switch( select( "Little Manager", "Cloud Cotton", "Little Headress", "Cancel" ) ) {
 	case 1:
-		mes "[Child Manager ©¬]";
+		mes "[Child Manager ??]";
 		mes "If you want to play with the little manager, it would cost you 30 Barmeal Tickets.";
 		next;
 		if (select( "Exchange.", "Stop." ) == 2) {
-			mes "[Child Manager ©¬]";
+			mes "[Child Manager ??]";
 			mes "Then, it's time for me to play!";
 			close;
 		}
 		if (countitem(1000103) < 30) {
-			mes "[Child Manager ©¬]";
+			mes "[Child Manager ??]";
 			mes "Like I said, if you want to play with the little manager, you'll need 30 Barmeal Tickets!";
 			close;
 		}
-		mes "[Child Manager ©¬]";
+		mes "[Child Manager ??]";
 		mes "Have fun with your new friend!";
 		delitem 1000103,30;
 		getitem 9123,1;
@@ -258,7 +302,7 @@ ba_in01,87,386,3	script	Child Manager ©¬#ep172_pet	EP17_2_CHILD_ADMIN1,{
 		callshop "barter_Ep_17_2_C_Admin_Acc";
 		end;
 	case 4:
-		mes "[Child Manager ©¬]";
+		mes "[Child Manager ??]";
 		mes "Then, it's time for me to play!";
 		close;
 	}

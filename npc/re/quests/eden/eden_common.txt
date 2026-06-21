@@ -436,3 +436,14 @@ moc_para01,20,35,5	script	Office Assistant Neede	814,{
 function	script	F_HasEdenGroupMark	{
 	return (countitem(6219) > 0 || countitem(22508) > 0);
 }
+
+function	script	F_CleanupEdenBoardCooldown	{
+	.@start = getarg(0);
+	.@end = getarg(1);
+
+	for (.@i = .@start; .@i <= .@end; .@i++) {
+		if (checkquest(.@i, PLAYTIME) == 2)
+			erasequest .@i;
+	}
+	return;
+}

@@ -1,24 +1,33 @@
-// Sync macro patrol farming maps from db/re/map_drops.yml (Play_RO_Gold_Coin_ global drops).
+// Sync macro patrol farming maps from map_drops (Play_RO_Gold_Coin_ global drops).
 // Usage: node tools/sync_macro_patrol_maps.js
 
 const fs = require('fs');
 const path = require('path');
 
-const yamlPath = path.join(__dirname, '..', 'db', 're', 'map_drops.yml');
-const text = fs.readFileSync(yamlPath, 'utf8');
+const files = [
+	path.join(__dirname, '..', 'db', 're', 'map_drops.yml'),
+	path.join(__dirname, '..', 'db', 'import', 'map_drops.yml'),
+];
 
 const maps = [];
 let current = null;
 
-for (const line of text.split(/\r?\n/)) {
-	const mapMatch = line.match(/^\s*- Map:\s*(.+)\s*$/);
-	if (mapMatch) {
-		current = mapMatch[1].trim();
+for (const yamlPath of files) {
+	if (!fs.existsSync(yamlPath)) {
 		continue;
 	}
 
-	if (current && /Item:\s*Play_RO_Gold_Coin_/.test(line)) {
-		maps.push(current);
+	const text = fs.readFileSync(yamlPath, 'utf8');
+	for (const line of text.split(/\r?\n/)) {
+		const mapMatch = line.match(/^\s*- Map:\s*(.+)\s*$/);
+		if (mapMatch) {
+			current = mapMatch[1].trim();
+			continue;
+		}
+
+		if (current && /Item:\s*Play_RO_Gold_Coin_/.test(line)) {
+			maps.push(current);
+		}
 	}
 }
 

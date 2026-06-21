@@ -14,6 +14,7 @@
 //===== Additional Comments: =================================
 //= 1.0 First version. [Euphy]
 //= 1.1 Do not refine above ticket level. [Euphy]
+//= 1.2 Fix cert_level array missing +10 (off-by-one for +10~+5). [Custom]
 //============================================================
 
 // Main NPC :: safety_Ref_NPC
@@ -52,7 +53,7 @@ prontera,182,174,6	script	Refine Master	851,{
 		6234,	// Guarantee_Armor_7Up
 		6235,	// Guarantee_Armor_6Up
 		6457;	// Guarantee_Armor_5Up
-	setarray .@cert_level[0],19,18,17,16,15,14,13,12,11,9,8,7,6,5;
+	setarray .@cert_level[0],19,18,17,16,15,14,13,12,11,10,9,8,7,6,5;
 	.@size_cert = getarraysize(.@cert_weapon);
 
 	for ( .@i = 0; .@i < .@size_cert; ++.@i ) {
@@ -221,7 +222,7 @@ prontera,182,174,6	script	Refine Master	851,{
 		mes "You switched the item while I wasn't looking! Get out of here!";
 		close;
 	}
-	successrefitem .@part, .@ticket_lv - getequiprefinerycnt(.@part);
+	successrefitem .@part, .@ticket_lv - .@refinerycnt;
 	next;
 	emotion ET_DELIGHT;
 	mes "[Refine Master]";

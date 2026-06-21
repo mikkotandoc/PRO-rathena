@@ -2070,6 +2070,7 @@ void intif_parse_questlog(int32 fd)
 	} else {
 		struct quest *received = (struct quest *)RFIFOP(fd,8);
 		int32 k = num_received;
+		bool invalid_skipped = false;
 
 		if(sd->quest_log)
 			RECREATE(sd->quest_log, struct quest, num_received);
@@ -2077,8 +2078,14 @@ void intif_parse_questlog(int32 fd)
 			CREATE(sd->quest_log, struct quest, num_received);
 
 		for(int32 i = 0; i < num_received; i++) {
+			if(received[i].quest_id <= 0) {
+				ShowWarning("intif_parse_QuestLog: invalid quest id %d for char %u, skipping.\n", received[i].quest_id, char_id);
+				invalid_skipped = true;
+				continue;
+			}
 			if(!quest_search(received[i].quest_id)) {
 				ShowError("intif_parse_QuestLog: quest %d not found in DB.\n", received[i].quest_id);
+				invalid_skipped = true;
 				continue;
 			}
 			if(received[i].state != Q_COMPLETE) // Insert at the beginning
@@ -2089,9 +2096,22 @@ void intif_parse_questlog(int32 fd)
 		}
 		if(sd->avail_quests < k) {
 			// sd->avail_quests and k didn't meet in the middle: some entries were skipped
-			if(k < num_received) // Move the entries at the end to fill the gap
-				memmove(&sd->quest_log[k], &sd->quest_log[sd->avail_quests], sizeof(struct quest) * (num_received - k));
-			sd->quest_log = (struct quest *)aRealloc(sd->quest_log, sizeof(struct quest) * sd->num_quests);
+			if(k < num_received) // Move completed entries forward to close the gap
+				memmove(&sd->quest_log[sd->avail_quests], &sd->quest_log[k], sizeof(struct quest) * (num_received - k));
+			if(sd->num_quests > 0)
+				sd->quest_log = (struct quest *)aRealloc(sd->quest_log, sizeof(struct quest) * sd->num_quests);
+			else if(sd->quest_log) {
+				aFree(sd->quest_log);
+				sd->quest_log = nullptr;
+			}
+		} else if(sd->num_quests == 0 && sd->quest_log) {
+			aFree(sd->quest_log);
+			sd->quest_log = nullptr;
+		}
+
+		if(invalid_skipped) {
+			sd->save_quest = true;
+			intif_quest_save(sd);
 		}
 	}
 

@@ -109,27 +109,15 @@ $ecoCsv = @'
 $zoneDrops = @{
     temple = @(
         @{ Item = 'Feather'; Rate = 3000 },
-        @{ Item = 'Fluff'; Rate = 3000 },
-        @{ Item = 'Temple_Barmund_Rune'; Rate = 1125 },
-        @{ Item = 'Barmund_Temple_Essence'; Rate = 225 },
-        @{ Item = 'Shadowdecon'; Rate = 17 },
-        @{ Item = 'Shadowdecon_Ore'; Rate = 180 }
+        @{ Item = 'Fluff'; Rate = 3000 }
     )
     venom = @(
         @{ Item = 'Sticky_Mucus'; Rate = 3000 },
-        @{ Item = 'Detrimindexta'; Rate = 2000 },
-        @{ Item = 'Venom_Barmund_Rune'; Rate = 1125 },
-        @{ Item = 'Barmund_Venom_Essence'; Rate = 225 },
-        @{ Item = 'Shadowdecon'; Rate = 17 },
-        @{ Item = 'Shadowdecon_Ore'; Rate = 180 }
+        @{ Item = 'Detrimindexta'; Rate = 2000 }
     )
     soul = @(
         @{ Item = 'Horseshoe'; Rate = 3500 },
-        @{ Item = 'Transparent_Cloth'; Rate = 2000 },
-        @{ Item = 'Soul_Barmund_Rune'; Rate = 1125 },
-        @{ Item = 'Barmund_Soul_Essence'; Rate = 225 },
-        @{ Item = 'Shadowdecon'; Rate = 17 },
-        @{ Item = 'Shadowdecon_Ore'; Rate = 180 }
+        @{ Item = 'Transparent_Cloth'; Rate = 2000 }
     )
 }
 
