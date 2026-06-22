@@ -5167,43 +5167,47 @@ Body:
     CardsAllowed: true
     TargetItems:
       - Item: Deepblue_Sunglasses_
-#  - Item: FullPenest_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_FullPene_Earring
-#      - Item: S_FullPene_Pendant
-#      - Item: S_FullPene_Armor
-#      - Item: S_FullPene_Shoes
-#      - Item: S_FullTemp_Earring
-#      - Item: S_FullTemp_Shoes
-#      - Item: S_FullTemp_Armor
-#      - Item: S_FullTemp_Pendant
-#  - Item: Reload_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_S_Reload_Shield
-#  - Item: SpellCaster_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_SpellCaster_Armor
-#      - Item: S_SpellCaster_Shoes
-#      - Item: S_SpellCaster_Earring
-#      - Item: S_SpellCaster_Pendant
-#  - Item: Ex_Status_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_P_Power_Weapon
-#      - Item: S_P_Power_Shield
-#      - Item: S_M_Spell_Weapon
-#      - Item: S_M_Spell_Shield
-#      - Item: S_Concentration_Weapon
-#      - Item: S_Concentration_Shield
-#      - Item: S_Wisdom_Weapon
-#      - Item: S_Wisdom_Shield
-#      - Item: S_Stamina_Weapon
-#      - Item: S_Stamina_Shield
-#      - Item: S_Creative_Weapon
-#      - Item: S_Creative_Shield
+  - Item: FullPenest_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_FullPene_Earring
+      - Item: S_FullPene_Pendant
+      - Item: S_FullPene_Armor
+      - Item: S_FullPene_Shoes
+      - Item: S_FullTemp_Earring
+      - Item: S_FullTemp_Shoes
+      - Item: S_FullTemp_Armor
+      - Item: S_FullTemp_Pendant
+  - Item: Reload_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_S_Reload_Shield
+  - Item: SpellCaster_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_SpellCaster_Armor
+      - Item: S_SpellCaster_Shoes
+      - Item: S_SpellCaster_Earring
+      - Item: S_SpellCaster_Pendant
+  - Item: Ex_Status_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_P_Power_Weapon
+      - Item: S_P_Power_Shield
+      - Item: S_M_Spell_Weapon
+      - Item: S_M_Spell_Shield
+      - Item: S_Concentration_Weapon
+      - Item: S_Concentration_Shield
+      - Item: S_Wisdom_Weapon
+      - Item: S_Wisdom_Shield
+      - Item: S_Stamina_Weapon
+      - Item: S_Stamina_Shield
+      - Item: S_Creative_Weapon
+      - Item: S_Creative_Shield
   - Item: Snow_F_Refine
     ResultRefine: 9
     MaximumRefine: 8
@@ -5246,30 +5250,34 @@ Body:
       - Item: Glacier_B_Sword
       - Item: Glacier_Sword
       - Item: Glacier_T_Sword
-#  - Item: R_Bearers_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_R_Bearers_Armor
-#      - Item: S_R_Bearers_Shoes
-#      - Item: S_R_Bearers_Earring
-#      - Item: S_R_Bearers_Pendant
-#  - Item: M_Blitz_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_Mega_Blitz_Shield
-#      - Item: S_Mega_Blitz_Weapon
-#  - Item: Absorb_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_Absorb_Shield
-#      - Item: S_Absorb_Weapon
-#  - Item: Mammoth_Shadow_Up
-#    MaximumRefine: 10
-#    TargetItems:
-#      - Item: S_M_Mammoth_Armor
-#      - Item: S_M_Mammoth_Shoes
-#      - Item: S_M_Mammoth_Earring
-#      - Item: S_M_Mammoth_Pendant
+  - Item: R_Bearers_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_R_Bearers_Armor
+      - Item: S_R_Bearers_Shoes
+      - Item: S_R_Bearers_Earring
+      - Item: S_R_Bearers_Pendant
+  - Item: M_Blitz_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_Mega_Blitz_Shield
+      - Item: S_Mega_Blitz_Weapon
+  - Item: Absorb_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_Absorb_Shield
+      - Item: S_Absorb_Weapon
+  - Item: Mammoth_Shadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_M_Mammoth_Armor
+      - Item: S_M_Mammoth_Shoes
+      - Item: S_M_Mammoth_Earring
+      - Item: S_M_Mammoth_Pendant
   - Item: SubjectCape_Refine_Cube
     ResultRefine: 12
     MaximumRefine: 11
@@ -5287,18 +5295,101 @@ Body:
       - Item: Anti_Magic_Manteau
       - Item: Comp_Anti_Manteau_TH
       - Item: Comp_Geffen_M_Muffle
-#  - Item: Loki_Coin_2
-#    TargetItems:
-#      - Item: Gambler_Seal_KR_
-#  - Item: Loki_Advice_2
-#    TargetItems:
-#      - Item: Spade_Ace_Melee
-#  - Item: Loki_Advice
-#    TargetItems:
-#      - Item: Heart_Ace_Melee
-#  - Item: Loki_Coin
-#    TargetItems:
-#      - Item: Gambler_Seal_KR_
+  - Item: Loki_Coin
+    TargetItems:
+      - Item: Gambler_Seal_KR_
+  - Item: Loki_Coin_2
+    TargetItems:
+      - Item: Gambler_Seal_KR_
+  - Item: Loki_Coin_3
+    TargetItems:
+      - Item: Gambler_Seal_KR_
+  - Item: Loki_Coin_4
+    TargetItems:
+      - Item: Gambler_Seal_KR_
+  - Item: Loki_Advice
+    TargetItems:
+      - Item: Heart_Ace_Melee
+  - Item: Loki_Advice_2
+    TargetItems:
+      - Item: Spade_Ace_Melee
+  - Item: Loki_Advice_3
+    TargetItems:
+      - Item: Diamond_Ace_Range
+  - Item: Loki_Advice_4
+    TargetItems:
+      - Item: Clover_Ace_Defense
+  - Item: MajorAutoSpell_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_M_AutoSpell_Armor
+      - Item: S_M_AutoSpell_Shoes
+      - Item: S_M_AutoSpell_Earring
+      - Item: S_M_AutoSpell_Pendant
+  - Item: Hasty_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_Hasty_Shoes
+      - Item: S_Hasty_Armor
+      - Item: S_Hasty_Shield
+      - Item: S_Hasty_Weapon
+      - Item: S2_Hasty_Shoes
+  - Item: PhysicalShadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_Durable_Weapon
+      - Item: S_Durable_Shield
+  - Item: PerfectSize_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_PerfectSize_Weapon
+      - Item: S_PerfectSize_Armor
+  - Item: AllMighty_Up
+    RandomOptionGroup: ALLMIGHTY_S_ATT
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_AllMighty_Earring
+      - Item: S_AllMighty_Pendant
+  - Item: True_GemShadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_TrueGem_Armor
+      - Item: S_TrueGem_Shoes
+      - Item: S_TrueGem_Earring
+      - Item: S_TrueGem_Pendant
+  - Item: EXPShadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_Beginner_Shoes
+      - Item: S_Beginner_Shield
+      - Item: S_Rookie_Shoes
+      - Item: S_Rookie_Shield
+      - Item: S_Advanced_Shoes
+      - Item: S_Advanced_Shield
+      - Item: S_Expert_Shoes
+      - Item: S_Expert_Shield
+  - Item: MagicalShadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_Clever_Weapon
+      - Item: S_Clever_Shield
+  - Item: InfinityShadow_Up
+    RandomOptionGroup: SHADOW_RANDOM_MIX
+    MaximumRefine: 10
+    TargetItems:
+      - Item: S_Infinity_Weapon
+      - Item: S_Infinity_Shield
+  - Item: Fan_Upgrade_Kit_EX
+    RandomOptionGroup: FAN_UPGRADE_KIT
+    TargetItems:
+      - Item: SeeOtter_Fan
 #  - Item: Glacier_Armor_9Refine
 #    NotSocketEnchantItem: false
 #    TargetItems:

@@ -70797,7 +70797,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-     laphine_synthesis();
+      laphine_synthesis();
   - Id: 100888
     AegisName: PhysicalShadow_Mix
     Name: Durable Shadow Pick-Up Box
@@ -73744,7 +73744,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      laphine_synthesis();
+      laphine_upgrade();
   - Id: 101309
     AegisName: EXPShadow_Up
     Name: Experience Shadow Spellbook
@@ -73753,7 +73753,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      laphine_synthesis();
+      laphine_upgrade();
   - Id: 101310
     AegisName: MagicalShadow_Up
     Name: Clever Shadow Spellbook
@@ -73762,7 +73762,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      laphine_synthesis();
+      laphine_upgrade();
   - Id: 101311
     AegisName: InfinityShadow_Up
     Name: Infinity Shadow Spellbook
@@ -73771,7 +73771,7 @@ Body:
     Flags:
       BuyingStore: true
     Script: |
-      laphine_synthesis();
+      laphine_upgrade();
   - Id: 101314
     AegisName: Viva_Adul_Hat_Box
     Name: Helm of Faith Box

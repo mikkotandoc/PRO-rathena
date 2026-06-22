@@ -161,8 +161,8 @@ L_Reward:
 			return;
 	}
 
-	.@b_exp = (.@b_exp * getbattleflag("base_exp_rate")) / .@rate / 2;
-	.@j_exp = (.@j_exp * getbattleflag("job_exp_rate")) / .@rate / 2;
+	.@b_exp = (.@b_exp * 0.8 * getbattleflag("base_exp_rate")) / .@rate;
+	.@j_exp = (.@j_exp * 0.8 * getbattleflag("job_exp_rate")) / .@rate;
 
 	erasequest .@q_id;
 

@@ -4,33 +4,228 @@
 //= [Official Conversion]
 //= Costumes exchange/enchant NPCs in Malangdo.
 //=
-//= Note:
-//=   Although new enchant boxes are already exchanged,
-//=   their enchants are currently not supported.
 //===== Changelogs: ==========================================
 //= 1.0 First version. [Capuche]
 //= 1.1 Corrected exchange costumes for enchant box 4-21 [Everade]
 //= 1.2 Added support for more than 120 missing enchants [Everade]
 //= 1.3 Added a temporary fix of the menu length on Aver De Dosh until new data [Capuche]
+//= 1.4 Added Gregio Grumani 4th slot visual effect enchanter and missing costumes.
 //============================================================
 
-// Missing 4th slot enchanter
-//mal_in01,24,121,x	script	Gregio Grumani#eventhat	x,{
+// 4th slot visual effect enchanter (Enchant Stone Box 4-21 effect stones)
+mal_in01,24,121,6	script	Gregio Grumani#eventhat	4_CAT_SAILOR5,{
+	disable_items;
+	if (checkweight(1119,3) == 0) {
+		mes "[Gregio Grumani]";
+		mes "You are carrying too many items.";
+		mes "Please free up some inventory space and come back.";
+		close;
+	}
+	mes "[Gregio Grumani]";
+	mes "I can apply visual effects to the 4th enchant slot of your costume.";
+	mes "Bring the costume you are wearing and a visual effect stone.";
+	next;
+	switch( select( "Apply visual effect.", "Remove visual effect.", "End conversation." ) ) {
+	case 1:
+		.@mode = 1;
+		break;
+	case 2:
+		.@mode = 2;
+		break;
+	default:
+		mes "[Gregio Grumani]";
+		mes "Come back whenever you want a new look.";
+		close;
+	}
+	.@eq_top = getequipid(EQI_COSTUME_HEAD_TOP);
+	.@eq_mid = getequipid(EQI_COSTUME_HEAD_MID);
+	.@eq_low = getequipid(EQI_COSTUME_HEAD_LOW);
 
-// These 4th slot Enchants are included in Enchant Stone Box 4-21
-//ID		Loc
-//25058, , 	Upper
-//25059, , 	Middle
-//25136, , 	Middle
-//25137, , 	Lower
-//25138, , 	Middle
-//25176, , 	Middle
-//25177, , 	Middle
-//25178, , 	Middle
-//25224, , 	Middle
-//25225, , 	Middle
-//25226, , 	Lower
-//25205, , 	Lower
+	if (.@eq_top == -1 && .@eq_mid == -1 && .@eq_low == -1) {
+		mes "[Gregio Grumani]";
+		mes "You must wear the costume you want to enchant.";
+		close;
+	}
+	if (.@mode == 2) {
+		if (Zeny < 99800) {
+			mes "[Gregio Grumani]";
+			mes "Removing a visual effect costs 99,800 zeny.";
+			close;
+		}
+		.@menu$ = "Cancel:";
+		if (.@eq_top > -1)
+			.@menu$ += "Upper [" + getitemname(.@eq_top) + "]:";
+		if (.@eq_mid > -1)
+			.@menu$ += "Middle [" + getitemname(.@eq_mid) + "]:";
+		if (.@eq_low > -1)
+			.@menu$ += "Lower [" + getitemname(.@eq_low) + "]:";
+		.@pick = select(.@menu$) - 1;
+		if (.@pick == 0) {
+			mes "[Gregio Grumani]";
+			mes "Come back if you change your mind.";
+			close;
+		}
+		.@pick--;
+		if (.@eq_top > -1) {
+			if (.@pick == 0) { .@part = EQI_COSTUME_HEAD_TOP; .@equip_id = .@eq_top; }
+			else .@pick--;
+		}
+		if (.@part == 0 && .@eq_mid > -1) {
+			if (.@pick == 0) { .@part = EQI_COSTUME_HEAD_MID; .@equip_id = .@eq_mid; }
+			else .@pick--;
+		}
+		if (.@part == 0 && .@eq_low > -1) {
+			if (.@pick == 0) { .@part = EQI_COSTUME_HEAD_LOW; .@equip_id = .@eq_low; }
+		}
+		if (.@part == 0) {
+			mes "[Gregio Grumani]";
+			mes "Please choose a costume location.";
+			close;
+		}
+		.@equip_refine = getequiprefinerycnt(.@part);
+		setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+		if (.@card[3] == 0 || getiteminfo(.@card[3], ITEMINFO_SUBTYPE) != CARD_ENCHANT) {
+			mes "[Gregio Grumani]";
+			mes "This costume has no visual effect to remove.";
+			close;
+		}
+		mes "[Gregio Grumani]";
+		mes "I will remove the visual effect from ^0000FF" + getitemname(.@equip_id) + "^000000 for 99,800 zeny.";
+		mes "The effect stone will not be returned.";
+		next;
+		if (select( "Cancel", "Remove effect" ) == 1) {
+			mes "[Gregio Grumani]";
+			mes "Come back if you change your mind.";
+			close;
+		}
+		if (Zeny < 99800) {
+			mes "[Gregio Grumani]";
+			mes "You do not have enough zeny.";
+			close;
+		}
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+			close;
+		Zeny -= 99800;
+		delequip .@part;
+		.@card[3] = 0;
+		getitem2 .@equip_id,1,1,.@equip_refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
+		mes "[Gregio Grumani]";
+		mes "The visual effect has been removed.";
+		close;
+	}
+
+	.@menu$ = "Cancel:";
+	if (.@eq_top > -1)
+		.@menu$ += "Upper [" + getitemname(.@eq_top) + "]:";
+	if (.@eq_mid > -1)
+		.@menu$ += "Middle [" + getitemname(.@eq_mid) + "]:";
+	if (.@eq_low > -1)
+		.@menu$ += "Lower [" + getitemname(.@eq_low) + "]:";
+	.@pick = select(.@menu$) - 1;
+	if (.@pick == 0) {
+		mes "[Gregio Grumani]";
+		mes "Come back when you are ready.";
+		close;
+	}
+	.@pick--;
+	if (.@eq_top > -1) {
+		if (.@pick == 0) { .@part = EQI_COSTUME_HEAD_TOP; .@equip_id = .@eq_top; }
+		else .@pick--;
+	}
+	if (.@part == 0 && .@eq_mid > -1) {
+		if (.@pick == 0) { .@part = EQI_COSTUME_HEAD_MID; .@equip_id = .@eq_mid; }
+		else .@pick--;
+	}
+	if (.@part == 0 && .@eq_low > -1) {
+		if (.@pick == 0) { .@part = EQI_COSTUME_HEAD_LOW; .@equip_id = .@eq_low; }
+	}
+	if (.@part == 0) {
+		mes "[Gregio Grumani]";
+		mes "Please choose a costume location.";
+		close;
+	}
+
+	switch(.@part) {
+	case EQI_COSTUME_HEAD_TOP:
+		setarray .@stone_id[0],
+			25058, 29041;	// TwinkleEffect_Top	Twinkle_Effect
+		break;
+	case EQI_COSTUME_HEAD_MID:
+		setarray .@stone_id[0],
+			25059, 29040,	// GhostEffect_Middle	Ghost_Effect
+			25136, 29142,	// ElectricEffect_Middle	Electric_Effect
+			25138, 29144,	// ShrinkEffect_Middle	Shrink_Effect
+			25176, 29160,	// BlueAuraEffect_Middle	BlueAura_Effect
+			25177, 29162,	// ShadowEffect_Middle	Shadow_Effect
+			25178, 29161,	// PinkGlowEffect_Middle	Pink_Glow_Effect
+			25224, 29224,	// WhiteBodyEffect_Middle	WhiteBody_Effect
+			25225, 29226;	// ExplodingEffect_Middle	ExplodingWave_Effect
+		break;
+	case EQI_COSTUME_HEAD_LOW:
+		setarray .@stone_id[0],
+			25137, 29143,	// GreenFloor_Bottom	Green_Floor_Effect
+			25205, 29144,	// ShrinkEffect_Bottom	Shrink_Effect
+			25226, 29225;	// WaterFieldEffect_Bottom	WaterField_Effect
+		break;
+	default:
+		mes "[Gregio Grumani]";
+		mes "Something went wrong. Please try again.";
+		close;
+	}
+
+	.@size = getarraysize(.@stone_id);
+	.@menu$ = "";
+	for (.@i = 0; .@i < .@size; .@i += 2) {
+		if (countitem(.@stone_id[.@i]) < 1)
+			continue;
+		.@menu$ += getitemname(.@stone_id[.@i]) + ":";
+		.@list[ getarraysize(.@list) ] = .@i;
+	}
+	if (.@menu$ == "") {
+		mes "[Gregio Grumani]";
+		mes "You do not have a visual effect stone for this costume location.";
+		close;
+	}
+	.@menu$ += "Cancel";
+	.@pick = select(.@menu$) - 1;
+	if (.@pick >= getarraysize(.@list)) {
+		mes "[Gregio Grumani]";
+		mes "Come back when you are ready.";
+		close;
+	}
+	.@s = .@list[.@pick];
+	.@stone = .@stone_id[.@s];
+	.@enchant = .@stone_id[.@s+1];
+
+	.@equip_refine = getequiprefinerycnt(.@part);
+	setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+
+	if (getequipid(.@part) < 0 || countitem(.@stone) < 1) {
+		mes "[Gregio Grumani]";
+		mes "You are missing the costume or the effect stone.";
+		close;
+	}
+	mes "[Gregio Grumani]";
+	mes "I will apply ^3131FF" + getitemname(.@stone) + "^000000 to the 4th slot of ^0000FF" + getitemname(.@equip_id) + "^000000.";
+	mes "^0000FFVisual effect enchants always succeed.^000000";
+	if (.@card[3] > 0)
+		mes "^FF0000The existing 4th slot effect will be replaced.^000000";
+	next;
+	if (select( "Cancel", "Apply effect" ) == 1) {
+		mes "[Gregio Grumani]";
+		mes "Come back if you change your mind.";
+		close;
+	}
+	if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+		close;
+	delitem .@stone, 1;
+	delequip .@part;
+	.@card[3] = .@enchant;
+	getitem2 .@equip_id,1,1,.@equip_refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
+	mes "[Gregio Grumani]";
+	mes "Done! Enjoy your new visual effect.";
+	close;
+}
 
 
 // Costume exchange
@@ -789,6 +984,56 @@ mal_in01,22,113,3	script	Aver De Dosh#cos_ect	4_WHITETIGER,{
 		case 31573:	// C_Mecha_Cat_Ears
 		case 31598:	// C_Forest_Guide
 		case 31624:	// C_HeartOfCat_TW
+		case 5909:	// C_Valkyrie_Circlet
+		case 20381:	// C_Steampunk_Hat
+		case 20499:	// C_Cat_Ear_Hat
+		case 31088:	// C_Mad_Hatter
+		case 31136:	// C_Clock_Casket
+		case 31160:	// C_Rune_Helm
+		case 31165:	// C_Piggyback
+		case 31397:	// C_Pope_Sitting_Head
+		case 19959:	// C_Drooping_Argiope
+		case 19960:	// C_Chain_Puppet
+		case 20033:	// C_Buddhist_Priest_Crown
+		case 20098:	// C_Vampire_Hairband
+		case 20171:	// C_Sepia_Cap
+		case 20174:	// C_Halloween_Hat_Orange
+		case 20395:	// C_Black_Witch_Hat
+		case 20482:	// C_Heaven_Cage
+		case 19990:	// C_Snow_Rabbit_Knit_Hat
+		case 20257:	// C_Black_Rabbit_Bonnet
+		case 31033:	// C_BelieversCap
+		case 31166:	// C_Teddy_Bear_Hood
+		case 19802:	// C_Drooping_Nine_Tail
+		case 20153:	// C_Monochrome_Cap
+		case 20451:	// C_Sky_Of_Memory
+		case 31179:	// C_Wolf_Masquerade
+		case 31716:	// C_Blinking_Eyes_RD
+		case 31815:	// C_Angola_Intention
+		case 31849:	// C_Runaway_Accelerator
+		case 31848:	// C_Rose_Gothic_Bonnet
+		case 31906:	// C_PGstone_Knit_Hat_PK
+		case 31911:	// C_LittleGarden
+		case 31923:	// C_Baby_Polar_Bear
+		case 31884:	// C_Magic_Helm
+		case 31765:	// C_Garnet_Tiara
+		case 31766:	// C_Peony_Hair_Ornament
+		case 440000:	// C_SharkHead
+		case 31606:	// C_Autumn_Headband
+		case 400073:	// C_Romance_Rose_TW
+		case 440002:	// C_Happy_Cat_TW
+		case 31832:	// C_Bicolor_Cat_Witch_Hat
+		case 400020:	// C_BeachBall
+		case 19815:	// C_Lolita_Ten_Gallon_Hat
+		case 19816:	// C_Pecopeco_Cap
+		case 20172:	// C_Pumpkin_Head
+		case 20268:	// C_Sleep_Eclipse_Family
+		case 20329:	// C_Tare_HSchool_Doll_Hat
+		case 20396:	// C_Woodie_Hat
+		case 20398:	// C_Niflheim_Bunny_Hat
+		case 20432:	// C_Khalitzburg_KN_Helm
+		case 20449:	// C_White_Black_Temp
+		case 31799:	// C_Pretty_Bear_WH
 			// top + mid
 		case 19574:	// C_Lord_of_Death
 		case 19578:	// C_Goggle
@@ -885,6 +1130,23 @@ mal_in01,22,113,3	script	Aver De Dosh#cos_ect	4_WHITETIGER,{
 		case 31673:	// C_Picnic_Basket
 		case 31688:	// C_Poring_On_Shoulder
 		case 31699:	// C_Smiling_Eyes
+		case 20488:	// C_Pope_Ribbon
+		case 20486:	// C_Twin_Margaret
+		case 20379:	// C_PocketWatch_Hair_Orna
+		case 31118:	// C_Assassin_Skull_Mask
+		case 31930:	// C_Mike_Stand
+		case 31931:	// C_Half_Rim_Glasses
+		case 410005:	// C_Magic_Heir_TW
+		case 31497:	// C_Flowery_Vision_TH
+		case 31787:	// C_SavageB_On_Shoulder
+		case 31798:	// C_Baby_Panda
+		case 440000:	// C_SharkHead
+		case 440002:	// C_Happy_Cat_TW
+		case 19158:	// C_Gemini_Eyes
+		case 19289:	// C_Moon_Eyepatch
+		case 20286:	// C_Under_Rim_Glasses_Red
+		case 20459:	// C_Valhalla_Idol
+		case 31120:	// C_Vampire_Familiar
 			// mid + low
 		case 19554:	// C_Hahoe_Mask
 		case 19563:	// C_Dragon_Arhat_Mask
@@ -1026,6 +1288,50 @@ mal_in01,22,113,3	script	Aver De Dosh#cos_ect	4_WHITETIGER,{
 		case 31616:	// C_Sleep_Sheep_TW
 		case 31625:	// C_Protect_Cloth
 		case 31698:	// C_Pigtail_Red_Hood
+		case 19992:	// C_Chilly_Breath
+		case 31087:	// C_Dwarf_Beard
+		case 31162:	// C_Shaving_Foam
+		case 31164:	// C_Brown_Stall
+		case 31586:	// C_Poporing_Muffler
+		case 31693:	// C_LunaticMuffler
+		case 20022:	// C_Love_Piece
+		case 31569:	// C_OpenAir_Headset
+		case 31559:	// C_Royalguard_Necklace
+		case 31566:	// C_Stall_Of_Dominions
+		case 31601:	// C_Under_Rim_Glasses_Bu
+		case 31916:	// C_Frill_Collar
+		case 31934:	// C_Blink_Eyes_Sakura
+		case 400074:	// C_Disapear_Time_TW
+		case 31134:	// C_Chatty_Parrot
+		case 31479:	// C_ManyStars_TW
+		case 31671:	// C_Twin_Canon
+		case 31735:	// C_FortunetellinSealed
+		case 31033:	// C_BelieversCap
+		case 31088:	// C_Mad_Hatter
+		case 31118:	// C_Assassin_Skull_Mask
+		case 440002:	// C_Happy_Cat_TW
+		case 5979:	// C_Angel_Fluttering
+		case 20201:	// C_Banshee_Master_Kiss
+		case 20315:	// C_Analyze_Eye
+		case 20341:	// C_Cowlick_BL
+		case 20349:	// C_FlyingGalapago
+		case 20350:	// C_Cowlick_YL
+		case 20351:	// C_Cowlick_GN
+		case 20352:	// C_Cowlick_PP
+		case 20353:	// C_Cowlick_RD
+		case 20354:	// C_Cowlick_OM
+		case 20355:	// C_Cowlick_BU
+		case 20356:	// C_Cowlick_WH
+		case 20487:	// C_Floral_Waltz
+		case 31055:	// C_Poring_Soap_Pipe
+		case 31071:	// C_Roll_Twin_BU
+		case 31072:	// C_Roll_Twin_RD
+		case 31073:	// C_Roll_Twin_YL
+		case 31074:	// C_Roll_Twin_GN
+		case 31075:	// C_Roll_Twin_BL
+		case 31076:	// C_Roll_Twin_WH
+		case 31077:	// C_Roll_Twin_OM
+		case 31078:	// C_Roll_Twin_PP
 			break;
 		default:
 			mes "[Aver De Dosh]";
@@ -1363,6 +1669,26 @@ mal_in01,20,107,3	script	Lace La Zard#cos_ect	4_FROG,{
 	case 20763:	// C_Amistr_Bag
 	case 20764:	// C_Fallen_Angel_Wing
 	case 20765:	// C_Archangel_Wing
+	case 20515:	// C_Magic_Circle
+	case 20516:	// C_Wings_of_Michael
+	case 20517:	// C_GiantCatBag_TW
+	case 20519:	// C_Full_BloomCherry_Tree
+	case 20533:	// C_PinkButterfly_Wing_T
+	case 20535:	// C_Digital_Space
+	case 20543:	// C_Halloween_Poring_Bag
+	case 20546:	// C_Backside_Ribbon_Bell
+	case 20570:	// C_HeartChocoBag
+	case 20572:	// C_WingOfHeart
+	case 20576:	// C_Cat_Fork
+	case 20582:	// C_T_Bear_Bag
+	case 20584:	// C_Big_Foxtail
+	case 20588:	// C_Nifl_Bloom
+	case 20589:	// C_Gimmick_One_Feather
+	case 20592:	// C_Santa_Backpack
+	case 20593:	// C_Ice_Wing
+	case 20598:	// C_GiantCatBag_JP_BL
+	case 20599:	// C_Sakura_Wing
+	case 20514:	// C_Thanatos_Sword
 		break;
 	default:
 		mes "[Lace La Zard]";

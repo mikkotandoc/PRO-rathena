@@ -478,6 +478,24 @@ Body:
           - Index: 0
             Item: Booster_Coin
             Amount: 15
+      - Index: 20
+        Item: S_RL_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 21
+        Item: S_SP_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
+      - Index: 22
+        Item: S_NV_Weapon
+        RequiredItems:
+          - Index: 0
+            Item: Booster_Coin
+            Amount: 15
   - Name: mega14
     Items:
       - Index: 0

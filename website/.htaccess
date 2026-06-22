@@ -1,0 +1,25 @@
+# PRO-Ragnarok Wiki — optional pretty URLs (requires mod_rewrite)
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	# If the wiki lives in a subdirectory, set RewriteBase accordingly, e.g.:
+	# RewriteBase /wiki/
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^page/([A-Za-z0-9_-]+)/?$ index.php?page=$1 [L,QSA]
+</IfModule>
+
+# Block direct access to markdown source files
+<IfModule mod_authz_core.c>
+	<FilesMatch "\.md$">
+		Require all denied
+	</FilesMatch>
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+	<FilesMatch "\.md$">
+		Order allow,deny
+		Deny from all
+	</FilesMatch>
+</IfModule>
