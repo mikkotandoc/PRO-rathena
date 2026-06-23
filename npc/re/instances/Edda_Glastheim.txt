@@ -2145,6 +2145,14 @@ end;
 1@gl_prq,52,270,4	script	Oscar#gh_purification_4	4_ED_OSCAR,3,3,{
 	.@var = get_instance_var("hunt");
 	.@mode = get_instance_var("mode");
+	.@cid = getcharid(0);
+
+	if (get_instance_var("reward_" + .@cid)) {
+		cutin "oscar01",255;
+		warp "glast_01",244,290;
+		end;
+	}
+
 	cutin "oscar01",2;
 	mes "[ Oscar ]";
 	mes "Traveling to different timelines ang engaging in combat takes a lot of energy.";
@@ -2154,14 +2162,16 @@ end;
 	next;
 	mes "[ Oscar ]";
 	mes "Oh, I think this dimension will start to collapse. Let's get out first.";
-	if(checkquest(.@var,HUNTING) == 2){
-		if(!.@mode)
+	if (checkquest(.@var,HUNTING) == 2) {
+		if (!.@mode)
 			getitem 25739,3;
 		else
 			getitem 25740,6;
 		erasequest .@var;
+		set_instance_var("reward_" + .@cid, 1);
 	}
 	close2;
+	cutin "oscar01",255;
 	warp "glast_01",244,290;
 	end;
 }

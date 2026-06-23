@@ -72,8 +72,6 @@ yuno,216,345,3	script	Sierra#yuno	4_F_SCIENCE,{
 			close;
 		case IE_OK:
 			setquest 16400;
-			@documents = 0;
-			@weapon = 0;
 			mapannounce "yuno", strcharinfo(0) + " is entering " + .instance_name$ + ".", bc_map, "0x00ff99", FW_NORMAL, 12;
 			end;
 		}
@@ -875,16 +873,25 @@ OnMyMobDead:
 	.@boss_event$ = .@npc$ + "::OnMyMobDead";
 
 	if (get_instance_var("can_leave")) {
+		.@cid = getcharid(0);
+		if (get_instance_var("reward_weapon_" + .@cid)) {
+			warp "yuno",216,343;
+			end;
+		}
+		if (get_instance_var("reward_docs_" + .@cid)) {
+			mes "[Sierra]";
+			mes "Open the treasure chest to claim your weapon and leave the instance.";
+			close;
+		}
 		mes "[Sierra]";
 		mes "Excellent work. Take these research materials before you leave.";
 		next;
-		if(@documents == 0){
-			@documents = 1;
-			getitem 25786,9;
-			getitem 25787,15;
-		}
-		warp "yuno",216,343;
-		end;
+		getitem 25786,9;
+		getitem 25787,15;
+		set_instance_var("reward_docs_" + .@cid, 1);
+		mes "[Sierra]";
+		mes "When you're ready, open the treasure chest to receive your weapon and exit.";
+		close;
 	}
 
 	// Recover if the boss died without firing the kill event.
@@ -1006,13 +1013,12 @@ OnWaveLoop:
 
 OnMyMobDead:
 	.@map$ = instance_mapname("1@gol2");
-	@weapon = 0;
 	set_instance_var("mvp_alive", 0);
 	set_instance_var("can_leave", 1);
 	killmonster .@map$, instance_npcname("Sierra#mvp")+"::OnTele";
 	hideoffnpc instance_npcname("Sierra#mvp");
 	hideoffnpc instance_npcname("Box#mvp");
-	mapannounce .@map$, "Sierra : The combat simulation is complete. Talk to me to collect your rewards.", bc_map, 0x00FF99;
+	mapannounce .@map$, "Sierra : The combat simulation is complete. Talk to me for research materials, then open the treasure chest to leave.", bc_map, 0x00FF99;
 	end;
 
 OnTele:
@@ -1045,16 +1051,27 @@ OnTouch:
 }
 
 1@gol2,49,59,3	script	Box#mvp	4_TREASURE_BOX,{
-	
-	// TODO: msg
-	if(!checkweight(16092,1))mes "you are overweigt bruh";
-	
-	if(@weapon == 0) {
-		@weapon = 1;
-		setArray .@weapons[0],21051,21052,32023,1333,16092,28138,28765,28766,28044,28042,26158,2055,2056,26161,16095,18185,18187,18186,32350,32024,32025,32351,16093,16094,28767,28768,18184,28633,26159,26160,1865,1866,16096,18188,26212,26213,32107,32108;
-		getitem .@weapons[rand(38)],1;
-		
+	if (!get_instance_var("can_leave"))
+		end;
+
+	.@cid = getcharid(0);
+	if (get_instance_var("reward_weapon_" + .@cid)) {
+		warp "yuno",216,343;
+		end;
 	}
+	if (!get_instance_var("reward_docs_" + .@cid)) {
+		mes "Collect the research materials from Sierra before opening the chest.";
+		close;
+	}
+	if (!checkweight(16092,1)) {
+		mes "You are carrying too much to receive the weapon.";
+		close;
+	}
+	setarray .@weapons[0],21051,21052,32023,1333,16092,28138,28765,28766,28044,28042,26158,2055,2056,26161,16095,18185,18187,18186,32350,32024,32025,32351,16093,16094,28767,28768,18184,28633,26159,26160,1865,1866,16096,18188,26212,26213,32107,32108;
+	getitem .@weapons[rand(38)],1;
+	set_instance_var("reward_weapon_" + .@cid, 1);
+	warp "yuno",216,343;
+	end;
 }
 // ==============================
 // ===== warpers
