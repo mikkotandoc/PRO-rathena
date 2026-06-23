@@ -49,7 +49,7 @@ moc_para01,39,38,3	script	Mission [70~99]	4_BOARD3,{
         case 2:
             mes "[Mission Board 70~99]";
             next;
-            switch(select("Geffen: 10 Sky Petite:Geffen: 10 Ground Petite:Geffen: 10 Marionette & Deviruchi:Geffen: 10 Nightmare:Einbroch: 20 Metaling & 10 Holden:Einbroch: 20 Noxious:Einbroch: 20 Venomous:Einbroch: 15 Teddy Bear:Einbroch: 20 Pitman:Einbroch: 15 Waste Stove:Einbroch: 15 Mineral & 5 Obsidian")) {
+            switch(select("Geffen - 10 Sky Petite:Geffen - 10 Ground Petite:Geffen - 10 Marionette & Deviruchi:Geffen - 10 Nightmare:Einbroch - 20 Metaling & 10 Holden:Einbroch - 20 Noxious:Einbroch - 20 Venomous:Einbroch - 15 Teddy Bear:Einbroch - 20 Pitman:Einbroch - 15 Waste Stove:Einbroch - 15 Mineral & 5 Obsidian")) {
                 case 1:  callsub L_AssignQuest, 80106, 80147, "Sky Petite", 10;
                 case 2:  callsub L_AssignQuest, 80107, 80148, "Ground Petite", 10;
                 case 3:  callsub L_AssignQuest, 80108, 80149, "Marionette & Deviruchi", 10;
@@ -70,7 +70,7 @@ moc_para01,39,38,3	script	Mission [70~99]	4_BOARD3,{
         case 3:
             mes "[Mission Board 70~99]";
             next;
-            switch(select("Lhz: 20 Rafflesia:Lhz: 20 Stem Worm:Lhz: 20 Breeze:Turtle: 10 Dragon Tail & Spring Rabbit:Turtle: 10 Solider, Permeter, Freezer, Heater:Turtle: 10 Assaulter")) {
+            switch(select("Lhz - 20 Rafflesia:Lhz - 20 Stem Worm:Lhz - 20 Breeze:Turtle - 10 Dragon Tail & Spring Rabbit:Turtle - 10 Solider, Permeter, Freezer, Heater:Turtle - 10 Assaulter")) {
                 case 1: callsub L_AssignQuest, 80117, 80158, "Rafflesia", 20;
                 case 2: callsub L_AssignQuest, 80118, 80159, "Stem Worm", 20;
                 case 3: callsub L_AssignQuest, 80119, 80160, "Breeze", 20;
@@ -85,7 +85,7 @@ moc_para01,39,38,3	script	Mission [70~99]	4_BOARD3,{
         case 4:
             mes "[Mission Board 70~99]";
             next;
-            switch(select("Ayothaya: 20 Tamruan:Brasilis: 20 Toucan:Brasilis: 20 Headless Mule:Moscovia: 20 Uzhas:Moscovia: 20 Baba Yaga:Louyang: 20 Increase Soil:Louyang: 15 Hyegun & Jing Guai:Amatsu: 20 Miyabi:Amatsu: 20 Antique Firelock:Amatsu: 20 Shinobi:Gonryun: 20 Wicked Nymph:Gonryun: 20 Enchanted Peach Tree:Gonryun: 20 Evil Cloud Hermit")) {
+            switch(select("Ayothaya - 20 Tamruan:Brasilis - 20 Toucan:Brasilis - 20 Headless Mule:Moscovia - 20 Uzhas:Moscovia - 20 Baba Yaga:Louyang - 20 Increase Soil:Louyang - 15 Hyegun & Jing Guai:Amatsu - 20 Miyabi:Amatsu - 20 Antique Firelock:Amatsu - 20 Shinobi:Gonryun - 20 Wicked Nymph:Gonryun - 20 Enchanted Peach Tree:Gonryun - 20 Evil Cloud Hermit")) {
                 case 1:  callsub L_AssignQuest, 80123, 80164, "Tamruan", 20;
                 case 2:  callsub L_AssignQuest, 80124, 80165, "Toucan", 20;
                 case 3:  callsub L_AssignQuest, 80125, 80166, "Headless Mule", 20;

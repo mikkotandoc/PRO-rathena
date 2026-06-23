@@ -152,15 +152,52 @@ foreach ($line in ($ecoCsv.Trim() -split "`n")) {
 }
 
 $depth1 = (Get-Content $prFile -Encoding UTF8)[114951..115718]
-$depth2Start = (Select-String -Path (Join-Path $root 'db\import\mob_db.yml') -Pattern 'Id: 22252' | Select-Object -First 1).LineNumber
-$depth2 = if ($depth2Start) {
-    (Get-Content (Join-Path $root 'db\import\mob_db.yml') -Encoding UTF8)[($depth2Start - 1)..((Get-Content (Join-Path $root 'db\import\mob_db.yml')).Count - 1)]
-} else { @() }
+
+# Depth 2: generate from tools/generate_bio_mobs.py when not already in import
+$depth2 = @()
+$depth2Start = $null
+if (Test-Path $outFile) {
+    $depth2Start = (Select-String -Path $outFile -Pattern 'Id: 22252' | Select-Object -First 1).LineNumber
+}
+if ($depth2Start) {
+    $existingLines = Get-Content $outFile -Encoding UTF8
+    $depth2 = $existingLines[($depth2Start - 1)..($existingLines.Count - 1)]
+} else {
+    $pyScript = Join-Path $root 'tools\generate_bio_mobs.py'
+    if (Test-Path $pyScript) {
+        $depth2Text = & python -c @"
+import sys
+sys.path.insert(0, r'$root\tools')
+from generate_bio_mobs import DEPTH2_KRO, render_depth2
+parts = []
+for mid, data in sorted(DEPTH2_KRO.items()):
+    entry = dict(data)
+    entry['Id'] = mid
+    parts.append(render_depth2(entry))
+print('\n'.join(parts))
+"@
+        if ($depth2Text) { $depth2 = $depth2Text -split "`n" }
+    }
+}
+
+# Preserve non-biosphere import entries (e.g. Airship Crash MD_AIRBOAT_*)
+$preserveYaml = @()
+$biosphereIds = 21920..21943 + 22140..22155 + 22252..22261
+if (Test-Path $outFile) {
+    $existing = Get-Content $outFile -Raw -Encoding UTF8
+    $blocks = [regex]::Matches($existing, '(?ms)^  - Id: (\d+)\r?\n.*?(?=^  - Id: \d+\r?\n|\z)')
+    foreach ($block in $blocks) {
+        $id = [int]$block.Groups[1].Value
+        if ($biosphereIds -notcontains $id) {
+            $preserveYaml += $block.Value.TrimEnd()
+        }
+    }
+}
 
 $header = @'
-# Varmundt's Biosphere mob definitions (import overlay)
-# ECO 21920-21943: Divine Pride stats
-# Depth 1: rAthena PR #8115 | Depth 2: Divine Pride stats
+# Custom mob import overlay
+# Varmundt's Biosphere: ECO 21920-21943, Depth 1 (PR #8115), Depth 2 (kRO EP20)
+# Other entries (e.g. Airship Crash) are preserved across rebuilds
 
 Header:
   Type: MOB_DB
@@ -169,7 +206,7 @@ Header:
 Body:
 '@
 
-$parts = @($header) + $ecoYaml + $depth1 + $depth2
+$parts = @($header) + $ecoYaml + $depth1 + $depth2 + $preserveYaml
 $content = ($parts -join "`n") + "`n"
 
 # Fix upstream PR placeholders and name length limits (max 23 chars)

@@ -617,7 +617,7 @@ I22: Restrict("RE");
 // --------------------------------------------------
 menu	"Auction Hall",S1, "Battlegrounds",S2, "Casino",S3, "Dimensional Rift",S4,
 		"Eden Group Headquarters",S5, "Kunlun Arena",S6, "Izlude Arena",S7, 
-		"Monster Race Arena",S8, "Para Market",S9, "Turbo Track",S10;
+		"Monster Race Arena",S8, "Para Market",S9, "Turbo Track",S10, "Item Mall",S11;
 
 S1: Go("auction_01",22,68);
 S2: Go("bat_room",154,150);
@@ -632,6 +632,7 @@ S8: Go("p_track01",62,41);
 S9: Restrict("RE");
 	Go("paramk",97,17);
 S10: Go("turbo_room",99,114);
+S11: Go("prt_mk",100,95);
 
 OnNaviGenerate:
 
@@ -1330,6 +1331,7 @@ OnNaviGenerate:
 	naviregisterwarp("Warper > Izlude Arena", "arena_room", 100, 88);
 	naviregisterwarp("Warper > Monster Race Arena", "p_track01", 62, 41);
 	naviregisterwarp("Warper > Turbo Track", "turbo_room", 99, 114);
+	naviregisterwarp("Warper > Item Mall", "prt_mk", 100, 95);
 	if (checkre(0)) {
 		naviregisterwarp("Warper > Dimensional Rift", "dali", 113, 82);
 		naviregisterwarp("Warper > Eden Group Headquarters", "moc_para01", 31, 14);

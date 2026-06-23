@@ -2,10 +2,8 @@
 // For more information, see LICENCE in the main folder
 
 /**
- * Custom Atcommands
- * Place the definition of custom atcommands in this file.
- * Format:
- *	ACMD_DEF(command_name),
+ * Custom atcommand registrations.
+ * Implementations belong in atcommand.inc.
  **/
 
-//ACMD_DEF(newcommand),
+ACMD_DEF(mall),

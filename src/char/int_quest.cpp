@@ -15,6 +15,8 @@
 #include "char.hpp"
 #include "inter.hpp"
 
+bool mapif_quest_delete(uint32 char_id, int32 quest_id);
+
 /**
  * Loads the entire questlog for a character.
  *

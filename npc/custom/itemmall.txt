@@ -11,25 +11,12 @@
 //= Item Mall vendors on prt_mk (use @mall to warp there).
 //============================================================
 
-// @mall - warp to the item mall map (all players)
--	script	mall_warp_cmd	-1,{
-OnCall:
-	if (strcharinfo(3) == "prt_mk") {
-		dispbottom "You are already at the Item Mall.";
-		end;
-	}
-	warp "prt_mk", 100, 95;
-	end;
-
-OnInit:
-	bindatcmd "mall", strnpcinfo(0)+"::OnCall", 0, 99;
-	end;
-}
+// @mall is handled by ACMD_FUNC(mall) in src/custom/atcommand.inc
 
 // ==========================================
 // 1. COMBINED EQUIPMENT VENDOR
 // ==========================================
-prt_mk,100,98,4	script	Equipment Merchant#p_market	961,{
+prt_mk,114,98,4	script	Equipment Merchant#p_market	961,{
 	mes "[Equipment Merchant]";
 	mes "Welcome! What type of combat gear are you looking for today?";
 	next;
@@ -69,7 +56,7 @@ prt_mk,100,98,4	script	Equipment Merchant#p_market	961,{
 // ==========================================
 // 2. COMBINED HEADGEAR & GARMENT VENDOR
 // ==========================================
-prt_mk,100,101,4	script	Headgear & Garment Dealer#p_market	961,{
+prt_mk,114,101,4	script	Headgear & Garment Dealer#p_market	961,{
 	mes "[Headgear & Garment Dealer]";
 	mes "I have garments, accessories, and a massive collection of headgears.";
 	next;
@@ -95,7 +82,7 @@ prt_mk,100,101,4	script	Headgear & Garment Dealer#p_market	961,{
 // ==========================================
 // 3. COMBINED SUPPLIES & DEALERS
 // ==========================================
-prt_mk,100,104,4	script	Supply Dealer#p_market	961,{
+prt_mk,114,104,4	script	Supply Dealer#p_market	961,{
 	mes "[Supply Dealer]";
 	mes "Looking for consumables, ammunition, or specialty goods?";
 	next;

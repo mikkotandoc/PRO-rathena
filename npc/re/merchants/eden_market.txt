@@ -1435,7 +1435,7 @@ paramk,97,58,4	script	Eden Coin Trader#paramk	4_F_KAFRA7,{
 
 	mes "[Eden Coin Trader]";
 	mes "Welcome to the Eden Group Coin exchange counter.";
-	mes "Trade your Eden Group Coins earned from missions for useful supplies.";
+	mes "Trade mission coins for EXP manuals, buffs, heals, and warp tools.";
 	next;
 
 	if (select("Open Exchange Shop:Cancel") == 2) {

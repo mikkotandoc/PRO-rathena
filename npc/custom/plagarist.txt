@@ -3,9 +3,10 @@
 //===== By: ==================================================
 //= Easycore
 //===== Last Updated: ========================================
-//= 20210905
+//= 20250623
 //===== Description: ========================================= 
-//= Simple Plagiarism Skill
+//= Plagiarism skill copy NPC for Rogue / Stalker.
+//= Skill list synced with CopyFlags.Plagiarism in db/re/skill_db.yml
 //= Require 'getskillname' script command:
 //=    https://rathena.org/board/files/file/4307-script-command-getskillname/
 //============================================================
@@ -13,7 +14,8 @@
 prontera,142,172,3	script	Plagiarism NPC	747,{
 	mes "[ ^FF0000Plagiarism Master^000000 ]";
 	if (.plag_skill && !getskilllv("RG_PLAGIARISM")) {
-		mes "You must have Plagiarism learned.";
+		mes "You must have ^FF0000Plagiarism^000000 learned.";
+		mes "Only ^FFA500Rogues^000000 and ^FFA500Stalkers^000000 can use this service.";
 		close;
 	}
 	mes "Heya ^FFA500"+strcharinfo(0)+"^000000!";
@@ -52,9 +54,17 @@ prontera,142,172,3	script	Plagiarism NPC	747,{
 		.zeny = 25000;
 		//Must Plagiarism skil be learned? (1. Yes | 0. No)
 		.plag_skill = 1;
-		//Skill ID Array
-		setarray .SkillID[0],263,13, 7,14,19,20,21,83,84,85,86,89,90,91,421,534,536,537,540,542;
-		//Skill LV Array
-		setarray .SkillLV[0], 10,10,10,10,10,10,10,10,10,10,10,10,10,5,   7, 10,  5, 10, 19,  5;
+		//Skill ID Array (CopyFlags.Plagiarism from db/re/skill_db.yml)
+		setarray .SkillID[0],
+			5,7,11,13,14,15,17,18,19,20,21,24,28,42,46,47,52,54,62,68,
+			69,70,77,79,80,81,83,84,85,86,88,89,90,91,116,121,122,123,141,148,
+			152,156,212,229,230,250,251,253,254,263,266,267,271,272,337,421,526,527,528,529,
+			530,531,534,535,536,537,539,540,541,542,1001,1004,1006,1009,1015,3008;
+		//Skill LV Array (MaxLevel per skill)
+		setarray .SkillLV[0],
+			10,10,10,10,10,10,10,10,10,10,10,1,10,10,10,10,10,4,10,5,
+			5,10,10,10,10,10,10,10,10,5,10,10,5,5,5,5,5,5,10,1,
+			1,1,10,5,5,5,5,10,10,10,5,5,5,5,1,7,10,5,10,5,
+			5,5,10,10,5,10,5,10,5,5,1,1,1,1,1,10;
 		end;
 }

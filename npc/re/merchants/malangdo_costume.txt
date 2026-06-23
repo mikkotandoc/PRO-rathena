@@ -1292,7 +1292,6 @@ mal_in01,22,113,3	script	Aver De Dosh#cos_ect	4_WHITETIGER,{
 		case 31087:	// C_Dwarf_Beard
 		case 31162:	// C_Shaving_Foam
 		case 31164:	// C_Brown_Stall
-		case 31586:	// C_Poporing_Muffler
 		case 31693:	// C_LunaticMuffler
 		case 20022:	// C_Love_Piece
 		case 31569:	// C_OpenAir_Headset

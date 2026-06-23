@@ -138,3 +138,7 @@
 
 // Poring Village
 1@begi	mapflag	nodynamicnpc
+
+// Airship Crash
+1@mjo1	mapflag	nodynamicnpc
+1@mjo2	mapflag	nodynamicnpc

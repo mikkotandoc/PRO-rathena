@@ -22,73 +22,129 @@ moc_para01,45,38,3	script	Mission [130~190]	4_BOARD3,{
     }
 
     mes "[Mission Board 130~190]";
-    mes "Please select a difficulty range to view available assignments:";
+    mes "Please select a level range to view available assignments:";
     next;
     
-    switch(select("Above Lv 130 ~ 140 Quests:Above Lv 150 & 160 Quests:Above Lv 170 ~ 190 Quests:Turn in Completed Missions:Cancel")) {
+    switch(select("Lv 130 ~ 140 Quests:Lv 150 ~ 160 Quests:Lv 170 ~ 190 Quests:Turn in Completed Missions:Cancel")) {
         
         // ==========================================
-        // ABOVE LEVEL 130 ~ 140
+        // LEVEL 130 ~ 140
         // ==========================================
         case 1:
             mes "[Mission Board 130~190]";
-            mes "Select an assignment target:";
+            mes "Select a level bracket:";
             next;
-            switch(select("Lv130+: 60 Monsters in ecl_fild01:Lv130+: 60 Monsters in ba_bath:Lv130+: 60 Monsters in ba_lib:Lv130+: 60 Monsters in ba_pw02:Lv130+: 60 Monsters in ba_pw01:Lv130+: 60 Monsters in lasa_dun02:Lv140+: 30 Cenere & Antique Book:Lv140+: 120 Monsters in lasa_dun03:Lv140+: 120 Monsters in prt_prison:Lv140+: 120 Monsters in prt_q:Lv140+: 120 Monsters in rockmi1")) {
-                case 1:  callsub L_AssignQuest, 80700, 80733, "ecl_fild01 Hunt", 60;
-                case 2:  callsub L_AssignQuest, 80701, 80734, "ba_bath Hunt", 60;
-                case 3:  callsub L_AssignQuest, 80702, 80735, "ba_lib Hunt", 60;
-                case 4:  callsub L_AssignQuest, 80703, 80736, "ba_pw02 Hunt", 60;
-                case 5:  callsub L_AssignQuest, 80704, 80737, "ba_pw01 Hunt", 60;
-                case 6:  callsub L_AssignQuest, 80705, 80738, "lasa_dun02 Hunt", 60;
-                case 7:  callsub L_AssignQuest, 80706, 80739, "Cenere & Antique Book", 30;
-                case 8:  callsub L_AssignQuest, 80707, 80740, "lasa_dun03 Hunt", 120;
-                case 9:  callsub L_AssignQuest, 80708, 80741, "prt_prison Hunt", 120;
-                case 10: callsub L_AssignQuest, 80709, 80742, "prt_q Hunt", 120;
-                case 11: callsub L_AssignQuest, 80710, 80743, "rockmi1 Hunt", 120;
+            switch(select("Lv 130+ Field Hunts:Lv 140+ Hunts")) {
+                case 1:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 130+ assignments:";
+                    next;
+                    switch(select("60 Monsters in ecl_fild01:60 Monsters in ba_bath:60 Monsters in ba_lib:60 Monsters in ba_pw02:60 Monsters in ba_pw01:60 Monsters in lasa_dun02")) {
+                        case 1: callsub L_AssignQuest, 80700, 80733, "ecl_fild01 Hunt", 60;
+                        case 2: callsub L_AssignQuest, 80701, 80734, "ba_bath Hunt", 60;
+                        case 3: callsub L_AssignQuest, 80702, 80735, "ba_lib Hunt", 60;
+                        case 4: callsub L_AssignQuest, 80703, 80736, "ba_pw02 Hunt", 60;
+                        case 5: callsub L_AssignQuest, 80704, 80737, "ba_pw01 Hunt", 60;
+                        case 6: callsub L_AssignQuest, 80705, 80738, "lasa_dun02 Hunt", 60;
+                    }
+                    break;
+                case 2:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 140+ assignments:";
+                    next;
+                    switch(select("30 Cenere & Antique Book:120 Monsters in lasa_dun03:120 Monsters in prt_prison:120 Monsters in prt_q:120 Monsters in rockmi1")) {
+                        case 1: callsub L_AssignQuest, 80706, 80739, "Cenere & Antique Book", 30;
+                        case 2: callsub L_AssignQuest, 80707, 80740, "lasa_dun03 Hunt", 120;
+                        case 3: callsub L_AssignQuest, 80708, 80741, "prt_prison Hunt", 120;
+                        case 4: callsub L_AssignQuest, 80709, 80742, "prt_q Hunt", 120;
+                        case 5: callsub L_AssignQuest, 80710, 80743, "rockmi1 Hunt", 120;
+                    }
+                    break;
             }
             break;
         // ==========================================
-        // ABOVE LEVEL 150 & 160
+        // LEVEL 150 ~ 160
         // ==========================================
         case 2:
             mes "[Mission Board 130~190]";
-            mes "Select an assignment target:";
+            mes "Select a level bracket:";
             next;
-            switch(select("Lv150+: 30 Wanderer (Nightmare):Lv150+: 30 Smelly Zombie:Lv150+: 20 Repair Robot & 30 Green Cenere:Lv150+: 40 Big Ben & Neo-Punk:Lv150+: 160 Monsters in ba_lost:Lv160+: 50 Big Bell:Lv160+: 40 Grey Goat & Wolf Baby:Lv160+: 80 Monsters in sp_rudus2:Lv160+: 50 Recon Robot:Lv160+: 40 Exploration Rover Duo")) {
-                case 1:  callsub L_AssignQuest, 80711, 80744, "Wanderer (Nightmare)", 30;
-                case 2:  callsub L_AssignQuest, 80712, 80745, "Smelly Zombie", 30;
-                case 3:  callsub L_AssignQuest, 80713, 80746, "Repair Robot & Green Cenere", 20;
-                case 4:  callsub L_AssignQuest, 80714, 80747, "Big Ben & Neo-Punk", 40;
-                case 5:  callsub L_AssignQuest, 80715, 80748, "ba_lost Hunt", 160;
-                case 6:  callsub L_AssignQuest, 80716, 80749, "Big Bell", 50;
-                case 7:  callsub L_AssignQuest, 80717, 80750, "Grey Goat & Wolf Baby", 40;
-                case 8:  callsub L_AssignQuest, 80718, 80751, "sp_rudus2 Hunt", 80;
-                case 9:  callsub L_AssignQuest, 80719, 80752, "Recon Robot", 50;
-                case 10: callsub L_AssignQuest, 80720, 80753, "Exploration Rover Duo", 40;
+            switch(select("Lv 150+ Hunts:Lv 160+ Hunts")) {
+                case 1:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 150+ assignments:";
+                    next;
+                    switch(select("30 Wanderer (Nightmare):30 Smelly Zombie:20 Repair Robot & 30 Green Cenere:40 Big Ben & Neo-Punk:160 Monsters in ba_lost")) {
+                        case 1: callsub L_AssignQuest, 80711, 80744, "Wanderer (Nightmare)", 30;
+                        case 2: callsub L_AssignQuest, 80712, 80745, "Smelly Zombie", 30;
+                        case 3: callsub L_AssignQuest, 80713, 80746, "Repair Robot & Green Cenere", 20;
+                        case 4: callsub L_AssignQuest, 80714, 80747, "Big Ben & Neo-Punk", 40;
+                        case 5: callsub L_AssignQuest, 80715, 80748, "ba_lost Hunt", 160;
+                    }
+                    break;
+                case 2:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 160+ assignments:";
+                    next;
+                    switch(select("50 Big Bell:40 Grey Goat & Wolf Baby:80 Monsters in sp_rudus2:50 Recon Robot:40 Exploration Rover Duo")) {
+                        case 1: callsub L_AssignQuest, 80716, 80749, "Big Bell", 50;
+                        case 2: callsub L_AssignQuest, 80717, 80750, "Grey Goat & Wolf Baby", 40;
+                        case 3: callsub L_AssignQuest, 80718, 80751, "sp_rudus2 Hunt", 80;
+                        case 4: callsub L_AssignQuest, 80719, 80752, "Recon Robot", 50;
+                        case 5: callsub L_AssignQuest, 80720, 80753, "Exploration Rover Duo", 40;
+                    }
+                    break;
             }
             break;
 
         // ==========================================
-        // ABOVE LEVEL 170 ~ 190
+        // LEVEL 170 ~ 190
         // ==========================================
         case 3:
             mes "[Mission Board 130~190]";
-            mes "Select an assignment target:";
+            mes "Select a level bracket:";
             next;
-            switch(select("Lv170+: 160 Monsters in ba_2whs01:Lv170+: 80 Monsters in oz_dun01:Lv170+: 160 Monsters in sp_rudus3:Lv175+: 160 Monsters in mag_dun03:Lv180+: 160 Monsters in ba_2whs02:Lv180+: 160 Monsters in gl_cas01_:Lv180+: 80 Monsters in gw_fild01:Lv180+: 80 Monsters in gw_fild02:Lv180+: 160 Monsters in ein_dun03:Lv190+: 240 Monsters in odin_past:Lv190+: 240 Monsters in abyss_04:Lv190+: 240 Monsters in ba_pw03")) {
-                case 1:  callsub L_AssignQuest, 80721, 80754, "ba_2whs01 Hunt", 160;
-                case 2:  callsub L_AssignQuest, 80722, 80755, "oz_dun01 Hunt", 80;
-                case 3:  callsub L_AssignQuest, 80723, 80756, "sp_rudus3 Hunt", 160;
-                case 4:  callsub L_AssignQuest, 80724, 80757, "mag_dun03 Hunt", 160;
-                case 5:  callsub L_AssignQuest, 80725, 80758, "ba_2whs02 Hunt", 160;
-                case 6:  callsub L_AssignQuest, 80726, 80759, "gl_cas01_ Hunt", 160;
-                case 7:  callsub L_AssignQuest, 80727, 80760, "gw_fild01 Hunt", 80;
-                case 8:  callsub L_AssignQuest, 80728, 80761, "gw_fild02 Hunt", 80;
-                case 9:  callsub L_AssignQuest, 80729, 80762, "ein_dun03 Hunt", 160;
-                case 10: callsub L_AssignQuest, 80730, 80763, "odin_past Hunt", 240;
-                case 11: callsub L_AssignQuest, 80731, 80764, "abyss_04 Hunt", 240;
-                case 12: callsub L_AssignQuest, 80732, 80765, "ba_pw03 Hunt", 240;
+            switch(select("Lv 170+ Hunts:Lv 175+ Hunts:Lv 180+ Hunts:Lv 190+ Hunts")) {
+                case 1:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 170+ assignments:";
+                    next;
+                    switch(select("160 Monsters in ba_2whs01:80 Monsters in oz_dun01:160 Monsters in sp_rudus3")) {
+                        case 1: callsub L_AssignQuest, 80721, 80754, "ba_2whs01 Hunt", 160;
+                        case 2: callsub L_AssignQuest, 80722, 80755, "oz_dun01 Hunt", 80;
+                        case 3: callsub L_AssignQuest, 80723, 80756, "sp_rudus3 Hunt", 160;
+                    }
+                    break;
+                case 2:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 175+ assignments:";
+                    next;
+                    switch(select("160 Monsters in mag_dun03")) {
+                        case 1: callsub L_AssignQuest, 80724, 80757, "mag_dun03 Hunt", 160;
+                    }
+                    break;
+                case 3:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 180+ assignments:";
+                    next;
+                    switch(select("160 Monsters in ba_2whs02:160 Monsters in gl_cas01_:80 Monsters in gw_fild01:80 Monsters in gw_fild02:160 Monsters in ein_dun03")) {
+                        case 1: callsub L_AssignQuest, 80725, 80758, "ba_2whs02 Hunt", 160;
+                        case 2: callsub L_AssignQuest, 80726, 80759, "gl_cas01_ Hunt", 160;
+                        case 3: callsub L_AssignQuest, 80727, 80760, "gw_fild01 Hunt", 80;
+                        case 4: callsub L_AssignQuest, 80728, 80761, "gw_fild02 Hunt", 80;
+                        case 5: callsub L_AssignQuest, 80729, 80762, "ein_dun03 Hunt", 160;
+                    }
+                    break;
+                case 4:
+                    mes "[Mission Board 130~190]";
+                    mes "Lv 190+ assignments:";
+                    next;
+                    switch(select("240 Monsters in odin_past:240 Monsters in abyss_04:240 Monsters in ba_pw03")) {
+                        case 1: callsub L_AssignQuest, 80730, 80763, "odin_past Hunt", 240;
+                        case 2: callsub L_AssignQuest, 80731, 80764, "abyss_04 Hunt", 240;
+                        case 3: callsub L_AssignQuest, 80732, 80765, "ba_pw03 Hunt", 240;
+                    }
+                    break;
             }
             break;
         // ==========================================

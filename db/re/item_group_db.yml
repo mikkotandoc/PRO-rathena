@@ -45236,20 +45236,20 @@ Body:
         List:
           - Index: 0
             Item: Pirate_Captain_Coat
-#  - Group: BS_ITEM_M_S_59
-#    SubGroups:
-#      - SubGroup: 0
-#        Algorithm: All
-#        List:
-#          - Index: 0
-#            Item: Phreeoni_Wing
-#  - Group: BS_ITEM_M_S_60
-#    SubGroups:
-#      - SubGroup: 0
-#        Algorithm: All
-#        List:
-#          - Index: 0
-#            Item: Boitata_Hat_K
+  - Group: BS_ITEM_M_S_59
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Phreeoni_Wing_Suits
+  - Group: BS_ITEM_M_S_60
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Boitata_Hat_K
   - Group: BS_ITEM_M_S_61
     SubGroups:
       - SubGroup: 0
@@ -45264,6 +45264,13 @@ Body:
         List:
           - Index: 0
             Item: Vesper_H_Gear_K
+  - Group: BS_ITEM_M_S_63
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: Moaning_of_EvilSpirits
   - Group: ENCHANT_STONE_BOX28
     SubGroups:
       - SubGroup: 6

@@ -447,3 +447,17 @@ function	script	F_CleanupEdenBoardCooldown	{
 	}
 	return;
 }
+
+function	script	F_CleanupEdenEventBoard	{
+	for (.@i = 70309; .@i <= 70320; .@i++) {
+		if (checkquest(.@i, PLAYTIME) == 2)
+			erasequest .@i;
+	}
+	for (.@i = 70289; .@i <= 70300; .@i++) {
+		if (checkquest(.@i) < 0)
+			continue;
+		if (checkquest(.@i, PLAYTIME) == 2)
+			erasequest .@i;
+	}
+	return;
+}

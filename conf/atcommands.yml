@@ -875,6 +875,9 @@ Body:
   - Command: mail
     Help: |
       Open mail box.
+  - Command: mall
+    Help: |
+      Warps you to the Item Mall (prt_mk).
   - Command: makeegg
     Help: |
       Params: <pet_id>

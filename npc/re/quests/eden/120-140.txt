@@ -34,7 +34,7 @@ moc_para01,43,38,3	script	Mission [120~140]	4_BOARD3,{
             mes "[Mission Board 120~140]";
             mes "Select a target to hunt:";
             next;
-            switch(select("Odin: 20 Skogul:Odin: 20 Frus:Odin: 5 Blue & Brown Skeggiold:Abyss: 30 Green & Red Ferus:Abyss: 30 Yellow & Blue Acidus:Abyss: 1 Hydrolancer:Thanatos: 30 Baroness of Retribution:Thanatos: 30 Lady Solace:Thanatos: 30 Mistress of Shelter:Thanatos: 30 Dame of Sentinel")) {
+            switch(select("Odin - 20 Skogul:Odin - 20 Frus:Odin - 5 Blue & Brown Skeggiold:Abyss - 30 Green & Red Ferus:Abyss - 30 Yellow & Blue Acidus:Abyss - 1 Hydrolancer:Thanatos - 30 Baroness of Retribution:Thanatos - 30 Lady Solace:Thanatos - 30 Mistress of Shelter:Thanatos - 30 Dame of Sentinel")) {
                 case 1:  callsub L_AssignQuest, 80500, 80544, "Skogul", 20;
                 case 2:  callsub L_AssignQuest, 80501, 80545, "Frus", 20;
                 case 3:  callsub L_AssignQuest, 80502, 80546, "Skeggiold Duo", 5;
@@ -74,7 +74,7 @@ moc_para01,43,38,3	script	Mission [120~140]	4_BOARD3,{
             mes "[Mission Board 120~140]";
             mes "Select a target to hunt:";
             next;
-            switch(select("Nameless: 30 Ragged Zombie & Slaughter:Nameless: 30 Banshee:Nameless: 20 Necromancer:Rachel: 20 Vanberk & Isilla:Rachel: 30 Hodremlin:Rachel: 20 Agav & Echinio")) {
+            switch(select("Nameless - 30 Ragged Zombie & Slaughter:Nameless - 30 Banshee:Nameless - 20 Necromancer:Rachel - 20 Vanberk & Isilla:Rachel - 30 Hodremlin:Rachel - 20 Agav & Echinio")) {
                 case 1: callsub L_AssignQuest, 80519, 80563, "Nameless Undead Trio", 30;
                 case 2: callsub L_AssignQuest, 80520, 80564, "Banshee", 30;
                 case 3: callsub L_AssignQuest, 80521, 80565, "Necromancer", 20;
@@ -91,7 +91,7 @@ moc_para01,43,38,3	script	Mission [120~140]	4_BOARD3,{
             mes "[Mission Board 120~140]";
             mes "Select an assignment target:";
             next;
-            switch(select("Bio: 30 Egnigem Cenia:Bio: 30 Armeyer Dinze:Bio: 30 Wickebine Tres:Bio: 30 Kavach Icarus:Bio: 30 Errende Ebecee:Bio: 30 Laurell Weinder:Bio: 2 Cecil Damon:Bio: 2 Kathryne Keyron:Bio: 2 Margaretha Sorin:Bio: 2 Seyren Windsor:Bio: 2 Eremes Guile:Bio: 2 Howard Alt-Eisen:Morroc: 30 Incarnation Valkyrie:Morroc: 30 Incarnation Mud:Morroc: 30 Incarnation Excorcist:Morroc: 30 Incarnation Ghost:Other: 5 Incubus & Succubus:Other: 20 Miming:Other: 20 Little Fatum")) {
+            switch(select("Bio - 30 Egnigem Cenia:Bio - 30 Armeyer Dinze:Bio - 30 Wickebine Tres:Bio - 30 Kavach Icarus:Bio - 30 Errende Ebecee:Bio - 30 Laurell Weinder:Bio - 2 Cecil Damon:Bio - 2 Kathryne Keyron:Bio - 2 Margaretha Sorin:Bio - 2 Seyren Windsor:Bio - 2 Eremes Guile:Bio - 2 Howard Alt-Eisen:Morroc - 30 Incarnation Valkyrie:Morroc - 30 Incarnation Mud:Morroc - 30 Incarnation Excorcist:Morroc - 30 Incarnation Ghost:Other - 5 Incubus & Succubus:Other - 20 Miming:Other - 20 Little Fatum")) {
                 case 1:  callsub L_AssignQuest, 80525, 80569, "Egnigem Cenia", 30;
                 case 2:  callsub L_AssignQuest, 80526, 80570, "Armeyer Dinze", 30;
                 case 3:  callsub L_AssignQuest, 80527, 80571, "Wickebine Tres", 30;

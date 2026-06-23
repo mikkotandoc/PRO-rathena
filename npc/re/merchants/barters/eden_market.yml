@@ -129,41 +129,77 @@ Body:
   - Name: para_edencoin10
     Items:
       - Index: 0
-        Item: White_Potion
+        Item: HE_Battle_Manual
         RequiredItems:
           - Index: 0
             Item: Para_Team_Coin
-            Amount: 2
+            Amount: 18
       - Index: 1
-        Item: Blue_Potion
+        Item: Job_Manual50
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 10
+      - Index: 2
+        Item: Battle_Manual
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 8
+      - Index: 3
+        Item: HE_Bubble_Gum
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 15
+      - Index: 4
+        Item: Bubble_Gum
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 10
+      - Index: 5
+        Item: Berserk_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 5
+      - Index: 6
+        Item: Awakening_Potion
         RequiredItems:
           - Index: 0
             Item: Para_Team_Coin
             Amount: 3
-      - Index: 2
+      - Index: 7
+        Item: White_Slim_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 2
+      - Index: 8
+        Item: Giant_Fly_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 6
+      - Index: 9
+        Item: Wing_Of_Butterfly
+        RequiredItems:
+          - Index: 0
+            Item: Para_Team_Coin
+            Amount: 4
+      - Index: 10
         Item: Wing_Of_Fly
         RequiredItems:
           - Index: 0
             Item: Para_Team_Coin
             Amount: 1
-      - Index: 3
-        Item: Wing_Of_Butterfly
-        RequiredItems:
-          - Index: 0
-            Item: Para_Team_Coin
-            Amount: 5
-      - Index: 4
-        Item: White_Slim_Potion
-        RequiredItems:
-          - Index: 0
-            Item: Para_Team_Coin
-            Amount: 5
-      - Index: 5
+      - Index: 11
         Item: Kafra_Card
         RequiredItems:
           - Index: 0
             Item: Para_Team_Coin
-            Amount: 20
+            Amount: 12
   - Name: para_orbs10
     Items:
       - Index: 0

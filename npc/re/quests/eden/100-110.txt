@@ -34,7 +34,7 @@ moc_para01,41,38,3	script	Mission [100~110]	4_BOARD3,{
             mes "[Mission Board 100~110]";
             mes "Select a target to hunt:";
             next;
-            switch(select("Nogg: 30 Nightmare Terror:Nogg: 30 Ground & Sky Deleter:GH: 30 Carat:GH: 30 Arclouse:GH: 30 Anolian:GH: 30 Sting:GH: 30 Majorous:GH: 30 Raydric:GH: 30 Khalitzburg:GH: 30 Wanderer:GH: 10 Abysmal Knight")) {
+            switch(select("Nogg - 30 Nightmare Terror:Nogg - 30 Ground & Sky Deleter:GH - 30 Carat:GH - 30 Arclouse:GH - 30 Anolian:GH - 30 Sting:GH - 30 Majorous:GH - 30 Raydric:GH - 30 Khalitzburg:GH - 30 Wanderer:GH - 10 Abysmal Knight")) {
                 case 1:  callsub L_AssignQuest, 80300, 80326, "Nightmare Terror", 30;
                 case 2:  callsub L_AssignQuest, 80301, 80327, "Deleter Duo", 30;
                 case 3:  callsub L_AssignQuest, 80302, 80328, "Carat", 30;
@@ -74,7 +74,7 @@ moc_para01,41,38,3	script	Mission [100~110]	4_BOARD3,{
             mes "[Mission Board 100~110]";
             mes "Select an assignment target:";
             next;
-            switch(select("Thanatos: 30 Ancient Mimic:Thanatos: 30 Deathword:Thanatos: 20 Owl Baron:Juperos: 20 Orange & Green Venatu:Juperos: 20 Red & Blue Venatu:Juperos: 10 Blue & Orange Dimik:Juperos: 10 Green & Red Dimik")) {
+            switch(select("Thanatos - 30 Ancient Mimic:Thanatos - 30 Deathword:Thanatos - 20 Owl Baron:Juperos - 20 Orange & Green Venatu:Juperos - 20 Red & Blue Venatu:Juperos - 10 Blue & Orange Dimik:Juperos - 10 Green & Red Dimik")) {
                 case 1: callsub L_AssignQuest, 80319, 80345, "Ancient Mimic", 30;
                 case 2: callsub L_AssignQuest, 80320, 80346, "Deathword", 30;
                 case 3: callsub L_AssignQuest, 80321, 80347, "Owl Baron", 20;

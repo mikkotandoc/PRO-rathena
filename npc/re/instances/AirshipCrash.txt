@@ -6,7 +6,10 @@
 //============================================================
 
 function	script	F_Aircrash_HpMult	{
-	getpartymember getcharid(1);
+	.@party_id = getcharid(1);
+	if (.@party_id < 1)
+		return 1;
+	getpartymember .@party_id;
 	return max(1, min($@partymembercount, 10));
 }
 
@@ -47,13 +50,17 @@ dali02,137,86,3	script	Dr. Dulaisakstrom#mjo	PORTAL,{
 		mes "^ff0000Users below level 215 cannot enter this dungeon.^000000";
 		close;
 	}
-	if (checkquest(15073, PLAYTIME) == 2) {
-		mes "^0000ffYou may enter Airship Crash again.^000000";
-		erasequest 15073;
-	}
-	else if (checkquest(15072, PLAYTIME) == 0 || checkquest(15072, PLAYTIME) == 1) {
+	switch (checkquest(15092, PLAYTIME)) {
+	case 0:
+	case 1:
 		mes "^ff0000This Memorial Dungeon cannot be accessed for 3 days after your last entrance.^000000";
 		close;
+	case 2:
+		mes "^0000ffYou may enter Airship Crash again.^000000";
+		erasequest 15092;
+		if (isbegin_quest(15072) > 0)
+			erasequest 15072;
+		break;
 	}
 	.@party_id = getcharid(1);
 	.@md_name$ = "Airship Crash";
@@ -61,26 +68,31 @@ dali02,137,86,3	script	Dr. Dulaisakstrom#mjo	PORTAL,{
 		mes "^ff0000To enter, you must create or join a party of 1 or more members.^000000";
 		close;
 	}
-	if (is_party_leader() == false) {
-		mes "^ff0000Only the party leader can create the memorial dungeon.^000000";
-		close;
-	}
 	switch(select("Create Memorial Dungeon:Enter Airship Crash:Cancel")) {
 	case 1:
+		if (is_party_leader() == false) {
+			mes "^ff0000Only the party leader can create the memorial dungeon.^000000";
+			close;
+		}
 		if (instance_create(.@md_name$) < 0) {
 			mes "Party: " + getpartyname(.@party_id);
 			mes "^0000ff" + .@md_name$ + "^000000 - Creation failed!";
 			close;
 		}
-		mes "^ff0000Memorial dungeon created.^000000";
-		mes "^ff0000Select Enter Airship Crash to proceed.^000000";
+		mes "^0000ffMemorial dungeon created.^000000";
+		mes "^0000ffSelect Enter Airship Crash to proceed.^000000";
 		close;
 	case 2:
+		switch (checkquest(15092, PLAYTIME)) {
+		case 0:
+		case 1:
+			mes "^ff0000This Memorial Dungeon cannot be accessed for 3 days after your last entrance.^000000";
+			close;
+		}
 		switch(instance_enter(.@md_name$)) {
 		case IE_OK:
 			mapannounce "dali02", strcharinfo(0) + " of the party " + getpartyname(.@party_id) + " entered " + .@md_name$ + ".", bc_map, "0x00ff99";
-			if (isbegin_quest(15072) == 0)
-				setquest 15072;
+			setquest 15072;
 			end;
 		case IE_NOMEMBER:
 			mes "^ff0000To enter, you must create or join a party of 1 or more members.^000000";
@@ -473,10 +485,10 @@ OnTouch:
 	next;
 	if (select("Leave.:Stay.") == 2)
 		close;
-	if (checkquest(15072) == 1)
+	if (isbegin_quest(15072) == 1)
 		completequest 15072;
-	if (isbegin_quest(15073) == 0)
-		setquest 15073;
+	if (isbegin_quest(15092) == 0)
+		setquest 15092;
 	warp "dali02", 137, 86;
 	end;
 }

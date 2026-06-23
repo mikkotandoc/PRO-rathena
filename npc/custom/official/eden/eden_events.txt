@@ -6,39 +6,22 @@
 // Hunt completion window: +168h (7 days) per quest_db.yml
 //============================================================
 
-moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
+moc_para01,33,35,3	script	Eden Event Coordinator	4_F_KAFRA8,{
 
-	if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 2000) {
-		mes "[Eden Event Coordinator]";
-		mes "You are carrying too much to receive event rewards.";
-		mes "Please free up inventory space and try again.";
-		close;
-	}
+	mes "[Eden Event Coordinator]";
+	mes "Welcome! I coordinate limited-time hunting events for Eden members.";
+	mes "Complete assignments to earn EXP and Eden Group Coins.";
+	next;
 
-	if (!callfunc("F_HasEdenGroupMark")) {
+	if (countitem(6219) == 0 && countitem(22508) == 0) {
 		mes "[Eden Event Coordinator]";
 		mes "These special event assignments are reserved for registered Eden Group members.";
 		close;
 	}
 
-	for (.@i = 70309; .@i <= 70320; .@i++) {
-		if (checkquest(.@i, PLAYTIME) == 2)
-			erasequest .@i;
-	}
-	for (.@i = 70289; .@i <= 70300; .@i++) {
-		if (checkquest(.@i, HUNTING) == 1)
-			erasequest .@i;
-	}
-
-	mes "[Eden Event Coordinator]";
-	mes "Welcome! I coordinate limited-time hunting events for Eden members.";
-	mes "Complete assignments to earn EXP and Eden Group Coins.";
-	mes "^0000ffRules:^000000 Each hunt must be finished within ^0000cd7 days^000000.";
-	mes "After turn-in, that event enters a ^0000cd24-hour cooldown^000000 before you can take it again.";
-	next;
-
 	switch(select("Browse Event Quests:Turn In Completed Quests:Cancel")) {
 	case 1:
+		callsub L_Cleanup;
 		mes "[Eden Event Coordinator]";
 		mes "Select an event assignment:";
 		next;
@@ -60,11 +43,21 @@ moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
 		break;
 
 	case 2:
+		if (checkweight(1201,1) == 0 || (MaxWeight - Weight) < 2000) {
+			mes "[Eden Event Coordinator]";
+			mes "You are carrying too much to receive event rewards.";
+			mes "Please free up inventory space and try again.";
+			close;
+		}
+
+		callsub L_Cleanup;
 		mes "[Eden Event Coordinator]";
 		mes "Checking your completed event assignments...";
 		next;
 
 		for (.@i = 70289; .@i <= 70300; .@i++) {
+			if (checkquest(.@i) < 0)
+				continue;
 			if (checkquest(.@i, HUNTING) != 2)
 				continue;
 
@@ -90,6 +83,21 @@ moc_para01,46,36,3	script	Eden Event Coordinator	4_F_KAFRA7,{
 	}
 	end;
 
+L_Cleanup:
+	for (.@i = 70309; .@i <= 70320; .@i++) {
+		if (checkquest(.@i) < 0)
+			continue;
+		if (checkquest(.@i, PLAYTIME) == 2)
+			erasequest .@i;
+	}
+	for (.@i = 70289; .@i <= 70300; .@i++) {
+		if (checkquest(.@i) < 0)
+			continue;
+		if (checkquest(.@i, PLAYTIME) == 2)
+			erasequest .@i;
+	}
+	return;
+
 L_Assign:
 	.@q_id = getarg(0);
 	.@cd_id = getarg(1);
@@ -104,15 +112,25 @@ L_Assign:
 	if (checkquest(.@cd_id, PLAYTIME) == 2)
 		erasequest .@cd_id;
 
-	if (checkquest(.@q_id, HUNTING) == 1) {
+	if (checkquest(.@q_id) >= 0 && checkquest(.@q_id, PLAYTIME) == 2) {
 		erasequest .@q_id;
 		mes "[Eden Event Coordinator]";
 		mes "Your previous ^0000ff" + .@name$ + "^000000 attempt expired after ^0000cd7 days^000000 and has been reset.";
 		next;
 	}
 
+	if (checkquest(.@q_id) < 0) {
+		setquest .@q_id;
+		mes "[Eden Event Coordinator]";
+		mes "Event registered: ^0000ff" + .@name$ + "^000000.";
+		mes "You have ^0000cd7 days^000000 to complete this hunt.";
+		mes "Return here to turn it in once your Quest Window shows it as finished.";
+		close;
+	}
+
 	switch (checkquest(.@q_id, HUNTING)) {
 	case -1:
+		erasequest .@q_id;
 		break;
 	case 2:
 		mes "[Eden Event Coordinator]";
@@ -139,30 +157,24 @@ L_Reward:
 	.@cd_id = getarg(1);
 
 	switch (.@q_id) {
-		// Mission Board 1~39 tier (div 200)
-		case 70289: .@b_exp = 3000;  .@j_exp = 2000;  .@rate = 200; .@coin = 10; break; // Spore-like
-		case 70290: .@b_exp = 3200;  .@j_exp = 3000;  .@rate = 200; .@coin = 15; break; // Zombie & Skeleton-like
-		// Mission Board 40~69 tier (div 220)
-		case 70291: .@b_exp = 14350; .@j_exp = 13700; .@rate = 220; .@coin = 20; break; // Orc Skeleton
-		case 70292: .@b_exp = 14350; .@j_exp = 13700; .@rate = 220; .@coin = 25; break; // Orc Zombie
-		// Mission Board 70~99 tier (div 220)
-		case 70293: .@b_exp = 39600; .@j_exp = 35000; .@rate = 220; .@coin = 30; break; // Increase Soil
-		case 70294: .@b_exp = 72000; .@j_exp = 72000; .@rate = 220; .@coin = 40; break; // Injustice
-		// Mission Board 100~110 tier (div 150)
-		case 70295: .@b_exp = 160000; .@j_exp = 160000; .@rate = 150; .@coin = 50; break; // Nightmare Terror
-		case 70296: .@b_exp = 300000; .@j_exp = 300000; .@rate = 150; .@coin = 60; break; // Nepenthes
-		// Mission Board 120~140 tier (div 200)
-		case 70297: .@b_exp = 800000;  .@j_exp = 800000;  .@rate = 200; .@coin = 60; break; // Dolomedes
-		case 70298: .@b_exp = 1000000; .@j_exp = 1000000; .@rate = 200; .@coin = 75; break; // Desert Canyon Duo
-		// Mission Board 130~190 tier (div 200)
-		case 70299: .@b_exp = 1110729; .@j_exp = 1413414; .@rate = 200; .@coin = 75; break; // lasa_dun02
-		case 70300: .@b_exp = 1042488; .@j_exp = 2760588; .@rate = 200; .@coin = 75; break; // ecl_fild01
+		case 70289: .@b_exp = 3000;  .@j_exp = 2000;  .@rate = 200; .@coin = 10; break;
+		case 70290: .@b_exp = 3200;  .@j_exp = 3000;  .@rate = 200; .@coin = 15; break;
+		case 70291: .@b_exp = 14350; .@j_exp = 13700; .@rate = 220; .@coin = 20; break;
+		case 70292: .@b_exp = 14350; .@j_exp = 13700; .@rate = 220; .@coin = 25; break;
+		case 70293: .@b_exp = 39600; .@j_exp = 35000; .@rate = 220; .@coin = 30; break;
+		case 70294: .@b_exp = 72000; .@j_exp = 72000; .@rate = 220; .@coin = 40; break;
+		case 70295: .@b_exp = 160000; .@j_exp = 160000; .@rate = 150; .@coin = 50; break;
+		case 70296: .@b_exp = 300000; .@j_exp = 300000; .@rate = 150; .@coin = 60; break;
+		case 70297: .@b_exp = 800000;  .@j_exp = 800000;  .@rate = 200; .@coin = 60; break;
+		case 70298: .@b_exp = 1000000; .@j_exp = 1000000; .@rate = 200; .@coin = 75; break;
+		case 70299: .@b_exp = 1110729; .@j_exp = 1413414; .@rate = 200; .@coin = 75; break;
+		case 70300: .@b_exp = 1042488; .@j_exp = 2760588; .@rate = 200; .@coin = 75; break;
 		default:
 			return;
 	}
 
-	.@b_exp = (.@b_exp * 0.8 * getbattleflag("base_exp_rate")) / .@rate;
-	.@j_exp = (.@j_exp * 0.8 * getbattleflag("job_exp_rate")) / .@rate;
+	.@b_exp = (.@b_exp * 80 * getbattleflag("base_exp_rate")) / (.@rate * 100);
+	.@j_exp = (.@j_exp * 80 * getbattleflag("job_exp_rate")) / (.@rate * 100);
 
 	erasequest .@q_id;
 

@@ -5,7 +5,7 @@
 //= prt_mk (use @mall to warp there).
 //============================================================
 
-prt_mk,100,107,4	script	Catalyst Supplier#prt_mk	4_M_ALCHE_A,{
+prt_mk,114,107,4	script	Catalyst Supplier#prt_mk	4_M_ALCHE_A,{
 	mes "[Catalyst Supplier]";
 	mes "Need arrows, runestones, spell books, or other job catalysts?";
 	mes "I stock supplies for Rune Knights, Maestros, Biologos, Warlocks, and Alchemists.";

@@ -21183,11 +21183,25 @@ BUILDIN_FUNC(erasequest)
 	if (!script_charid2sd(3,sd))
 		return SCRIPT_CMD_FAILURE;
 
-	if( quest_delete(sd, script_getnum(st, 2))  == -1 ){
-		script_reportsrc(st);
-		script_reportfunc(st);
-	}
-	pc_show_questinfo(sd); 
+	if (quest_delete(sd, script_getnum(st, 2)) == 0)
+		pc_show_questinfo(sd);
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/**
+ * questlogcleanup {,<char_id>};
+ * Removes quest log entries that no longer exist in quest_db.
+ **/
+BUILDIN_FUNC(questlogcleanup)
+{
+	map_session_data *sd;
+
+	if (!script_charid2sd(2, sd))
+		return SCRIPT_CMD_FAILURE;
+
+	if (quest_pc_cleanup(sd))
+		pc_show_questinfo(sd);
 
 	return SCRIPT_CMD_SUCCESS;
 }
@@ -28716,6 +28730,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(questinfo, "i??"),
 	BUILDIN_DEF(setquest, "i?"),
 	BUILDIN_DEF(erasequest, "i?"),
+	BUILDIN_DEF(questlogcleanup, "?"),
 	BUILDIN_DEF(completequest, "i?"),
 	BUILDIN_DEF(checkquest, "i??"),
 	BUILDIN_DEF(isbegin_quest,"i?"),

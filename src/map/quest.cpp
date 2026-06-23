@@ -545,8 +545,7 @@ bool quest_pc_cleanup(map_session_data *sd)
 
 	for (i = 0; i < sd->num_quests; i++) {
 		if (sd->quest_log[i].quest_id <= 0 || !quest_search(sd->quest_log[i].quest_id)) {
-			if (sd->quest_log[i].state != Q_COMPLETE)
-				clif_quest_delete(sd, sd->quest_log[i].quest_id);
+			clif_quest_delete(sd, sd->quest_log[i].quest_id);
 			continue;
 		}
 
@@ -970,7 +969,7 @@ int32 quest_check( const map_session_data* sd, int32 quest_id, e_quest_check_typ
 				if (!qi)
 					return -1;
 
-				ARR_FIND(0, qi->objectives.size(), j, sd->quest_log[i].count[j] < qi->objectives[j]->count);
+				ARR_FIND(0, qi->objectives.size(), j, !qi->objectives[j] || sd->quest_log[i].count[j] < qi->objectives[j]->count);
 				if (j == qi->objectives.size())
 					return 2;
 				if (sd->quest_log[i].time < (uint32)time(nullptr))
