@@ -315,6 +315,8 @@ function	script	F_EpClearConfirm	{
 			mes " - ^4d4dffep17_2_main^000000 set to at least ^0000ff36^000000";
 			mes " - ^4d4dffep172_watergarden^000000 set to at least ^0000ff3^000000";
 			mes " - Hidden Garden instance NPCs restored to visible";
+		} else {
+			mes " - ^4d4dffOS Occupation^000000 instance entrance NPC restored to visible";
 		}
 		break;
 	case 18:

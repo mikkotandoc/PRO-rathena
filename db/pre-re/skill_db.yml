@@ -5173,6 +5173,10 @@ Body:
     Hit: Single
     HitCount: 1
     Element: Earth
+    CopyFlags:
+      Skill:
+        Plagiarism: true
+        Reproduce: true
     Duration2: 30000
     Requires:
       SpCost: 9

@@ -7558,7 +7558,11 @@ sp_cor,162,56,0	script	#171_ocp_ev	HIDDEN_WARP_NPC,4,4,{
 	end;
 
 OnTouch:
-	if (isbegin_quest(11603) == 2 && isbegin_quest(12452) != 2) {
+	// Episode clear ticket: reveal OS Occupation entrance without story warp touch.
+	if (callfunc("F_Ep17_1InstanceReady") && isbegin_quest(12452) != 2) {
+		cloakoffnpc "Est#171_ocp",getcharid(0);
+		npctalk "We have to act quickly to annihilate them. We don't have much time.","Est#171_ocp",bc_self;
+	} else if (isbegin_quest(11603) == 2 && isbegin_quest(12452) != 2) {
 		cloakoffnpc "Est#171_ocp",getcharid(0);
 		npctalk "We have to act quickly to annihilate them. We don't have much time.","Est#171_ocp",bc_self;
 	} else if (isbegin_quest(12452) == 2)

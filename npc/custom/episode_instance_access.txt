@@ -19,6 +19,7 @@ function	script	F_EpClearApply	{
 		break;
 	case 17:
 		if (.@part == 1) {
+			callfunc("F_EpForceComplete", 11603);
 			callfunc("F_EpForceComplete", 16360);
 		} else if (.@part == 2) {
 			if (ep17_2_main < 36)
@@ -115,12 +116,39 @@ function	script	F_EpUncloakEp16	{
 	return .@fixed;
 }
 
+function	script	F_Ep17_1InstanceReady	{
+	return (isbegin_quest(11603) == 2 || checkquest(17046, PLAYTIME) == 2);
+}
+
+function	script	F_EpUncloakEp17_1	{
+	.@repair = getarg(0, 0);
+	.@fixed = 0;
+
+	if (!callfunc("F_Ep17_1InstanceReady"))
+		return 0;
+
+	if (isbegin_quest(12452) == 2) {
+		if (.@repair)
+			.@fixed += callfunc("F_EpRepairTry", "Operation Officer#171_ocp");
+		else
+			callfunc("F_EpUncloakNpcForce", "Operation Officer#171_ocp");
+	} else {
+		if (.@repair)
+			.@fixed += callfunc("F_EpRepairTry", "Est#171_ocp");
+		else
+			callfunc("F_EpUncloakNpcForce", "Est#171_ocp");
+	}
+	return .@fixed;
+}
+
 function	script	F_EpUncloakInstances	{
 	.@ep = getarg(0);
 	.@part = getarg(1, 0);
 
 	if (.@ep == 16 && terra_gloria_main >= 25)
 		callfunc("F_EpUncloakEp16", 0);
+	if (.@ep == 17 && .@part == 1 && callfunc("F_Ep17_1InstanceReady"))
+		callfunc("F_EpUncloakEp17_1", 0);
 	if (.@ep == 17 && .@part == 2 && ep17_2_main >= 1) {
 		cloakoffnpcself( "#he_admin1" );
 		cloakoffnpcself( "#he_admin2" );
@@ -175,6 +203,8 @@ function	script	F_EpRepairHiddenNpcs	{
 
 	if (terra_gloria_main >= 25)
 		.@fixed += callfunc("F_EpUncloakEp16", 1);
+	if (callfunc("F_Ep17_1InstanceReady"))
+		.@fixed += callfunc("F_EpUncloakEp17_1", 1);
 	if (ep17_2_main >= 1) {
 		.@fixed += callfunc("F_EpRepairTry", "#he_admin1");
 		.@fixed += callfunc("F_EpRepairTry", "#he_admin2");
@@ -217,6 +247,8 @@ function	script	F_EpUncloakOnMapLoad	{
 		if (.@map$ == "rebel_in" || .@map$ == "ein_fild04" || .@map$ == "slabw01" || .@map$ == "prt_cas_q")
 			callfunc("F_EpUncloakEp16", 0);
 	}
+	if (.@map$ == "sp_cor" && callfunc("F_Ep17_1InstanceReady"))
+		callfunc("F_EpUncloakEp17_1", 0);
 	if (.@map$ == "ba_maison" && ep17_2_main >= 1) {
 		cloakoffnpcself( "#he_admin1" );
 		cloakoffnpcself( "#he_admin2" );
@@ -261,6 +293,7 @@ OnPCLoadMapEvent:
 
 // Map flags for OnPCLoadMapEvent (episode instance hub maps)
 rebel_in	mapflag	loadevent
+sp_cor	mapflag	loadevent
 ein_fild04	mapflag	loadevent
 slabw01	mapflag	loadevent
 prt_cas_q	mapflag	loadevent
