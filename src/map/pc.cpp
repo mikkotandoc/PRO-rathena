@@ -5526,6 +5526,8 @@ bool pc_skill_plagiarism(map_session_data &sd, uint16 skill_id, uint16 skill_lv)
 
 	int32 type = skill_isCopyable(&sd, skill_id);
 	if (type == 1) {
+		skill_lv = cap_value(min(skill_lv, pc_checkskill(&sd, RG_PLAGIARISM)), 1, skill_get_max(skill_id));
+
 		pc_skill_plagiarism_reset(sd, type);
 
 		sd.cloneskill_idx = idx;

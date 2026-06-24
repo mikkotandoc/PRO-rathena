@@ -1,11 +1,13 @@
-function Get-TicketPercent {
-	param($type, $amount)
-	if ($type -eq 'boss_monster') { return 0.05 }
-	if ($amount -le 15) { return 0.045 }
-	if ($amount -le 25) { return 0.035 }
-	if ($amount -le 30) { return 0.03 }
-	if ($amount -le 35) { return 0.025 }
-	return 0.02
+$mapTicketPercent = [ordered]@{
+	bl_grass  = 0.05
+	bl_lava   = 0.06
+	bl_ice    = 0.065
+	bl_death  = 0.07
+	bl_soul   = 0.075
+	bl_venom  = 0.08
+	bl_temple = 0.085
+	bl_depth1 = 0.09
+	bl_depth2 = 0.10
 }
 
 $spawnFiles = @(
@@ -19,9 +21,9 @@ foreach ($file in $spawnFiles) {
 	$path = Join-Path $root $file
 	foreach ($line in Get-Content $path) {
 		if ($line -notmatch '^(?<map>bl_\w+)\s+(?<type>monster|boss_monster)\s+\S+\s+(?<id>\d+),(?<amount>\d+).+//\s*(?<aegis>\S+)') { continue }
-		$rate = Get-TicketPercent $Matches.type ([int]$Matches.amount)
 		if ($Matches.type -eq 'boss_monster') { continue }
 		$map = $Matches.map
+		$rate = $mapTicketPercent[$map]
 		if (-not $byMap[$map]) { $byMap[$map] = @{ w = 0; wr = 0.0; min = 1.0; max = 0.0 } }
 		$byMap[$map].w += [int]$Matches.amount
 		$byMap[$map].wr += [int]$Matches.amount * $rate

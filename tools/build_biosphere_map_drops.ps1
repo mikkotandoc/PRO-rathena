@@ -1,6 +1,6 @@
 # Generate db/import/map_drops.yml for Varmundt's Biosphere special drops.
 # Zone runes/essence: kRO reference at 75% (matches build_biosphere_mobs.ps1).
-# BarMealTicket: 2-5% per monster via SpecificDrops (harder/rarer = higher rate).
+# BarMealTicket: 5-10% via map GlobalDrops (weaker maps = lower rate).
 # Map drop Rate is n/100000 (see db/import-tmpl/map_drops.yml).
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
@@ -39,17 +39,21 @@ function Convert-DropYaml {
 	return $lines
 }
 
-function Get-TicketPercent {
-	param(
-		[string]$SpawnType,
-		[int]$Amount
-	)
-	if ($SpawnType -eq 'boss_monster') { return 5 }
-	if ($Amount -le 15) { return 4.5 }
-	if ($Amount -le 25) { return 3.5 }
-	if ($Amount -le 30) { return 3 }
-	if ($Amount -le 35) { return 2.5 }
-	return 2
+function Get-MapTicketPercent {
+	param([string]$Map)
+	$ticketByMap = [ordered]@{
+		bl_grass  = 5
+		bl_lava   = 6
+		bl_ice    = 6.5
+		bl_death  = 7
+		bl_soul   = 7.5
+		bl_venom  = 8
+		bl_temple = 8.5
+		bl_depth1 = 9
+		bl_depth2 = 10
+	}
+	if ($ticketByMap.Contains($Map)) { return $ticketByMap[$Map] }
+	return 5
 }
 
 function Read-BiosphereSpawns {
@@ -65,7 +69,6 @@ function Read-BiosphereSpawns {
 				Aegis = $Matches.aegis
 				SpawnType = $Matches.type
 				Amount = [int]$Matches.amount
-				TicketPercent = Get-TicketPercent $Matches.type ([int]$Matches.amount)
 			}
 			if (-not $byMap.ContainsKey($Matches.map)) {
 				$byMap[$Matches.map] = New-Object System.Collections.Generic.List[object]
@@ -128,14 +131,14 @@ $zoneMaps = [ordered]@{
 
 $depthMaps = @('bl_depth1', 'bl_depth2')
 
-# Rare Etel materials for depth BIO_ mobs (<10% effective at 150x: rate * 150 / 100000).
+# Rare Etel materials for depth BIO_ mobs (75% kRO tuning; <10% effective at 150x).
 $etelRareDrops = @(
-	@{ Item = 'Etel_Stone'; Rate = 2500 },
-	@{ Item = 'Blessed_Etel_Dust'; Rate = 2000 },
-	@{ Item = 'Etel_Skyblue_Jewel'; Rate = 1500 },
-	@{ Item = 'Etel_Topaz'; Rate = 1200 },
-	@{ Item = 'Etel_Violet_Jewel'; Rate = 1000 },
-	@{ Item = 'Etel_Amber'; Rate = 800 }
+	@{ Item = 'Etel_Stone'; Rate = 1875 },
+	@{ Item = 'Blessed_Etel_Dust'; Rate = 1500 },
+	@{ Item = 'Etel_Skyblue_Jewel'; Rate = 1125 },
+	@{ Item = 'Etel_Topaz'; Rate = 900 },
+	@{ Item = 'Etel_Violet_Jewel'; Rate = 750 },
+	@{ Item = 'Etel_Amber'; Rate = 600 }
 )
 $spawnFiles = @(
 	'npc\re\mobs\dungeons\biosphere.txt',
@@ -146,7 +149,7 @@ $spawnsByMap = Read-BiosphereSpawns -Files $spawnFiles
 $header = @'
 # Varmundt's Biosphere map-wide special drops (import overlay)
 # Zone runes: map-specific GlobalDrops (75% kRO tuning)
-# BarMealTicket: SpecificDrops 2-5% by spawn difficulty (rare/hard = higher)
+# BarMealTicket: map GlobalDrops 5-10% (weaker maps = lower rate)
 # BIO_ depth mobs: rare Etel material SpecificDrops (see `$etelRareDrops)
 # Normal mob loot stays in mob_db.
 
@@ -174,6 +177,10 @@ function Write-MapEntry {
 	$body.Add("      - Index: $goldIdx")
 	$body.Add('        Item: Play_RO_Gold_Coin_')
 	$body.Add("        Rate: $(Get-MapRate 6)")
+	$ticketIdx = $goldIdx + 1
+	$body.Add("      - Index: $ticketIdx")
+	$body.Add('        Item: BarMealTicket')
+	$body.Add("        Rate: $(Get-MapRate (Get-MapTicketPercent $Map))")
 
 	if ($spawnsByMap.ContainsKey($Map)) {
 		$body.Add('    SpecificDrops:')
@@ -181,13 +188,6 @@ function Write-MapEntry {
 			$body.Add("      - Monster: $($mob.Aegis)")
 			$body.Add('        Drops:')
 			$dropIdx = 0
-			if ($mob.Aegis -notmatch '^BIO_') {
-				$ticketRate = Get-MapRate $mob.TicketPercent
-				$body.Add("          - Index: $dropIdx")
-				$body.Add('            Item: BarMealTicket')
-				$body.Add("            Rate: $ticketRate")
-				$dropIdx++
-			}
 			if ($mob.Aegis -match '^BIO_' -and $Map -in $depthMaps) {
 				foreach ($drop in $etelRareDrops) {
 					$body.Add("          - Index: $dropIdx")

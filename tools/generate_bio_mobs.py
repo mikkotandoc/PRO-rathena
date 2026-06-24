@@ -106,7 +106,7 @@ DEPTH2_KRO = {
 }
 
 DEPTH2_DROPS = [
-    ("Etel_Dust", 200),
+    ("Etel_Dust", 150),
     ("Abyss_Jewel_Fragment", 350),
     ("Time_Dim_J_Fragment", 350),
     ("Abyss_Magic_Jewel", 75),
@@ -149,8 +149,8 @@ def convert_motion(speed: float, aspd: float) -> tuple[int, int, int]:
 
 
 def render_depth2(m: dict) -> str:
-    atk = int(round((m["AtkMin"] + m["AtkMax"]) / 2 * ATK_FACTOR))
-    matk = int(round((m["MatkMin"] + m["MatkMax"]) / 2 * MATK_FACTOR))
+    atk = int(m["AtkMin"])
+    matk = int(m["MatkMin"])
     walk, delay, motion = convert_motion(m["Speed"], m["Aspd"])
     lines = [
         f"  - Id: {m['Id']}",

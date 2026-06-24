@@ -12,8 +12,9 @@ if (-not (Test-Path $prFile)) {
 
 function Convert-EcoMob {
     param($m)
-    $atk = [int]((($m.AtkMin + $m.AtkMax) / 2) * 0.972)
-    $matk = [int]((($m.MatkMin + $m.MatkMax) / 2) * 0.918)
+    # rAthena renewal: Attack = kRO ATK min, Attack2 = kRO MATK min (see ECO_CORNUS in db/re/mob_db.yml).
+    $atk = [int]$m.AtkMin
+    $matk = [int]$m.MatkMin
     $walk = [int](1000 / $m.Speed)
     $motion = [int](1000 / $m.Aspd)
     $delay = if ($m.AttackDelay) { $m.AttackDelay } else { [Math]::Max(96, [int]($motion * 0.2)) }
@@ -151,34 +152,20 @@ foreach ($line in ($ecoCsv.Trim() -split "`n")) {
     $ecoYaml.Add((Convert-EcoMob $m))
 }
 
-$depth1 = (Get-Content $prFile -Encoding UTF8)[114951..115718]
+$depth1File = Join-Path $root 'db\import\biosphere_depth1_mob_db.yml'
+$depth2File = Join-Path $root 'db\import\biosphere_depth2_mob_db.yml'
 
-# Depth 2: generate from tools/generate_bio_mobs.py when not already in import
-$depth2 = @()
-$depth2Start = $null
-if (Test-Path $outFile) {
-    $depth2Start = (Select-String -Path $outFile -Pattern 'Id: 22252' | Select-Object -First 1).LineNumber
+function Get-YamlBody {
+    param([string]$FilePath)
+    if (-not (Test-Path $FilePath)) { return @() }
+    $lines = Get-Content $FilePath -Encoding UTF8
+    $start = ($lines | Select-String -Pattern '^Body:' | Select-Object -First 1).LineNumber
+    if (-not $start) { return @() }
+    return $lines[$start..($lines.Count - 1)]
 }
-if ($depth2Start) {
-    $existingLines = Get-Content $outFile -Encoding UTF8
-    $depth2 = $existingLines[($depth2Start - 1)..($existingLines.Count - 1)]
-} else {
-    $pyScript = Join-Path $root 'tools\generate_bio_mobs.py'
-    if (Test-Path $pyScript) {
-        $depth2Text = & python -c @"
-import sys
-sys.path.insert(0, r'$root\tools')
-from generate_bio_mobs import DEPTH2_KRO, render_depth2
-parts = []
-for mid, data in sorted(DEPTH2_KRO.items()):
-    entry = dict(data)
-    entry['Id'] = mid
-    parts.append(render_depth2(entry))
-print('\n'.join(parts))
-"@
-        if ($depth2Text) { $depth2 = $depth2Text -split "`n" }
-    }
-}
+
+$depth1 = Get-YamlBody -FilePath $depth1File
+$depth2 = Get-YamlBody -FilePath $depth2File
 
 # Preserve non-biosphere import entries (e.g. Airship Crash MD_AIRBOAT_*)
 $preserveYaml = @()

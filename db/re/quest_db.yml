@@ -16321,37 +16321,37 @@ Body:
     Targets:
       - Mob: PORING
         Count: 10
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70290
     Title: "[Event] Ant Egg Collection"
     Targets:
       - Mob: ANT_EGG
         Count: 20
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70291
     Title: "[Event] Skeleton Warriors"
     Targets:
       - Mob: SOLDIER_SKELETON
         Count: 30
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70292
     Title: "[Event] Orc Zombie Cleanup"
     Targets:
       - Mob: ORC_ZOMBIE
         Count: 40
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70293
     Title: "[Event] Mi Gao Extermination"
     Targets:
       - Mob: INCREASE_SOIL
         Count: 50
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70294
     Title: "[Event] Anubis Guardian Trial"
     Targets:
       - Mob: ANUBIS
         Count: 60
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70295
     Title: "[Event] Illusion of Moonlight"
     Targets:
@@ -16365,7 +16365,7 @@ Body:
           ILL_ARCHER_SKELETON: true
           ILL_NINE_TAIL: true
           ILL_FURY_HERO: true
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70296
     Title: "[Event] Illusion of Vampire"
     Targets:
@@ -16379,7 +16379,7 @@ Body:
           ILL_ZOMBIE_C: true
           ILL_NIGHTMARE: true
           ILL_GHOUL: true
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70297
     Title: "[Event] Illusion of Teddy Bear"
     Targets:
@@ -16395,7 +16395,7 @@ Body:
           ILL_TEDDY_BEAR_W: true
           ILL_OBSIDIAN: true
           ILL_TEDDY_BEAR_G: true
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70298
     Title: "[Event] Illusion of Abyss"
     Targets:
@@ -16408,7 +16408,7 @@ Body:
           ILL_ASSULTER: true
           ILL_SOLIDER: true
           ILL_HEATER: true
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70299
     Title: "[Event] Illusion of Twins"
     Targets:
@@ -16425,7 +16425,7 @@ Body:
           ILL_GIEARTH: true
           ILL_SOLDIER_ANDR: true
           ILL_VITATA: true
-    TimeLimit: +168h
+    TimeLimit: +24h
   - Id: 70300
     Title: "[Event] Illusion of Labyrinth"
     Targets:
@@ -16441,45 +16441,45 @@ Body:
           ILL_SIDE_WINDER: true
           ILL_BAPHOMET_J: true
           ILL_KILLER_MANTIS: true
-    TimeLimit: +168h
+    TimeLimit: +24h
 
   # Eden Group Event Quest Cooldowns (70309-70320)
   - Id: 70309
     Title: "[Event] Poring Extermination - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70310
     Title: "[Event] Ant Egg Collection - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70311
     Title: "[Event] Skeleton Warriors - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70312
     Title: "[Event] Orc Zombie Cleanup - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70313
     Title: "[Event] Mi Gao Extermination - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70314
     Title: "[Event] Anubis Guardian Trial - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70315
     Title: "[Event] Illusion of Moonlight - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70316
     Title: "[Event] Illusion of Vampire - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70317
     Title: "[Event] Illusion of Teddy Bear - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70318
     Title: "[Event] Illusion of Abyss - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70319
     Title: "[Event] Illusion of Twins - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
   - Id: 70320
     Title: "[Event] Illusion of Labyrinth - Waiting"
-    TimeLimit: +24h
+    TimeLimit: +168h
 
   - Id: 62928
     Title: "Silvervine Quest - Angeling"

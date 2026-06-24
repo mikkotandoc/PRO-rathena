@@ -37,9 +37,15 @@ prontera,142,172,3	script	Plagiarism NPC	747,{
 		end;
 	if (.zeny > 0)
 		Zeny -= .zeny;
-	npcskill .SkillID[.@s],.SkillLV[.@s],20,200;
-	sleep2 1500;
-	unitwarp getnpcid(0),.map$,.x,.y;
+	.@plv = getskilllv("RG_PLAGIARISM");
+	.@copy_lv = .SkillLV[.@s];
+	if (.@copy_lv > .@plv)
+		.@copy_lv = .@plv;
+	if (!plagiarizeskill(.SkillID[.@s], .@copy_lv)) {
+		message(strcharinfo(0), "Unable to copy that skill. Preserve may be active, or the skill cannot be copied.");
+		end;
+	}
+	dispbottom "Copied "+getskillname(.SkillID[.@s])+" Lv. "+.@copy_lv+".";
 	end;
 
 	OnInit:
@@ -58,13 +64,13 @@ prontera,142,172,3	script	Plagiarism NPC	747,{
 		setarray .SkillID[0],
 			5,7,11,13,14,15,17,18,19,20,21,24,28,42,46,47,52,54,62,68,
 			69,70,77,79,80,81,83,84,85,86,88,89,90,91,116,121,122,123,141,148,
-			152,156,212,229,230,250,251,253,254,263,266,267,271,272,337,421,526,527,528,529,
+			149,152,156,212,229,230,250,251,253,254,263,266,267,271,272,337,421,526,527,528,529,
 			530,531,534,535,536,537,539,540,541,542,1001,1004,1006,1009,1015,3008;
 		//Skill LV Array (MaxLevel per skill)
 		setarray .SkillLV[0],
 			10,10,10,10,10,10,10,10,10,10,10,1,10,10,10,10,10,4,10,5,
 			5,10,10,10,10,10,10,10,10,5,10,10,5,5,5,5,5,5,10,1,
-			1,1,10,5,5,5,5,10,10,10,5,5,5,5,1,7,10,5,10,5,
+			1,1,1,10,5,5,5,5,10,10,10,5,5,5,5,1,7,10,5,10,5,
 			5,5,10,10,5,10,5,10,5,5,1,1,1,1,1,10;
 		end;
 }

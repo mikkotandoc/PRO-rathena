@@ -2,8 +2,8 @@
 // Eden Group Event Quest Board
 // Daily hunting events rewarding Eden Group Coins (25223)
 // Quest IDs 70289 ~ 70300 (client: OngoingQuests.lub)
-// Cooldown IDs 70309 ~ 70320 (+24h per quest)
-// Hunt completion window: +168h (7 days) per quest_db.yml
+// Hunt quests 70289 ~ 70300 (+24h to complete)
+// Cooldown IDs 70309 ~ 70320 (+168h / 7 days after turn-in)
 //============================================================
 
 moc_para01,33,35,3	script	Eden Event Coordinator	4_F_KAFRA8,{
@@ -24,6 +24,8 @@ moc_para01,33,35,3	script	Eden Event Coordinator	4_F_KAFRA8,{
 		callsub L_Cleanup;
 		mes "[Eden Event Coordinator]";
 		mes "Select an event assignment:";
+		mes "Each hunt must be finished within ^0000cd24 hours^000000.";
+		mes "After turn-in, that event enters a ^0000cd7-day cooldown^000000 before you can take it again.";
 		next;
 		switch(select("[Event] Poring Extermination:[Event] Ant Egg Collection:[Event] Skeleton Warriors:[Event] Orc Zombie Cleanup:[Event] Mi Gao Extermination:[Event] Anubis Guardian Trial:[Event] Illusion of Moonlight:[Event] Illusion of Vampire:[Event] Illusion of Teddy Bear:[Event] Illusion of Abyss:[Event] Illusion of Twins:[Event] Illusion of Labyrinth:Cancel")) {
 			case 1:  callsub L_Assign, 70289, 70309, "Poring Extermination"; break;
@@ -74,7 +76,7 @@ moc_para01,33,35,3	script	Eden Event Coordinator	4_F_KAFRA8,{
 
 		mes "[Eden Event Coordinator]";
 		mes "Your completed event quests have been rewarded.";
-		mes "Each turned-in assignment is now on a ^0000cd24-hour cooldown^000000.";
+		mes "Each turned-in assignment is now on a ^0000cd7-day cooldown^000000.";
 		mes "You may repeat it after the timer shown in your Quest Window expires.";
 		close;
 
@@ -105,7 +107,7 @@ L_Assign:
 
 	if (checkquest(.@cd_id, PLAYTIME) == 0 || checkquest(.@cd_id, PLAYTIME) == 1) {
 		mes "[Eden Event Coordinator]";
-		mes "^ff0000" + .@name$ + "^000000 is on a ^0000cd24-hour cooldown^000000.";
+		mes "^ff0000" + .@name$ + "^000000 is on a ^0000cd7-day cooldown^000000.";
 		mes "Check your Quest Window for the remaining wait time, then try again.";
 		close;
 	}
@@ -115,7 +117,7 @@ L_Assign:
 	if (checkquest(.@q_id) >= 0 && checkquest(.@q_id, PLAYTIME) == 2) {
 		erasequest .@q_id;
 		mes "[Eden Event Coordinator]";
-		mes "Your previous ^0000ff" + .@name$ + "^000000 attempt expired after ^0000cd7 days^000000 and has been reset.";
+		mes "Your previous ^0000ff" + .@name$ + "^000000 attempt expired after ^0000cd24 hours^000000 and has been reset.";
 		next;
 	}
 
@@ -123,7 +125,7 @@ L_Assign:
 		setquest .@q_id;
 		mes "[Eden Event Coordinator]";
 		mes "Event registered: ^0000ff" + .@name$ + "^000000.";
-		mes "You have ^0000cd7 days^000000 to complete this hunt.";
+		mes "You have ^0000cd24 hours^000000 to complete this hunt.";
 		mes "Return here to turn it in once your Quest Window shows it as finished.";
 		close;
 	}
@@ -141,14 +143,14 @@ L_Assign:
 	case 1:
 		mes "[Eden Event Coordinator]";
 		mes "You are already tracking ^0000ff" + .@name$ + "^000000.";
-		mes "Finish the hunt within ^0000cd7 days^000000, or wait for an expired attempt to reset.";
+		mes "Finish the hunt within ^0000cd24 hours^000000, or wait for an expired attempt to reset.";
 		close;
 	}
 
 	setquest .@q_id;
 	mes "[Eden Event Coordinator]";
 	mes "Event registered: ^0000ff" + .@name$ + "^000000.";
-	mes "You have ^0000cd7 days^000000 to complete this hunt.";
+	mes "You have ^0000cd24 hours^000000 to complete this hunt.";
 	mes "Return here to turn it in once your Quest Window shows it as finished.";
 	close;
 
