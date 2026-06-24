@@ -1,0 +1,10 @@
+//===== rAthena Script =======================================
+//= PRO Anti-Cheat (shield.dll) - DISABLED
+//===== Description: =========================================
+//= Server-side heartbeat enforcement is disabled.
+//= shield.dll runs local background scans on the client only.
+//============================================================
+
+-	script	ProAntiCheat	-1,{
+	end;
+}

@@ -1,0 +1,105 @@
+# Guarani - Booster Weapon Voucher exchange (prontera 148,282)
+# Official rate: 1x Boost_W_Ticket per Booster Weapon [2]
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: guarani_weapon
+    Items:
+      - Index: 0
+        Item: Boost_TH_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 1
+        Item: Boost_Axe
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 2
+        Item: Boost_Katar
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 3
+        Item: Boost_Staff
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 4
+        Item: Boost_Hall
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 5
+        Item: Boost_Bow
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 6
+        Item: Boost_Spear
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 7
+        Item: Boost_Sword
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 8
+        Item: Boost_Dagger
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 9
+        Item: Boost_Spl_Book
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 10
+        Item: Boost_Knuckle
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 11
+        Item: Boost_Guitar
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 12
+        Item: Boost_Whip
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 13
+        Item: Boost_Nindo
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 14
+        Item: Boost_Gatling
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
+      - Index: 15
+        Item: Boost_Foxtail
+        RequiredItems:
+          - Index: 0
+            Item: Boost_W_Ticket
+            Amount: 1
