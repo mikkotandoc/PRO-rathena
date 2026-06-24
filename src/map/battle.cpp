@@ -2056,6 +2056,31 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 			damage = i64max(damage * ed->db->damagetaken / 100, 1);
 	}
 
+	if (damage > 0 && bl->type == BL_PC) {
+		bool track_damage = false;
+
+		if (src->type == BL_PC)
+			track_damage = true;
+		else if (src->type == BL_MOB && status_get_class_(src) == CLASS_BOSS)
+			track_damage = true;
+
+		if (track_damage) {
+			if (sd == nullptr)
+				sd = BL_CAST(BL_PC, bl);
+
+			if (sd != nullptr)
+				sd->last_damage_taken_tick = gettick();
+		}
+	}
+
+	if (damage > 0 && bl->type == BL_PC && src->type == BL_MOB) {
+		if (sd == nullptr)
+			sd = BL_CAST(BL_PC, bl);
+
+		if (sd != nullptr)
+			sd->last_damage_tick = gettick();
+	}
+
 	if (tsc != nullptr && !tsc->empty()) {
 		if (!battle_status_block_damage(src, bl, tsc, d, damage, skill_id, skill_lv)) // Statuses that reduce damage to 0.
 			return 0;

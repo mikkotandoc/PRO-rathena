@@ -3642,6 +3642,8 @@ struct s_laphine_synthesis{
 	uint16 minimumRefine;
 	uint16 maximumRefine;
 	uint16 requiredRequirements;
+	uint16 rewardCount;
+	bool requireSameItem;
 	std::unordered_map<t_itemid, std::shared_ptr<s_laphine_synthesis_requirement>> requirements;
 	uint16 rewardGroupId;
 };

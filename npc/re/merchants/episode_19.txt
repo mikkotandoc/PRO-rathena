@@ -10,9 +10,24 @@
 icas_in,192,57,3	script	Incineration Furnace#ep19	4_POINT_RED,{
 	mes "There is a brazier where you can feel the heat.";
 	mes "If you have useless Dim Glacier weapons, put them in and melt them.";
-	close2;
-	laphine_synthesis("Dim Glacier Extractor");
-	end;
+	mes "How many weapons of the same type would you like to incinerate at once?";
+	next;
+	switch( select( "Official: 3 weapons.", "Custom: 6 weapons.", "Custom: 9 weapons.", "Cancel." ) ) {
+	case 1:
+		close2;
+		laphine_synthesis("Dim Glacier Extractor");
+		end;
+	case 2:
+		close2;
+		laphine_synthesis("Dim Glacier Extractor (6)");
+		end;
+	case 3:
+		close2;
+		laphine_synthesis("Dim Glacier Extractor (9)");
+		end;
+	case 4:
+		close;
+	}
 }
 
 icas_in,188,60,3	script	Forr#ep19	4_EP19_IWIN,{

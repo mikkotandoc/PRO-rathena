@@ -17,6 +17,9 @@ void SkillTeleport::castendNoDamageId(block_list* src, block_list* target, uint1
 
 	if(sd != nullptr)
 	{
+		if (pc_is_damage_teleport_locked(sd))
+			return;
+
 		if (map_getmapflag(target->m, MF_NOTELEPORT) && skill_lv <= 2) {
 			clif_skill_teleportmessage( *sd, NOTIFY_MAPINFO_CANT_TP );
 			return;

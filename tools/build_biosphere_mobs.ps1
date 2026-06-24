@@ -153,19 +153,11 @@ foreach ($line in ($ecoCsv.Trim() -split "`n")) {
 
 $depth1 = (Get-Content $prFile -Encoding UTF8)[114951..115718]
 
-# Depth 2: generate from tools/generate_bio_mobs.py when not already in import
+# Depth 2: always regenerate from tools/generate_bio_mobs.py (abyss jewels live in map_drops).
 $depth2 = @()
-$depth2Start = $null
-if (Test-Path $outFile) {
-    $depth2Start = (Select-String -Path $outFile -Pattern 'Id: 22252' | Select-Object -First 1).LineNumber
-}
-if ($depth2Start) {
-    $existingLines = Get-Content $outFile -Encoding UTF8
-    $depth2 = $existingLines[($depth2Start - 1)..($existingLines.Count - 1)]
-} else {
-    $pyScript = Join-Path $root 'tools\generate_bio_mobs.py'
-    if (Test-Path $pyScript) {
-        $depth2Text = & python -c @"
+$pyScript = Join-Path $root 'tools\generate_bio_mobs.py'
+if (Test-Path $pyScript) {
+	$depth2Text = & python -c @"
 import sys
 sys.path.insert(0, r'$root\tools')
 from generate_bio_mobs import DEPTH2_KRO, render_depth2
@@ -176,8 +168,7 @@ for mid, data in sorted(DEPTH2_KRO.items()):
     parts.append(render_depth2(entry))
 print('\n'.join(parts))
 "@
-        if ($depth2Text) { $depth2 = $depth2Text -split "`n" }
-    }
+	if ($depth2Text) { $depth2 = $depth2Text -split "`n" }
 }
 
 # Preserve non-biosphere import entries (e.g. Airship Crash MD_AIRBOAT_*)

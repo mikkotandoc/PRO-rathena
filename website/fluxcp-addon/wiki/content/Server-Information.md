@@ -2,7 +2,7 @@
 
 [← Back to Home](Home.md)
 
-Mechanics and rates for **PRO-Ragnarok (Cathode)** from `conf/` and `src/config/`.
+Mechanics and rates for **PRO-Ragnarok (Cathode)**.
 
 ---
 
@@ -19,7 +19,7 @@ Mechanics and rates for **PRO-Ragnarok (Cathode)** from `conf/` and `src/config/
 | PK mode | Off |
 | Multi-level up | **Yes** — multiple level-ups per kill possible |
 | Pincode | **Forced** on login |
-| Character slots | Up to **9** per account (default rAthena) |
+| Character slots | Up to **9** per account |
 | Char delete delay | **1 second** (birthdate required) |
 
 ---
@@ -28,10 +28,10 @@ Mechanics and rates for **PRO-Ragnarok (Cathode)** from `conf/` and `src/config/
 
 | Type | Rate | Notes |
 |------|------|-------|
-| Base EXP | **150x** | `base_exp_rate: 15000` |
-| Job EXP | **150x** | `job_exp_rate: 15000` |
-| MVP EXP modifier | 1x | `mvp_exp_rate: 100` |
-| Quest EXP | 1x | `quest_exp_rate: 100` |
+| Base EXP | **150x** | |
+| Job EXP | **150x** | |
+| MVP EXP modifier | 1x | |
+| Quest EXP | 1x | |
 
 ### Death Penalty
 
@@ -46,8 +46,6 @@ Mechanics and rates for **PRO-Ragnarok (Cathode)** from `conf/` and `src/config/
 
 ## Drop Rates
 
-rAthena uses **100 = 1×** official. Config value **10000 = 100×**.
-
 | Drop Type | Rate |
 |-----------|------|
 | Common / etc | **100x** |
@@ -55,10 +53,8 @@ rAthena uses **100 = 1×** official. Config value **10000 = 100×**.
 | Usable items | **100x** |
 | Equipment | **100x** |
 | Cards (normal mobs) | **100x** |
-| MVP inventory rewards | **10x** (`item_rate_mvp: 1000`) |
+| MVP inventory rewards | **10x** |
 | Add-drop / treasure | 1x |
-
-**Floating rates** (`floating_rates.txt`) exist in the repo but are **disabled**.
 
 Use `@rates` in-game to see the live values your client displays.
 
@@ -72,14 +68,14 @@ Use `@rates` in-game to see the live values your client displays.
 | Max ASPD (base / 2nd) | **190** |
 | Max ASPD (3rd / 4th / expanded) | **193** |
 | Max stats (3rd+) | **130** |
-| Monster HP rate | **1x** (no inflation) |
+| Monster HP rate | **1x** |
 | MVP HP rate | **1x** |
 
 ---
 
 ## VIP Bonuses
 
-VIP is group **5** (`vip_group` in login config). When VIP is active:
+When VIP is active:
 
 | Bonus | Value |
 |-------|-------|
@@ -88,15 +84,13 @@ VIP is group **5** (`vip_group` in login config). When VIP is active:
 | Drop rate | **+50%** |
 | Extra storage | **+300** slots |
 | Account storages | **6** slots (`@storage`–`@storage6`) vs 3 for normal |
-| Gemstone requirement | Reduced (mode 2) |
+| Gemstone requirement | Reduced |
 
-*(staff: document how players obtain VIP.)*
+*(Document how players obtain VIP on your server.)*
 
 ---
 
 ## War of Emperium
-
-**Controller:** default `agit_controller.txt` (custom `woe_controller.txt` is **disabled**).
 
 | Day | Start | End |
 |-----|-------|-----|
@@ -106,7 +100,7 @@ VIP is group **5** (`vip_group` in login config). When VIP is active:
 
 **Castles:** all 20 first-edition castles (Prontera, Payon, Geffen, Aldebaran × 5 each).
 
-### GvG Damage ( Renewal )
+### GvG Damage (Renewal)
 
 | Type | Damage dealt in WoE |
 |------|---------------------|
@@ -114,7 +108,7 @@ VIP is group **5** (`vip_group` in login config). When VIP is active:
 | Weapon / magic / misc skills | **60%** |
 | Flee penalty | **20%** |
 
-Guilds can hold unlimited castles (`guild_max_castles: 0`).
+Guilds can hold unlimited castles.
 
 ---
 
@@ -136,7 +130,7 @@ Guilds can hold unlimited castles (`guild_max_castles: 0`).
 | Mail zeny fee | **2%** |
 | Mail attachment fee | **2,500z** per item |
 | Mail weight cap | **2,000** |
-| Autotrade timeout | **None** (0) |
+| Autotrade timeout | **None** |
 | Auction house | **Off** |
 
 ---
@@ -145,10 +139,10 @@ Guilds can hold unlimited castles (`guild_max_castles: 0`).
 
 | Setting | Value |
 |---------|-------|
-| Start maps | `iz_int` intro maps |
+| Start maps | Intro maps (`iz_int`) |
 | Default save point | **prontera 156, 191** |
 | Starting zeny | **0** |
-| Starting items | Knife, Cotton Shirt, + custom items (IDs 23484, 100029) |
+| Starting items | Basic novice gear + bonus starter items |
 
 Look up item names on [Divine Pride](https://www.divine-pride.net/database/item).
 
@@ -156,12 +150,10 @@ Look up item names on [Divine Pride](https://www.divine-pride.net/database/item)
 
 ## Enabled Features
 
-From `conf/battle/feature.conf` (highlights):
-
 - Buying store, search stores, banking, autotrade
 - Roulette, achievements, stylist UI, refine UI, enchant UI
 - Pet evolution, private airship system
-- BG queue (custom BG scripts are off)
+- BG queue (custom BG recruiters are off)
 
 ---
 

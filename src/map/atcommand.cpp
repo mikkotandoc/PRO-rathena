@@ -595,6 +595,9 @@ ACMD_FUNC(mapmove)
 
 	nullpo_retr(-1, sd);
 
+	if (pc_is_transport_atcommand_locked(sd))
+		return -1;
+
 	memset(map_name, '\0', sizeof(map_name));
 
 	if (!message || !*message ||
@@ -725,6 +728,9 @@ ACMD_FUNC(jump)
 	int16 x = 0, y = 0;
 
 	nullpo_retr(-1, sd);
+
+	if (pc_is_transport_atcommand_locked(sd))
+		return -1;
 
 	memset(atcmd_output, '\0', sizeof(atcmd_output));
 
@@ -2217,6 +2223,9 @@ ACMD_FUNC(go)
 	};
 
 	nullpo_retr(-1, sd);
+
+	if (pc_is_transport_atcommand_locked(sd))
+		return -1;
 
 	if( map_getmapflag(sd->m, MF_NOGO) && !pc_has_permission(sd, PC_PERM_WARP_ANYWHERE) ) {
 		clif_displaymessage(sd->fd,msg_txt(sd,995)); // You cannot use @go on this map.

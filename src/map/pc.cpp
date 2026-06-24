@@ -2142,6 +2142,8 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 #endif
 
 	sd->canuseitem_tick = tick;
+	sd->last_damage_taken_tick = 0;
+	sd->last_damage_tick = 0;
 	sd->canusecashfood_tick = tick;
 	sd->canequip_tick = tick;
 	sd->cantalk_tick = tick;
@@ -6337,6 +6339,9 @@ bool pc_isUseitem(map_session_data *sd,int32 n)
 		}
 	}
 
+	if( nameid == 601 && pc_is_damage_teleport_locked( sd ) )
+		return false;
+
 	if( itemdb_group.item_exists( IG_GIANT_FLY_WING, nameid ) ){
 		struct party_data *pd = party_search( sd->status.party_id );
 
@@ -7226,6 +7231,39 @@ char pc_randomwarp(map_session_data *sd, clr_type type, bool ignore_mapflag)
 		return pc_setpos(sd,mapdata->index,x,y,type);
 
 	return 3;
+}
+
+bool pc_is_damage_teleport_locked(map_session_data *sd)
+{
+	nullpo_retr(false, sd);
+
+	if (sd->last_damage_taken_tick == 0)
+		return false;
+
+	if (DIFF_TICK(gettick(), sd->last_damage_taken_tick) < 2000) {
+		clif_displaymessage(sd->fd, "You cannot teleport so soon after taking damage.");
+		return true;
+	}
+
+	return false;
+}
+
+bool pc_is_transport_atcommand_locked(map_session_data *sd)
+{
+	nullpo_retr(false, sd);
+
+	if (sd->group_id != 0)
+		return false;
+
+	if (sd->last_damage_tick == 0)
+		return false;
+
+	if (DIFF_TICK(gettick(), sd->last_damage_tick) < 3000) {
+		clif_displaymessage(sd->fd, "You cannot use transport commands while in combat.");
+		return true;
+	}
+
+	return false;
 }
 
 /*==========================================

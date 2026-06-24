@@ -105,13 +105,9 @@ DEPTH2_KRO = {
     },
 }
 
+# Etel_Dust stays on mob_db; abyss jewels are map_drops on bl_depth2 (build_biosphere_map_drops.ps1).
 DEPTH2_DROPS = [
     ("Etel_Dust", 200),
-    ("Abyss_Jewel_Fragment", 350),
-    ("Time_Dim_J_Fragment", 350),
-    ("Abyss_Magic_Jewel", 75),
-    ("Time_Dimension_Jewel", 75),
-    ("Abyss_Rune_Ore", 25),
 ]
 
 

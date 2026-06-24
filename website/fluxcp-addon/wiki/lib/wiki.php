@@ -242,9 +242,10 @@ function wiki_render_page($slug)
 		$debug = '';
 		if (Flux::config('DebugMode')) {
 			$path = wiki_content_path($slug);
-			$debug = ' Expected file: <code>' . htmlspecialchars($path ? $path : '(invalid slug)', ENT_QUOTES, 'UTF-8') . '</code>';
 			if ($path) {
-				$debug .= is_file($path) ? ' (file exists)' : ' (file missing — upload addons/wiki/content/*.md)';
+				$debug = is_file($path) ? ' (content file exists but could not be read)' : ' (content file missing)';
+			} else {
+				$debug = ' (invalid page name)';
 			}
 		}
 		return '<p class="wiki-error">Page content could not be loaded.' . $debug . '</p>';

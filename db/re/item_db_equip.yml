@@ -124998,10 +124998,10 @@ Body:
     Script: |
       .@r = getrefine();
       bonus bMaxHP,.@r*10;
-      skill "AS_CLOAKING",1;
+      addtoskill "AS_CLOAKING",1;
       bonus2 bSkillUseSP,"AS_CLOAKING",-50+(.@r*5);
     UnEquipScript: |
-      sc_end SC_CLOAKING;
+      if (getskilllv("AS_CLOAKING") < 1) sc_end SC_CLOAKING;
   - Id: 24133
     AegisName: S_Cloaking_Shoes
     Name: Cloaking Shadow Shoes
@@ -125013,10 +125013,10 @@ Body:
     Script: |
       .@r = getrefine();
       bonus bMaxHP,.@r*10;
-      skill "AS_CLOAKING",1;
+      addtoskill "AS_CLOAKING",1;
       bonus2 bSkillUseSP,"AS_CLOAKING",-50+(.@r*5);
     UnEquipScript: |
-      sc_end SC_CLOAKING;
+      if (getskilllv("AS_CLOAKING") < 1) sc_end SC_CLOAKING;
   - Id: 24134
     AegisName: S_Cloaking_Shield
     Name: Cloaking Shadow Shield
@@ -125028,10 +125028,10 @@ Body:
     Script: |
       .@r = getrefine();
       bonus bMaxHP,.@r*10;
-      skill "AS_CLOAKING",1;
+      addtoskill "AS_CLOAKING",1;
       bonus2 bSkillUseSP,"AS_CLOAKING",-50+(.@r*5);
     UnEquipScript: |
-      sc_end SC_CLOAKING;
+      if (getskilllv("AS_CLOAKING") < 1) sc_end SC_CLOAKING;
   - Id: 24135
     AegisName: S_Cloaking_Weapon
     Name: Cloaking Shadow Weapon
@@ -125044,10 +125044,10 @@ Body:
       .@r = getrefine();
       bonus bBaseAtk,.@r;
       bonus bMatk,.@r;
-      skill "AS_CLOAKING",1;
+      addtoskill "AS_CLOAKING",1;
       bonus2 bSkillUseSP,"AS_CLOAKING",-50+(.@r*5);
     UnEquipScript: |
-      sc_end SC_CLOAKING;
+      if (getskilllv("AS_CLOAKING") < 1) sc_end SC_CLOAKING;
   - Id: 24136
     AegisName: S_Cloaking_Earring
     Name: Cloaking Shadow Earring
@@ -125059,10 +125059,10 @@ Body:
     Script: |
       .@r = getrefine();
       bonus bMaxHP,.@r*10;
-      skill "AS_CLOAKING",1;
+      addtoskill "AS_CLOAKING",1;
       bonus2 bSkillUseSP,"AS_CLOAKING",-50+(.@r*5);
     UnEquipScript: |
-      sc_end SC_CLOAKING;
+      if (getskilllv("AS_CLOAKING") < 1) sc_end SC_CLOAKING;
   - Id: 24137
     AegisName: S_Cloaking_Pendant
     Name: Cloaking Shadow Pendant
@@ -125074,10 +125074,10 @@ Body:
     Script: |
       .@r = getrefine();
       bonus bMaxHP,.@r*10;
-      skill "AS_CLOAKING",1;
+      addtoskill "AS_CLOAKING",1;
       bonus2 bSkillUseSP,"AS_CLOAKING",-50+(.@r*5);
     UnEquipScript: |
-      sc_end SC_CLOAKING;
+      if (getskilllv("AS_CLOAKING") < 1) sc_end SC_CLOAKING;
   - Id: 24138
     AegisName: S_Teleport_Armor
     Name: Teleport Shadow Armor

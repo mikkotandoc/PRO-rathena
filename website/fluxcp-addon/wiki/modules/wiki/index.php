@@ -18,7 +18,13 @@ if ($current_page === null) {
 	$is_not_found = true;
 	$page_title = 'Page Not Found';
 	$wikiBody = wiki_render_not_found(is_string($requested) ? $requested : '');
+	$wikiJobTree = '';
 } else {
 	$page_title = wiki_get_pages()[$current_page]['title'];
 	$wikiBody = wiki_render_page($current_page);
+	$wikiJobTree = '';
+	if ($current_page === 'Classes') {
+		require_once WIKI_ADDON_DIR . '/lib/jobtree.php';
+		$wikiJobTree = wiki_render_job_tree();
+	}
 }

@@ -2,7 +2,9 @@
 
 [← Back to Home](Home.md)
 
-Job changes, level caps, and class notes for **PRO-Ragnarok** (Renewal).
+Job changes, level caps, and the **interactive job tree** on this page for **PRO-Ragnarok** (Renewal).
+
+> **Tip:** Click any **2nd job** portrait to expand Trans → 3rd → 4th classes.
 
 ---
 
@@ -17,7 +19,7 @@ Job changes, level caps, and class notes for **PRO-Ragnarok** (Renewal).
 | Baby classes | Yes |
 | Baby 3rd / expanded | Yes |
 | Expanded (Gunslinger, Ninja, Summoner, etc.) | Yes |
-| Linear job path (`LastJob`) | Yes |
+| Must follow your chosen job path | Yes |
 | Must use all skill points before change | Yes |
 | Free Eden weapon on job change | Yes |
 
@@ -41,8 +43,6 @@ Job changes, level caps, and class notes for **PRO-Ragnarok** (Renewal).
 
 ## Level Caps by Tier
 
-From `db/re/job_exp.yml` (Renewal):
-
 | Tier | Max Base | Max Job | Examples |
 |------|----------|---------|----------|
 | Novice / 1st | 99–200 | 10–50 | Swordman, Mage |
@@ -51,27 +51,36 @@ From `db/re/job_exp.yml` (Renewal):
 | 4th / endgame | **275** | **70** | Dragon Knight, Arch Mage |
 | Expanded endgame | **275** | **70** | Hyper Novice, Spirit Handler |
 
-Check `@exp` or Divine Pride job charts for your exact class.
+---
+
+## Job Tree Overview (Quick Reference)
+
+The interactive tree above matches the standard **Renewal** layout:
+
+| Branch | 2nd Jobs → 4th Examples |
+|--------|-------------------------|
+| Swordman | Knight → Dragon Knight · Crusader → Imperial Guard |
+| Magician | Wizard → Arch Mage · Sage → Elemental Master |
+| Merchant | Blacksmith → Meister · Alchemist → Biolo |
+| Thief | Assassin → Shadow Cross · Rogue → Abyss Chaser |
+| Archer | Hunter → Wind Hawk · Bard/Dancer → Troubadour/Trouvere |
+| Acolyte | Priest → Cardinal · Monk → Inquisitor |
+| Expanded | Taekwon → Star Emperor / Soul Reaper · Ninja · Gunslinger · Doram |
+| **New (Coming Soon)** | **Druid → Karnos → Alitea** (Episode 21) |
+
+**Super Novice** sits below Novice → **Hyper Novice** (expanded).
 
 ---
 
-## 4th Class Jobs (Examples)
+## Druid (Coming Soon)
 
-| 3rd Class | 4th Class |
-|-----------|-----------|
-| Rune Knight | Dragon Knight |
-| Royal Guard | Imperial Guard |
-| Warlock | Arch Mage |
-| Ranger | Wind Hawk |
-| Minstrel / Wanderer | Troubadour / Trouvere |
-| Archbishop | Cardinal |
-| Sura | Inquisitor |
-| Genetic | Biolo |
-| Mechanic | Meister |
-| Shadow Chaser | Abyss Chaser |
-| Guillotine Cross | Soul Ascetic *(check client)* |
+**Druid**, **Karnos**, and **Alitea** are the upcoming Episode 21 class line (nature / beast forms). They appear in the interactive tree under **New Classes** with a **Coming Soon** badge — not yet playable on this server.
 
-Use [Divine Pride job tree](https://www.divine-pride.net/database/skilltree) for full trees.
+| Class | Status |
+|-------|--------|
+| Druid | Coming Soon |
+| Karnos | Coming Soon |
+| Alitea | Coming Soon |
 
 ---
 
@@ -81,12 +90,10 @@ Use [Divine Pride job tree](https://www.divine-pride.net/database/skilltree) for
 |------|-------|
 | Super Novice → Hyper Novice | High BL cap |
 | Taekwon → Star Emperor / Soul Reaper | Expanded path |
-| Gunslinger → Rebellion | Shared 4th reqs |
-| Ninja → Kagerou / Oboro | |
-| Summoner | Doram race — starts `lasa_fild01` |
-| Spirit Handler | BL 200 / JL 60 for 4th |
-
-Baby variants follow the same Job Master rules when enabled.
+| Gunslinger → Rebellion | Expanded path |
+| Ninja → Kagerou / Oboro | Gender split |
+| Summoner (Doram) | Starts at Lasagna fields → Spirit Handler |
+| Baby variants | Same trees with Baby job names |
 
 ---
 
@@ -104,19 +111,7 @@ Baby variants follow the same Job Master rules when enabled.
 
 **NPC:** `prontera 142,172` — **25,000 zeny**
 
-Copy one skill from the server's allowed plagiarism list. Requires **Plagiarism** skill learned.
-
----
-
-## Skill Rebalance Notes
-
-The emulator fork may track **kRO rebalance** patches. If your skill damage differs from old wikis, check recent patch notes *(staff)*.
-
-**General tips:**
-
-- Read skill tooltips after each patch
-- Dragon Knight / Imperial Guard / Arch Mage received recent formula updates on kRO — confirm in-game
-- Episode 20 bosses may resist certain damage types
+Copy one skill from the server's allowed plagiarism list. Requires **Plagiarism** learned.
 
 ---
 
@@ -126,9 +121,9 @@ The emulator fork may track **kRO rebalance** patches. If your skill damage diff
 |---------|---------|
 | `@hominfo` | Homunculus stats |
 | `@homstats` | Detailed homunculus info |
-| Breeder NPC | `prontera 124,201` — rent Falcon, Peco, Cart, Mado |
+| Breeder NPC | `prontera 124,201` — Falcon, Peco, Cart, Mado |
 
-Genetic **Biolo** uses homunculus-based skills — plan job level 70 before endgame.
+**Biolo** (Genetic 4th) uses homunculus skills — plan for job level 70.
 
 ---
 
@@ -137,4 +132,5 @@ Genetic **Biolo** uses homunculus-based skills — plan job level 70 before endg
 - [Getting Started](Getting-Started.md)
 - [NPCs & Merchants](NPCs-and-Merchants.md)
 - [Items & Equipment](Items-and-Equipment.md)
+- [Divine Pride Skill Trees](https://www.divine-pride.net/database/skilltree)
 - [Home](Home.md)

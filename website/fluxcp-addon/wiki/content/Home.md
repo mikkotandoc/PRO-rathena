@@ -1,7 +1,6 @@
 # PRO-Ragnarok Wiki
 
-> **Player wiki** for **PRO-Ragnarok** (char server **Cathode**).  
-> Content is based on the live server files in `PRO-Server-Live`. Edit sections marked *(staff: …)* when you change configs.
+> **Player wiki** for **PRO-Ragnarok** (char server **Cathode**).
 
 ---
 
@@ -13,7 +12,7 @@
 | [NPCs & Merchants](NPCs-and-Merchants.md) | [Items & Equipment](Items-and-Equipment.md) | [Dungeons & Instances](Dungeons.md) |
 | [Player Commands](Commands.md) | [Server Rules](Rules.md) | [Classes & Skills](Classes.md) |
 
-**External references:** [Divine Pride Database](https://www.divine-pride.net/) · [rAthena Wiki](https://github.com/rathena/rathena/wiki)
+**External reference:** [Divine Pride Database](https://www.divine-pride.net/)
 
 ---
 
@@ -23,9 +22,8 @@
 |---|---|
 | **Brand** | PRO-Ragnarok |
 | **Char Server Name** | **Cathode** |
-| **Emulator** | rAthena (PRO-rathena fork) |
 | **Mode** | **Renewal** |
-| **Client Patch** | **2021-11-03** (`PACKETVER 20211103`) |
+| **Client Patch** | **2021-11-03** |
 | **Max Base Level** | **275** (4th jobs) |
 | **Max Job Level** | Up to **70** (4th jobs) |
 | **Base EXP Rate** | **150x** |
@@ -35,8 +33,8 @@
 | **Death Penalty** | **1%** base & job EXP per death |
 | **PK Mode** | **Off** |
 | **Pincode** | **Required** on login |
-| **New Character Start** | Intro maps (`iz_int`) → default save point **Prontera** |
-| **Website / Discord** | *(staff: add links)* |
+| **New Character Start** | Intro maps → default save point **Prontera** |
+| **Website / Discord** | *(add your links here)* |
 | **WOE** | Tue & Thu **21:00–23:00**, Sat **16:00–18:00** (server time) |
 
 ---
@@ -47,7 +45,6 @@
 |------|----------|
 | *(staff)* | Server launch / patch notes |
 | *(staff)* | Rate or event announcements |
-| In-repo | Renewal episode content (17–20), custom PRO-Asia systems |
 
 *Replace this table with dated announcements on your website or Discord.*
 
@@ -55,8 +52,8 @@
 
 ## Getting Started (Quick)
 
-1. Register on the website *(staff: FluxCP URL)* and create a character.
-2. Complete the intro sequence on `iz_int` maps; you will save in **Prontera** (`156, 191`).
+1. Register on the website and create a character.
+2. Complete the intro sequence; you will save in **Prontera** (`156, 191`).
 3. Talk to **Healer** (`prontera 162,193`) — free heal, buffs, identify all.
 4. Use **Warper** (`prontera 159,192`) for leveling fields and dungeons.
 5. Visit **Job Master** (`prontera 153,193`) when ready — up to **4th class**.
@@ -102,16 +99,22 @@
 
 ## Prontera Service Hub
 
-```
-                    [Episode Guide 165,175]
-    [Instance Merchant 164,172]     [Silvervine 153,191]
-[Platinum 128,200]  [Job Master 153,193] [Reset 150,193] [Healer 162,193]
-    [Warper 159,192]                    [King Poring 174,176]
-         [Earl — Points/Coins 144,178]  [MVP Room 148,174]
-              [Centro / Booster 166,300]
-```
+| NPC | Location |
+|-----|----------|
+| Episode Guide | `prontera 165,175` |
+| Instance & EP Merchant | `prontera 164,172` |
+| Job Master | `prontera 153,193` |
+| Silvervine Quester | `prontera 153,191` |
+| Reset Girl | `prontera 150,193` |
+| Healer | `prontera 162,193` |
+| Warper | `prontera 159,192` |
+| Platinum Skills | `prontera 128,200` |
+| Earl (Points / Coins) | `prontera 144,178` |
+| King Poring | `prontera 174,176` |
+| Private MVP Room | `prontera 148,174` |
+| Centro (Booster) | `prontera 166,300` |
 
-**Item Mall** is on map **`prt_mk`** — use Warper → Item Mall or walk via warper menu.
+**Item Mall** is on map **`prt_mk`** — use Warper → Item Mall.
 
 ---
 
@@ -121,9 +124,9 @@
 |----------|----------|
 | Zeny | NPC services, PVP entry, card recycle |
 | Booster Coin | Centro promotional gear |
-| PRO-Asia Coin (`Play_RO_Gold_Coin_`) | Supplies & costumes (Earl) |
+| PRO-Asia Coin | Supplies & costumes (Earl) |
 | Silvervine Fruit | Episode Clear tickets |
-| Playtime Points (`#PlayPoints`) | Earl → Points Shop |
+| Playtime Points | Earl → Points Shop |
 | Eden / instance tokens | Barter merchants |
 
 ---
@@ -134,7 +137,3 @@
 - [Custom Systems](Custom-Systems.md) · [NPCs & Merchants](NPCs-and-Merchants.md)
 - [Items & Equipment](Items-and-Equipment.md) · [Dungeons & Instances](Dungeons.md)
 - [Classes & Skills](Classes.md) · [Commands](Commands.md) · [Rules](Rules.md)
-
----
-
-*Sourced from PRO-Server-Live. Update when configs or NPC scripts change.*

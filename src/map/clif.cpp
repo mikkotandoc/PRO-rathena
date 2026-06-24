@@ -23809,6 +23809,22 @@ void clif_parse_laphine_synthesis( int32 fd, map_session_data* sd ){
 		}
 	}
 
+	if( synthesis->requireSameItem && count > 1 ){
+		t_itemid first_item_id = 0;
+
+		for( size_t i = 0; i < count; i++ ){
+			int16 index = server_index( p->items[i].index );
+			struct item* item = &sd->inventory.u.items_inventory[index];
+
+			if( first_item_id == 0 ){
+				first_item_id = item->nameid;
+			}else if( first_item_id != item->nameid ){
+				clif_laphine_synthesis_result( sd, LAPHINE_SYNTHESIS_ITEM );
+				return;
+			}
+		}
+	}
+
 	// If triggered from item
 	if( sd->itemid == sd->state.laphine_synthesis ){
 		int16 index = pc_search_inventory( sd, sd->state.laphine_synthesis );
@@ -23833,7 +23849,9 @@ void clif_parse_laphine_synthesis( int32 fd, map_session_data* sd ){
 		}
 	}
 
-	itemdb_group.pc_get_itemgroup( synthesis->rewardGroupId, true, *sd );
+	for( uint16 reward_index = 0; reward_index < synthesis->rewardCount; reward_index++ ){
+		itemdb_group.pc_get_itemgroup( synthesis->rewardGroupId, true, *sd );
+	}
 
 	clif_laphine_synthesis_result( sd, LAPHINE_SYNTHESIS_SUCCESS );
 #endif

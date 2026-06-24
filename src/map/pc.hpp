@@ -560,6 +560,8 @@ public:
 	t_tick cansendmail_tick; // [Mail System Flood Protection]
 	t_tick ks_floodprotect_tick; // [Kill Steal Protection]
 	t_tick equipswitch_tick; // Equip switch
+	t_tick last_damage_taken_tick; // Blocks teleport/fly wing briefly after MVP or PvP damage
+	t_tick last_damage_tick; // Blocks transport atcommands briefly after monster damage
 
 	struct s_item_delay {
 		t_itemid nameid;
@@ -1501,6 +1503,8 @@ enum e_setpos pc_setpos(map_session_data* sd, uint16 mapindex, int32 x, int32 y,
 enum e_setpos pc_setpos_savepoint( map_session_data& sd, clr_type clrtype = CLR_TELEPORT );
 void pc_setsavepoint(map_session_data *sd, int16 mapindex,int32 x,int32 y);
 char pc_randomwarp(map_session_data *sd,clr_type type,bool ignore_mapflag = false);
+bool pc_is_damage_teleport_locked(map_session_data *sd);
+bool pc_is_transport_atcommand_locked(map_session_data *sd);
 bool pc_memo(map_session_data* sd, int32 pos);
 
 char pc_checkadditem( const map_session_data* sd, t_itemid nameid, int32 amount );

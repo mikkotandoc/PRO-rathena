@@ -8,18 +8,17 @@ PRO-Ragnarok custom mechanics beyond standard Renewal. All locations are in-game
 
 ## Booster Coin System
 
-**NPC:** Centro — `prontera 166,300`  
-**Data:** `npc/custom/official/booster_coin_exchange.txt`, `mega_booster.yml`
+**NPC:** Centro — `prontera 166,300`
 
 Trade **Booster Coins** for promotional gear:
 
 - Booster hat / back boxes, metal weapon boxes, weapon tickets
 - Costume enchant scrolls (slots 1–2)
 - Memento boxes, illusion upgrade tickets, episode tickets
-- Job-group **Booster Weapons** (Swordsman, Merchant, Thief, Mage, Acolyte, Archer, expanded classes)
+- Job-group **Booster Weapons** (Swordman, Merchant, Thief, Mage, Acolyte, Archer, expanded classes)
 - Booster shadow equipment, level-up tickets
 
-**Related NPCs:** Booster Operator (`prt_in`), Yves (Malangdo costume enchant).
+**Related NPCs:** Booster Operator (Prontera Inn), Yves (Malangdo costume enchant).
 
 ---
 
@@ -29,22 +28,24 @@ Trade **Booster Coins** for promotional gear:
 
 | Menu | Status |
 |------|--------|
-| **Points Shop** | **Open** — spends `#PlayPoints` from playtime |
-| **Coin Shop → General Supplies** | **Open** — `barter_pro_coins` |
-| **Coin Shop → Costume Shop** | **Open** — `barter_pro_costumes` (vanity only) |
-| Cash Shop | *Not implemented* |
-| Vote Shop | *Not implemented* |
+| **Points Shop** | **Open** — spends Playtime Points |
+| **Coin Shop → General Supplies** | **Open** |
+| **Coin Shop → Costume Shop** | **Open** (vanity only) |
+| Cash Shop | *Not available* |
+| Vote Shop | *Not available* |
 
-**Currency:** `Play_RO_Gold_Coin_` (PRO-Asia Coins) — drops on select farming maps. Macro patrol may run on those maps.
+**Currency:** **PRO-Asia Coins** — drops on select farming maps. Macro patrol may run on those maps.
 
 ### General Supplies (sample)
 
-| Item | Coins | Divine Pride |
-|------|-------|--------------|
-| Blacksmith Blessing | 4 | [6635](https://www.divine-pride.net/database/item/6635) |
-| Enriched Oridecon Box (5) | 3 | Search DB |
-| Enriched Elunium Box | 6 | Search DB |
-| Shadowdecon Ore Box | 3 | Search DB |
+| Item | Coins |
+|------|-------|
+| Blacksmith Blessing | 4 |
+| Enriched Oridecon Box (5) | 3 |
+| Enriched Elunium Box | 6 |
+| Shadowdecon Ore Box | 3 |
+
+Look up item stats on [Divine Pride](https://www.divine-pride.net/database/item).
 
 ### Costume Shop (sample — vanity only)
 
@@ -57,20 +58,17 @@ Trade **Booster Coins** for promotional gear:
 | Angeling Hat | 6 |
 | Freyja Crown | 10 |
 
-Full list: `npc/custom/barters/cash_coin_costumes.yml`. Look up stats on [Divine Pride](https://www.divine-pride.net/database/item).
-
 ---
 
 ## Playtime Point System
 
-**Script:** `npc/custom/hourly.txt`  
 **Command:** `@playtime`
 
-- Tracks online time in **10-minute** steps; **60 minutes** = **1 Play Point** (`#PlayPoints`)
+- Tracks online time in **10-minute** steps; **60 minutes** = **1 Play Point**
 - **Vending disqualifies** you — re-log to re-enroll
 - Spend points at Earl → **Points Shop**
 
-**Sample rewards:** Battle manuals, foods, buff items, costume boxes *(see script for full list)*.
+**Sample rewards:** Battle manuals, foods, buff items, costume boxes.
 
 ---
 
@@ -112,7 +110,7 @@ Skip episode storyline **without rewards or EXP** — unlocks instance NPCs only
   - Normal pool: **~98%**
   - Mini-boss pool: **~1.99%**
   - MVP pool: **~0.01%**
-- Some cards are on a **forbidden list** and cannot be recycled
+- Some cards cannot be recycled
 
 ---
 
@@ -120,7 +118,7 @@ Skip episode storyline **without rewards or EXP** — unlocks instance NPCs only
 
 **NPC:** `prontera 142,172`  
 **Cost:** **25,000 zeny**  
-**Classes:** Rogue / Stalker with Plagiarism learned — copy a skill from the configured list.
+**Classes:** Rogue / Stalker with Plagiarism learned — copy a skill from the allowed list.
 
 ---
 
@@ -129,7 +127,7 @@ Skip episode storyline **without rewards or EXP** — unlocks instance NPCs only
 **NPC:** Phantom's Spirit — `comodo 214,186` / `208,187`  
 **Maps:** `vis_h01`, `vis_h02`, `vis_h03`
 
-Public MVP hunting area (iRO-style). MVP HP is scaled (**100×** base). Entry passes and time limits apply — talk to the NPC in Comodo.
+Public MVP hunting area. MVP HP is scaled (**100×** base). Entry passes and time limits apply — talk to the NPC in Comodo.
 
 ---
 
@@ -144,8 +142,6 @@ Public MVP hunting area (iRO-style). MVP HP is scaled (**100×** base). Entry pa
 | Depth Level 2 | 450 | `bl_depth2` |
 
 **Cooldown:** once per day per hunt (4-hour playtime quest lock). Large EXP rewards on turn-in.
-
-*(Standard Biosphere daily script is present in repo but not enabled — only Depth is loaded.)*
 
 ---
 
@@ -185,8 +181,6 @@ Public MVP hunting area (iRO-style). MVP HP is scaled (**100×** base). Entry pa
 
 ## Account Storage
 
-**Script:** `npc/custom/etc/account_storage.txt`
-
 | Account type | Storages |
 |--------------|----------|
 | Normal | `@storage`, `@storage2`, `@storage3` |
@@ -198,8 +192,6 @@ Use `@storage` alone for a menu, or `@storage2` etc. directly.
 
 ## Extended Autoloot (`@alootid2`)
 
-**Script:** `npc/custom/alootid2.txt`
-
 - **10 autoloot groups**, **10 item IDs** per group
 - Configure with `@alootid2` — useful for targeted farming
 
@@ -207,27 +199,21 @@ Use `@storage` alone for a menu, or `@storage2` etc. directly.
 
 ## Macro Patrol
 
-**Script:** `npc/custom/macro_patrol.txt`
-
-- Runs `@macrodetect` on players farming maps that drop **PRO-Asia Coins**
-- Staff command: `@macropatrol`
-- **Policy:** see [Server Rules](Rules.md) — do not use macros/bots
+- Automated checks on maps that drop **PRO-Asia Coins**
+- **Policy:** see [Server Rules](Rules.md) — do not use macros or bots
 
 ---
 
 ## Title & Aura System
 
-**Script:** `npc/custom/etc/title_system.txt`
-
-- PVP Ladder awards title ID **1047** (Apex Predator) and aura ID **2000**
+- PVP Ladder awards title **Apex Predator** and a special aura
 - Other titles may be added by staff
 
 ---
 
 ## Eden Group Services
 
-**Map:** `moc_para01`  
-**Scripts:** `eden_hq_services.txt`, `eden_events.txt`, `MVP_exchange.txt`, `eat_gear_mimic.txt`
+**Map:** `moc_para01`
 
 | Service | Notes |
 |---------|-------|
@@ -237,17 +223,6 @@ Use `@storage` alone for a menu, or `@storage2` etc. directly.
 | EAT gear mimic | Copy appearance of Eden gear |
 
 Warp via Warper or Eden Teleport Officer.
-
----
-
-## Disabled Systems (in repo, not loaded)
-
-These exist but are **commented out** in `npc/scripts_custom.conf`:
-
-- Custom WoE controller & WoE info NPC
-- Costume recycler, floating rates, stock market, hunting missions
-- Most holiday events, battleground recruiters, MVP arena
-- `web_commands`, quest shop/board
 
 ---
 

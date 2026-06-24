@@ -1558,6 +1558,8 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 
 		entry = std::make_shared<s_laphine_synthesis>();
 		entry->item_id = item_id;
+		entry->rewardCount = 1;
+		entry->requireSameItem = false;
 	}
 
 	if( this->nodeExists( node, "RewardGroup" ) ){
@@ -1597,6 +1599,39 @@ uint64 LaphineSynthesisDatabase::parseBodyNode( const ryml::NodeRef& node ){
 	}else{
 		if( !exists ){
 			entry->requiredRequirements = 1;
+		}
+	}
+
+	if( this->nodeExists( node, "RewardCount" ) ){
+		uint16 amount;
+
+		if( !this->asUInt16( node, "RewardCount", amount ) ){
+			return 0;
+		}
+
+		if( amount < 1 ){
+			this->invalidWarning( node["RewardCount"], "RewardCount must be at least 1, defaulting to 1...\n" );
+			amount = 1;
+		}
+
+		entry->rewardCount = amount;
+	}else{
+		if( !exists ){
+			entry->rewardCount = 1;
+		}
+	}
+
+	if( this->nodeExists( node, "RequireSameItem" ) ){
+		bool require_same_item;
+
+		if( !this->asBool( node, "RequireSameItem", require_same_item ) ){
+			return 0;
+		}
+
+		entry->requireSameItem = require_same_item;
+	}else{
+		if( !exists ){
+			entry->requireSameItem = false;
 		}
 	}
 

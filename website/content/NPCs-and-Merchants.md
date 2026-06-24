@@ -2,7 +2,7 @@
 
 [← Back to Home](Home.md)
 
-Directory of **enabled** custom NPCs from `npc/scripts_custom.conf` on **PRO-Server-Live**.
+Directory of major in-game NPCs and services on **PRO-Ragnarok**.
 
 ---
 
@@ -26,8 +26,6 @@ Directory of **enabled** custom NPCs from `npc/scripts_custom.conf` on **PRO-Ser
 | Plagiarism Master | 142, 172 | Rogue skill copy (25k z) |
 | Earl (Cash Coin Shop) | 144, 178 | Playtime points + PRO-Asia coin shops |
 | Private MVP Room | 148, 174 | Rent MVP room (100k z / 60 min) |
-| Barter NPC | *(see barter_npc)* | Same as Instance Merchant |
-| GM Episode Debug | 167, 173 | Staff episode testing |
 
 ---
 
@@ -85,7 +83,7 @@ Warp: **Warper → Item Mall** or menu entry to `prt_mk 100,95`
 | Advanced training | Instructor Ur (23, 35) |
 | MVP exchange | Eve Natalia area (53, 33) |
 | Eden events | Daily hunt board |
-| EAT gear mimic | Eden HQ script |
+| EAT gear mimic | Eden HQ |
 
 ---
 
@@ -124,7 +122,7 @@ Hub: `jor_nest` — endgame episode content
 
 ## Malangdo (Costumes)
 
-Official kRO costume exchange & enchant NPCs (`malangdo_costume.txt`):
+Costume exchange and enchant NPCs:
 
 | NPC | Role |
 |-----|------|
@@ -144,7 +142,7 @@ Official kRO costume exchange & enchant NPCs (`malangdo_costume.txt`):
 
 ---
 
-## Quest NPCs (Enabled)
+## Quest NPCs
 
 | Quest | Theme |
 |-------|-------|
@@ -156,7 +154,7 @@ Official kRO costume exchange & enchant NPCs (`malangdo_costume.txt`):
 | Valhallen | Godly equipment |
 | Kaho Horn | High-end headgear |
 
-Locations vary — use `@whereis` on quest items or ask on Discord.
+Locations vary — use `@whodrops` on quest items or ask on Discord.
 
 ---
 
@@ -173,12 +171,6 @@ Locations vary — use `@whereis` on quest items or ask on Discord.
 | King Poring recycle | 2,500,000 z |
 | MVP private room | 100,000 z / hour |
 | PVP Ladder entry | 50,000 z |
-
----
-
-## Disabled NPCs (not loaded)
-
-Card Seller, WOE Controller, MVP Arena, Lottery, Stock Market, Hunting Missions, Quest Shop, most holiday events, Battleground recruiters, Floating Rates, Costume Recycler.
 
 ---
 

@@ -2126,7 +2126,7 @@ Body:
     SubType: Arrow
     Buy: 1
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 25
     Jobs:
       Archer: true
@@ -2145,7 +2145,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2166,7 +2166,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2187,7 +2187,7 @@ Body:
     SubType: Arrow
     Buy: 4
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 40
     Jobs:
       Archer: true
@@ -2206,7 +2206,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2227,7 +2227,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2248,7 +2248,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2269,7 +2269,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2290,7 +2290,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 1
     Jobs:
       Archer: true
@@ -2311,7 +2311,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 1
     Jobs:
       Archer: true
@@ -2333,7 +2333,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 1
     Jobs:
       Archer: true
@@ -2354,7 +2354,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 1
     Jobs:
       Archer: true
@@ -2375,7 +2375,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2396,7 +2396,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 1
     Jobs:
       Archer: true
@@ -2418,7 +2418,7 @@ Body:
     SubType: Arrow
     Buy: 20
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 10
     Jobs:
       Archer: true
@@ -2439,7 +2439,7 @@ Body:
     SubType: Arrow
     Buy: 30
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 50
     Jobs:
       Archer: true
@@ -2458,7 +2458,7 @@ Body:
     SubType: Arrow
     Buy: 40
     Sell: 0
-    Weight: 3
+    Weight: 0
     Attack: 50
     Jobs:
       Archer: true
@@ -2479,7 +2479,7 @@ Body:
     SubType: Arrow
     Buy: 5
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2500,7 +2500,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 1
     Jobs:
       Archer: true
@@ -2521,7 +2521,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 1
     Jobs:
       Archer: true
@@ -2542,7 +2542,7 @@ Body:
     SubType: Arrow
     Buy: 3
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -2560,7 +2560,7 @@ Body:
     Type: Ammo
     SubType: Dagger
     Buy: 50
-    Weight: 5
+    Weight: 0
     Attack: 30
     Jobs:
       Assassin: true
@@ -2574,7 +2574,7 @@ Body:
     SubType: Arrow
     Buy: 3
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 50
     Jobs:
       Archer: true
@@ -2596,7 +2596,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 45
     Jobs:
       Archer: true
@@ -2615,7 +2615,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 35
     Jobs:
       Archer: true
@@ -2634,7 +2634,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 45
     Jobs:
       Archer: true
@@ -2653,7 +2653,7 @@ Body:
     SubType: Arrow
     Buy: 10
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Archer: true
@@ -32329,7 +32329,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 1
-    Weight: 1
+    Weight: 0
     Attack: 25
     Jobs:
       Gunslinger: true
@@ -32343,7 +32343,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 15
-    Weight: 2
+    Weight: 0
     Attack: 15
     Jobs:
       Gunslinger: true
@@ -32359,7 +32359,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 30
-    Weight: 2
+    Weight: 0
     Attack: 30
     Jobs:
       Gunslinger: true
@@ -32375,7 +32375,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 80
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32389,7 +32389,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 80
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32403,7 +32403,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 80
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32418,7 +32418,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 80
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32433,7 +32433,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 80
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32446,7 +32446,7 @@ Body:
     Name: Sow Bug
     Type: Ammo
     SubType: Bullet
-    Weight: 5
+    Weight: 0
     Attack: 50
     Jobs:
       Gunslinger: true
@@ -32470,7 +32470,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 250
-    Weight: 250
+    Weight: 0
     Attack: 30
     Classes:
       All: false
@@ -32482,7 +32482,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 500
-    Weight: 500
+    Weight: 0
     Attack: 30
     Classes:
       All: false
@@ -32494,7 +32494,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 750
-    Weight: 750
+    Weight: 0
     Attack: 30
     Classes:
       All: false
@@ -32506,7 +32506,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 1000
-    Weight: 1000
+    Weight: 0
     Attack: 30
     Classes:
       All: false
@@ -32518,7 +32518,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 1200
-    Weight: 1200
+    Weight: 0
     Attack: 30
     Classes:
       All: false
@@ -32530,7 +32530,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 50
     Jobs:
       Gunslinger: true
@@ -32546,7 +32546,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 40
     Jobs:
       Gunslinger: true
@@ -32562,7 +32562,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 40
     Jobs:
       Gunslinger: true
@@ -32578,7 +32578,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 40
     Jobs:
       Gunslinger: true
@@ -32594,7 +32594,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 40
     Jobs:
       Gunslinger: true
@@ -32610,7 +32610,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 40
     Jobs:
       Gunslinger: true
@@ -32626,7 +32626,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 15
     Jobs:
       Gunslinger: true
@@ -32642,7 +32642,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       Gunslinger: true
@@ -32658,7 +32658,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 15
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32672,7 +32672,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 15
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32686,7 +32686,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 15
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32700,7 +32700,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 15
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32714,7 +32714,7 @@ Body:
     Type: Ammo
     SubType: Grenade
     Buy: 15
-    Weight: 5
+    Weight: 0
     Attack: 50
     Classes:
       All: false
@@ -32728,7 +32728,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 20
     Jobs:
       Gunslinger: true
@@ -32744,7 +32744,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 20
     Jobs:
       Gunslinger: true
@@ -32760,7 +32760,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 20
     Jobs:
       Gunslinger: true
@@ -32776,7 +32776,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 20
     Jobs:
       Gunslinger: true
@@ -32793,7 +32793,7 @@ Body:
     Type: Ammo
     SubType: Bullet
     Buy: 5
-    Weight: 1
+    Weight: 0
     Attack: 20
     Jobs:
       Gunslinger: true
@@ -32811,7 +32811,7 @@ Body:
     SubType: Shuriken
     Buy: 2
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 10
     Jobs:
       KagerouOboro: true
@@ -32826,7 +32826,7 @@ Body:
     SubType: Shuriken
     Buy: 4
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -32841,7 +32841,7 @@ Body:
     SubType: Shuriken
     Buy: 6
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 45
     Jobs:
       KagerouOboro: true
@@ -32856,7 +32856,7 @@ Body:
     SubType: Shuriken
     Buy: 12
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 70
     Jobs:
       KagerouOboro: true
@@ -32871,7 +32871,7 @@ Body:
     SubType: Shuriken
     Buy: 20
     Sell: 0
-    Weight: 1
+    Weight: 0
     Attack: 100
     Jobs:
       KagerouOboro: true
@@ -32885,7 +32885,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -32901,7 +32901,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -32917,7 +32917,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -32933,7 +32933,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -32949,7 +32949,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -32966,7 +32966,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 1
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -32981,7 +32981,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 1
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -32996,7 +32996,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 1
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33011,7 +33011,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 1
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33026,7 +33026,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 1
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33041,7 +33041,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33056,7 +33056,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33071,7 +33071,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33086,7 +33086,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 10
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33103,7 +33103,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 10
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33120,7 +33120,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33137,7 +33137,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33154,7 +33154,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33180,7 +33180,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 10
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33197,7 +33197,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 10
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33214,7 +33214,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 20
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33231,7 +33231,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 40
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33248,7 +33248,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 80
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33265,7 +33265,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 20
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33282,7 +33282,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 40
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33299,7 +33299,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 80
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33316,7 +33316,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 70
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33334,7 +33334,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33352,7 +33352,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33369,7 +33369,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33386,7 +33386,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33403,7 +33403,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33420,7 +33420,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33437,7 +33437,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33454,7 +33454,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33471,7 +33471,7 @@ Body:
     Type: Ammo
     SubType: Throwweapon
     Buy: 100
-    Weight: 50
+    Weight: 0
     Jobs:
       Alchemist: true
     Classes:
@@ -33487,7 +33487,7 @@ Body:
     Name: Starfish
     Type: Ammo
     SubType: Shuriken
-    Weight: 5
+    Weight: 0
     Attack: 110
     Jobs:
       KagerouOboro: true
@@ -33512,7 +33512,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 10
-    Weight: 20
+    Weight: 0
     Attack: 50
     Jobs:
       KagerouOboro: true
@@ -33537,7 +33537,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 10
-    Weight: 20
+    Weight: 0
     Attack: 50
     Jobs:
       KagerouOboro: true
@@ -33562,7 +33562,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 100
-    Weight: 1
+    Weight: 0
     Attack: 50
     Jobs:
       KagerouOboro: true
@@ -33577,7 +33577,7 @@ Body:
     Name: Light Shuriken
     Type: Ammo
     SubType: Shuriken
-    Weight: 5
+    Weight: 0
     Attack: 5
     Locations:
       Ammo: true
@@ -33599,7 +33599,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 100
     Jobs:
       Alchemist: true
@@ -33616,7 +33616,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 50
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -33635,7 +33635,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 50
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -33654,7 +33654,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 50
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -33673,7 +33673,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 80
-    Weight: 1
+    Weight: 0
     Attack: 250
     Jobs:
       Alchemist: true
@@ -33690,7 +33690,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 50
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -33709,7 +33709,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 50
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -33728,7 +33728,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 50
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -33747,7 +33747,7 @@ Body:
     Type: Ammo
     SubType: Cannonball
     Buy: 50
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -33765,7 +33765,7 @@ Body:
     Name: Poison Cannon Ball
     Type: Ammo
     SubType: Cannonball
-    Weight: 1
+    Weight: 0
     Attack: 120
     Jobs:
       Alchemist: true
@@ -102136,7 +102136,7 @@ Body:
     Name: IDTest arrow
     Type: Ammo
     SubType: Arrow
-    Weight: 10
+    Weight: 0
     Attack: 10
     Locations:
       Ammo: true
@@ -102147,7 +102147,7 @@ Body:
     Name: IDTest canon
     Type: Ammo
     SubType: CannonBall
-    Weight: 10
+    Weight: 0
     Attack: 10
     Locations:
       Ammo: true
@@ -102158,7 +102158,7 @@ Body:
     Name: IDTest throw
     Type: Ammo
     SubType: CannonBall
-    Weight: 10
+    Weight: 0
     Attack: 10
     Locations:
       Ammo: true
@@ -102170,7 +102170,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -102184,7 +102184,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -102200,7 +102200,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -102216,7 +102216,7 @@ Body:
     Type: Ammo
     SubType: Kunai
     Buy: 30
-    Weight: 1
+    Weight: 0
     Attack: 30
     Jobs:
       KagerouOboro: true
@@ -102231,7 +102231,7 @@ Body:
     Name: IDTest ammo
     Type: Ammo
     SubType: Dagger
-    Weight: 10
+    Weight: 0
     Attack: 10
     Locations:
       Ammo: true

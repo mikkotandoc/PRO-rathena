@@ -11,11 +11,11 @@ Your first hour on **PRO-Ragnarok (Cathode)** — a Renewal server with **150x E
 | Requirement | Details |
 |-------------|---------|
 | Client | Renewal client matching patch **2021-11-03** |
-| Account | Register on the control panel *(staff: add URL)* |
+| Account | Register on the control panel |
 | Pincode | **Required** — set on first login |
 | System | Windows PC; stable internet |
 
-*(staff: add download / patcher link and GRF instructions.)*
+Download the client and patcher from the website. Follow the install guide on the control panel.
 
 ---
 
@@ -23,7 +23,7 @@ Your first hour on **PRO-Ragnarok (Cathode)** — a Renewal server with **150x E
 
 1. Register on the website control panel.
 2. Download and patch the client to **2021-11-03**.
-3. Set server IP / port in your `clientinfo.xml` or patcher *(staff: publish address)*.
+3. Run the patcher or launcher — it configures the server address automatically.
 4. Log in, create a pincode, then create a character.
 5. You begin on the **intro maps** (`iz_int`) and save in **Prontera** after completion.
 
@@ -89,7 +89,7 @@ Supports normal, transcendent, 3rd, **4th**, baby, and expanded classes (Gunslin
 2. **Booster weapons** — Centro with Booster Coins (`prontera 166,300`)
 3. **Item Mall** — basic gear on `prt_mk` (Warper → Item Mall)
 4. **Illusion gear** — Instance Merchant (`prontera 164,172`)
-5. **PRO-Asia Coins** — farm `Play_RO_Gold_Coin_` on field maps → Earl shop
+5. **PRO-Asia Coins** — farm on designated field maps → Earl shop
 
 → [Items & Equipment](Items-and-Equipment.md)
 

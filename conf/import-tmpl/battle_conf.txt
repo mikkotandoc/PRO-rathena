@@ -1,0 +1,7 @@
+// client.conf — Macro Patrol (npc/custom/macro_patrol.txt)
+// Patrol requires macro_detection_punishment: 1 (jail). Value 0 = ban, patrol is skipped.
+macro_detection_retry: 1
+macro_detection_timeout: 30000
+macro_detection_punishment: 1
+macro_detection_punishment_time: 1440
+macrochecker_delay: 300000

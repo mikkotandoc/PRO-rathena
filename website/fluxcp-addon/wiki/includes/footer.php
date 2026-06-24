@@ -3,7 +3,7 @@
 
 			<footer class="wiki-footer">
 				<p>
-					Unofficial wiki for <strong>PRO-Ragnarok</strong> (PRO-rathena).
+					Unofficial wiki for <strong>PRO-Ragnarok</strong>.
 					Game data may change; confirm in-game or with staff.
 				</p>
 				<p class="wiki-footer-links">

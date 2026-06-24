@@ -137,6 +137,15 @@ $etelRareDrops = @(
 	@{ Item = 'Etel_Violet_Jewel'; Rate = 1000 },
 	@{ Item = 'Etel_Amber'; Rate = 800 }
 )
+
+# bl_depth2 abyss jewels (mob_db /10000 rates x10 for map_drops /100000).
+$depth2AbyssDrops = @(
+	@{ Item = 'Abyss_Jewel_Fragment'; Rate = 3500 },
+	@{ Item = 'Time_Dim_J_Fragment'; Rate = 3500 },
+	@{ Item = 'Abyss_Magic_Jewel'; Rate = 750 },
+	@{ Item = 'Time_Dimension_Jewel'; Rate = 750 },
+	@{ Item = 'Abyss_Rune_Ore'; Rate = 250 }
+)
 $spawnFiles = @(
 	'npc\re\mobs\dungeons\biosphere.txt',
 	'npc\re\mobs\dungeons\bl_depth1.txt'
@@ -147,7 +156,7 @@ $header = @'
 # Varmundt's Biosphere map-wide special drops (import overlay)
 # Zone runes: map-specific GlobalDrops (75% kRO tuning)
 # BarMealTicket: SpecificDrops 2-5% by spawn difficulty (rare/hard = higher)
-# BIO_ depth mobs: rare Etel material SpecificDrops (see `$etelRareDrops)
+# BIO_ depth mobs: Etel rares; bl_depth2 also gets abyss jewel SpecificDrops
 # Normal mob loot stays in mob_db.
 
 Header:
@@ -194,6 +203,14 @@ function Write-MapEntry {
 					$body.Add("            Item: $($drop.Item)")
 					$body.Add("            Rate: $($drop.Rate)")
 					$dropIdx++
+				}
+				if ($Map -eq 'bl_depth2') {
+					foreach ($drop in $depth2AbyssDrops) {
+						$body.Add("          - Index: $dropIdx")
+						$body.Add("            Item: $($drop.Item)")
+						$body.Add("            Rate: $($drop.Rate)")
+						$dropIdx++
+					}
 				}
 			}
 		}

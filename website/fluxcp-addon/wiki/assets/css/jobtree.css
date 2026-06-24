@@ -1,0 +1,314 @@
+/* Interactive job tree — scoped under .pro-wiki */
+
+.pro-wiki .wiki-jobtree {
+	margin: 0 0 2.5rem;
+	padding: 1.25rem 1.5rem 1.5rem;
+	background: var(--wiki-surface, #1c2530);
+	border: 1px solid var(--wiki-border, #2a3544);
+	border-radius: 8px;
+}
+
+.pro-wiki .wiki-jobtree h2 {
+	margin-top: 0;
+	font-family: var(--wiki-font-heading, Georgia, serif);
+	color: var(--wiki-heading, #f0e6d2);
+	border-bottom: 1px solid var(--wiki-border, #2a3544);
+	padding-bottom: 0.5rem;
+}
+
+.pro-wiki .wiki-jobtree-heading {
+	margin: 1.75rem 0 1rem;
+	font-size: 1.1rem;
+	color: var(--wiki-gold, #c9a227);
+	font-weight: 600;
+}
+
+.pro-wiki .wiki-jobtree-intro,
+.pro-wiki .wiki-jobtree-note {
+	color: var(--wiki-text-muted, #8b9cb3);
+	font-size: 0.95rem;
+}
+
+.pro-wiki .wiki-jobtree-novice-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 1.25rem 0 1.5rem;
+	padding-bottom: 1.25rem;
+	border-bottom: 1px dashed var(--wiki-border, #2a3544);
+}
+
+.pro-wiki .wiki-jobtree-sn {
+	text-align: center;
+	width: 100%;
+}
+
+.pro-wiki .wiki-jobtree-sn-label {
+	margin: 0 0 0.5rem;
+	font-size: 0.85rem;
+	color: var(--wiki-text-muted, #8b9cb3);
+}
+
+.pro-wiki .wiki-jobtree-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+	gap: 1rem;
+}
+
+.pro-wiki .wiki-jobtree-branch {
+	background: rgba(0, 0, 0, 0.2);
+	border: 1px solid var(--wiki-border, #2a3544);
+	border-radius: 6px;
+	padding: 0.85rem;
+	position: relative;
+}
+
+.pro-wiki .wiki-jobtree-grid--soon .wiki-jobtree-branch {
+	border-color: rgba(201, 162, 39, 0.45);
+	background: rgba(201, 162, 39, 0.04);
+}
+
+.pro-wiki .wiki-jobtree-branch-soon {
+	position: absolute;
+	top: 0.45rem;
+	right: 0.55rem;
+	font-size: 0.62rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--wiki-gold, #c9a227);
+	opacity: 0.9;
+}
+
+.pro-wiki .wiki-jobtree-first-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.pro-wiki .wiki-jobtree-seconds {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	flex: 1;
+	min-width: 0;
+}
+
+.pro-wiki .wiki-jobtree-second-btn {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+	padding: 0.35rem;
+	margin: 0;
+	background: transparent;
+	border: 2px solid transparent;
+	border-radius: 6px;
+	cursor: pointer;
+	color: inherit;
+	font: inherit;
+	transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.pro-wiki .wiki-jobtree-second-btn:hover,
+.pro-wiki .wiki-jobtree-second-btn:focus {
+	border-color: var(--wiki-gold-dim, #9a7b1a);
+	background: var(--wiki-gold-glow, rgba(201, 162, 39, 0.15));
+	outline: none;
+}
+
+.pro-wiki .wiki-jobtree-second-btn.is-active {
+	border-color: var(--wiki-gold, #c9a227);
+	background: var(--wiki-gold-glow, rgba(201, 162, 39, 0.15));
+}
+
+.pro-wiki .wiki-jobtree-hint {
+	font-size: 0.65rem;
+	color: var(--wiki-text-muted, #8b9cb3);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.pro-wiki .wiki-jobtree-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.35rem;
+	min-width: 5.5rem;
+	text-align: center;
+	position: relative;
+}
+
+.pro-wiki .wiki-jobtree-card--soon {
+	opacity: 0.82;
+}
+
+.pro-wiki .wiki-jobtree-sprite-single,
+.pro-wiki .wiki-jobtree-sprite-pair {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	min-height: 4.75rem;
+}
+
+.pro-wiki .wiki-jobtree-sprite-pair {
+	gap: 0.15rem;
+}
+
+.pro-wiki .wiki-jobtree-sprite {
+	width: 72px;
+	height: 72px;
+	max-width: none;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+	object-fit: contain;
+	object-position: bottom center;
+	flex-shrink: 0;
+}
+
+.pro-wiki .wiki-jobtree-sprite--male,
+.pro-wiki .wiki-jobtree-sprite--female {
+	width: 56px;
+	height: 72px;
+}
+
+.pro-wiki .wiki-jobtree-sprite-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 72px;
+	height: 72px;
+	border-radius: 4px;
+	background: var(--wiki-border, #2a3544);
+	color: var(--wiki-gold, #c9a227);
+	font-weight: 700;
+	font-size: 1.25rem;
+}
+
+.pro-wiki .wiki-jobtree-soon-badge {
+	display: inline-block;
+	margin-top: 0.1rem;
+	padding: 0.12rem 0.4rem;
+	font-size: 0.58rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: #1c2530;
+	background: linear-gradient(135deg, #e8c547, #c9a227);
+	border-radius: 3px;
+	line-height: 1.3;
+}
+
+.pro-wiki .wiki-jobtree-dp--soon {
+	color: var(--wiki-text-muted, #8b9cb3);
+	font-style: italic;
+}
+
+.pro-wiki .wiki-jobtree-card--novice .wiki-jobtree-name {
+	color: var(--wiki-gold, #c9a227);
+	font-weight: 700;
+}
+
+.pro-wiki .wiki-jobtree-card--first .wiki-jobtree-name {
+	font-weight: 600;
+	color: var(--wiki-heading, #f0e6d2);
+}
+
+.pro-wiki .wiki-jobtree-card--second .wiki-jobtree-name {
+	font-size: 0.88rem;
+}
+
+.pro-wiki .wiki-jobtree-name {
+	font-size: 0.82rem;
+	line-height: 1.25;
+	max-width: 6.5rem;
+}
+
+.pro-wiki .wiki-jobtree-arrow {
+	color: var(--wiki-text-muted, #8b9cb3);
+	font-size: 1.25rem;
+	flex-shrink: 0;
+}
+
+.pro-wiki .wiki-jobtree-arrow--down {
+	font-size: 1.5rem;
+}
+
+.pro-wiki .wiki-jobtree-expand {
+	margin-top: 0.85rem;
+	padding: 0.85rem;
+	background: rgba(201, 162, 39, 0.06);
+	border: 1px solid var(--wiki-gold-dim, #9a7b1a);
+	border-radius: 6px;
+	animation: wiki-jobtree-open 0.2s ease;
+}
+
+@keyframes wiki-jobtree-open {
+	from { opacity: 0; transform: translateY(-4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.pro-wiki .wiki-jobtree-expand-title {
+	margin: 0 0 0.65rem;
+	font-size: 0.9rem;
+	color: var(--wiki-text-muted, #8b9cb3);
+}
+
+.pro-wiki .wiki-jobtree-expand-empty {
+	margin: 0;
+	font-size: 0.88rem;
+	color: var(--wiki-text-muted, #8b9cb3);
+	font-style: italic;
+}
+
+.pro-wiki .wiki-jobtree-chain {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 0.35rem 0.5rem;
+}
+
+.pro-wiki .wiki-jobtree-chain-step {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.pro-wiki .wiki-jobtree-tier {
+	font-size: 0.65rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--wiki-gold, #c9a227);
+}
+
+.pro-wiki .wiki-jobtree-dp {
+	margin: 0.65rem 0 0;
+	font-size: 0.85rem;
+}
+
+.pro-wiki .wiki-jobtree-dp a {
+	color: var(--wiki-link, #7eb8da);
+}
+
+@media (max-width: 600px) {
+	.pro-wiki .wiki-jobtree-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.pro-wiki .wiki-jobtree-first-row {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.pro-wiki .wiki-jobtree-seconds {
+		justify-content: center;
+	}
+
+	.pro-wiki .wiki-jobtree-chain {
+		justify-content: center;
+	}
+}

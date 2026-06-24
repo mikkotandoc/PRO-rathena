@@ -42687,12 +42687,12 @@ Body:
       if (.@r >= 6 && .@r_weapon >= 7) {
          bonus bPerfectHitAddRate,10;
       }
-      if (.@sum >= 17) {
+      if (.@sum >= 18) {
          bonus2 bMagicAtkEle,Ele_All,15;
-         bonus3 bAutoSpell,"SO_CLOUD_KILL",3,1;
+         bonus5 bAutoSpell,"SO_CLOUD_KILL",3,30,BF_WEAPON|BF_SHORT,0;
       }
       if (.@sum >= 22) {
-         autobonus3 "{ bonus5 bAutoSpell,\"SO_POISON_BUSTER\",1,10,BF_MAGIC,1; }",100,30000,"SO_CLOUD_KILL";
+         autobonus3 "{ bonus5 bAutoSpell,\"SO_POISON_BUSTER\",4,30,BF_MAGIC|BF_SKILL,0; }",1000,30000,"SO_CLOUD_KILL";
       }
   - Combos:
       - Combo:

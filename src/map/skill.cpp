@@ -942,6 +942,8 @@ bool skill_isNotOk( uint16 skill_id, map_session_data& sd ){
 		case SC_DIMENSIONDOOR:
 		case ALL_ODINS_RECALL:
 		case WE_CALLALLFAMILY:
+			if (pc_is_damage_teleport_locked(&sd))
+				return true;
 			if(mapdata->getMapFlag(MF_NOTELEPORT)) {
 				clif_skill_teleportmessage( sd, NOTIFY_MAPINFO_CANT_TP );
 				return true;
@@ -3211,7 +3213,6 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 			break;
 		case TR_ROSEBLOSSOM_ATK:
 		case TR_METALIC_FURY:
-		case TR_RHYTHMICAL_WAVE:
 		case ABC_FROM_THE_ABYSS_ATK:
 			clif_skill_damage( *dsrc, *bl, tick, dmg.amotion, dmg.dmotion, damage, dmg.div_, skill_id, -1, DMG_SPLASH );
 			break;
@@ -5653,6 +5654,8 @@ int32 skill_castend_map (map_session_data *sd, uint16 skill_id, const char *mapn
 	{
 	case AL_TELEPORT:
 	case ALL_ODINS_RECALL:
+		if (pc_is_damage_teleport_locked(sd))
+			return 0;
 		//The storage window is closed automatically by the client when there's
 		//any kind of map change, so we need to restore it automatically
 		//bugreport:8027

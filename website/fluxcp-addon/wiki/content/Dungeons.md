@@ -41,19 +41,19 @@ Confirm mob levels with `@mobinfo`. Rates: **150x EXP**, **100x drops**.
 
 Exchange materials at **Instance & EP Merchant** (`prontera 164,172`).
 
-| Instance | Theme | Barter |
-|----------|-------|--------|
-| Illusion Vampire | Undead castle | barter_ill_vampire |
-| Illusion Underwater | Deep sea | barter_ill_underwater |
-| Illusion Twins | Dual bosses | barter_ill_twins |
-| Illusion Moonlight | Payon | barter_ill_moonlight |
-| Illusion Frozen | Ice cave | barter_ill_frozen |
-| Illusion Turtle | Turtle Island | barter_ill_turtle |
-| Illusion Luanda | Savanna | barter_ill_luanda |
-| Illusion Teddy Bear | Toy factory | barter_ill_teddy |
-| Resonance Stone | Special exchange | resonance_stone_barter |
+| Instance | Theme |
+|----------|-------|
+| Illusion Vampire | Undead castle |
+| Illusion Underwater | Deep sea |
+| Illusion Twins | Dual bosses |
+| Illusion Moonlight | Payon |
+| Illusion Frozen | Ice cave |
+| Illusion Turtle | Turtle Island |
+| Illusion Luanda | Savanna |
+| Illusion Teddy Bear | Toy factory |
+| Resonance Stone | Special exchange |
 
-**Tip:** Run with a party for faster clears; gear is account-wide progress via barter tokens.
+**Tip:** Run with a party for faster clears; gear progress is via barter tokens at the merchant.
 
 ---
 
@@ -98,11 +98,11 @@ Access via **Episode Guide** warps or natural quest progression. **Episode Clear
 
 - Hub: `jor_nest`
 - Endgame episode bosses
-- Some Ep 20 monsters have custom damage tuning — expect longer fights
+- Some Episode 20 monsters have custom damage tuning — expect longer fights
 
 ### Episode 21
 
-**Not available** in current server revision.
+**Not available** yet — Druid class line coming in a future update.
 
 ---
 
@@ -110,7 +110,7 @@ Access via **Episode Guide** warps or natural quest progression. **Episode Clear
 
 | Area | Maps | Notes |
 |------|------|-------|
-| Surface biomes | `bl_grass`, `bl_lava`, `bl_ice`, `bl_death`, `bl_soul`, `bl_venom`, `bl_temple` | Official content — standard dailies in repo but **not enabled** |
+| Surface biomes | `bl_grass`, `bl_lava`, `bl_ice`, `bl_death`, `bl_soul`, `bl_venom`, `bl_temple` | Open-world biomes |
 | **Depth 1** | `bl_depth1` | Daily: **300 kills**, BL **250+** |
 | **Depth 2** | `bl_depth2` | Daily: **450 kills**, BL **250+** |
 
@@ -128,9 +128,9 @@ Researcher: `ba_in01` — register first, then take daily hunts. **4-hour** cool
 
 ---
 
-## Memorial Dungeons & Instances (Official)
+## Memorial Dungeons & Instances
 
-Loaded from `npc/re/instances/` and episode scripts. Examples:
+Examples available through Warper or episode NPCs:
 
 - Thanatos Tower, Old Glast Heim (OGH), Edda Biolabs / Glastheim
 - Episode 17–20 memorial dungeons

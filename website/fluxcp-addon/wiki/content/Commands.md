@@ -4,15 +4,13 @@
 
 Atcommands and script-bound commands on **PRO-Ragnarok**. Type `@commands` in-game for your full list.
 
-**Default player group** is defined in `conf/groups.yml` (group **Player**, ID 0).
-
 ---
 
 ## Custom Script Commands
 
 | Command | Description |
 |---------|-------------|
-| `@playtime` | Playtime progress — minutes toward next `#PlayPoints` reward |
+| `@playtime` | Playtime progress — minutes toward next Play Point reward |
 | `@alootid2` | Manage extended autoloot groups (10×10 item slots) |
 | `@storage2` | Open account storage slot 2 |
 | `@storage3` | Open account storage slot 3 |
@@ -20,7 +18,6 @@ Atcommands and script-bound commands on **PRO-Ragnarok**. Type `@commands` in-ga
 | `@storage5` | Open account storage slot 5 *(VIP)* |
 | `@storage6` | Open account storage slot 6 *(VIP)* |
 | `@ping` | Connection latency check |
-| `@macropatrol` | **GM only** — trigger macro detection on coin farm maps |
 
 **Account storage:** `@storage` alone opens a menu (slots 1–3, or 1–6 if VIP).
 
@@ -71,7 +68,7 @@ Atcommands and script-bound commands on **PRO-Ragnarok**. Type `@commands` in-ga
 | `@storage` | Kafra storage (slot 1) or storage menu |
 | `@breakguild` | Leave guild (leader = disband) |
 
-**Note:** `@mall` is documented in some files but **not granted** to players — use **Warper → Item Mall** instead.
+**Note:** `@mall` is not available to players — use **Warper → Item Mall** instead.
 
 ---
 
@@ -90,14 +87,13 @@ Atcommands and script-bound commands on **PRO-Ragnarok**. Type `@commands` in-ga
 
 ## VIP Commands
 
-VIP group (**5**) inherits Player commands plus:
+VIP players inherit all standard commands and also receive:
 
 | Command | Extra |
 |---------|-------|
 | `@who` | List online players |
-| `@rates` | *(also on VIP)* |
 
-VIP also unlocks `@storage4`–`@storage6` via account storage script.
+VIP also unlocks `@storage4`–`@storage6` via account storage.
 
 ---
 
@@ -107,14 +103,6 @@ VIP also unlocks `@storage4`–`@storage6` via account storage script.
 |---------|-------------|
 | `@breakguild` | Leave or disband guild |
 | `@request` | Send request message to GMs |
-
-Charcommands (`#command`) may differ — type `@charcommands` if available.
-
----
-
-## GM Commands
-
-Not listed here. Staff use `doc/atcommands.txt` in the repo.
 
 ---
 

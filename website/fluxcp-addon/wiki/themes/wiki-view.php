@@ -8,6 +8,9 @@ if (!defined('FLUX_ROOT')) {
 }
 ?>
 <link rel="stylesheet" href="<?php echo htmlspecialchars(wiki_asset_url('css/style.css'), ENT_QUOTES, 'UTF-8') ?>">
+<?php if (!empty($wikiJobTree)): ?>
+<link rel="stylesheet" href="<?php echo htmlspecialchars(wiki_asset_url('css/jobtree.css'), ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -66,12 +69,15 @@ if (!defined('FLUX_ROOT')) {
 			</header>
 
 			<div class="wiki-content">
+<?php if (!empty($wikiJobTree)): ?>
+				<?php echo $wikiJobTree ?>
+<?php endif; ?>
 				<?php echo $wikiBody ?>
 			</div>
 
 			<footer class="wiki-footer">
 				<p>
-					Unofficial wiki for <strong>PRO-Ragnarok</strong> (PRO-rathena).
+					Unofficial wiki for <strong>PRO-Ragnarok</strong>.
 					Game data may change; confirm in-game or with staff.
 				</p>
 				<p class="wiki-footer-links">
@@ -96,3 +102,6 @@ if (!defined('FLUX_ROOT')) {
 	});
 })();
 </script>
+<?php if (!empty($wikiJobTree)): ?>
+<script src="<?php echo htmlspecialchars(wiki_asset_url('js/jobtree.js'), ENT_QUOTES, 'UTF-8') ?>"></script>
+<?php endif; ?>
