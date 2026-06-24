@@ -71,7 +71,7 @@ $WIKI_PAGES = [
 ];
 
 define('WIKI_SITE_NAME', 'PRO-Ragnarok Wiki');
-define('WIKI_TAGLINE', 'Player wiki for Cathode — PRO-Ragnarok private server');
+define('WIKI_TAGLINE', 'Unofficial player wiki for the PRO-rathena private server');
 
 /**
  * Base URL path for the wiki (trailing slash), e.g. "/" or "/wiki/".
