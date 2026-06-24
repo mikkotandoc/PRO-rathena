@@ -105,7 +105,7 @@ function	script	F_BiosphereDepth1Enter	{
 		mes "^777777(ba_in01 292, 105)^000000";
 		close;
 	}
-	warp "bl_depth1", 180, 180;
+	warp "bl_depth1", 180, 165;
 	end;
 }
 

@@ -7,5 +7,5 @@
 //= parameters.
 //===== Additional Comments: ================================= 
 //= 1.0 Initial script. [Cydh]
-//= 1.1 Biosphere uses mob DamageTaken: 10 (90% DR) only; no map skill_damage stack.
+//= 1.1 Biosphere uses mob DamageTaken: 20 (80% DR) on all damage types; no map skill_damage stack.
 //============================================================

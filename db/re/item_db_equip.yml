@@ -233772,7 +233772,7 @@ Body:
          bonus bMatkRate,5;
          if (.@r>=9) {
             bonus5 bAutoSpell,"SO_PSYCHIC_WAVE",4,100,BF_SHORT|BF_WEAPON,1;
-            bonus5 bAutoSpell,"WZ_METEOR",4,100,BF_SHORT|BF_WEAPON,1;
+            bonus5 bAutoSpell,"WZ_METEOR",7,100,BF_SHORT|BF_WEAPON,1;
             if (.@r>=11) {
                bonus2 bMagicAddSize,Size_All,15;
                bonus2 bMagicAtkEle,Ele_Neutral,15;

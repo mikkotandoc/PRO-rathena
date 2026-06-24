@@ -21,6 +21,7 @@
 //= 1.0.3 Fix typos and update marketshop [Anity99]
 //= 1.0.4 Fixed item id typo [Everade]
 //= 1.0.5 kRO schedule: Wed 04:00 restock/holiday, 04:00 day roll, Sat 21:00~Sun 24:00 late weekend [PRO]
+//= 1.0.6 Fix restock item IDs to match marketshops; add @paradiserestock GM command [PRO]
 //============================================================
 
 // $event_paramk schedule (mirrors F_ParaMarketSchedule for debug; NPCs call the function directly)
@@ -106,7 +107,7 @@ function	script	F_CoolDown	{
 
 -	marketshop	para_jew10	FAKE_NPC,969:250000:20,7289:50000:20,7290:50000:20,7291:50000:20,7292:50000:20,7293:50000:20,7294:50000:20,7295:50000:20,7296:50000:20,7297:50000:20
 
--	marketshop	para_alc10	FAKE_NPC,971:20000:20,972:20000:20,970:30000:20:7136:20000:20,7135:20000:20
+-	marketshop	para_alc10	FAKE_NPC,971:20000:20,972:20000:20,970:30000:20,7136:20000:20,7135:20000:20
 
 -	marketshop	para_alc20	FAKE_NPC,1061:5000:1000,905:1000:1000,1059:1000:1000,7033:1000:1000,929:4000:1000,1000:10000:1000,921:500:3000,507:200:5000,508:500:3000,509:1000:3000,510:3500:1000,511:200:1000,576:2000:1000,1033:1000:1000,1032:1000:1000,6244:1500:1000,1051:1000:1000,6217:15000:1000
 
@@ -124,23 +125,46 @@ function	script	F_CoolDown	{
 -	marketshop	red_hugo01	FAKE_NPC,100381:2000000:4,100382:3000000:2,100383:4000000:2,100384:6000000:1,100385:2000000:4,100386:3000000:2,100387:4000000:2
 
 
-// Update Market Shop (kRO: limited stock restocks on Wed maintenance, 04:00 server time)
--	script	Update_Shop	-1,{
-OnWed0400:
-	npcshopupdate "para_coin10",6304,0,1;
-	npcshopupdate "para_coin10",6080,0,1;
-	npcshopupdate "para_coin10",6081,0,1;
-	npcshopupdate "para_coin10",6380,0,1;
+// Restores limited-stock Paradise Market merchants to their marketshop quantities.
+function	script	F_ParaMarketRestock	{
+	npcshopupdate "para_coin10",6304,0,10;
+	npcshopupdate "para_coin10",6080,0,10;
+	npcshopupdate "para_coin10",6081,0,10;
+	npcshopupdate "para_coin10",6380,0,1000;
 	npcshopupdate "para_coin10",6004,0,1;
 	npcshopupdate "para_hei10",6608,0,1;
 	npcshopupdate "para_hei10",6607,0,1;
 	npcshopupdate "para_hei10",6755,0,1;
 	npcshopupdate "para_hei10",7642,0,1;
 	npcshopupdate "para_hei10",22687,0,1;
-	npcshopupdate "para_hei10",23016,0,1;
 	npcshopupdate "para_key10",7026,0,10;
 	npcshopupdate "para_key10",7027,0,10;
-	npcshopupdate "para_wp00",1181,0,1;
+	npcshopupdate "para_wp00",2039,0,1;
+	npcshopupdate "para_wp00",2051,0,1;
+	npcshopupdate "para_wp00",26109,0,1;
+	npcshopupdate "para_wp00",21050,0,1;
+	npcshopupdate "para_wp00",26007,0,1;
+	npcshopupdate "para_wp00",23016,0,1;
+	npcshopupdate "para_wp00",13469,0,1;
+	npcshopupdate "para_wp00",16063,0,1;
+	npcshopupdate "para_wp00",32005,0,1;
+	npcshopupdate "para_wp00",28022,0,1;
+	npcshopupdate "para_wp00",28023,0,1;
+	npcshopupdate "para_wp00",18149,0,1;
+	npcshopupdate "para_wp00",18174,0,1;
+	npcshopupdate "para_wp00",28244,0,1;
+	npcshopupdate "para_wp00",28254,0,1;
+	npcshopupdate "para_wp00",32301,0,1;
+	npcshopupdate "para_wp00",13337,0,1;
+	npcshopupdate "para_wp00",13338,0,1;
+	npcshopupdate "para_wp00",1326,0,1;
+	npcshopupdate "para_wp00",1846,0,1;
+	npcshopupdate "para_wp00",16065,0,1;
+	npcshopupdate "para_wp00",28612,0,1;
+	npcshopupdate "para_wp00",28626,0,1;
+	npcshopupdate "para_wp00",28725,0,1;
+	npcshopupdate "para_wp00",28745,0,1;
+	npcshopupdate "para_wp00",28762,0,1;
 	npcshopupdate "para_arm10",5007,0,1;
 	npcshopupdate "para_ptn00",678,0,999;
 	npcshopupdate "para_ptn00",12016,0,9999;
@@ -182,11 +206,18 @@ OnWed0400:
 	npcshopupdate "para_ref10",1003,0,500;
 	npcshopupdate "para_ref10",1002,0,500;
 	npcshopupdate "para_ref10",999,0,500;
+	npcshopupdate "para_ref10",25728,0,5;
+	npcshopupdate "para_ref10",25730,0,2;
 	npcshopupdate "para_ref20",984,0,10;
 	npcshopupdate "para_ref20",985,0,100;
 	npcshopupdate "para_ref20",987,0,1;
 	npcshopupdate "para_ref20",988,0,1;
 	npcshopupdate "para_ref20",989,0,1;
+	npcshopupdate "para_ref20",6635,0,1;
+	npcshopupdate "para_ref20",990,0,5000;
+	npcshopupdate "para_ref20",991,0,5000;
+	npcshopupdate "para_ref20",992,0,5000;
+	npcshopupdate "para_ref20",993,0,5000;
 	npcshopupdate "para_jew10",969,0,20;
 	npcshopupdate "para_jew10",7289,0,20;
 	npcshopupdate "para_jew10",7290,0,20;
@@ -207,62 +238,120 @@ OnWed0400:
 	npcshopupdate "para_alc20",1059,0,1000;
 	npcshopupdate "para_alc20",7033,0,1000;
 	npcshopupdate "para_alc20",929,0,1000;
+	npcshopupdate "para_alc20",1000,0,1000;
+	npcshopupdate "para_alc20",921,0,3000;
+	npcshopupdate "para_alc20",507,0,5000;
+	npcshopupdate "para_alc20",508,0,3000;
+	npcshopupdate "para_alc20",509,0,3000;
+	npcshopupdate "para_alc20",510,0,1000;
+	npcshopupdate "para_alc20",511,0,1000;
+	npcshopupdate "para_alc20",576,0,1000;
+	npcshopupdate "para_alc20",1033,0,1000;
+	npcshopupdate "para_alc20",1032,0,1000;
+	npcshopupdate "para_alc20",6244,0,1000;
+	npcshopupdate "para_alc20",1051,0,1000;
+	npcshopupdate "para_alc20",6217,0,1000;
 	npcshopupdate "para_alc30",1000,0,100;
 	npcshopupdate "para_alc30",1001,0,100;
 	npcshopupdate "para_alc30",990,0,100;
 	npcshopupdate "para_alc30",991,0,100;
 	npcshopupdate "para_alc30",992,0,100;
 	npcshopupdate "para_alc30",993,0,100;
-	npcshopupdate "para_fod10",6252,0,100;
-	npcshopupdate "para_fod10",6253,0,100;
-	npcshopupdate "para_fod10",6254,0,100;
-	npcshopupdate "para_fod10",6256,0,100;
-	npcshopupdate "para_fod10",6257,0,100;
-	npcshopupdate "para_fod10",6259,0,100;
-	npcshopupdate "para_fod10",6260,0,100;
-	npcshopupdate "para_fod10",22658,0,50;
-	npcshopupdate "para_fod10",22659,0,50;
-	npcshopupdate "para_mag10",12108,0,99999;
-	npcshopupdate "para_mag10",717,0,99999;
+	npcshopupdate "para_fod10",7476,0,100;
+	npcshopupdate "para_fod10",7477,0,100;
+	npcshopupdate "para_fod10",7478,0,100;
+	npcshopupdate "para_fod10",7479,0,100;
+	npcshopupdate "para_fod10",100075,0,100;
+	npcshopupdate "para_fod10",100076,0,100;
+	npcshopupdate "para_fod10",100077,0,100;
+	npcshopupdate "para_fod10",100078,0,50;
 	npcshopupdate "para_mag10",715,0,99999;
 	npcshopupdate "para_mag10",716,0,99999;
 	npcshopupdate "para_mag10",14512,0,100;
 	npcshopupdate "para_mag10",14513,0,100;
 	npcshopupdate "para_mag10",14514,0,100;
-	npcshopupdate "para_mag10",12737,0,99999;
-	npcshopupdate "para_mag10",12734,0,99999;
-	npcshopupdate "para_mag10",12738,0,100;
-	npcshopupdate "para_mag10",12735,0,50;
-	npcshopupdate "para_mag10",12736,0,10;
-	npcshopupdate "para_mag10",6360,0,99999;
-	npcshopupdate "para_mag10",6363,0,99999;
-	npcshopupdate "para_mag10",6361,0,99999;
-	npcshopupdate "para_mag10",6362,0,99999;
-	npcshopupdate "para_mag11",717,0,99999;
-	npcshopupdate "para_mag11",12737,0,99999;
-	npcshopupdate "para_mag11",12734,0,99999;
-	npcshopupdate "para_mag11",6360,0,99999;
-	npcshopupdate "para_mag11",6363,0,99999;
-	npcshopupdate "para_mag11",6361,0,99999;
-	npcshopupdate "para_mag11",6362,0,99999;
+	npcshopupdate "para_mag10",23194,0,50;
+	npcshopupdate "para_mag10",23193,0,50;
+	npcshopupdate "para_mag10",23191,0,50;
+	npcshopupdate "para_mag10",23192,0,50;
+	npcshopupdate "para_mag11",715,0,99999;
+	npcshopupdate "para_mag11",716,0,99999;
+	npcshopupdate "para_mag11",14512,0,100;
+	npcshopupdate "para_mag11",14513,0,100;
+	npcshopupdate "para_mag11",14514,0,100;
+	npcshopupdate "para_mag11",23194,0,50;
+	npcshopupdate "para_mag11",23193,0,50;
+	npcshopupdate "para_mag11",23191,0,50;
+	npcshopupdate "para_mag11",23192,0,50;
+	npcshopupdate "para_mag20",12118,0,100;
 	npcshopupdate "para_mag20",12119,0,100;
 	npcshopupdate "para_mag20",12121,0,100;
 	npcshopupdate "para_mag20",12120,0,100;
-	npcshopupdate "para_mag20",12118,0,100;
-	npcshopupdate "para_plt01",709,0,50;
-	npcshopupdate "para_plt01",7932,0,99999;
-	npcshopupdate "para_plt01",7933,0,99999;
-	npcshopupdate "para_plt01",7934,0,99999;
-	npcshopupdate "para_plt01",7935,0,99999;
-	npcshopupdate "para_plt01",7936,0,99999;
-	npcshopupdate "para_plt01",7937,0,99999;
+	npcshopupdate "para_mag20",12114,0,100;
+	npcshopupdate "para_mag20",12115,0,100;
+	npcshopupdate "para_mag20",12116,0,100;
+	npcshopupdate "para_mag20",12117,0,100;
+	npcshopupdate "para_plt01",6236,0,10;
+	npcshopupdate "para_plt01",7211,0,10;
+	npcshopupdate "para_plt01",7566,0,10;
+	npcshopupdate "para_plt01",6649,0,10;
+	npcshopupdate "para_plt01",968,0,10;
+	npcshopupdate "para_plt01",25508,0,10;
+	npcshopupdate "para_plt01",7510,0,10;
+	npcshopupdate "para_plt01",7754,0,10;
+	npcshopupdate "para_plt01",7020,0,10;
+	npcshopupdate "para_plt01",7450,0,10;
+	npcshopupdate "para_plt01",7109,0,10;
+	npcshopupdate "para_plt01",751,0,10;
+	npcshopupdate "para_plt01",7036,0,10;
+	npcshopupdate "para_plt01",7513,0,10;
+	npcshopupdate "para_plt01",750,0,10;
+	npcshopupdate "para_plt01",7019,0,10;
+	npcshopupdate "para_plt01",1030,0,10;
+	npcshopupdate "para_plt01",25622,0,10;
+	npcshopupdate "para_plt01",7300,0,10;
+	npcshopupdate "para_plt01",7018,0,10;
+	npcshopupdate "para_plt01",7169,0,10;
+	npcshopupdate "para_plt01",7562,0,10;
+	npcshopupdate "para_plt01",6091,0,10;
+	npcshopupdate "para_plt01",7114,0,10;
+	npcshopupdate "para_plt01",7113,0,10;
+	npcshopupdate "para_plt01",7451,0,10;
+	npcshopupdate "para_plt01",25629,0,10;
+	npcshopupdate "para_plt01",7108,0,10;
+	npcshopupdate "para_plt01",23817,0,10;
+	npcshopupdate "para_ist01",25786,0,2;
+	npcshopupdate "para_ist01",25787,0,20;
+	npcshopupdate "para_ist01",6608,0,10;
+	npcshopupdate "para_ist01",6607,0,20;
+	npcshopupdate "para_ist01",6755,0,2;
 	npcshopupdate "red_hugo01",100381,0,4;
-	npcshopupdate "red_hugo01",100382,0,3;
+	npcshopupdate "red_hugo01",100382,0,2;
 	npcshopupdate "red_hugo01",100383,0,2;
 	npcshopupdate "red_hugo01",100384,0,1;
 	npcshopupdate "red_hugo01",100385,0,4;
-	npcshopupdate "red_hugo01",100386,0,3;
+	npcshopupdate "red_hugo01",100386,0,2;
 	npcshopupdate "red_hugo01",100387,0,2;
+	return;
+}
+
+// Update Market Shop (kRO: limited stock restocks on Wed maintenance, 04:00 server time)
+-	script	Update_Shop	-1,{
+OnInit:
+	bindatcmd "paradiserestock", strnpcinfo(0)+"::OnGMRestock", 99, 99;
+	end;
+
+OnGMRestock:
+	if (getgroupid() < 99) {
+		dispbottom "You are not authorized to use this command.";
+		end;
+	}
+	callfunc "F_ParaMarketRestock";
+	dispbottom "Paradise Market: all limited-stock merchants have been restocked.";
+	end;
+
+OnWed0400:
+	callfunc "F_ParaMarketRestock";
 	end;
 }
 

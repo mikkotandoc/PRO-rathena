@@ -45344,7 +45344,7 @@ Body:
       Critical: true
     Range: 7
     Hit: Multi_Hit
-    HitCount: 2
+    HitCount: 3
     Element: Weapon
     GiveAp: 2
     SplashArea:
