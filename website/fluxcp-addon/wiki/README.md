@@ -1,20 +1,6 @@
 # PRO-Ragnarok Wiki — PHP Site
 
-Self-contained PHP wiki for shared hosting **or** as a **FluxCP addon**. No Composer or database required.
-
-## FluxCP installation (recommended for your CP site)
-
-Use the ready-made addon package in **`fluxcp-addon/wiki/`**. Copy that folder to your FluxCP `addons/` directory.
-
-**Full step-by-step instructions:** see [`fluxcp-addon/wiki/INSTALL-FLUXCP.md`](fluxcp-addon/wiki/INSTALL-FLUXCP.md)
-
-Quick summary:
-
-1. Copy `website/fluxcp-addon/wiki/` → `your-fluxcp/addons/wiki/`
-2. Open `https://your-site/fluxcp/?module=wiki` (adjust `BaseURI`)
-3. **Wiki** appears in the main menu automatically
-
-## Standalone hosting (no FluxCP)
+Self-contained PHP wiki for shared hosting. No Composer or database required.
 
 ## Requirements
 

@@ -1,0 +1,411 @@
+/* PRO-Ragnarok Wiki — FluxCP addon (scoped under .pro-wiki) */
+
+.pro-wiki {
+	--wiki-bg: #0f1419;
+	--wiki-bg-elevated: #161d26;
+	--wiki-bg-sidebar: #121820;
+	--wiki-surface: #1c2530;
+	--wiki-border: #2a3544;
+	--wiki-text: #d8dee9;
+	--wiki-text-muted: #8b9cb3;
+	--wiki-heading: #f0e6d2;
+	--wiki-gold: #c9a227;
+	--wiki-gold-dim: #9a7b1a;
+	--wiki-gold-glow: rgba(201, 162, 39, 0.15);
+	--wiki-link: #7eb8da;
+	--wiki-link-hover: #a8d4f0;
+	--wiki-code-bg: #0a0e12;
+	--wiki-table-stripe: rgba(255, 255, 255, 0.03);
+	--wiki-max-content: 52rem;
+	--wiki-sidebar-width: 17rem;
+	--wiki-font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+	--wiki-font-heading: "Crimson Pro", Georgia, "Times New Roman", serif;
+
+	font-family: var(--wiki-font-body);
+	font-size: 1.05rem;
+	line-height: 1.65;
+	color: var(--wiki-text);
+	background:
+		radial-gradient(ellipse at 20% 0%, rgba(74, 124, 89, 0.08) 0%, transparent 50%),
+		radial-gradient(ellipse at 80% 100%, rgba(201, 162, 39, 0.06) 0%, transparent 45%),
+		var(--wiki-bg);
+	border: 1px solid var(--wiki-border);
+	border-radius: 6px;
+	overflow: hidden;
+	margin: 0.5rem 0 1rem;
+}
+
+.pro-wiki *,
+.pro-wiki *::before,
+.pro-wiki *::after {
+	box-sizing: border-box;
+}
+
+.pro-wiki a {
+	color: var(--wiki-link);
+	text-decoration: none;
+	transition: color 0.15s ease;
+}
+
+.pro-wiki a:hover {
+	color: var(--wiki-link-hover);
+	text-decoration: underline;
+}
+
+.pro-wiki .wiki-layout {
+	display: flex;
+	min-height: 28rem;
+}
+
+.pro-wiki .wiki-sidebar {
+	flex: 0 0 var(--wiki-sidebar-width);
+	width: var(--wiki-sidebar-width);
+	background: var(--wiki-bg-sidebar);
+	border-right: 1px solid var(--wiki-border);
+	display: flex;
+	flex-direction: column;
+}
+
+.pro-wiki .wiki-brand {
+	padding: 1.25rem 1rem 1rem;
+	border-bottom: 1px solid var(--wiki-border);
+	background: linear-gradient(180deg, rgba(201, 162, 39, 0.08) 0%, transparent 100%);
+}
+
+.pro-wiki .wiki-brand-link {
+	display: block;
+	text-decoration: none;
+}
+
+.pro-wiki .wiki-brand-link:hover {
+	text-decoration: none;
+}
+
+.pro-wiki .wiki-brand-title {
+	display: block;
+	font-family: var(--wiki-font-heading);
+	font-size: 1.35rem;
+	font-weight: 600;
+	color: var(--wiki-gold);
+	letter-spacing: 0.02em;
+}
+
+.pro-wiki .wiki-brand-tagline {
+	display: block;
+	margin-top: 0.35rem;
+	font-size: 0.78rem;
+	line-height: 1.4;
+	color: var(--wiki-text-muted);
+}
+
+.pro-wiki .wiki-nav-toggle {
+	display: none;
+	margin: 0.75rem 1rem;
+	padding: 0.5rem 0.75rem;
+	font: inherit;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--wiki-heading);
+	background: var(--wiki-surface);
+	border: 1px solid var(--wiki-border);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.pro-wiki .wiki-sidebar-nav {
+	flex: 1;
+	padding: 0.75rem 0 1.5rem;
+	overflow-y: auto;
+}
+
+.pro-wiki .wiki-nav-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.pro-wiki .wiki-nav-item a {
+	display: block;
+	padding: 0.45rem 1rem;
+	font-size: 0.92rem;
+	color: var(--wiki-text-muted);
+	border-left: 3px solid transparent;
+	text-decoration: none;
+}
+
+.pro-wiki .wiki-nav-item a:hover {
+	color: var(--wiki-text);
+	background: rgba(255, 255, 255, 0.04);
+	text-decoration: none;
+}
+
+.pro-wiki .wiki-nav-item.is-active a {
+	color: var(--wiki-gold);
+	background: var(--wiki-gold-glow);
+	border-left-color: var(--wiki-gold);
+	font-weight: 600;
+}
+
+.pro-wiki .wiki-nav-external {
+	margin-top: 1.25rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--wiki-border);
+}
+
+.pro-wiki .wiki-nav-heading {
+	margin: 0 0 0.35rem;
+	padding: 0 1rem;
+	font-size: 0.7rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--wiki-text-muted);
+}
+
+.pro-wiki .wiki-main {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.pro-wiki .wiki-page-header {
+	padding: 2rem 2rem 1rem;
+	border-bottom: 1px solid var(--wiki-border);
+	background: linear-gradient(180deg, var(--wiki-bg-elevated) 0%, transparent 100%);
+}
+
+.pro-wiki .wiki-page-title {
+	margin: 0;
+	font-family: var(--wiki-font-heading);
+	font-size: 2.25rem;
+	font-weight: 600;
+	color: var(--wiki-heading);
+	line-height: 1.2;
+}
+
+.pro-wiki .wiki-page-subtitle {
+	margin: 0.5rem 0 0;
+	font-size: 0.95rem;
+	color: var(--wiki-text-muted);
+}
+
+.pro-wiki .wiki-content {
+	flex: 1;
+	padding: 1.5rem 2rem 2.5rem;
+}
+
+.pro-wiki .wiki-footer {
+	padding: 1.25rem 2rem 2rem;
+	font-size: 0.85rem;
+	color: var(--wiki-text-muted);
+	border-top: 1px solid var(--wiki-border);
+}
+
+.pro-wiki .wiki-footer-links a {
+	color: var(--wiki-text-muted);
+}
+
+.pro-wiki .wiki-footer-links a:hover {
+	color: var(--wiki-link);
+}
+
+.pro-wiki .wiki-article h1,
+.pro-wiki .wiki-article h2,
+.pro-wiki .wiki-article h3,
+.pro-wiki .wiki-article h4 {
+	font-family: var(--wiki-font-heading);
+	color: var(--wiki-heading);
+	line-height: 1.25;
+	margin-top: 1.75rem;
+	margin-bottom: 0.65rem;
+}
+
+.pro-wiki .wiki-article h1 {
+	font-size: 1.75rem;
+	margin-top: 0;
+}
+
+.pro-wiki .wiki-article h2 {
+	font-size: 1.45rem;
+	padding-bottom: 0.35rem;
+	border-bottom: 1px solid var(--wiki-border);
+}
+
+.pro-wiki .wiki-article h3 {
+	font-size: 1.2rem;
+	color: var(--wiki-gold-dim);
+}
+
+.pro-wiki .wiki-article h4 {
+	font-size: 1.05rem;
+}
+
+.pro-wiki .wiki-article p,
+.pro-wiki .wiki-article ul,
+.pro-wiki .wiki-article ol,
+.pro-wiki .wiki-article blockquote,
+.pro-wiki .wiki-article pre {
+	margin: 0 0 1rem;
+}
+
+.pro-wiki .wiki-article ul,
+.pro-wiki .wiki-article ol {
+	padding-left: 1.5rem;
+}
+
+.pro-wiki .wiki-article li {
+	margin-bottom: 0.35rem;
+}
+
+.pro-wiki .wiki-article blockquote {
+	margin-left: 0;
+	padding: 0.75rem 1rem;
+	border-left: 4px solid var(--wiki-gold);
+	background: var(--wiki-gold-glow);
+	color: var(--wiki-text);
+	border-radius: 0 4px 4px 0;
+}
+
+.pro-wiki .wiki-article blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+.pro-wiki .wiki-article hr {
+	border: none;
+	border-top: 1px solid var(--wiki-border);
+	margin: 2rem 0;
+}
+
+.pro-wiki .wiki-article strong {
+	color: var(--wiki-heading);
+	font-weight: 600;
+}
+
+.pro-wiki .wiki-article code {
+	font-family: "Cascadia Code", "Consolas", monospace;
+	font-size: 0.88em;
+	padding: 0.15em 0.4em;
+	background: var(--wiki-code-bg);
+	border: 1px solid var(--wiki-border);
+	border-radius: 3px;
+	color: #b8d4a8;
+}
+
+.pro-wiki .wiki-article pre {
+	padding: 1rem;
+	background: var(--wiki-code-bg);
+	border: 1px solid var(--wiki-border);
+	border-radius: 6px;
+	overflow-x: auto;
+}
+
+.pro-wiki .wiki-article pre code {
+	padding: 0;
+	background: none;
+	border: none;
+	color: var(--wiki-text);
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+
+.pro-wiki .wiki-article table {
+	width: 100%;
+	margin: 1rem 0 1.5rem;
+	border-collapse: collapse;
+	font-size: 0.92rem;
+	background: var(--wiki-surface);
+	border: 1px solid var(--wiki-border);
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.pro-wiki .wiki-article thead th {
+	background: rgba(201, 162, 39, 0.12);
+	color: var(--wiki-gold);
+	font-weight: 600;
+	text-align: left;
+}
+
+.pro-wiki .wiki-article th,
+.pro-wiki .wiki-article td {
+	padding: 0.55rem 0.75rem;
+	border: 1px solid var(--wiki-border);
+	vertical-align: top;
+}
+
+.pro-wiki .wiki-article tbody tr:nth-child(even) {
+	background: var(--wiki-table-stripe);
+}
+
+.pro-wiki .wiki-article tbody tr:hover {
+	background: rgba(126, 184, 218, 0.06);
+}
+
+.pro-wiki .wiki-page-header + .wiki-content .wiki-article > h1:first-child {
+	display: none;
+}
+
+.pro-wiki .wiki-not-found h1,
+.pro-wiki .wiki-error {
+	color: #e07a7a;
+}
+
+@media (max-width: 900px) {
+	.pro-wiki .wiki-layout {
+		flex-direction: column;
+	}
+
+	.pro-wiki .wiki-sidebar {
+		width: 100%;
+		flex: none;
+	}
+
+	.pro-wiki .wiki-nav-toggle {
+		display: block;
+	}
+
+	.pro-wiki .wiki-sidebar-nav {
+		display: none;
+		padding-bottom: 0.75rem;
+	}
+
+	.pro-wiki .wiki-sidebar.is-nav-open .wiki-sidebar-nav {
+		display: block;
+	}
+
+	.pro-wiki .wiki-page-header,
+	.pro-wiki .wiki-content,
+	.pro-wiki .wiki-footer {
+		padding-left: 1.25rem;
+		padding-right: 1.25rem;
+	}
+
+	.pro-wiki .wiki-page-title {
+		font-size: 1.75rem;
+	}
+
+	.pro-wiki .wiki-article table {
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+}
+
+@media (max-width: 480px) {
+	.pro-wiki {
+		font-size: 1rem;
+	}
+
+	.pro-wiki .wiki-brand-title {
+		font-size: 1.15rem;
+	}
+}
+
+@media print {
+	.pro-wiki .wiki-sidebar,
+	.pro-wiki .wiki-nav-toggle,
+	.pro-wiki .wiki-footer {
+		display: none;
+	}
+}
