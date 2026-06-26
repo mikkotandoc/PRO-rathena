@@ -1,0 +1,73 @@
+local _recommendedReady = false
+
+local function EnsureRecommendedQuests()
+	if _recommendedReady then
+		return
+	end
+	_recommendedReady = true
+	pcall(function()
+		dofile("SystemEN/RecommendedQuests.lub")
+	end)
+	pcall(function()
+		dofile("SystemEN/RecommendedQuests_basic.lub")
+	end)
+end
+
+function RecommendedQuestInfoLoad()
+	EnsureRecommendedQuests()
+	if RecommendedQuestInfoList == nil or InsertRecommededQuestInfo == nil then
+		return
+	end
+	for questID, table in pairs(RecommendedQuestInfoList) do
+		if table.Title == nil then
+			table.Title = ""
+		end
+		if table.IconName == nil then
+			table.IconName = ""
+		end
+		if table.Summary == nil then
+			table.Summary = ""
+		end
+		if table.BgName == nil then
+			table.BgName = ""
+		end
+		if table.NpcSpr == nil then
+			table.NpcSpr = ""
+		end
+		if table.NpcNavi == nil then
+			table.NpcNavi = ""
+		end
+		if table.NpcPosX == nil then
+			table.NpcPosX = 0
+		end
+		if table.NpcPosY == nil then
+			table.NpcPosY = 0
+		end
+		InsertRecommededQuestInfo(questID, table.Title, table.IconName, table.Summary, table.BgName, table.NpcSpr, table.NpcNavi, table.NpcPosX, table.NpcPosY)
+		if table.QuestInfo1 ~= nil and AddRecommendedQuestInfo ~= nil then
+			for k, v in pairs(table.QuestInfo1) do
+				AddRecommendedQuestInfo(questID, 0, v)
+			end
+		end
+		if table.QuestInfo2 ~= nil and AddRecommendedQuestInfo ~= nil then
+			for k, v in pairs(table.QuestInfo2) do
+				AddRecommendedQuestInfo(questID, 1, v)
+			end
+		end
+		if table.QuestInfo3 ~= nil and AddRecommendedQuestInfo ~= nil then
+			for k, v in pairs(table.QuestInfo3) do
+				AddRecommendedQuestInfo(questID, 2, v)
+			end
+		end
+	end
+end
+
+function RecommendedQuestActiveLoad()
+	EnsureRecommendedQuests()
+	if RecommendedActiveList == nil or SetRecommendedQuestActive == nil then
+		return
+	end
+	for k, questID in pairs(RecommendedActiveList) do
+		SetRecommendedQuestActive(questID)
+	end
+end

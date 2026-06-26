@@ -56,14 +56,19 @@ function	script	F_BiosphereDaily_Do	{
 	.@rune$ = .@rune_item$[.@i];
 	.@essence$ = .@essence_item$[.@i];
 
-	if (checkquest(.@wait, PLAYTIME) == 2) {
+	switch (checkquest(.@wait, PLAYTIME)) {
+	case -1:
+		break;
+	case 0:
+	case 1:
 		mes "[Admin Beta]";
 		mes "You have already completed the ^0000cd" + .@name$ + "^000000 daily hunt today.";
 		mes "Please come back after the reset.";
 		close;
-	}
-	if (checkquest(.@wait, PLAYTIME) == 0)
+	case 2:
 		erasequest .@wait;
+		break;
+	}
 
 	switch (checkquest(.@hunt, HUNTING)) {
 	case -1:
@@ -120,13 +125,13 @@ function	script	F_BiosphereTicket_Info	{
 // questinfo requires a map-attached NPC (nd->m != -1)
 ba_in01,252,353,0	script	BiosphereDailyInfo#01	-1,{
 OnInit:
-	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90500,HUNTING) == -1 && checkquest(90501,PLAYTIME) == -1");
-	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90502,HUNTING) == -1 && checkquest(90503,PLAYTIME) == -1");
-	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90504,HUNTING) == -1 && checkquest(90505,PLAYTIME) == -1");
-	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90506,HUNTING) == -1 && checkquest(90507,PLAYTIME) == -1");
-	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90508,HUNTING) == -1 && checkquest(90509,PLAYTIME) == -1");
-	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90510,HUNTING) == -1 && checkquest(90511,PLAYTIME) == -1");
-	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90512,HUNTING) == -1 && checkquest(90513,PLAYTIME) == -1");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90500,HUNTING) == -1 && (checkquest(90501,PLAYTIME) == -1 || checkquest(90501,PLAYTIME) == 2)");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90502,HUNTING) == -1 && (checkquest(90503,PLAYTIME) == -1 || checkquest(90503,PLAYTIME) == 2)");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90504,HUNTING) == -1 && (checkquest(90505,PLAYTIME) == -1 || checkquest(90505,PLAYTIME) == 2)");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90506,HUNTING) == -1 && (checkquest(90507,PLAYTIME) == -1 || checkquest(90507,PLAYTIME) == 2)");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90508,HUNTING) == -1 && (checkquest(90509,PLAYTIME) == -1 || checkquest(90509,PLAYTIME) == 2)");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90510,HUNTING) == -1 && (checkquest(90511,PLAYTIME) == -1 || checkquest(90511,PLAYTIME) == 2)");
+	questinfo(QTYPE_DAILYQUEST, QMARK_YELLOW, "BaseLevel >= 240 && checkquest(90512,HUNTING) == -1 && (checkquest(90513,PLAYTIME) == -1 || checkquest(90513,PLAYTIME) == 2)");
 	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90500,HUNTING) == 2");
 	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90502,HUNTING) == 2");
 	questinfo(QTYPE_QUEST2, QMARK_YELLOW, "checkquest(90504,HUNTING) == 2");

@@ -126,7 +126,13 @@ jor_que,32,37,5	script	Lehar#i19ms21	EP19_RGAN_D,5,5,{
 		ep19_main = 60;
 		close;
 	}
-	if (ep19_main >= 60) {
+	if (isbegin_quest(17648) == 1) {
+		.@party_id = getcharid(1);
+		if (!.@party_id) {
+			mes "[Lehar]";
+			mes "You haven't joined a party. Join or form a party of one or more so we can track who enters.";
+			close;
+		}
 		.@md_name$ = "Confused Snake's Nest";
 		mes "[Lehar]";
 		mes "Are you ready? When you are ready, I will send you a signal to confirm that the person who entered has moved.";
@@ -135,7 +141,8 @@ jor_que,32,37,5	script	Lehar#i19ms21	EP19_RGAN_D,5,5,{
 		case 1:
 			mes "[Lehar]";
 			mes "I will open the entrance as soon as there is a traffic signal. Please wait a moment.";
-			instance_create(.@md_name$);
+			if (instance_create(.@md_name$) == -3)
+				instance_warning(2, .@md_name$);
 			close;
 		case 2:
 			switch( instance_enter(.@md_name$) ) {

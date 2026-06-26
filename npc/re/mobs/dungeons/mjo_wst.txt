@@ -1,0 +1,12 @@
+//===== rAthena Script =======================================
+//= Mjolnir Underground Caverns (mjo_wst01)
+//===== Description: =========================================
+//= Spawn counts from Divine Pride / kRO official data.
+//============================================================
+
+// mjo_wst01 - Mjolnir Underground Caverns
+mjo_wst01	monster	--ja--	21951,90
+mjo_wst01	monster	--ja--	21953,90
+mjo_wst01	monster	--ja--	21952,90
+mjo_wst01	monster	--ja--	21954,90
+mjo_wst01	boss_monster	--ja--	21955,1,21600000,600000,0

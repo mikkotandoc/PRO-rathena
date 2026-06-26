@@ -1,0 +1,12 @@
+//===== rAthena Script =======================================
+//= Power Twisted Plains (ra_pol01)
+//===== Description: =========================================
+//= Spawn counts from Divine Pride / kRO official data.
+//============================================================
+
+// ra_pol01 - Power Twisted Plains
+ra_pol01	monster	--ja--	21947,100
+ra_pol01	monster	--ja--	21948,125
+ra_pol01	monster	--ja--	21949,125
+ra_pol01	monster	--ja--	21946,125
+ra_pol01	boss_monster	--ja--	21950,1,21600000,600000,0

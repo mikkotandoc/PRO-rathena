@@ -6,8 +6,10 @@
 //============================================================
 
 function	script	F_ep20_drift_clear	{
-	if (ep20_main == 21 && isbegin_quest(17721) == 1) {
-		callfunc("F_ep20_completequest", 17721);
+	if (ep20_main == 21 && isbegin_quest(17703) == 1) {
+		callfunc("F_ep20_completequest", 17709);
+		callfunc("F_ep20_completequest", 20006);
+		callfunc("F_ep20_setquest", 23100);
 		ep20_main = 22;
 		callfunc("F_ep20_reward", 20, 90);
 	}
@@ -19,11 +21,7 @@ jor_maze,1,1,0	script(CLOAKED)	Drift Ice Zone#ep20	HIDDEN_WARP_NPC,{
 
 OnStart:
 	if (ep20_main < 21) end;
-	if (instance_create("Drift Ice Zone") < 0) {
-		mes "Party leader must create the instance.";
-		close;
-	}
-	warp "1@twsd",314,92;
+	callfunc("F_ep20_instance_enter", "Drift Ice Zone");
 	end;
 }
 

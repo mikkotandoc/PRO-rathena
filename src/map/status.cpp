@@ -4165,7 +4165,10 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 				if(!pc_has_permission(sd,PC_PERM_USE_ALL_EQUIPMENT) && itemdb_isNoEquip(data.get(), sd->m)) // Card restriction checks.
 					continue;
 				if(i == EQI_HAND_L && sd->inventory.u.items_inventory[index].equip == EQP_HAND_L) { // Left hand status.
-					sd->state.lr_flag = LR_FLAG_WEAPON;
+					if (sd->inventory_data[index]->type == IT_WEAPON)
+						sd->state.lr_flag = LR_FLAG_WEAPON;
+					else if (sd->inventory_data[index]->type == IT_ARMOR)
+						sd->state.lr_flag = LR_FLAG_SHIELD;
 					run_script(data->script,0,sd->id,0);
 					sd->state.lr_flag = LR_FLAG_NONE;
 				} else
@@ -4205,7 +4208,10 @@ int32 status_calc_pc_sub(map_session_data* sd, uint8 opt)
 				if (!pc_has_permission(sd, PC_PERM_USE_ALL_EQUIPMENT) && itemdb_isNoEquip(sd->inventory_data[index], sd->m))
 					continue;
 				if (i == EQI_HAND_L && sd->inventory.u.items_inventory[index].equip == EQP_HAND_L) { // Left hand status.
-					sd->state.lr_flag = LR_FLAG_WEAPON;
+					if (sd->inventory_data[index]->type == IT_WEAPON)
+						sd->state.lr_flag = LR_FLAG_WEAPON;
+					else if (sd->inventory_data[index]->type == IT_ARMOR)
+						sd->state.lr_flag = LR_FLAG_SHIELD;
 					run_script(data->script, 0, sd->id, 0);
 					sd->state.lr_flag = LR_FLAG_NONE;
 				}

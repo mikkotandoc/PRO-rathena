@@ -819,6 +819,11 @@ void BarterDatabase::loadingFinished(){
 			}
 		}
 
+		// Normal barter UI only allows buying one item at a time; extended UI supports quantity.
+		if( battle_config.feature_barter_force_extended && battle_config.feature_barter_extended ){
+			extended = true;
+		}
+
 		if( extended && !battle_config.feature_barter_extended ){
 #ifndef BUILDBOT
 			ShowError( "Barter %s uses extended mechanics but this is not enabled.\n", barter->name.c_str() );

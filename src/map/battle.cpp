@@ -8947,6 +8947,7 @@ static const struct _battle_data {
 
 	{ "feature.barter",                     &battle_config.feature_barter,                  1,      0,      1,              },
 	{ "feature.barter_extended",            &battle_config.feature_barter_extended,         1,      0,      1,              },
+	{ "feature.barter_force_extended",      &battle_config.feature_barter_force_extended,   1,      0,      1,              },
 	{ "feature.itemlink",                   &battle_config.feature_itemlink,                1,      0,      1,              },
 	{ "feature.mesitemlink",                &battle_config.feature_mesitemlink,             1,      0,      1,              },
 	{ "feature.mesitemlink_brackets",       &battle_config.feature_mesitemlink_brackets,    0,      0,      1,              },
@@ -9223,6 +9224,10 @@ void battle_adjust_conf()
 	if( battle_config.feature_barter_extended ){
 		ShowWarning("conf/battle/feature.conf extended barter shop system is enabled but it requires PACKETVER 2019-11-06 or newer, disabling...\n");
 		battle_config.feature_barter_extended = 0;
+	}
+	if( battle_config.feature_barter_force_extended ){
+		ShowWarning("conf/battle/feature.conf barter force extended is enabled but it requires PACKETVER 2019-11-06 or newer, disabling...\n");
+		battle_config.feature_barter_force_extended = 0;
 	}
 #endif
 

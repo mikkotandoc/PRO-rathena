@@ -113,6 +113,15 @@ function	script	F_Kafra	{
 		break;
 	case 5:// NPC has it's own welcome message. (Display nothing)
 		break;
+	case 6:// Prontera Market Street specific message
+		mes "[Kafra Employee]";
+		mes "Welcome to the";
+		mes "Kafra Corporation.";
+		mes "The Kafra services";
+		mes "are always on your side.";
+		mes "Kafra Points are not provided at the Prontera Market Street branch. Please note this when using.";
+		mes "How may I assist you?";
+		break;
 	}
 	next;
 	if (.@welcome == 2)// Guild Kafra Menu override (free Teleport, free Storage, Free Cart)
@@ -138,6 +147,14 @@ function	script	F_Kafra	{
 			case 9: setarray .@K_Menu0$[0],"Use Storage","Rent a Pushcart","Use Teleport Service","Check Other Information","Cancel"; break;
 			// Storage, Save, and Pushcart (Dewata, reorder of case 7)
 			case 10: setarray .@K_Menu0$[0],"Use Storage","Save","Rent a Pushcart","Cancel"; break;
+			// Prontera
+			case 11: setarray .@K_Menu0$[0],"Save","Use Storage","Use Teleport Service","Rent a Pushcart","Check Other Information","~ Prontera Market ~","Cancel"; break;
+			// Prontera Market Street
+			case 12: setarray .@K_Menu0$[0],"Use Storage 1","Use Storage 2","Use Storage 3","Rent a Pushcart","Move to The Center of Prontera","Cancel"; break;
+			case 13: setarray .@K_Menu0$[0],"Use Storage 1","Use Storage 2","Use Storage 3","Rent a Pushcart","Move to The South of Prontera","Cancel"; break;
+			case 14: setarray .@K_Menu0$[0],"Use Storage 1","Use Storage 2","Use Storage 3","Rent a Pushcart","Move to The East of Prontera","Cancel"; break;
+			case 15: setarray .@K_Menu0$[0],"Use Storage 1","Use Storage 2","Use Storage 3","Rent a Pushcart","Move to The West of Prontera","Cancel"; break;
+			case 16: setarray .@K_Menu0$[0],"Use Storage 1","Use Storage 2","Use Storage 3","Rent a Pushcart","Move to The North of Prontera","Cancel"; break;
 			// Default message (obsolete)
 			default: setarray .@K_Menu0$[0],"Save","Use Storage","Use Teleport Service","Rent a Pushcart","Check Other Information","Cancel"; break;
 		}
@@ -181,6 +198,58 @@ function	script	F_Kafra	{
 			callfunc "F_KafInfo",getarg(2);
 			next;
 		}
+		else if (.@K_Menu0$[.@j] == "~ Prontera Market ~") {
+			.@npc_name$ = strnpcinfo(3);
+			mes "[Kafra Employee]";
+			mes "I will guide you to Prontera Market.";
+			close2;
+			if (.@npc_name$ == "kaf_prontera" || .@npc_name$ == "kaf_prontera6")
+				warp "prt_mk",161,287;
+			else if (.@npc_name$ == "kaf_prontera3")
+				warp "prt_mk",161,39;
+			else if (.@npc_name$ == "kaf_prontera5")
+				warp "prt_mk",38,162;
+			else if (.@npc_name$ == "kaf_prontera4")
+				warp "prt_mk",285,162;
+			else
+				warp "prt_mk",161,143;
+			end;
+		}
+		else if (.@K_Menu0$[.@j] == "Move to The Center of Prontera") {
+			mes "[Kafra Employee]";
+			mes "I will guide you to the Center of Prontera.";
+			close2;
+			warp "prontera",155,183;
+			end;
+		}
+		else if (.@K_Menu0$[.@j] == "Move to The South of Prontera") {
+			mes "[Kafra Employee]";
+			mes "I will guide you to the South of Prontera.";
+			close2;
+			warp "prontera",155,35;
+			end;
+		}
+		else if (.@K_Menu0$[.@j] == "Move to The East of Prontera") {
+			mes "[Kafra Employee]";
+			mes "I will guide you to the East of Prontera.";
+			close2;
+			warp "prontera",275,204;
+			end;
+		}
+		else if (.@K_Menu0$[.@j] == "Move to The West of Prontera") {
+			mes "[Kafra Employee]";
+			mes "I will guide you to the West of Prontera.";
+			close2;
+			warp "prontera",36,204;
+			end;
+		}
+		else if (.@K_Menu0$[.@j] == "Move to The North of Prontera") {
+			mes "[Kafra Employee]";
+			mes "I will guide you to the North of Prontera.";
+			close2;
+			warp "prontera",155,323;
+			end;
+		}
 		else if (.@K_Menu0$[.@j] == "Cancel") {
 			callfunc "F_KafEnd",.@welcome,0;
 			end;
@@ -189,7 +258,69 @@ function	script	F_Kafra	{
 			callfunc "F_KafStor",1,0;
 			next;
 		}
+		else if (.@K_Menu0$[.@j] == "Use Storage 1") {
+			callfunc "F_Storage",4,0;
+			next;
+		}
+		else if (.@K_Menu0$[.@j] == "Use Storage 2") {
+			callfunc "F_Storage",1,5;
+			next;
+		}
+		else if (.@K_Menu0$[.@j] == "Use Storage 3") {
+			callfunc "F_Storage",2,6;
+			next;
+		}
 	}
+}
+
+//===================================================
+// Prontera Market Street Storage Functions
+//===================================================
+function	script	F_CallStorage	{
+	.@stor_id = getarg(0);
+	.@vip_stor_id = getarg(1);
+
+	if (.@vip_stor_id > 0 && vip_status(VIP_STATUS_ACTIVE))
+		.@stor_id = .@vip_stor_id;
+
+	callfunc("F_CheckKafCode");
+	close2;
+	if (.@stor_id == 0)
+		openstorage;
+	else if (!openstorage2(.@stor_id, STOR_MODE_GET|STOR_MODE_PUT))
+		end;
+	end;
+}
+
+function	script	F_Storage	{
+	.@stor_id = getarg(0);
+	.@vip_stor_id = getarg(1);
+	.@fee = 50;
+
+	if (!callfunc("F_CanOpenStorage")) {
+		mes "[Kafra Employee]";
+		mes "I'm sorry, but you need the Novice's";
+		mes "Basic Skill Level 6 to use the Storage Service.";
+		return;
+	}
+	if (countitem(7059))
+		delitem 7059,1;
+	else {
+		if (Zeny < .@fee) {
+			mes "[Kafra Employee]";
+			mes "I'm sorry, but you don't have enough zeny to use";
+			mes "the Storage Service. Our Storage access fee is " + .@fee + " zeny.";
+			return;
+		}
+		Zeny -= .@fee;
+	}
+	mes "[Kafra Employee]";
+	mes "Here, let me open your Storage for you.";
+	mes "Thank you for using the Kafra Service.";
+	close2;
+	callfunc "F_CallStorage", .@stor_id, .@vip_stor_id;
+	cutin "", 255;
+	end;
 }
 
 //===================================================
@@ -262,7 +393,8 @@ function	script	F_KafStor	{
 				return;
 			}
 			Zeny -= .@fee;
-			RESRVPTS += (.@fee/5);
+			if (getarg(2) != 6)
+				RESRVPTS += (.@fee/5);
 		}
 	}
 
@@ -397,7 +529,8 @@ function	script	F_KafCart	{
 			return 1;
 		}
 		Zeny -= .@rental_fee;
-		RESRVPTS += 48;
+		if (getarg(0) != 6)
+			RESRVPTS += 48;
 	}
 	setcart;
 	return 1;

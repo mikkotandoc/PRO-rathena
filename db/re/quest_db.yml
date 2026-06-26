@@ -13143,72 +13143,465 @@ Body:
   - Id: 17662
     Title: Standby: Finding an Underground Hideout on the Ground
     TimeLimit: 4h
-  - Id: 17700
-    Title: Natives of the Ancient Ice Gorge
-  - Id: 17701
-    Title: Natives of the Ancient Ice Gorge
-  - Id: 17702
-    Title: Natives of the Ancient Ice Gorge
-  - Id: 17703
-    Title: Natives of the Ancient Ice Gorge
-  - Id: 17704
-    Title: Natives of the Ancient Ice Gorge
-  - Id: 17705
-    Title: Natives of the Ancient Ice Gorge
-  - Id: 17706
+  - Id: 16691
+    Title: Expand Exploration Range
+  - Id: 16692
+    Title: The Natives of the Ancient Ice Canyon
+  - Id: 16693
+    Title: Exploration of the Ancient Ice Canyon
+  - Id: 16694
+    Title: Evidence and Return
+  - Id: 16695
+    Title: Suspicious Signs
+  - Id: 16696
+    Title: Military Camp Investigation
+  - Id: 16697
+    Title: Lodge Investigation
+  - Id: 16698
+    Title: Back Alley Exploration
+  - Id: 16699
+    Title: Suspicious Signs?
+  - Id: 16700
+    Title: Identity of the Suspicious Device
+  - Id: 16701
+    Title: Canyon Exploration
+  - Id: 16702
+    Title: Return to Ice Castle
+  - Id: 16703
+    Title: Recent Events
+  - Id: 16704
     Title: Era of Cold War and Espionage
-  - Id: 17707
-    Title: Era of Cold War and Espionage
-  - Id: 17708
-    Title: Era of Cold War and Espionage
-  - Id: 17709
-    Title: Era of Cold War and Espionage
-  - Id: 17710
-    Title: Era of Cold War and Espionage
-  - Id: 17711
-    Title: Era of Cold War and Espionage
-  - Id: 17712
-    Title: More Expert Than Any Awin
-  - Id: 17713
-    Title: More Expert Than Any Awin
-  - Id: 17714
-    Title: Kopo's Secret Base
-  - Id: 17715
-    Title: Infiltration of Rgans' Hideout
-  - Id: 17716
-    Title: Infiltration of Rgans' Hideout
-  - Id: 17717
-    Title: Infiltration of Rgans' Hideout
+  - Id: 16734
+    Title: Barmunt's Biospere Deep Guide
+  - Id: 16735
+    Title: Deep 1st Floor Specimen Research
+    Targets:
+      - Id: 1
+        Count: 300
+        Location: bl_depth1
+  - Id: 16736
+    Title: "[Standby] Deep 1st Floor Specimen Research"
+    TimeLimit: 4h
+  - Id: 16737
+    Title: Deep 1st Floor Specimen Advanced Research
+    Targets:
+      - Id: 1
+        Count: 2000
+        Location: bl_depth1
+  - Id: 16738
+    Title: "[Standby] Deep 1st Floor Specimen Advanced Research"
+    TimeLimit: 7d 4h
+  - Id: 16739
+    Title: Deep 1st Floor Fire Specimen Research I
+    Targets:
+      - Mob: BIO_LAVA_TOAD
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_FIRE_FRILLDORA
+        Count: 50
+        Location: bl_depth1
+  - Id: 16740
+    Title: "[Standby] Deep 1st Floor Fire Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16741
+    Title: Deep 1st Floor Fire Specimen Research II
+    Targets:
+      - Mob: BIO_LAVA_TOAD
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_FIRE_FRILLDORA
+        Count: 80
+        Location: bl_depth1
+  - Id: 16742
+    Title: "[Standby] Deep 1st Floor Fire Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16743
+    Title: Deep 1st Floor Ice Specimen Research I
+    Targets:
+      - Mob: BIO_ANOLIAN
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_KAPHA
+        Count: 50
+        Location: bl_depth1
+  - Id: 16744
+    Title: "[Standby] Deep 1st Floor Ice Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16745
+    Title: Deep 1st Floor Ice Specimen Research II
+    Targets:
+      - Mob: BIO_ANOLIAN
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_KAPHA
+        Count: 80
+        Location: bl_depth1
+  - Id: 16746
+    Title: "[Standby] Deep 1st Floor Ice Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16747
+    Title: Deep 1st Floor Earth Specimen Research I
+    Targets:
+      - Mob: BIO_STING
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_WOOD_GOBLIN
+        Count: 50
+        Location: bl_depth1
+  - Id: 16748
+    Title: "[Standby] Deep 1st Floor Earth Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16749
+    Title: Deep 1st Floor Earth Specimen Research II
+    Targets:
+      - Mob: BIO_STING
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_WOOD_GOBLIN
+        Count: 80
+        Location: bl_depth1
+  - Id: 16750
+    Title: "[Standby] Deep 1st Floor Earth Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16751
+    Title: Deep 1st Floor Storm Specimen Research I
+    Targets:
+      - Mob: BIO_DRAGON_TAIL
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_LITTLE_FATUM
+        Count: 50
+        Location: bl_depth1
+  - Id: 16752
+    Title: "[Standby] Deep 1st Floor Storm Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16753
+    Title: Deep 1st Floor Storm Specimen Research II
+    Targets:
+      - Mob: BIO_DRAGON_TAIL
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_LITTLE_FATUM
+        Count: 80
+        Location: bl_depth1
+  - Id: 16754
+    Title: "[Standby] Deep 1st Floor Storm Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16755
+    Title: Deep 1st Floor Purification Specimen Research I
+    Targets:
+      - Mob: BIO_HOLY_FRUS
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_HOLY_SKOGUL
+        Count: 50
+        Location: bl_depth1
+  - Id: 16756
+    Title: "[Standby] Deep 1st Floor Purification Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16757
+    Title: Deep 1st Floor Purification Specimen Research II
+    Targets:
+      - Mob: BIO_HOLY_FRUS
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_HOLY_SKOGUL
+        Count: 80
+        Location: bl_depth1
+  - Id: 16758
+    Title: "[Standby] Deep 1st Floor Purification Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16759
+    Title: Deep 1st Floor Corruption Specimen Research I
+    Targets:
+      - Mob: BIO_SKEL_ARCHER
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_SKEL_SOLDIER
+        Count: 50
+        Location: bl_depth1
+  - Id: 16760
+    Title: "[Standby] Deep 1st Floor Corruption Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16761
+    Title: Deep 1st Floor Corruption Specimen Research II
+    Targets:
+      - Mob: BIO_SKEL_ARCHER
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_SKEL_SOLDIER
+        Count: 80
+        Location: bl_depth1
+  - Id: 16762
+    Title: "[Standby] Deep 1st Floor Corruption Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16763
+    Title: Deep 1st Floor Soul Specimen Research I
+    Targets:
+      - Mob: BIO_EMPATHIZER
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_PRAY_GIVER
+        Count: 50
+        Location: bl_depth1
+  - Id: 16764
+    Title: "[Standby] Deep 1st Floor Soul Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16765
+    Title: Deep 1st Floor Soul Specimen Research II
+    Targets:
+      - Mob: BIO_EMPATHIZER
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_PRAY_GIVER
+        Count: 80
+        Location: bl_depth1
+  - Id: 16766
+    Title: "[Standby] Deep 1st Floor Soul Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16767
+    Title: Deep 1st Floor Venom Specimen Research I
+    Targets:
+      - Mob: BIO_PINGUICULA_D
+        Count: 50
+        Location: bl_depth1
+      - Mob: BIO_POM_SPIDER
+        Count: 50
+        Location: bl_depth1
+  - Id: 16768
+    Title: "[Standby] Deep 1st Floor Venom Specimen Research I"
+    TimeLimit: 4h
+  - Id: 16769
+    Title: Deep 1st Floor Venom Specimen Research II
+    Targets:
+      - Mob: BIO_PINGUICULA_D
+        Count: 80
+        Location: bl_depth1
+      - Mob: BIO_POM_SPIDER
+        Count: 80
+        Location: bl_depth1
+  - Id: 16770
+    Title: "[Standby] Deep 1st Floor Venom Specimen Research II"
+    TimeLimit: 4h
+  - Id: 16779
+    Title: Depth Abyss Sample Research
+    Targets:
+      - Id: 1
+        Count: 450
+        Location: bl_depth2
+  - Id: 16780
+    Title: "[Standby] Depth Abyss Sample Research"
+    TimeLimit: 4h
+  - Id: 17690
+    Title: A New Exploration Site
+  - Id: 17691
+    Title: Infiltrating the Lair of Lergan
+  - Id: 17692
+    Title: Infiltrating the Lair of Lergan
+  - Id: 17693
+    Title: Infiltrating the Lair of Lergan
     Targets:
       - Mob: EP20_RGAN_WARLOCK
         Count: 5
       - Mob: EP20_JORGAN_HEALER
         Count: 5
+  - Id: 17694
+    Title: Infiltrating the Lair of Lergan
+  - Id: 17695
+    Title: Infiltrating the Lair of Lergan
+  - Id: 17696
+    Title: Sacred and Divine
+  - Id: 17697
+    Title: Sacred and Divine
+  - Id: 17698
+    Title: Sacred and Divine
+  - Id: 17699
+    Title: Sacred and Divine
+  - Id: 17700
+    Title: Sacred and Divine
+  - Id: 17701
+    Title: Earning Lergan's Trust
+  - Id: 17702
+    Title: Heading Towards the End of the Maze
+  - Id: 17703
+    Title: Heading Towards the End of the Maze
+    Targets:
+      - Mob: EP20_JORGAN_CLEANER
+        Count: 3
+  - Id: 17704
+    Title: Heading Towards the End of the Maze
+  - Id: 17705
+    Title: Heading Towards the End of the Maze
+  - Id: 17706
+    Title: Heading Towards the End of the Maze
+  - Id: 17707
+    Title: Unexpected Reunion
+  - Id: 17708
+    Title: Unexpected Reunion
+  - Id: 17709
+    Title: Report on Infiltration
+  - Id: 17710
+    Title: Cleaning the Serpent's Maze
+  - Id: 17711
+    Title: "[Standby] Cleaning the Serpent's Maze"
+    TimeLimit: 4h
+  - Id: 17712
+    Title: A New Beginning
+  - Id: 17713
+    Title: A New Beginning
+  - Id: 17714
+    Title: A New Beginning
+  - Id: 17715
+    Title: A New Beginning
+  - Id: 17716
+    Title: A New Beginning
+  - Id: 17717
+    Title: "[Standby] Taste of Leisure"
+    TimeLimit: 4h
   - Id: 17718
-    Title: Infiltration of Rgans' Hideout
+    Title: Taste of Leisure
   - Id: 17719
-    Title: Infiltration of Rgans' Hideout
+    Title: Sacred and Divine
   - Id: 17720
-    Title: Where the End of the Maze Leads
+    Title: Taste of Leisure
   - Id: 17721
-    Title: Where the End of the Maze Leads
-  - Id: 17722
-    Title: Deep Ancient Sea
-  - Id: 17723
-    Title: Deep Ancient Sea
-  - Id: 17724
-    Title: Deep Ancient Sea
+    Title: Taste of Leisure
   - Id: 17725
-    Title: Deep Ancient Sea
+    Title: They've Appeared! What's This?!
+  - Id: 17726
+    Title: They've Appeared! What's This?!
+  - Id: 17727
+    Title: They've Appeared! What's This?!
+  - Id: 17728
+    Title: They've Appeared! What's This?!
+  - Id: 18206
+    Title: Information on the Power Twisted Plains
+  - Id: 18207
+    Title: Daily Light Cleansing
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: ra_pol01
+  - Id: 18208
+    Title: Daily Solid Cleansing
+    Targets:
+      - Id: 1
+        Count: 500
+        Location: ra_pol01
+  - Id: 18209
+    Title: "[Standby] Daily Cleansing"
+    TimeLimit: 4h
+  - Id: 18210
+    Title: Focus! Weekly Cleansing
+    Targets:
+      - Id: 1
+        Count: 5000
+        Location: ra_pol01
+  - Id: 18211
+    Title: "[Standby] Weekly Cleansing"
+    TimeLimit: 7d 4h
+  - Id: 18212
+    Title: Information on the Mjolnir Underground Cave
+  - Id: 18213
+    Title: Daily 100 Monster Subjugation!
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: mjo_wst01
+  - Id: 18214
+    Title: Daily 500 Monster Subjugation!
+    Targets:
+      - Id: 1
+        Count: 500
+        Location: mjo_wst01
+  - Id: 18215
+    Title: "[Standby] Daily Monster Subjugation"
+    TimeLimit: 4h
+  - Id: 18216
+    Title: Large-scale Monster Subjugation
+    Targets:
+      - Id: 1
+        Count: 5000
+        Location: mjo_wst01
+  - Id: 18217
+    Title: "[Standby] Large-scale Monster Subjugation"
+    TimeLimit: 7d 4h
+  - Id: 18220
+    Title: To the Ice Castle
+  - Id: 18221
+    Title: Finding Lehrar...!
+  - Id: 18222
+    Title: Investigation, Investigation, Investigation
+  - Id: 18223
+    Title: Lehrar's Mark 1
+  - Id: 18224
+    Title: Lehrar's Mark 2
+  - Id: 18225
+    Title: Lehrar's Mark 3
+  - Id: 18226
+    Title: It's Just a Hoax. The Next Location.
+  - Id: 18227
+    Title: Investigating the Sacred Roots
+  - Id: 18228
+    Title: Nyar's Call
+  - Id: 18229
+    Title: Step on the Cats' Backs and Run!
+  - Id: 18230
+    Title: Was Everyone Here?
+  - Id: 18231
+    Title: So, What Happened?
+  - Id: 18232
+    Title: Separated Sanctuary
+  - Id: 18233
+    Title: The Undying One
+  - Id: 23100
+    Title: Ancient Deep Sea
+  - Id: 23101
+    Title: No Matter How Deep, I Can Find It 1
+    Targets:
+      - Mob: EP20_ICEEGG
+        Count: 5
+  - Id: 23102
+    Title: No Matter How Deep, I Can Find It 2
+  - Id: 23103
+    Title: Hidden in the Ice
+  - Id: 23104
+    Title: Hidden in the Ice
+  - Id: 23105
+    Title: Hidden in the Ice
+  - Id: 23106
+    Title: A Nest of Small Branches
+  - Id: 23107
+    Title: A Nest of Small Branches
+  - Id: 23108
+    Title: Across the Iceberg and the Frozen Sea
+  - Id: 23109
+    Title: Across the Iceberg and the Frozen Sea
     Targets:
       - Mob: EP20_JORGAN_WARLOCK
         Count: 5
-  - Id: 17726
-    Title: The Undying One
-  - Id: 17727
-    Title: The Undying One
-  - Id: 17728
-    Title: The Undying One
+  - Id: 23110
+    Title: "[Standby] Pulling Out Yormungand's Roots"
+    TimeLimit: 4h
+  - Id: 23111
+    Title: Pulling Out Yormungand's Roots
+    Targets:
+      - Mob: EP20_JORGAN_WARLOCK
+        Count: 15
+  - Id: 23112
+    Title: The Serpent's Maze
+  - Id: 23113
+    Title: Gathering Rumors Among Yormungands 1
+  - Id: 23114
+    Title: Gathering Rumors Among Yormungands 2
+  - Id: 23115
+    Title: Gathering Rumors Among Yormungands 3
+  - Id: 23116
+    Title: The Cat at the End of the Maze
+  - Id: 23117
+    Title: The Cat at the End of the Maze
+  - Id: 23118
+    Title: The Cat at the End of the Maze
   - Id: 20000
     Title: Natives of the Ancient Ice Gorge
   - Id: 20001

@@ -1,0 +1,42 @@
+//===== rAthena Script =======================================
+//= Level 275 hunting grounds (kRO BL275)
+//===== Description: =========================================
+//= moc_akhet, nif_fild03, cmd_bhole — Divine Pride spawn data
+//============================================================
+
+// moc_akhet - Ancient Temple Akhet
+moc_akhet	monster	--ja--	22395,120
+moc_akhet	monster	--ja--	22396,23
+moc_akhet	monster	--ja--	22401,75
+moc_akhet	monster	--ja--	22402,14
+moc_akhet	monster	--ja--	22397,120
+moc_akhet	monster	--ja--	22398,23
+moc_akhet	monster	--ja--	22399,105
+moc_akhet	monster	--ja--	22400,20
+moc_akhet	boss_monster	--ja--	22404,1,21600000,600000,0
+
+// nif_fild03 - Niflheim Pumpkin Farm
+nif_fild03	monster	--ja--	22383,60
+nif_fild03	monster	--ja--	22384,10
+nif_fild03	monster	--ja--	22385,105
+nif_fild03	monster	--ja--	22386,17
+nif_fild03	monster	--ja--	22387,75
+nif_fild03	monster	--ja--	22388,14
+nif_fild03	monster	--ja--	22389,105
+nif_fild03	monster	--ja--	22390,17
+nif_fild03	monster	--ja--	22391,105
+nif_fild03	monster	--ja--	22392,17
+nif_fild03	boss_monster	--ja--	22394,1,21600000,600000,0
+
+// cmd_bhole - Unknown Blue Hole
+cmd_bhole	monster	--ja--	22435,90
+cmd_bhole	monster	--ja--	22440,15
+cmd_bhole	monster	--ja--	22436,60
+cmd_bhole	monster	--ja--	22441,10
+cmd_bhole	monster	--ja--	22431,100
+cmd_bhole	monster	--ja--	22433,17
+cmd_bhole	monster	--ja--	22437,100
+cmd_bhole	monster	--ja--	22442,16
+cmd_bhole	monster	--ja--	22434,100
+cmd_bhole	monster	--ja--	22439,17
+cmd_bhole	monster	--ja--	22438,1,3600000,600000,0

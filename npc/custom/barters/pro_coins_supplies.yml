@@ -1,0 +1,151 @@
+# PRO-Asia Coin shop additions and bonus-consumable price adjustments (+20%).
+# Merges into barter_pro_coins (npc/re/merchants/barters/points_barter.yml).
+
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: barter_pro_coins
+    Items:
+      # +20% on bonus / boost consumables
+      - Index: 8
+        Item: HE_Bubble_Gum
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 9
+        Item: Bubble_Gum_Green
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 10
+        Item: Bubble_Gum_Yellow
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 11
+        Item: Bubble_Gum_Orange
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 12
+        Item: Bubble_Gum_Red
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 13
+        Item: HE_Battle_Manual
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 18
+        Item: Comp_Power_Booster
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 10
+      - Index: 19
+        Item: E_Red_Booster
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 18
+      - Index: 20
+        Item: Comp_Almighty
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 10
+      - Index: 21
+        Item: E_Infinity_Drink
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 18
+      - Index: 26
+        Item: Convex_Mirror
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 10
+      # Snacks and similar consumables
+      - Index: 32
+        Item: Guyak_Pudding
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 33
+        Item: Guyak_Candy
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 2
+      - Index: 34
+        Item: Baked_Mushroom
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 2
+      - Index: 35
+        Item: Grilled_Corn
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 36
+        Item: Grilled_Sausage
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 2
+      - Index: 37
+        Item: Abrasive
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 4
+      - Index: 38
+        Item: Regeneration_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 4
+      - Index: 39
+        Item: Almighty
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 12
+      - Index: 40
+        Item: Limit_Power_Booster
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 10
+      - Index: 41
+        Item: Insurance
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 2
+      # Refinement materials
+      - Index: 42
+        Item: HD_Bradium
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 4
+      - Index: 43
+        Item: HD_Carnium
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 4

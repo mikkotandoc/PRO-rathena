@@ -1,0 +1,16 @@
+# Merge these lines into proasia_Custom.grf -> data/num2cardillustnametable.txt
+# Do NOT place a partial table in data/ (it overrides the full GRF table).
+#
+# num2cardillustnametable.txt
+1230022#1230022#
+1230023#1230023#
+1230024#1230024#
+1230025#1230025#
+1230026#1230026#
+#
+# cardprefixnametable.txt
+1230022#Princess Tiara#
+1230023#Beryl Dragon#
+1230024#Ignis Fatuus#
+1230025#Leviathan Dragon#
+1230026#The Void Reaver#

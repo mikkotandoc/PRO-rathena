@@ -241,7 +241,7 @@ prontera,157,187,3	script	Kafra Employee::kaf_prontera	112,{
 	mes "always here to support";
 	mes "you. So how can I be";
 	mes "of service today?";
-	callfunc "F_Kafra",5,0,0,40,800;
+	callfunc "F_Kafra",5,11,0,40,800;
 	savepoint "prontera",156,184,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Prontera";
 }
@@ -256,7 +256,7 @@ prontera,152,326,3	script	Kafra Employee::kaf_prontera6	112,{
 	mes "always here to support";
 	mes "you. So how can I be";
 	mes "of service today?";
-	callfunc "F_Kafra",5,0,0,40,800;
+	callfunc "F_Kafra",5,11,0,40,800;
 	savepoint "prontera",157,327,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Prontera";
 }
@@ -269,7 +269,7 @@ prontera,151,29,0	script	Kafra Employee::kaf_prontera2	115,{
 	mes "The Kafra Services";
 	mes "are always on your side.";
 	mes "So how can I help you?";
-	callfunc "F_Kafra",5,0,0,40,800;
+	callfunc "F_Kafra",5,11,0,40,800;
 	savepoint "prontera",150,33,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Prontera";
 }
@@ -282,7 +282,7 @@ prontera,29,207,6	script	Kafra Employee::kaf_prontera3	113,{
 	mes "is always working to provide";
 	mes "you with convenient services.";
 	mes "How may I be of assistance?";
-	callfunc "F_Kafra",5,0,0,40,800;
+	callfunc "F_Kafra",5,11,0,40,800;
 	savepoint "prontera",33,208,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Prontera";
 }
@@ -297,7 +297,7 @@ prontera,282,200,2	script	Kafra Employee::kaf_prontera4	114,{
 	mes "adventurers of Rune-Midgarts";
 	mes "with its excellent service. So";
 	mes "what can I do for you today?";
-	callfunc "F_Kafra",5,0,0,40,800;
+	callfunc "F_Kafra",5,11,0,40,800;
 	savepoint "prontera",281,203,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Prontera";
 }
@@ -311,7 +311,7 @@ prontera,146,89,6	script	Kafra Employee::kaf_prontera5	117,{
 	mes "The Kafra services";
 	mes "are always on your side.";
 	mes "How may I assist you?";
-	callfunc "F_Kafra",5,0,0,40,800;
+	callfunc "F_Kafra",5,11,0,40,800;
 	savepoint "prontera",116,73,1,1;
 	callfunc "F_KafEnd",0,1,"in the city of Prontera";
 }

@@ -4,6 +4,7 @@
 //= Ancient Ice Gorge fields and Safe Place travel routes.
 //===== Changelogs: ==========================================
 //= 1.0 Initial release.
+//= 1.1 Complete field and safety-zone connections.
 //============================================================
 
 // Frozen Scale Glacier -> Frozen Scale Beach
@@ -14,6 +15,10 @@ jor_back4,101,260,0	warp2	#to_jor_back3_from4	2,2,jor_back3,63,325
 jor_back4,350,70,0	warp2	#to_jor_back5_from4	2,2,jor_back5,350,70
 jor_back5,350,70,0	warp2	#to_jor_back4_from5	2,2,jor_back4,350,75
 
+// Ancient Ice Canyon East <-> West
+jor_back5,380,200,0	warp2	#to_jor_back6_from5	2,2,jor_back6,20,200
+jor_back6,15,200,0	warp2	#to_jor_back5_from6	2,2,jor_back5,375,200
+
 // Ancient Ice Canyon East <-> Safe Place (north route)
 jor_back5,350,380,0	warp2	#to_jor_safty1_A	2,2,jor_safty1,64,325
 jor_safty1,64,320,0	warp2	#to_jor_back5_B	2,2,jor_back5,350,375
@@ -21,3 +26,11 @@ jor_safty1,64,320,0	warp2	#to_jor_back5_B	2,2,jor_back5,350,375
 // Safe Place north route <-> south camps
 jor_safty1,195,330,0	warp2	#to_jor_safty1_south_A	2,2,jor_safty1,195,158
 jor_safty1,195,158,0	warp2	#to_jor_safty1_north_A	2,2,jor_safty1,195,325
+
+// Safe Place zone 3 <-> gorge field (snake nest route)
+jor_safty1,330,320,0	warp2	#to_jor_back5_C	2,2,jor_back5,353,360
+jor_back5,353,365,0	warp2	#to_jor_safty1_C	2,2,jor_safty1,330,327
+
+// Safe Place deep camp <-> Drift Ice Zone field
+jor_safty1,328,145,0	warp2	#to_jor_twice_A	2,2,jor_twice,161,240
+jor_twice,161,235,0	warp2	#to_jor_safty1_D	2,2,jor_safty1,328,150

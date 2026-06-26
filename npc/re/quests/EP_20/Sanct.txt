@@ -1,0 +1,102 @@
+//===== rAthena Script =======================================
+//= Episode 20 - Sacred Roots bishop trust chain (17697-17701)
+//============================================================
+
+function	script	F_ep20_sanctCheck	{
+	callfunc("F_ep20_checkTransform", getarg(0));
+	return;
+}
+
+jor_sanct,162,86,3	script	Bishop Gomiagand#ep20	4_EP19_RGAN_R3,{
+	callfunc("F_ep20_sanctCheck","Bishop");
+	if (ep20_main != 19 || isbegin_quest(17697) != 1) end;
+	mes "[Bishop]";
+	mes "Assist the faithful. Prove you belong here.";
+	callfunc("F_ep20_completequest", 17697);
+	callfunc("F_ep20_setquest", 17698);
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 19 && isbegin_quest(17697) == 1" );
+	end;
+}
+
+jor_root2,26,271,3	script	Snakeberry Bush#ep20	4_ROPEPILE,{
+	if (ep20_main != 19 || isbegin_quest(17698) != 1) end;
+	if (countitem(1001154) < 3) {
+		mes "You gather snakeberries from the roots.";
+		getitem 1001154, 3;
+	}
+	mes "You collected ^0000CD3 Snakeberries^000000.";
+	callfunc("F_ep20_completequest", 17698);
+	callfunc("F_ep20_setquest", 17699);
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 19 && isbegin_quest(17698) == 1" );
+	end;
+}
+
+jor_sanct,185,128,3	script	Bishop Halseybygand#ep20	4_EP19_RGAN_R3,{
+	callfunc("F_ep20_sanctCheck","Bishop");
+	if (ep20_main != 19 || isbegin_quest(17699) != 1) end;
+	mes "[Bishop]";
+	mes "The magic absorption device... Lasgand grows bolder.";
+	callfunc("F_ep20_completequest", 17699);
+	callfunc("F_ep20_setquest", 17700);
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 19 && isbegin_quest(17699) == 1" );
+	end;
+}
+
+jor_sanct,42,105,3	script	Bishop Eryligand#ep20	4_EP19_RGAN_R3,{
+	callfunc("F_ep20_sanctCheck","Bishop");
+	if (ep20_main != 19 || isbegin_quest(17700) != 1) end;
+	mes "[Bishop]";
+	mes "The Awin transformation device was built here in secret.";
+	callfunc("F_ep20_completequest", 17700);
+	callfunc("F_ep20_setquest", 17701);
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 19 && isbegin_quest(17700) == 1" );
+	end;
+}
+
+jor_sanct,257,115,3	script	Pamoshgand#ep20	4_EP19_RGAN_SR1,{
+	callfunc("F_ep20_sanctCheck","Pamoshgand");
+	if (ep20_main != 19 || isbegin_quest(17701) != 1) end;
+	mes "[Pamoshgand]";
+	mes "You may be useful after all. Report to Serekgand near the maze door.";
+	callfunc("F_ep20_completequest", 17701);
+	close;
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 19 && isbegin_quest(17701) == 1" );
+	end;
+}
+
+jor_maze,52,238,3	script	Yormungand Rumor#ep20a	4_EP19_RGAN_SR2,{
+	if (ep20_main < 27 || isbegin_quest(23112) != 1) end;
+	if (isbegin_quest(23113) == 0)
+		callfunc("F_ep20_setquest", 23113);
+	mes "Yormungand followers whisper about Lasgand's plans...";
+	if (isbegin_quest(23114) == 0 && isbegin_quest(23113) == 2) {
+		callfunc("F_ep20_completequest", 23113);
+		callfunc("F_ep20_setquest", 23114);
+	}
+	close;
+}
+
+jor_maze,154,244,3	script	Yormungand Rumor#ep20b	4_EP19_RGAN_SR2,{
+	if (ep20_main < 27 || isbegin_quest(23114) != 1) end;
+	mes "More rumors echo through the maze corridors...";
+	callfunc("F_ep20_completequest", 23114);
+	callfunc("F_ep20_setquest", 23115);
+	close;
+}
+
+jor_maze,281,191,3	script	Yormungand Rumor#ep20c	4_EP19_RGAN_SR2,{
+	if (ep20_main < 27 || isbegin_quest(23115) != 1) end;
+	mes "You overhear talk of the white cat at the maze's end.";
+	callfunc("F_ep20_completequest", 23115);
+	callfunc("F_ep20_setquest", 23116);
+	close;
+}

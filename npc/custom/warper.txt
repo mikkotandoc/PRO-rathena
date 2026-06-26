@@ -333,7 +333,7 @@ menu	"Abandoned Lab Amicitia",D1, "Abyss Lakes",D2, "Amatsu Dungeon",D3,
 		"Rudus Dungeon",D43, "Scaraba Hole",D44, "Sphinx",D45,
 		"Sunken Ship",D46, "Thanatos Tower",D47, "Thor Volcano",D48,
 		"Toy Factory",D49, "Turtle Dungeon",D50, "Umbala Dungeon",D51,
-		"Varmundt's Dungeon",D52, "Verus Area",D53;
+		"Varmundt's Dungeon",D52, "Verus Area",D53, "BL250 Zones",D54;
 
 D1: Restrict("RE");
 	setarray @c[2],253,244,145,278;
@@ -492,8 +492,11 @@ D52: Restrict("RE");
 	 Disp("Sewage Treatment Plant:1st Power Plant:2nd Power Plant:Large Bath Meditathio:Lost Farm Valley:Library Memory Corridor:Upper Floor of Tartaros Storage:Lower Floor of Tartaros Storage:Death Rune:Fire Rune:Grass Rune:Ice Rune:Soul Rune:Venom Rune:Temple Rune:Biosphere Lobby:Depth 1:Depth 2 Hub:Depth 2 Abyss");
 	 Pick("","ba_pw02","ba_pw01","ba_pw03","ba_bath","ba_lost","ba_lib","ba_2whs01","ba_2whs02","bl_death","bl_lava","bl_grass","bl_ice","bl_soul","bl_venom","bl_temple","ba_in01","bl_depth1","ba_chess","bl_depth2");
 D53: Restrict("RE");
-	 setarray @c[2],244,61,72,20,122,22;
-	 Disp("Lab-OPTATIO:R&D-WISH:Verus Center Square"); Pick("verus");
+	setarray @c[2],244,61,72,20,122,22;
+	Disp("Lab-OPTATIO:R&D-WISH:Verus Center Square"); Pick("verus");
+D54: Restrict("RE");
+	setarray @c[2],50,50,200,200;
+	Disp("Mjolnir Underground Caverns:Power Twisted Plains"); Pick("","mjo_wst01","ra_pol01");
 
 // --------------------------------------------------
 	Castles:
@@ -1028,6 +1031,10 @@ OnNaviGenerate:
 	if (!.OnlyFirstDun) {
 		naviregisterwarp("Warper > Coal Mines 2", "mjo_dun02", 381, 343);
 		naviregisterwarp("Warper > Coal Mines 3", "mjo_dun03", 302, 262);
+	}
+	if (checkre(0)) {
+		naviregisterwarp("Warper > Mjolnir Underground Caverns", "mjo_wst01", 50, 50);
+		naviregisterwarp("Warper > Power Twisted Plains", "ra_pol01", 200, 200);
 	}
 	naviregisterwarp("Warper > Culvert 1", "prt_sewb1", 131, 247);
 	if (!.OnlyFirstDun) {

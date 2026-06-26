@@ -1,0 +1,44 @@
+//===== rAthena Script =======================================
+//= Warps - Episode 20 dungeon maps
+//===== Description: =========================================
+//= Snake nest, roots, labyrinth, sanctuary, and drift ice.
+//===== Changelogs: ==========================================
+//= 1.0 Initial release.
+//============================================================
+
+// Snake's Nest <-> Snake God's Root 1F
+jor_nest,37,270,0	warp2	#to_jor_root1_from_nest	2,2,jor_root1,32,15
+jor_root1,32,8,0	warp2	#to_jor_nest_from_root1	2,2,jor_nest,40,265
+
+// Snake God's Root 1F <-> 2F
+jor_root1,200,297,0	warp2	#to_jor_root2_from1	2,2,jor_root2,200,12
+jor_root2,200,8,0	warp2	#to_jor_root1_from2	2,2,jor_root1,200,290
+
+// Snake God's Root 2F <-> Deep Root Cave
+jor_root2,200,297,0	warp2	#to_jor_root3_from2	2,2,jor_root3,50,12
+jor_root3,50,8,0	warp2	#to_jor_root2_from3	2,2,jor_root2,200,290
+
+// Snake God's Root 2F <-> Safe Place 2 (upper route)
+jor_root2,239,243,0	warp2	#to_jor_safty2_from_root2	2,2,jor_safty2,77,362
+jor_safty2,77,357,0	warp2	#to_jor_root2_from_safty2	2,2,jor_root2,239,238
+
+// Snake Labyrinth <-> Sanctuary / Drift Ice / Twig's Nest
+jor_maze,150,12,0	warp2	#to_jor_sanct_from_maze	2,2,jor_sanct,150,290
+jor_sanct,150,297,0	warp2	#to_jor_maze_from_sanct	2,2,jor_maze,150,18
+
+jor_maze,297,150,0	warp2	#to_jor_twice_from_maze	2,2,jor_twice,18,150
+jor_twice,12,150,0	warp2	#to_jor_maze_from_twice	2,2,jor_maze,290,150
+
+jor_maze,150,297,0	warp2	#to_jor_twig_from_maze	2,2,jor_twig,150,18
+jor_twig,150,12,0	warp2	#to_jor_maze_from_twig	2,2,jor_maze,150,290
+
+// Snake Labyrinth <-> Safe Place 2 (side passages)
+jor_maze,15,47,0	warp2	#to_jor_safty2_maze_A	2,2,jor_safty2,190,38
+jor_safty2,190,32,0	warp2	#to_jor_maze_safty2_A	2,2,jor_maze,15,52
+
+jor_maze,17,153,0	warp2	#to_jor_safty2_maze_B	2,2,jor_safty2,310,43
+jor_safty2,310,38,0	warp2	#to_jor_maze_safty2_B	2,2,jor_maze,17,158
+
+// Safe Place 2 <-> gorge field
+jor_safty2,300,148,0	warp2	#to_jor_back1_from_safty2	2,2,jor_back1,364,222
+jor_back1,364,218,0	warp2	#to_jor_safty2_from_back1	2,2,jor_safty2,300,143

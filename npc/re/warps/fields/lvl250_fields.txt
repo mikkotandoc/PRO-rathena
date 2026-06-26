@@ -1,0 +1,85 @@
+//===== rAthena Script =======================================
+//= Warps - Mjolnir Underground Caverns & Power Twisted Plains
+//===== Description: =========================================
+//= Field entry NPCs (BL 250+) and map exit portals.
+//============================================================
+
+function	script	F_Lvl250_UnlockMjo	{
+	#mjo_wst_unlock = 1;
+	return;
+}
+
+function	script	F_Lvl250_UnlockPol	{
+	#ra_pol_unlock = 1;
+	return;
+}
+
+//============================================================
+// Einbroch Field -> Mjolnir Underground Caverns
+//============================================================
+ein_fild08,192,49,3	script	Mjolnir Cavern Guide#mjo_wst	4_M_EINOLD,{
+	if (BaseLevel < 250) {
+		mes "[Mjolnir Cavern Guide]";
+		mes "The underground caverns beneath Mjolnir are too dangerous for anyone below base level 250.";
+		close;
+	}
+	mes "[Mjolnir Cavern Guide]";
+	mes "Beneath Mount Mjolnir lies a network of caverns filled with mutated creatures.";
+	mes "Would you like to enter, or take on a weekly extermination duty?";
+	next;
+	switch (select("Enter the caverns", "Weekly extermination hunt", "Cancel")) {
+	case 1:
+		callfunc "F_Lvl250_UnlockMjo";
+		warp "mjo_wst01", 50, 50;
+		end;
+	case 2:
+		callfunc "F_Lvl250_HuntWeekly", 18216, 18217, "Mjolnir Underground Caverns", 5000, "Mocadas_Gold", 3, 12180000000, 10210000000, "[Mjolnir Cavern Guide]";
+		end;
+	case 3:
+		mes "[Mjolnir Cavern Guide]";
+		mes "Come back when you are ready.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Underground Caverns>";
+	end;
+}
+
+mjo_wst01,50,8,0	warp2	#mjo_wst_exit	2,2,ein_fild08,192,45
+
+//============================================================
+// Rachel Field -> Power Twisted Plains
+//============================================================
+ra_fild10,352,341,3	script	Priest Pano#ra_pol	4_M_RACHMAN1,{
+	if (BaseLevel < 250) {
+		mes "[Priest Pano]";
+		mes "The twisted plains ahead are only open to adventurers with base level 250 or higher.";
+		close;
+	}
+	mes "[Priest Pano]";
+	mes "The ^0000cdPower Twisted Plains^000000 lie beyond this path.";
+	mes "Purification duties are also available for those willing to hunt there.";
+	next;
+	switch (select("Enter Power Twisted Plains", "Daily purification hunt", "Cancel")) {
+	case 1:
+		callfunc "F_Lvl250_UnlockPol";
+		warp "ra_pol01", 200, 200;
+		end;
+	case 2:
+		callfunc "F_RaPol_DailyMenu";
+		end;
+	case 3:
+		mes "[Priest Pano]";
+		mes "May the light guide you.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Power Twisted Plains>";
+	end;
+}
+
+ra_pol01,200,8,0	warp2	#ra_pol_exit	2,2,ra_fild10,352,336

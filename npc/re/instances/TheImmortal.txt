@@ -6,8 +6,8 @@
 //============================================================
 
 function	script	F_ep20_immortal_clear	{
-	if (ep20_main == 29 && isbegin_quest(17728) == 1) {
-		callfunc("F_ep20_completequest", 17728);
+	if (ep20_main == 29 && isbegin_quest(18232) == 1) {
+		callfunc("F_ep20_completequest", 18232);
 		ep20_main = 30;
 		callfunc("F_ep20_reward", 30, 100);
 	}
@@ -19,11 +19,7 @@ jor_twig,1,1,0	script(CLOAKED)	The Immortal#ep20	HIDDEN_WARP_NPC,{
 
 OnStart:
 	if (ep20_main < 29) end;
-	if (instance_create("The Immortal") < 0) {
-		mes "Party leader must create the instance.";
-		close;
-	}
-	warp "1@twig",150,150;
+	callfunc("F_ep20_instance_enter", "The Immortal");
 	end;
 }
 

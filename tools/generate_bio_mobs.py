@@ -179,7 +179,7 @@ def render_depth2(m: dict) -> str:
         f"    AttackDelay: {delay}",
         f"    AttackMotion: {motion}",
         "    DamageMotion: 432",
-        "    DamageTaken: 20",
+        "    DamageTaken: 10",
         "    Ai: 21",
         "    Class: Boss",
         "    Drops:",

@@ -1,0 +1,53 @@
+//===== rAthena Script =======================================
+//= Episode 21 - Rising Land & Jormungandr Temple spawns
+//===== Description: =========================================
+//= Spawn counts from Divine Pride / kRO official data.
+//============================================================
+
+// jor_raise1 - North of the Rising Land
+jor_raise1	monster	--ja--	22315,70
+jor_raise1	monster	--ja--	22313,70
+jor_raise1	monster	--ja--	22316,70
+jor_raise1	monster	--ja--	22314,70
+jor_raise1	monster	--ja--	22317,70
+jor_raise1	monster	--ja--	22323,30
+jor_raise1	monster	--ja--	22325,30
+jor_raise1	monster	--ja--	22327,30
+
+// jor_raise2 - South of the Rising Land
+jor_raise2	monster	--ja--	22313,100
+jor_raise2	monster	--ja--	22319,130
+jor_raise2	monster	--ja--	22320,100
+jor_raise2	monster	--ja--	22318,130
+jor_raise2	boss_monster	--ja--	22362,1,21600000,600000,0
+
+// jor_tmple1 - Gimle 1st Floor
+jor_tmple1	monster	--ja--	22323,70
+jor_tmple1	monster	--ja--	22324,70
+jor_tmple1	monster	--ja--	22325,70
+jor_tmple1	monster	--ja--	22353,75
+jor_tmple1	monster	--ja--	22326,70
+jor_tmple1	monster	--ja--	22327,70
+jor_tmple1	monster	--ja--	22354,75
+jor_tmple1	monster	--ja--	22355,20
+jor_tmple1	monster	--ja--	22356,20
+jor_tmple1	monster	--ja--	22357,20
+jor_tmple1	boss_monster	--ja--	22360,1,21600000,600000,0
+
+// jor_tmple2 - Gimle 2nd Floor
+jor_tmple2	monster	--ja--	22355,90
+jor_tmple2	monster	--ja--	22356,90
+jor_tmple2	monster	--ja--	22357,90
+jor_tmple2	monster	--ja--	22358,80
+jor_tmple2	monster	--ja--	22359,80
+jor_tmple2	monster	--ja--	22360,70
+jor_tmple2	monster	--ja--	22361,70
+jor_tmple2	boss_monster	--ja--	22363,1,21600000,600000,0
+
+// jor_sklf1 - Jorscalf 1st Floor (awakened variants)
+jor_sklf1	monster	--ja--	22417,100
+jor_sklf1	monster	--ja--	22418,100
+jor_sklf1	monster	--ja--	22414,100
+jor_sklf1	monster	--ja--	22415,100
+jor_sklf1	monster	--ja--	22416,100
+jor_sklf1	boss_monster	--ja--	22412,1,21600000,600000,0

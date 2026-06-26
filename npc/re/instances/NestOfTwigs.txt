@@ -6,10 +6,10 @@
 //============================================================
 
 function	script	F_ep20_twig_clear	{
-	if (ep20_main == 25 && isbegin_quest(17724) == 1) {
-		callfunc("F_ep20_completequest", 17724);
+	if (ep20_main == 25 && isbegin_quest(23106) == 1) {
+		callfunc("F_ep20_completequest", 23106);
 		ep20_main = 26;
-		callfunc("F_ep20_setquest", 17725);
+		callfunc("F_ep20_setquest", 23109);
 		callfunc("F_ep20_reward", 10, 70);
 	}
 	return;
@@ -20,11 +20,7 @@ jor_twice,1,1,0	script(CLOAKED)	Nest of Twigs#ep20	HIDDEN_WARP_NPC,{
 
 OnStart:
 	if (ep20_main < 25) end;
-	if (instance_create("Nest of Twigs") < 0) {
-		mes "Party leader must create the instance.";
-		close;
-	}
-	warp "1@twig",100,100;
+	callfunc("F_ep20_instance_enter", "Nest of Twigs");
 	end;
 }
 

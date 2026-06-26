@@ -8,6 +8,7 @@
 #include <cstring>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include <common/cli.hpp>
 #include <common/core.hpp>
@@ -174,18 +175,32 @@ TIMER_FUNC(login_waiting_disconnect_timer){
 }
 
 void login_online_db_setoffline( int32 char_server ){
-	for( std::pair<uint32,struct online_login_data> pair : online_db ){
-		if( char_server == -1 ){
+	if( char_server == -1 ){
+		for( auto& pair : online_db ){
 			pair.second.char_server = -1;
 
 			if( pair.second.waiting_disconnect != INVALID_TIMER ){
 				delete_timer( pair.second.waiting_disconnect, login_waiting_disconnect_timer );
 				pair.second.waiting_disconnect = INVALID_TIMER;
 			}
-		}else if( pair.second.char_server == char_server ){
-			// Char server disconnected.
-			pair.second.char_server = -2;
 		}
+		return;
+	}
+
+	std::vector<uint32> accounts;
+
+	for( const auto& pair : online_db ){
+		if( pair.second.char_server == char_server ){
+			accounts.push_back( pair.first );
+		}
+	}
+
+	for( uint32 account_id : accounts ){
+		login_remove_online_user( account_id );
+	}
+
+	if( !accounts.empty() ){
+		ShowStatus( "Set %zu accounts offline (char-server #%d disconnected).\n", accounts.size(), char_server );
 	}
 }
 
@@ -199,11 +214,17 @@ void login_online_db_setoffline( int32 char_server ){
  * @return : 0
  */
 static TIMER_FUNC(login_online_data_cleanup){
-	for( std::pair<uint32,struct online_login_data> pair : online_db  ){
+	std::vector<uint32> accounts;
+
+	for( const auto& pair : online_db ){
 		// Unknown server.. set them offline
 		if( pair.second.char_server == -2 ){
-			login_remove_online_user( pair.first );
+			accounts.push_back( pair.first );
 		}
+	}
+
+	for( uint32 account_id : accounts ){
+		login_remove_online_user( account_id );
 	}
 
 	return 0;

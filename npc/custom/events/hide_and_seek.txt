@@ -1,0 +1,1111 @@
+//===== rAthena Script =======================================
+
+//= Hide and Seek Event
+
+//===== Description: =========================================
+
+//= Server-wide hide and seek. A hider NPC relocates to a random
+
+//= town and random walkable tile; the first player to find and
+
+//= click it wins a reward. Runs multiple rounds per session.
+
+//= Starts automatically via OnClock or manually by a GM.
+
+//============================================================
+
+
+
+// Controller NPC - remains in limbo (hidden, off the playfield).
+
+// Active rounds spawn a runtime duplicate at the chosen hide spot.
+
+sec_in02,0,0,0	script	HideSeek_Hider	CLEAR_NPC,{
+
+
+
+	// ----------------------------------------------------------
+
+	// Player interaction (runs on the active duplicate only)
+
+	// ----------------------------------------------------------
+
+	if (strnpcinfo(4) == "sec_in02") end;
+
+
+
+	set .@ctrl$, "HideSeek_Hider";
+
+
+
+	if (!getvariableofnpc(.Active, .@ctrl$)) end;
+
+	if (getvariableofnpc(.Winner, .@ctrl$)) {
+
+		mes "[Mysterious Hider]";
+
+		mes "Too slow! Someone already found me.";
+
+		close;
+
+		end;
+
+	}
+
+
+
+	if (!getvariableofnpc(.RewardSlot, .@ctrl$)) {
+
+		mes "[Mysterious Hider]";
+
+		mes "This round is not ready yet. Please wait for the next announcement.";
+
+		close;
+
+		end;
+
+	}
+
+	if (!callsub(S_CheckRewardWeight)) {
+
+		mes "[Mysterious Hider]";
+
+		mes "Your inventory is too full to carry the reward.";
+
+		mes "Make some room and try again quickly!";
+
+		close;
+
+		end;
+
+	}
+
+
+
+	set .@aid, getcharid(3);
+
+	set getvariableofnpc(.PendingAid, .@ctrl$), .@aid;
+
+	donpcevent .@ctrl$+"::OnTryClaim";
+
+
+
+	if (getvariableofnpc(.WinnerAid, .@ctrl$) != .@aid) {
+
+		mes "[Mysterious Hider]";
+
+		mes "Too slow! Someone already found me.";
+
+		close;
+
+		end;
+
+	}
+
+
+
+	callsub S_GiveReward;
+
+
+
+	set .@tier, getvariableofnpc(.RewardTier, .@ctrl$);
+
+	if (.@tier == 3)
+
+		set .@tier$, "Very Rare";
+
+	else if (.@tier == 2)
+
+		set .@tier$, "Rare";
+
+	else
+
+		set .@tier$, "Common";
+
+
+
+	set .@round, getvariableofnpc(.CurrentRound, .@ctrl$);
+
+	set .@max, getvariableofnpc(.RoundMax, .@ctrl$);
+
+	set .@label$, getvariableofnpc(.RewardLabel$, .@ctrl$);
+
+	set .@map$, getvariableofnpc(.CurrentMapLabel$, .@ctrl$);
+
+
+
+	announce strcharinfo(0) + " found the Mysterious Hider in " + .@map$ + " (Round " + .@round + "/" + .@max + ") and won a " + .@tier$ + " prize: " + .@label$ + "!", bc_all | bc_yellow;
+
+
+
+	mes "[Mysterious Hider]";
+
+	if (.@round < .@max)
+
+		mes "You found me! Round ^0055FF" + .@round + "/" + .@max + "^000000 complete.^000000 You won:^009900 " + .@label$ + "^000000";
+
+	else {
+
+		mes "You found me on the final round! You won:^009900 " + .@label$ + "^000000";
+
+		announce "Hide and Seek is over! All " + .@max + " rounds have been completed.", bc_all | bc_blue;
+
+	}
+
+
+
+	close2;
+
+	donpcevent .@ctrl$+"::OnRoundComplete";
+
+	end;
+
+
+
+// ----------------------------------------------------------
+
+// Atomic round claim (controller only - no player dialog)
+
+// ----------------------------------------------------------
+
+OnTryClaim:
+
+	if (!.InSession || !.Active || .Winner) end;
+
+	if (!.PendingAid) end;
+
+	set .Winner, 1;
+
+	set .WinnerAid, .PendingAid;
+
+	stopnpctimer;
+
+	end;
+
+
+
+// ----------------------------------------------------------
+
+// Round cleanup after a winner (controller only)
+
+// ----------------------------------------------------------
+
+OnRoundComplete:
+
+	if (!.InSession) end;
+
+	sleep 300;
+
+	if (.CurrentRound < .RoundMax) {
+
+		callsub S_AdvanceRound;
+
+		end;
+
+	}
+
+	callsub S_EventEnd, 0;
+
+	end;
+
+
+
+// ----------------------------------------------------------
+
+// Automatic schedule (edit times here)
+
+// ----------------------------------------------------------
+
+OnClock1400:
+
+OnClock2000:
+
+	if (!.AutoStart) end;
+
+	callsub S_EventStart;
+
+	end;
+
+
+
+// ----------------------------------------------------------
+
+// Manual trigger (called by HideSeek_Manager)
+
+// ----------------------------------------------------------
+
+OnManualStart:
+
+	callsub S_EventStart;
+
+	end;
+
+
+
+// ----------------------------------------------------------
+
+// GM force-end
+
+// ----------------------------------------------------------
+
+OnForceEnd:
+
+	if (!.InSession) end;
+
+	announce "The Hide and Seek event has been ended by a GM.", bc_all, 0xFF0000;
+
+	callsub S_EventEnd, 0;
+
+	end;
+
+
+
+// ----------------------------------------------------------
+
+// Per-round timeout (fixed 5 minutes)
+
+// ----------------------------------------------------------
+
+OnTimer300000:
+
+	if (!.InSession || !.Active) end;
+
+	callsub S_OnRoundTimeout;
+
+	end;
+
+
+
+// ----------------------------------------------------------
+
+// Event start (session)
+
+// ----------------------------------------------------------
+
+S_EventStart:
+
+	if (.InSession) return;
+
+
+
+	set .InSession, 1;
+
+	set .CurrentRound, 1;
+
+	set .PendingAid, 0;
+
+
+
+	announce "Hide and Seek has begun! " + .RoundMax + " rounds - find the Mysterious Hider hiding in a random town!", bc_all | bc_blue;
+
+	announce "Each round lasts up to 5 minutes. The first player to find the hider wins that round's prize!", bc_all | bc_blue;
+
+
+
+	callsub S_StartRound;
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Start / restart a single round
+
+// ----------------------------------------------------------
+
+S_StartRound:
+
+	set .Winner, 0;
+
+	set .WinnerAid, 0;
+
+	set .PendingAid, 0;
+
+	set .Active, 0;
+
+	set .LocIdx, -1;
+
+	set .CurrentMap$, "";
+
+	set .CurrentMapLabel$, "";
+
+	set .CurrentX, 0;
+
+	set .CurrentY, 0;
+
+
+
+	callsub S_RollReward;
+
+
+
+	if (.DupName$ != "" && getnpcid(0, .DupName$))
+
+		disablenpc .DupName$;
+
+
+
+	callsub S_SpawnHider;
+
+
+
+	if (!.Active) {
+
+		debugmes "HideSeek_Hider: could not spawn the hider NPC on any town map.";
+
+		callsub S_EventEnd, 0;
+
+		return;
+
+	}
+
+
+
+	announce "Round " + .CurrentRound + "/" + .RoundMax + ": The Mysterious Hider is hiding somewhere in " + .CurrentMapLabel$ + "!", bc_all | bc_blue;
+
+	setnpctimer 0;
+
+	initnpctimer;
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Place the active hider duplicate on a random town tile
+
+// ----------------------------------------------------------
+
+S_SpawnHider:
+
+	set .@spawned, 0;
+
+	set .@maps, getarraysize(.Map$);
+
+
+
+	for (set .@m, 0; .@m < .@maps && !.@spawned; set .@m, .@m + 1) {
+
+		set .LocIdx, rand(.@maps);
+
+		set .CurrentMap$, .Map$[.LocIdx];
+
+		set .CurrentMapLabel$, .MapLabel$[.LocIdx];
+
+
+
+		if (mapname2id(.CurrentMap$) < 0)
+
+			continue;
+
+
+
+		for (set .@try, 0; .@try < .MaxCellTries; set .@try, .@try + 1) {
+
+			getfreecell(.CurrentMap$, .@x, .@y);
+
+			if (!checkcell(.CurrentMap$, .@x, .@y, cell_chkpass))
+
+				continue;
+
+			if (checkcell(.CurrentMap$, .@x, .@y, cell_chknpc))
+
+				continue;
+
+
+
+			set .CurrentX, .@x;
+
+			set .CurrentY, .@y;
+
+			set .DupId, .DupId + 1;
+
+
+
+			// Duplicates inherit the controller disabled state; enable briefly first.
+
+			enablenpc "HideSeek_Hider";
+
+			set .DupName$, duplicate("HideSeek_Hider", .CurrentMap$, .CurrentX, .CurrentY, "HideSeek_Hider#"+.DupId, .Sprite);
+
+			disablenpc "HideSeek_Hider";
+
+
+
+			if (.DupName$ == "" || !getnpcid(0, .DupName$))
+
+				continue;
+
+
+
+			setnpcdisplay .DupName$, "Mysterious Hider", .Sprite;
+
+			enablenpc .DupName$;
+
+			hideoffnpc .DupName$;
+
+			set .Active, 1;
+
+			set .@spawned, 1;
+
+			break;
+
+		}
+
+	}
+
+
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Advance to the next round after a winner
+
+// ----------------------------------------------------------
+
+S_AdvanceRound:
+
+	callsub S_CleanupDuplicate;
+
+	set .CurrentRound, .CurrentRound + 1;
+
+	callsub S_StartRound;
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Round timed out with no winner
+
+// ----------------------------------------------------------
+
+S_OnRoundTimeout:
+
+	if (!.InSession) return;
+
+
+
+	stopnpctimer;
+
+	callsub S_CleanupDuplicate;
+
+
+
+	announce "Round " + .CurrentRound + "/" + .RoundMax + " ended - nobody found the Mysterious Hider in " + .CurrentMapLabel$ + " in time!", bc_all, 0xFF0000;
+
+
+
+	if (.CurrentRound < .RoundMax) {
+
+		set .CurrentRound, .CurrentRound + 1;
+
+		callsub S_StartRound;
+
+		return;
+
+	}
+
+
+
+	announce "Hide and Seek is over. All rounds have finished.", bc_all | bc_blue;
+
+	callsub S_EventEnd, 1;
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Roll this round's tier and reward
+
+// ----------------------------------------------------------
+
+S_RollReward:
+
+	set .RewardSlot, 0;
+
+	set .RewardTier, 0;
+
+	set .RewardLabel$, "";
+
+
+
+	set .@roll, rand(100);
+
+	if (.@roll >= (.TierCommon + .TierRare))
+
+		set .RewardTier, 3; // Very Rare
+
+	else if (.@roll >= .TierCommon)
+
+		set .RewardTier, 2; // Rare
+
+	else
+
+		set .RewardTier, 1; // Common
+
+
+
+	if (.RewardTier == 1)
+
+		set .RewardSlot, rand(6) + 1;
+
+	else if (.RewardTier == 2)
+
+		set .RewardSlot, rand(3) + 11;
+
+	else
+
+		set .RewardSlot, rand(2) + 14;
+
+
+
+	callsub S_BuildRewardLabel;
+
+	return;
+
+
+
+// One item per round - standard item IDs only (common 1-10, rare 11-13, very rare 14-15)
+
+S_CheckRewardWeight:
+
+	switch (.RewardSlot) {
+
+	case 1: if (!checkweight(12883, 3)) return 0; break;
+
+	case 2: if (!checkweight(12208, 3)) return 0; break;
+
+	case 3: if (!checkweight(12210, 3)) return 0; break;
+
+	case 4: if (!checkweight(7621, 3)) return 0; break;
+
+	case 5: if (!checkweight(6230, 1)) return 0; break;
+
+	case 6: if (!checkweight(6234, 1)) return 0; break;
+
+	case 11: if (!checkweight(6241, 5)) return 0; break;
+
+	case 12: if (!checkweight(6240, 5)) return 0; break;
+
+	case 13: if (!checkweight(6635, 3)) return 0; break;
+
+	case 14: if (!checkweight(23919, 1)) return 0; break;
+
+	case 15: if (!checkweight(23914, 1)) return 0; break;
+
+	default: return 0;
+
+	}
+
+	return 1;
+
+
+
+S_GiveReward:
+
+	switch (.RewardSlot) {
+
+	case 1: getitem 12883, 3; break;
+
+	case 2: getitem 12208, 3; break;
+
+	case 3: getitem 12210, 3; break;
+
+	case 4: getitem 7621, 3; break;
+
+	case 5: getitem 6230, 1; break;
+
+	case 6: getitem 6234, 1; break;
+
+	case 11: getitem 6241, 5; break;
+
+	case 12: getitem 6240, 5; break;
+
+	case 13: getitem 6635, 3; break;
+
+	case 14: getitem 23919, 1; break;
+
+	case 15: getitem 23914, 1; break;
+
+	}
+
+	return;
+
+
+
+S_BuildRewardLabel:
+
+	switch (.RewardSlot) {
+
+	case 1: set .RewardLabel$, getitemname(12883) + " x3"; break;
+
+	case 2: set .RewardLabel$, getitemname(12208) + " x3"; break;
+
+	case 3: set .RewardLabel$, getitemname(12210) + " x3"; break;
+
+	case 4: set .RewardLabel$, getitemname(7621) + " x3"; break;
+
+	case 5: set .RewardLabel$, getitemname(6230) + " x1"; break;
+
+	case 6: set .RewardLabel$, getitemname(6234) + " x1"; break;
+
+	case 11: set .RewardLabel$, getitemname(6241) + " x5"; break;
+
+	case 12: set .RewardLabel$, getitemname(6240) + " x5"; break;
+
+	case 13: set .RewardLabel$, getitemname(6635) + " x3"; break;
+
+	case 14: set .RewardLabel$, getitemname(23919) + " x1"; break;
+
+	case 15: set .RewardLabel$, getitemname(23914) + " x1"; break;
+
+	default: set .RewardLabel$, "Mystery Prize"; break;
+
+	}
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Remove the active duplicate only (between rounds)
+
+// ----------------------------------------------------------
+
+S_CleanupDuplicate:
+
+	set .Active, 0;
+
+
+
+	if (.DupName$ != "" && getnpcid(0, .DupName$))
+
+		disablenpc .DupName$;
+
+
+
+	set .Winner, 0;
+
+	set .WinnerAid, 0;
+
+	set .PendingAid, 0;
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Event end (session over)
+
+// ----------------------------------------------------------
+
+S_EventEnd:
+
+	stopnpctimer;
+
+	callsub S_CleanupDuplicate;
+
+
+
+	set .InSession, 0;
+
+	set .CurrentRound, 0;
+
+	set .LocIdx, -1;
+
+	set .CurrentMap$, "";
+
+	set .CurrentMapLabel$, "";
+
+	set .CurrentX, 0;
+
+	set .CurrentY, 0;
+
+	set .RewardSlot, 0;
+
+	set .RewardTier, 0;
+
+	set .RewardLabel$, "";
+
+	return;
+
+
+
+// ----------------------------------------------------------
+
+// Configuration (defaults; GMs can edit via HideSeek_Manager)
+
+// ----------------------------------------------------------
+
+OnInit:
+
+	// Runtime duplicates share this script; only init the sec_in02 controller.
+
+	if (strnpcinfo(4) != "sec_in02") end;
+
+
+
+	set .InSession, 0;
+
+	set .Active, 0;
+
+	set .Winner, 0;
+
+	set .WinnerAid, 0;
+
+	set .DupId, 0;
+
+	set .LocIdx, -1;
+
+	set .DupName$, "";
+
+	set .CurrentMap$, "";
+
+	set .CurrentMapLabel$, "";
+
+	set .PendingAid, 0;
+
+
+
+	set .GMLevel, 60;
+
+	set .RoundMax, 5;
+
+	set .AutoStart, 1;
+
+
+
+	// Reward tier chances (must total 100).
+
+	set .TierCommon, 50;
+
+	set .TierRare, 45;
+
+	set .TierVeryRare, 5;
+
+
+
+	// Reward item IDs are hardcoded in S_GiveReward / S_CheckRewardWeight.
+
+
+
+	set .Sprite, 722;
+
+	set .MaxCellTries, 50;
+
+
+
+	setarray .Map$[0], "prontera", "alberta", "aldebaran", "amatsu", "ayothaya", "brasilis", "comodo", "dewata", "ecl_in01", "einbech", "einbroch", "dicastes01", "geffen", "hugel", "icecastle", "izlude", "jawaii", "yuno", "gonryun", "lasagna", "lighthalzen", "louyang", "xmas", "malangdo", "malaya", "manuk", "mid_camp", "mora", "morocc", "moscovia", "nameless_i", "nameless_n", "niflheim", "payon", "rachel", "harboro1", "sp_cor", "splendide", "thor_camp", "umbala", "ba_maison", "veins", "verus04", "wolfvill", "moc_ruins", "paramk", "rockrdg1", "rockrdg2", "ecl_hub01", "yggdrasil01", "moc_para01", "prt_mk";
+
+	setarray .MapLabel$[0], "Prontera", "Alberta", "Aldebaran", "Amatsu", "Ayothaya", "Brasilis", "Comodo", "Dewata", "Eclage", "Einbech", "Einbroch", "El Dicastes", "Geffen", "Hugel", "Ice Castle", "Izlude", "Jawaii", "Juno", "Kunlun", "Lasagna", "Lighthalzen", "Louyang", "Lutie", "Malangdo", "Malaya", "Manuk", "Midgard Expedition Camp", "Mora", "Morroc", "Moscovia", "Nameless Island", "Nameless Island", "Niflheim", "Payon", "Rachel", "Rock Ridge", "Splendide", "Splendide", "Thor Volcano Camp", "Umbala", "Bifrost Tower", "Veins", "Verus", "Wolf Village", "Morroc Ruins", "Para Market", "Rock Ridge Mountains", "Rock Ridge Mountains", "Eclage Hub", "Yggdrasil Tree", "Para Market", "Prontera Market";
+
+
+
+	disablenpc strnpcinfo(3);
+
+	end;
+
+}
+
+
+
+// ----------------------------------------------------------
+
+// GM / Event Manager NPC (Prontera) — future home for server events
+
+// ----------------------------------------------------------
+
+prontera,147,198,5	script	HideSeek_Manager	4_M_MANAGER,{
+
+	set .@n$, "[Hide & Seek Manager]";
+
+	set .@ctrl$, "HideSeek_Hider";
+
+
+
+	mes .@n$;
+
+	mes "I run the server-wide Hide and Seek event.";
+
+	mes "When it is active, find the ^0055FFMysterious Hider^000000";
+
+	mes "somewhere in the cities and click them to win each round!";
+
+	next;
+
+
+
+	if (getgmlevel() < getvariableofnpc(.GMLevel, .@ctrl$)) {
+
+		mes "Scheduled starts: ^77777714:00 and 20:00 server time^000000.";
+
+		close;
+
+	}
+
+
+
+	switch (select("Start Event:View Status:Configure Settings:Force End:Cancel")) {
+
+	case 1:
+
+		if (getvariableofnpc(.InSession, .@ctrl$)) {
+
+			mes .@n$;
+
+			mes "An event is already in progress.";
+
+			mes "Wait until all rounds finish or force-end it.";
+
+			close;
+
+		}
+
+		donpcevent .@ctrl$+"::OnManualStart";
+
+		mes .@n$;
+
+		mes "Hide and Seek event started.";
+
+		close;
+
+	case 2:
+
+		mes .@n$;
+
+		if (getvariableofnpc(.InSession, .@ctrl$)) {
+
+			mes "Status: ^0055FFACTIVE^000000";
+
+			mes "Round: ^0055FF" + getvariableofnpc(.CurrentRound, .@ctrl$) + "/" + getvariableofnpc(.RoundMax, .@ctrl$) + "^000000";
+
+			if (getvariableofnpc(.Active, .@ctrl$)) {
+
+				mes "Hider: ^009900OUT^000000";
+
+				mes "Location: ^0055FF" + getvariableofnpc(.CurrentMapLabel$, .@ctrl$) + "^000000";
+
+				mes "Coords: ^0055FF" + getvariableofnpc(.CurrentX, .@ctrl$) + ", " + getvariableofnpc(.CurrentY, .@ctrl$) + "^000000";
+
+			} else {
+
+				mes "Hider: ^777777between rounds^000000";
+
+			}
+
+			if (getvariableofnpc(.RewardTier, .@ctrl$) == 3)
+
+				mes "Prize tier: ^FF0000Very Rare^000000";
+
+			else if (getvariableofnpc(.RewardTier, .@ctrl$) == 2)
+
+				mes "Prize tier: ^CC66FFRare^000000";
+
+			else if (getvariableofnpc(.RewardTier, .@ctrl$) == 1)
+
+				mes "Prize tier: ^777777Common^000000";
+
+			mes "Prize: ^009900" + getvariableofnpc(.RewardLabel$, .@ctrl$) + "^000000";
+
+			mes "Round timeout: ^7777775 min^000000";
+
+		} else {
+
+			mes "Status: ^777777INACTIVE^000000";
+
+			mes "Rounds per session: ^0055FF" + getvariableofnpc(.RoundMax, .@ctrl$) + "^000000";
+
+			mes "Auto-start: ^777777" + (getvariableofnpc(.AutoStart, .@ctrl$) ? "ON" : "OFF") + "^000000";
+
+		}
+
+		close;
+
+	case 3:
+
+		mes .@n$;
+
+		mes "Current settings:";
+
+		mes " Rounds: ^0055FF" + getvariableofnpc(.RoundMax, .@ctrl$) + "^000000";
+
+		mes " Round timeout: ^0055FF5 min (fixed)^000000";
+
+		mes " GM level: ^0055FF" + getvariableofnpc(.GMLevel, .@ctrl$) + "^000000";
+
+		mes " Auto-start: ^0055FF" + (getvariableofnpc(.AutoStart, .@ctrl$) ? "ON" : "OFF") + "^000000";
+
+		mes " Common/Rare/V.Rare: ^0055FF" + getvariableofnpc(.TierCommon, .@ctrl$) + "/" + getvariableofnpc(.TierRare, .@ctrl$) + "/" + getvariableofnpc(.TierVeryRare, .@ctrl$) + "%^000000";
+
+		next;
+
+		switch (select("Rounds per session:GM access level:Auto-start schedule:Reward tier %:Back")) {
+
+		case 1:
+
+			mes .@n$;
+
+			mes "Enter total rounds per session (1-20).";
+
+			mes "Current: ^0055FF" + getvariableofnpc(.RoundMax, .@ctrl$) + "^000000";
+
+			next;
+
+			input .@val;
+
+			if (.@val < 1 || .@val > 20) {
+
+				mes "Invalid value. Use 1 to 20.";
+
+				close;
+
+			}
+
+			set getvariableofnpc(.RoundMax, .@ctrl$), .@val;
+
+			mes "Rounds set to ^0055FF" + .@val + "^000000.";
+
+			close;
+
+		case 2:
+
+			mes .@n$;
+
+			mes "Enter minimum GM level to manage this event.";
+
+			mes "Current: ^0055FF" + getvariableofnpc(.GMLevel, .@ctrl$) + "^000000";
+
+			next;
+
+			input .@val;
+
+			if (.@val < 1 || .@val > 99) {
+
+				mes "Invalid value. Use 1 to 99.";
+
+				close;
+
+			}
+
+			set getvariableofnpc(.GMLevel, .@ctrl$), .@val;
+
+			mes "GM level set to ^0055FF" + .@val + "^000000.";
+
+			close;
+
+		case 3:
+
+			set .@cur, getvariableofnpc(.AutoStart, .@ctrl$);
+
+			set getvariableofnpc(.AutoStart, .@ctrl$), !.@cur;
+
+			mes .@n$;
+
+			mes "Auto-start is now ^0055FF" + (getvariableofnpc(.AutoStart, .@ctrl$) ? "ON" : "OFF") + "^000000.";
+
+			close;
+
+		case 4:
+
+			mes .@n$;
+
+			mes "Enter Common tier chance (0-100).";
+
+			mes "Current: ^0055FF" + getvariableofnpc(.TierCommon, .@ctrl$) + "%^000000";
+
+			next;
+
+			input .@common;
+
+			if (.@common < 0 || .@common > 100) {
+
+				mes "Invalid value.";
+
+				close;
+
+			}
+
+			mes "Enter Rare tier chance (0-100).";
+
+			mes "Current: ^0055FF" + getvariableofnpc(.TierRare, .@ctrl$) + "%^000000";
+
+			next;
+
+			input .@rare;
+
+			if (.@rare < 0 || .@rare > 100) {
+
+				mes "Invalid value.";
+
+				close;
+
+			}
+
+			set .@very, 100 - .@common - .@rare;
+
+			if (.@very < 0) {
+
+				mes "Common + Rare cannot exceed 100.";
+
+				close;
+
+			}
+
+			set getvariableofnpc(.TierCommon, .@ctrl$), .@common;
+
+			set getvariableofnpc(.TierRare, .@ctrl$), .@rare;
+
+			set getvariableofnpc(.TierVeryRare, .@ctrl$), .@very;
+
+			mes "Tier chances set to ^0055FF" + .@common + "/" + .@rare + "/" + .@very + "%^000000.";
+
+			close;
+
+		case 5:
+
+			close;
+
+		}
+
+	case 4:
+
+		if (!getvariableofnpc(.InSession, .@ctrl$)) {
+
+			mes .@n$;
+
+			mes "There is no active event to end.";
+
+			close;
+
+		}
+
+		donpcevent .@ctrl$+"::OnForceEnd";
+
+		mes .@n$;
+
+		mes "Event force-ended.";
+
+		close;
+
+	case 5:
+
+		close;
+
+	}
+
+	end;
+
+}
+
+

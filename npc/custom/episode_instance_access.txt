@@ -45,6 +45,8 @@ function	script	F_EpClearApply	{
 	case 20:
 		if (ep20_main < 100)
 			ep20_main = 100;
+		callfunc("F_EpForceComplete", 18233);
+		callfunc("F_EpForceComplete", 20008);
 		break;
 	}
 	callfunc("F_EpUncloakInstances", .@ep, .@part);
@@ -182,6 +184,14 @@ function	script	F_EpUncloakInstances	{
 	}
 	if (.@ep == 19 && ep19_main >= 100)
 		cloakoffnpcself( "Arolong#ep19re2" );
+	if (.@ep == 20 && ep20_main >= 13)
+		cloakoffnpcself( "Canyon Exploration#ep20" );
+	if (.@ep == 20 && ep20_main >= 21)
+		cloakoffnpcself( "Drift Ice Zone#ep20" );
+	if (.@ep == 20 && ep20_main >= 25)
+		cloakoffnpcself( "Nest of Twigs#ep20" );
+	if (.@ep == 20 && ep20_main >= 29)
+		cloakoffnpcself( "The Immortal#ep20" );
 	return;
 }
 
@@ -237,6 +247,14 @@ function	script	F_EpRepairHiddenNpcs	{
 	}
 	if (ep19_main >= 100)
 		.@fixed += callfunc("F_EpRepairTry", "Arolong#ep19re2");
+	if (ep20_main >= 13)
+		.@fixed += callfunc("F_EpRepairTry", "Canyon Exploration#ep20");
+	if (ep20_main >= 21)
+		.@fixed += callfunc("F_EpRepairTry", "Drift Ice Zone#ep20");
+	if (ep20_main >= 25)
+		.@fixed += callfunc("F_EpRepairTry", "Nest of Twigs#ep20");
+	if (ep20_main >= 29)
+		.@fixed += callfunc("F_EpRepairTry", "The Immortal#ep20");
 	return .@fixed;
 }
 
@@ -281,6 +299,14 @@ function	script	F_EpUncloakOnMapLoad	{
 		cloakoffnpcself( "Iwin#i19ms21" );
 		cloakoffnpcself( "Iwin#i19ms22" );
 	}
+	if (.@map$ == "icecastle" && ep20_main >= 13)
+		cloakoffnpcself( "Canyon Exploration#ep20" );
+	if (.@map$ == "jor_maze" && ep20_main >= 21)
+		cloakoffnpcself( "Drift Ice Zone#ep20" );
+	if (.@map$ == "jor_twice" && ep20_main >= 25)
+		cloakoffnpcself( "Nest of Twigs#ep20" );
+	if (.@map$ == "jor_twig" && ep20_main >= 29)
+		cloakoffnpcself( "The Immortal#ep20" );
 	return;
 }
 
@@ -304,3 +330,7 @@ oz_dun01	mapflag	loadevent
 jor_dun03	mapflag	loadevent
 jor_nest	mapflag	loadevent
 jor_que	mapflag	loadevent
+icecastle	mapflag	loadevent
+jor_maze	mapflag	loadevent
+jor_twice	mapflag	loadevent
+jor_twig	mapflag	loadevent

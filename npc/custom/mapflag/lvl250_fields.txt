@@ -1,0 +1,11 @@
+//===== rAthena Script =======================================
+//= Mapflags: BL250 end-game field zones
+//============================================================
+
+mjo_wst01	mapflag	nomemo
+mjo_wst01	mapflag	noteleport
+mjo_wst01	mapflag	nosave	SavePoint
+
+ra_pol01	mapflag	nomemo
+ra_pol01	mapflag	noteleport
+ra_pol01	mapflag	nosave	SavePoint

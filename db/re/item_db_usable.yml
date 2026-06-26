@@ -12738,21 +12738,29 @@ Body:
     Name: Str Dish20
     Type: Usable
     Weight: 10
+    Script: |
+      sc_start SC_FOOD_STR_CASH,3600000,20;
   - Id: 12687
     AegisName: Int_Dish20
     Name: Int Dish20
     Type: Usable
     Weight: 10
+    Script: |
+      sc_start SC_FOOD_INT_CASH,3600000,20;
   - Id: 12688
     AegisName: Vit_Dish20
     Name: Vit Dish20
     Type: Usable
     Weight: 10
+    Script: |
+      sc_start SC_FOOD_VIT_CASH,3600000,20;
   - Id: 12689
     AegisName: Dex_Dish20
     Name: Dex Dish20
     Type: Usable
     Weight: 10
+    Script: |
+      sc_start SC_FOOD_DEX_CASH,3600000,20;
   - Id: 12690
     AegisName: Old_C_Album_Helm
     Name: Headgear Card Album
@@ -13659,11 +13667,15 @@ Body:
     Name: Agi Dish20
     Type: Usable
     Weight: 10
+    Script: |
+      sc_start SC_FOOD_AGI_CASH,3600000,20;
   - Id: 12777
     AegisName: Luk_Dish20
     Name: Luk Dish20
     Type: Usable
     Weight: 10
+    Script: |
+      sc_start SC_FOOD_LUK_CASH,3600000,20;
   - Id: 12778
     AegisName: Bapho_Jr_Scroll
     Name: Bapho Jr Scroll

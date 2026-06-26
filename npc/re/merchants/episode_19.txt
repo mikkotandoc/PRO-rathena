@@ -10,7 +10,7 @@
 icas_in,192,57,3	script	Incineration Furnace#ep19	4_POINT_RED,{
 	mes "There is a brazier where you can feel the heat.";
 	mes "If you have useless Dim Glacier weapons, put them in and melt them.";
-	mes "How many weapons of the same type would you like to incinerate at once?";
+	mes "How many weapons would you like to incinerate at once?";
 	next;
 	switch( select( "3 weapons (Official)", "6 weapons (Custom)", "9 weapons (Custom)", "Cancel" ) ) {
 	case 1:
@@ -18,16 +18,95 @@ icas_in,192,57,3	script	Incineration Furnace#ep19	4_POINT_RED,{
 		laphine_synthesis("Dim Glacier Extractor");
 		end;
 	case 2:
-		close2;
-		laphine_synthesis("Dim Glacier Extractor (6)");
+		callsub S_BatchIncinerate, 6;
 		end;
 	case 3:
-		close2;
-		laphine_synthesis("Dim Glacier Extractor (9)");
+		callsub S_BatchIncinerate, 9;
 		end;
 	case 4:
 		close;
 	}
+
+S_BatchIncinerate:
+	.@need = getarg(0);
+	.@conversions = .@need / 3;
+	// Same weapon list as D_Gw_Extractor in db/re/laphine_synthesis.yml
+	setarray .@weapons$[0],
+		"D_Glacier_T_Sword", "D_Glacier_Lance", "D_Glacier_Sword", "D_Glacier_B_Sword",
+		"D_Glacier_Spear", "D_Glacier_T_Axe", "D_Glacier_Axe", "D_Glacier_Mace",
+		"D_Glacier_M_Mace", "D_Glacier_R_Knife", "D_Glacier_B_Knife", "D_Glacier_Bow",
+		"D_Glacier_Knuckle", "D_Glacier_Book", "D_Glacier_Katar", "D_Glacier_Wand",
+		"D_Glacier_Staff", "D_Glacier_Foxtail", "D_Glacier_Violin", "D_Glacier_Whip",
+		"D_Glacier_Humma", "D_Glacier_Revolver", "D_Glacier_Rifle", "D_Glacier_Shotgun",
+		"D_Glacier_Gatling", "D_Glacier_Launcher";
+	.@weapon_total = getarraysize(.@weapons$);
+	for ( .@i = 0; .@i < .@weapon_total; .@i++ )
+		.@weapon_id[.@i] = getiteminfo( .@weapons$[.@i], ITEMINFO_ID );
+	.@total = 0;
+	getinventorylist;
+	freeloop(1);
+	for ( .@i = 0; .@i < @inventorylist_count; .@i++ ) {
+		if ( @inventorylist_equip[.@i] )
+			continue;
+		for ( .@w = 0; .@w < .@weapon_total; .@w++ ) {
+			if ( @inventorylist_id[.@i] == .@weapon_id[.@w] ) {
+				.@total += @inventorylist_amount[.@i];
+				break;
+			}
+		}
+	}
+	freeloop(0);
+	if ( .@total < .@need ) {
+		mes "You do not have " + .@need + " unequipped Dim Glacier weapons.";
+		mes "Any weapon accepted by the official extractor counts.";
+		close;
+	}
+	mes "Melt " + .@need + " unequipped Dim Glacier weapons at once?";
+	mes "They may be any weapon type, like the official extractor.";
+	mes "You currently have " + .@total + " eligible weapon(s).";
+	mes "This performs " + .@conversions + " extraction(s).";
+	next;
+	if ( select( "Incinerate.", "Cancel." ) == 2 ) {
+		mes "The brazier cools down.";
+		close;
+	}
+	.@left = .@need;
+	freeloop(1);
+	while ( .@left > 0 ) {
+		getinventorylist;
+		.@found = 0;
+		for ( .@i = 0; .@i < @inventorylist_count; .@i++ ) {
+			if ( @inventorylist_equip[.@i] )
+				continue;
+			.@is_valid = 0;
+			for ( .@w = 0; .@w < .@weapon_total; .@w++ ) {
+				if ( @inventorylist_id[.@i] == .@weapon_id[.@w] ) {
+					.@is_valid = 1;
+					break;
+				}
+			}
+			if ( !.@is_valid )
+				continue;
+			.@del = @inventorylist_amount[.@i];
+			if ( .@del > .@left )
+				.@del = .@left;
+			if ( !delitemidx( @inventorylist_idx[.@i], .@del ) )
+				continue;
+			.@left -= .@del;
+			.@found = 1;
+			break;
+		}
+		if ( !.@found ) {
+			freeloop(0);
+			mes "Could not remove the selected weapons. Make sure they are unequipped.";
+			close;
+		}
+	}
+	freeloop(0);
+	for ( .@i = 0; .@i < .@conversions; .@i++ )
+		getgroupitem( IG_D_GW_EXTRACTOR );
+	mes "The weapons have been melted.";
+	close;
 }
 
 icas_in,188,60,3	script	Forr#ep19	4_EP19_IWIN,{

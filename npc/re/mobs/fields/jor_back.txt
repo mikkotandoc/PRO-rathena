@@ -22,3 +22,7 @@ jor_back3	monster	--ja--	21522,70
 jor_back3	monster	--ja--	21520,70
 // unknown delay
 jor_back3	boss_monster	--ja--	21537,1,7200000,600000,1
+
+// jor_tail - Frozen Tail (EP19)
+jor_tail	monster	--ja--	21524,80
+jor_tail	monster	--ja--	21525,90

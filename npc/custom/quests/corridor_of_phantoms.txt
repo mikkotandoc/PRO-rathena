@@ -348,9 +348,11 @@ S_Exchange:
 
 	.@roll = rand(10000);
 	if (.@roll < 400) {
-		// ~4% — Sealed MVP card (iRO wiki; DB-available sealed cards)
-		setarray .@sealed[0], 23172, 23171, 23173, 22846;
-		getitem .@sealed[rand(4)], 1;
+		// ~4% — Sealed MVP card (iRO wiki Corridor-available sealed cards)
+		setarray .@sealed[0],
+			4480, 4483, 4485, 4489, 4492, 4493, 4495, 4496,
+			4498, 4536, 4537, 4540, 4542, 4543, 4544;
+		getitem .@sealed[rand(15)], 1;
 		mes "[Phantom's Spirit]";
 		mes "The phantoms bow before your strength!";
 		mes "A ^FF0000Sealed MVP Card^000000 materialises before you.";
@@ -360,10 +362,10 @@ S_Exchange:
 		mes "[Phantom's Spirit]";
 		mes "An ^33AA33Ancient Hero weapon^000000 emerges from the veil.";
 	} else {
-		// ~70% — boss class card
+		// ~70% — boss class card (mini-boss; not full MVP cards)
 		setarray .@boss[0],
-			4135, 4168, 4137, 4121, 4146, 4142, 4143, 4318,
-			4147, 4128, 4131, 4132, 4123, 4144, 4145, 4148;
+			4047, 4054, 4174, 4179, 4183, 4197, 4198, 4211,
+			4253, 4266, 4290, 4300, 4303, 4306, 4269, 4218;
 		getitem .@boss[rand(16)], 1;
 		mes "[Phantom's Spirit]";
 		mes "A ^33AA33boss class card^000000 drifts to you from beyond.";

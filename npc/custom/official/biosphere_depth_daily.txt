@@ -1,75 +1,9 @@
 //===== rAthena Script =======================================
-//= Varmundt's Biosphere Depth - Daily Hunts
+//= Varmundt's Biosphere Depth - Level 2 Daily Hunt
 //===== Description: =========================================
-//= Depth 1: 300 kills in bl_depth1 (Base Level 250+).
 //= Depth 2: 450 kills in bl_depth2 (Base Level 250+).
+//= Depth 1 uses official quests in npc/re/quests/biosphere_depth1.txt.
 //============================================================
-
-ba_in01,286,104,5	script	Depth Researcher#bs_d1	4_EP17_BASIC_B,{
-	if (BaseLevel < 250) {
-		mes "[Depth Researcher]";
-		mes "Depth research is only available to adventurers with base level 250 or higher.";
-		close;
-	}
-	if (!#biosphere_depth1) {
-		mes "[Depth Researcher]";
-		mes "Please register with the Deep Research Manager nearby before taking depth hunts.";
-		close;
-	}
-	mes "[Depth Researcher]";
-	mes "Would you like to take on today's depth level 1 hunt?";
-	mes "Eliminate ^0000cd300^000000 monsters inside the depth habitat.";
-	next;
-	if (select("Accept daily hunt", "Cancel") == 2) {
-		mes "[Depth Researcher]";
-		mes "Come back whenever you are ready.";
-		close;
-	}
-	callsub F_DepthDaily, 90514, 90515, "Depth Level 1", "bl_depth1", 300, "Bar_D_Docu_1", 800000000, 480000000;
-	end;
-
-F_DepthDaily:
-	.@hunt = getarg(0);
-	.@wait = getarg(1);
-	.@name$ = getarg(2);
-	.@reward$ = getarg(5);
-	.@bexp = getarg(6);
-	.@jexp = getarg(7);
-
-	if (checkquest(.@wait, PLAYTIME) == 2) {
-		mes "[Depth Researcher]";
-		mes "You have already completed the ^0000cd" + .@name$ + "^000000 daily hunt today.";
-		close;
-	}
-	if (checkquest(.@wait, PLAYTIME) == 0)
-		erasequest .@wait;
-
-	switch (checkquest(.@hunt, HUNTING)) {
-	case -1:
-		setquest .@hunt;
-		mes "[Depth Researcher]";
-		mes "Good luck. Any monster in ^0000cd" + .@name$ + "^000000 counts toward the goal.";
-		close;
-	case 0:
-	case 1:
-		mes "[Depth Researcher]";
-		mes "Keep hunting in ^0000cd" + .@name$ + "^000000 until you reach the target.";
-		close;
-	case 2:
-		erasequest .@hunt;
-		setquest .@wait;
-		getitem .@reward$, 1;
-		getexp .@bexp, .@jexp;
-		mes "[Depth Researcher]";
-		mes "Excellent work. Here is your research material and reward experience.";
-		close;
-	}
-	end;
-
-OnInit:
-	setunittitle getnpcid(0), "<Depth 1 Daily>";
-	end;
-}
 
 ba_chess,25,13,5	script	Depth Surveyor#bs_d2	4_EP17_BASIC_B,{
 	if (BaseLevel < 250) {
@@ -77,9 +11,10 @@ ba_chess,25,13,5	script	Depth Surveyor#bs_d2	4_EP17_BASIC_B,{
 		mes "The abyss survey is only available to adventurers with base level 250 or higher.";
 		close;
 	}
-	if (!#biosphere_depth1) {
+	if (isbegin_quest(16734) != 2) {
 		mes "[Depth Surveyor]";
-		mes "You must register for depth research in Varmundt's Mansion first.";
+		mes "You must complete the Depth Biosphere introduction with the Depth Research Manager first.";
+		mes "^777777(ba_in01 292, 104)^000000";
 		close;
 	}
 	mes "[Depth Surveyor]";
@@ -91,7 +26,7 @@ ba_chess,25,13,5	script	Depth Surveyor#bs_d2	4_EP17_BASIC_B,{
 		mes "Return when you are prepared.";
 		close;
 	}
-	callsub F_DepthDaily, 90516, 90517, "Depth Level 2", "bl_depth2", 450, "Time_D_Ma_Rune", 1000000000, 600000000;
+	callsub F_DepthDaily, 16779, 16780, "Depth Level 2", "bl_depth2", 450, "Time_D_Ma_Rune", 1000000000, 600000000;
 	end;
 
 F_DepthDaily:
@@ -102,13 +37,18 @@ F_DepthDaily:
 	.@bexp = getarg(6);
 	.@jexp = getarg(7);
 
-	if (checkquest(.@wait, PLAYTIME) == 2) {
+	switch (checkquest(.@wait, PLAYTIME)) {
+	case -1:
+		break;
+	case 0:
+	case 1:
 		mes "[Depth Surveyor]";
 		mes "You have already completed the ^0000cd" + .@name$ + "^000000 daily hunt today.";
 		close;
-	}
-	if (checkquest(.@wait, PLAYTIME) == 0)
+	case 2:
 		erasequest .@wait;
+		break;
+	}
 
 	switch (checkquest(.@hunt, HUNTING)) {
 	case -1:

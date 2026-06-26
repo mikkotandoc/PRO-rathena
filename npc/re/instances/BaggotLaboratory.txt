@@ -26,7 +26,7 @@ jor_dun03,57,63,3	script(CLOAKED)	Juncea#ep19re2	4_EP19_JUNCEA,{
 		ep19_main = 50;
 		close;
 	}
-	if (ep19_main >= 50) {
+	if (ep19_main == 50) {
 		if (is_party_leader() == false) {
 			mes "[Juncea]";
 			mes "I can only open the secret passage for party leaders. Please have your party leader talk to me.";
@@ -303,7 +303,7 @@ OnInstanceInit:
 // ------------------------------
 
 jor_nest,66,260,3	script	Arolong#ep19re2	4_EP19_IWIN,{
-	if (ep19_main < 100)
+	if (isbegin_quest(17649) < 2)
 		end;
 	if (checkweight(1000811,1) == 0) {
 		mes "[Arolong]";
@@ -389,10 +389,43 @@ jor_nest,66,260,3	script	Arolong#ep19re2	4_EP19_IWIN,{
 	cutin "",255;
 	switch( select( .@menu$, "Enter Bagot's Lab", "Do not challenge" ) ) {
 	case 1:
+		switch( checkquest(16663,PLAYTIME) ) {
+		case 0:
+		case 1:
+			mes "[Arolong]";
+			mes "Today's challenge is over.";
+			mes "If you come back tomorrow, please let me in.";
+			close;
+		}
+		if (checkquest(16662,HUNTING) == 2) {
+			mes "[Arolong]";
+			mes "Did you win a fight and come back?";
+			mes "Please claim your reward before starting another simulation.";
+			close;
+		}
+		if (!is_party_leader()) {
+			mes "[Arolong]";
+			mes "Only the party leader can prepare the memorial dungeon.";
+			close;
+		}
 		mes "- ^0000ff Preparation for entry has started. After you are ready, press the button to enter the lab in Bagot.^000000 -";
 		instance_create(.@md_name$);
 		close;
 	case 2:
+		switch( checkquest(16663,PLAYTIME) ) {
+		case 0:
+		case 1:
+			mes "[Arolong]";
+			mes "Today's challenge is over.";
+			mes "If you come back tomorrow, please let me in.";
+			close;
+		}
+		if (checkquest(16662,HUNTING) == 2) {
+			mes "[Arolong]";
+			mes "Did you win a fight and come back?";
+			mes "Please claim your reward before starting another simulation.";
+			close;
+		}
 		switch( instance_enter(.@md_name$) ) {
 		case IE_OTHER:
 			mes "An unknown error occurred.";
@@ -421,7 +454,7 @@ jor_nest,66,260,3	script	Arolong#ep19re2	4_EP19_IWIN,{
 
 OnInit:
 	cloakonnpc();
-	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "ep19_main >= 100 && checkquest(16662,HUNTING) != 2 && checkquest(16663,PLAYTIME) == -1" );
+	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "isbegin_quest(17649) == 2 && checkquest(16662,HUNTING) != 2 && checkquest(16663,PLAYTIME) == -1" );
 	questinfo( QTYPE_DAILYQUEST, QMARK_YELLOW, "checkquest(16663,PLAYTIME) == 2" );
 	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "checkquest(16662,HUNTING) == 2" );
 	end;

@@ -11726,7 +11726,7 @@ Body:
       DropEffect: CLIENT
     Script: |
       bonus2 bResEff,Eff_Freeze,10000;
-      bonus2 bAddClass,Class_All,10;
+      bonus bAtkRate,10;
       bonus bMatkRate,10;
   - Id: 4637
     AegisName: Immotal_Corps_Card

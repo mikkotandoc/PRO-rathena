@@ -1,0 +1,127 @@
+//===== rAthena Script =======================================
+//= BL250 Field Daily / Weekly Hunts
+//===== Description: =========================================
+//= Power Twisted Plains daily (100 or 500 kills, 4h reset).
+//= Mjolnir Underground Caverns weekly (5000 kills, Sat 4h reset).
+//= Official basis: iRO/kRO map update announcements.
+//============================================================
+
+function	script	F_Lvl250_HuntDaily	{
+	.@hunt = getarg(0);
+	.@wait = getarg(1);
+	.@zone$ = getarg(2);
+	.@count = getarg(3);
+	.@item$ = getarg(4);
+	.@amount = getarg(5);
+	.@bexp = getarg(6);
+	.@jexp = getarg(7);
+
+	switch (checkquest(.@wait, PLAYTIME)) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes getarg(8);
+		mes "You have already completed today's ^0000cd" + .@zone$ + "^000000 hunt.";
+		close;
+	case 2:
+		erasequest .@wait;
+		break;
+	}
+
+	switch (checkquest(.@hunt, HUNTING)) {
+	case -1:
+		setquest .@hunt;
+		mes getarg(8);
+		mes "Eliminate ^0000cd" + .@count + "^000000 monsters in ^0000cd" + .@zone$ + "^000000.";
+		mes "Dead Branch summons do not count.";
+		close;
+	case 0:
+	case 1:
+		mes getarg(8);
+		mes "Keep hunting in ^0000cd" + .@zone$ + "^000000 until you reach the target.";
+		close;
+	case 2:
+		erasequest .@hunt;
+		setquest .@wait;
+		if (.@item$ != "" && .@amount > 0)
+			getitem .@item$, .@amount;
+		getexp .@bexp, .@jexp;
+		mes getarg(8);
+		mes "Purification complete. Here is your reward.";
+		close;
+	}
+	end;
+}
+
+function	script	F_Lvl250_HuntWeekly	{
+	.@hunt = getarg(0);
+	.@wait = getarg(1);
+	.@zone$ = getarg(2);
+	.@count = getarg(3);
+	.@item$ = getarg(4);
+	.@amount = getarg(5);
+	.@bexp = getarg(6);
+	.@jexp = getarg(7);
+
+	switch (checkquest(.@wait, PLAYTIME)) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes getarg(8);
+		mes "You have already completed this week's ^0000cd" + .@zone$ + "^000000 hunt.";
+		close;
+	case 2:
+		erasequest .@wait;
+		break;
+	}
+
+	switch (checkquest(.@hunt, HUNTING)) {
+	case -1:
+		setquest .@hunt;
+		mes getarg(8);
+		mes "Eliminate ^0000cd" + .@count + "^000000 monsters in ^0000cd" + .@zone$ + "^000000 this week.";
+		mes "Dead Branch summons do not count.";
+		close;
+	case 0:
+	case 1:
+		mes getarg(8);
+		mes "Keep hunting in ^0000cd" + .@zone$ + "^000000 until you reach the weekly target.";
+		close;
+	case 2:
+		erasequest .@hunt;
+		setquest .@wait;
+		if (.@item$ != "" && .@amount > 0)
+			getitem .@item$, .@amount;
+		getexp .@bexp, .@jexp;
+		mes getarg(8);
+		mes "Weekly extermination complete. Here is your reward.";
+		close;
+	}
+	end;
+}
+
+function	script	F_RaPol_DailyMenu	{
+	if (BaseLevel < 250) {
+		mes "[Priest Pano]";
+		mes "Only adventurers with base level 250 or higher may take on purification duties.";
+		close;
+	}
+	mes "[Priest Pano]";
+	mes "Choose how many monsters you will purge from the Power Twisted Plains today.";
+	next;
+	switch (select("Hunt 100 monsters", "Hunt 500 monsters", "Cancel")) {
+	case 1:
+		callfunc "F_Lvl250_HuntDaily", 18207, 18209, "Power Twisted Plains", 100, "Mocadas_Gold", 1, 243000000, 204000000, "[Priest Pano]";
+		end;
+	case 2:
+		callfunc "F_Lvl250_HuntDaily", 18208, 18209, "Power Twisted Plains", 500, "Mocadas_Gold", 3, 1218000000, 1032000000, "[Priest Pano]";
+		end;
+	case 3:
+		mes "[Priest Pano]";
+		mes "Return when you are ready.";
+		close;
+	}
+	end;
+}

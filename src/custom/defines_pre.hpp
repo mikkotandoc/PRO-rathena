@@ -11,4 +11,8 @@
 
 #define PACKETVER 20250529
 
+/// Match Nemo ExtendCashShopPreview / client cash shop equipment preview.
+/// Without this, only the first item per tab displays correctly; the rest show as unknown with wrong prices.
+#define ENABLE_CASHSHOP_PREVIEW_PATCH
+
 #endif /* CONFIG_CUSTOM_DEFINES_PRE_HPP */
