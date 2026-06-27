@@ -7546,6 +7546,7 @@
 	export_constant(IG_C_PRO_GACHA_1);
 	export_constant(IG_C_PRO_GACHA_2);
 	export_constant(IG_ODIN_RELIC);
+	export_constant(IG_DIMEN_W_BOX);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);

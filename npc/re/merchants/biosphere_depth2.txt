@@ -46,7 +46,7 @@ OnInit:
 	end;
 }
 
-// Dimension weapon enchant (2 o'clock)
+// Dimension weapon / crown enchant (2 o'clock)
 ba_chess,22,16,3	script	Dimension Equipment Manager#b2	4_EP17_MASTER_A,{
 	if (isbegin_quest(16778) == 0) {
 		mes "[Dimension Equipment Manager]";
@@ -55,20 +55,37 @@ ba_chess,22,16,3	script	Dimension Equipment Manager#b2	4_EP17_MASTER_A,{
 	}
 	.@points = get_reputation_points(REPU_BIO_DEPTH2);
 	mes "[Dimension Equipment Manager]";
-	mes "I engrave Time Dimension weapons with abyss rune power.";
+	mes "I engrave Time Dimension weapons and rune crowns with abyss rune power.";
 	next;
-	if (.@points < 750) {
+	switch (select("Enchant dimension weapon:Enchant rune crown:Cancel")) {
+	case 1:
+		if (.@points < 750) {
+			mes "[Dimension Equipment Manager]";
+			mes "You need at least ^0000cd750^000000 Depth Abyss research reputation to enchant dimension weapons.";
+			close;
+		}
 		mes "[Dimension Equipment Manager]";
-		mes "You need at least ^0000cd750^000000 Depth Abyss research reputation to enchant dimension weapons.";
+		mes "Bring the dimension weapon you wish to enchant.";
+		close2;
+		item_enchant(133);
+		end;
+	case 2:
+		if (.@points < 1500) {
+			mes "[Dimension Equipment Manager]";
+			mes "You need at least ^0000cd1500^000000 Depth Abyss research reputation to enchant rune crowns.";
+			close;
+		}
+		mes "[Dimension Equipment Manager]";
+		mes "Bring the Time Dimension Rune Crown you wish to enchant.";
+		close2;
+		item_enchant(132);
+		end;
+	case 3:
 		close;
 	}
-	mes "[Dimension Equipment Manager]";
-	mes "Bring the dimension weapon you wish to enchant.";
-	close2;
-	item_enchant(133);
 	end;
 
 OnInit:
-	setunittitle getnpcid(0), "<Weapon Enchant>";
+	setunittitle getnpcid(0), "<Equipment Enchant>";
 	end;
 }
