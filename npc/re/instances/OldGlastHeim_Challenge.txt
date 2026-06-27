@@ -114,6 +114,12 @@ function	script	F_OGHCM_ShowNpc	{
 	return;
 }
 
+function	script	F_OGHCM_HidePortals	{
+	disablenpc instance_npcname("#oghcm_w_portal");
+	disablenpc instance_npcname("#oghcm_e_portal");
+	return;
+}
+
 // Returns 0 = ok, 1 = self on cooldown, 2 = party leader on cooldown.
 function	script	F_OGHCM_CheckEntryCooldown	{
 	.@party_id = getarg(0);
@@ -409,9 +415,8 @@ OnWestDead:
 	if ('OGHCM_WestClear)
 		end;
 	'OGHCM_WestClear = 1;
-	mapannounce 'map1$, "Oscar: The west wing portal is open.", bc_map, 0x00FF99;
-	callfunc("F_OGHCM_ShowNpc", instance_npcname("#oghcm_w_portal"));
 	callsub S_StartRootPhase;
+	callsub S_OnWingClear, 0;
 	callsub S_TryEnableMid;
 	end;
 
@@ -424,11 +429,35 @@ OnEastDead:
 	if ('OGHCM_EastClear)
 		end;
 	'OGHCM_EastClear = 1;
-	mapannounce 'map1$, "Oscar: The east wing portal is open.", bc_map, 0x00FF99;
-	callfunc("F_OGHCM_ShowNpc", instance_npcname("#oghcm_e_portal"));
 	callsub S_StartRootPhase;
+	callsub S_OnWingClear, 1;
 	callsub S_TryEnableMid;
 	end;
+
+S_OnWingClear:
+	.@east = getarg(0);
+	if ('OGHCM_SoloMode) {
+		mapannounce 'map1$, "Oscar: The wing is secure. Enter the central corridor and purify the corruption roots!", bc_map, 0x00FF99;
+		sleep 1500;
+		warpparty 'map1$, 150, 79, 'party_id, 'map1$;
+		callfunc("F_OGHCM_HidePortals");
+		return;
+	}
+	if ('OGHCM_WestClear && 'OGHCM_EastClear) {
+		mapannounce 'map1$, "Oscar: Both wings are secure. Gather in the central corridor and purify the corruption roots!", bc_map, 0x00FF99;
+		callfunc("F_OGHCM_HidePortals");
+		sleep 1500;
+		warpparty 'map1$, 150, 79, 'party_id, 'map1$;
+		return;
+	}
+	if (.@east) {
+		mapannounce 'map1$, "Oscar: The east wing portal is open. Use it to reinforce the west wing, or enter the corridor for the corruption roots.", bc_map, 0x00FF99;
+		callfunc("F_OGHCM_ShowNpc", instance_npcname("#oghcm_e_portal"));
+	} else {
+		mapannounce 'map1$, "Oscar: The west wing portal is open. Use it to reinforce the east wing, or enter the corridor for the corruption roots.", bc_map, 0x00FF99;
+		callfunc("F_OGHCM_ShowNpc", instance_npcname("#oghcm_w_portal"));
+	}
+	return;
 
 S_StartRootPhase:
 	if ('OGHCM_RootPhase)
@@ -445,14 +474,20 @@ S_StartRootPhase:
 	return;
 
 S_TryEnableMid:
-	if ('OGHCM_SoloMode) {
-		if ((!'OGHCM_WestClear && !'OGHCM_EastClear) || !'OGHCM_RootPhaseDone)
-			return;
-	} else if (!'OGHCM_WestClear || !'OGHCM_EastClear || !'OGHCM_RootPhaseDone)
+	if ('OGHCM_MidReady)
 		return;
-	callfunc("F_OGHCM_ShowNpc", instance_npcname("#oghcm_c_portal"));
+	if ('OGHCM_SoloMode) {
+		if (!'OGHCM_WestClear && !'OGHCM_EastClear)
+			return;
+	} else if (!'OGHCM_WestClear || !'OGHCM_EastClear)
+		return;
+	if (!'OGHCM_RootPhaseDone)
+		return;
+	'OGHCM_MidReady = 1;
+	callfunc("F_OGHCM_HidePortals");
 	callfunc("F_OGHCM_ShowNpc", instance_npcname("Oscar#oghcm_mid"));
-	mapannounce 'map1$, "Oscar: The central corridor is secure. Speak with me to continue.", bc_map, 0x00FF99;
+	mapannounce 'map1$, "Oscar: The central corridor is secure. Talk to me at the center of the corridor to continue.", bc_map, 0x00FF99;
+	warpparty 'map1$, 150, 79, 'party_id, 'map1$;
 	return;
 
 OnTimer30000:
@@ -468,12 +503,13 @@ OnTimer30000:
 
 OnRootDead:
 	callfunc("F_OGHCM_RootDrop");
-	if (!'OGHCM_RootKilled) {
+	if (!'OGHCM_RootKilled)
 		'OGHCM_RootKilled = 1;
-		stopnpctimer;
-		'OGHCM_RootPhaseDone = 1;
-		callsub S_TryEnableMid;
-	}
+	if (mobcount('map1$, instance_npcname("OGHCM Controller") + "::OnRootDead") > 0)
+		end;
+	stopnpctimer;
+	'OGHCM_RootPhaseDone = 1;
+	callsub S_TryEnableMid;
 	end;
 
 OnBossDead:
@@ -586,47 +622,58 @@ OnStart:
 	if (select("Proceed.", "Not yet.") == 2)
 		close;
 	disablenpc instance_npcname("Oscar#oghcm_mid");
-	disablenpc instance_npcname("#oghcm_c_portal");
 	warpparty 'map2$, 150, 28, 'party_id, 'map2$;
 	callfunc("F_OGHCM_ShowNpc", instance_npcname("Oscar#oghcm_boss"));
 	end;
 }
 
-1@gl_he,78,82,0	script	#oghcm_w_portal	WARPNPC,2,2,{
+1@gl_he,80,80,0	script	#oghcm_w_portal	WARPNPC,2,2,{
+	if ('OGHCM_MidReady)
+		end;
 	mes "[Portal]";
-	mes "The wing portal shimmers.";
+	if ('OGHCM_EastClear) {
+		mes "The portal leads to the central corridor.";
+		.@dest$ = "the central corridor";
+	} else {
+		mes "The portal leads to the east wing.";
+		.@dest$ = "the east wing";
+	}
 	next;
-	if (select("Enter the portal.", "Cancel") == 2)
+	if (select("Enter the portal (" + .@dest$ + ").", "Cancel") == 2)
 		close;
-	if ('OGHCM_SoloMode || 'OGHCM_EastClear)
+	if ('OGHCM_EastClear)
 		warp 'map1$, 150, 79;
 	else
 		warp 'map1$, 215, 79;
 	end;
 }
 
-1@gl_he,217,81,0	script	#oghcm_e_portal	WARPNPC,2,2,{
+1@gl_he,215,79,0	script	#oghcm_e_portal	WARPNPC,2,2,{
+	if ('OGHCM_MidReady)
+		end;
 	mes "[Portal]";
-	mes "The wing portal shimmers.";
+	if ('OGHCM_WestClear) {
+		mes "The portal leads to the central corridor.";
+		.@dest$ = "the central corridor";
+	} else {
+		mes "The portal leads to the west wing.";
+		.@dest$ = "the west wing";
+	}
 	next;
-	if (select("Enter the portal.", "Cancel") == 2)
+	if (select("Enter the portal (" + .@dest$ + ").", "Cancel") == 2)
 		close;
-	if ('OGHCM_SoloMode || 'OGHCM_WestClear)
+	if ('OGHCM_WestClear)
 		warp 'map1$, 150, 79;
 	else
 		warp 'map1$, 80, 80;
 	end;
 }
 
-1@gl_he,150,83,0	script	#oghcm_c_portal	WARPNPC,2,2,{
-	mes "[Portal]";
-	mes "The corridor leads toward Oscar.";
-	next;
-	if (select("Enter the portal.", "Cancel") == 2)
-		close;
-	warp 'map1$, 150, 79;
-	end;
-}
+// Block default corridor warps on the shared Glast Heim wing layout.
+1@gl_he,96,80,0	warp	#oghcm_junc_w1	2,2,1@gl_he,80,80
+1@gl_he,90,80,0	warp	#oghcm_junc_w2	2,2,1@gl_he,105,80
+1@gl_he,202,79,0	warp	#oghcm_junc_e1	2,2,1@gl_he,215,79
+1@gl_he,206,79,0	warp	#oghcm_junc_e2	2,2,1@gl_he,195,79
 
 1@gl_he2,150,28,5	script	Oscar#oghcm_boss	4_ED_OSCAR,{
 	if ('OGHCM_BossStarted)
@@ -749,6 +796,7 @@ OnInstanceInit:
 	'OGHCM_Phase30 = 0;
 	'OGHCM_ArenaWarn = 0;
 	'OGHCM_ArenaExpire = 0;
+	'OGHCM_MidReady = 0;
 	'OGHCM_GridExpire = 0;
 	disablenpc instance_npcname("Oscar#oghcm_mid");
 	disablenpc instance_npcname("Oscar#oghcm_boss");
@@ -756,6 +804,9 @@ OnInstanceInit:
 	disablenpc instance_npcname("#oghcm_chest");
 	disablenpc instance_npcname("#oghcm_w_portal");
 	disablenpc instance_npcname("#oghcm_e_portal");
-	disablenpc instance_npcname("#oghcm_c_portal");
+	disablenpc instance_npcname("#oghcm_junc_w1");
+	disablenpc instance_npcname("#oghcm_junc_w2");
+	disablenpc instance_npcname("#oghcm_junc_e1");
+	disablenpc instance_npcname("#oghcm_junc_e2");
 	end;
 }

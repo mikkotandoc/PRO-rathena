@@ -63,41 +63,42 @@ ba_in01,292,104,1	script	Depth Research Manager#b	4_EP17_MASTER_A,{
  completequest 16734;
  close;
  }
- // .@points = get_reputation_points(REPU_BIO_DEPTH1);
- // if (.@points >= 2000 && isbegin_quest(16778) == 0) { // Quest to enter 2nd floor
- // mes "[Depth Research Manager]";
- // mes "Hello? You've been doing a lot of research into Depth Biosphere.";
- // mes "Because you are such a guest, I have new news to tell you.";
- // next;
- // mes "[Depth Research Manager]";
- // mes "While researching the Depth Biosphere, we discovered a mysterious warp that suddenly opened in the garden of Varmundt's mansion.";
- // next;
- // mes "[Depth Research Manager]";
- // mes "When we investigated that place, we felt similar waves to the Depth Biosphere we were studying.";
- // mes "We have decided that new research is needed, and would like to give you a new request.";
- // next;
- // mes "[Depth Research Manager]";
- // mes "Would you please investigate the newly discovered mysterious warp?";
- // next;
- // if (select( "Accept the survey.", "Do not accept the survey." ) == 2) {
- // mes "[Depth Research Manager]";
- // mes "You may be in trouble now that you have been preparing for other research.";
- // mes "I would like to ask you to investigate next time you have a chance.";
- // close;
- // }
- // mes "[Depth Research Manager]";
- // mes "Thank you. I believe you will do a great job in this study.";
- // next;
- // mes "[Depth Research Manager]";
- // mes "The warp was found in the Chess Garden, a location we haven't told you about yet.";
- // mes "Let me show you the way to the chess garden.";
- // next;
- // mes "[Depth Research Manager]";
- // mes "You can get to the Chess Garden via the [Chessboard] ba_maison.gat,242,128,0,101,0 placed near the Water Garden.";
- // mes "The person in charge of research requests at Chess Garden will give you detailed instructions. Please go there and listen to the explanation.";
- // setquest 16778;
- // next;
- // }
+ .@points = get_reputation_points(REPU_BIO_DEPTH1);
+ if (.@points >= 2000 && isbegin_quest(16778) == 0) {
+ mes "[Depth Research Manager]";
+ mes "Hello? You've been doing a lot of research into Depth Biosphere.";
+ mes "Because you are such a guest, I have new news to tell you.";
+ next;
+ mes "[Depth Research Manager]";
+ mes "While researching the Depth Biosphere, we discovered a mysterious warp that suddenly opened in the garden of Varmundt's mansion.";
+ next;
+ mes "[Depth Research Manager]";
+ mes "When we investigated that place, we felt similar waves to the Depth Biosphere we were studying.";
+ mes "We have decided that new research is needed, and would like to give you a new request.";
+ next;
+ mes "[Depth Research Manager]";
+ mes "Would you please investigate the newly discovered mysterious warp?";
+ next;
+ if (select( "Accept the survey.", "Do not accept the survey." ) == 2) {
+ mes "[Depth Research Manager]";
+ mes "You may be in trouble now that you have been preparing for other research.";
+ mes "I would like to ask you to investigate next time you have a chance.";
+ close;
+ }
+ mes "[Depth Research Manager]";
+ mes "Thank you. I believe you will do a great job in this study.";
+ next;
+ mes "[Depth Research Manager]";
+ mes "The warp was found in the Chess Garden, a location we haven't told you about yet.";
+ mes "Let me show you the way to the chess garden.";
+ next;
+ mes "[Depth Research Manager]";
+ mes "You can get to the Chess Garden via the portal near the Water Garden at ^0000cd(ba_maison 242, 122)^000000.";
+ mes "The person in charge of research requests at Chess Garden will give you detailed instructions. Please go there and listen to the explanation.";
+ setquest 16778;
+ completequest 16778;
+ next;
+ }
  mes "[Depth Research Manager]";
  mes "Hello, guest. Did you bring " + mesitemlink(1001289) + ", would you like me to pass on the results of your research?";
  mes "Or would you like to hear an explanation of the Biosphere deep dungeons?";

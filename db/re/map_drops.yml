@@ -1088,177 +1088,177 @@ Body:
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 75000
+            Rate: 100000
           - Index: 1
             Item: Fourth_Grenade
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_Bh_Bow
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Knuckle
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_Bh_Lute
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_Rifle
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_Revolver
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Shotgun
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_Bh_Fuuma
-            Rate: 15000
+            Rate: 22500
           - Index: 9
             Item: Fourth_Gatling
-            Rate: 15000
+            Rate: 22500
           - Index: 10
             Item: Fourth_1h_Whip
-            Rate: 15000
+            Rate: 22500
       - Monster: DOLORIAN
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 75000
+            Rate: 100000
           - Index: 1
             Item: Fourth_Grenade
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_Bh_Bow
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Knuckle
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_Bh_Lute
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_Rifle
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_Revolver
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Shotgun
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_Bh_Fuuma
-            Rate: 15000
+            Rate: 22500
           - Index: 9
             Item: Fourth_Gatling
-            Rate: 15000
+            Rate: 22500
           - Index: 10
             Item: Fourth_1h_Whip
-            Rate: 15000
+            Rate: 22500
       - Monster: PLAGARION
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 75000
+            Rate: 100000
           - Index: 1
             Item: Fourth_Grenade
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_Bh_Bow
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Knuckle
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_Bh_Lute
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_Rifle
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_Revolver
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Shotgun
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_Bh_Fuuma
-            Rate: 15000
+            Rate: 22500
           - Index: 9
             Item: Fourth_Gatling
-            Rate: 15000
+            Rate: 22500
           - Index: 10
             Item: Fourth_1h_Whip
-            Rate: 15000
+            Rate: 22500
       - Monster: DEADRE
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 75000
+            Rate: 100000
           - Index: 1
             Item: Fourth_Grenade
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_Bh_Bow
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Knuckle
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_Bh_Lute
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_Rifle
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_Revolver
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Shotgun
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_Bh_Fuuma
-            Rate: 15000
+            Rate: 22500
           - Index: 9
             Item: Fourth_Gatling
-            Rate: 15000
+            Rate: 22500
           - Index: 10
             Item: Fourth_1h_Whip
-            Rate: 15000
+            Rate: 22500
       - Monster: VENEDI
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 75000
+            Rate: 100000
           - Index: 1
             Item: Fourth_Grenade
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_Bh_Bow
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Knuckle
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_Bh_Lute
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_Rifle
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_Revolver
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Shotgun
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_Bh_Fuuma
-            Rate: 15000
+            Rate: 22500
           - Index: 9
             Item: Fourth_Gatling
-            Rate: 15000
+            Rate: 22500
           - Index: 10
             Item: Fourth_1h_Whip
-            Rate: 15000
+            Rate: 22500
       - Monster: R001_BESTIA
         Drops:
           - Index: 0
@@ -1266,37 +1266,37 @@ Body:
             Rate: 100000
           - Index: 1
             Item: Etel_Stone
-            Rate: 50000
+            Rate: 75000
           - Index: 2
             Item: Fourth_Grenade
-            Rate: 75000
+            Rate: 100000
           - Index: 3
             Item: Fourth_Bh_Bow
-            Rate: 75000
+            Rate: 100000
           - Index: 4
             Item: Fourth_1h_Knuckle
-            Rate: 37500
+            Rate: 56250
           - Index: 5
             Item: Fourth_Bh_Lute
-            Rate: 37500
+            Rate: 56250
           - Index: 6
             Item: Fourth_Rifle
-            Rate: 37500
+            Rate: 56250
           - Index: 7
             Item: Fourth_Revolver
-            Rate: 37500
+            Rate: 56250
           - Index: 8
             Item: Fourth_Shotgun
-            Rate: 37500
+            Rate: 56250
           - Index: 9
             Item: Fourth_Bh_Fuuma
-            Rate: 37500
+            Rate: 56250
           - Index: 10
             Item: Fourth_Gatling
-            Rate: 37500
+            Rate: 56250
           - Index: 11
             Item: Fourth_1h_Whip
-            Rate: 37500
+            Rate: 56250
   - Map: nif_dun01
     GlobalDrops:
       - Index: 0
@@ -1393,118 +1393,118 @@ Body:
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 10000
+            Rate: 15000
           - Index: 1
             Item: Fourth_Bh_Axe
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_1h_Sword
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Manual
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_1h_Mace
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_1h_Dagger
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_1h_Nindo2
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Bh_Katar
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_1h_Plant
-            Rate: 15000
+            Rate: 22500
       - Monster: BLUEMOON_LOLI_RURI
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 10000
+            Rate: 15000
           - Index: 1
             Item: Fourth_Bh_Axe
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_1h_Sword
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Manual
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_1h_Mace
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_1h_Dagger
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_1h_Nindo2
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Bh_Katar
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_1h_Plant
-            Rate: 15000
+            Rate: 22500
       - Monster: GROTE
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 10000
+            Rate: 15000
           - Index: 1
             Item: Fourth_Bh_Axe
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_1h_Sword
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Manual
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_1h_Mace
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_1h_Dagger
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_1h_Nindo2
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Bh_Katar
-            Rate: 15000
+            Rate: 22500
           - Index: 8
             Item: Fourth_1h_Plant
-            Rate: 15000
+            Rate: 22500
       - Monster: PIERROTZOIST
         Drops:
           - Index: 0
             Item: Etel_Dust
-            Rate: 10000
+            Rate: 15000
           - Index: 1
             Item: Fourth_Bh_Axe
-            Rate: 15000
+            Rate: 22500
           - Index: 2
             Item: Fourth_1h_Sword
-            Rate: 15000
+            Rate: 22500
           - Index: 3
             Item: Fourth_1h_Manual
-            Rate: 15000
+            Rate: 22500
           - Index: 4
             Item: Fourth_1h_Mace
-            Rate: 15000
+            Rate: 22500
           - Index: 5
             Item: Fourth_1h_Dagger
-            Rate: 15000
+            Rate: 22500
           - Index: 6
             Item: Fourth_1h_Nindo2
-            Rate: 15000
+            Rate: 22500
           - Index: 7
             Item: Fourth_Bh_Katar
-            Rate: 5000
+            Rate: 7500
           - Index: 8
             Item: Fourth_1h_Plant
-            Rate: 15000
+            Rate: 22500
       - Monster: DEATH_WITCH
         Drops:
           - Index: 0
@@ -1512,31 +1512,31 @@ Body:
             Rate: 100000
           - Index: 1
             Item: Etel_Stone
-            Rate: 50000
+            Rate: 75000
           - Index: 2
             Item: Fourth_Bh_Axe
-            Rate: 37500
+            Rate: 56250
           - Index: 3
             Item: Fourth_1h_Sword
-            Rate: 37500
+            Rate: 56250
           - Index: 4
             Item: Fourth_1h_Manual
-            Rate: 37500
+            Rate: 56250
           - Index: 5
             Item: Fourth_1h_Mace
-            Rate: 37500
+            Rate: 56250
           - Index: 6
             Item: Fourth_1h_Dagger
-            Rate: 37500
+            Rate: 56250
           - Index: 7
             Item: Fourth_1h_Nindo2
-            Rate: 37500
+            Rate: 56250
           - Index: 8
             Item: Fourth_Bh_Katar
-            Rate: 37500
+            Rate: 56250
           - Index: 9
             Item: Fourth_1h_Plant
-            Rate: 750
+            Rate: 56250
   - Map: 1@advs
     SpecificDrops:
       - Monster: EP18_MD_SCHULANG_R

@@ -1,0 +1,295 @@
+# Varmundt's Biosphere Depth 2 (Time Dimension) barters
+
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: barter_bio_depth2_materials
+    Items:
+      - Index: 0
+        Item: Abyss_Magic_Jewel
+        Zeny: 10000
+        RequiredItems:
+          - Index: 0
+            Item: Abyss_Jewel_Fragment
+            Amount: 10
+      - Index: 1
+        Item: Time_Dimension_Jewel
+        Zeny: 10000
+        RequiredItems:
+          - Index: 0
+            Item: Time_Dim_J_Fragment
+            Amount: 10
+      - Index: 2
+        Item: Abyss_Rune_Ore
+        Zeny: 20000
+        RequiredItems:
+          - Index: 0
+            Item: Abyss_Magic_Jewel
+            Amount: 10
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 10
+      - Index: 3
+        Item: Abyss_Rune
+        Zeny: 30000
+        RequiredItems:
+          - Index: 0
+            Item: Abyss_Rune_Ore
+            Amount: 5
+          - Index: 1
+            Item: Temporal_Crystal
+            Amount: 5
+      - Index: 4
+        Item: Time_D_Ma_Rune
+        Zeny: 50000
+        RequiredItems:
+          - Index: 0
+            Item: Abyss_Rune
+            Amount: 5
+          - Index: 1
+            Item: Coagulated_Spell
+            Amount: 5
+          - Index: 2
+            Item: Polluted_Spell
+            Amount: 5
+          - Index: 3
+            Item: Spell_Of_Time
+            Amount: 3
+  - Name: barter_bio_depth2_crowns
+    Items:
+      - Index: 0
+        Item: Time_DM_R_Crown_DK
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 1
+        Item: Time_DM_R_Crown_IG
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 2
+        Item: Time_DM_R_Crown_MT
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 3
+        Item: Time_DM_R_Crown_BO
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 4
+        Item: Time_DM_R_Crown_SHC
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 5
+        Item: Time_DM_R_Crown_ABC
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 6
+        Item: Time_DM_R_Crown_AG
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 7
+        Item: Time_DM_R_Crown_EM
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 8
+        Item: Time_DM_R_Crown_CD
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 9
+        Item: Time_DM_R_Crown_IQ
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 10
+        Item: Time_DM_R_Crown_WH
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 11
+        Item: Time_DM_R_Crown_TR
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 12
+        Item: Time_DM_R_Crown_SS
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 13
+        Item: Time_DM_R_Crown_NW
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 14
+        Item: Time_DM_R_Crown_SKE
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 15
+        Item: Time_DM_R_Crown_SOA
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 16
+        Item: Time_DM_R_Crown_HN
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
+      - Index: 17
+        Item: Time_DM_R_Crown_SH
+        Zeny: 500000
+        RequiredItems:
+          - Index: 0
+            Item: Jewel_Of_Time_Ore
+            Amount: 70
+          - Index: 1
+            Item: Time_Dimension_Jewel
+            Amount: 50
+          - Index: 2
+            Item: Abyss_Magic_Jewel
+            Amount: 50
