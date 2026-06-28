@@ -787,7 +787,21 @@ icecastle,201,171,3	script	Lehar#ep20ms04	4_EP19_LEHAR,{
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "Good work in the canyon. Report to Miriam inside the castle.";
-		close3;
+		next;
+		switch( select( "Warp me to Miriam.", "I'm stuck / need help.", "Close." ) ) {
+		case 1:
+			mes "[Lehar]";
+			mes "Miriam is in the castle meeting room.";
+			close2;
+			cutin "",255;
+			warp "icas_in",259,200;
+			end;
+		case 2:
+			callfunc("F_ep20_canyon_stuck_recover");
+			end;
+		case 3:
+			close3;
+		}
 	}
 	if (ep20_main >= 100) {
 		cutin "ep19_lehar01.png",2;
@@ -808,6 +822,8 @@ icecastle,201,171,3	script	Lehar#ep20ms04	4_EP19_LEHAR,{
 
 OnInit:
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 13" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main == 14 && isbegin_quest(16702) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main == 14 && isbegin_quest(16702) == 2 && isbegin_quest(16703) <= 0" );
 	end;
 }
 

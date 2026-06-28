@@ -665,8 +665,10 @@ Body:
     TimeLimit: 3600
     Enter:
       Map: 1@20cn1
-      X: 100
-      Y: 100
+      X: 350
+      Y: 75
+    AdditionalMaps:
+      1@20cn2: true
   - Id: 142
     Name: Drift Ice Zone
     TimeLimit: 3600
