@@ -113,47 +113,66 @@ function	script	F_ep20_canStart	{
 	return (ep19_main == 100 && BaseLevel >= 215 && isbegin_quest(17650) == 2);
 }
 
+// Returns true when the player has a solo party with at least one online member.
+function	script	F_ep20_instance_party_ok	{
+	.@party_id = getcharid(1);
+
+	if (!.@party_id)
+		return 0;
+	if (!instance_check_party(.@party_id, 1))
+		return 0;
+	getpartymember .@party_id, 2;
+	if ($@partymembercount != 1)
+		return 0;
+	return 1;
+}
+
+// getarg(0) = instance name, getarg(1) = 0 auto prepare+enter, 1 prepare only, 2 enter only
 function	script	F_ep20_instance_enter	{
 	.@name$ = getarg(0);
+	.@mode = getarg(1, 0);
 
-	if (getcharid(1) < 1) {
-		mes "Form a party first.";
-		close;
+	if (!callfunc("F_ep20_instance_party_ok")) {
+		mes "- ^0000FFCreate a one-person party with ^4D4DFF/organize PARTY NAME^0000FF, then try again.^000000 -";
+		close3;
 	}
-	if (instance_id()) {
-		mes "You are already inside a memorial dungeon.";
-		close;
-	}
-	if (is_party_leader() == false) {
-		switch (instance_enter(.@name$)) {
-		case IE_OK:
-			close;
-		case IE_NOINSTANCE:
-			mes "The party leader must create the instance first.";
-			close;
-		case IE_NOMEMBER:
-			mes "Only party members can enter the memorial dungeon.";
-			close;
-		default:
-			mes "Unable to enter the memorial dungeon.";
-			close;
+
+	if (.@mode == 1 || .@mode == 0) {
+		.@create = instance_create(.@name$);
+		if (.@create == -3)
+			instance_warning(2, .@name$);
+		else if (.@create < 0) {
+			switch (.@create) {
+			case -1:
+				mes "This memorial dungeon is not registered on the server.";
+				mes "Ask a GM to reload the instance database.";
+				break;
+			case -2:
+				mes "Your party could not be found. Reform your solo party and try again.";
+				break;
+			case -4:
+				mes "The server has no free instance slots right now. Try again shortly.";
+				break;
+			default:
+				mes "Could not create the memorial dungeon. (Error: " + .@create + ")";
+				break;
+			}
+			close3;
+		}
+		if (.@mode == 1) {
+			mes "- ^0000FFEntry preparations have begun. Select Enter when ready.^000000 -";
+			close3;
 		}
 	}
-	if (instance_create(.@name$) < 0) {
-		mes "The party leader must create the instance.";
-		close;
+
+	if (instance_enter(.@name$) == IE_OK)
+		end;
+	if (.@mode == 2) {
+		mes "- ^0000FFThe memorial dungeon has not been created yet, or it is still loading. Prepare it first, wait a moment, then enter again.^000000 -";
+		close3;
 	}
-	switch (instance_enter(.@name$)) {
-	case IE_OK:
-		close;
-	case IE_NOMEMBER:
-		mes "Only party members can enter the memorial dungeon.";
-		close;
-	default:
-		mes "Unable to enter the memorial dungeon.";
-		close;
-	}
-	end;
+	mes "- ^0000FFThe memorial dungeon is still loading. Wait a moment and interact again.^000000 -";
+	close3;
 }
 
 function	script	F_ep20_startHoruru	{
@@ -766,22 +785,47 @@ icecastle,201,171,3	script	Lehar#ep20ms04	4_EP19_LEHAR,{
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "The exploration team is ready. This is a solo instance mission.";
-		mes "Enter the ^0000CDCanyon Exploration^000000 when prepared.";
+		mes "Create a one-person party, then prepare and enter ^0000CDCanyon Exploration^000000.";
 		next;
-		if (select( "Enter Canyon Exploration.", "Prepare more." ) == 2) {
-			mes "[Lehar]";
-			mes "Take your time. The gorge won't get any warmer.";
+		switch( select( "Prepare Canyon Exploration.", "Enter Canyon Exploration.", "I'm stuck / need help.", "Close." ) ) {
+		case 1:
+			if (!callfunc("F_ep20_instance_party_ok")) {
+				mes "[Lehar]";
+				mes "- ^0000FFOnly the leader of a one-person party can use the memorial dungeon.^000000 -";
+				mes "Use ^4D4DFF/organize PARTY NAME^000000 if you are not in a party yet.";
+				close3;
+			}
+			if (isbegin_quest(16701) == 1) {
+				callfunc("F_ep20_completequest", 16701);
+				callfunc("F_ep20_setquest", 16702);
+			}
+			close2;
+			cutin "",255;
+			callfunc("F_ep20_instance_enter", "Canyon Exploration", 1);
+			end;
+		case 2:
+			if (!callfunc("F_ep20_instance_party_ok")) {
+				mes "[Lehar]";
+				mes "- ^0000FFOnly the leader of a one-person party can use the memorial dungeon.^000000 -";
+				mes "Use ^4D4DFF/organize PARTY NAME^000000 if you are not in a party yet.";
+				close3;
+			}
+			if (isbegin_quest(16701) == 1) {
+				callfunc("F_ep20_completequest", 16701);
+				callfunc("F_ep20_setquest", 16702);
+			}
+			close2;
+			cutin "",255;
+			callfunc("F_ep20_instance_enter", "Canyon Exploration", 2);
+			end;
+		case 3:
+			close2;
+			cutin "",255;
+			callfunc("F_ep20_canyon_stuck_recover");
+			end;
+		case 4:
 			close3;
 		}
-		if (getcharid(1) < 1) {
-			mes "[Lehar]";
-			mes "Form a solo party first, then talk to me again.";
-			close3;
-		}
-		callfunc("F_ep20_completequest", 16701);
-		callfunc("F_ep20_setquest", 16702);
-		doevent "Canyon Exploration#ep20::OnStart";
-		close3;
 	}
 	if (ep20_main == 14) {
 		cutin "ep19_lehar01.png",2;
@@ -797,6 +841,8 @@ icecastle,201,171,3	script	Lehar#ep20ms04	4_EP19_LEHAR,{
 			warp "icas_in",259,200;
 			end;
 		case 2:
+			close2;
+			cutin "",255;
 			callfunc("F_ep20_canyon_stuck_recover");
 			end;
 		case 3:
@@ -810,13 +856,15 @@ icecastle,201,171,3	script	Lehar#ep20ms04	4_EP19_LEHAR,{
 		next;
 		if (select( "Enter Canyon Exploration.", "Cancel." ) == 2)
 			close3;
-		if (getcharid(1) < 1) {
+		if (!callfunc("F_ep20_instance_party_ok")) {
 			mes "[Lehar]";
 			mes "Form a solo party first, then talk to me again.";
 			close3;
 		}
-		doevent "Canyon Exploration#ep20::OnStart";
-		close3;
+		close2;
+		cutin "",255;
+		callfunc("F_ep20_instance_enter", "Canyon Exploration", 0);
+		end;
 	}
 	end;
 

@@ -14,20 +14,39 @@ function	script	F_ep20_canyon_clear	{
 	return;
 }
 
-// Recovery for players stuck after canyon (ep20_main == 14).
+// Recovery for players stuck on canyon entry (ep20_main == 13) or after (ep20_main == 14).
 function	script	F_ep20_canyon_stuck_recover	{
 	.@in_md = (instance_id() > 0);
+	.@party_id = getcharid(1);
+	.@party_ok = callfunc("F_ep20_instance_party_ok");
+	.@party_inst = instance_id(2);
+	.@q16701 = isbegin_quest(16701);
 	.@q16702 = isbegin_quest(16702);
 	.@q16703 = isbegin_quest(16703);
+
+	getpartymember .@party_id, 2;
 
 	cutin "ep19_lehar01.png",2;
 	mes "[Lehar]";
 	if (.@in_md) {
-		mes "You're still inside the canyon instance, but your report is already filed.";
+		mes "You're still inside the canyon instance.";
 		mes "I'll pull you out now.";
+	} else if (ep20_main == 13) {
+		mes "Having trouble entering the canyon? Let me check your status.";
 	} else {
 		mes "Let me check your canyon exploration records...";
 	}
+	next;
+
+	mes "[Lehar]";
+	mes "^777777--- Canyon status ---^000000";
+	mes "^777777ep20_main:^000000 " + ep20_main;
+	mes "^777777Party ID:^000000 " + .@party_id + "  ^777777members:^000000 " + $@partymembercount;
+	mes "^777777Solo party ready:^000000 " + ((.@party_ok) ? "^00CC00yes^000000" : "^FF0000no^000000");
+	mes "^777777Party leader:^000000 " + ((is_party_leader()) ? "^00CC00yes^000000" : "^FF0000no^000000");
+	mes "^777777Party instance:^000000 " + ((.@party_inst > 0) ? .@party_inst : "none");
+	mes "^777777Your instance:^000000 " + ((.@in_md) ? instance_id() : "none");
+	mes "^77777716701:^000000 " + .@q16701 + "  ^77777716702:^000000 " + .@q16702 + "  ^77777716703:^000000 " + .@q16703;
 	next;
 
 	if (.@in_md) {
@@ -38,6 +57,56 @@ function	script	F_ep20_canyon_stuck_recover	{
 		instance_destroy;
 		warp "icecastle",201,171;
 		end;
+	}
+
+	if (ep20_main == 13) {
+		switch( select( "Clear stale party instance.", "Prepare Canyon Exploration.", "Enter Canyon Exploration.", "Close." ) ) {
+		case 1:
+			if (!is_party_leader()) {
+				mes "[Lehar]";
+				mes "Only the party leader can clear a reserved memorial dungeon.";
+				close3;
+			}
+			if (.@party_inst <= 0) {
+				mes "[Lehar]";
+				mes "Your party has no reserved instance to clear.";
+				close3;
+			}
+			instance_destroy;
+			mes "[Lehar]";
+			mes "Cleared the stale party instance. Use Prepare, then Enter.";
+			close3;
+		case 2:
+			if (!.@party_ok) {
+				mes "[Lehar]";
+				mes "Create a one-person party with ^4D4DFF/organize^000000 first.";
+				close3;
+			}
+			if (isbegin_quest(16701) == 1) {
+				callfunc("F_ep20_completequest", 16701);
+				callfunc("F_ep20_setquest", 16702);
+			}
+			close2;
+			cutin "",255;
+			callfunc("F_ep20_instance_enter", "Canyon Exploration", 1);
+			end;
+		case 3:
+			if (!.@party_ok) {
+				mes "[Lehar]";
+				mes "Create a one-person party with ^4D4DFF/organize^000000 first.";
+				close3;
+			}
+			if (isbegin_quest(16701) == 1) {
+				callfunc("F_ep20_completequest", 16701);
+				callfunc("F_ep20_setquest", 16702);
+			}
+			close2;
+			cutin "",255;
+			callfunc("F_ep20_instance_enter", "Canyon Exploration", 2);
+			end;
+		case 4:
+			close3;
+		}
 	}
 
 	mes "[Lehar]";
@@ -60,7 +129,7 @@ function	script	F_ep20_canyon_stuck_recover	{
 
 	if (ep20_main < 14) {
 		mes "[Lehar]";
-		mes "^FF0000Warning:^000000 story progress (ep20_main) is below 14. A GM may need to fix this.";
+		mes "^FF0000Warning:^000000 story progress (ep20_main) is below 14.";
 		next;
 	}
 
@@ -68,7 +137,7 @@ function	script	F_ep20_canyon_stuck_recover	{
 		mes "[Lehar - GM Debug]";
 		mes "ep20_main = " + ep20_main;
 		mes "16702 = " + isbegin_quest(16702) + ", 16703 = " + isbegin_quest(16703);
-		mes "instance_id = " + instance_id();
+		mes "instance_id = " + instance_id() + ", party instance = " + instance_id(2);
 		next;
 		switch( select( "Warp to Miriam.", "Set ep20_main = 14.", "Close." ) ) {
 		case 1:
@@ -106,7 +175,11 @@ icecastle,1,1,0	script(CLOAKED)	Canyon Exploration#ep20	HIDDEN_WARP_NPC,{
 
 OnStart:
 	if (ep20_main != 13 && ep20_main < 100) end;
-	callfunc("F_ep20_instance_enter", "Canyon Exploration");
+	if (!callfunc("F_ep20_instance_party_ok")) {
+		mes "- ^0000FFCreate a one-person party first.^000000 -";
+		close3;
+	}
+	callfunc("F_ep20_instance_enter", "Canyon Exploration", 0);
 	end;
 }
 
