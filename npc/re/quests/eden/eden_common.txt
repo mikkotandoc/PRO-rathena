@@ -437,6 +437,20 @@ function	script	F_HasEdenGroupMark	{
 	return (countitem(6219) > 0 || countitem(22508) > 0);
 }
 
+// Matches pc_is_renewal_job in src/map/pc.hpp (3rd jobs + advanced extended classes).
+function	script	F_IsRenewalJob	{
+	.@eac = eaclass();
+	.@third = .@eac & EAJ_THIRDMASK;
+	if ((.@third >= EAJ_RUNE_KNIGHT && .@third <= EAJ_GUILLOTINE_CROSS) ||
+		(.@third >= EAJ_ROYAL_GUARD && .@third <= EAJ_SHADOW_CHASER))
+		return 1;
+	if (.@third == EAJ_SUPER_NOVICE_E || .@third == EAJ_STAR_EMPEROR || .@third == EAJ_SOUL_REAPER ||
+		(.@eac & EAJ_UPPERMASK) == EAJ_REBELLION || (.@eac & EAJ_UPPERMASK) == EAJ_KAGEROUOBORO ||
+		(.@eac & EAJ_BASEMASK) == EAJ_SUMMONER)
+		return 1;
+	return 0;
+}
+
 function	script	F_CleanupEdenBoardCooldown	{
 	.@start = getarg(0);
 	.@end = getarg(1);

@@ -164,7 +164,7 @@ moc_para01,110,83,4	script	Reno	967,{
         case 2:
             mes "[Reno]";
             
-            if (BaseLevel < 100 || Class < 4001) {
+            if (BaseLevel < 100 || !callfunc("F_IsRenewalJob")) {
                 mes "Access Denied.";
                 mes "Advanced weapons strictly require **Base Level 100** and a **Third Job or Advanced Extended Class**.";
                 close;
@@ -340,7 +340,7 @@ moc_para01,110,87,4	script	Lumin	813,{
             mes "[Lumin]";
             
             // STRICT REQUIREMENT BLOCK
-            if (BaseLevel < 100 || Class < 4001) {
+            if (BaseLevel < 100 || !callfunc("F_IsRenewalJob")) {
                 mes "Access Denied.";
                 mes "Advanced armor pieces strictly require **Base Level 100** and a **Third Job or Advanced Extended Class**.";
                 close;

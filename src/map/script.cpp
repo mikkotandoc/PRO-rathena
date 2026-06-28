@@ -18276,7 +18276,7 @@ BUILDIN_FUNC(callshop)
 		// flag the user as using a valid script call for opening the shop (for floating NPCs)
 		sd->state.callshop = 1;
 
-		if( nd->u.barter.extended ){
+		if( npc_barter_is_extended( *nd ) ){
 			clif_barter_extended_open( *sd, *nd );
 		}else{
 			clif_barter_open( *sd, *nd );

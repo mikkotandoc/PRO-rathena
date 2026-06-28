@@ -56,13 +56,13 @@ Body:
             Item: Play_RO_Gold_Coin_
             Amount: 4
       - Index: 1
-        Item: Enriched_Oridecon_Box5
+        Item: C_Enc_Oridecon_Box5
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 3
       - Index: 2
-        Item: Enriched_Elunium_Box
+        Item: C_Enriched_Elunium_Box
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
@@ -241,3 +241,15 @@ Body:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 60
+      - Index: 32
+        Item: M_BlitzShadow_Mix
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 68
+      - Index: 33
+        Item: Mammoth_Mix
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 75

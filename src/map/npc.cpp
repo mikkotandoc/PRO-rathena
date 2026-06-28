@@ -2303,7 +2303,7 @@ int32 npc_click(map_session_data* sd, npc_data* nd)
 			break;
 		case NPCTYPE_BARTER:
 			sd->npc_shopid = nd->id;
-			if( nd->u.barter.extended ){
+			if( npc_barter_is_extended( *nd ) ){
 				clif_barter_extended_open( *sd, *nd );
 			}else{
 				clif_barter_open( *sd, *nd );
@@ -3163,6 +3163,10 @@ uint8 npc_selllist(map_session_data* sd, int32 list_length, const PACKET_CZ_PC_S
 	}
 
 	return 0;
+}
+
+bool npc_barter_is_extended( const npc_data& nd ){
+	return nd.u.barter.extended || ( battle_config.feature_barter_force_extended && battle_config.feature_barter_extended );
 }
 
 e_purchase_result npc_barter_purchase( map_session_data& sd, std::shared_ptr<s_npc_barter> barter, std::vector<s_barter_purchase>& purchases ){

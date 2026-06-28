@@ -8,6 +8,19 @@ Header:
 Body:
   - Name: barter_pro_coins
     Items:
+      # Stackable container boxes (client allows bulk qty); replaces UniqueId base boxes.
+      - Index: 1
+        Item: C_Enc_Oridecon_Box5
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 3
+      - Index: 2
+        Item: C_Enriched_Elunium_Box
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 6
       # +20% on bonus / boost consumables
       - Index: 8
         Item: HE_Bubble_Gum
@@ -136,15 +149,39 @@ Body:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 2
-      # Refinement materials
       - Index: 42
+        Item: G_Red_Booster
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 12
+      - Index: 43
+        Item: G_Infinity_Drink
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 12
+      # Refinement materials
+      - Index: 44
         Item: HD_Bradium
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
-            Amount: 4
-      - Index: 43
+            Amount: 8
+      - Index: 45
         Item: HD_Carnium
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 8
+      - Index: 45
+        Item: HD_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 4
+      - Index: 45
+        Item: HD_Oridecon
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_

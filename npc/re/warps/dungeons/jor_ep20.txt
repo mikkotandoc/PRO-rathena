@@ -8,19 +8,19 @@
 
 // Snake's Nest <-> Snake God's Root 1F
 jor_nest,37,270,0	warp2	#to_jor_root1_from_nest	2,2,jor_root1,32,15
-jor_root1,32,8,0	warp2	#to_jor_nest_from_root1	2,2,jor_nest,40,265
+jor_root1,32,11,0	warp2	#to_jor_nest_from_root1	2,2,jor_nest,40,265
 
-// Snake God's Root 1F <-> 2F
-jor_root1,200,297,0	warp2	#to_jor_root2_from1	2,2,jor_root2,200,12
-jor_root2,200,8,0	warp2	#to_jor_root1_from2	2,2,jor_root1,200,290
+// Snake God's Root 1F <-> 2F (coords aligned to map_cache walkable cells)
+jor_root1,61,289,0	warp2	#to_jor_root2_from1	2,2,jor_root2,35,10
+jor_root2,35,7,0	warp2	#to_jor_root1_from2	2,2,jor_root1,61,286
 
-// Snake God's Root 2F <-> Deep Root Cave
-jor_root2,200,297,0	warp2	#to_jor_root3_from2	2,2,jor_root3,50,12
-jor_root3,50,8,0	warp2	#to_jor_root2_from3	2,2,jor_root2,200,290
+// Deep Root Cave <-> Frozen Scale Plains (field entrance at jor_back2)
+jor_back2,26,287,0	warp2	#to_jor_root3_from_back2	2,2,jor_root3,330,20
+jor_root3,330,14,0	warp2	#to_jor_back2_from3	2,2,jor_back2,26,284
 
-// Snake God's Root 2F <-> Safe Place 2 (upper route)
-jor_root2,239,243,0	warp2	#to_jor_safty2_from_root2	2,2,jor_safty2,77,362
-jor_safty2,77,357,0	warp2	#to_jor_root2_from_safty2	2,2,jor_root2,239,238
+// Snake God's Root 2F <-> Safe Place 2 (dest coords offset from warp tiles to avoid loop)
+jor_root2,235,241,0	warp2	#to_jor_safty2_from_root2	2,2,jor_safty2,74,365
+jor_safty2,74,361,0	warp2	#to_jor_root2_from_safty2	2,2,jor_root2,232,241
 
 // Snake Labyrinth <-> Sanctuary / Drift Ice / Twig's Nest
 jor_maze,150,12,0	warp2	#to_jor_sanct_from_maze	2,2,jor_sanct,150,290

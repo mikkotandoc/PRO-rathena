@@ -665,7 +665,7 @@ Body:
     TimeLimit: 3600
     Enter:
       Map: 1@20cn1
-      X: 350
+      X: 256
       Y: 75
     AdditionalMaps:
       1@20cn2: true

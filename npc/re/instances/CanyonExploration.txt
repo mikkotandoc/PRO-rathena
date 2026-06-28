@@ -215,7 +215,6 @@ OnIwinDone:
 	if ('cn_step != 1) end;
 	'cn_step = 2;
 	mapannounce 'map_cn1$,"Lehar: Mana surge ahead! Something is opening...",bc_map,0xFFFF00;
-	sleep2 1000;
 	enablenpc instance_npcname("Canyon Portal#ep20cn01");
 	specialeffect EF_PORTAL, AREA, instance_npcname("Canyon Portal#ep20cn01");
 	end;
@@ -237,7 +236,7 @@ OnSpawn:
 }
 
 // Step 1 - Entry briefing
-1@20cn1,350,75,3	script	Lehar#ep20cn00	4_EP19_LEHAR,{
+1@20cn1,256,75,3	script	Lehar#ep20cn00	4_EP19_LEHAR,{
 	if (ep20_main == 14) {
 		callfunc("F_ep20_canyon_stuck_recover");
 		end;
@@ -246,9 +245,37 @@ OnSpawn:
 	if ('cn_step > 0) {
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
-		mes "Follow the canyon road. Bottom, then right, then north.";
-		mes "Two Suspicious Iwin are posing as patrol guards.";
-		close3;
+		if ('cn_step == 1) {
+			mes "Follow the canyon road. Bottom, then right, then north.";
+			mes "Two Suspicious Iwin are posing as patrol guards.";
+			if (!('iwin_mask & 1)) {
+				mes "Check the patrol at <NAVI>[Suspicious Iwin]<INFO>" + 'map_cn1$ + ",276,82,0,000,0</INFO></NAVI> first.";
+				close2;
+				cutin "",255;
+				navigateto('map_cn1$, 276, 82, 0, 0);
+				end;
+			}
+			if (!('iwin_mask & 2)) {
+				mes "One more guard is near <NAVI>[Suspicious Iwin]<INFO>" + 'map_cn1$ + ",232,238,0,000,0</INFO></NAVI>.";
+				close2;
+				cutin "",255;
+				navigateto('map_cn1$, 232, 238, 0, 0);
+				end;
+			}
+			mes "Both patrols are checked. The portal is at <NAVI>[Canyon Portal]<INFO>" + 'map_cn1$ + ",241,252,0,000,0</INFO></NAVI>.";
+		} else {
+			mes "The mana surge opened a portal deeper in the canyon.";
+			mes "Enter the blue gate at <NAVI>[Canyon Portal]<INFO>" + 'map_cn1$ + ",241,252,0,000,0</INFO></NAVI>.";
+			if ('cn_step >= 2) {
+				enablenpc instance_npcname("Canyon Portal#ep20cn01");
+				specialeffect EF_PORTAL, AREA, instance_npcname("Canyon Portal#ep20cn01");
+			}
+		}
+		close2;
+		cutin "",255;
+		if (('cn_step == 1 && ('iwin_mask & 3) == 3) || 'cn_step >= 2)
+			navigateto('map_cn1$, 241, 252, 0, 0);
+		end;
 	}
 	cutin "ep19_lehar01.png",2;
 	mes "[Lehar]";
@@ -263,11 +290,12 @@ OnSpawn:
 	enablenpc instance_npcname("Suspicious Iwin#ep20cn01");
 	enablenpc instance_npcname("Suspicious Iwin#ep20cn02");
 	mapannounce 'map_cn1$,"Lehar: Find the two Suspicious Iwin along the canyon road.",bc_map,0xFFFF00;
+	navigateto('map_cn1$, 276, 82, 0, 0);
 	end;
 }
 
 // Suspicious Iwin (bottom-right and north)
-1@20cn1,378,82,3	script	Suspicious Iwin#ep20cn01	4_EP19_IWIN,{
+1@20cn1,276,82,3	script	Suspicious Iwin#ep20cn01	4_EP19_IWIN,{
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 1) end;
 	if ('iwin_mask & 1) {
 		mes "[Suspicious Iwin]";
@@ -281,12 +309,18 @@ OnSpawn:
 	mes "Wait. That Iwin salute was wrong. Keep watching the others.";
 	close2;
 	'iwin_mask |= 1;
-	if ('iwin_mask == 3)
+	if (!('iwin_mask & 2)) {
+		mapannounce 'map_cn1$,"Lehar: Check the other Suspicious Iwin farther north.",bc_map,0xFFFF00;
+		navigateto('map_cn1$, 232, 238, 0, 0);
+	}
+	if ('iwin_mask == 3) {
+		navigateto('map_cn1$, 241, 252, 0, 0);
 		donpcevent instance_npcname("#ep20cn_ctrl") + "::OnIwinDone";
+	}
 	end;
 }
 
-1@20cn1,332,338,3	script	Suspicious Iwin#ep20cn02	4_EP19_IWIN,{
+1@20cn1,232,238,3	script	Suspicious Iwin#ep20cn02	4_EP19_IWIN,{
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 1) end;
 	if ('iwin_mask & 2) {
 		mes "[Suspicious Iwin]";
@@ -300,30 +334,40 @@ OnSpawn:
 	mes "That one reeks of Rgan magic residue. We found them both.";
 	close2;
 	'iwin_mask |= 2;
-	if ('iwin_mask == 3)
+	if (!('iwin_mask & 1)) {
+		mapannounce 'map_cn1$,"Lehar: Check the other Suspicious Iwin along the lower road.",bc_map,0xFFFF00;
+		navigateto('map_cn1$, 276, 82, 0, 0);
+	}
+	if ('iwin_mask == 3) {
+		navigateto('map_cn1$, 241, 252, 0, 0);
 		donpcevent instance_npcname("#ep20cn_ctrl") + "::OnIwinDone";
+	}
 	end;
 }
 
 // Portal 1 - deeper canyon (after both Iwin)
-1@20cn1,346,352,0	script(CLOAKED)	Canyon Portal#ep20cn01	GATE_SKYBLUE,2,2,{
+1@20cn1,241,252,0	script	Canyon Portal#ep20cn01	GATE_SKYBLUE,2,2,{
 	end;
 
 OnTouch:
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 2) end;
 	enablenpc instance_npcname("Lehar#ep20cn02");
-	warp 'map_cn1$,168,248;
+	warp 'map_cn1$,240,248;
 	end;
 }
 
 // Step 2 - Bagot ambush
-1@20cn1,168,248,3	script	Lehar#ep20cn02	4_EP19_LEHAR,{
+1@20cn1,240,248,3	script	Lehar#ep20cn02	4_EP19_LEHAR,{
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 2) end;
 	if ('cn_step > 3) {
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "Bagot is manipulating the canyon mana. Talk to the white cat.";
-		close3;
+		mes "Nyar is at <NAVI>[Nyar]<INFO>" + 'map_cn1$ + ",240,245,0,000,0</INFO></NAVI>.";
+		close2;
+		cutin "",255;
+		navigateto('map_cn1$, 240, 245, 0, 0);
+		end;
 	}
 	cutin "ep19_lehar01.png",2;
 	mes "[Lehar]";
@@ -335,11 +379,14 @@ OnTouch:
 	cutin "",255;
 	'cn_step = 3;
 	enablenpc instance_npcname("Bagot#ep20cn01");
+	cloakoffnpc instance_npcname("Bagot#ep20cn01");
 	enablenpc instance_npcname("Nyar#ep20cn01");
+	cloakoffnpc instance_npcname("Nyar#ep20cn01");
+	navigateto('map_cn1$, 165, 241, 0, 0);
 	end;
 }
 
-1@20cn1,165,252,5	script(CLOAKED)	Bagot#ep20cn01	4_EP18_BAGOT,{
+1@20cn1,165,241,5	script(CLOAKED)	Bagot#ep20cn01	4_EP18_BAGOT,{
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 3) end;
 	mes "[Bagot]";
 	mes "Lasgand needs this canyon's mana. You are already too late.";
@@ -352,10 +399,11 @@ OnTouch:
 	close2;
 	disablenpc instance_npcname("Bagot#ep20cn01");
 	mapannounce 'map_cn1$,"Nyar: Follow me if you want to live.",bc_map,0xFFFF00;
+	navigateto('map_cn1$, 240, 245, 0, 0);
 	end;
 }
 
-1@20cn1,170,245,3	script(CLOAKED)	Nyar#ep20cn01	4_EP20_NYAR,{
+1@20cn1,240,245,3	script(CLOAKED)	Nyar#ep20cn01	4_EP20_NYAR,{
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 3) end;
 	mes "[Nyar]";
 	mes "Meow... the safe path is below. Hurry.";
@@ -366,22 +414,24 @@ OnTouch:
 	'cn_step = 4;
 	enablenpc instance_npcname("Canyon Portal#ep20cn02");
 	specialeffect EF_PORTAL, AREA, instance_npcname("Canyon Portal#ep20cn02");
+	navigateto('map_cn1$, 240, 242, 0, 0);
 	end;
 }
 
 // Portal 2 - lower canyon
-1@20cn1,172,242,0	script(CLOAKED)	Canyon Portal#ep20cn02	GATE_SKYBLUE,2,2,{
+1@20cn1,240,242,0	script	Canyon Portal#ep20cn02	GATE_SKYBLUE,2,2,{
 	end;
 
 OnTouch:
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 4) end;
 	enablenpc instance_npcname("Lehar#ep20cn03");
-	warp 'map_cn1$,355,72;
+	cloakoffnpc instance_npcname("Lehar#ep20cn03");
+	warp 'map_cn1$,255,72;
 	end;
 }
 
 // Step 3 - hiding Lehar / follow cat
-1@20cn1,355,72,1	script(CLOAKED)	Lehar#ep20cn03	4_EP19_LEHAR,3,3,{
+1@20cn1,255,72,1	script(CLOAKED)	Lehar#ep20cn03	4_EP19_LEHAR,3,3,{
 	end;
 
 OnTouch:
@@ -397,10 +447,12 @@ OnTouch:
 	cutin "",255;
 	'cn_step = 5;
 	enablenpc instance_npcname("Nyar#ep20cn02");
+	cloakoffnpc instance_npcname("Nyar#ep20cn02");
+	navigateto('map_cn1$, 258, 68, 0, 0);
 	end;
 }
 
-1@20cn1,358,68,3	script(CLOAKED)	Nyar#ep20cn02	4_EP20_NYAR,{
+1@20cn1,258,68,3	script(CLOAKED)	Nyar#ep20cn02	4_EP20_NYAR,{
 	if ((ep20_main != 13 && ep20_main < 100) || 'cn_step < 5) end;
 	mes "[Nyar]";
 	mes "Meow... this way. Stay close.";
@@ -411,11 +463,12 @@ OnTouch:
 	'cn_step = 6;
 	enablenpc instance_npcname("Canyon Portal#ep20cn03");
 	specialeffect EF_PORTAL, AREA, instance_npcname("Canyon Portal#ep20cn03");
+	navigateto('map_cn1$, 260, 65, 0, 0);
 	end;
 }
 
 // Portal 3 - final map
-1@20cn1,360,65,0	script(CLOAKED)	Canyon Portal#ep20cn03	GATE_SKYBLUE,2,2,{
+1@20cn1,260,65,0	script	Canyon Portal#ep20cn03	GATE_SKYBLUE,2,2,{
 	end;
 
 OnTouch:
@@ -441,8 +494,11 @@ OnTouch:
 	if ('cn_step >= 8) {
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
-		mes "Use the portal to leave and report to Miriam.";
-		close3;
+		mes "Use the portal at <NAVI>[Canyon Exit]<INFO>" + 'map_cn2$ + ",38,27,0,000,0</INFO></NAVI> to leave and report to Miriam.";
+		close2;
+		cutin "",255;
+		navigateto('map_cn2$, 38, 27, 0, 0);
+		end;
 	}
 	cutin "ep19_lehar01.png",2;
 	mes "[Lehar]";
@@ -459,10 +515,11 @@ OnTouch:
 	'cn_step = 8;
 	enablenpc instance_npcname("Canyon Exit#ep20cn01");
 	specialeffect EF_PORTAL, AREA, instance_npcname("Canyon Exit#ep20cn01");
+	navigateto('map_cn2$, 38, 27, 0, 0);
 	end;
 }
 
-1@20cn2,38,27,0	script(CLOAKED)	Canyon Exit#ep20cn01	GATE_SKYBLUE,2,2,{
+1@20cn2,38,27,0	script	Canyon Exit#ep20cn01	GATE_SKYBLUE,2,2,{
 	end;
 
 OnTouch:

@@ -23324,7 +23324,7 @@ void clif_parse_inventory_expansion_reject( int32 fd, map_session_data* sd ){
 
 void clif_barter_open( map_session_data& sd, npc_data& nd ){
 #if PACKETVER_MAIN_NUM >= 20190116 || PACKETVER_RE_NUM >= 20190116 || PACKETVER_ZERO_NUM >= 20181226
-	if( nd.subtype != NPCTYPE_BARTER || nd.u.barter.extended || sd.state.barter_open ){
+	if( nd.subtype != NPCTYPE_BARTER || npc_barter_is_extended( nd ) || sd.state.barter_open ){
 		return;
 	}
 
@@ -23413,7 +23413,7 @@ void clif_parse_barter_buy( int32 fd, map_session_data* sd ){
 	}
 
 	// It is an extended barter
-	if( nd->u.barter.extended ){
+	if( npc_barter_is_extended( *nd ) ){
 		return;
 	}
 
@@ -23478,7 +23478,7 @@ void clif_parse_barter_buy( int32 fd, map_session_data* sd ){
 
 void clif_barter_extended_open( map_session_data& sd, npc_data& nd ){
 #if PACKETVER_MAIN_NUM >= 20191120 || PACKETVER_RE_NUM >= 20191106 || PACKETVER_ZERO_NUM >= 20191127
-	if( nd.subtype != NPCTYPE_BARTER || !nd.u.barter.extended || sd.state.barter_extended_open ){
+	if( nd.subtype != NPCTYPE_BARTER || !npc_barter_is_extended( nd ) || sd.state.barter_extended_open ){
 		return;
 	}
 
@@ -23583,7 +23583,7 @@ void clif_parse_barter_extended_buy( int32 fd, map_session_data* sd ){
 	}
 
 	// Not an extended barter
-	if( !nd->u.barter.extended ){
+	if( !npc_barter_is_extended( *nd ) ){
 		return;
 	}
 

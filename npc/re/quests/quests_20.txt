@@ -955,21 +955,76 @@ jor_root1,32,34,3	script	Rgan Shaman#ep20ms01	4_EP19_RGAN_SR2,{
 		callfunc("F_ep20_completequest", 17692);
 		callfunc("F_ep20_setquest", 17693);
 		ep20_main = 17;
-		ep20_main = 17;
+		navigateto("jor_root1", 277, 75);
 		close;
 	}
 	if (ep20_main == 17 && isbegin_quest(17693) == 1) {
 		if (checkquest(17693,HUNTING) == 2) {
 			mes "[Lazy]";
-			mes "Good hunting. Let's talk inside the sanctuary.";
+			mes "Good hunting. Regroup with us at ^0000CDSafe Place 2^000000.";
 			callfunc("F_ep20_completequest", 17693);
 			callfunc("F_ep20_setquest", 17694);
 			ep20_main = 18;
-			close;
+			close2;
+			navigateto("jor_safty2", 74, 363);
+			end;
 		}
 		mes "[Lazy]";
-		mes "Hunt ^0000CD5 Superior Rgan Warlock^000000 in root1 and ^0000CD5 Ancient Rgan Restorer^000000 in root2.";
-		close;
+		mes "Hunt ^0000CD5 Superior Rgan Warlock^000000 on root1 and ^0000CD5 Jormungand Church Warlock^000000 on root2.";
+		next;
+		switch( select( "Mark root1 warlocks.", "Mark root2 warlocks.", "Reset hunt quest (bug fix).", "Close." ) ) {
+		case 1:
+			close2;
+			navigateto("jor_root1", 277, 75);
+			end;
+		case 2:
+			mes "[Lazy]";
+			mes "Use the ^0000CDportal at the southwest^000000 of this floor to reach root2.";
+			next;
+			close2;
+			navigateto("jor_root1", 61, 289);
+			end;
+		case 3:
+			erasequest 17693;
+			setquest 17693;
+			mes "[Lazy]";
+			mes "I reset your hunt log with the corrected targets.";
+			mes "Superior Rgan Warlock on root1, Jormungand Church Warlock on root2.";
+			close2;
+			navigateto("jor_root1", 277, 75);
+			end;
+		case 4:
+			close3;
+		}
+	}
+	if (getgmlevel() >= 60 && ep20_main >= 16 && ep20_main <= 18) {
+		mes "[Lazy - GM Debug]";
+		mes "^777777ep20_main:^000000 " + ep20_main;
+		mes "^77777717691:^000000 " + isbegin_quest(17691);
+		mes "^77777717692:^000000 " + isbegin_quest(17692);
+		mes "^77777717693:^000000 " + isbegin_quest(17693);
+		if (isbegin_quest(17693) == 1)
+			mes "^77777717693 hunt:^000000 " + checkquest(17693,HUNTING);
+		next;
+		switch( select( "Reset hunt quest 17693.", "Set ep20_main = 17.", "Close." ) ) {
+		case 1:
+			if (isbegin_quest(17693) == 1)
+				erasequest 17693;
+			setquest 17693;
+			ep20_main = 17;
+			mes "[Lazy - GM Debug]";
+			mes "Quest 17693 re-assigned. Hunt targets: Warlock (root1), Church Warlock (root2).";
+			close2;
+			navigateto("jor_root1", 277, 75);
+			end;
+		case 2:
+			ep20_main = 17;
+			mes "[Lazy - GM Debug]";
+			mes "ep20_main set to 17.";
+			close3;
+		case 3:
+			close3;
+		}
 	}
 	end;
 
@@ -980,22 +1035,133 @@ OnInit:
 	end;
 }
 
+// Main Quest: Chapter 20005 - Regroup at Safe Place 2 (after root hunt)
+jor_safty2,74,363,3	script	Lazy#ep20safty01	4_EP19_RGAN_SR3,{
+	callfunc("F_ep20_checkTransform","Lazy");
+	if (ep20_main < 17 || ep20_main > 19) {
+		mes "[Lazy]";
+		mes "This area is off limits for now.";
+		close;
+	}
+	if (ep20_main == 17 && isbegin_quest(17693) == 1 && checkquest(17693,HUNTING) == 2) {
+		mes "[Lazy]";
+		mes "Good hunting. Let's regroup here before the sanctuary.";
+		callfunc("F_ep20_completequest", 17693);
+		callfunc("F_ep20_setquest", 17694);
+		ep20_main = 18;
+		next;
+	}
+	if (ep20_main == 18 && isbegin_quest(17694) == 0) {
+		callfunc("F_ep20_setquest", 17694);
+	}
+	if (isbegin_quest(17694) == 1) {
+		mes "[Lazy]";
+		mes "Talk to Miriam and Horuru nearby before we enter Sacred Roots.";
+		next;
+		switch( select( "Mark Miriam.", "Mark Horuru.", "Close." ) ) {
+		case 1:
+			close2;
+			navigateto("jor_safty2", 76, 362);
+			end;
+		case 2:
+			close2;
+			navigateto("jor_safty2", 78, 361);
+			end;
+		case 3:
+			close;
+		}
+	}
+	if (isbegin_quest(17695) == 1) {
+		mes "[Lazy]";
+		mes "Speak to Horuru, then head to Sacred Roots.";
+		close2;
+		navigateto("jor_safty2", 78, 361);
+		end;
+	}
+	if (isbegin_quest(17696) == 1) {
+		mes "[Lazy]";
+		mes "Enter ^0000CDSacred Roots (jor_sanct)^000000 when you're ready.";
+		close2;
+		navigateto("jor_sanct", 162, 86);
+		end;
+	}
+	mes "[Lazy]";
+	mes "Stay close. We move as a group from here.";
+	close;
+
+OnInit:
+	cloakoffnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 18 && isbegin_quest(17694) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main == 18 && isbegin_quest(17695) == 1" );
+	questinfo( QTYPE_QUEST2, QMARK_YELLOW, "ep20_main == 18 && isbegin_quest(17696) == 1" );
+	end;
+}
+
+jor_safty2,76,362,3	script	Miriam#ep20safty01	4_EP18_MIRIAM,{
+	if (ep20_main < 17 || ep20_main > 19) end;
+	if (ep20_main != 18 || isbegin_quest(17694) != 1) {
+		mes "[Miriam]";
+		mes "Talk to Lazy first if you just arrived.";
+		close;
+	}
+	cutin "ep18_miriam_01.png",0;
+	mes "[Miriam]";
+	mes "Good work on the hunt. We need to infiltrate Lasgand's sanctuary next.";
+	callfunc("F_ep20_completequest", 17694);
+	callfunc("F_ep20_setquest", 17695);
+	close2;
+	cutin "",255;
+	navigateto("jor_safty2", 78, 361);
+	end;
+
+OnInit:
+	cloakoffnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 18 && isbegin_quest(17694) == 1" );
+	end;
+}
+
+jor_safty2,78,361,3	script	Horuru#ep20safty01	4_EP19_IWIN,{
+	if (ep20_main < 17 || ep20_main > 19) end;
+	if (ep20_main != 18 || isbegin_quest(17695) != 1) {
+		mes "[Horuru]";
+		mes "Miriam has something to discuss first.";
+		close;
+	}
+	cutin "ep19_iwin06.png",2;
+	mes "[Horuru]";
+	mes "Stay in Rgan form. Enter ^0000CDSacred Roots^000000 through the northern route.";
+	callfunc("F_ep20_completequest", 17695);
+	callfunc("F_ep20_setquest", 17696);
+	close2;
+	cutin "",255;
+	navigateto("jor_sanct", 162, 86);
+	end;
+
+OnInit:
+	cloakoffnpc strnpcinfo(0);
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 18 && isbegin_quest(17695) == 1" );
+	end;
+}
+
 // Main Quest: Chapter 20005 - jor_sanct infiltration (Steps 28+)
 jor_sanct,162,86,3	script	Rgan Guide#ep20ms01	4_EP19_RGAN_R3,{
 	callfunc("F_ep20_checkTransform","Rgan");
 	if (ep20_main < 18) end;
-	if (ep20_main == 18) {
+	if (ep20_main == 18 && isbegin_quest(17696) == 1) {
 		mes "[Rgan]";
 		mes "Lasgand's sanctuary... only faithful Rgans may enter.";
 		next;
 		mes "[Lazy]";
 		mes "Leave this to me. I'll scout ahead.";
-		callfunc("F_ep20_completequest", 17694);
-		callfunc("F_ep20_completequest", 17695);
 		callfunc("F_ep20_completequest", 17696);
 		callfunc("F_ep20_setquest", 17697);
 		ep20_main = 19;
 		callfunc("F_ep20_reward", 20, 90);
+		close;
+	}
+	if (ep20_main == 18) {
+		mes "[Rgan]";
+		mes "Only faithful Rgans may enter. Regroup with the party at ^0000CDSafe Place 2^000000 first.";
 		close;
 	}
 	if (ep20_main == 19) {
@@ -1007,7 +1173,7 @@ jor_sanct,162,86,3	script	Rgan Guide#ep20ms01	4_EP19_RGAN_R3,{
 	end;
 
 OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 18" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 18 && isbegin_quest(17696) == 1" );
 	end;
 }
 

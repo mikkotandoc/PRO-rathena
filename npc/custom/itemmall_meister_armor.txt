@@ -1,0 +1,59 @@
+//===== rAthena Script =======================================
+//= Item Mall - Meister Basic Armor Vendor
+//===== Description: =========================================
+//= Sells generic starter armor and Mechanic/Meister job gear
+//= on prt_mk (use @mall to warp there).
+//============================================================
+
+prt_mk,114,110,4	script	Meister Armorer#prt_mk	4_F_JOB_BLACKSMITH,{
+	mes "[Meister Armorer]";
+	mes "Need armor for the forge?";
+	mes "I carry generic starter pieces and full Mechanic / Meister job sets.";
+	next;
+	switch (select("Basic Equipment:Mechanic & Meister Gear:Quit")) {
+		case 1:
+			switch (select("Body Armor:Shields:Footwear & Garments:Accessories:Back")) {
+				case 1: callshop "im_mt_body", 1; break;
+				case 2: callshop "im_mt_shield", 1; break;
+				case 3: callshop "im_mt_feet", 1; break;
+				case 4: callshop "im_mt_acc", 1; break;
+				case 5: break;
+			}
+			break;
+		case 2:
+			switch (select("Body Armor:Garments:Shoes:Shields & Headgear:Back")) {
+				case 1: callshop "im_mt_job_body", 1; break;
+				case 2: callshop "im_mt_job_garment", 1; break;
+				case 3: callshop "im_mt_job_shoes", 1; break;
+				case 4: callshop "im_mt_job_misc", 1; break;
+				case 5: break;
+			}
+			break;
+		case 3:
+			close;
+	}
+	end;
+}
+
+// ----- Generic starter gear (all jobs) -----
+
+-	shop	im_mt_body	731,2304:10000,2306:15000,2308:15000,2322:15000,2310:45000
+-	shop	im_mt_shield	731,2101:5000,2102:12000
+-	shop	im_mt_feet	731,2404:10000,2406:18000,2504:10000
+-	shop	im_mt_acc	731,2618:10000
+
+// ----- Mechanic / Meister body armor (Lv 99-100) -----
+
+-	shop	im_mt_job_body	731,15079:75000,15110:80000,15111:90000,15179:150000
+
+// ----- Mechanic / Meister garments -----
+
+-	shop	im_mt_job_garment	731,20732:80000,20733:90000,20822:120000
+
+// ----- Mechanic / Meister shoes -----
+
+-	shop	im_mt_job_shoes	731,22024:65000,22043:80000,22044:90000
+
+// ----- Mechanic / Meister shield & headgear -----
+
+-	shop	im_mt_job_misc	731,2139:50000,5760:100000

@@ -1,0 +1,3 @@
+﻿file: C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\db\re\map_cache.dat size=28342 maps=8
+alberta 0x280 len=169541912
+truncated at map index 1 pos=169541938

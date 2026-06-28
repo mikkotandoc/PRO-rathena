@@ -13403,7 +13403,7 @@ Body:
     Targets:
       - Mob: EP20_RGAN_WARLOCK
         Count: 5
-      - Mob: EP20_JORGAN_HEALER
+      - Mob: EP20_JORGAN_WARLOCK
         Count: 5
   - Id: 17694
     Title: Infiltrating the Lair of Lergan
