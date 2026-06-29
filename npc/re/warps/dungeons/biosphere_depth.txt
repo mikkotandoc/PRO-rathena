@@ -20,6 +20,10 @@ OnTouch:
 		mes "^777777(ba_in01 292, 104)^000000";
 		close;
 	}
+	if (get_reputation_points(REPU_BIO_DEPTH1) < 2000) {
+		mes "^0000cdYou need at least 2000 Depth Biosphere 1st floor research reputation to access the Chess Garden.^000000";
+		close;
+	}
 	warp "ba_chess", 24, 24;
 	end;
 }
@@ -65,6 +69,10 @@ function	script	F_BiosphereDepth2Enter	{
 	if (isbegin_quest(16734) != 2) {
 		mes "^0000cdYou must complete the Depth Biosphere introduction with the Depth Research Manager first.^000000";
 		mes "^777777(ba_in01 292, 104)^000000";
+		close;
+	}
+	if (get_reputation_points(REPU_BIO_DEPTH1) < 2000) {
+		mes "^0000cdYou need at least 2000 Depth Biosphere 1st floor research reputation to enter the Time Dimension abyss.^000000";
 		close;
 	}
 	warp "bl_depth2", getarg(0), getarg(1);

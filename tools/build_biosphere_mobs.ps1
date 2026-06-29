@@ -151,13 +151,77 @@ foreach ($line in ($ecoCsv.Trim() -split "`n")) {
     $ecoYaml.Add((Convert-EcoMob $m))
 }
 
+function Convert-Depth2Mob {
+	param($m)
+	$atk = [int][Math]::Round((($m.AtkMin + $m.AtkMax) / 2) * 0.984)
+	$matk = [int][Math]::Round((($m.MatkMin + $m.MatkMax) / 2) * 0.949)
+	$walk = [Math]::Max(20, [int][Math]::Round(1000 / $m.Speed))
+	$motion = [Math]::Max(96, [int][Math]::Round(1000 / $m.Aspd))
+	$delay = [Math]::Max(96, [int]($motion * 0.2))
+	$yaml = @"
+  - Id: $($m.Id)
+    AegisName: $($m.AegisName)
+    Name: $($m.Name)
+    Level: $($m.Level)
+    Hp: $($m.Hp)
+    BaseExp: $($m.BaseExp)
+    JobExp: $($m.JobExp)
+    Attack: $atk
+    Attack2: $matk
+    Defense: $($m.Defense)
+    MagicDefense: $($m.MagicDefense)
+    Resistance: $($m.Resistance)
+    MagicResistance: $($m.MagicResistance)
+    Str: $($m.Str)
+    Agi: $($m.Agi)
+    Vit: $($m.Vit)
+    Int: $($m.Int)
+    Dex: $($m.Dex)
+    Luk: $($m.Luk)
+    AttackRange: $($m.AttackRange)
+    SkillRange: 10
+    ChaseRange: 12
+    Size: $($m.Size)
+    Race: $($m.Race)
+    Element: $($m.Element)
+    ElementLevel: $($m.ElementLevel)
+    WalkSpeed: $walk
+    AttackDelay: $delay
+    AttackMotion: $motion
+    DamageMotion: 432
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Drops:
+      - Item: $($m.CommonDrop)
+        Rate: 1500
+      - Item: Etel_Dust
+        Rate: 200
+"@
+	return $yaml
+}
+
+$depth2Kro = @(
+	[ordered]@{ Id=22252; AegisName='BIO_DUNEYRR'; Name='Abyss Duneyrr'; Level=265; Hp=166986400; BaseExp=6626510; JobExp=4615364; AtkMin=47506; AtkMax=70919; MatkMin=12034; MatkMax=21895; Defense=443; MagicDefense=171; Resistance=1725; MagicResistance=2009; Str=414; Agi=274; Vit=329; Int=265; Dex=368; Luk=352; AttackRange=2; Size='Large'; Race='Demihuman'; Element='Fire'; ElementLevel=3; Speed=7.69; Aspd=2.38; CommonDrop='Fur' }
+	[ordered]@{ Id=22253; AegisName='BIO_NAGA'; Name='Abyss Naga'; Level=265; Hp=181266750; BaseExp=6600885; JobExp=4597510; AtkMin=41543; AtkMax=61986; MatkMin=10459; MatkMax=18982; Defense=432; MagicDefense=167; Resistance=1651; MagicResistance=1923; Str=393; Agi=261; Vit=312; Int=252; Dex=350; Luk=334; AttackRange=2; Size='Large'; Race='Brute'; Element='Earth'; ElementLevel=2; Speed=6.67; Aspd=1.16; CommonDrop='Scales_Shell' }
+	[ordered]@{ Id=22254; AegisName='BIO_ANCIENT_TREE'; Name='Abyss Ancient Tree'; Level=265; Hp=164463460; BaseExp=6498899; JobExp=4526483; AtkMin=45258; AtkMax=67500; MatkMin=11944; MatkMax=21675; Defense=492; MagicDefense=190; Resistance=2066; MagicResistance=2401; Str=509; Agi=335; Vit=404; Int=326; Dex=448; Luk=433; AttackRange=1; Size='Large'; Race='Plant'; Element='Earth'; ElementLevel=2; Speed=5.00; Aspd=1.04; CommonDrop='Elder_Branch' }
+	[ordered]@{ Id=22255; AegisName='BIO_DOLLOCARIS'; Name='Abyss Dollocaris'; Level=265; Hp=178600800; BaseExp=6549636; JobExp=4561821; AtkMin=41198; AtkMax=61456; MatkMin=10497; MatkMax=19040; Defense=444; MagicDefense=172; Resistance=1734; MagicResistance=2019; Str=417; Agi=276; Vit=331; Int=267; Dex=370; Luk=354; AttackRange=1; Size='Medium'; Race='Fish'; Element='Earth'; ElementLevel=3; Speed=5.00; Aspd=0.95; CommonDrop="Scropion's_Nipper" }
+	[ordered]@{ Id=22256; AegisName='BIO_ICE_GARGOYLE'; Name='Abyss Ice Gargoyle'; Level=265; Hp=162858710; BaseExp=6595539; JobExp=4605240; AtkMin=35500; AtkMax=52941; MatkMin=11349; MatkMax=20594; Defense=255; MagicDefense=151; Resistance=851; MagicResistance=1915; Str=354; Agi=326; Vit=224; Int=298; Dex=443; Luk=364; AttackRange=11; Size='Medium'; Race='Demon'; Element='Water'; ElementLevel=3; Speed=6.67; Aspd=1.39; CommonDrop='Petite_DiablOfs_Wing' }
+	[ordered]@{ Id=22257; AegisName='BIO_FLAME_GHOST'; Name='Abyss Flame Ghost'; Level=265; Hp=159779165; BaseExp=6565544; JobExp=4583592; AtkMin=31327; AtkMax=46726; MatkMin=17705; MatkMax=32310; Defense=280; MagicDefense=314; Resistance=1067; MagicResistance=2177; Str=264; Agi=263; Vit=298; Int=402; Dex=385; Luk=402; AttackRange=3; Size='Medium'; Race='Undead'; Element='Fire'; ElementLevel=2; Speed=10.00; Aspd=1.10; CommonDrop='Skull' }
+	[ordered]@{ Id=22258; AegisName='BIO_ACIDUS_'; Name='Abyss Acidus'; Level=265; Hp=171678990; BaseExp=6690545; JobExp=4655421; AtkMin=34336; AtkMax=51209; MatkMin=13247; MatkMax=24048; Defense=592; MagicDefense=259; Resistance=2412; MagicResistance=1768; Str=325; Agi=288; Vit=442; Int=382; Dex=421; Luk=383; AttackRange=2; Size='Large'; Race='Dragon'; Element='Wind'; ElementLevel=2; Speed=5.00; Aspd=1.30; CommonDrop='Dragon_Canine' }
+	[ordered]@{ Id=22259; AegisName='BIO_MOROCC_1'; Name='Abyss Morocc Avatar'; Level=265; Hp=155392230; BaseExp=6652134; JobExp=4633211; AtkMin=49940; AtkMax=74569; MatkMin=12648; MatkMax=23033; Defense=444; MagicDefense=172; Resistance=1734; MagicResistance=2019; Str=417; Agi=276; Vit=331; Int=267; Dex=370; Luk=354; AttackRange=2; Size='Large'; Race='Angel'; Element='Dark'; ElementLevel=1; Speed=6.67; Aspd=2.08; CommonDrop='Dark_Debris' }
+	[ordered]@{ Id=22260; AegisName='BIO_SALAMANDER'; Name='Abyss Salamander'; Level=265; Hp=155742230; BaseExp=6575264; JobExp=4579669; AtkMin=50854; AtkMax=75905; MatkMin=13265; MatkMax=24142; Defense=480; MagicDefense=185; Resistance=1987; MagicResistance=2311; Str=487; Agi=321; Vit=387; Int=312; Dex=429; Luk=414; AttackRange=2; Size='Large'; Race='Formless'; Element='Fire'; ElementLevel=2; Speed=7.69; Aspd=3.33; CommonDrop='Burning_Heart' }
+	[ordered]@{ Id=22261; AegisName='BIO_MOSKILLO'; Name='Abyss Moskillo'; Level=265; Hp=155812230; BaseExp=6498388; JobExp=4526126; AtkMin=48782; AtkMax=72759; MatkMin=13071; MatkMax=23738; Defense=519; MagicDefense=200; Resistance=2257; MagicResistance=2623; Str=563; Agi=369; Vit=447; Int=361; Dex=493; Luk=478; AttackRange=1; Size='Medium'; Race='Insect'; Element='Wind'; ElementLevel=3; Speed=5.00; Aspd=1.16; CommonDrop='Round_Shell' }
+)
+
 $depth1 = (Get-Content $prFile -Encoding UTF8)[114951..115718]
 
-# Depth 2: always regenerate from tools/generate_bio_mobs.py (abyss jewels live in map_drops).
+# Depth 2: prefer Python generator; fall back to embedded kRO data when Python is unavailable.
 $depth2 = @()
 $pyScript = Join-Path $root 'tools\generate_bio_mobs.py'
 if (Test-Path $pyScript) {
-	$depth2Text = & python -c @"
+	try {
+		$depth2Text = & python -c @"
 import sys
 sys.path.insert(0, r'$root\tools')
 from generate_bio_mobs import DEPTH2_KRO, render_depth2
@@ -167,8 +231,14 @@ for mid, data in sorted(DEPTH2_KRO.items()):
     entry['Id'] = mid
     parts.append(render_depth2(entry))
 print('\n'.join(parts))
-"@
-	if ($depth2Text) { $depth2 = $depth2Text -split "`n" }
+"@ 2>$null
+		if ($depth2Text) { $depth2 = $depth2Text -split "`n" }
+	} catch {
+		# Python unavailable; use embedded fallback below.
+	}
+}
+if ($depth2.Count -eq 0) {
+	$depth2 = $depth2Kro | ForEach-Object { Convert-Depth2Mob $_ }
 }
 
 # Preserve non-biosphere import entries (e.g. EP21, Airship Crash MD_AIRBOAT_*)

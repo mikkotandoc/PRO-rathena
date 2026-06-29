@@ -34,6 +34,10 @@ OnInit:
 	.report_aid = 0;           // Account id to notify after manual run
 	.manual_run = 0;           // 1 when invoked by @macropatrol run
 
+	.current_cycle_id = 0;    // SQL macro_patrol_cycle.id for the active patrol run
+
+	.log_enabled = 1;          // Write patrol/challenge rows to macro_patrol_* tables
+
 	// Maps with Play_RO_Gold_Coin_ in GlobalDrops (db/re + db/import map_drops.yml)
 	// Regenerate: powershell tools/sync_macro_patrol_maps.ps1  (or node tools/sync_macro_patrol_maps.js)
 
@@ -177,6 +181,8 @@ OnAtcommand:
 
 		dispbottom "Answer is case-sensitive 4-letter word (e.g. WOLF, BEAR). Fail/timeout = jail.";
 
+		callsub(OnStartChallenge, "manual_test");
+
 		macro_detector getcharid(3);
 
 		end;
@@ -281,9 +287,13 @@ OnShowStatus:
 
 		dispbottom "Last cycle: " + (.@ago / 1000) + "s ago | players " + .last_players + " | eligible " + .last_eligible + " | checked " + .last_checked;
 
-	} else
+	} 	else
 
 		dispbottom "Last cycle: never (or since last @reloadscript).";
+
+
+
+	dispbottom "SQL logging: " + (.log_enabled ? "ON" : "OFF");
 
 
 
@@ -439,6 +449,12 @@ OnPatrol:
 
 
 
+	if (.log_enabled)
+
+		callsub(OnLogCycleStart, .@player_count, .@eligible_count);
+
+
+
 	if (.@player_count <= 0) {
 
 		callsub(OnReport);
@@ -501,6 +517,8 @@ OnPatrol:
 
 		#macro_patrol_next = gettimetick(2) + .player_cooldown_ms;
 
+		callsub(OnStartChallenge, "patrol");
+
 		macro_detector getcharid(3);
 
 		detachrid;
@@ -514,6 +532,12 @@ OnPatrol:
 
 
 	.last_checked = .@checked;
+
+
+
+	if (.log_enabled)
+
+		callsub(OnLogCycleFinish);
 
 
 
@@ -592,6 +616,122 @@ OnEligible:
 
 
 	return 1;
+
+
+
+OnLogCycleStart:
+
+	.@players = getarg(0);
+
+	.@eligible = getarg(1);
+
+	query_sql("INSERT INTO `macro_patrol_cycle` (`cycle_time`,`players_on_farm`,`eligible`,`manual_run`) VALUES (NOW()," + .@players + "," + .@eligible + "," + .manual_run + ")");
+
+	query_sql("SELECT LAST_INSERT_ID()", .@cycle_id);
+
+	if (getarraysize(.@cycle_id) > 0)
+
+		.current_cycle_id = .@cycle_id[0];
+
+	return;
+
+
+
+OnLogCycleFinish:
+
+	if (.current_cycle_id <= 0)
+
+		return;
+
+	query_sql("UPDATE `macro_patrol_cycle` SET `challenged` = " + .last_checked + " WHERE `id` = " + .current_cycle_id);
+
+	return;
+
+
+
+OnStartChallenge:
+
+	.@source$ = getarg(0);
+
+	#macro_patrol_active = 1;
+
+	#macro_patrol_challenge_id = 0;
+
+	if (!.log_enabled)
+
+		return;
+
+	.@aid = getcharid(3);
+
+	.@cid = getcharid(0);
+
+	.@name$ = escape_sql(strcharinfo(0));
+
+	.@map$ = escape_sql(strcharinfo(3));
+
+	query_sql("INSERT INTO `macro_patrol_challenge` (`cycle_id`,`challenge_time`,`account_id`,`char_id`,`char_name`,`map`,`base_level`,`job_level`,`source`) VALUES (" + .current_cycle_id + ",NOW()," + .@aid + "," + .@cid + ",'" + .@name$ + "','" + .@map$ + "'," + BaseLevel + "," + JobLevel + ",'" + escape_sql(.@source$) + "')");
+
+	query_sql("SELECT LAST_INSERT_ID()", .@log_id);
+
+	if (getarraysize(.@log_id) > 0)
+
+		#macro_patrol_challenge_id = .@log_id[0];
+
+	return;
+
+
+
+OnMacroDetectFail:
+
+	if (#macro_patrol_active <= 0)
+
+		end;
+
+	.@fail = #macro_patrol_fail_type;
+
+	.@result$ = "timeout";
+
+	if (.@fail == 1)
+
+		.@result$ = "disconnect";
+
+	else if (.@fail == 3)
+
+		.@result$ = "incorrect";
+
+	if (.log_enabled && #macro_patrol_challenge_id > 0)
+
+		query_sql("UPDATE `macro_patrol_challenge` SET `result` = '" + escape_sql(.@result$) + "', `result_time` = NOW(), `jail_minutes` = " + getbattleflag("macro_detection_punishment_time") + " WHERE `id` = " + #macro_patrol_challenge_id + " AND `result` = 'pending'");
+
+	#macro_patrol_active = 0;
+
+	#macro_patrol_challenge_id = 0;
+
+	#macro_patrol_fail_type = 0;
+
+	end;
+
+
+
+OnMacroDetectPass:
+
+	if (#macro_patrol_active <= 0)
+
+		end;
+
+	if (.log_enabled && #macro_patrol_challenge_id > 0)
+
+		query_sql("UPDATE `macro_patrol_challenge` SET `result` = 'passed', `result_time` = NOW() WHERE `id` = " + #macro_patrol_challenge_id + " AND `result` = 'pending'");
+
+	#macro_patrol_active = 0;
+
+	#macro_patrol_challenge_id = 0;
+
+	#macro_patrol_fail_type = 0;
+
+	end;
+
+
 
 }
 

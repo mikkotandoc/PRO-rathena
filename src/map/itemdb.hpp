@@ -3257,6 +3257,7 @@ enum e_random_item_group {
 	IG_C_PRO_GACHA_1,
 	IG_C_PRO_GACHA_2,
 	IG_ODIN_RELIC,
+	IG_DIMEN_W_BOX,
 
 	IG_MAX
 };

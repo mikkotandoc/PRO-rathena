@@ -124971,26 +124971,520 @@ Body:
 #    AegisName: E_PORING_2023
 #  - Id: 21945
 #    AegisName: E_LUNATIC_2023
-#  - Id: 21946
-#    AegisName: BURNING_KNIGHT
-#  - Id: 21947
-#    AegisName: DEDSERA
-#  - Id: 21948
-#    AegisName: HARDROCK_TITAN
-#  - Id: 21949
-#    AegisName: DEADWEEN
-#  - Id: 21950
-#    AegisName: GAIA_POL
-#  - Id: 21951
-#    AegisName: PUNCH_BUG
-#  - Id: 21952
-#    AegisName: AFERDE
-#  - Id: 21953
-#    AegisName: DISPOL
-#  - Id: 21954
-#    AegisName: TIMBERS
-#  - Id: 21955
-#    AegisName: RENIRE
+  - Id: 21946
+    AegisName: BURNING_KNIGHT
+    Name: Burning Night
+    Level: 265
+    Hp: 45319714
+    BaseExp: 1065428
+    JobExp: 890485
+    Attack: 15858
+    Attack2: 4486
+    Defense: 504
+    MagicDefense: 195
+    Resistance: 489
+    MagicResistance: 229
+    Str: 296
+    Agi: 249
+    Vit: 235
+    Int: 189
+    Dex: 256
+    Luk: 246
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Ghost
+    ElementLevel: 2
+    WalkSpeed: 180
+    AttackDelay: 612
+    AttackMotion: 576
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Blaze_Stone
+        Rate: 2350
+      - Item: Burning_Heart
+        Rate: 1750
+      - Item: Burning_Horse_Shoe
+        Rate: 2000
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Zelunium
+        Rate: 25
+      - Item: Burning_Knight_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21947
+    AegisName: DEDSERA
+    Name: Deadsera
+    Level: 262
+    Hp: 48836035
+    BaseExp: 995893
+    JobExp: 836550
+    Attack: 9914
+    Attack2: 3980
+    Defense: 409
+    MagicDefense: 230
+    Resistance: 348
+    MagicResistance: 268
+    Str: 180
+    Agi: 148
+    Vit: 172
+    Int: 180
+    Dex: 225
+    Luk: 172
+    AttackRange: 7
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Plant
+    Element: Undead
+    ElementLevel: 2
+    WalkSpeed: 1000
+    AttackDelay: 574
+    AttackMotion: 480
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Aromatic_Flower
+        Rate: 2350
+      - Item: Sticky_Poison
+        Rate: 1750
+      - Item: Root_Of_Maneater
+        Rate: 1000
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Zelunium
+        Rate: 25
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Dedsera_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21948
+    AegisName: HARDROCK_TITAN
+    Name: Hardrock Titan
+    Level: 263
+    Hp: 47874030
+    BaseExp: 1023843
+    JobExp: 855728
+    Attack: 13826
+    Attack2: 3845
+    Defense: 481
+    MagicDefense: 186
+    Resistance: 445
+    MagicResistance: 209
+    Str: 263
+    Agi: 222
+    Vit: 209
+    Int: 169
+    Dex: 228
+    Luk: 219
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 200
+    AttackDelay: 794
+    AttackMotion: 768
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Evil_Minded_Ruby
+        Rate: 2350
+      - Item: Great_Nature
+        Rate: 250
+      - Item: Stone_Heart
+        Rate: 2500
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Zelunium
+        Rate: 25
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Hardrock_Titan_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21949
+    AegisName: DEADWEEN
+    Name: Deadween
+    Level: 264
+    Hp: 50482947
+    BaseExp: 1054194
+    JobExp: 885523
+    Attack: 11955
+    Attack2: 4703
+    Defense: 410
+    MagicDefense: 231
+    Resistance: 347
+    MagicResistance: 278
+    Str: 179
+    Agi: 148
+    Vit: 171
+    Int: 179
+    Dex: 174
+    Luk: 171
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Brute
+    Element: Poison
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 505
+    AttackMotion: 480
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Congealed_Poison
+        Rate: 2350
+      - Item: Rotten_Meat
+        Rate: 1750
+      - Item: Animal's_Skin
+        Rate: 1500
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Zelunium
+        Rate: 25
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Deadween_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21950
+    AegisName: GAIA_POL
+    Name: Gaia Pol
+    Level: 270
+    Hp: 401194387
+    BaseExp: 1953747
+    JobExp: 1641148
+    MvpExp: 781499
+    Attack: 18052
+    Attack2: 7233
+    Defense: 435
+    MagicDefense: 247
+    Resistance: 410
+    MagicResistance: 322
+    Str: 207
+    Agi: 171
+    Vit: 197
+    Int: 207
+    Dex: 201
+    Luk: 197
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    Element: Earth
+    ElementLevel: 4
+    WalkSpeed: 200
+    AttackDelay: 625
+    AttackMotion: 576
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Crystal_Of_Pollution
+        Rate: 3000
+      - Item: Bs_Making_S
+        Rate: 3000
+      - Item: Old_Card_Album
+        Rate: 2000
+    Drops:
+      - Item: Evil_Black_Bid
+        Rate: 1800
+      - Item: Evil_Minded_Ruby
+        Rate: 1800
+      - Item: Animal's_Skin
+        Rate: 1500
+      - Item: Shadowdecon_Ore
+        Rate: 500
+      - Item: Zelunium_Ore
+        Rate: 500
+      - Item: Shadowdecon
+        Rate: 150
+      - Item: Zelunium
+        Rate: 150
+      - Item: Gaia_Pol_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21951
+    AegisName: PUNCH_BUG
+    Name: Punch Bug
+    Level: 262
+    Hp: 46915251
+    BaseExp: 999230
+    JobExp: 835156
+    Attack: 13521
+    Attack2: 3800
+    Defense: 486
+    MagicDefense: 188
+    Resistance: 457
+    MagicResistance: 214
+    Str: 272
+    Agi: 229
+    Vit: 216
+    Int: 174
+    Dex: 235
+    Luk: 227
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Insect
+    Element: Earth
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 658
+    AttackMotion: 576
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Fresh_Pear
+        Rate: 2250
+      - Item: Worm_Peelings
+        Rate: 250
+      - Item: Solid_Peeling
+        Rate: 3250
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Zelunium
+        Rate: 25
+      - Item: Punch_Bug_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21952
+    AegisName: AFERDE
+    Name: Aferde
+    Level: 264
+    Hp: 46254911
+    BaseExp: 1027707
+    JobExp: 863274
+    Attack: 11986
+    Attack2: 5321
+    Defense: 478
+    MagicDefense: 275
+    Resistance: 482
+    MagicResistance: 387
+    Str: 271
+    Agi: 223
+    Vit: 258
+    Int: 271
+    Dex: 263
+    Luk: 258
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Insect
+    Element: Wind
+    ElementLevel: 2
+    WalkSpeed: 170
+    AttackDelay: 794
+    AttackMotion: 768
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Slicky_Fluid
+        Rate: 2250
+      - Item: Short_Leg
+        Rate: 2668
+      - Item: Zargon
+        Rate: 600
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Zelunium
+        Rate: 25
+      - Item: Aferde_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21953
+    AegisName: DISPOL
+    Name: Dispol
+    Level: 263
+    Hp: 44652659
+    BaseExp: 1039283
+    JobExp: 872563
+    Attack: 10756
+    Attack2: 5849
+    Defense: 284
+    MagicDefense: 300
+    Resistance: 227
+    MagicResistance: 376
+    Str: 135
+    Agi: 146
+    Vit: 152
+    Int: 205
+    Dex: 183
+    Luk: 205
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Brute
+    Element: Holy
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 480
+    AttackMotion: 480
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Cool_Liquid
+        Rate: 2250
+      - Item: Moustache_Of_Mole
+        Rate: 4500
+      - Item: Nail_Of_Mole
+        Rate: 2500
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Zelunium
+        Rate: 25
+      - Item: Dispol_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21954
+    AegisName: TIMBERS
+    Name: Timbers
+    Level: 265
+    Hp: 47189684
+    BaseExp: 1043994
+    JobExp: 876955
+    Attack: 12304
+    Attack2: 5400
+    Defense: 472
+    MagicDefense: 271
+    Resistance: 469
+    MagicResistance: 377
+    Str: 262
+    Agi: 216
+    Vit: 249
+    Int: 262
+    Dex: 254
+    Luk: 249
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Neutral
+    ElementLevel: 4
+    WalkSpeed: 160
+    AttackDelay: 719
+    AttackMotion: 576
+    DamageMotion: 480
+    Ai: 04
+    Drops:
+      - Item: Whittling
+        Rate: 2250
+      - Item: Resin
+        Rate: 2000
+      - Item: Wooden_Block
+        Rate: 1500
+      - Item: Shadowdecon_Ore
+        Rate: 150
+      - Item: Zelunium_Ore
+        Rate: 150
+      - Item: Shadowdecon
+        Rate: 25
+      - Item: Zelunium
+        Rate: 25
+      - Item: Timbers_Card
+        Rate: 1
+        StealProtected: true
+  - Id: 21955
+    AegisName: RENIRE
+    Name: Renire
+    Level: 270
+    Hp: 384095393
+    BaseExp: 2006252
+    JobExp: 1760275
+    MvpExp: 802501
+    Attack: 17467
+    Attack2: 7456
+    Defense: 472
+    MagicDefense: 270
+    Resistance: 481
+    MagicResistance: 381
+    Str: 256
+    Agi: 211
+    Vit: 244
+    Int: 256
+    Dex: 248
+    Luk: 244
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Insect
+    Element: Water
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 598
+    AttackMotion: 576
+    DamageMotion: 480
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Mjo_Treasure
+        Rate: 3000
+      - Item: Bs_Making_S
+        Rate: 3000
+      - Item: Old_Card_Album
+        Rate: 2000
+    Drops:
+      - Item: Green_Crystal_Fragment
+        Rate: 1800
+      - Item: Cool_Liquid
+        Rate: 1800
+      - Item: Long_Limb
+        Rate: 2200
+      - Item: Shadowdecon_Ore
+        Rate: 500
+      - Item: Zelunium_Ore
+        Rate: 500
+      - Item: Shadowdecon
+        Rate: 150
+      - Item: Zelunium
+        Rate: 150
+      - Item: Renire_Card
+        Rate: 1
+        StealProtected: true
 #  - Id: 21956
 #    AegisName: G_BURNING_KNIGHT
 #  - Id: 21957

@@ -70,6 +70,7 @@ Footer:
   - Path: npc/re/merchants/barters/eden_market.yml
   - Path: npc/re/merchants/barters/biosphere.yml
   - Path: npc/re/merchants/barters/biosphere_depth1.yml
+  - Path: npc/re/merchants/barters/biosphere_depth2.yml
   - Path: npc/re/merchants/barters/clock_unknown_basement.yml
   - Path: npc/re/merchants/barters/constellation_tower.yml
   - Path: npc/re/merchants/barters/tower_remorse.yml

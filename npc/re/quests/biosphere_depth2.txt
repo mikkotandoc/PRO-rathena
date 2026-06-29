@@ -1,0 +1,214 @@
+//===== rAthena Script =======================================
+//= Varmundt's Depth Biosphere 2nd floor (Time Dimension)
+//===== Description: =========================================
+//= kRO/iRO Depth Abyss research quests and reputation.
+//===== Changelog: ===========================================
+//= 1.0 Initial implementation.
+//============================================================
+
+ba_chess,25,13,5	script	Depth Abyss Research Manager#b2	4_EP17_BASIC_B,{
+	if (BaseLevel < 250) {
+		mes "[Depth Abyss Research Manager]";
+		mes "The Time Dimension abyss is only open to adventurers with base level 250 or higher.";
+		close;
+	}
+	if (isbegin_quest(16734) != 2) {
+		mes "[Depth Abyss Research Manager]";
+		mes "Please speak with the Depth Research Manager in the Biosphere lobby first.";
+		mes "^777777(ba_in01 292, 104)^000000";
+		close;
+	}
+	if (get_reputation_points(REPU_BIO_DEPTH1) < 2000) {
+		mes "[Depth Abyss Research Manager]";
+		mes "You need at least ^0000cd2000^000000 Depth Biosphere 1st floor research reputation before I can assign abyss surveys.";
+		close;
+	}
+	if (isbegin_quest(16778) == 0) {
+		mes "[Depth Abyss Research Manager]";
+		mes "Welcome to the Chess Garden gateway. Beyond here lies the ^0000cdDepth Abyss^000000, a Time Dimension space even more distorted than Depth 1.";
+		next;
+		mes "[Depth Abyss Research Manager]";
+		mes "Monsters inside are far stronger. Teleportation and saving do not work there, and many support effects are stripped upon entry.";
+		next;
+		mes "[Depth Abyss Research Manager]";
+		mes "Complete my surveys to earn abyss research reputation and materials for Time Dimension equipment.";
+		setquest 16778;
+		completequest 16778;
+		close;
+	}
+	mes "[Depth Abyss Research Manager]";
+	mes "Would you like to take on an abyss research request?";
+	next;
+	switch( select( "Depth abyss sample study (450)", "Depth abyss bulk study (3000)", "Receive all specimen studies", "Receive individual specimen study", "Cancel" ) ) {
+	case 1:
+		callsub F_Depth2Daily;
+	case 2:
+		callsub F_Depth2Bulk;
+	case 3:
+		callsub S_allquest, 16781;
+	case 4:
+		.@s = select( "Demihuman (Duneyrr)", "Brute (Naga)", "Plant (Ancient Tree)", "Fish (Dollocaris)", "Demon (Ice Gargoyle)", "Undead (Flame Ghost)", "Dragon (Acidus)", "Angel (Morocc Avatar)", "Formless (Salamander)", "Insect (Moskillo)", "Cancel" );
+		if (.@s == 11)
+			close;
+		callsub S_Quest, 16781, .@s;
+	case 5:
+		close;
+	}
+	end;
+
+F_Depth2Daily:
+	switch( checkquest(16780, PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Depth Abyss Research Manager]";
+		mes "You have already completed today's ^0000cdDepth Abyss sample study^000000.";
+		close;
+	case 2:
+		erasequest 16780;
+		break;
+	}
+	switch( checkquest(16779, HUNTING) ) {
+	case -1:
+		setquest 16779;
+		mes "[Depth Abyss Research Manager]";
+		mes "Hunt ^0000cd450^000000 monsters anywhere in Depth Level 2, then report back.";
+		close;
+	case 0:
+	case 1:
+		mes "[Depth Abyss Research Manager]";
+		mes "Keep hunting in the abyss until you reach 450 kills.";
+		close;
+	case 2:
+		erasequest 16779;
+		setquest 16780;
+		getitem Time_D_Ma_Rune, 1;
+		getexp 1000000000, 600000000;
+		add_reputation_points REPU_BIO_DEPTH2, 20;
+		if (get_reputation_points(REPU_BIO_DEPTH2) >= 5000 && isbegin_quest(16801) == 0) {
+			setquest 16801;
+			completequest 16801;
+		}
+		mes "[Depth Abyss Research Manager]";
+		mes "Excellent work. Here is your Time Dimension research reward.";
+		close;
+	}
+	end;
+
+F_Depth2Bulk:
+	switch( checkquest(90519, PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[Depth Abyss Research Manager]";
+		mes "The bulk abyss survey is still on cooldown.";
+		close;
+	case 2:
+		erasequest 90519;
+		break;
+	}
+	switch( checkquest(90518, HUNTING) ) {
+	case -1:
+		setquest 90518;
+		mes "[Depth Abyss Research Manager]";
+		mes "Hunt ^0000cd3000^000000 monsters in Depth Level 2. Take your time; this is a large survey.";
+		close;
+	case 0:
+	case 1:
+		mes "[Depth Abyss Research Manager]";
+		mes "Return when you have hunted 3000 abyss monsters.";
+		close;
+	case 2:
+		erasequest 90518;
+		setquest 90519;
+		getitem Bl_Depth_Ev_2, 1;
+		for (.@i = 0; .@i < 50; ++.@i)
+			getexp 331051392, 0;
+		add_reputation_points REPU_BIO_DEPTH2, 100;
+		if (get_reputation_points(REPU_BIO_DEPTH2) >= 5000 && isbegin_quest(16801) == 0) {
+			setquest 16801;
+			completequest 16801;
+		}
+		mes "[Depth Abyss Research Manager]";
+		mes "Remarkable dedication. Please accept this abyss rune box.";
+		close;
+	}
+	end;
+
+S_allquest:
+	.@base = getarg(0);
+	setarray .@label$[0], "Demihuman", "Brute", "Plant", "Fish", "Demon", "Undead", "Dragon", "Angel", "Formless", "Insect";
+	for (.@i = 0; .@i < 10; ++.@i) {
+		.@hunt = .@base + (.@i * 2);
+		.@wait = .@hunt + 1;
+		switch( checkquest(.@wait, PLAYTIME) ) {
+		case 0:
+		case 1:
+			mes .@label$[.@i] + " specimen study ^FF0000on cooldown^000000";
+			continue;
+		case 2:
+			erasequest .@wait;
+			break;
+		}
+		switch( checkquest(.@hunt, HUNTING) ) {
+		case -1:
+			mes .@label$[.@i] + " specimen study ^0000cdaccepted^000000";
+			setquest .@hunt;
+			break;
+		case 0:
+		case 1:
+		case 2:
+			mes .@label$[.@i] + " specimen study ^FF0000in progress^000000";
+			break;
+		}
+	}
+	close;
+
+S_Quest:
+	.@base = getarg(0);
+	.@s = getarg(1);
+	.@hunt = .@base + ((.@s - 1) * 2);
+	.@wait = .@hunt + 1;
+	switch( checkquest(.@wait, PLAYTIME) ) {
+	case 0:
+	case 1:
+		mes "[Depth Abyss Research Manager]";
+		mes "That specimen study is still on cooldown.";
+		close;
+	case 2:
+		erasequest .@wait;
+		break;
+	}
+	switch( checkquest(.@hunt, HUNTING) ) {
+	case -1:
+		setquest .@hunt;
+		mes "[Depth Abyss Research Manager]";
+		mes "Hunt ^0000cd25^000000 of the requested abyss monster, then return.";
+		close;
+	case 0:
+	case 1:
+		mes "[Depth Abyss Research Manager]";
+		mes "Keep hunting until you reach the specimen target.";
+		close;
+	case 2:
+		erasequest .@hunt;
+		setquest .@wait;
+		getitem Abyss_Rune_Ore, 1;
+		getexp 248288528, 0;
+		add_reputation_points REPU_BIO_DEPTH2, 2;
+		if (get_reputation_points(REPU_BIO_DEPTH2) >= 5000 && isbegin_quest(16801) == 0) {
+			setquest 16801;
+			completequest 16801;
+		}
+		mes "[Depth Abyss Research Manager]";
+		mes "Thank you. Here is your specimen research reward.";
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Depth Abyss>";
+	end;
+}
