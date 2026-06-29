@@ -43,6 +43,17 @@ Header:
   Type: MOB_AVAIL_DB
   Version: 1
 
+Body:
+  # Training Zone player dummies (tra_fild01/02/03)
+  # Native s_dummy_* sprites work for most dummies; player-shaped dummies
+  # need job sprite fallbacks to avoid client gravity errors.
+  - Mob: S_DUMMY_100_DORAMP
+    Sprite: JOB_SUMMONER
+    Sex: Female
+  - Mob: S_DUMMY_100_HUMANP
+    Sprite: JOB_NOVICE
+    Sex: Male
+
 #Body:
   # Examples
 #  - Mob: PORING

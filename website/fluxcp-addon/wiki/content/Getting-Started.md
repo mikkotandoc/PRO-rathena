@@ -2,7 +2,7 @@
 
 [← Back to Home](Home.md)
 
-Your first hour on **PRO-Ragnarok (Cathode)** — a Renewal server with **150x EXP** and **100x drops**.
+Your first hours on **PRO-Ragnarok (Cathode)** — a Renewal server with **150x EXP** and **100x drops**.
 
 ---
 
@@ -33,8 +33,7 @@ Download the client and patcher from the website. Follow the install guide on th
 
 - [ ] Set and remember your **pincode**
 - [ ] Talk to **Healer** — `prontera 162,193` (free heal + buffs + identify)
-- [ ] Open **Warper** — `prontera 159,192` and pick a leveling map
-- [ ] Register **Eden Group** at `moc_para01` for beginner missions & Paradise gear
+- [ ] **Join Eden Group** at `moc_para01` — see [Leveling Guide](#leveling-guide-recommended) below
 - [ ] Use **Job Master** — `prontera 153,193` at BL 1 / JL 10 for 1st job
 - [ ] Enable `@autoloot` and configure `@alootid` or `@alootid2`
 - [ ] Check `@playtime` — earn shop points while playing (not while vending)
@@ -42,56 +41,122 @@ Download the client and patcher from the website. Follow the install guide on th
 
 ---
 
-## Leveling Guide (Suggested)
+## Leveling Guide (Recommended)
 
-With **150x EXP**, leveling is fast. Use the **Warper** for safe routes. Confirm mob levels on [Divine Pride](https://www.divine-pride.net/database/monster).
+### Eden Group quests are the fastest path
 
-| Level Range | Suggested Areas | Notes |
-|-------------|-----------------|-------|
-| **1–10** | Intro / `iz_dun00` / Prontera fields | Job change at BL 1 / JL 10 |
-| **10–30** | Payon Cave, Ant Hell, Orc Dungeon | Use healer freely |
-| **30–50** | Clock Tower B1, Mjolnir Dead Pit, Sphinx | Eden missions help gear |
-| **50–70** | Geffen Dungeon, Orc Village 2F, Toy Factory | 2nd job at JL 40 |
-| **70–99** | Glast Heim Churchyard, Juno fields, Magma Dungeon | Rebirth at BL 99 / JL 50 |
-| **99–130** | Rachel Sanctuary, Nameless Island, Brasilis | 3rd job at BL 99 / JL 50 |
-| **130–175** | Episode 17 fields, Illusion dungeons | Instance Merchant barters |
-| **175–200** | Episode 18–19 areas, Biosphere biomes | Episode Guide warps |
-| **200–250** | Episode 20, endgame instances | 4th job at BL **200** / JL **70** |
-| **250–275** | Biosphere Depth, Corridor of Phantoms, MVPs | Daily hunts & party content |
+On PRO-Ragnarok, **Eden Group hunting missions** are the best way to level. Each completed mission pays a large lump of **Base EXP and Job EXP** that scales with the server rate — far more efficient than grinding random mobs in the open field, especially while you are learning the game.
 
-**Tip:** `@mobinfo <name>` and `@whodrops <item>` help you find farming spots.
+Eden missions also reward **Eden Group Coins** (spend at the Eden Coin Trader) and unlock **Paradise equipment** as you progress.
+
+> **Best practice:** Register with Eden, pick up every mission your level board offers, complete them, turn them in, and repeat. Use the Warper only to reach hunt areas — not as your primary EXP source.
 
 ---
 
-## Job Progression
+### Step 1 — Join the Eden Group
 
-**Job Master** — `prontera 153,193`
+| Step | Action |
+|------|--------|
+| 1 | Warp to **Eden Group HQ** — map `moc_para01` (Warper → Eden Group, or Kafra Teleport Officer inside HQ) |
+| 2 | Talk to **Secretary Lime Evenor** at `moc_para01 27,35` |
+| 3 | Complete registration and receive your **Eden Group Mark** |
+| 4 | Optional: speak with **Instructor Boya** (`25,35`) for beginner training quests and free Paradise uniform gear |
+
+Without the Eden Group Mark, mission boards will not give you assignments.
+
+---
+
+### Step 2 — Find your mission board
+
+All hunting boards are on the **2nd floor mission wing** of Eden HQ (`moc_para01`, around `35–45, 38`). Use **Eden HQ Guide** (`51,39`) for escorts if you get lost.
+
+| Board | Minimum Base Level | Coordinates |
+|-------|-------------------|-------------|
+| Mission [1~39] | 1 | `35, 38` |
+| Mission [11–25] | 11 | `36, 38` |
+| Mission [26–40] | 26 | `38, 38` |
+| Mission [40~69] | 40 | `37, 38` |
+| Mission [41–55] | 41 | `40, 38` |
+| Mission [56–70] | 56 | `42, 38` |
+| Mission [70~99] | 70 | `39, 38` |
+| Mission [100~110] | 100 | `41, 38` |
+| Mission [120~140] | 120 | `43, 38` |
+| Mission [130~190] | 130 | `45, 38` |
+
+When you outlevel a board, move to the next one on the same floor. Boards enforce a minimum base level — you cannot take missions above your bracket.
+
+---
+
+### Step 3 — Daily Eden loop
+
+This is the core leveling routine from **level 1 through ~190**:
+
+1. **Accept missions** — open your level board, pick hunt targets, register each quest.
+2. **Hunt** — defeat the required monsters. Use `@autoloot` and the **Warper** to reach the field or dungeon listed on the quest.
+3. **Turn in** — return to the **same board** and choose **Turn in Completed Missions**. You receive Base EXP, Job EXP, and sometimes Eden Coins.
+4. **Repeat** — pick up the next available mission on that board or a neighbouring board you qualify for.
+5. **Heal & rebuff** — warp to Prontera Healer (`162,193`) between runs; death costs 1% current-level EXP.
+
+Each individual mission has a **24-hour cooldown** after turn-in. While one quest is cooling down, accept others from the same board so you always have active hunts.
+
+**Eden Coin Trader** (`108,35`) — trade coins for EXP manuals, buff potions, heals, and warp tools to speed up your loop.
+
+---
+
+### Step 4 — Gear while you level
+
+| Source | Location | Notes |
+|--------|----------|-------|
+| Paradise weapons & armor | `moc_para01` — Mala / Reno / Lumin / Lucy (`110,79~`) | Eden mission rewards |
+| Instructor Boya training | `25,35` | Early uniform set after training quests |
+| Eden Coin Trader | `108,35` | Supplies and manuals |
+| Booster weapons | Centro — `prontera 166,300` | Mid-game shortcut once you have Booster Coins |
+| Item Mall | `prt_mk` via Warper | Basic gear |
+
+Do not skip Paradise gear — it keeps you alive while clearing Eden hunts.
+
+---
+
+### Step 5 — Job changes (do not delay)
+
+Visit **Job Master** — `prontera 153,193` as soon as you meet each threshold. Higher job level unlocks more skills, which makes Eden hunts faster.
 
 | Step | Requirement |
 |------|-------------|
 | 1st class | BL 1 / JL 10 |
 | 2nd class | BL 1 / JL 40 |
-| Rebirth | BL 99 / JL 50 |
+| Rebirth (Trans) | BL 99 / JL 50 |
 | 3rd class | BL 99 / JL 50 |
 | 4th class | BL **200** / JL **70** |
 
 **Platinum skills:** `prontera 128,200` — free quest skills for your class.
 
-Supports normal, transcendent, 3rd, **4th**, baby, and expanded classes (Gunslinger, Ninja, Summoner, etc.).
-
-→ [Classes & Skills](Classes.md)
+→ Full rebalance notes: [Classes & Skills](Classes.md)
 
 ---
 
-## Early Gear Path
+### Level bracket roadmap
 
-1. **Eden Group** — Paradise weapons & armor (`moc_para01`)
-2. **Booster weapons** — Centro with Booster Coins (`prontera 166,300`)
-3. **Item Mall** — basic gear on `prt_mk` (Warper → Item Mall)
-4. **Illusion gear** — Instance Merchant (`prontera 164,172`)
-5. **PRO-Asia Coins** — farm on designated field maps → Earl shop
+Use Eden boards as your **primary** EXP source at every stage. Supplement with open-field hunting only when boards are on cooldown or you need specific drops.
 
-→ [Items & Equipment](Items-and-Equipment.md)
+| Level Range | Primary method | Secondary (cooldown / drops) |
+|-------------|--------------|------------------------------|
+| **1–39** | Eden board [1~39] | Instructor Boya training quests |
+| **40–69** | Eden board [40~69] | Shipwreck, Orc Dungeon, Payon Cave |
+| **70–99** | Eden board [70~99] | Glast Heim, Magma Dungeon, Juno fields |
+| **100–119** | Eden board [100~110] | Nogg Road, Thanatos, Juperos hunts |
+| **120–129** | Eden board [120~140] | Rachel Sanctuary, Nameless Island |
+| **130–175** | Eden board [130~190] | Episode 17 fields — see [Instance Guide](Instance-Guide.md) |
+| **175–200** | Eden + Episode 18–19 | [Instance Guide](Instance-Guide.md) for MD steps |
+| **200–250** | Episode 20, instances | 4th job at BL 200 / JL 70 |
+| **250–275** | Biosphere Depth, Corridor of Phantoms | Daily hunts, MVP parties |
+
+**Tips:**
+
+- `@mobinfo <name>` — confirm monster level and element before hunting.
+- `@exp` — check how close you are to the next level.
+- `@rates` — confirm live server rates in-game.
+- Party up for 175+ content; Eden solo remains viable well into mid-game.
 
 ---
 
@@ -102,6 +167,7 @@ Supports normal, transcendent, 3rd, **4th**, baby, and expanded classes (Gunslin
 | `@rates` | Show server rates |
 | `@autoloot` | Pick up all drops automatically |
 | `@alootid +<id>` | Autoloot one item ID |
+| `@alootid2` | Extended autoloot groups (10 × 10 items) |
 | `@go prontera` | Warp to town |
 | `@exp` | EXP to next level |
 | `@playtime` | Playtime point progress |
@@ -114,4 +180,5 @@ Supports normal, transcendent, 3rd, **4th**, baby, and expanded classes (Gunslin
 ## See Also
 
 - [Home](Home.md) · [Server Information](Server-Information.md)
-- [NPCs & Merchants](NPCs-and-Merchants.md) · [Custom Systems](Custom-Systems.md)
+- [Instance & Episode Guide](Instance-Guide.md) · [NPCs & Merchants](NPCs-and-Merchants.md) · [Custom Systems](Custom-Systems.md)
+- [Items & Equipment](Items-and-Equipment.md) · [Dungeons & Instances](Dungeons.md)

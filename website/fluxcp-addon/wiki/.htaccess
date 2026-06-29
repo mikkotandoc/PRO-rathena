@@ -5,6 +5,9 @@
 	# If the wiki lives in a subdirectory, set RewriteBase accordingly, e.g.:
 	# RewriteBase /wiki/
 
+	# Legacy / bookmarked markdown URLs → PHP router
+	RewriteRule ^([A-Za-z0-9_-]+)\.md/?$ index.php?page=$1 [L,QSA]
+
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^page/([A-Za-z0-9_-]+)/?$ index.php?page=$1 [L,QSA]

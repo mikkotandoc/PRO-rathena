@@ -2,63 +2,65 @@
 
 [← Back to Home](Home.md)
 
-Detailed server mechanics sourced from `conf/battle/` and `src/config/`.
+Mechanics and rates for **PRO-Ragnarok (Cathode)**.
 
 ---
 
 ## General
 
-| Setting | Value | Config Source |
-|---------|-------|---------------|
-| Server mode | Renewal | `src/config/renewal.hpp` |
-| Max Base Level | 275 | `db/re/job_exp.yml` |
-| Max Job Level | 10–70 (varies by class) | `db/re/job_exp.yml` |
-| PK Mode | Off | `conf/battle/misc.conf` |
-| Multi-level up | Off | `conf/battle/exp.conf` |
+| Setting | Value |
+|---------|-------|
+| Display / brand | PRO-Ragnarok |
+| Char server name | **Cathode** |
+| Game mode | Renewal |
+| Client date | **2021-11-03** |
+| Max base level | **275** |
+| Max job level | **10–70** (varies by class) |
+| PK mode | Off |
+| Multi-level up | **Yes** — multiple level-ups per kill possible |
+| Pincode | **Forced** on login |
+| Character slots | Up to **9** per account |
+| Char delete delay | **1 second** (birthdate required) |
 
 ---
 
 ## Experience Rates
 
-| Type | Rate | Config Key |
-|------|------|------------|
-| Base EXP | **450x** | `base_exp_rate: 45000` |
-| Job EXP | **450x** | `job_exp_rate: 45000` |
-| MVP EXP bonus | 100% (1x modifier) | `mvp_exp_rate: 100` |
-| Quest EXP | 100% | `quest_exp_rate: 100` |
-| Party EXP bonus | +25% per extra attacker (max 12) | `exp_bonus_attacker: 25` |
+| Type | Rate | Notes |
+|------|------|-------|
+| Base EXP | **150x** | |
+| Job EXP | **150x** | |
+| MVP EXP modifier | 1x | |
+| Quest EXP | 1x | |
+
+### Eden Group Quest EXP
+
+Eden hunting missions pay **scaled Base EXP and Job EXP** on turn-in. Rewards multiply with the server EXP rate — Eden boards are the most efficient leveling path for new and mid-level characters. See [Getting Started → Leveling Guide](Getting-Started.md#leveling-guide-recommended).
 
 ### Death Penalty
 
 | Setting | Value |
 |---------|-------|
-| Type | Lose % of **current level** EXP |
-| Base EXP loss | 1% per death |
-| Job EXP loss | 1% per death |
-| Zeny loss on PvP death | 0% |
+| Type | Lose % of current level EXP |
+| Base EXP lost | **1%** per death |
+| Job EXP lost | **1%** per death |
+| Zeny lost (PvP) | **0%** |
 
 ---
 
 ## Drop Rates
 
-All rates use rAthena's `item_rate_*` system where **100 = 1x** official.
+| Drop Type | Rate |
+|-----------|------|
+| Common / etc | **100x** |
+| Healing items | **100x** |
+| Usable items | **100x** |
+| Equipment | **100x** |
+| Cards (normal mobs) | **100x** |
+| MVP inventory rewards | **10x** |
+| Add-drop / treasure | 1x |
 
-| Drop Type | Rate | Config Key |
-|-----------|------|------------|
-| Common (etc) | **300x** | `item_rate_common: 30000` |
-| Healing items | **100x** | `item_rate_heal: 10000` |
-| Usable items | **300x** | `item_rate_use: 30000` |
-| Equipment | **300x** | `item_rate_equip: 30000` |
-| Cards | **100x** | `item_rate_card: 10000` |
-| MVP rewards | **300x** | `item_rate_mvp: 30000` |
-| Add-drop (equip) | **300x** | `item_rate_adddrop: 30000` |
-| Drop rate cap | 90x max | `drop_rate_cap: 9000` |
-| Logarithmic drops | Off | `item_logarithmic_drops: no` |
-| Renewal drop formula | **Off** | `RENEWAL_DROP` not defined |
-
-### Floating Rates
-
-Script `npc/custom/etc/floating_rates.txt` can randomize rates 1.0x–1.5x every 6 hours. **Currently disabled** in `npc/scripts_custom.conf`.
+Use `@rates` in-game to see the live values your client displays.
 
 ---
 
@@ -66,46 +68,97 @@ Script `npc/custom/etc/floating_rates.txt` can randomize rates 1.0x–1.5x every
 
 | Setting | Value |
 |---------|-------|
-| Max ASPD (base) | 190 |
-| Max ASPD (3rd class) | 193 |
-| Max stat parameter (3rd) | 130 |
-| Left-hand card fix | Enabled (official) |
-| Natural HP regen interval | 6s |
-| Natural SP regen interval | 8s |
+| Max walk speed | **300** |
+| Max ASPD (base / 2nd) | **190** |
+| Max ASPD (3rd / 4th / expanded) | **193** |
+| Max stats (3rd+) | **130** |
+| Monster HP rate | **1x** |
+| MVP HP rate | **1x** |
 
 ---
 
-## VIP System
+## VIP Bonuses
 
-VIP storage/exp bonuses are defined in `conf/battle/player.conf`:
+When VIP is active:
 
 | Bonus | Value |
 |-------|-------|
-| Extra storage | +300 slots |
-| Base EXP bonus | +50% |
-| Job EXP bonus | +50% |
+| Base EXP | **+50%** |
+| Job EXP | **+50%** |
+| Drop rate | **+50%** |
+| Extra storage | **+300** slots |
+| Account storages | **6** slots (`@storage`–`@storage6`) vs 3 for normal |
+| Gemstone requirement | Reduced |
 
-*(Placeholder — confirm if VIP is sold / how to obtain.)*
+*(Document how players obtain VIP on your server.)*
 
 ---
 
 ## War of Emperium
 
-| Setting | Status |
-|---------|--------|
-| Custom WOE controller | Present but **commented out** in `scripts_custom.conf` |
-| WOE Information NPC | `prontera 149,193` |
-| Castles configured | Prontera, Payon, Geffen, Aldebaran, Arunafeltz, Schwarzwald + TE castles |
+| Day | Start | End |
+|-----|-------|-----|
+| **Tuesday** | 21:00 | 23:00 |
+| **Thursday** | 21:00 | 23:00 |
+| **Saturday** | 16:00 | 18:00 |
 
-*(Placeholder — add WOE day/time schedule once confirmed with staff.)*
+**Castles:** all 20 first-edition castles (Prontera, Payon, Geffen, Aldebaran × 5 each).
+
+### GvG Damage (Renewal)
+
+| Type | Damage dealt in WoE |
+|------|---------------------|
+| Melee / ranged | **80%** |
+| Weapon / magic / misc skills | **60%** |
+| Flee penalty | **20%** |
+
+Guilds can hold unlimited castles.
+
+---
+
+## Party & Social
+
+| Setting | Value |
+|---------|-------|
+| Party EXP share level gap | **15** |
+| Same-account party block | **On** |
+| Party item share | Random |
+| Chat channels | `#global`, `#support`, `#trade`, `#ally`, `#map` |
+
+---
+
+## Mail & Trading
+
+| Setting | Value |
+|---------|-------|
+| Mail zeny fee | **2%** |
+| Mail attachment fee | **2,500z** per item |
+| Mail weight cap | **2,000** |
+| Autotrade timeout | **None** |
+| Auction house | **Off** |
+
+---
+
+## New Character Setup
+
+| Setting | Value |
+|---------|-------|
+| Start maps | Intro maps (`iz_int`) |
+| Default save point | **prontera 156, 191** |
+| Starting zeny | **0** |
+| Starting items | Basic novice gear + bonus starter items |
+| Recommended first destination | **Eden Group HQ** (`moc_para01`) for missions |
+
+Look up item names on [Divine Pride](https://www.divine-pride.net/database/item).
 
 ---
 
 ## Enabled Features
 
-From `conf/battle/feature.conf`:
-
-- Buying store, search stores, banking, autotrade, BG queue, roulette, achievements, stylist, pet evolution, refine UI, enchant UI, private airship system
+- Buying store, search stores, banking, autotrade
+- Roulette, achievements, stylist UI, refine UI, enchant UI
+- Pet evolution, private airship system
+- BG queue (custom BG recruiters are off)
 
 ---
 
@@ -113,15 +166,15 @@ From `conf/battle/feature.conf`:
 
 | Episode | Status |
 |---------|--------|
-| 14–16.2 | Quest + barter content |
-| 17.1–17.2 | Full (instances, enchants, merchants) |
-| 18–20 | Active hubs and content |
-| 21 | Not yet available |
+| 16.x | Quest + barter content |
+| 17.1–17.2 | Instances, enchants, merchants |
+| 18–20 | Active hubs |
+| 21 | Not available yet |
+
+Use **Episode Guide** (`prontera 165,175`) or **Balheele** episode tickets for access.
 
 ---
 
 ## See Also
 
-- [Home](Home.md)
-- [Custom Systems](Custom-Systems.md)
-- [Rules](Rules.md)
+- [Home](Home.md) · [Getting Started](Getting-Started.md) · [Custom Systems](Custom-Systems.md) · [Rules](Rules.md)

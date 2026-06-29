@@ -9,8 +9,9 @@
 | | | |
 |---|---|---|
 | [Getting Started](Getting-Started.md) | [Server Information](Server-Information.md) | [Custom Systems](Custom-Systems.md) |
-| [NPCs & Merchants](NPCs-and-Merchants.md) | [Items & Equipment](Items-and-Equipment.md) | [Dungeons & Instances](Dungeons.md) |
-| [Player Commands](Commands.md) | [Server Rules](Rules.md) | [Classes & Skills](Classes.md) |
+| [Instance Guide](Instance-Guide.md) | [NPCs & Merchants](NPCs-and-Merchants.md) | [Items & Equipment](Items-and-Equipment.md) |
+| [Dungeons & Instances](Dungeons.md) | [Player Commands](Commands.md) | [Server Rules](Rules.md) |
+| [Classes & Skills](Classes.md) | | |
 
 **External reference:** [Divine Pride Database](https://www.divine-pride.net/)
 
@@ -43,10 +44,16 @@
 
 | Date | Headline |
 |------|----------|
+| Recent | **kRO Eden mission boards** — level-bracket hunt quests with scaled Base/Job EXP and 24h per-quest cooldown |
+| Recent | **Eden HQ services** — navigation guides, coin trader, Paradise gear warehouse (`eden_hq_services.txt`) |
+| Recent | **Malangdo costume enchants** — Gregio Grumani 4th-slot visual effects + expanded exchange roster |
+| Recent | **Laphine upgrade DB** — expanded reform targets (`db/re/laphine_upgrade.yml`) |
+| Recent | **Perfect Enchant UI** — English `EnchantList.lub` client deploy for enchant tables |
+| Recent | **Booster Coin barters** — updated Centro exchanges (`mega_booster.yml`) |
+| Recent | **kRO Q1 2026 skill rebalance** — 4th job tuning tracked in-repo |
 | *(staff)* | Server launch / patch notes |
-| *(staff)* | Rate or event announcements |
 
-*Replace this table with dated announcements on your website or Discord.*
+*Replace or extend this table with dated announcements on your website or Discord.*
 
 ---
 
@@ -54,12 +61,13 @@
 
 1. Register on the website and create a character.
 2. Complete the intro sequence; you will save in **Prontera** (`156, 191`).
-3. Talk to **Healer** (`prontera 162,193`) — free heal, buffs, identify all.
-4. Use **Warper** (`prontera 159,192`) for leveling fields and dungeons.
-5. Visit **Job Master** (`prontera 153,193`) when ready — up to **4th class**.
-6. Check **Centro** (`prontera 166,300`) for Booster Coin gear.
+3. **Join Eden Group** at `moc_para01` — talk to **Secretary Lime Evenor** (`27,35`).
+4. Pick up **Eden hunting missions** on the 2F mission boards — **best EXP/JEXP for new players**.
+5. Talk to **Healer** (`prontera 162,193`) between runs — free heal, buffs, identify all.
+6. Visit **Job Master** (`prontera 153,193`) at each job threshold — up to **4th class**.
+7. Check **Centro** (`prontera 166,300`) for Booster Coin gear once you have coins.
 
-→ Full guide: [Getting Started](Getting-Started.md)
+→ Full Eden leveling guide: [Getting Started](Getting-Started.md)
 
 ---
 
@@ -115,6 +123,8 @@
 | Centro (Booster) | `prontera 166,300` |
 
 **Item Mall** is on map **`prt_mk`** — use Warper → Item Mall.
+
+**Eden Group HQ** is on map **`moc_para01`** — mission boards, Paradise gear, Eden Coin Trader.
 
 ---
 

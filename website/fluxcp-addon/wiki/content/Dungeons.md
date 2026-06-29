@@ -2,173 +2,122 @@
 
 [← Back to Home](Home.md)
 
-Dungeons, instances, and MVP content on **PRO-Ragnarok**. Use the **Warper** (`prontera 159,192`) for most access.
-
 ---
 
 ## Quick Access
 
 | Method | Location |
 |--------|----------|
-| Warper | `prontera 159,192` — Dungeons, Fields, Instances |
+| **Instance & Episode Guide** | [Instance-Guide.md](Instance-Guide.md) — **step-by-step kRO/iRO progression** |
+| Warper | `prontera 159,192` — Dungeons & Instances menus |
 | Episode Guide | `prontera 165,175` — Episode hub warps |
 | Instance & EP Merchant | `prontera 164,172` — Illusion barters |
-| Balheele | `prt_cas 373,77` — Episode clear (unlock NPCs) |
-| Eden Teleport | Warper / Eden HQ |
-
----
-
-## Leveling Dungeons (Suggested)
-
-Confirm mob levels with `@mobinfo`. Rates: **150x EXP**, **100x drops**.
-
-| Level | Dungeons & Fields |
-|-------|-------------------|
-| 1–25 | Payon Cave, Ant Hell, Culvert, Prontera fields |
-| 25–50 | Orc Dungeon, Clock Tower B1, Sphinx, Pyramids |
-| 50–80 | Glast Heim (Churchyard, Culvert), Geffen Dungeon, Mjolnir |
-| 80–99 | Magma Dungeon, Juno fields, Niflheim quest area |
-| 99–120 | Rachel Sanctuary, Amatsu dungeon, Nameless Island |
-| 120–150 | Episode 17 fields, Einbroch mine, Thanatos entrance |
-| 150–175 | Illusion dungeons, Episode 18 Wolf Village |
-| 175–200 | Ice Castle (Ep 19), Biolab extensions |
-| 200–250 | Episode 20 Jor Nest, Biosphere biomes |
-| 250–275 | Biosphere Depth, Corridor MVPs, endgame instances |
+| Eden Teleport Officer | `prontera 124,76` |
 
 ---
 
 ## Illusion Investigation Instances
 
-Exchange materials at **Instance & EP Merchant** (`prontera 164,172`).
+Exchange rewards via **Instance & EP Merchant**:
 
-| Instance | Theme |
-|----------|-------|
-| Illusion Vampire | Undead castle |
-| Illusion Underwater | Deep sea |
-| Illusion Twins | Dual bosses |
-| Illusion Moonlight | Payon |
-| Illusion Frozen | Ice cave |
-| Illusion Turtle | Turtle Island |
-| Illusion Luanda | Savanna |
-| Illusion Teddy Bear | Toy factory |
-| Resonance Stone | Special exchange |
-
-**Tip:** Run with a party for faster clears; gear progress is via barter tokens at the merchant.
+| Instance | Barter Shop |
+|----------|-------------|
+| Illusion Vampire | barter_ill_vampire |
+| Illusion Underwater | barter_ill_underwater |
+| Illusion Twins | barter_ill_twins |
+| Resonance Stone | resonance_stone_barter |
+| Illusion Moonlight | barter_ill_moonlight |
+| Illusion Frozen | barter_ill_frozen |
+| Illusion Turtle | barter_ill_turtle |
+| Illusion Luanda | barter_ill_luanda |
+| Illusion Teddy Bear | barter_ill_teddy |
 
 ---
 
 ## Episode Instances
 
-Access via **Episode Guide** warps or natural quest progression. **Episode Clear** tickets skip quests but grant **no loot** from story.
-
 ### Episode 16.x
 
 - Terra Gloria storyline
 - Heart Hunter content
-- Grace equipment barters
+- Grace equipment exchanges
 
-### Episode 17.1 — Dawn / Illusion
+### Episode 17.1 — Dawn, Illusion
 
-| Map | Instance / Area |
-|-----|-----------------|
-| `sp_cor` | Cor Operation Base |
-| `sp_rudus` | Rudus Facility |
-| `sp_os` | OS Occupation |
+| Map | Content |
+|-----|---------|
+| sp_cor | Cor Operation Base |
+| sp_rudus | Rudus Facility |
+| sp_os | OS Occupation Area |
 
 ### Episode 17.2 — Sage's Legacy
 
 | Map | Content |
 |-----|---------|
-| `ba_in01` | Baggot Laboratory |
-| `ba_pw01` | Pax Employment |
-| Water Garden | Instance (quest or ticket) |
+| ba_in01 | Baggot Laboratory merchants |
+| ba_pw01 | Pax's Employment |
+| Water Garden | Instance (unlock via quest or episode clear) |
 
 ### Episode 18 — Wolf Village
 
-- Hub: `wolfvill`
-- Clock Tower Unknown Basement extension
-- Story instances & merchants
+Hub: `wolfvill` — storyline instances and merchants
 
 ### Episode 19 — Ice Castle
 
-- Hub: `icas_in`
-- Ice-themed instances and traders
+Hub: `icas_in` — Ice Castle traders and instances
 
-### Episode 20 — Yggdrasil / Jor
+### Episode 20 — Yggdrasil
 
-- Hub: `jor_nest`
-- Endgame episode bosses
-- Some Episode 20 monsters have custom damage tuning — expect longer fights
+Hub: `jor_nest` — endgame episode content
+
+Custom tuning: specific Episode 20 monsters take reduced physical/magic damage (`battle.cpp`).
 
 ### Episode 21
 
-**Not available** yet — Druid class line coming in a future update.
+**Not yet available** in current rAthena revision.
 
 ---
 
-## Biosphere (Varmundt)
+## Custom MVP Areas
 
-| Area | Maps | Notes |
-|------|------|-------|
-| Surface biomes | `bl_grass`, `bl_lava`, `bl_ice`, `bl_death`, `bl_soul`, `bl_venom`, `bl_temple` | Open-world biomes |
-| **Depth 1** | `bl_depth1` | Daily: **300 kills**, BL **250+** |
-| **Depth 2** | `bl_depth2` | Daily: **450 kills**, BL **250+** |
-
-Researcher: `ba_in01` — register first, then take daily hunts. **4-hour** cooldown after completion.
+| Area | Maps | Access |
+|------|------|--------|
+| Corridor of Phantoms | vis_h01, vis_h02, vis_h03 | Quest + mapflag scripts |
+| Private MVP Room | instanced | `prontera 148,174` |
+| Clock Tower Unknown Basement | c_tower maps | Episode 18 quest content |
 
 ---
 
-## Custom MVP Content
+## Memorial Dungeons
 
-| Content | Maps | Access |
-|---------|------|--------|
-| **Corridor of Phantoms** | `vis_h01`–`vis_h03` | Comodo NPC — public MVP hunt, **100×** MVP HP |
-| **Private MVP Room** | `06guild_01`–`08` | `prontera 148,174` — 100k z / 60 min solo |
-| **Silvervine targets** | Various mini-boss maps | Daily hunt contracts |
+Episode Clear tickets (Balheele) uncloak instance entrance NPCs without full quest completion. See `npc/custom/episode_instance_access.txt` for variable flags per episode.
 
----
-
-## Memorial Dungeons & Instances
-
-Examples available through Warper or episode NPCs:
-
-- Thanatos Tower, Old Glast Heim (OGH), Edda Biolabs / Glastheim
-- Episode 17–20 memorial dungeons
-- Wolfchev, Heart Hunter, Terra Gloria
-
-Use Warper **Instance** menu or episode NPCs. If locked, buy an **Episode Clear** ticket from Balheele.
+→ **Full walkthrough:** [Instance & Episode Progression Guide](Instance-Guide.md)
 
 ---
 
 ## Guild Dungeons
 
-**Warper → Guild Dungeons** — standard Renewal castle dungeons (Alde, Geffen, Payon, Prontera guild maps).
-
-Requires guild membership and castle ownership rules per official mechanics.
+Access via **Warper → Guild Dungeons** menu. Standard Renewal castle dungeons.
 
 ---
 
-## War of Emperium Maps
+## Leveling Dungeons
 
-During WoE (**Tue/Thu 21:00–23:00**, **Sat 16:00–18:00**), all **20 FE castles** are active.
+For leveling, use **Eden Group mission boards** first — see [Getting Started → Leveling Guide](Getting-Started.md#leveling-guide-recommended).
 
-See [Server Information](Server-Information.md) for GvG damage modifiers.
-
----
-
-## Dungeon Tips
-
-- `@mobinfo <name>` — HP, level, element, race
-- `@whereis <mob id>` — maps where a monster spawns
-- `@whodrops <item>` — best farming targets
-- Party up for instance medals and faster clears
-- Healer in Prontera is **free** — restock between runs
+| Level | Suggested content |
+|-------|-------------------|
+| 1–130 | Eden boards (primary EXP) |
+| 100–150 | Illusion Investigation instances |
+| 130–200 | Episode 17–18 story & fields |
+| 200–275 | Episode 19–20 endgame instances |
 
 ---
 
 ## See Also
 
+- [Instance & Episode Guide](Instance-Guide.md)
 - [Getting Started](Getting-Started.md)
-- [Items & Equipment](Items-and-Equipment.md)
 - [Custom Systems](Custom-Systems.md)
 - [Home](Home.md)

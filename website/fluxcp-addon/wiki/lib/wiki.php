@@ -57,6 +57,11 @@ $WIKI_PAGES = array(
 		'nav'   => 'Dungeons & Instances',
 		'file'  => 'Dungeons.md',
 	),
+	'Instance-Guide' => array(
+		'title' => 'Instance & Episode Guide',
+		'nav'   => 'Instance Guide',
+		'file'  => 'Instance-Guide.md',
+	),
 	'Commands' => array(
 		'title' => 'Player Commands',
 		'nav'   => 'Player Commands',
