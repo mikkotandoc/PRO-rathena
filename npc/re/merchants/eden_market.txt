@@ -339,6 +339,7 @@ function	script	F_ParaMarketRestock	{
 -	script	Update_Shop	-1,{
 OnInit:
 	bindatcmd "paradiserestock", strnpcinfo(0)+"::OnGMRestock", 99, 99;
+	callfunc "F_ParaMarketRestock";
 	end;
 
 OnGMRestock:
@@ -2030,8 +2031,14 @@ paramk,116,100,3	script	Hwaran#plt01	4_F_RUSGREEN,{
 		mes "[Hwaran]";
 		mes "Please shower them with affection, though they are poisonous plants.";
 		mes "I selected these babies from the farm myself. Very potent when made into meds.";
+		mes "^4d4dffIf you see nothing, that means everything is sold out.^000000";
 		close2;
-		callshop "para_plt01";
+		if (callshop("para_plt01") == 0) {
+			mes "[Hwaran]";
+			mes "Sorry, all limited stock is sold out right now.";
+			mes "We restock every Wednesday at 4:00 AM server time.";
+			close;
+		}
 		end;
 	}
 	mes "[Hwaran]";

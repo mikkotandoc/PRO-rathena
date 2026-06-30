@@ -1,131 +1,247 @@
 // ==========================================
-// rAthena Costume Recycler NPC (Item ID Version)
+// rAthena Costume Recycler NPC
+// Recycles PRO Gacha Egg I/II costumes (Common–Rare) into Gacha Coins,
+// and exchanges coins for rewards including random gacha costumes.
 // ==========================================
 
-prontera,155,199,4	script	Gacha Machine	2_VENDING_MACHINE1,{
-    mes .npc_name$;
-    mes "Hello, adventurer!";
-    mes "Got bad luck with your Gacha Eggs?";
-    mes "Don't let those junk costumes gather dust. I melt them down into precious Gacha Coins.";
-    next;
-    
-    mes .npc_name$;
-    mes "My current exchange rate is:";
-    mes "^FF00001 Costume = " + .coins_reward + " " + getitemname(.coin_id) + "(s)^000000";
-    mes "Would you like to recycle a costume?";
-    next;
+prontera,155,199,4	script	costume_recycler	2_VENDING_MACHINE1,{
+	mes .npc_name$;
+	mes "Hello, adventurer!";
+	mes "Got bad luck with your Gacha Eggs?";
+	mes "Don't let those junk costumes gather dust. I melt them down into precious Gacha Coins.";
+	next;
 
-    if (select("Yes, please.:No, thank you.") == 2) {
-        mes .npc_name$;
-        mes "Suit yourself. Come back if your inventory gets too heavy!";
-        close;
-    }
+	switch (select("Recycle a costume:Exchange Gacha Coins:No, thank you.")) {
+	case 1:
+		callsub S_RecycleCostume;
+		end;
+	case 2:
+		callsub S_ExchangeCoins;
+		end;
+	case 3:
+		mes .npc_name$;
+		mes "Suit yourself. Come back if your inventory gets too heavy!";
+		close;
+	}
 
-    // Build selection menu dynamically using modern script-local variables
-    .@menu_str$ = "";
-    deletearray .@mapped_index[0], getarraysize(.@mapped_index);
-    .@menu_count = 0;
+S_RecycleCostume:
+	mes .npc_name$;
+	mes "I accept Common, Uncommon, and Rare costumes from";
+	mes "Gacha Egg I and Gacha Egg II.";
+	mes "Exchange rate: ^FF00001 Costume = 1 " + getitemname(.coin_id) + "^000000";
+	mes "Legendary costumes cannot be recycled here.";
+	mes "Would you like to recycle a costume?";
+	next;
 
-    for (.@i = 0; .@i < getarraysize(.valid_costumes); .@i++) {
-        .@item_id = .valid_costumes[.@i];
-        
-        // FIXED: Subtract the equipped status (1 if equipped, 0 if not) from total count.
-        // This isolates only the duplicate copies sitting in the inventory.
-        .@qty = countitem(.@item_id) - isequipped(.@item_id);
+	if (select("Yes, please.:No, thank you.") == 2) {
+		mes .npc_name$;
+		mes "Suit yourself. Come back if your inventory gets too heavy!";
+		close;
+	}
 
-        if (.@qty > 0) {
-            // Shortened layout to "[Qty] Item Name" to prevent client UI text splitting
-            .@menu_str$ += "[" + .@qty + "] " + getitemname(.@item_id) + ":";
-            .@mapped_index[.@menu_count] = .@i;
-            .@menu_count++;
-        }
-    }
+	callsub S_BuildRecycleList;
 
-    // No unequipped valid costumes found in inventory
-    if (.@menu_count == 0) {
-        mes .npc_name$;
-        mes "It looks like you don't have any of the accepted costumes in your inventory right now.";
-        mes "^FF0000Note: If you are wearing the costume, you must unequip it first!^000000";
-        close;
-    }
+	if (.@menu_count == 0) {
+		mes .npc_name$;
+		mes "It looks like you don't have any accepted costumes from Gacha Egg I or II right now.";
+		mes "^FF0000Note: If you are wearing the costume, you must unequip it first!^000000";
+		close;
+	}
 
-    // Append Cancel option tightly
-    .@menu_str$ += "Cancel";
+	.@menu_str$ += "Cancel";
 
-    mes .npc_name$;
-    mes "Please select the costume you want to scrap:";
-    next;
+	mes .npc_name$;
+	mes "Please select the costume you want to scrap:";
+	next;
 
-    .@choice = select(.@menu_str$) - 1;
+	.@choice = select(.@menu_str$) - 1;
 
-    // Player clicked 'Cancel'
-    if (.@choice == .@menu_count) {
-        mes .npc_name$;
-        mes "Change your mind? Alright then.";
-        close;
-    }
+	if (.@choice == .@menu_count) {
+		mes .npc_name$;
+		mes "Change your mind? Alright then.";
+		close;
+	}
 
-    // Direct lookup of the selected item ID from the mapped index array
-    .@target_id = .valid_costumes[.@mapped_index[.@choice]];
+	.@target_id = .@menu_items[.@choice];
 
-    mes .npc_name$;
-    mes "You selected: ^990000" + getitemname(.@target_id) + "^000000.";
-    mes "Are you absolutely sure? This action ^FF0000cannot be undone^000000.";
-    next;
+	mes .npc_name$;
+	mes "You selected: ^990000" + getitemname(.@target_id) + "^000000.";
+	mes "Are you absolutely sure? This action ^FF0000cannot be undone^000000.";
+	next;
 
-    if (select("Yes, melt it down!:Wait, cancel!") == 2) {
-        mes .npc_name$;
-        mes "Close call! Your costume is safe.";
-        close;
-    }
+	if (select("Yes, melt it down!:Wait, cancel!") == 2) {
+		mes .npc_name$;
+		mes "Close call! Your costume is safe.";
+		close;
+	}
 
-    // Exploit/Lag double check right before deletion
-    // Ensures they have at least 1 loose copy available to scrap
-    if ((countitem(.@target_id) - isequipped(.@target_id)) < 1) {
-        mes .npc_name$;
-        mes "Hey! You don't have an unequipped copy of that costume anymore.";
-        close;
-    }
+	if ((countitem(.@target_id) - isequipped(.@target_id)) < 1) {
+		mes .npc_name$;
+		mes "Hey! You don't have an unequipped copy of that costume anymore.";
+		close;
+	}
 
-    // Execution
-    delitem .@target_id, 1;
-    getitem .coin_id, .coins_reward;
-    
-    // Aesthetic effects
-    specialeffect2 EF_REFINE_SUCCESS, AREA, player;
-    soundeffect "blacksmith.wav", 0;
+	delitem .@target_id, 1;
+	getitem .coin_id, .coins_reward;
 
-    mes .npc_name$;
-    mes "Done! Your costume has been recycled.";
-    mes "Here is your ^009900" + .coins_reward + " " + getitemname(.coin_id) + "^000000.";
-    close;
+	specialeffect2 EF_REFINE_SUCCESS, AREA, player;
+	soundeffect "blacksmith.wav", 0;
+
+	mes .npc_name$;
+	mes "Done! Your costume has been recycled.";
+	mes "Here is your ^009900" + .coins_reward + " " + getitemname(.coin_id) + "^000000.";
+	close;
+
+S_ExchangeCoins:
+	mes .npc_name$;
+	mes "What would you like to exchange your Gacha Coins for?";
+	next;
+
+	switch (select(
+		"Nyangvine Mileage Coupon (" + .mileage_cost + " coins)",
+		"Random Gacha Egg I costume (" + .random_cost + " coins)",
+		"Random Gacha Egg II costume (" + .random_cost + " coins)",
+		"Cancel"
+	)) {
+	case 1:
+		callsub S_ExchangeMileage;
+		end;
+	case 2:
+		callsub S_ExchangeRandom, 1;
+		end;
+	case 3:
+		callsub S_ExchangeRandom, 2;
+		end;
+	case 4:
+		mes .npc_name$;
+		mes "Come back when you're ready.";
+		close;
+	}
+
+S_ExchangeMileage:
+	if (countitem(.coin_id) < .mileage_cost) {
+		mes .npc_name$;
+		mes "You need at least ^FF0000" + .mileage_cost + " " + getitemname(.coin_id) + "(s)^000000.";
+		close;
+	}
+
+	delitem .coin_id, .mileage_cost;
+	getitem .mileage_id, 1;
+	specialeffect2 EF_REFINE_SUCCESS, AREA, player;
+
+	mes .npc_name$;
+	mes "Pleasure doing business!";
+	mes "Here is your ^009900" + getitemname(.mileage_id) + "^000000.";
+	close;
+
+S_ExchangeRandom:
+	.@pool = getarg(0);
+
+	if (.@pool == 1) {
+		.@size = getarraysize(.gacha1_pool);
+		.@pool_name$ = "Gacha Egg I";
+	} else {
+		.@size = getarraysize(.gacha2_pool);
+		.@pool_name$ = "Gacha Egg II";
+	}
+
+	mes .npc_name$;
+	mes "Spend ^FF0000" + .random_cost + " " + getitemname(.coin_id) + "(s)^000000";
+	mes "for a random ^009900Common, Uncommon, or Rare^000000 costume";
+	mes "from the " + .@pool_name$ + " pool.";
+	next;
+
+	if (select("Exchange now.:Not now.") == 2) {
+		mes .npc_name$;
+		mes "Come back when you're ready.";
+		close;
+	}
+
+	if (countitem(.coin_id) < .random_cost) {
+		mes .npc_name$;
+		mes "You need at least ^FF0000" + .random_cost + " " + getitemname(.coin_id) + "(s)^000000.";
+		close;
+	}
+
+	if (checkweight(501, 1) == 0) {
+		mes .npc_name$;
+		mes "Your inventory is too heavy. Please free up some space first.";
+		close;
+	}
+
+	.@reward_id = (.@pool == 1 ? .gacha1_pool[rand(.@size)] : .gacha2_pool[rand(.@size)]);
+
+	delitem .coin_id, .random_cost;
+	getitem .@reward_id, 1;
+	specialeffect2 EF_FIREWORK, AREA, player;
+
+	mes .npc_name$;
+	mes "Here is your ^009900" + getitemname(.@reward_id) + "^000000!";
+	mes "Good luck with your next roll!";
+	close;
+
+S_BuildRecycleList:
+	.@menu_str$ = "";
+	deletearray .@menu_items[0], getarraysize(.@menu_items);
+	.@menu_count = 0;
+
+	for (.@p = 1; .@p <= 2; .@p++) {
+		if (.@p == 1)
+			.@pool_size = getarraysize(.gacha1_pool);
+		else
+			.@pool_size = getarraysize(.gacha2_pool);
+
+		for (.@i = 0; .@i < .@pool_size; .@i++) {
+			.@item_id = (.@p == 1 ? .gacha1_pool[.@i] : .gacha2_pool[.@i]);
+			.@qty = countitem(.@item_id) - isequipped(.@item_id);
+
+			if (.@qty <= 0)
+				continue;
+
+			// Skip duplicates already listed from the other pool (none expected, but safe)
+			.@dup = 0;
+			for (.@j = 0; .@j < .@menu_count; .@j++) {
+				if (.@menu_items[.@j] == .@item_id) {
+					.@dup = 1;
+					break;
+				}
+			}
+			if (.@dup)
+				continue;
+
+			.@menu_str$ += "[" + .@qty + "] " + getitemname(.@item_id) + ":";
+			.@menu_items[.@menu_count] = .@item_id;
+			.@menu_count++;
+		}
+	}
+	return;
 
 OnInit:
-    .npc_name$ = "^0000FF[Costume Recycler]^000000";
-    .coins_reward = 1; // Number of coins given per costume
-    .coin_id = 50008;  // Gacha Coin ID
+	.npc_name$ = "^0000FF[Costume Recycler]^000000";
+	.coins_reward = 1;
+	.coin_id = 50008;      // Gacha Coin
+	.mileage_id = 7000;    // Nyangvine Mileage Coupon
+	.mileage_cost = 5;
+	.random_cost = 3;      // Random Common–Rare costume exchange
 
-    // Add the numerical Item IDs of all valid costumes here
-    setarray .valid_costumes[0], 
-        31436, // Replace these numbers with your actual Costume Item IDs
-        31771, 
-        19551, 
-        19888, 
-        19886,
-	19889,
-	410138,
-	480461,
-	20127,
-	20143,
-	20151,
-	19894,
-	20280,
-	31683,
-	20130,
-	20132,
-	410082,
-	20577,
-	20592,
-        19891;
-    end;
+	// Gacha Egg I (#50002) — Common, Uncommon, Rare only
+	setarray .gacha1_pool[0],
+		// Common
+		31436, 31771, 19551, 19888, 19886, 19889, 19891, 19882, 480461,
+		20127, 20143, 20151,
+		// Uncommon
+		19894, 20280, 20130, 20132, 410082, 20577, 20592,
+		// Rare
+		480055, 480056, 480058, 410350, 31301;
+
+	// Gacha Egg II (#50003) — Common, Uncommon, Rare only
+	setarray .gacha2_pool[0],
+		// Common
+		5909, 5911, 5913, 19608, 19635, 19639, 19646, 20017, 20125, 20499,
+		5912, 19840,
+		// Uncommon
+		20311, 19985, 20613, 20617, 20761, 20407, 410138, 15893,
+		// Rare
+		5914, 31040, 480060, 20548, 20547;
+	end;
 }

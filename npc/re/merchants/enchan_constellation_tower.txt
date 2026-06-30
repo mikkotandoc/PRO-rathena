@@ -28,14 +28,14 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 			setarray .@card[0],getequipcardid(.@slot,3),getequipcardid(.@slot,2),getequipcardid(.@slot,1),getequipcardid(.@slot,0);
 			copyarray .@equip_card[0], .@card[0], 4;	// for final check
 			.@equip_refine = getequiprefinerycnt(.@slot);
-			.@grade = getenchantgrade(.@equipType);
+			.@grade = getenchantgrade(.@slot);
 			for(set .@i,0; .@i<(MAX_ITEM_RDM_OPT); set .@i,.@i+1) {
-				setarray .@arrid[.@i],getequiprandomoption(.@equipType,.@i,ROA_ID);
-				setarray .@value[.@i],getequiprandomoption(.@equipType,.@i,ROA_VALUE);
-				setarray .@param[.@i],getequiprandomoption(.@equipType,.@i,ROA_PARAM);
+				setarray .@arrid[.@i],getequiprandomoption(.@slot,.@i,ROA_ID);
+				setarray .@value[.@i],getequiprandomoption(.@slot,.@i,ROA_VALUE);
+				setarray .@param[.@i],getequiprandomoption(.@slot,.@i,ROA_PARAM);
 			}
 
-			if(.@card[2] != 0){ next; mes .@npc$,"You have a card equipped, you better not tempt luck, come back when you don't have any."; close; }
+			if(.@card[3] != 0){ next; mes .@npc$,"You have a card equipped, you better not tempt luck, come back when you don't have any."; close; }
 
 			.@cardSlot = 0;
 			if (.@card[0] == 0) { .@cardSlot = 3; }
@@ -77,8 +77,8 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 													310716,310717,310718,310719,310720,310721,310722,310723,
 													310724,310725,310726;
 					}
-					else if (inarray(.NebulaIds,.@equip_id) != -1) { // Nebula
-						.@CostID = 1000398;
+					else if ((.@idx = inarray(.NebulaIds,.@equip_id)) != -1) { // Nebula
+						.@CostID = .NebulaDustIds[.@idx];
 						.@CostI = 5;
 						.@CostZ = 100000;
 						.@RefineMin = 0;
@@ -99,8 +99,8 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 						}
 						close; // Hasta que vea como hacerlo ....
 					}
-					else if (inarray(.NebulaIds,.@equip_id) != -1) { // Nebula
-						.@CostID = 1000442;
+					else if ((.@idx = inarray(.NebulaIds,.@equip_id)) != -1) { // Nebula
+						.@CostID = .NebulaFragmentIds[.@idx];
 						.@CostI = 5;
 						.@CostZ = 1000000;
 						.@RefineMin = 0;
@@ -131,6 +131,7 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 			if(.@equip_refine < .@RefineMin) { mes "You need it refined to +"+.@RefineMin+"."; close; }
 			if(Zeny < .@CostZ){ mes "You don't have enough zeny"; close; }
 			if(countitem(.@CostID) < .@CostI){ mes "You don't have enough "+getitemname(.@CostID)+" on you"; close; }
+			if(callfunc("F_IsEquipIDHack", .@slot, .@equip_id) || callfunc("F_IsEquipCardHack", .@slot, .@equip_card[3], .@equip_card[2], .@equip_card[1], .@equip_card[0]) || callfunc("F_IsEquipRefineHack", .@slot, .@equip_refine)) close;
 			.@card[.@CardPosition] = .@Enchants[rand(0,getarraysize(.@Enchants)-1)];
 			close2;
 			specialeffect2 EF_REPAIRWEAPON;
@@ -167,11 +168,11 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 				getequipcardid(.@slot,0);
 			copyarray .@equip_card[0], .@card[0], 4;	// for final check
 			.@equip_refine = getequiprefinerycnt(.@slot);
-			.@grade = getenchantgrade(.@equipType);
+			.@grade = getenchantgrade(.@slot);
 			for(set .@i,0; .@i<(MAX_ITEM_RDM_OPT); set .@i,.@i+1) {
-				setarray .@arrid[.@i],getequiprandomoption(.@equipType,.@i,ROA_ID);
-				setarray .@value[.@i],getequiprandomoption(.@equipType,.@i,ROA_VALUE);
-				setarray .@param[.@i],getequiprandomoption(.@equipType,.@i,ROA_PARAM);
+				setarray .@arrid[.@i],getequiprandomoption(.@slot,.@i,ROA_ID);
+				setarray .@value[.@i],getequiprandomoption(.@slot,.@i,ROA_VALUE);
+				setarray .@param[.@i],getequiprandomoption(.@slot,.@i,ROA_PARAM);
 			}
 
 			if (.@card[1] == 0) {
@@ -237,5 +238,7 @@ OnInit:
 	setunittitle getnpcid(0), "Constellation Enchant";
 	setarray .NebulaIds,			450169,450170,450171,450172,450173,450174;
 	setarray .StellarIds,			490132,490133,490134,490135,490136,490137;
+	setarray .NebulaDustIds,		1000398,1000399,1000400,1000401,1000402,1000403;
+	setarray .NebulaFragmentIds,	1000442,1000443,1000444,1000445,1000446,1000447;
 	end;
 }

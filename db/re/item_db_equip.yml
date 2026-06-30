@@ -226859,19 +226859,22 @@ Body:
     AegisName: Elemental_Jewel
     Name: Elemental Jewel
     Type: Armor
-    Weight: 100
+    Weight: 10
     Slots: 1
     Locations:
       Both_Accessory: true
+    Classes:
+      Fourth: true
     ArmorLevel: 1
     EquipLevelMin: 200
     Script: |
+      bonus bMatk,50;
       bonus bSpl,3;
       bonus bMatkRate,10;
       bonus2 bSubRace,RC_Player_Human,3;
       bonus2 bSubRace,RC_Player_Doram,3;
       bonus2 bSkillCooldown,"SO_VARETYR_SPEAR",-1000;
-      bonus2 bSkillAtk,"SO_VARETYR_SPEAR",BaseLevel/3;
+      bonus2 bSkillAtk,"SO_VARETYR_SPEAR",min(BaseLevel,249)/3;
       bonus2 bSkillAtk,"EM_CONFLAGRATION",BaseLevel/10;
       bonus2 bSkillAtk,"EM_DIAMOND_STORM",BaseLevel/10;
       bonus2 bSkillAtk,"EM_LIGHTNING_LAND",BaseLevel/10;

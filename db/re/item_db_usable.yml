@@ -88699,6 +88699,7 @@ Body:
     AegisName: C_PRO_GACHA_1
     Name: PRO Ragnarok Asia Gacha Pack    # !todo check english name
     Type: Usable
+    Weight: 10
     Flags:
       Container: true
     Script: |
@@ -88708,6 +88709,7 @@ Body:
     AegisName: C_PRO_GACHA_2
     Name: PRO Ragnarok Asia Costume Gacha Egg II
     Type: Usable
+    Weight: 10
     Flags:
       Container: true
     Script: |

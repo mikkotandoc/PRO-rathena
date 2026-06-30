@@ -102246,9 +102246,3 @@ Body:
     Trade:
       NoTrade: false
       NoSell: false
-  - Id: 50003
-    AegisName: Play_RO_Gacha_Coin
-    Name: Play RO Costume Coin
-    Type: Etc
-    Buy: 100
-    Weight: 1
