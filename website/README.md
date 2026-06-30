@@ -92,6 +92,7 @@ website/
 | NPCs-and-Merchants | `content/NPCs-and-Merchants.md` |
 | Items-and-Equipment | `content/Items-and-Equipment.md` |
 | Dungeons | `content/Dungeons.md` |
+| Instance-Guide | `content/Instance-Guide.md` |
 | Commands | `content/Commands.md` |
 | Rules | `content/Rules.md` |
 | Classes | `content/Classes.md` |

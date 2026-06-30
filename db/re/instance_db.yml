@@ -699,3 +699,10 @@ Body:
       Y: 37
     AdditionalMaps:
       1@gol2: true
+  - Id: 146
+    Name: Bio 5 Bed of Honor Hard
+    TimeLimit: 7200
+    Enter:
+      Map: lhz_dun_n
+      X: 100
+      Y: 202

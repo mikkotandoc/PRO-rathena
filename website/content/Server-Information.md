@@ -33,6 +33,10 @@ Mechanics and rates for **PRO-Ragnarok (Cathode)**.
 | MVP EXP modifier | 1x | |
 | Quest EXP | 1x | |
 
+### Eden Group Quest EXP
+
+Eden hunting missions pay **scaled Base EXP and Job EXP** on turn-in. Rewards multiply with the server EXP rate — Eden boards are the most efficient leveling path for new and mid-level characters. See [Getting Started → Leveling Guide](Getting-Started.md#leveling-guide-recommended).
+
 ### Death Penalty
 
 | Setting | Value |
@@ -143,6 +147,7 @@ Guilds can hold unlimited castles.
 | Default save point | **prontera 156, 191** |
 | Starting zeny | **0** |
 | Starting items | Basic novice gear + bonus starter items |
+| Recommended first destination | **Eden Group HQ** (`moc_para01`) for missions |
 
 Look up item names on [Divine Pride](https://www.divine-pride.net/database/item).
 
@@ -172,4 +177,4 @@ Use **Episode Guide** (`prontera 165,175`) or **Balheele** episode tickets for a
 
 ## See Also
 
-- [Home](Home.md) · [Custom Systems](Custom-Systems.md) · [Rules](Rules.md)
+- [Home](Home.md) · [Getting Started](Getting-Started.md) · [Custom Systems](Custom-Systems.md) · [Rules](Rules.md)

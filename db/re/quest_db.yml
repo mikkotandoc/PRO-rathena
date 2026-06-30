@@ -17105,3 +17105,24 @@ Body:
   - Id: 90517
     Title: "[Standby] Biosphere Depth - Level 2 Daily Hunt"
     TimeLimit: 4h
+  - Id: 90518
+    Title: Depth Abyss Bulk Research
+    Targets:
+      - Id: 1
+        Count: 3000
+        Location: bl_depth2
+  - Id: 90519
+    Title: "[Standby] Depth Abyss Bulk Research"
+    TimeLimit: 4h
+  - Id: 90520
+    Title: "Memorial Dungeon: Bio 5 Bed of Honor (Hard)"
+    TimeLimit: 4h
+  - Id: 90521
+    Title: Bio 5 Hard Mode Hunt
+    Targets:
+      - Id: 1
+        Count: 200
+        Location: lhz_dun_n
+  - Id: 90522
+    Title: "[Standby] Bio 5 Hard Mode Hunt Reward"
+    TimeLimit: 4h

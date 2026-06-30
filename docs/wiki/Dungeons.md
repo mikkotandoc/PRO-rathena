@@ -8,6 +8,7 @@
 
 | Method | Location |
 |--------|----------|
+| **Instance & Episode Guide** | [Instance-Guide.md](Instance-Guide.md) — **step-by-step kRO/iRO progression** |
 | Warper | `prontera 159,192` — Dungeons & Instances menus |
 | Episode Guide | `prontera 165,175` — Episode hub warps |
 | Instance & EP Merchant | `prontera 164,172` — Illusion barters |
@@ -91,6 +92,8 @@ Custom tuning: specific Episode 20 monsters take reduced physical/magic damage (
 
 Episode Clear tickets (Balheele) uncloak instance entrance NPCs without full quest completion. See `npc/custom/episode_instance_access.txt` for variable flags per episode.
 
+→ **Full walkthrough:** [Instance & Episode Progression Guide](Instance-Guide.md)
+
 ---
 
 ## Guild Dungeons
@@ -101,20 +104,20 @@ Access via **Warper → Guild Dungeons** menu. Standard Renewal castle dungeons.
 
 ## Leveling Dungeons
 
-*(Placeholder — staff should add recommended dungeons by level bracket.)*
+For leveling, use **Eden Group mission boards** first — see [Getting Started → Leveling Guide](Getting-Started.md#leveling-guide-recommended).
 
-| Level | Suggested Dungeon |
+| Level | Suggested content |
 |-------|-------------------|
-| 1–50 | *(placeholder)* |
-| 50–100 | *(placeholder)* |
-| 100–150 | Illusion instances |
-| 150–200 | Episode 17–18 areas |
-| 200–275 | Episode 19–20 endgame |
+| 1–130 | Eden boards (primary EXP) |
+| 100–150 | Illusion Investigation instances |
+| 130–200 | Episode 17–18 story & fields |
+| 200–275 | Episode 19–20 endgame instances |
 
 ---
 
 ## See Also
 
+- [Instance & Episode Guide](Instance-Guide.md)
 - [Getting Started](Getting-Started.md)
 - [Custom Systems](Custom-Systems.md)
 - [Home](Home.md)

@@ -53,6 +53,11 @@ $WIKI_PAGES = [
 		'nav'   => 'Dungeons & Instances',
 		'file'  => 'Dungeons.md',
 	],
+	'Instance-Guide' => [
+		'title' => 'Instance & Episode Guide',
+		'nav'   => 'Instance Guide',
+		'file'  => 'Instance-Guide.md',
+	],
 	'Commands' => [
 		'title' => 'Player Commands',
 		'nav'   => 'Player Commands',

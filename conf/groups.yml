@@ -43,9 +43,8 @@ Header:
 Body:
   - Id: 0
     # group 0 is the default group for every new account
-    # TEST SERVER: all at/char commands enabled for every player
     Name: Player
-    Level: 99
+    Level: 0
     Commands:
       mall: true
     Permissions:
@@ -53,7 +52,6 @@ Body:
       can_party: true
       attendance: true
       command_enable: true
-      all_commands: true
       any_warp: true
       macro_register: true
       item_unconditional: true
@@ -233,6 +231,8 @@ Body:
     Inherit:
       Support: true
       Law Enforcement: true
+    Commands:
+      macrochecker: true
     LogCommands: true
     Permissions:
       can_trade: true

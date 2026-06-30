@@ -164,7 +164,7 @@ lighthalzen,321,218,4	script	Ohno Tohiro#1	4_M_RASWORD,{
 	mes "Is there something you want from me?";
 	while(true) {
 		next;
-		switch( select( "End the conversation.", "Ask him about the tomb of honor.", "Return to the tomb of honor.", "Say that Zeny is not enough." ) ) {
+		switch( select( "End the conversation.", "Ask him about the tomb of honor.", "Return to the tomb of honor.", "Say that Zeny is not enough.", "Bed of Honor Hard Mode (BL 250+)" ) ) {
 		case 1:
 			mes "[Ohno Tohiro]";
 			mes "There are many adventurers looking for this crevice, except for you!";
@@ -251,6 +251,10 @@ lighthalzen,321,218,4	script	Ohno Tohiro#1	4_M_RASWORD,{
 			next;
 			delitem 7347,10;// Lab_Staff_Record
 			warp "lhz_dun_n",100,202;
+			end;
+		case 5:
+			close2;
+			callfunc "F_Bio5Hard_Instance";
 			end;
 		}
 	}

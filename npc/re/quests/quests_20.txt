@@ -101,7 +101,7 @@ function	script	F_ep20_safetyMenu	{
 		warp "jor_safty1", 328, 150;
 		end;
 	case 6:
-		warp "jor_back5", 350, 75;
+		warp "jor_back5", 353, 73;
 		end;
 	case 7:
 		close;
@@ -268,7 +268,7 @@ icas_in,262,202,3	script	Leon Petit#ep20ms01	4_EP19_LEON,{
 		mes "Lehar is waiting at the gorge. Follow the navigation.";
 		next;
 		if (select( "Warp to Ancient Ice Gorge East.", "I'll go on my own." ) == 1)
-			warp "jor_back5", 350, 75;
+			warp "jor_back5", 353, 73;
 		close3;
 	}
 	if (ep20_main == 6) {
@@ -312,65 +312,7 @@ jor_safty1,325,148,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep2
 jor_back5,348,73,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s6	GATE_SKYBLUE,2,2
 jor_back5,350,354,0	duplicate(Safety Zone Portal#ep20s1)	Safety Zone Portal#ep20s7	GATE_SKYBLUE,2,2
 
-jor_back5,353,73,3	script	Lehar#ep20warp01	4_EP19_LEHAR,{
-	if (ep20_main < 2)
-		end;
-	cutin "ep19_lehar01.png",2;
-	if (ep20_main == 2) {
-		mes "[Lehar]";
-		mes "You need to speak with me at the gorge entrance first.";
-		mes "Find me at ^0000CD(350, 75)^000000.";
-		next;
-		if (select( "Warp to gorge entrance.", "Open safety portal menu." ) == 1) {
-			close2;
-			cutin "",255;
-			warp "jor_back5", 350, 75;
-			end;
-		}
-	}
-	else if (ep20_main == 3) {
-		mes "[Lehar]";
-		mes "Regroup with me at ^0000CDSafety Zone 1 (64, 328)^000000.";
-		next;
-		if (select( "Warp to Safety Zone 1.", "Open safety portal menu." ) == 1) {
-			close2;
-			cutin "",255;
-			warp "jor_safty1", 64, 328;
-			end;
-		}
-	}
-	else if (ep20_main == 4) {
-		mes "[Lehar]";
-		mes "I'm waiting at ^0000CDSafety Zone 2 (195, 327)^000000.";
-		next;
-		if (select( "Warp to Safety Zone 2.", "Open safety portal menu." ) == 1) {
-			close2;
-			cutin "",255;
-			warp "jor_safty1", 195, 327;
-			end;
-		}
-	}
-	else if (ep20_main == 5) {
-		mes "[Lehar]";
-		mes "Report to Miriam at ^0000CD(353, 357)^000000.";
-		next;
-		if (select( "Warp to Miriam.", "Open safety portal menu." ) == 1) {
-			close2;
-			cutin "",255;
-			warp "jor_back5", 353, 357;
-			end;
-		}
-	}
-	else {
-		mes "[Lehar]";
-		mes "Need to move between the safety zones? I can open a portal for you.";
-		next;
-	}
-	callfunc("F_ep20_safetyMenu");
-	end;
-}
-
-jor_back5,350,75,3	script	Lehar#ep20ms01	4_EP19_LEHAR,{
+jor_back5,353,73,3	script	Lehar#ep20ms01	4_EP19_LEHAR,{
 	if (ep20_main < 2) end;
 	if (ep20_main == 2) {
 		cutin "ep19_lehar01.png",2;
@@ -433,8 +375,10 @@ jor_back5,350,75,3	script	Lehar#ep20ms01	4_EP19_LEHAR,{
 	}
 	cutin "ep19_lehar01.png",2;
 	mes "[Lehar]";
-	mes "The gorge is larger than I imagined...";
-	close3;
+	mes "Need to move between the safety zones? I can open a portal for you.";
+	next;
+	callfunc("F_ep20_safetyMenu");
+	end;
 
 OnInit:
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 2" );
@@ -447,12 +391,12 @@ jor_safty1,64,328,3	script	Lehar#ep20ms02	4_EP19_LEHAR,{
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "You reached the safety zone early. I still need to meet you at the gorge entrance first.";
-		mes "Find me at ^0000CDjor_back5 (350, 75)^000000.";
+		mes "Find me at ^0000CDjor_back5 (353, 73)^000000.";
 		next;
 		if (select( "Warp to the gorge entrance.", "I'll walk." ) == 1) {
 			close2;
 			cutin "",255;
-			warp "jor_back5", 350, 75;
+			warp "jor_back5", 353, 73;
 			end;
 		}
 		close3;
@@ -520,12 +464,12 @@ jor_safty1,195,327,3	script	Lehar#ep20ms03	4_EP19_LEHAR,{
 		cutin "ep19_lehar01.png",2;
 		mes "[Lehar]";
 		mes "You're ahead of me. Meet me at the gorge entrance first.";
-		mes "Find me at ^0000CDjor_back5 (350, 75)^000000.";
+		mes "Find me at ^0000CDjor_back5 (353, 73)^000000.";
 		next;
 		if (select( "Warp to the gorge entrance.", "I'll walk." ) == 1) {
 			close2;
 			cutin "",255;
-			warp "jor_back5", 350, 75;
+			warp "jor_back5", 353, 73;
 			end;
 		}
 		close3;
