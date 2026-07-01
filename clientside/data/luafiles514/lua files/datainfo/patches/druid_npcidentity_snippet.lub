@@ -1,0 +1,6 @@
+-- Episode 21 Druid job IDs (append inside jobtbl in npcidentity.lub)
+	JT_DRUID = 4351,
+	JT_BABY_DRUID = 4352,
+	JT_KARNOS = 4353,
+	JT_BABY_KARNOS = 4354,
+	JT_ALITEA = 4355,

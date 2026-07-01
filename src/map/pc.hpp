@@ -1816,7 +1816,7 @@ bool pc_is_same_equip_index(enum equip_index eqi, const int16* equip_index, int1
 #define pc_is_upper_expanded_first(class_) (\
 	(class_&MAPID_THIRDMASK) == MAPID_SUPER_NOVICE_E || (class_&MAPID_THIRDMASK) == MAPID_STAR_EMPEROR || \
 	(class_&MAPID_THIRDMASK) == MAPID_SOUL_REAPER || (class_&MAPID_SECONDMASK) == MAPID_REBELLION || \
-	(class_&MAPID_SECONDMASK) == MAPID_KAGEROUOBORO || (class_&MAPID_FIRSTMASK) == MAPID_SUMMONER)
+	(class_&MAPID_SECONDMASK) == MAPID_KAGEROUOBORO || (class_&MAPID_FIRSTMASK) == MAPID_SUMMONER || (class_&MAPID_FIRSTMASK) == MAPID_DRUID)
 
 /// Checks if the player is a 2nd upper expanded job or higher.
 #define pc_is_upper_expanded_second(class_) (\

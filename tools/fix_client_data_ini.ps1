@@ -37,5 +37,6 @@ foreach ($name in @($launcher, $bat)) {
 }
 
 & (Join-Path $PSScriptRoot "deploy_questinfo_client_patch.ps1") -ClientRoot $ClientRoot
+& (Join-Path $PSScriptRoot "deploy_druid_client_patch.ps1") -ClientRoot $ClientRoot
 
-Write-Host "Quest patch deployed. Keep your original DATA.INI / GRF set."
+Write-Host "Quest + Druid patches deployed. Keep your original DATA.INI / GRF set."

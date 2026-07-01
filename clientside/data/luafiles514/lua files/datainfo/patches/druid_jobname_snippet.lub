@@ -1,0 +1,7 @@
+-- Episode 21 Druid sprite resource names (append inside JobNameTable in jobname.lub)
+-- Requires matching .act/.spr files in data/sprite/ (player sprite folder from Episode 21 client).
+	[jobtbl.JT_DRUID] = "druid",
+	[jobtbl.JT_BABY_DRUID] = "baby_druid",
+	[jobtbl.JT_KARNOS] = "karnos",
+	[jobtbl.JT_BABY_KARNOS] = "baby_karnos",
+	[jobtbl.JT_ALITEA] = "alitea",
