@@ -51,6 +51,7 @@ function Is_Expanded	{
 		case JOB_KAGEROU:
 		case JOB_OBORO:
 		case JOB_SUMMONER:
+		case JOB_DRUID:
 			return true;
 		default:
 			return false;
@@ -250,6 +251,16 @@ function	Job_Options	{
 		Job_Options(.@job_opt, roclass(EAJ_SPIRIT_HANDLER));	// .@eac|EAJL_2_1
 	}
 
+	if (.TraitExpanded && .@eac == EAJ_DRUID) {
+		Require_Level(.Req_Karnos[0], .Req_Karnos[1]);
+		Job_Options(.@job_opt, roclass(EAJ_KARNOS));	// .@eac|EAJL_2_1
+	}
+
+	if (.TraitExpanded && .@eac == EAJ_KARNOS) {
+		Require_Level(.Req_Alitea[0], .Req_Alitea[1]);
+		Job_Options(.@job_opt, roclass(EAJ_ALITEA));	// .@eac|EAJL_THIRD
+	}
+
 	if (.TraitExpanded && .@eac == EAJ_STAR_EMPEROR) {
 		Require_Level(.Req_Fourth[0], .Req_Fourth[1]);
 		Job_Options(.@job_opt, roclass(EAJ_SKY_EMPEROR));	// .@eac|EAJL_FOURTH
@@ -295,6 +306,8 @@ function	Job_Options	{
 				Job_Options(.@job_opt,Job_Swordman,
 					Job_Mage, Job_Archer, Job_Acolyte, Job_Merchant, Job_Thief,
 					Job_Super_Novice, Job_Taekwon, Job_Gunslinger, Job_Ninja);
+				if( .TraitExpanded )
+					Job_Options(.@job_opt, Job_Druid);
 				if( .BabyNovice )
 					Job_Options(.@job_opt, Job_Baby);
 				break;
@@ -320,6 +333,8 @@ function	Job_Options	{
 						Job_Baby_Gunslinger, Job_Baby_Ninja);
 				if( .BabySummoner )
 					Job_Options(.@job_opt, Job_Baby_Summoner);
+				if( .BabyDruid )
+					Job_Options(.@job_opt, Job_Baby_Druid);
 				break;
 			default:
 				mes "An error has occurred.";
@@ -717,6 +732,7 @@ OnInit:
 	.BabyRenewal = true;				// Enable Baby Renewal classes?
 	.BabyExpanded = true;				// Enable Baby Expanded classes: Ex. Baby Ninja, Baby Taekwon, etc.
 	.BabySummoner = true;				// Enable Baby Summoner?
+	.BabyDruid = true;					// Enable Baby Druid?
 	.LastJob = true;					// Enforce linear class changes?
 	.SkillPointCheck = true;			// Force player to use up all skill points?
 	.Platinum = true;					// Get platinum skills automatically?
@@ -731,6 +747,8 @@ OnInit:
 	setarray .Req_Exp_NJ_GS[0],99,70; 	// Minimum base level, job level to turn into Ninja -> Kagerou/Oboro, Gunslinger -> Rebellion
 	setarray .Req_Exp_SNOVI[0],99,99; 	// Minimum base level, job level to turn into Expanded Super Novice
 	setarray .Req_SHandler[0],200,60;	// Minimum base level, job level to turn into Spirit Handler
+	setarray .Req_Karnos[0],99,50;		// Minimum base level, job level to turn into Karnos
+	setarray .Req_Alitea[0],200,70;		// Minimum base level, job level to turn into Alitea
 	.SNovice = 45;						// Minimum base level to turn into Super Novice
 	
 	// Setting adjustments by PACKETVER
@@ -739,8 +757,11 @@ OnInit:
 			debugmes "jobmaster: BabyExpanded is disabled due to outdated PACKETVER.";
 		if( .BabySummoner )
 			debugmes "jobmaster: BabySummoner is disabled due to outdated PACKETVER.";
+		if( .BabyDruid )
+			debugmes "jobmaster: BabyDruid is disabled due to outdated PACKETVER.";
 		.BabyExpanded = false;
 		.BabySummoner = false;
+		.BabyDruid = false;
 	}
 	end;
 }

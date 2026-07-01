@@ -9535,6 +9535,9 @@ void status_set_viewdata(block_list *bl, int32 class_)
 				sd->vd.look[LOOK_HAIR_COLOR] = cap_value(sd->status.hair_color, MIN_HAIR_COLOR, MAX_HAIR_COLOR);
 				sd->vd.look[LOOK_CLOTHES_COLOR] = cap_value(sd->status.clothes_color, MIN_CLOTH_COLOR, MAX_CLOTH_COLOR);
 				sd->vd.look[LOOK_BODY2] = sd->status.body;
+				if( class_ >= JOB_DRUID && class_ <= JOB_ALITEA ){
+					sd->vd.look[LOOK_BODY2] = class_;
+				}
 				sd->vd.sex = sd->status.sex;
 				sd->vd.look[LOOK_ROBE] = sd->status.robe;
 

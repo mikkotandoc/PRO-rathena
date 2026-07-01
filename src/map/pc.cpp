@@ -2111,7 +2111,10 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	sd->status.hair_color = cap_value(sd->status.hair_color,MIN_HAIR_COLOR,MAX_HAIR_COLOR);
 	sd->status.clothes_color = cap_value(sd->status.clothes_color,MIN_CLOTH_COLOR,MAX_CLOTH_COLOR);
 
-	if( !job_db.exists( sd->status.body ) && (sd->status.body <= JOB_SECOND_JOB_START || sd->status.body >= JOB_SECOND_JOB_END) ){
+	if( sd->status.class_ >= JOB_DRUID && sd->status.class_ <= JOB_ALITEA ){
+		// Episode 21 jobs require body style to match class on modern clients.
+		sd->status.body = sd->status.class_;
+	}else if( sd->status.body == 0 || ( !job_db.exists( sd->status.body ) && (sd->status.body <= JOB_SECOND_JOB_START || sd->status.body >= JOB_SECOND_JOB_END) ) ){
 		sd->status.body = sd->status.class_;
 	}
 
