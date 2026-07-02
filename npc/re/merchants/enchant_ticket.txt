@@ -1,0 +1,107 @@
+//===== rAthena Script =======================================
+//= Enchant Ticket Enchanter (Jeeky / Jekyll)
+//===== Description: =========================================
+//= [Official Conversion]
+//= kRO: Jeeky at itemmall (31, 70)
+//= iRO: Jekyll the Genie of Keys at prontera (177, 327)
+//===== Changelog: ===========================================
+//= 1.0 Initial release. [PRO-rathena]
+//= 1.1 Simplified script to avoid map load errors. [PRO-rathena]
+//= 1.2 Inline script and itemmall-safe sprite. [PRO-rathena]
+//= 1.3 Jeeky disabled on itemmall for map load testing. [PRO-rathena]
+//= 1.4 Re-enabled Jeeky on itemmall. [PRO-rathena]
+//============================================================
+
+itemmall,31,70,3	script	Jeeky#enchant_ticket	4_M_GENIE,{
+	if (checkweight(1201,1) == 0) {
+		mes "[Jeeky]";
+		mes "You are carrying too many items. Please free up some inventory space and come back.";
+		close;
+	}
+	if (MaxWeight - Weight < 10000) {
+		mes "[Jeeky]";
+		mes "You are carrying too much weight. Please reduce your weight and come back.";
+		close;
+	}
+	disable_items;
+	mes "[Jeeky]";
+	mes "I can enchant equipment using Enchant Tickets.";
+	mes "Bring the ticket and any other required materials with you.";
+	next;
+	switch( select( "Enchant equipment", "About enchantment tickets", "Cancel" ) ) {
+	case 1:
+		break;
+	case 2:
+		mes "[Jeeky]";
+		mes "The following equipment series can be enchanted here:";
+		mes "^0000FF- Mad Bunny-LT";
+		mes "- Hero Boots-LT, Hero Badge";
+		mes "- Young Leaf of World Tree series";
+		mes "- Poring Balloon series";
+		mes "- Helm of Faith series";
+		mes "- Thanos Helmet-LT series^000000";
+		close;
+	case 3:
+		close;
+	}
+	mes "[Jeeky]";
+	mes "Which equipment would you like to enchant?";
+	next;
+	setarray .@enchant_id[0], 15, 21, 20, 23, 22, 25, 32;
+	.@s = select( "Mad Bunny-LT", "Hero Boots-LT", "Hero Badge", "Young Leaf of World Tree", "Poring Balloon", "Helm of Faith", "Thanos Helmet-LT", "Cancel" ) - 1;
+	if (.@s >= 7) {
+		close;
+	}
+	close2;
+	item_enchant( .@enchant_id[.@s] );
+	end;
+}
+
+prontera,177,327,3	script	Jekyll#enchant_ticket	4_M_GENIE,{
+	if (checkweight(1201,1) == 0) {
+		mes "[Jekyll]";
+		mes "You are carrying too many items. Please free up some inventory space and come back.";
+		close;
+	}
+	if (MaxWeight - Weight < 10000) {
+		mes "[Jekyll]";
+		mes "You are carrying too much weight. Please reduce your weight and come back.";
+		close;
+	}
+	disable_items;
+	mes "[Jekyll]";
+	mes "I can enchant equipment using Enchant Tickets.";
+	mes "Bring the ticket and any other required materials with you.";
+	next;
+	switch( select( "Enchant equipment", "About enchantment tickets", "Cancel" ) ) {
+	case 1:
+		break;
+	case 2:
+		mes "[Jekyll]";
+		mes "The following equipment series can be enchanted here:";
+		mes "^0000FF- Mad Bunny-LT";
+		mes "- Hero Boots-LT, Hero Badge";
+		mes "- Young Leaf of World Tree series";
+		mes "- Poring Balloon series";
+		mes "- Helm of Faith series";
+		mes "- Thanos Helmet-LT series^000000";
+		close;
+	case 3:
+		close;
+	}
+	mes "[Jekyll]";
+	mes "Which equipment would you like to enchant?";
+	next;
+	setarray .@enchant_id[0], 15, 21, 20, 23, 22, 25, 32;
+	.@s = select( "Mad Bunny-LT", "Hero Boots-LT", "Hero Badge", "Young Leaf of World Tree", "Poring Balloon", "Helm of Faith", "Thanos Helmet-LT", "Cancel" ) - 1;
+	if (.@s >= 7) {
+		close;
+	}
+	close2;
+	item_enchant( .@enchant_id[.@s] );
+	end;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Genie of Keys>" );
+	end;
+}

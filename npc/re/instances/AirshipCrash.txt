@@ -92,7 +92,8 @@ dali02,137,86,3	script	Dr. Dulaisakstrom#mjo	PORTAL,{
 		switch(instance_enter(.@md_name$)) {
 		case IE_OK:
 			mapannounce "dali02", strcharinfo(0) + " of the party " + getpartyname(.@party_id) + " entered " + .@md_name$ + ".", bc_map, "0x00ff99";
-			setquest 15072;
+			if (isbegin_quest(15072) == 0)
+				setquest 15072;
 			end;
 		case IE_NOMEMBER:
 			mes "^ff0000To enter, you must create or join a party of 1 or more members.^000000";
@@ -189,18 +190,288 @@ dali02,131,86,5	script	Wurmm#mjo	4_M_ALCHE_C,{
 }
 
 //============================================================
+// Instance - Crash Site Story (Heroes' Trails)
+//============================================================
+1@mjo1,224,205,5	script	Chaos#mjo	4_M_CHAOS,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#mjo");
+	end;
+}
+
+1@mjo1,229,202,3	script	Lydia#mjo	4_F_LYDIA,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Lydia#mjo");
+	end;
+}
+
+1@mjo1,227,199,3	script	Seth#mjo	4_CAT,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Seth#mjo");
+	end;
+}
+
+1@mjo1,233,207,3	script	Loki#mjo	4_M_ROKI2,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Loki#mjo");
+	end;
+}
+
+1@mjo1,236,204,5	script	Iris#mjo	4_F_IRIS,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Iris#mjo");
+	end;
+}
+
+1@mjo1,228,198,3	script	Airship Crate#mjo	4_SOIL,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Airship Crate#mjo");
+	end;
+}
+
+1@mjo1,241,190,3	script	Captain Pelloch#mjo	4_M_FALLENGONY,{
+	if ('story_phase < 2) {
+		mes "^0000cdThe collapsed man is unconscious.^000000";
+		close;
+	}
+	if ('pelloch_saved) {
+		mes "^0000cdCaptain Pelloch has already been stabilized.^000000";
+		close;
+	}
+	.@account_id = getcharid(3);
+	.@name$ = strcharinfo(0);
+	mes "^0000cdA blonde man in a captain's uniform lies among the wreckage.^000000";
+	next;
+	unittalk .@account_id, .@name$ + ": Look! There's a guy down here.";
+	next;
+	switch (select("I see a collapsed person.:Is he injured?")) {
+	case 1:
+		mes "[" + .@name$ + "]";
+		mes "I see a collapsed person.";
+		unittalk .@account_id, .@name$ + ": I see a collapsed person.";
+		break;
+	case 2:
+		mes "[" + .@name$ + "]";
+		mes "Is he injured?";
+		unittalk .@account_id, .@name$ + ": Is he injured?";
+		break;
+	}
+	next;
+	cutin "lydia_a.bmp",2;
+	mes "[Lydia]";
+	mes "He's still breathing. Help him up, quick!";
+	npctalk "Lydia: He's still breathing. Help him up, quick!", instance_npcname("Lydia#mjo");
+	next;
+	cutin "h_chaos02",2;
+	mes "[Chaos]";
+	mes "Tch, what a mess... Fine, lend me a hand.";
+	npctalk "Chaos: Tch, what a mess... Fine, lend me a hand.", instance_npcname("Chaos#mjo");
+	next;
+	cutin "",255;
+	specialeffect EF_RESURRECTION, AREA, instance_npcname("Captain Pelloch#mjo");
+	sleep2 1000;
+	'pelloch_saved = 1;
+	'injured_rescued++;
+	mapannounce instance_mapname("1@mjo1"), "Captain Pelloch: Ugh... thank you... I thought that was the end...", bc_map, 0xFFFF00;
+	disablenpc instance_npcname("Captain Pelloch#mjo");
+	enablenpc instance_npcname("Captain Pelloch#mjo2");
+	if ('injured_rescued >= 5)
+		mapannounce instance_mapname("1@mjo1"), "The survivors you helped may weaken the contaminated creature lurking in the cave.", bc_map, 0x00FF99;
+	close;
+OnInstanceInit:
+	disablenpc instance_npcname("Captain Pelloch#mjo");
+	end;
+}
+
+1@mjo1,241,190,3	script	Captain Pelloch#mjo2	4_M_REINDEER,{
+	if ('pelloch_saved == 0)
+		end;
+	mes "[Captain Pelloch]";
+	mes "I am Captain Pelloch. Our airship went down after the assault...";
+	mes "The Ymir fragment scattered everywhere and changed the monsters.";
+	next;
+	mes "[Captain Pelloch]";
+	mes "The Schwarzwald expedition team set up inside the cave to the northeast.";
+	mes "Please help them investigate the cavity when you are ready.";
+	close;
+OnInstanceInit:
+	disablenpc instance_npcname("Captain Pelloch#mjo2");
+	end;
+}
+
+// Additional injured passengers (help 5 total for weaker MVP on kRO).
+function	script	F_Aircrash_HelpInjured	{
+	if ('story_phase < 2) {
+		mes "^0000cdYou should investigate the crash site with the others first.^000000";
+		close;
+	}
+	if ('injured_rescued >= 5) {
+		mes "^0000cdYou have already helped enough survivors for now.^000000";
+		close;
+	}
+	mes "^0000cdAn injured passenger lies among the debris.^000000";
+	next;
+	if (select("Help the injured person.:Leave them for now.") == 2)
+		close;
+	specialeffect EF_RESURRECTION, AREA, strnpcinfo(0);
+	sleep2 500;
+	'injured_rescued++;
+	mapannounce instance_mapname("1@mjo1"), "Injured Passenger: Thank you... I can walk on my own now...", bc_map, 0xFFFF00;
+	disablenpc strnpcinfo(0);
+	if ('injured_rescued >= 5)
+		mapannounce instance_mapname("1@mjo1"), "The survivors you helped may weaken the contaminated creature lurking in the cave.", bc_map, 0x00FF99;
+	close;
+}
+
+1@mjo1,205,218,3	script	Injured Passenger#mjo1	4_M_FALLENGONY,{
+	callfunc "F_Aircrash_HelpInjured";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Injured Passenger#mjo1");
+	end;
+}
+1@mjo1,252,225,3	script	Injured Passenger#mjo2	4_M_FALLENGONY,{
+	callfunc "F_Aircrash_HelpInjured";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Injured Passenger#mjo2");
+	end;
+}
+1@mjo1,198,195,3	script	Injured Passenger#mjo3	4_M_FALLENGONY,{
+	callfunc "F_Aircrash_HelpInjured";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Injured Passenger#mjo3");
+	end;
+}
+1@mjo1,260,198,3	script	Injured Passenger#mjo4	4_M_FALLENGONY,{
+	callfunc "F_Aircrash_HelpInjured";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("Injured Passenger#mjo4");
+	end;
+}
+
+1@mjo1,225,215,0	script	#AircrashIntroWp	HIDDEN_WARP_NPC,12,12,{
+	end;
+OnTouch:
+	if ('story_phase > 0)
+		end;
+	if (is_party_leader() == false)
+		end;
+	donpcevent instance_npcname("#AircrashStory") + "::OnStart";
+	end;
+OnInstanceInit:
+	end;
+}
+
+1@mjo1,1,2,0	script	#AircrashStory	-1,{
+	end;
+OnStart:
+	if ('story_phase > 0)
+		end;
+	'story_phase = 1;
+	.@map$ = instance_mapname("1@mjo1");
+	.@chaos$ = instance_npcname("Chaos#mjo");
+	.@lydia$ = instance_npcname("Lydia#mjo");
+	.@seth$ = instance_npcname("Seth#mjo");
+	.@loki$ = instance_npcname("Loki#mjo");
+	.@iris$ = instance_npcname("Iris#mjo");
+	.@crate$ = instance_npcname("Airship Crate#mjo");
+	.@account_id = getcharid(3);
+	.@name$ = strcharinfo(0);
+
+	hideoffnpc .@chaos$;
+	hideoffnpc .@lydia$;
+	hideoffnpc .@seth$;
+	hideoffnpc .@crate$;
+	setpcblock PCBLOCK_NPC, true;
+
+	npctalk "Chaos: Wow, oh, oh, oh, oh..", .@chaos$;
+	sleep 3500;
+	npctalk "Lydia: Argh! Ha, Ha, Hands!!", .@lydia$;
+	sleep 3500;
+	npctalk "Seth: Meow, meow!", .@seth$;
+	sleep 2000;
+
+	cutin "lydia_a.bmp",2;
+	mapannounce .@map$, "[ Lydia ] What the hell is going on?", bc_map, 0xFFFFFF;
+	sleep 4000;
+	cutin "",255;
+
+	npctalk "Lydia: Well, we don't see anything.", .@lydia$;
+	emotion ET_SWEAT, getnpcid(0, .@lydia$);
+	sleep 3500;
+	mapannounce .@map$, "...and a person that came from the airship that fell.", bc_map, 0xFFFFFF;
+	sleep 3500;
+
+	hideoffnpc .@loki$;
+	hideoffnpc .@iris$;
+	specialeffect EF_SUI_EXPLOSION, AREA, .@loki$;
+
+	cutin "h_iris02",2;
+	npctalk "Iris: Hooray!!!", .@iris$;
+	sleep 3000;
+	cutin "ep14_roki02",2;
+	npctalk "Loki: Who are you?", .@loki$;
+	sleep 3000;
+	cutin "lydia_a.bmp",2;
+	npctalk "Lydia: Ah...", .@lydia$;
+	emotion ET_THROB, getnpcid(0, .@lydia$);
+	sleep 2500;
+	mapannounce .@map$, "[ Lydia ] (Oh, no... this can't be... is this a dream...?)", bc_map, 0xFF99CC;
+	sleep 4000;
+	cutin "",255;
+
+	cutin "h_chaos02",2;
+	mapannounce .@map$, "[Chaos] Hey, quit gawking and look around! Survivors could still be out here!", bc_map, 0xFFFF99;
+	sleep 4000;
+	cutin "",255;
+
+	unittalk .@account_id, .@name$ + ": Look! There's a guy down here.";
+	sleep 2500;
+	mapannounce .@map$, "Search the crash site and help the injured. Survivors appear near the wreckage.", bc_map, 0x00FF99;
+	sleep 2500;
+
+	enablenpc instance_npcname("Captain Pelloch#mjo");
+	enablenpc instance_npcname("Injured Passenger#mjo1");
+	enablenpc instance_npcname("Injured Passenger#mjo2");
+	enablenpc instance_npcname("Injured Passenger#mjo3");
+	enablenpc instance_npcname("Injured Passenger#mjo4");
+	'story_phase = 2;
+	setpcblock PCBLOCK_NPC, false;
+	viewpoint 1, 241, 190, 2, 0xFF0000;
+	end;
+
+OnInstanceInit:
+	end;
+}
+
+//============================================================
 // Instance - Field Entrance
 //============================================================
 1@mjo1,219,379,3	script	Expedition Scientist#mjo	4_LGTSCIENCE,{
 	mes "[Scientist]";
 	mes "Welcome to the crash site.";
-	mes "The expedition team is waiting inside the cave to the northeast.";
-	mes "Follow the cave entrance marked on your minimap.";
+	if ('story_phase == 0) {
+		mes "Strange figures were spotted near the wreckage to the ^0000cdnorthwest^000000.";
+		mes "You should investigate there before heading to the expedition cave.";
+	} else {
+		mes "The expedition team is waiting inside the cave to the northeast.";
+		mes "Follow the cave entrance marked on your minimap.";
+	}
 	next;
 	mes "[Scientist]";
 	mes "Coordinates: ^0000cd(277, 253)^000000";
 	close2;
 	viewpoint 1, 277, 253, 1, 0xFFFF00;
+	if ('story_phase == 0)
+		viewpoint 1, 225, 215, 2, 0xFF0000;
 	end;
 }
 
@@ -435,6 +706,9 @@ OnInstanceInit:
 	'investigation = 0;
 	'boss_summoned = 0;
 	'hp_mult = 1;
+	'story_phase = 0;
+	'injured_rescued = 0;
+	'pelloch_saved = 0;
 	'map2$ = instance_mapname("1@mjo2");
 	end;
 
@@ -451,13 +725,18 @@ OnSummonBoss:
 	if (mobcount('map2$, instance_npcname("#AircrashCtrl") + "::OnBossDead") > 0)
 		end;
 	.@label$ = instance_npcname("#AircrashCtrl") + "::OnBossDead";
-	monster 'map2$, 150, 150, "--ja--", 20891, 1, .@label$;
+	// kRO: helping 5 injured survivors summons the weaker boss (20891).
+	.@boss_id = ('injured_rescued >= 5 ? 20891 : 21062);
+	monster 'map2$, 150, 150, "--ja--", .@boss_id, 1, .@label$;
 	if ('hp_mult > 1 && $@mobid[0]) {
 		.@hp = getunitdata($@mobid[0], UMOB_MAXHP);
 		setunitdata $@mobid[0], UMOB_MAXHP, .@hp * 'hp_mult;
 		setunitdata $@mobid[0], UMOB_HP, .@hp * 'hp_mult;
 	}
-	mapannounce 'map2$, "An Unidentified Creature has appeared!", bc_map, 0xFF0000;
+	if (.@boss_id == 20891)
+		mapannounce 'map2$, "A weakened Unidentified Creature has appeared!", bc_map, 0xFF0000;
+	else
+		mapannounce 'map2$, "A powerful Unidentified Life Form has appeared!", bc_map, 0xFF0000;
 	end;
 
 OnMobDead:

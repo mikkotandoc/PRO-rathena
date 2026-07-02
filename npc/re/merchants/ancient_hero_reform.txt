@@ -1,0 +1,166 @@
+//===== rAthena Script =======================================
+//= Ancient Hero Equipment Reform (MuhRO basis)
+//===== Description: =========================================
+//= Patent Ancient Hero's Cube upgrades + Hero-LT material exchange.
+//= Bioresearch Laboratory / Bed of Honor Hard supply these materials.
+//============================================================
+
+yuno,214,347,3	script	Zomcha#edda_ref	4_M_SAGE_C,{
+	disable_items;
+	mes "[Zomcha]";
+	mes "I exchange surplus biolab research for reform materials.";
+	mes "Use ^0000cdPatent Ancient Hero's Cube^000000 on +7 Ancient Hero gear at the Grade Market.";
+	next;
+	switch( select( "Exchange research materials", "About Ancient Hero upgrades", "Cancel" ) ) {
+	case 1:
+		mes "[Zomcha]";
+		mes "Rates follow MuhRO biolab exchange values.";
+		next;
+		switch( select( "Back", "Patent Cube (300 Doc / 500 Frag each)", "Refine Hammer (200 Doc / 300 Frag each)", "Weapon Upgrade Stone Low (50/50)", "Weapon Upgrade Stone Mid (100/100)", "Weapon Upgrade Stone High (150/150)" ) ) {
+		case 1:
+			close;
+		case 2:
+			.@doc = 300; .@frag = 500; .@item = 100753;
+			break;
+		case 3:
+			.@doc = 200; .@frag = 300; .@item = 100821;
+			break;
+		case 4:
+			.@doc = 50; .@frag = 50; .@item = 1000430;
+			break;
+		case 5:
+			.@doc = 100; .@frag = 100; .@item = 1000431;
+			break;
+		case 6:
+			.@doc = 150; .@frag = 150; .@item = 1000432;
+			break;
+		}
+		mes "[Zomcha]";
+		mes "Trade ^0000cd" + .@doc + " Research Documents^000000 and ^0000cd" + .@frag + " Experimental Fragments^000000 for 1x " + getitemname(.@item) + ".";
+		next;
+		if (select( "Exchange once.", "Cancel." ) == 2)
+			close;
+		if (countitem(25786) < .@doc || countitem(25787) < .@frag) {
+			mes "[Zomcha]";
+			mes "You do not have enough research materials.";
+			close;
+		}
+		if (!checkweight(.@item, 1)) {
+			mes "[Zomcha]";
+			mes "Your inventory is too full.";
+			close;
+		}
+		delitem 25786, .@doc;
+		delitem 25787, .@frag;
+		getitem .@item, 1;
+		mes "[Zomcha]";
+		mes "Exchange complete.";
+		close;
+	case 2:
+		mes "[Zomcha]";
+		mes "^0000cdAncient Hero^000000 -> ^0000cdPatent^000000: use Patent Cube on +7 gear (refine -2).";
+		mes "^0000cdPatent^000000 -> ^0000cdHero-LT^000000: see Whoopi at the Grade Market.";
+		mes "EDDA Biolab weapons are enchanted at Lavian; Ancient Hero weapons come from biolab MVP boxes.";
+		close;
+	case 3:
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Biolab Exchange>";
+	end;
+}
+
+grademk,48,169,3	script	Whoopi#hero_lt	4_F_JOB_KNIGHT,{
+	disable_items;
+	mes "[Whoopi]";
+	mes "I assist with ^0000cdHero-LT^000000 weapon refinement.";
+	mes "Bring a Patent weapon, Modified Hero's Refine Hammer, and research materials.";
+	next;
+	switch( select( "Hero-LT material info", "Open reform hammer guide", "Cancel" ) ) {
+	case 1:
+		mes "[Whoopi]";
+		mes "Typical Patent -> Hero-LT costs (per MuhRO):";
+		mes "^0000cd150^000000 Research Documents";
+		mes "^0000cd300^000000 Experimental Fragments";
+		mes "^0000cd100^000000 Weapon Upgrade Stone (tier varies)";
+		mes "^0000cd1^000000 Modified Hero's Refine Hammer";
+		mes "Use the hammer on your Patent weapon from inventory.";
+		next;
+		mes "[Whoopi]";
+		mes "Higher tiers may also require Powerful Dimensional Essence.";
+		close;
+	case 2:
+		mes "[Whoopi]";
+		mes "Equip your Patent weapon and use the appropriate ^0000cdModified Hero's Refine Hammer^000000 from your inventory.";
+		mes "The hammer opens the official reform interface.";
+		close;
+	case 3:
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Hero-LT Reform>";
+	end;
+}
+
+lighthalzen,318,215,4	script	Doil#instance_mat	4_M_RASWORD,{
+	disable_items;
+	mes "[Doil]";
+	mes "I trade biolab hunt spoils for reform supplies.";
+	mes "Bed of Honor Hard and Bioresearch Laboratory are your best sources.";
+	next;
+	switch( select( "Energy Fragment exchange", "Sentimental Fragment exchange", "Cancel" ) ) {
+	case 1:
+		mes "[Doil]";
+		mes "Trade ^0000cd50 Energy Fragments^000000 for 1 Patent Ancient Hero's Cube?";
+		next;
+		if (select( "Exchange", "Cancel" ) == 2)
+			close;
+		if (countitem(6820) < 50) {
+			mes "[Doil]";
+			mes "You need 50 Energy Fragments.";
+			close;
+		}
+		if (!checkweight(100753, 1)) {
+			mes "[Doil]";
+			mes "Your inventory is too full.";
+			close;
+		}
+		delitem 6820, 50;
+		getitem 100753, 1;
+		mes "[Doil]";
+		mes "Here is your cube.";
+		close;
+	case 2:
+		mes "[Doil]";
+		mes "Trade ^0000cd30 Sentimental Fragments^000000 for 1 Modified Hero's Refine Hammer?";
+		next;
+		if (select( "Exchange", "Cancel" ) == 2)
+			close;
+		if (countitem(22687) < 30) {
+			mes "[Doil]";
+			mes "You need 30 Sentimental Fragments.";
+			close;
+		}
+		if (!checkweight(100821, 1)) {
+			mes "[Doil]";
+			mes "Your inventory is too full.";
+			close;
+		}
+		delitem 22687, 30;
+		getitem 100821, 1;
+		mes "[Doil]";
+		mes "Use it wisely on your Patent equipment.";
+		close;
+	case 3:
+		close;
+	}
+	end;
+
+OnInit:
+	setunittitle getnpcid(0), "<Endgame Materials>";
+	end;
+}

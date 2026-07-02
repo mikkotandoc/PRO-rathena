@@ -89,15 +89,10 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 					break;
 				case 1:
 					if (inarray(.StellarIds,.@equip_id) != -1) { // Stellar
-						//https://hazyforest.com/enchants:stellar_seal_accessories
-						// Perfect Enchants - Slot 1
-						// Random Upgrade Enchants - Slot 1
-						switch(select("Enchant Items:Reset enchants:Nothing")){
-						case 1:
-						case 2:
-						case 3: close;
-						}
-						close; // Hasta que vea como hacerlo ....
+						mes .@npc$;
+						mes "Stellar signet slot 1 enchanting is not available yet.";
+						mes "You can still enchant slots 2 and 3, or reset existing enchants.";
+						close;
 					}
 					else if ((.@idx = inarray(.NebulaIds,.@equip_id)) != -1) { // Nebula
 						.@CostID = .NebulaFragmentIds[.@idx];
@@ -111,7 +106,9 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 					break;
 				case 0:
 				default:
-					end;
+					mes .@npc$;
+					mes "This equipment has no open enchant slots left.";
+					close;
 			}
 			.@CardPosition = 3-.@cardSlot;
 			next;
@@ -131,7 +128,11 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 			if(.@equip_refine < .@RefineMin) { mes "You need it refined to +"+.@RefineMin+"."; close; }
 			if(Zeny < .@CostZ){ mes "You don't have enough zeny"; close; }
 			if(countitem(.@CostID) < .@CostI){ mes "You don't have enough "+getitemname(.@CostID)+" on you"; close; }
-			if(callfunc("F_IsEquipIDHack", .@slot, .@equip_id) || callfunc("F_IsEquipCardHack", .@slot, .@equip_card[3], .@equip_card[2], .@equip_card[1], .@equip_card[0]) || callfunc("F_IsEquipRefineHack", .@slot, .@equip_refine)) close;
+			if(callfunc("F_IsEquipIDHack", .@slot, .@equip_id) || callfunc("F_IsEquipCardHack", .@slot, .@equip_card[3], .@equip_card[2], .@equip_card[1], .@equip_card[0]) || callfunc("F_IsEquipRefineHack", .@slot, .@equip_refine)) {
+				mes .@npc$;
+				mes "Your equipment changed while we were talking. Please try again.";
+				close;
+			}
 			.@card[.@CardPosition] = .@Enchants[rand(0,getarraysize(.@Enchants)-1)];
 			close2;
 			specialeffect2 EF_REPAIRWEAPON;
@@ -208,8 +209,11 @@ e_tower,69,117,5	script	Susan Grey#HRO_ConstellationTower	4_F_HUWOMAN,{
 					if(.@equip_refine < .@RefineMin) { mes "You need it refined to +"+.@RefineMin+"."; close; }
 					if(Zeny < .@CostZ){ mes "You don't have enough zeny"; close; }
 					if(countitem(.@CostID) < .@CostI){ mes "You don't have enough "+getitemname(.@CostID)+" on you"; close; }
-					// anti-hack
-					if(callfunc("F_IsEquipIDHack", .@slot, .@equip_id) || callfunc("F_IsEquipCardHack", .@slot, .@equip_card[3], .@equip_card[2], .@equip_card[1], .@equip_card[0]) || callfunc("F_IsEquipRefineHack", .@slot, .@equip_refine)) close;
+					if(callfunc("F_IsEquipIDHack", .@slot, .@equip_id) || callfunc("F_IsEquipCardHack", .@slot, .@equip_card[3], .@equip_card[2], .@equip_card[1], .@equip_card[0]) || callfunc("F_IsEquipRefineHack", .@slot, .@equip_refine)) {
+						mes .@npc$;
+						mes "Your equipment changed while we were talking. Please try again.";
+						close;
+					}
 					close2;
 					.@c = rand(100);
 					specialeffect2 EF_REPAIRWEAPON;

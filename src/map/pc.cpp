@@ -2111,9 +2111,20 @@ bool pc_authok(map_session_data *sd, uint32 login_id2, time_t expiration_time, i
 	sd->status.hair_color = cap_value(sd->status.hair_color,MIN_HAIR_COLOR,MAX_HAIR_COLOR);
 	sd->status.clothes_color = cap_value(sd->status.clothes_color,MIN_CLOTH_COLOR,MAX_CLOTH_COLOR);
 
-	if( !job_db.exists( sd->status.body ) && (sd->status.body <= JOB_SECOND_JOB_START || sd->status.body >= JOB_SECOND_JOB_END) ){
+#if PACKETVER >= 20231220 && !defined(PACKETVER_ZERO)
+	if( sd->status.body != sd->status.class_ ){
+		std::shared_ptr<s_job_info> job = job_db.find( sd->status.class_ );
+
+		if( sd->status.body <= 1 || !job_db.exists( sd->status.body ) ||
+		    job == nullptr || !util::vector_exists( job->alternate_outfits, sd->status.body ) ){
+			sd->status.body = sd->status.class_;
+		}
+	}
+#else
+	if( !job_db.exists( sd->status.body ) ){
 		sd->status.body = sd->status.class_;
 	}
+#endif
 
 	//Initializations to null/0 unneeded since map_session_data was filled with 0 upon allocation.
 	sd->state.connect_new = 1;

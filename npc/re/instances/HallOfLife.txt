@@ -1,0 +1,432 @@
+//===== rAthena Script =======================================
+//= Instance: Hall of Life (Garden of Time)
+//===== Description: =========================================
+//= Weekly-scaling dimensional criminal prison (kRO/IRO style).
+//= Moving portals, phantom space, sanctuary, and groggy windows.
+//============================================================
+
+function	script	F_md_hol_get_level	{
+	if (#MD_HOL_LEVEL < 1)
+		#MD_HOL_LEVEL = 1;
+	if (#MD_HOL_LEVEL > 20)
+		#MD_HOL_LEVEL = 20;
+	return #MD_HOL_LEVEL;
+}
+
+function	script	F_md_hol_set_level	{
+	.@lv = getarg(0);
+	if (.@lv < 1) .@lv = 1;
+	if (.@lv > 20) .@lv = 20;
+	#MD_HOL_LEVEL = .@lv;
+	.@card = 312452 + .@lv;
+	if (isequippedcnt(420231) > 0) {
+		delequip EQI_HEAD_LOW;
+		getitem2 420231,1,1,0,0,0,0,0,.@card;
+	} else if (countitem(420231) > 0) {
+		delitem 420231,1;
+		getitem2 420231,1,1,0,0,0,0,0,.@card;
+	}
+	return .@lv;
+}
+
+function	script	F_md_hol_reward	{
+	.@lv = getarg(0);
+	setarray .@cycle[1], 15,23,32,42,52,62,72,83,98,118,139,161,183,205,227,250,273,297,321,346;
+	setarray .@fruit[1], 8,15,20,26,31,37,43,49,55,62,69,77,86,96,106,118,129,142,158,158;
+	setarray .@truth[1], 3,6,21,26,28,31,34,38,42,46,49,53,59,64,70,70,70,70,70,70;
+	setarray .@light[1], 5,8,9,11,12,13,14,16,17,18,20,22,26,26,26,26,26,26,26,26;
+	setarray .@genesis[1], 0,0,0,0,0,0,0,0,0,0,1,2,3,4,5,6,7,8,9,10;
+	if (.@lv < 1) .@lv = 1;
+	if (.@lv > 20) .@lv = 20;
+	getitem 1001456, .@cycle[.@lv]; // Circulation of Life
+	getitem 1001457, .@fruit[.@lv]; // Fruit of Birth
+	getitem 1001458, .@fruit[.@lv]; // Fruit of Extinction
+	if (.@truth[.@lv] > 0)
+		getitem 1001459, .@truth[.@lv]; // Truth of Life
+	if (.@light[.@lv] > 0)
+		getitem 1001460, .@light[.@lv]; // Light of Life
+	if (.@genesis[.@lv] > 0)
+		getitem 1001601, .@genesis[.@lv]; // Genesis of Life
+	return;
+}
+
+function	script	F_md_hol_boss_hp	{
+	.@lv = getarg(0);
+	return 800000000 + ((.@lv - 1) * 40000000);
+}
+
+1@ba_go,1,1,0	script	#hall_of_life_ctrl	-1,{
+	end;
+OnInstanceInit:
+	'hol_map$ = instance_mapname("1@ba_go");
+	'hol_level = 0;
+	'hol_phase = 0;
+	'hol_boss_gid = 0;
+	'hol_center_x = 200;
+	'hol_center_y = 50;
+	'hol_portal_wave = 0;
+	'hol_portal_stack = 0;
+	'hol_phantom_left = 0;
+	'hol_in_phantom = 0;
+	'hol_groggy_until = 0;
+	'hol_sanctuary = 0;
+	for ( .@i = 1; .@i <= 4; ++.@i )
+		disablenpc instance_npcname("Hol Portal#" + .@i);
+	disablenpc instance_npcname("Hol Phantom Portal");
+	disablenpc instance_npcname("Hol Boss#standby");
+	disablenpc instance_npcname("Hol Exit#reward");
+	end;
+OnBossStart:
+	donpcevent instance_npcname("#hol_boss_ai") + "::OnStart";
+	donpcevent instance_npcname("#hol_portal_ctrl") + "::OnStart";
+	end;
+OnBossDead:
+	if ('hol_phase != 1)
+		end;
+	'hol_phase = 2;
+	donpcevent instance_npcname("#hol_boss_ai") + "::OnStop";
+	donpcevent instance_npcname("#hol_portal_ctrl") + "::OnStop";
+	for ( .@i = 1; .@i <= 4; ++.@i )
+		donpcevent instance_npcname("Hol Portal#" + .@i) + "::OnDisable";
+	disablenpc instance_npcname("Hol Phantom Portal");
+	mapannounce 'hol_map$, "Dimensional criminal Rigel has been corrected. Speak with the exit portal.", bc_map, 0x00FF99;
+	enablenpc instance_npcname("Hol Exit#reward");
+	end;
+OnPhantomClear:
+	'hol_in_phantom = 0;
+	'hol_portal_wave = 0;
+	'hol_portal_stack = 0;
+	'hol_groggy_until = gettimetick(2) + 20;
+	instance_warpall 'hol_map$, 'hol_center_x, 'hol_center_y;
+	if (unitexists('hol_boss_gid)) {
+		setunitdata 'hol_boss_gid, UMOB_DMGIMMUNE, 0;
+		unitstopwalk 'hol_boss_gid, USW_ALL;
+	}
+	mapannounce 'hol_map$, "Rigel's phantom space collapsed! He is stunned for 20 seconds — attack now!", bc_map, 0x00FF99;
+	end;
+OnInstanceDestroy:
+	end;
+}
+
+1@ba_go,200,50,0	script	#HolStart	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (!is_party_leader())
+		end;
+	if ('hol_phase > 0)
+		end;
+	'hol_level = callfunc("F_md_hol_get_level");
+	if (isequippedcnt(420231) < 1) {
+		dispbottom "Equip Constellation's Protection to begin the Hall of Life trial.";
+		end;
+	}
+	'hol_phase = 1;
+	enablenpc instance_npcname("Hol Boss#standby");
+	mapannounce 'hol_map$, "Hall of Life challenge level " + 'hol_level + " has begun.", bc_map, 0xFFDD44;
+	end;
+}
+
+1@ba_go,200,50,3	script(DISABLED)	Hol Boss#standby	4_CS_RIGEL,{
+	if ('hol_phase != 1)
+		end;
+	mes "[Dimensional Criminal]";
+	mes "Another challenger? This prison cannot hold me forever.";
+	next;
+	if (select( "Begin correction.", "Prepare more." ) == 2)
+		close;
+	close2;
+	disablenpc();
+	.@event$ = instance_npcname("#hall_of_life_ctrl") + "::OnBossDead";
+	.@hp = callfunc("F_md_hol_boss_hp", 'hol_level);
+	'hol_boss_gid = monster('hol_map$, 'hol_center_x, 'hol_center_y, "--ja--", 22174, 1, .@event$);
+	if ('hol_boss_gid > 0) {
+		setunitdata 'hol_boss_gid, UMOB_MAXHP, .@hp;
+		setunitdata 'hol_boss_gid, UMOB_HP, .@hp;
+		setunitdata 'hol_boss_gid, UMOB_ATKMIN, 18000 + ('hol_level * 500) + ('hol_portal_stack * 800);
+		setunitdata 'hol_boss_gid, UMOB_ATKMAX, 24000 + ('hol_level * 700) + ('hol_portal_stack * 1000);
+	}
+	donpcevent instance_npcname("#hall_of_life_ctrl") + "::OnBossStart";
+	mapannounce 'hol_map$, "Defeat Rigel! Avoid moving portals and clear phantom space when it opens.", bc_map, 0xFF4400;
+	end;
+}
+
+1@ba_go,1,1,0	script	#hol_boss_ai	-1,{
+	end;
+OnStart:
+	'hol_skill_tick = 0;
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTimer1000:
+	if ('hol_phase != 1 || 'hol_in_phantom || !unitexists('hol_boss_gid))
+		end;
+	'hol_skill_tick++;
+	getunitdata 'hol_boss_gid, .@b;
+	// Sanctuary — Rigel becomes immune and regenerates at the center
+	if (distance(.@b[UMOB_X], .@b[UMOB_Y], 'hol_center_x, 'hol_center_y) <= 8 && 'hol_groggy_until < gettimetick(2)) {
+		if (!'hol_sanctuary) {
+			'hol_sanctuary = 1;
+			setunitdata 'hol_boss_gid, UMOB_DMGIMMUNE, 1;
+			mapannounce 'hol_map$, "Rigel has entered Sanctuary! Lure him away from the center!", bc_map, 0xFF8800;
+		}
+		.@heal = .@b[UMOB_MAXHP] / 200;
+		if (.@heal > 0) {
+			.@newhp = .@b[UMOB_HP] + .@heal;
+			if (.@newhp > .@b[UMOB_MAXHP])
+				.@newhp = .@b[UMOB_MAXHP];
+			setunitdata 'hol_boss_gid, UMOB_HP, .@newhp;
+		}
+	} else if ('hol_sanctuary) {
+		'hol_sanctuary = 0;
+		if ('hol_groggy_until < gettimetick(2))
+			setunitdata 'hol_boss_gid, UMOB_DMGIMMUNE, 0;
+	}
+	// Groggy window — boss cannot act
+	if ('hol_groggy_until >= gettimetick(2)) {
+		unitstopwalk 'hol_boss_gid, USW_ALL;
+		initnpctimer;
+		end;
+	}
+	// Chase nearest player
+	getareaunits(BL_PC, 'hol_map$, 0, 0, 400, 100, .@pc[0]);
+	.@best = 9999;
+	.@tx = .@b[UMOB_X];
+	.@ty = .@b[UMOB_Y];
+	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+		getmapxy .@m$, .@px, .@py, BL_PC, .@pc[.@i];
+		if (.@m$ != 'hol_map$)
+			continue;
+		.@d = distance(.@px, .@py, .@b[UMOB_X], .@b[UMOB_Y]);
+		if (.@d < .@best) {
+			.@best = .@d;
+			.@tx = .@px;
+			.@ty = .@py;
+		}
+	}
+	if (.@best < 9999 && !'hol_sanctuary) {
+		.@dx = (.@tx > .@b[UMOB_X] ? 1 : (.@tx < .@b[UMOB_X] ? -1 : 0));
+		.@dy = (.@ty > .@b[UMOB_Y] ? 1 : (.@ty < .@b[UMOB_Y] ? -1 : 0));
+		unitwalk 'hol_boss_gid, .@b[UMOB_X] + (.@dx * 2), .@b[UMOB_Y] + (.@dy * 2);
+	}
+	// God's Shadow
+	if ('hol_skill_tick % 15 == 0) {
+		npcskilleffect "WZ_JUPITEL", 10, .@b[UMOB_X], .@b[UMOB_Y];
+		getareaunits(BL_PC, 'hol_map$, .@b[UMOB_X]-10, .@b[UMOB_Y]-10, .@b[UMOB_X]+10, .@b[UMOB_Y]+10, .@hit[0]);
+		for ( .@j = 0; .@j < getarraysize(.@hit); ++.@j ) {
+			if (!attachrid(.@hit[.@j]))
+				continue;
+			if (@WARM_SHIELD > gettimetick(2))
+				continue;
+			pushpc rand(8), 4;
+			percentheal -10,0;
+			detachrid;
+		}
+	}
+	// Frost Field
+	if ('hol_skill_tick % 30 == 0) {
+		npcskilleffect "WZ_FROSTNOVA", 10, .@b[UMOB_X], .@b[UMOB_Y];
+		getareaunits(BL_PC, 'hol_map$, .@b[UMOB_X]-12, .@b[UMOB_Y]-12, .@b[UMOB_X]+12, .@b[UMOB_Y]+12, .@hit[0]);
+		for ( .@j = 0; .@j < getarraysize(.@hit); ++.@j ) {
+			if (!attachrid(.@hit[.@j]))
+				continue;
+			if (@WARM_SHIELD > gettimetick(2))
+				continue;
+			sc_start SC_FREEZE, 8000, 0;
+			detachrid;
+		}
+	}
+	// Block Explosion
+	if ('hol_skill_tick % 45 == 0) {
+		npcskilleffect "NPC_DARKBREATH", 5, .@b[UMOB_X], .@b[UMOB_Y];
+		getareaunits(BL_PC, 'hol_map$, .@b[UMOB_X]-8, .@b[UMOB_Y]-8, .@b[UMOB_X]+8, .@b[UMOB_Y]+8, .@hit[0]);
+		for ( .@j = 0; .@j < getarraysize(.@hit); ++.@j ) {
+			if (!attachrid(.@hit[.@j]))
+				continue;
+			sc_start SC_WHITEIMPRISON, 6000, 0;
+			detachrid;
+		}
+	}
+	initnpctimer;
+	end;
+}
+
+1@ba_go,1,1,0	script	#hol_portal_ctrl	-1,{
+	end;
+OnStart:
+	'hol_portal_wave = 0;
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	for ( .@i = 1; .@i <= 4; ++.@i )
+		donpcevent instance_npcname("Hol Portal#" + .@i) + "::OnDisable";
+	end;
+OnTimer60000:
+	if ('hol_phase != 1 || 'hol_in_phantom)
+		end;
+	'hol_portal_wave++;
+	if ('hol_portal_wave > 3) {
+		enablenpc instance_npcname("Hol Phantom Portal");
+		mapannounce 'hol_map$, "A phantom portal has opened to the north! Enter it to break Rigel's defenses.", bc_map, 0xFF44FF;
+		initnpctimer;
+		end;
+	}
+	mapannounce 'hol_map$, "Moving dimensional portals are appearing! (" + 'hol_portal_wave + "/3)", bc_map, 0xFFDD44;
+	for ( .@i = 1; .@i <= 4; ++.@i )
+		donpcevent instance_npcname("Hol Portal#" + .@i) + "::OnEnable";
+	initnpctimer;
+	end;
+}
+
+-	script	HolPortal	-1,{
+	end;
+OnTouch:
+	if ('hol_phase != 1 || 'hol_in_phantom)
+		end;
+	percentheal -20,0;
+	'hol_portal_stack++;
+	if (unitexists('hol_boss_gid)) {
+		getunitdata 'hol_boss_gid, .@b;
+		setunitdata 'hol_boss_gid, UMOB_ATKMIN, 18000 + ('hol_level * 500) + ('hol_portal_stack * 800);
+		setunitdata 'hol_boss_gid, UMOB_ATKMAX, 24000 + ('hol_level * 700) + ('hol_portal_stack * 1000);
+	}
+	specialeffect EF_BEGINSPELL6;
+	end;
+OnEnable:
+	enablenpc strnpcinfo(0);
+	.@nx = 200 + rand(-60,60);
+	.@ny = 50 + rand(-25,25);
+	npcwalkto .@nx, .@ny;
+	initnpctimer;
+	end;
+OnDisable:
+	stopnpctimer;
+	disablenpc strnpcinfo(0);
+	end;
+OnTimer30000:
+	donpcevent instance_npcname(strnpcinfo(0)) + "::OnDisable";
+	end;
+OnTimer4000:
+	if ('hol_phase != 1)
+		end;
+	getareaunits(BL_PC, 'hol_map$, 0, 0, 400, 100, .@pc[0]);
+	if (getarraysize(.@pc) > 0) {
+		getmapxy .@m$, .@px, .@py, BL_PC, .@pc[ rand(getarraysize(.@pc)) ];
+		if (.@m$ == 'hol_map$)
+			npcwalkto .@px, .@py;
+	}
+	initnpctimer;
+	end;
+}
+
+1@ba_go,180,50,0	duplicate(HolPortal)	Hol Portal#1	HIDDEN_WARP_NPC,2,2
+1@ba_go,220,50,0	duplicate(HolPortal)	Hol Portal#2	HIDDEN_WARP_NPC,2,2
+1@ba_go,200,35,0	duplicate(HolPortal)	Hol Portal#3	HIDDEN_WARP_NPC,2,2
+1@ba_go,200,65,0	duplicate(HolPortal)	Hol Portal#4	HIDDEN_WARP_NPC,2,2
+
+1@ba_go,200,12,0	script(DISABLED)	Hol Phantom Portal	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if ('hol_phase != 1 || 'hol_portal_wave < 3 || 'hol_in_phantom)
+		end;
+	'hol_in_phantom = 1;
+	'hol_phantom_left = 4;
+	instance_warpall 'hol_map$, 320, 50;
+	sleep 1000;
+	.@event$ = instance_npcname("#hol_phantom_ctrl") + "::OnPhantomDead";
+	monster 'hol_map$, 290, 30, "--ja--", 22175, 1, .@event$;
+	monster 'hol_map$, 350, 30, "--ja--", 22175, 1, .@event$;
+	monster 'hol_map$, 290, 70, "--ja--", 22175, 1, .@event$;
+	monster 'hol_map$, 350, 70, "--ja--", 22175, 1, .@event$;
+	mapannounce 'hol_map$, "Destroy all four Rigel phantoms in the dimensional rift!", bc_map, 0xFF44FF;
+	end;
+}
+
+1@ba_go,1,1,0	script	#hol_phantom_ctrl	-1,{
+	end;
+OnPhantomDead:
+	'hol_phantom_left--;
+	if ('hol_phantom_left > 0) {
+		mapannounce 'hol_map$, "Rigel phantom destroyed. (" + (4 - 'hol_phantom_left) + "/4)", bc_map, 0xFF44FF;
+		end;
+	}
+	donpcevent instance_npcname("#hall_of_life_ctrl") + "::OnPhantomClear";
+	end;
+}
+
+1@ba_go,200,30,3	script(DISABLED)	Hol Exit#reward	GATE_SKYBLUE,{
+	if ('hol_phase < 2)
+		end;
+	if (checkweight(1201,20) == 0) {
+		mes "Your inventory is too full to receive rewards.";
+		close;
+	}
+	.@lv = callfunc("F_md_hol_get_level");
+	.@rewarded = (checkquest(12612,PLAYTIME) == 0 || checkquest(12612,PLAYTIME) == 1);
+	mes "[Dimensional Portal]";
+	mes "Current challenge level: ^0000cd" + .@lv + "^000000";
+	next;
+	if (.@rewarded) {
+		switch( select( "Leave the instance.", "Stay." ) ) {
+		case 1:
+			warp "t_garden",173,235;
+			end;
+		case 2:
+			close;
+		}
+	}
+	switch( select( "Receive weekly reward.", "Raise challenge level (+1).", "Leave without reward.", "Stay." ) ) {
+	case 1:
+		callfunc("F_md_hol_reward", .@lv);
+		if (checkquest(12612) == 1)
+			erasequest 12612;
+		setquest 12612;
+		if (isbegin_quest(12617) == 1)
+			completequest 12617;
+		mes "Weekly reward claimed for challenge level " + .@lv + ".";
+		close2;
+		warp "t_garden",173,235;
+		end;
+	case 2:
+		if (!is_party_leader()) {
+			mes "Only the party leader can raise the instance challenge level.";
+			close;
+		}
+		if (.@lv >= 20) {
+			mes "You are already at the maximum challenge level.";
+			close;
+		}
+		callfunc("F_md_hol_set_level", .@lv + 1);
+		mes "Challenge level increased to " + (.@lv + 1) + ".";
+		close2;
+		warp "t_garden",173,235;
+		end;
+	case 3:
+		if (!is_party_leader()) {
+			mes "Only the party leader can change the challenge level.";
+			close;
+		}
+		if (.@lv > 1)
+			callfunc("F_md_hol_set_level", .@lv - 1);
+		mes "You leave without claiming a reward. Challenge level decreased.";
+		close2;
+		warp "t_garden",173,235;
+		end;
+	case 4:
+		close;
+	}
+	end;
+}
+
+1@ba_go,1,1,0	script	#hol_fail_watch	-1,{
+	end;
+OnInstanceDestroy:
+	if ('hol_phase == 1) {
+		.@lv = callfunc("F_md_hol_get_level");
+		if (.@lv > 1 && (checkquest(12612,PLAYTIME) == -1 || checkquest(12612,PLAYTIME) == 2))
+			callfunc("F_md_hol_set_level", .@lv - 1);
+	}
+	end;
+}

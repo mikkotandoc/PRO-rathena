@@ -572,7 +572,7 @@ menu	"Bakonawa Lake",I1, "Bangungot Hospital 2F",I2, "Buwaya Cave",I3,
 		"Nidhoggur's Nest",I13, "Octopus Cave",I14, "Old Glast Heim",I15,
 		"Orc's Memory",I16, "Sarah and Fenrir",I17, "Sara Memory",I18,
 		"Sealed Shrine",I19, "Wolfchev's Laboratory",I20, "Glast Heim Challenge",I21,
-		"Airship Crash",I22;
+		"Airship Crash",I22, "Bed of Honor",I23, "Lake of Fire",I24;
 
 I1: Restrict("RE");
 	Go("ma_scene01",172,175);
@@ -614,6 +614,10 @@ I21: Restrict("RE");
 	Go("glast_01",139,285);
 I22: Restrict("RE");
 	Go("dali02",137,86);
+I23: Restrict("RE");
+	Go("lighthalzen",321,218);
+I24: Restrict("RE");
+	Go("t_garden",158,235);
 
 // --------------------------------------------------
 	Special:
@@ -1324,6 +1328,8 @@ OnNaviGenerate:
 		naviregisterwarp("Warper > Old Glast Heim", "glast_01", 204, 268);
 		naviregisterwarp("Warper > Glast Heim Challenge", "glast_01", 139, 285);
 		naviregisterwarp("Warper > Airship Crash", "dali02", 137, 86);
+		naviregisterwarp("Warper > Bed of Honor", "lighthalzen", 321, 218);
+		naviregisterwarp("Warper > Lake of Fire", "t_garden", 158, 235);
 		naviregisterwarp("Warper > Sarah and Fenrir", "dali02", 92, 141);
 		naviregisterwarp("Warper > Sara Memory", "dali", 133, 108);
 		naviregisterwarp("Warper > Wolfchev's Laboratory", "lhz_dun04", 148, 269);

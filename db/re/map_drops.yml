@@ -2341,6 +2341,228 @@ Body:
           - Index: 5
             Item: Etel_Topaz
             Rate: 13000
+  - Map: for_dun02
+    SpecificDrops:
+      - Monster: SPIRIT_H_WATER_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 25000
+      - Monster: SPIRIT_H_WATER_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 15000
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 35000
+      - Monster: SPIRIT_H_WATER_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 20000
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 45000
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 10000
+      - Monster: SPIRIT_D_WIND_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 25000
+      - Monster: SPIRIT_D_WIND_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 15000
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 35000
+      - Monster: SPIRIT_D_WIND_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 20000
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 45000
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 10000
+      - Monster: SPIRIT_R_FLAME_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 10000
+      - Monster: SPIRIT_R_FLAME_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 10000
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 17500
+      - Monster: SPIRIT_R_FLAME_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 10000
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 22500
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 10000
+      - Monster: SPIRIT_F_LAND_M
+        Drops:
+          - Index: 0
+            Item: Etel_Stone
+            Rate: 12500
+      - Monster: SPIRIT_F_LAND_L
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 12500
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 17500
+      - Monster: SPIRIT_F_LAND_SL
+        Drops:
+          - Index: 0
+            Item: Etel_Skyblue_Jewel
+            Rate: 10000
+          - Index: 1
+            Item: Etel_Stone
+            Rate: 10000
+          - Index: 2
+            Item: Etel_Topaz
+            Rate: 5000
+      - Monster: SPIRIT_C_WATER_S
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 30000
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 15000
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 30000
+      - Monster: SPIRIT_C_WATER_M
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 35000
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 25000
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 40000
+          - Index: 3
+            Item: Etel_Topaz
+            Rate: 10000
+      - Monster: SPIRIT_C_WATER_L
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 40000
+          - Index: 1
+            Item: Etel_Violet_Jewel
+            Rate: 10000
+          - Index: 2
+            Item: Etel_Skyblue_Jewel
+            Rate: 35000
+          - Index: 3
+            Item: Etel_Stone
+            Rate: 50000
+          - Index: 4
+            Item: Etel_Topaz
+            Rate: 20000
+      - Monster: SPIRIT_C_WATER_SL
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 45000
+          - Index: 1
+            Item: Etel_Amber
+            Rate: 700
+          - Index: 2
+            Item: Etel_Violet_Jewel
+            Rate: 1500
+          - Index: 3
+            Item: Etel_Skyblue_Jewel
+            Rate: 45000
+          - Index: 4
+            Item: Etel_Stone
+            Rate: 60000
+          - Index: 5
+            Item: Etel_Topaz
+            Rate: 30000
+      - Monster: SPIRIT_C_WIND_S
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 30000
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 15000
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 30000
+      - Monster: SPIRIT_C_WIND_M
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 35000
+          - Index: 1
+            Item: Etel_Skyblue_Jewel
+            Rate: 25000
+          - Index: 2
+            Item: Etel_Stone
+            Rate: 40000
+          - Index: 3
+            Item: Etel_Topaz
+            Rate: 10000
+      - Monster: SPIRIT_C_WIND_L
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 40000
+          - Index: 1
+            Item: Etel_Violet_Jewel
+            Rate: 10000
+          - Index: 2
+            Item: Etel_Skyblue_Jewel
+            Rate: 35000
+          - Index: 3
+            Item: Etel_Stone
+            Rate: 50000
+          - Index: 4
+            Item: Etel_Topaz
+            Rate: 20000
+      - Monster: SPIRIT_C_WIND_SL
+        Drops:
+          - Index: 0
+            Item: MD_Hol_Fragment
+            Rate: 45000
+          - Index: 1
+            Item: Etel_Amber
+            Rate: 1700
+          - Index: 2
+            Item: Etel_Violet_Jewel
+            Rate: 11500
+          - Index: 3
+            Item: Etel_Skyblue_Jewel
+            Rate: 14500
+          - Index: 4
+            Item: Etel_Stone
+            Rate: 16000
+          - Index: 5
+            Item: Etel_Topaz
+            Rate: 13000
   - Map: 1@xm_d
     SpecificDrops:
       - Monster: XM_MARIONETTE

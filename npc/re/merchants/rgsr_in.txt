@@ -34,7 +34,7 @@ itemmall,14,50,3	script	Equipment Reform PR Agent#it01	4_F_ZONDAGIRL,{
 }
 lighthalzen,99,156,3	duplicate(Equipment Reform PR Agent#it01)	Equipment Reform PR Agent#lh01	4_F_ZONDAGIRL
 
-rgsr_in,112,167,7	script	Enchant Researcher#rg02-1	MD_ED_M_SCIENCE,{
+rgsr_in,112,167,7	script	Enchant Researcher#rg02-1	4_LGTSCIENCE,{
 	mes "[Torus]";
 	mes "Huh? Do you have anyone else to see on our team other than the team leader?";
 	mes "Then that's me~";
@@ -58,7 +58,7 @@ OnInit:
 	end;
 }
 
-rgsr_in,115,169,5	script	Weapon Researcher#rg02	MD_ED_M_SCIENCE,{
+rgsr_in,115,169,5	script	Weapon Researcher#rg02	4_LGTSCIENCE,{
 	mes "[Frasa]";
 	mes "Let's see... You're a guest.";
 	mes "I like people who are sure what they want.";
@@ -125,7 +125,7 @@ OnInit:
 	end;
 }
 
-rgsr_in,115,180,5	script	Armor Researcher#rg02	MD_ED_M_SCIENCE,{
+rgsr_in,115,180,5	script	Armor Researcher#rg02	4_LGTSCIENCE,{
 	mes "[Algebra]";
 	mes "Ah, we've come this far, but our team's research is still lacking in experiments.";
 	mes "I'll improve it a bit next time and get the captain's permission, then let's proceed.";
@@ -229,7 +229,7 @@ OnInit:
 	end;
 }
 
-rgsr_in,131,187,5	script	Ore Researcher#rg02	MD_ED_M_SCIENCE,{
+rgsr_in,131,187,5	script	Ore Researcher#rg02	4_LGTSCIENCE,{
 	mes "[Grid]";
 	mes "Come on.";
 	mes "It's a low-budget lab, so it's always like this.";
@@ -286,7 +286,7 @@ rgsr_in,131,187,5	script	Ore Researcher#rg02	MD_ED_M_SCIENCE,{
 	}
 }
 
-rgsr_in,137,178,3	script	Accessories Researcher#rg02	MD_ED_M_SCIENCE,{
+rgsr_in,137,178,3	script	Accessories Researcher#rg02	4_LGTSCIENCE,{
 	mes "[Champ]";
 	mes "Finally, I talked to an adventurer and asked him to confirm my research, was that you?";
 	mes "Unfortunately, our team hasn't done enough to get out there yet.";
@@ -301,7 +301,7 @@ OnInit:
 	end;
 }
 
-rgsr_in,136,171,5	script	Special Equipment Researcher#rg02	MD_ED_M_SCIENCE,{
+rgsr_in,136,171,5	script	Special Equipment Researcher#rg02	4_LGTSCIENCE,{
 	mes "[Stack]";
 	mes "See Team Licht's performance?";
 	mes "We're proud of this lab.";

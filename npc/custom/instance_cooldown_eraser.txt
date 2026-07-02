@@ -1,0 +1,408 @@
+//===== rAthena Script =======================================
+//= Instance Cooldown Eraser
+//===== Description: =========================================
+//= Zeny sink NPC that clears memorial dungeon waiting timers.
+//= Covers all instances that use PLAYTIME quest cooldowns.
+//===== Pricing Tiers (zeny) =================================
+//= Tier 1 - Short / re-entry (<=2h):     225,000
+//= Tier 2 - Standard daily (4h):          787,500
+//= Tier 3 - Extended (12h-1d):          1,575,000
+//= Tier 4 - Multi-day (2-4d):           3,375,000
+//= Tier 5 - Weekly (7d):                6,750,000
+//= Tier 6 - Rare weekly lock:          11,250,000
+//============================================================
+
+function	script	F_InstCD_Active	{
+	.@qid = getarg(0);
+	.@st = checkquest(.@qid, PLAYTIME);
+	return (.@st == 0 || .@st == 1);
+}
+
+function	script	F_InstCD_Clear	{
+	.@qid = getarg(0);
+	if (checkquest(.@qid) > -1)
+		erasequest .@qid;
+	return;
+}
+
+prontera,163,197,4	script	Instance Eraser	4_M_SAGE_C,{
+	function	IsOnCooldown;
+	function	ClearEntry;
+	function	BuildMenu;
+	function	SelectEntry;
+
+	mes "[Instance Eraser]";
+	mes "I can unravel the temporal locks placed on memorial dungeons.";
+	mes "For a fee in zeny, I will erase your waiting time.";
+	mes " ";
+	mes "^777777Fees scale with how long the original cooldown lasts.^000000";
+	next;
+
+	switch (select("Instances on cooldown:Browse all instances:How much does it cost?:Cancel")) {
+	case 1:
+		.@show_all = 0;
+		break;
+	case 2:
+		.@show_all = 1;
+		break;
+	case 3:
+		mes "[Instance Eraser]";
+		mes "Short re-entry waits: ^0055FF" + callfunc("F_InsertComma", .cost_t1) + "z^000000";
+		mes "Standard daily (4h): ^0055FF" + callfunc("F_InsertComma", .cost_t2) + "z^000000";
+		mes "Extended (12h-1d): ^0055FF" + callfunc("F_InsertComma", .cost_t3) + "z^000000";
+		mes "Multi-day (2-4d): ^0055FF" + callfunc("F_InsertComma", .cost_t4) + "z^000000";
+		mes "Weekly (7d): ^0055FF" + callfunc("F_InsertComma", .cost_t5) + "z^000000";
+		mes "Special weekly lock: ^0055FF" + callfunc("F_InsertComma", .cost_t6) + "z^000000";
+		close;
+	default:
+		close;
+	}
+
+	.@shown = BuildMenu(.@show_all);
+	if (!.@shown) {
+		if (!.@show_all)
+			mes "You have no memorial dungeon waiting timers right now.";
+		else
+			mes "No entries are available.";
+		close;
+	}
+
+	if (!.@show_all && .menu_active > 1) {
+		switch (select("Pick one to reset:Reset ALL on cooldown:Cancel")) {
+		case 1:
+			.@entry = SelectEntry(.menu_active, 1);
+			break;
+		case 2:
+			mes "[Instance Eraser]";
+			mes "Reset every active memorial dungeon timer?";
+			mes "Total cost: ^0055FF" + callfunc("F_InsertComma", .menu_total) + " zeny^000000";
+			next;
+			if (select("Yes, reset all:Cancel") == 2)
+				close;
+			if (Zeny < .menu_total) {
+				mes "You need ^0055FF" + callfunc("F_InsertComma", .menu_total) + " zeny^000000.";
+				close;
+			}
+			Zeny -= .menu_total;
+			for (.@i = 0; .@i < .menu_active; .@i++)
+				ClearEntry(.menu_active_idx[.@i]);
+			mes "All active memorial dungeon timers have been cleared.";
+			close;
+		default:
+			close;
+		}
+	}
+	else if (!.@show_all && .menu_active == 1)
+		.@entry = .menu_active_idx[0];
+	else
+		.@entry = SelectEntry(.@shown, 0);
+
+	if (.@entry < 0)
+		close;
+
+	if (!IsOnCooldown(.@entry)) {
+		mes "[Instance Eraser]";
+		mes "^777777" + .name$[.@entry] + "^000000 is not on cooldown.";
+		mes "There is nothing for me to erase.";
+		close;
+	}
+
+	.@price = .cost[.@entry];
+	mes "[Instance Eraser]";
+	mes "Clear the waiting time for:";
+	mes "^0055FF" + .name$[.@entry] + "^000000";
+	mes "Cost: ^0055FF" + callfunc("F_InsertComma", .@price) + " zeny^000000";
+	next;
+	if (select("Pay and reset:Cancel") == 2)
+		close;
+	if (Zeny < .@price) {
+		mes "You need ^0055FF" + callfunc("F_InsertComma", .@price) + " zeny^000000.";
+		close;
+	}
+	Zeny -= .@price;
+	ClearEntry(.@entry);
+	mes "[Instance Eraser]";
+	mes "Done. You may enter ^0055FF" + .name$[.@entry] + "^000000 again.";
+	close;
+
+	function	IsOnCooldown	{
+		.@idx = getarg(0);
+		.@start = .qoff[.@idx];
+		.@end = .@start + .qnum[.@idx];
+		for (.@q = .@start; .@q < .@end; .@q++) {
+			if (callfunc("F_InstCD_Active", .quests[.@q]))
+				return 1;
+		}
+		return 0;
+	}
+
+	function	ClearEntry	{
+		.@idx = getarg(0);
+		.@start = .qoff[.@idx];
+		.@end = .@start + .qnum[.@idx];
+		for (.@q = .@start; .@q < .@end; .@q++)
+			callfunc("F_InstCD_Clear", .quests[.@q]);
+		return;
+	}
+
+	// getarg(0) = list size, getarg(1) = 0 browse list / 1 active cooldown list
+	// Returns instance index, or -1 when cancelled.
+	function	SelectEntry	{
+		.@list_size = getarg(0);
+		.@active_list = getarg(1, 0);
+		.@page = 0;
+
+		while (1) {
+			.@start = .@page * .page_size;
+			if (.@start >= .@list_size) {
+				.@page = 0;
+				.@start = 0;
+			}
+			.@end = .@start + .page_size;
+			if (.@end > .@list_size)
+				.@end = .@list_size;
+			.@count = .@end - .@start;
+
+			if (.@list_size > .page_size) {
+				.@pages = (.@list_size + .page_size - 1) / .page_size;
+				mes "[Instance Eraser]";
+				mes "Select a memorial dungeon. (Page " + (.@page + 1) + " / " + .@pages + ")";
+				next;
+			}
+
+			.@menu$ = "";
+			for (.@i = .@start; .@i < .@end; .@i++) {
+				if (.@active_list)
+					.@menu$ = .@menu$ + .menu_active_name$[.@i] + ":";
+				else
+					.@menu$ = .@menu$ + .name$[ .menu_idx[.@i] ] + ":";
+			}
+
+			.@has_prev = (.@page > 0);
+			.@has_next = (.@end < .@list_size);
+			if (.@has_prev)
+				.@menu$ = .@menu$ + "Previous Page:";
+			if (.@has_next)
+				.@menu$ = .@menu$ + "Next Page:";
+			.@menu$ = .@menu$ + "Cancel";
+
+			.@pick = select(.@menu$) - 1;
+			if (.@pick < .@count) {
+				if (.@active_list)
+					return .menu_active_idx[.@start + .@pick];
+				return .menu_idx[.@start + .@pick];
+			}
+			.@pick = .@pick - .@count;
+
+			if (.@has_prev) {
+				if (.@pick == 0) {
+					.@page--;
+					continue;
+				}
+				.@pick--;
+			}
+			if (.@has_next && .@pick == 0) {
+				.@page++;
+				continue;
+			}
+			return -1;
+		}
+	}
+
+	function	BuildMenu	{
+		.@show_all = getarg(0);
+		deletearray .menu_idx;
+		deletearray .menu_active_idx;
+		deletearray .menu_active_name$;
+		deletearray .menu_active_cost;
+		.menu_active = 0;
+		.menu_total = 0;
+		.@shown = 0;
+
+		for (.@i = 0; .@i < getarraysize(.name$); .@i++) {
+			.@on = IsOnCooldown(.@i);
+			if (!.@show_all && !.@on)
+				continue;
+
+			.menu_idx[.@shown] = .@i;
+
+			if (.@on) {
+				.menu_active_idx[.menu_active] = .@i;
+				.menu_active_name$[.menu_active] = .name$[.@i];
+				.menu_active_cost[.menu_active] = .cost[.@i];
+				.menu_total += .cost[.@i];
+				.menu_active++;
+			}
+			.@shown++;
+		}
+		return .@shown;
+	}
+
+OnInit:
+	.page_size = 10;
+	.cost_t1 = 225000;
+	.cost_t2 = 787500;
+	.cost_t3 = 1575000;
+	.cost_t4 = 3375000;
+	.cost_t5 = 6750000;
+	.cost_t6 = 11250000;
+
+	setarray .name$[0],
+		"Endless Tower",
+		"Sealed Catacomb",
+		"Orc's Memory",
+		"Nidhoggur's Nest",
+		"Mistwood Maze",
+		"Malangdo Culvert (Daily)",
+		"Malangdo Culvert (Weekly)",
+		"Octopus Cave",
+		"Bangungot Hospital 2F",
+		"Buwaya Cave",
+		"Bakonawa Lake",
+		"Wolfchev's Laboratory",
+		"Old Glast Heim (Normal)",
+		"Old Glast Heim (Hard)",
+		"Sara's Memories",
+		"Horror Toy Factory",
+		"Faceworm's Nest",
+		"Ghost Palace",
+		"Devil's Tower",
+		"Assault on the Airship",
+		"Fenrir and Sarah",
+		"Nightmarish Jitterbug",
+		"Isle of Bios",
+		"Morse's Cave",
+		"Temple of the Demon God",
+		"Central Laboratory",
+		"Last Room",
+		"Charleston in Distress",
+		"Charleston Advanced",
+		"Sky Fortress Invasion",
+		"Heart Hunter War Base",
+		"Infinite Space",
+		"Half Moon In The Daylight",
+		"Weekend Dungeon",
+		"Friday Dungeon",
+		"Poring Village",
+		"OGH Challenge Mode",
+		"Fall of Glast Heim",
+		"Glastheim Purification",
+		"Glastheim Purification Hard",
+		"Hidden Flower Garden",
+		"Farm Lost in Time",
+		"Water Garden",
+		"Constellation Tower",
+		"Tomb of Remorse",
+		"Airship Crash",
+		"Thanatos Tower (9F)",
+		"Thanatos Tower (10F)",
+		"Thanatos Tower (11F)",
+		"Thanatos Tower (12F)",
+		"Wolves Gathering Place",
+		"Iwin Patrol",
+		"Airship Destruction",
+		"Bagot Laboratory",
+		"EDDA Somatology Laboratory",
+		"Bio 5 Bed of Honor Hard",
+		"Lake of Fire",
+		"Hall of Life (Entry)",
+		"Hall of Life (Weekly Reward)",
+		"Memory of Thanatos",
+		"Villa of Deception";
+
+	setarray .cost[0],
+		3375000, 1575000, 225000, 1575000,
+		225000, 787500, 6750000, 225000,
+		6750000, 787500, 6750000, 3375000,
+		787500, 3375000, 787500, 787500,
+		787500, 787500, 787500, 787500,
+		6750000, 787500, 787500, 787500,
+		225000, 787500, 787500, 787500,
+		787500, 3375000, 787500, 225000,
+		787500, 787500, 787500, 3375000,
+		787500, 787500, 3375000, 787500,
+		787500, 3375000, 787500, 3375000,
+		787500, 787500, 787500, 787500,
+		787500, 787500, 787500, 787500,
+		787500, 225000, 11250000, 787500,
+		787500;
+
+	setarray .qnum[0],
+		2, 2, 1, 2, 1, 3, 2, 1, 2, 1,
+		1, 1, 1, 1, 1, 1, 5, 1, 2, 2,
+		1, 1, 3, 1, 1, 1, 1, 1, 1, 1,
+		1, 2, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 2, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 2, 1, 1, 1, 1, 1, 1,
+		1;
+
+	setarray .quests[0],
+		60200, 60201,
+		3040, 3041,
+		12059,
+		3135, 3136,
+		7211,
+		12254, 12271, 12272,
+		12273, 12274,
+		4197,
+		9223, 9224,
+		4229,
+		12278,
+		5112,
+		12317,
+		12334,
+		15002,
+		12331,
+		12325, 12326, 12327, 12328, 12329,
+		1261,
+		7577, 7568,
+		15050, 15051,
+		9336,
+		13182,
+		15005, 15007, 15008,
+		9319,
+		7605,
+		12347,
+		11379,
+		13185,
+		13188,
+		9419,
+		12375,
+		12365,
+		14586,
+		12377, 12378,
+		12379,
+		12417,
+		12493,
+		16402,
+		12460,
+		12461,
+		12498,
+		8587,
+		16439,
+		30059, 30060,
+		16464,
+		15092,
+		17422,
+		17423,
+		17424,
+		17425,
+		17527,
+		5973,
+		12560,
+		16663,
+		16400,
+		90520, 90522,
+		12610,
+		12619,
+		12612,
+		18028,
+		12522;
+
+	// Build quest offsets from counts.
+	.qoff[0] = 0;
+	for (.@i = 1; .@i < getarraysize(.qnum); .@i++)
+		.qoff[.@i] = .qoff[.@i - 1] + .qnum[.@i - 1];
+
+	end;
+}

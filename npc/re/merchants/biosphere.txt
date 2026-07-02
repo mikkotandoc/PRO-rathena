@@ -270,6 +270,10 @@ ba_in01,363,53,5	script	Beta#ms04	4_EP17_BASKET,3,3,{
 	mes "[Beta]";
 	mes "You can enchant up to 2 times if you bring a rune that matches the property of each equipment and a small fee. You can also reset the enchantment.";
 	next;
+	mes "[Beta]";
+	mes "^FF0000Important:^000000 Unequip the item and place it in your inventory before enchanting.";
+	mes "Equipped items cannot be used in the enchant window.";
+	next;
 	setarray .@index[0],16,17,18,19,57,58,59;
 	.@s = select( "Grassland Equipment Enchantment", "Fire Equipment Enchantment", "Ice Equipment Enchantment", "Death Equipment Enchantment", "Soul Equipment Enchantment", "Poison Equipment Enchantment", "Church Equipment Enchantment" ) - 1;
 	mes "[Beta]";
@@ -383,6 +387,10 @@ ba_in01,371,55,5	script	Beta#ms06	EP17_2_BETA_ITEMKEEPER,3,3,{
 	next;
 	mes "[Beta]";
 	mes "If you bring everything, we can enchant it up to three times. Reset is also possible.";
+	next;
+	mes "[Beta]";
+	mes "^FF0000Important:^000000 Unequip the item and place it in your inventory before enchanting.";
+	mes "Equipped items cannot be used in the enchant window.";
 	next;
 	setarray .@index[0],52,53,54,55,60,61,62;
 	.@s = select( "Grassland Equipment Enchantment", "Fire Equipment Enchantment", "Ice Equipment Enchantment", "Death Equipment Enchantment", "Soul Equipment Enchantment", "Poison Equipment Enchantment", "Temple Equipment Enchantment" ) - 1 ;

@@ -747,7 +747,7 @@ struct packet_spawn_unit {
 	uint8 isBoss;
 #endif
 #if PACKETVER >= 20150513
-	int16 body;
+	uint16 body;
 #endif
 /* Might be earlier, this is when the named item bug began */
 #if PACKETVER >= 20131223

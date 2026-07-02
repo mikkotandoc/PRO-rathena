@@ -174,15 +174,21 @@ Body:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 8
-      - Index: 45
+      - Index: 46
         Item: HD_Elunium
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 4
-      - Index: 45
+      - Index: 47
         Item: HD_Oridecon
         RequiredItems:
           - Index: 0
             Item: Play_RO_Gold_Coin_
             Amount: 4
+      - Index: 48
+        Item: Mammoth_Mix
+        RequiredItems:
+          - Index: 0
+            Item: Play_RO_Gold_Coin_
+            Amount: 75

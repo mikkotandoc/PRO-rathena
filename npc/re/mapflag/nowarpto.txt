@@ -297,6 +297,8 @@ rgsr_in	mapflag	nowarpto
 1@ghg	mapflag	nowarpto
 1@herbs	mapflag	nowarpto
 1@lost	mapflag	nowarpto
+1@f_lake	mapflag	nowarpto
+1@ba_go	mapflag	nowarpto
 ba_in01	mapflag	nowarpto
 1@odin	mapflag	nowarpto
 

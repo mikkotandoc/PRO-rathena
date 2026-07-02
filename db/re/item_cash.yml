@@ -211,3 +211,53 @@ Body:
         Price: 2800
       - Item: F_Spritual_Tunic_Box
         Price: 3500
+      - Item: Valkyrie_Drop
+        Price: 1000
+      - Item: Old_Moroc_Acc
+        Price: 1500
+      - Item: FullFaith_Crown_US
+        Price: 1500
+      - Item: Ancient_Prontera_US
+        Price: 1500
+      - Item: Apollo_Armor_TW_LT
+        Price: 2000
+      - Item: Astraea_Shoes_LT
+        Price: 2000
+      - Item: Hightech_Shield_US
+        Price: 2000
+      - Item: Dimension_L_Stone
+        Price: 2000
+      - Item: Mecha_Greaves_US
+        Price: 2000
+      - Item: Magic_Compression
+        Price: 2000
+      - Item: Tirnanog
+        Price: 2000
+      - Item: Twinhead_dragon_Boots
+        Price: 3000
+      - Item: NightW_Heart_US
+        Price: 3000
+      - Item: Ranger_Shoes_US
+        Price: 3000
+      - Item: Astraea_Ring_LT
+        Price: 3000
+      - Item: Astraea_Armor_LT
+        Price: 3000
+      - Item: Tristan_Cape_LT
+        Price: 3500
+      - Item: Mercury_Suits_LT
+        Price: 4000
+      - Item: Kshatra_Vairya
+        Price: 4000
+      - Item: Royal_Nightwatch_US
+        Price: 4000
+      - Item: Royal_Alberta_US
+        Price: 5000
+      - Item: Amulet_of_GenesisStone
+        Price: 1500
+      - Item: Gothic_HW_TW_LT
+        Price: 2000
+      - Item: Will_Ingrid_US
+        Price: 2000
+      - Item: Saint_Knight_US
+        Price: 4000

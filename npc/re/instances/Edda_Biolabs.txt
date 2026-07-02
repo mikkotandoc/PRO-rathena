@@ -1,6 +1,33 @@
 //============================================================
-//====== EDDA Somatology Laboratory (Biolabs)
+//====== EDDA Somatology Laboratory (Biolabs / Bioresearch)
+//====== MuhRO basis: normal + hard mode, Ancient Hero drops
 //============================================================
+
+function	script	F_EddaBio_MvpDrops	{
+	.@hard = getarg(0, 0);
+	.@rate = .@hard ? 2 : 1;
+	if (!checkweight(1201, 8))
+		return;
+	getitem 23992, 1; // Experimental Weapon Box (Test Subject Weapon Crate)
+	if (rand(10000) < 50 * .@rate)
+		getitem 19439, 1; // Vicious Mind Aura
+	if (rand(10000) < 100 * .@rate)
+		getitem 22171, 1; // Ancient Hero Boots
+	if (rand(10000) < 150 * .@rate)
+		getitem 100753, 1; // Patent Ancient Hero's Cube
+	if (rand(10000) < 150 * .@rate)
+		getitem 100821, 1; // Modified Hero's Refine Hammer
+	if (rand(10000) < 200 * .@rate)
+		getitem 23806, 1; // Ancient Hero Weapon Box
+	if (rand(10000) < 300 * .@rate)
+		getitem 23993, 1; // Bio Lab Material Box
+	if (rand(10000) < 300 * .@rate)
+		getitem 23994, 1; // Bio Reactor Box
+	if (rand(10000) < 200 * .@rate)
+		getitem 100706, 1; // Ancient Hero's Will
+	return;
+}
+
 yuno,216,345,3	script	Sierra#yuno	4_F_SCIENCE,{
 	if (BaseLevel < 170) {
 		mes "[Sierra]";
@@ -23,45 +50,72 @@ yuno,216,345,3	script	Sierra#yuno	4_F_SCIENCE,{
 	mes "[Sierra]";
 	mes "You can enter the memorial dungeon alone or with a party.";
 	mes "Clearing it grants research materials used for EDDA Biolab equipment.";
+	mes "^0000cdHard Mode^000000 (BL 250+) amplifies combat and improves Ancient Hero material drops.";
 	next;
 
-	switch( select( "Create Instance", "Enter Instance", "Cancel" ) ) {
+	switch( select( "Create Normal Instance", "Create Hard Instance", "Enter Instance", "Cancel" ) ) {
 	case 1:
-		if (!is_party_leader()) {
-			mes "[Sierra]";
-			mes "Only the party leader can create the instance.";
-			close;
-		}
-		switch( checkquest(16400,PLAYTIME) ) {
-		case 0:
-		case 1:
-			mes "[Sierra]";
-			mes "You still need to recover from your last expedition.";
-			close;
-		}
-		switch( instance_create(.instance_name$) ) {
-		case -3:
-			dispbottom "Memorial Dungeon, '" + .instance_name$ + "' is already in progress.", 0xFFFFFF;
-			close;
-		case -4:
-		case -2:
-		case -1:
-			mes "[Sierra]";
-			mes "^0000FF" + .instance_name$ + "^000000 - instance creation failed.";
-			close;
-		}
-		mes "[Sierra]";
-		mes "The instance is ready. Select Enter Instance when your party is prepared.";
-		close;
+		.@hard = 0;
+		.@name$ = .instance_name$;
+		break;
 	case 2:
-		switch( checkquest(16400,PLAYTIME) ) {
-		case 0:
-		case 1:
+		if (BaseLevel < 250) {
 			mes "[Sierra]";
-			mes "You still need to recover from your last expedition.";
+			mes "Hard Mode is reserved for adventurers with base level 250 or higher.";
 			close;
 		}
-		switch( instance_enter(.instance_name$) ) {
+		.@hard = 1;
+		.@name$ = .instance_hard_name$;
+		break;
+	case 3:
+		goto L_Enter;
+	case 4:
+		close;
+	}
+	if (!is_party_leader()) {
+		mes "[Sierra]";
+		mes "Only the party leader can create the instance.";
+		close;
+	}
+	switch( checkquest(16400,PLAYTIME) ) {
+	case 0:
+	case 1:
+		mes "[Sierra]";
+		mes "You still need to recover from your last expedition.";
+		close;
+	}
+	$edda_bio_hard_pending = .@hard;
+	switch( instance_create(.@name$) ) {
+	case -3:
+		dispbottom "Memorial Dungeon, '" + .@name$ + "' is already in progress.", 0xFFFFFF;
+		close;
+	case -4:
+	case -2:
+	case -1:
+		mes "[Sierra]";
+		mes "^0000FF" + .@name$ + "^000000 - instance creation failed.";
+		close;
+	}
+	mes "[Sierra]";
+	mes "The " + (.@hard ? "^FF4400hard^000000" : "standard") + " simulation is ready.";
+	mes "Select Enter Instance when your party is prepared.";
+	close;
+
+L_Enter:
+	switch( checkquest(16400,PLAYTIME) ) {
+	case 0:
+	case 1:
+		mes "[Sierra]";
+		mes "You still need to recover from your last expedition.";
+		close;
+	}
+	switch( instance_enter(.instance_name$) ) {
+	case IE_OTHER:
+		mes "[Sierra]";
+		mes "An unknown error has occurred.";
+		close;
+	case IE_NOINSTANCE:
+		switch( instance_enter(.instance_hard_name$) ) {
 		case IE_OTHER:
 			mes "[Sierra]";
 			mes "An unknown error has occurred.";
@@ -72,16 +126,20 @@ yuno,216,345,3	script	Sierra#yuno	4_F_SCIENCE,{
 			close;
 		case IE_OK:
 			setquest 16400;
-			mapannounce "yuno", strcharinfo(0) + " is entering " + .instance_name$ + ".", bc_map, "0x00ff99", FW_NORMAL, 12;
+			mapannounce "yuno", strcharinfo(0) + " is entering " + .instance_hard_name$ + ".", bc_map, "0xFF8800", FW_NORMAL, 12;
 			end;
 		}
-	case 3:
-		close;
+	case IE_OK:
+		setquest 16400;
+		mapannounce "yuno", strcharinfo(0) + " is entering " + .instance_name$ + ".", bc_map, "0x00ff99", FW_NORMAL, 12;
+		end;
 	}
 	end;
 
 OnInit:
 	set .instance_name$, "EDDA Somatology Laboratory";
+	set .instance_hard_name$, "EDDA Somatology Laboratory (Hard)";
+	setunittitle getnpcid(0), "<Bioresearch Lab>";
 	end;
 }
 //
@@ -89,6 +147,8 @@ OnInit:
 	end;
 
 OnInstanceInit:
+	set_instance_var("hard_mode", $edda_bio_hard_pending);
+	$edda_bio_hard_pending = 0;
 	set_instance_var("map1$", instance_mapname("1@gol1"));
 	set_instance_var("map2$", instance_mapname("1@gol2"));
 	set_instance_var("party_id", 0);
@@ -886,8 +946,13 @@ OnMyMobDead:
 		mes "[Sierra]";
 		mes "Excellent work. Take these research materials before you leave.";
 		next;
-		getitem 25786,9;
-		getitem 25787,15;
+		.@hard = get_instance_var("hard_mode");
+		getitem 25786, .@hard ? 12 : 9;
+		getitem 25787, .@hard ? 20 : 15;
+		if (!get_instance_var("reward_antiquity_" + .@cid)) {
+			getitem 102571, 1; // Antiquity Somatology Dungeon
+			set_instance_var("reward_antiquity_" + .@cid, 1);
+		}
 		set_instance_var("reward_docs_" + .@cid, 1);
 		mes "[Sierra]";
 		mes "When you're ready, open the treasure chest to receive your weapon and exit.";
@@ -927,11 +992,19 @@ OnStartCombat:
 	hideoffnpc instance_npcname("block#37");
 	hideoffnpc instance_npcname("block#38");
 	setcell .@map$,50,44,52,44,cell_walkable,0;
-	monster .@map$,50,60,"Nameless Swordsman",20536,1,.@boss_event$;
-	if (!mobcount(.@map$, .@boss_event$)) {
+	.@gid = monster(.@map$,50,60,"Nameless Swordsman",20536,1,.@boss_event$);
+	if (!.@gid || !mobcount(.@map$, .@boss_event$)) {
 		set_instance_var("combat_started", 0);
 		mapannounce .@map$, "[Sierra]: Combat simulation failed to initialize. Please try again.", bc_map, 0xFF0000;
 		end;
+	}
+	if (get_instance_var("hard_mode")) {
+		getunitdata .@gid, .@u;
+		setunitdata .@gid, UMOB_MAXHP, .@u[UMOB_MAXHP] * 3;
+		setunitdata .@gid, UMOB_HP, .@u[UMOB_MAXHP] * 3;
+		setunitdata .@gid, UMOB_ATKMIN, .@u[UMOB_ATKMIN] * 13 / 10;
+		setunitdata .@gid, UMOB_ATKMAX, .@u[UMOB_ATKMAX] * 13 / 10;
+		mapannounce .@map$, "[Sierra]: Hard simulation active — Unknown Swordsman power amplified.", bc_map, 0xFF8800;
 	}
 	set_instance_var("mvp_alive", 1);
 	hideonnpc instance_npcname("Sierra#mvp");
@@ -1013,9 +1086,18 @@ OnWaveLoop:
 
 OnMyMobDead:
 	.@map$ = instance_mapname("1@gol2");
+	.@hard = get_instance_var("hard_mode");
 	set_instance_var("mvp_alive", 0);
 	set_instance_var("can_leave", 1);
 	killmonster .@map$, instance_npcname("Sierra#mvp")+"::OnTele";
+	.@count = getmapunits(BL_PC, .@map$, .@aid);
+	for (.@i = 0; .@i < .@count; ++.@i) {
+		if (!attachrid(.@aid[.@i]))
+			continue;
+		callfunc "F_EddaBio_MvpDrops", .@hard;
+		getexp .@hard ? 200000000 : 100000000, .@hard ? 120000000 : 60000000;
+		detachrid;
+	}
 	hideoffnpc instance_npcname("Sierra#mvp");
 	hideoffnpc instance_npcname("Box#mvp");
 	mapannounce .@map$, "Sierra : The combat simulation is complete. Talk to me for research materials, then open the treasure chest to leave.", bc_map, 0x00FF99;

@@ -669,7 +669,7 @@ OnInit:
 	// mes "4th place - none";
 	// mes "5th place - none";
 	// mes "-----------------";
-	// mes "¡Ø The strategy record is updated every 5 minutes.";
+	// mes "?? The strategy record is updated every 5 minutes.";
 	// mes "If recording does not occur immediately, please wait for a while and check.";
 	// close;
 // }
@@ -818,6 +818,7 @@ t_garden,166,235,3	script(CLOAKED)	Sealing Spirit Stone#life2	HEROS_OUT_ORB,{
 				mes "Based on the records engraved in the adventurer's soul";
 				mes "We have reissued a protection engraved with a barrier ^0000fflevel 1^000000.";
 				getitem2 420231,1,1,0,0,0,0,0,312453;	// MD_Hol_Protection
+				#MD_HOL_LEVEL = 1;
 				close;
 			}
 			mes "[Sealing Spirit Stone]";
@@ -978,10 +979,52 @@ OnInit:
 }
 
 
+// C. Instances - shared helpers
+function	script	F_got_instance_enter	{
+	.@name$ = getarg(0);
+	.@cooldown_q = getarg(1, 0);
+	if (.@cooldown_q > 0) {
+		switch( checkquest(.@cooldown_q,PLAYTIME) ) {
+		case 0:
+		case 1:
+			mes "^ff0000This memorial dungeon is on cooldown.^000000";
+			close;
+		case 2:
+			if (checkquest(.@cooldown_q) == 1)
+				erasequest .@cooldown_q;
+			break;
+		}
+	}
+	if (instance_create(.@name$) < 0) {
+		mes "The instance could not be created. Your party may already have an active reservation.";
+		close;
+	}
+	switch( instance_enter(.@name$) ) {
+	case IE_OK:
+		if (.@cooldown_q > 0)
+			setquest .@cooldown_q;
+		close;
+	case IE_NOMEMBER:
+		mes "All party members must be registered to enter.";
+		close;
+	case IE_NOINSTANCE:
+		mes "The instance reservation was not found. Try again.";
+		close;
+	default:
+		mes "Unable to enter the instance right now.";
+		close;
+	}
+}
+
+
 // t_garden,158,235,2	script(CLOAKED)	Dimension Prison#1	GATE_SKYBLUE,2,2,{	// unknown OnTouch effect
 t_garden,158,235,2	script(CLOAKED)	Dimension Prison#1	GATE_SKYBLUE,{
 	if (isbegin_quest(12597) != 2)
 		end;
+	if (BaseLevel < 250) {
+		mes "^0000cdLake of Fire is only open to adventurers with base level 250 or higher.^000000";
+		close;
+	}
 	if (checkweight(1201,1) == 0) {
 		mes "^ff0000It seems that there are too many types and weights of items. Please organize your inventory.^000000";
 		close;
@@ -990,19 +1033,83 @@ t_garden,158,235,2	script(CLOAKED)	Dimension Prison#1	GATE_SKYBLUE,{
 		mes "^0000ffPlease organize a party of at least one person and proceed.^000000";
 		close;
 	}
-	// ...
-			end;
+	switch( checkquest(12610,PLAYTIME) ) {
+	case 0:
+	case 1:
+		mes "^ff0000You have already completed today's Lake of Fire trial.^000000";
+		mes "Bring ^0000cd5 Dimensional Crystal Fragments^000000 if you wish to reset the cooldown.";
+		next;
+		if (select( "Cancel.", "Reset cooldown (5 fragments)." ) == 1)
+			close;
+		if (countitem(1001414) < 5) {
+			mes "You need 5 ^0000cdDimensional Crystal Fragments^000000.";
+			close;
+		}
+		delitem 1001414,5;
+		erasequest 12610;
+		break;
+	case 2:
+		if (checkquest(12610) == 1)
+			erasequest 12610;
+		break;
 	}
+	if (!is_party_leader()) {
+		mes "Only the party leader can create the Lake of Fire instance.";
+		close;
+	}
+	mes "^0000cdLake of Fire^000000";
+	mes "A lava prison where the divine beast guards are held.";
+	mes "Would you like to enter?";
+	next;
+	if (select( "Cancel", "Enter Lake of Fire" ) == 1)
+		close;
+	callfunc("F_got_instance_enter", "Lake of Fire", 0);
+	end;
+}
 
 // t_garden,173,235,2	script(CLOAKED)	Dimension Prison#2	GATE_SKYBLUE,2,2,{	// unknown OnTouch effect
 t_garden,173,235,2	script(CLOAKED)	Dimension Prison#2	GATE_SKYBLUE,{
 	if (isbegin_quest(12597) != 2)
 		end;
+	if (BaseLevel < 250) {
+		mes "^0000cdHall of Life is only open to adventurers with base level 250 or higher.^000000";
+		close;
+	}
 	if (checkweight(1201,1) == 0) {
 		mes "^ff0000It seems that there are too many types and weights of items. Please organize your inventory.^000000";
 		close;
 	}
-	// ...
+	if (isequippedcnt(420231) < 1) {
+		mes "You must equip ^0000cdConstellation's Protection^000000 to enter the Hall of Life.";
+		mes "Reissue one from the Sealing Spirit Stone if needed.";
+		close;
+	}
+	switch( checkquest(12619,PLAYTIME) ) {
+	case 0:
+	case 1:
+		mes "^ff0000Please wait before entering the Hall of Life again.^000000";
+		close;
+	case 2:
+		if (checkquest(12619) == 1)
+			erasequest 12619;
+		break;
+	}
+	if (!is_party_leader()) {
+		mes "Only the party leader can create the Hall of Life instance.";
+		close;
+	}
+	if (countitem(1001415) < 1) {
+		mes "You need a ^0000cdHall of Life Key^000000 to open this prison.";
+		close;
+	}
+	mes "^0000cdHall of Life^000000";
+	mes "The prison of the dimensional criminal who stole Rigel's form.";
+	mes "Current barrier level: ^0000ff" + callfunc("F_md_hol_get_level") + "^000000";
+	next;
+	if (select( "Cancel", "Enter Hall of Life" ) == 1)
+		close;
+	delitem 1001415,1;
+	callfunc("F_got_instance_enter", "Hall of Life", 12619);
 	end;
 }
 

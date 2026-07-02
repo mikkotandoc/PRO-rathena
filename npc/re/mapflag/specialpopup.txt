@@ -46,5 +46,7 @@ bl_depth1	mapflag	specialpopup	7
 
 for_dun01	mapflag	specialpopup	8
 for_dun02	mapflag	specialpopup	8
+1@f_lake	mapflag	specialpopup	8
+1@ba_go	mapflag	specialpopup	8
 
 bl_depth2	mapflag	specialpopup	9

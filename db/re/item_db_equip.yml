@@ -172262,7 +172262,7 @@ Body:
     View: 2367
   - Id: 400433
     AegisName: Gothic_HW_TW_LT
-    Name: Fallen Wing Hairpin-LT
+    Name: Gothic Heart Hairband-LT
     Type: Armor
     Weight: 300
     Slots: 1
@@ -225114,16 +225114,18 @@ Body:
       bonus2 bSkillAtk,"NC_FLAMELAUNCHER",2*(BaseLevel/3);
   - Id: 490337
     AegisName: Amulet_of_GenesisStone
-    Name: Amulet of Genesis Stone
+    Name: Amulet of Asteria
     Type: Armor
     Weight: 100
     Slots: 1
     Locations:
-      Left_Accessory: true
+      Right_Accessory: true
     ArmorLevel: 1
     EquipLevelMin: 100
     Script: |
       bonus bAspdRate,15;
+      bonus bAtkRate,20;
+      bonus bMatkRate,20;
       bonus bDelayrate,-15;
       bonus2 bSubRace,RC_Player_Doram,3;
       bonus2 bSubRace,RC_Player_Human,3;
@@ -225131,7 +225133,6 @@ Body:
       bonus bMatk,BaseLevel;
       bonus bMaxHP,50*BaseLevel;
       bonus bMaxSP,5*BaseLevel;
-      /*Todo Add Item 23044 and Remove Cooldown Item Script*/
   - Id: 490340
     AegisName: Illegal_Tip
     Name: illegal Chip

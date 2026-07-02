@@ -1,0 +1,55 @@
+-- PRO Asia client quest UI snippet — merge into SystemEN/OngoingQuests.lub
+-- Quest IDs must match db/re/quest_db.yml
+
+	[16400] = {
+		Title = "EDDA Somatology Laboratory - Waiting",
+		IconName = "ico_nq.bmp",
+		Description = {
+			"You participated in the Bioresearch Laboratory memorial simulation. Wait before entering again. - <NAVI>[Sierra]<INFO>yuno,216,345,0,101,0</INFO></NAVI>"
+		},
+		Summary = "Memorial cooldown (4h)",
+		CoolTimeQuest = 1
+	},
+	[90518] = {
+		Title = "Depth Abyss Bulk Research",
+		IconName = "ico_dq.bmp",
+		Description = {
+			"Hunt ^0000cd3000^000000 monsters in Biosphere Depth Level 2, then report to <NAVI>[Depth Abyss Research Manager]<INFO>ba_chess,25,13,0,101,0</INFO></NAVI> at the Chess Garden."
+		},
+		Summary = "Hunt 3000 monsters"
+	},
+	[90519] = {
+		Title = "[Standby] Depth Abyss Bulk Research",
+		IconName = "ico_dq.bmp",
+		Description = {
+			"The bulk abyss survey is on cooldown. Return later. - <NAVI>[Depth Abyss Research Manager]<INFO>ba_chess,25,13,0,101,0</INFO></NAVI>"
+		},
+		Summary = "Cooldown active",
+		CoolTimeQuest = 1
+	},
+	[90520] = {
+		Title = "Memorial Dungeon: Bio 5 Bed of Honor (Hard)",
+		IconName = "ico_ev.bmp",
+		Description = {
+			"You entered the amplified Bed of Honor hard simulation. Wait for the memorial cooldown before opening another instance. - <NAVI>[Ohno Tohiro]<INFO>lighthalzen,321,218,0,101,0</INFO></NAVI>"
+		},
+		Summary = "Hard mode cooldown (4h)",
+		CoolTimeQuest = 1
+	},
+	[90521] = {
+		Title = "Bio 5 Hard Mode Hunt",
+		IconName = "ico_ev.bmp",
+		Description = {
+			"Defeat ^0000cd200^000000 monsters inside the hard Bed of Honor memorial, then claim your stipend from <NAVI>[Ohno Tohiro]<INFO>lighthalzen,321,218,0,101,0</INFO></NAVI>."
+		},
+		Summary = "Hunt 200 monsters"
+	},
+	[90522] = {
+		Title = "[Standby] Bio 5 Hard Mode Hunt Reward",
+		IconName = "ico_ev.bmp",
+		Description = {
+			"You already claimed today's hard mode hunt stipend. - <NAVI>[Ohno Tohiro]<INFO>lighthalzen,321,218,0,101,0</INFO></NAVI>"
+		},
+		Summary = "Reward cooldown (4h)",
+		CoolTimeQuest = 1
+	},

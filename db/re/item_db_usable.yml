@@ -68844,7 +68844,7 @@ Body:
     Type: Usable
     Weight: 10
     Script: |
-      addhomintimacy 100; // !TODO: Confirm increase amount
+      addhomintimacy 5000;
   - Id: 100372
     AegisName: RoyalGuard_S_Cube
     Name: Royal Guard Shadow Cube
@@ -77392,8 +77392,11 @@ Body:
     Weight: 100
     Flags:
       BuyingStore: true
-#   Script: |
-#     /* TODO */
+    Script: |
+      sc_end SC_WHITEIMPRISON;
+      sc_end SC_STUN;
+      sc_end SC_STONE;
+      dispbottom "The seal has been broken.";
   - Id: 102434
     AegisName: Warm_Shield_Scroll
     Name: Warm Shield Scroll
@@ -77401,8 +77404,11 @@ Body:
     Weight: 100
     Flags:
       BuyingStore: true
-#   Script: |
-#     /* TODO */
+    Script: |
+      sc_end SC_FREEZE;
+      @WARM_SHIELD = gettimetick(2) + 60;
+      sc_start SC_ENDURE, 60000, 10;
+      dispbottom "A warm barrier protects you from frost for 60 seconds.";
   - Id: 102440
     AegisName: R_Ep17_Box
     Name: Rune Tablet Engraving    # !todo check english name

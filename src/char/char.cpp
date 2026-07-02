@@ -1800,6 +1800,8 @@ int32 char_mmo_char_tobuf( CHARACTER_INFO& info, mmo_charstatus& p ){
 	info.head = p.hair;
 #if PACKETVER >= 20231220
 	info.body = p.body;
+	if( p.body != p.class_ && (p.body <= 1 || (p.body > JOB_SECOND_JOB_START && p.body < JOB_SECOND_JOB_END)) )
+		info.body = p.class_;
 #elif PACKETVER >= 20141022
 	if( p.body > JOB_SECOND_JOB_START && p.body < JOB_SECOND_JOB_END ){
 		info.body = 1;

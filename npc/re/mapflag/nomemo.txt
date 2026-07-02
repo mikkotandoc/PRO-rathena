@@ -362,6 +362,8 @@ rgsr_in	mapflag	nomemo
 1@ghg	mapflag	nomemo
 1@herbs	mapflag	nomemo
 1@lost	mapflag	nomemo
+1@f_lake	mapflag	nomemo
+1@ba_go	mapflag	nomemo
 ba_in01	mapflag	nomemo
 1@odin	mapflag	nomemo
 

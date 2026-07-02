@@ -1,0 +1,289 @@
+//===== rAthena Script =======================================
+//= Instance: Lake of Fire (Garden of Time)
+//===== Description: =========================================
+//= Daily memorial dungeon. Lure the immune divine beast onto
+//= dimensional traps, then fight it in the second area.
+//============================================================
+
+function	script	F_lake_energy_item$	{
+	switch( getarg(0) ) {
+	case 22177: return "Energy_Of_Spring";
+	case 22178: return "Energy_Of_Summer";
+	case 22179: return "Energy_Of_Autumn";
+	case 22180: return "Energy_Of_Winter";
+	}
+	return "Energy_Of_Spring";
+}
+
+function	script	F_lake_boss_name$	{
+	switch( getarg(0) ) {
+	case 22177: return "Floral Pegasus";
+	case 22178: return "Coral Marine";
+	case 22179: return "Maple Tree";
+	case 22180: return "Monarch Penguin";
+	}
+	return "Divine Beast";
+}
+
+1@f_lake,1,1,0	script	#lake_of_fire_ctrl	-1,{
+	end;
+OnInstanceInit:
+	'lake_map$ = instance_mapname("1@f_lake");
+	'lake_boss_id = 0;
+	'lake_phase = 0;
+	'lake_traps = 0;
+	'lake_boss_gid = 0;
+	'lake_p1_x = 100;
+	'lake_p1_y = 50;
+	'lake_p2_x = 280;
+	'lake_p2_y = 50;
+	setarray 'lake_trap_x[1], 25, 95, 51, 91, 129, 93, 43, 70;
+	setarray 'lake_trap_y[1], 151, 182, 93, 56, 58, 35, 34, 120;
+	for ( .@i = 1; .@i <= 8; ++.@i )
+		enablenpc instance_npcname("Lake Trap#" + .@i);
+	disablenpc instance_npcname("Lake Boss#standby");
+	disablenpc instance_npcname("Lake Exit#reward");
+	end;
+OnBossDead:
+	if ('lake_phase < 2)
+		end;
+	'lake_phase = 3;
+	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
+	donpcevent instance_npcname("#lake_skill_ai") + "::OnStop";
+	mapannounce 'lake_map$, "The divine beast has been subdued. Claim your reward at the exit portal.", bc_map, 0x00FF99;
+	enablenpc instance_npcname("Lake Exit#reward");
+	end;
+OnTrapReady:
+	'lake_phase = 2;
+	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
+	if (unitexists('lake_boss_gid))
+		unitkill 'lake_boss_gid;
+	instance_warpall 'lake_map$, 'lake_p2_x, 'lake_p2_y;
+	sleep 1500;
+	.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
+	'lake_boss_gid = monster('lake_map$, 'lake_p2_x, 'lake_p2_y, "--ja--", 'lake_boss_id, 1, .@event$);
+	if ('lake_boss_gid > 0) {
+		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 0;
+		setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
+		setunitdata 'lake_boss_gid, UMOB_HP, 700000000;
+	}
+	donpcevent instance_npcname("#lake_skill_ai") + "::OnStart";
+	mapannounce 'lake_map$, "The guardian's barrier shattered! Finish the battle in the inner prison!", bc_map, 0xFF4400;
+	end;
+OnActivateTrap:
+	.@idx = 'lake_trap_pending;
+	if ('lake_trap_done[.@idx])
+		end;
+	'lake_trap_done[.@idx] = 1;
+	disablenpc instance_npcname("Lake Trap#" + .@idx);
+	npcskilleffect "WZ_VERMILION", 1, 'lake_trap_x[.@idx], 'lake_trap_y[.@idx];
+	'lake_traps++;
+	mapannounce 'lake_map$, "A dimensional trap activated! (" + 'lake_traps + "/8)", bc_map, 0x00FF99;
+	if ('lake_traps >= 8)
+		donpcevent instance_npcname("#lake_of_fire_ctrl") + "::OnTrapReady";
+	end;
+}
+
+1@f_lake,100,50,0	script	#LakeStart	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (!is_party_leader())
+		end;
+	if ('lake_phase > 0)
+		end;
+	'lake_phase = 1;
+	enablenpc instance_npcname("Lake Boss#standby");
+	mapannounce 'lake_map$, "A divine beast guardian has appeared. Lure it onto the shining traps scattered across the prison.", bc_map, 0xFFDD44;
+	end;
+}
+
+1@f_lake,100,50,3	script(DISABLED)	Lake Boss#standby	4_EM_SERPENS,{
+	if ('lake_phase != 1)
+		end;
+	mes "[Divine Beast]";
+	mes "You dare challenge a guardian of the dimensional prison?";
+	next;
+	if (select( "Begin the trial.", "Not yet." ) == 2)
+		close;
+	close2;
+	disablenpc();
+	'lake_boss_id = rand(22177,22180);
+	.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
+	'lake_boss_gid = monster('lake_map$, 'lake_p1_x, 'lake_p1_y, "--ja--", 'lake_boss_id, 1, .@event$);
+	if ('lake_boss_gid > 0) {
+		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 1;
+		setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
+		setunitdata 'lake_boss_gid, UMOB_HP, 700000000;
+	}
+	donpcevent instance_npcname("#lake_boss_ai") + "::OnStart";
+	mapannounce 'lake_map$, callfunc("F_lake_boss_name$", 'lake_boss_id) + " is protected. Lure it onto the traps (0/8).", bc_map, 0xFFDD44;
+	end;
+}
+
+1@f_lake,1,1,0	script	#lake_boss_ai	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTimer500:
+	if ('lake_phase != 1 || !unitexists('lake_boss_gid))
+		end;
+	getunitdata 'lake_boss_gid, .@b;
+	getareaunits(BL_PC, 'lake_map$, 0, 0, 400, 200, .@pc[0]);
+	.@best = 9999;
+	.@tx = .@b[UMOB_X];
+	.@ty = .@b[UMOB_Y];
+	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+		getmapxy .@m$, .@px, .@py, BL_PC, .@pc[.@i];
+		if (.@m$ != 'lake_map$)
+			continue;
+		.@d = distance(.@px, .@py, .@b[UMOB_X], .@b[UMOB_Y]);
+		if (.@d < .@best) {
+			.@best = .@d;
+			.@tx = .@px;
+			.@ty = .@py;
+		}
+	}
+	if (.@best < 9999) {
+		.@dx = (.@tx > .@b[UMOB_X] ? 1 : (.@tx < .@b[UMOB_X] ? -1 : 0));
+		.@dy = (.@ty > .@b[UMOB_Y] ? 1 : (.@ty < .@b[UMOB_Y] ? -1 : 0));
+		unitwalk 'lake_boss_gid, .@b[UMOB_X] + (.@dx * 3), .@b[UMOB_Y] + (.@dy * 3);
+	}
+	for ( .@t = 1; .@t <= 8; ++.@t ) {
+		if ('lake_trap_done[.@t])
+			continue;
+		if (distance(.@b[UMOB_X], .@b[UMOB_Y], 'lake_trap_x[.@t], 'lake_trap_y[.@t]) <= 4) {
+			'lake_trap_pending = .@t;
+			donpcevent instance_npcname("#lake_of_fire_ctrl") + "::OnActivateTrap";
+		}
+	}
+	// God's Shadow - knock players away from the beast during lure phase
+	if (rand(100) < 8) {
+		getareaunits(BL_PC, 'lake_map$, .@b[UMOB_X]-12, .@b[UMOB_Y]-12, .@b[UMOB_X]+12, .@b[UMOB_Y]+12, .@hit[0]);
+		for ( .@j = 0; .@j < getarraysize(.@hit); ++.@j ) {
+			if (!attachrid(.@hit[.@j]))
+				continue;
+			if (@WARM_SHIELD > gettimetick(2))
+				continue;
+			.@dir = rand(8);
+			pushpc .@dir, 3;
+			detachrid;
+		}
+		npcskilleffect "WZ_JUPITEL", 5, .@b[UMOB_X], .@b[UMOB_Y];
+	}
+	initnpctimer;
+	setnpctimer 500;
+	end;
+}
+
+1@f_lake,1,1,0	script	#lake_skill_ai	-1,{
+	end;
+OnStart:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTimer12000:
+	if ('lake_phase != 2 || !unitexists('lake_boss_gid))
+		end;
+	getunitdata 'lake_boss_gid, .@b;
+	getareaunits(BL_PC, 'lake_map$, .@b[UMOB_X]-14, .@b[UMOB_Y]-14, .@b[UMOB_X]+14, .@b[UMOB_Y]+14, .@pc[0]);
+	switch( 'lake_boss_id ) {
+	case 22177: // Floral Pegasus - thorn field
+		npcskilleffect "NPC_EARTHQUAKE", 2, .@b[UMOB_X], .@b[UMOB_Y];
+		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+			if (!attachrid(.@pc[.@i]))
+				continue;
+			percentheal -15,0;
+			detachrid;
+		}
+		break;
+	case 22178: // Coral Marine - water blast
+		npcskilleffect "WZ_WATERBALL", 10, .@b[UMOB_X], .@b[UMOB_Y];
+		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+			if (!attachrid(.@pc[.@i]))
+				continue;
+			percentheal -20,0;
+			pushpc rand(8), 2;
+			detachrid;
+		}
+		break;
+	case 22179: // Maple Tree - root
+		npcskilleffect "NPC_PETRIFYATTACK", 5, .@b[UMOB_X], .@b[UMOB_Y];
+		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+			if (!attachrid(.@pc[.@i]))
+				continue;
+			sc_start SC_ANKLE, 8000, 0;
+			detachrid;
+		}
+		break;
+	case 22180: // Monarch Penguin - frost field
+		npcskilleffect "WZ_FROSTNOVA", 10, .@b[UMOB_X], .@b[UMOB_Y];
+		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+			if (!attachrid(.@pc[.@i]))
+				continue;
+			if (@WARM_SHIELD > gettimetick(2))
+				continue;
+			sc_start SC_FREEZE, 6000, 0;
+			detachrid;
+		}
+		break;
+	}
+	initnpctimer;
+	end;
+}
+
+-	script	LakeTrap	-1,{
+	end;
+OnTouch:
+	end;
+}
+
+1@f_lake,25,151,0	duplicate(LakeTrap)	Lake Trap#1	HIDDEN_WARP_NPC,2,2
+1@f_lake,95,182,0	duplicate(LakeTrap)	Lake Trap#2	HIDDEN_WARP_NPC,2,2
+1@f_lake,51,93,0	duplicate(LakeTrap)	Lake Trap#3	HIDDEN_WARP_NPC,2,2
+1@f_lake,91,56,0	duplicate(LakeTrap)	Lake Trap#4	HIDDEN_WARP_NPC,2,2
+1@f_lake,129,58,0	duplicate(LakeTrap)	Lake Trap#5	HIDDEN_WARP_NPC,2,2
+1@f_lake,93,35,0	duplicate(LakeTrap)	Lake Trap#6	HIDDEN_WARP_NPC,2,2
+1@f_lake,43,34,0	duplicate(LakeTrap)	Lake Trap#7	HIDDEN_WARP_NPC,2,2
+1@f_lake,70,120,0	duplicate(LakeTrap)	Lake Trap#8	HIDDEN_WARP_NPC,2,2
+
+1@f_lake,125,50,3	script(DISABLED)	Lake Exit#reward	GATE_SKYBLUE,{
+	if ('lake_phase < 3)
+		end;
+	if (checkweight(1201,10) == 0) {
+		mes "Your inventory is too full to receive rewards.";
+		close;
+	}
+	switch( checkquest(12610,PLAYTIME) ) {
+	case 0:
+	case 1:
+		mes "You have already received today's Lake of Fire reward.";
+		next;
+		if (select( "Leave the instance.", "Stay." ) == 2)
+			close;
+		break;
+	default:
+		if (checkquest(12610) == 1)
+			erasequest 12610;
+		setquest 12610;
+		getitem 1001415,1; // MD_Hol_Key
+		getitem 1001414,10; // MD_Hol_Fragment
+		getitem callfunc("F_lake_energy_item$", 'lake_boss_id), 5;
+		switch( 'lake_boss_id ) {
+		case 22177: if (checkquest(12613,HUNTING) != 2) { setquest 12613; completequest 12613; } break;
+		case 22178: if (checkquest(12614,HUNTING) != 2) { setquest 12614; completequest 12614; } break;
+		case 22179: if (checkquest(12615,HUNTING) != 2) { setquest 12615; completequest 12615; } break;
+		case 22180: if (checkquest(12616,HUNTING) != 2) { setquest 12616; completequest 12616; } break;
+		}
+		mes "You received your Lake of Fire reward.";
+		next;
+		break;
+	}
+	warp "t_garden",158,235;
+	end;
+}

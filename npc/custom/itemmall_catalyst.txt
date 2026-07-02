@@ -1,41 +1,17 @@
 //===== rAthena Script =======================================
-//= Item Mall - Catalyst & Ammunition Supplier
+//= Item Mall - Ammunition Supplier
 //===== Description: =========================================
-//= Sells arrows/ammunition and 4th job skill catalysts on
-//= prt_mk (use @mall to warp there).
+//= Sells arrows and ammunition on prt_mk (use @mall to warp).
+//= Job catalysts are sold by the dedicated job dealers nearby.
 //============================================================
 
-prt_mk,114,107,4	script	Catalyst Supplier#prt_mk	4_M_ALCHE_A,{
-	mes "[Catalyst Supplier]";
-	mes "Need arrows, runestones, spell books, or other job catalysts?";
-	mes "I stock supplies for Rune Knights, Maestros, Biologos, Warlocks, and Alchemists.";
+prt_mk,114,107,4	script	Ammunition Supplier#prt_mk	4_M_ARCHER,{
+	mes "[Ammunition Supplier]";
+	mes "Need arrows, bullets, kunai, or other ammunition?";
+	mes "Job catalysts are sold by the dealers just east of here.";
 	next;
-	switch (select("Ammunition & Arrows:Rune Knight Runestones:Maestro Song Catalyst:Biolo Bionic Supplies:Warlock Spell Books:Alchemist & Homunculus:Quit")) {
-		case 1: callshop "im_ammo", 1; break;
-		case 2: callshop "im_rk", 1; break;
-		case 3: callshop "im_maestro", 1; break;
-		case 4: callshop "im_biolo", 1; break;
-		case 5: callshop "im_wl", 1; break;
-		case 6: callshop "im_alch", 1; break;
-		case 7: close;
-	}
+	callshop "im_ammo", 1;
 	end;
 }
 
-// Ammunition & arrows
 -	shop	im_ammo	880,1766:50,1755:20,1750:10,1754:20,1761:20,1752:20,1760:20,1759:20,1772:100,1757:30,1770:20,1769:30,1765:40,1763:30,1762:30,1767:30,1764:30,1751:20,1768:30,1753:30,1756:30,1758:30,1771:1000,13200:50,13202:100,13201:300,13206:500,13203:500,13204:500,13205:52,13254:500,13251:100,13253:300,13250:50,13256:50,13258:50,13255:50,13257:50,7522:500,7521:500,7523:500
-
-// Rune Knight - rough runes, materials, Lux Anima
--	shop	im_rk	880,12737:1000,12734:2500,12738:7500,12735:18000,12736:50000,22540:10000,7938:3000,7939:3000
-
-// Maestro - Protect Neck Candy (song catalyst) and arrows
--	shop	im_maestro	880,11513:500,1750:10,1751:20,1752:20,1754:20,1755:20,1756:30,1757:30,1770:20
-
-// Biolo - bionic pharmacy catalysts
--	shop	im_biolo	880,1000275:2000,1000276:100,1000277:100,1000278:100,1000279:100,1000280:100,1000281:100,100516:100,100517:100,100518:100,100519:100,100520:100,100521:100,100522:100,100523:100
-
-// Warlock - Reading SB spell books and Arch Mage elemental stones
--	shop	im_wl	880,100065:100000,100066:100000,100067:100000,100068:100000,100069:100000,100070:100000,100071:100000,100072:100000,100073:100000,100074:100000,1000291:2000,1000292:2000,1000293:2000,1000294:2000,1000295:2000
-
-// Alchemist bottles/materials and Homunculus tablet
--	shop	im_alch	880,715:500,716:500,717:500,7134:50,7135:500,7136:500,7137:500,7138:500,7139:500,713:100,678:1000,7142:50,7140:120000,100371:50000

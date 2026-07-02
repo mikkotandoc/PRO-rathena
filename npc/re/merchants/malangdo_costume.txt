@@ -103,8 +103,11 @@ mal_in01,24,121,6	script	Gregio Grumani#eventhat	4_CAT_SAILOR5,{
 			mes "You do not have enough zeny.";
 			close;
 		}
-		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine)) {
+			mes "[Gregio Grumani]";
+			mes "Your costume changed while we were talking. Please try again.";
 			close;
+		}
 		Zeny -= 99800;
 		delequip .@part;
 		.@card[3] = 0;
@@ -216,8 +219,11 @@ mal_in01,24,121,6	script	Gregio Grumani#eventhat	4_CAT_SAILOR5,{
 		mes "Come back if you change your mind.";
 		close;
 	}
-	if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine))
+	if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) || callfunc("F_IsEquipRefineHack", .@part, .@equip_refine)) {
+		mes "[Gregio Grumani]";
+		mes "Your costume changed while we were talking. Please try again.";
 		close;
+	}
 	delitem .@stone, 1;
 	delequip .@part;
 	.@card[3] = .@enchant;

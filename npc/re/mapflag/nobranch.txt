@@ -304,6 +304,8 @@ rgsr_in	mapflag	nobranch
 1@ghg	mapflag	nobranch
 1@herbs	mapflag	nobranch
 1@lost	mapflag	nobranch
+1@f_lake	mapflag	nobranch
+1@ba_go	mapflag	nobranch
 ba_in01	mapflag	nobranch
 1@odin	mapflag	nobranch
 

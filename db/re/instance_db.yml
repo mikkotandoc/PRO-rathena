@@ -381,7 +381,7 @@ Body:
     Enter:
       Map: 1@gl_he
       X: 150
-      Y: 28
+      Y: 40
     AdditionalMaps:
       1@gl_he2: true
   - Id: 50
@@ -706,3 +706,26 @@ Body:
       Map: lhz_dun_n
       X: 100
       Y: 202
+  - Id: 149
+    Name: EDDA Somatology Laboratory (Hard)
+    TimeLimit: 7200
+    Enter:
+      Map: 1@gol1
+      X: 198
+      Y: 37
+    AdditionalMaps:
+      1@gol2: true
+  - Id: 147
+    Name: Lake of Fire
+    TimeLimit: 3600
+    Enter:
+      Map: 1@f_lake
+      X: 100
+      Y: 50
+  - Id: 148
+    Name: Hall of Life
+    TimeLimit: 3600
+    Enter:
+      Map: 1@ba_go
+      X: 200
+      Y: 50

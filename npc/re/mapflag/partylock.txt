@@ -180,6 +180,8 @@
 1@ghg	mapflag	partylock
 1@herbs	mapflag	partylock
 1@lost	mapflag	partylock
+1@f_lake	mapflag	partylock
+1@ba_go	mapflag	partylock
 1@odin	mapflag	partylock
 
 //============================================================
