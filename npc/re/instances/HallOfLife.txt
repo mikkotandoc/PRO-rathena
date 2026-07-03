@@ -89,6 +89,8 @@ OnBossDead:
 	for ( .@i = 1; .@i <= 4; ++.@i )
 		donpcevent instance_npcname("Hol Portal#" + .@i) + "::OnDisable";
 	disablenpc instance_npcname("Hol Phantom Portal");
+	if (isbegin_quest(12617) == 1)
+		completequest 12617;
 	mapannounce 'hol_map$, "Dimensional criminal Rigel has been corrected. Speak with the exit portal.", bc_map, 0x00FF99;
 	enablenpc instance_npcname("Hol Exit#reward");
 	end;
@@ -120,6 +122,8 @@ OnTouch:
 		dispbottom "Equip Constellation's Protection to begin the Hall of Life trial.";
 		end;
 	}
+	if (checkquest(12617) == -1)
+		setquest 12617;
 	'hol_phase = 1;
 	enablenpc instance_npcname("Hol Boss#standby");
 	mapannounce 'hol_map$, "Hall of Life challenge level " + 'hol_level + " has begun.", bc_map, 0xFFDD44;

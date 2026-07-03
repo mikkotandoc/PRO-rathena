@@ -1,0 +1,196 @@
+// @illmvp - Check illusion dungeon MVP summon kill progress.
+// Reads live counters from each dungeon's boss controller NPC.
+-	script	illusion_mvp_kills	-1,{
+OnCommand:
+	getmapxy(.@map$, .@x, .@y, BL_PC);
+
+	switch (.@map$) {
+	case "pay_d03_i":
+		callsub S_Moonlight;
+		end;
+	case "com_d02_i":
+		callsub S_SimpleCount, "illusion_luanda", 1500, "", "Tao Gunka / Wootan Defender";
+		end;
+	case "ant_d02_i":
+		callsub S_SimpleCount, "ant_d02_i_boss", 3000, "ILL_MAYA";
+		end;
+	case "ein_d02_i":
+		callsub S_SimpleCount, "ein_d02_i_boss", 2500, "ILL_TEDDY_BEAR_S";
+		end;
+	case "iz_d04_i":
+		callsub S_SimpleCount, "iz_d04_i_boss", 1500, "ILL_KRAKEN";
+		end;
+	case "iz_d05_i":
+		callsub S_SimpleCount, "iz_d05_i_boss", 1500, "ILL_ABYSMAL_WITCH";
+		end;
+	case "tur_d04_i":
+		callsub S_Turtle;
+		end;
+	case "prt_mz03_i":
+		callsub S_Labyrinth;
+		end;
+	case "lhz_dun_n":
+		callsub S_Biolabs;
+		end;
+	case "gef_d01_i":
+	case "ice_d03_i":
+	case "tur_d03_i":
+		callsub S_NoTracker;
+		end;
+	default:
+		callsub S_Help;
+		end;
+	}
+	end;
+
+// Standard kill-counter dungeons (.count variable).
+S_SimpleCount:
+	.@npc$ = getarg(0);
+	.@required = getarg(1);
+	.@mvp$ = getarg(2);
+	.@display$ = getarg(3, getmonsterinfo(.@mvp$, MOB_NAME));
+
+	callsub S_Header, .@map$, .@display$;
+
+	if (getvariableofnpc(.boss_spawn, .@npc$)) {
+		dispbottom "Status: MVP is currently alive on this map.";
+		end;
+	}
+	if (getvariableofnpc(.cooldown, .@npc$)) {
+		dispbottom "Status: MVP summon is on cooldown (up to 2 hours).";
+		end;
+	}
+
+	.@kills = getvariableofnpc(.count, .@npc$);
+	.@remaining = .@required - .@kills;
+	if (.@remaining < 0)
+		.@remaining = 0;
+
+	dispbottom "Monster kills: " + .@kills + " / " + .@required;
+	dispbottom "Kills remaining: " + .@remaining;
+	if (.@kills >= .@required)
+		dispbottom "The next qualifying kill may summon " + .@display$ + ".";
+	return;
+
+// Illusion of Moonlight - kills past 1000 roll a 10% summon chance per kill.
+S_Moonlight:
+	.@npc$ = "illusion_mob#moonlight";
+	callsub S_Header, .@map$, getmonsterinfo("ILL_MOONLIGHT", MOB_NAME);
+
+	if (getvariableofnpc(.mvp_spawn, .@npc$)) {
+		dispbottom "Status: MVP is currently alive on this map.";
+		end;
+	}
+
+	.@kills = getvariableofnpc(.kill_count, .@npc$);
+	.@required = 1000;
+
+	dispbottom "Monster kills: " + .@kills + " / " + .@required + "+";
+	if (.@kills <= .@required)
+		dispbottom "Kills remaining: " + (.@required - .@kills);
+	else
+		dispbottom "Past threshold: each additional kill has a 10% summon chance.";
+	return;
+
+// Illusion of Turtle - 2500 kills per ominous mob type (all five required).
+S_Turtle:
+	.@npc$ = "illusion_turtle_boss";
+	setarray .@mob_id[0], 3799, 3800, 3801, 3802, 3803;
+	.@required = 2500;
+
+	callsub S_Header, .@map$, getmonsterinfo("ILL_TURTLE_GENERAL", MOB_NAME);
+
+	if (getvariableofnpc(.boss_spawn, .@npc$)) {
+		dispbottom "Status: MVP is currently alive on this map.";
+		end;
+	}
+	if (getvariableofnpc(.cooldown, .@npc$)) {
+		dispbottom "Status: MVP summon is on cooldown (up to 2 hours).";
+		end;
+	}
+
+	.@ready = 1;
+	for (.@i = 0; .@i < getarraysize(.@mob_id); .@i++) {
+		.@id = .@mob_id[.@i];
+		.@kills = getvariableofnpc(.mob_count[.@id], .@npc$);
+		.@remaining = .@required - .@kills;
+		if (.@remaining < 0)
+			.@remaining = 0;
+		if (.@kills < .@required)
+			.@ready = 0;
+		dispbottom getmonsterinfo(.@id, MOB_NAME) + ": " + .@kills + " / " + .@required + " (" + .@remaining + " left)";
+	}
+	if (.@ready)
+		dispbottom "All quotas met. The next qualifying kill may summon the MVP.";
+	return;
+
+// Illusion of Labyrinth - one kill each on four chaotic MVP precursors.
+S_Labyrinth:
+	.@npc$ = "prt_mz03_i_boss";
+	setarray .@mob_id[0], 20521, 20522, 20523, 20524;
+
+	callsub S_Header, .@map$, getmonsterinfo("ILL_BAPHOMET", MOB_NAME);
+
+	if (getvariableofnpc(.boss_spawn, .@npc$)) {
+		dispbottom "Status: MVP is currently alive on this map.";
+		end;
+	}
+	if (getvariableofnpc(.cooldown, .@npc$)) {
+		dispbottom "Status: MVP summon is on cooldown (up to 2 hours).";
+		end;
+	}
+
+	.@done = 0;
+	for (.@i = 0; .@i < getarraysize(.@mob_id); .@i++) {
+		.@id = .@mob_id[.@i];
+		.@kills = getvariableofnpc(.count[.@id], .@npc$);
+		if (.@kills)
+			.@done++;
+		dispbottom getmonsterinfo(.@id, MOB_NAME) + ": " + (.@kills ? "cleared" : "not yet killed");
+	}
+	dispbottom "Progress: " + .@done + " / " + getarraysize(.@mob_id) + " precursor kills";
+	if (.@done >= getarraysize(.@mob_id))
+		dispbottom "All precursors cleared. Chaos Baphomet may appear on the next kill.";
+	return;
+
+// Nightmare Biolabs uses per-mob quotas (110) and mini-boss chains instead of a flat counter.
+S_Biolabs:
+	callsub S_Header, .@map$, "Nightmare Biolabs MVP";
+	dispbottom "This dungeon does not use a single shared kill counter.";
+	dispbottom "Defeat 110 of each regular monster to spawn its mini-boss.";
+	dispbottom "After all 13 mini-bosses are defeated 4 times each, an MVP spawns.";
+	if (getvariableofnpc(.lhz_dun_n_boss, "lhz_dun_n"))
+		dispbottom "Status: An MVP is currently active on this map.";
+	return;
+
+S_NoTracker:
+	callsub S_Header, .@map$, "Unknown";
+	dispbottom "No MVP summon counter is configured for this map on this server.";
+	return;
+
+S_Help:
+	dispbottom "=== Illusion MVP Kill Checker (@illmvp) ===";
+	dispbottom "Use this command inside an illusion dungeon to see MVP summon progress.";
+	dispbottom "Supported maps:";
+	dispbottom " pay_d03_i  - Illusion of Moonlight";
+	dispbottom " com_d02_i  - Illusion of Luanda (1500 kills)";
+	dispbottom " ant_d02_i  - Illusion of Twins (3000 kills)";
+	dispbottom " ein_d02_i  - Illusion of Teddy Bear (2500 kills)";
+	dispbottom " iz_d04_i   - Illusion of Underwater (1500 kills)";
+	dispbottom " iz_d05_i   - Illusion of Abyss (1500 kills)";
+	dispbottom " tur_d04_i  - Illusion of Turtle (2500 per mob type)";
+	dispbottom " prt_mz03_i - Illusion of Labyrinth (4 precursor kills)";
+	dispbottom " lhz_dun_n  - Nightmare Biolabs (multi-stage)";
+	return;
+
+S_Header:
+	dispbottom "======================================";
+	dispbottom " Illusion MVP: " + getarg(1);
+	dispbottom " Map: " + getarg(0);
+	dispbottom "======================================";
+	return;
+
+OnInit:
+	bindatcmd "illmvp", strnpcinfo(0)+"::OnCommand", 0, 99;
+	end;
+}

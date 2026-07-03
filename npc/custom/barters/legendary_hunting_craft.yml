@@ -1,0 +1,394 @@
+# Legendary Hunting Missions - cash shop armor & weapon crafting
+# Materials tuned for ~24h (budget) to ~48h (premium) of BL250 hunting.
+
+Header:
+  Type: BARTER_DB
+  Version: 2
+
+Body:
+  - Name: legendary_lhm_armors
+    Items:
+      # --- Tier 2 (2000 CP) ---
+      - Index: 0
+        Item: Apollo_Armor_TW_LT
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3
+      - Index: 1
+        Item: Astraea_Armor_LT
+        Zeny: 15000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 340
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 65
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 8
+          - Index: 3
+            Item: Zelunium
+            Amount: 5
+      - Index: 2
+        Item: Mercury_Suits_LT
+        Zeny: 20000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 400
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 75
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 10
+          - Index: 3
+            Item: Zelunium
+            Amount: 8
+      - Index: 3
+        Item: Tirnanog
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3
+
+  - Name: legendary_lhm_footwear
+    Items:
+      - Index: 0
+        Item: Astraea_Shoes_LT
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3
+      - Index: 1
+        Item: Twinhead_dragon_Boots
+        Zeny: 15000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 340
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 65
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 8
+          - Index: 3
+            Item: Zelunium
+            Amount: 5
+      - Index: 2
+        Item: Ranger_Shoes_US
+        Zeny: 15000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 340
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 65
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 8
+          - Index: 3
+            Item: Zelunium
+            Amount: 5
+      - Index: 3
+        Item: Mecha_Greaves_US
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3
+      - Index: 4
+        Item: Kshatra_Vairya
+        Zeny: 20000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 400
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 75
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 10
+          - Index: 3
+            Item: Zelunium
+            Amount: 8
+
+  - Name: legendary_lhm_garments
+    Items:
+      - Index: 0
+        Item: Magic_Compression
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3
+      - Index: 1
+        Item: Tristan_Cape_LT
+        Zeny: 17500000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 370
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 70
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 9
+          - Index: 3
+            Item: Zelunium
+            Amount: 6
+      - Index: 2
+        Item: Royal_Nightwatch_US
+        Zeny: 20000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 400
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 75
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 10
+          - Index: 3
+            Item: Zelunium
+            Amount: 8
+      - Index: 3
+        Item: Royal_Alberta_US
+        Zeny: 30000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 480
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 90
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 15
+          - Index: 3
+            Item: Zelunium
+            Amount: 10
+
+  - Name: legendary_lhm_weapons
+    Items:
+      - Index: 0
+        Item: Ancient_Prontera_US
+        Zeny: 5000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 220
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 45
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 3
+          - Index: 3
+            Item: Zelunium
+            Amount: 2
+      - Index: 1
+        Item: Hightech_Shield_US
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3
+
+  - Name: legendary_lhm_accessories
+    Items:
+      - Index: 0
+        Item: Valkyrie_Drop
+        Zeny: 5000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 220
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 45
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 3
+          - Index: 3
+            Item: Zelunium
+            Amount: 2
+      - Index: 1
+        Item: Old_Moroc_Acc
+        Zeny: 5000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 220
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 45
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 3
+          - Index: 3
+            Item: Zelunium
+            Amount: 2
+      - Index: 2
+        Item: Amulet_of_GenesisStone
+        Zeny: 5000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 220
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 45
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 3
+          - Index: 3
+            Item: Zelunium
+            Amount: 2
+      - Index: 3
+        Item: Dimension_L_Stone
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3
+      - Index: 4
+        Item: NightW_Heart_US
+        Zeny: 15000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 340
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 65
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 8
+          - Index: 3
+            Item: Zelunium
+            Amount: 5
+      - Index: 5
+        Item: Astraea_Ring_LT
+        Zeny: 15000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 340
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 65
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 8
+          - Index: 3
+            Item: Zelunium
+            Amount: 5
+
+  - Name: legendary_lhm_headgear
+    Items:
+      - Index: 0
+        Item: FullFaith_Crown_US
+        Zeny: 5000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 220
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 45
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 3
+          - Index: 3
+            Item: Zelunium
+            Amount: 2
+      - Index: 1
+        Item: Gothic_HW_TW_LT
+        Zeny: 10000000
+        RequiredItems:
+          - Index: 0
+            Item: Legend_Hunt_Scrap
+            Amount: 280
+          - Index: 1
+            Item: Legend_Hunt_Core
+            Amount: 55
+          - Index: 2
+            Item: Shadowdecon
+            Amount: 5
+          - Index: 3
+            Item: Zelunium
+            Amount: 3

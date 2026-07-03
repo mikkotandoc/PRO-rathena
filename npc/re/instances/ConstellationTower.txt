@@ -240,15 +240,16 @@ OnInstanceInit:
 	'B_MATKMIN_skillmob=1000;
 	'B_MATKMAX_skillmob=1000;
 
-	setarray 'boss_mhp,0,12,25,38,50,62;
+	// KRO/iRO difficulty % per star (max 1000% with 5 stars on all stats at floor 75)
+	setarray 'boss_mhp,0,15,30,45,60,75;
 
-	setarray 'boss_atk,0,15,30,45,60,75;
+	setarray 'boss_atk,0,20,40,60,80,100;
 
-	setarray 'boss_heal,0,25,50,75,100,125;
+	setarray 'boss_heal,0,30,60,90,120,150;
 
-	setarray 'boss_def,0,40,80,120,160,200;
+	setarray 'boss_def,0,50,100,150,200,250;
 
-	setarray 'boss_trap,0,70,140,210,280,350;
+	setarray 'boss_trap,0,85,170,235,340,425;
 
 	'boss_floor_lv = 50;
 	end;
@@ -260,6 +261,9 @@ function	script	#sumper	{
 	'sum_pt_4='boss_def['boss_state_4];
 	'sum_pt_5='boss_trap['boss_state_5];
 	'sum_pt = 'sum_pt_1+'sum_pt_2+'sum_pt_3+'sum_pt_4+'sum_pt_5;
+	// KRO floor 75 base difficulty is 600% (all stats at 3 stars)
+	if('boss_floor_lv == 75 && 'boss_state_1 == 3 && 'boss_state_2 == 3 && 'boss_state_3 == 3 && 'boss_state_4 == 3 && 'boss_state_5 == 3)
+		'sum_pt += 20;
 	return;
 }
 
@@ -407,11 +411,12 @@ OnTimer1000:
 1@ch_t,0,0,0	script	0FJumping Device	-1,{
 	.@floorcount=atoi(replacestr(strnpcinfo(0),"FJumping Device",""));
 	if(.@floorcount== 75){
-		'boss_state_1 = 2;
-		'boss_state_2 = 2;
-		'boss_state_3 = 2;
-		'boss_state_4 = 2;
-		'boss_state_5 = 2;
+		// KRO default: 3 stars on each stat (600% base difficulty)
+		'boss_state_1 = 3;
+		'boss_state_2 = 3;
+		'boss_state_3 = 3;
+		'boss_state_4 = 3;
+		'boss_state_5 = 3;
 		'boss_floor_lv = 75;
 		callfunc "#sumper";
 		warp 'map_3$,31,16;
@@ -1287,71 +1292,143 @@ OnInstanceInit:
 3@ch_t,39,90,2	script	Oscar#Con3	4_ED_OSCAR,{
 	cutin "oscar01",2;
 	mes "[Oscar]";
-	mes "Contribution to the altar ^ff0000Meteorite Powder 20^000000";
-	mes "Can be randomly enhanced ^ff0000Betelgeuse attribute^000000";
-	mes "At the same time to obtain more advanced bonus boxes";
+	mes "Offer ^ff0000Meteorite Dust^000000 at the Goddess's Altar to adjust ^ff0000Betelgeuse^000000 difficulty.";
+	if('boss_floor_lv == 75) {
+		mes "You climbed to floor 75. Base difficulty is ^ff0000600%^000000 and can be raised up to ^ff00001000%^000000.";
+	} else {
+		mes "On floor 50, difficulty starts at ^ff00000%^000000 and can be raised up to ^ff0000600%^000000.";
+	}
+	mes "Higher difficulty improves treasure and costume drop chances.";
 	next;
 Challenge1:
 	if('boss_stats_end){
-			callsub sub_show;
-	cutin "oscar01",255;
-	close;
+		callsub sub_show;
+		cutin "oscar01",255;
+		close;
 	}
 	if(getcharid(0)!= getpartyleader(getcharid(1),2)){
-	mes "Captain please come";
-	close2;
-	cutin "oscar01",255;
-	end;
-	}
-
-Challenge:
-	callsub sub_show;
-	if(select("Contribute to the meteorite's powder:Start the challenge")==2){
-		callfunc "#sumper";
-		'boss_stats_end=1;
-		enablenpc instance_npcname("#BossRoomEntrance");
+		mes "Captain please come";
 		close2;
 		cutin "oscar01",255;
 		end;
 	}
 
-	if(select("Contribution ^ff000020^000000 Individual"+getitemname('Fenwei)+"Unseal:Cancellation")==2)end;
-		if(countitem('Fenwei)<20){
-			mes "Need"+getitemname('Fenwei)+"20";
+Challenge:
+	callsub sub_show;
+	.@can_max = (('boss_floor_lv == 75 && 'sum_pt >= 600) || ('boss_floor_lv != 75 && 'sum_pt >= 300));
+	if(.@can_max)
+		.@pick = select("Reroll all stats - 20 "+getitemname('Fenwei)+":Maximize one stat:Seal one stat - 300 "+getitemname('Fenwei)+":Start the challenge");
+	else
+		.@pick = select("Reroll all stats - 20 "+getitemname('Fenwei)+":Seal one stat - 300 "+getitemname('Fenwei)+":Start the challenge");
+
+	if(.@pick == 1) {
+		if(countitem('Fenwei) < 20){
+			mes "You need 20 "+getitemname('Fenwei)+".";
 			close2;
 			cutin "oscar01",255;
 			end;
 		}
 		delitem 'Fenwei,20;
-		if('boss_floor_lv == 75){
-			'boss_state_1 = rand(3,5);
-			'boss_state_2 = rand(3,5);
-			'boss_state_3 = rand(3,5);
-			'boss_state_4 = rand(3,5);
-			'boss_state_5 = rand(3,5);
-		}
-		else {
-			'boss_state_1 = rand(1,3);
-			'boss_state_2 = rand(1,3);
-			'boss_state_3 = rand(1,3);
-			'boss_state_4 = rand(1,3);
-			'boss_state_5 = rand(1,3);
-		}
-
-		callfunc("#sumper");
+		callsub sub_roll_stats;
+		callfunc "#sumper";
+		mapannounce 'map_3$, strcharinfo(0)+" rerolled Betelgeuse difficulty.",bc_map,"0xFFFF00";
 		goto Challenge1;
-		end;
+	}
+	if(.@can_max && .@pick == 2) {
+		.@max_star = ('boss_floor_lv == 75) ? 5 : 3;
+		.@max_cost = ('boss_floor_lv == 75) ? 300 : 150;
+		mes "Choose a stat to maximize to "+.@max_star+" stars for ^ff0000"+.@max_cost+"^000000 "+getitemname('Fenwei)+".";
+		next;
+		switch(select("HP:Attack:Heal:Defense:Traps:Cancel")) {
+		case 1: .@stat = 1; break;
+		case 2: .@stat = 2; break;
+		case 3: .@stat = 3; break;
+		case 4: .@stat = 4; break;
+		case 5: .@stat = 5; break;
+		case 6:
+			goto Challenge;
+		}
+		if(getd("'boss_sealed_"+.@stat)) {
+			mes "That stat is sealed and cannot be changed.";
+			next;
+			goto Challenge;
+		}
+		if(getd("'boss_state_"+.@stat) >= .@max_star) {
+			mes "That stat is already at the maximum for this floor.";
+			next;
+			goto Challenge;
+		}
+		if(countitem('Fenwei) < .@max_cost){
+			mes "You need "+.@max_cost+" "+getitemname('Fenwei)+".";
+			close2;
+			cutin "oscar01",255;
+			end;
+		}
+		delitem 'Fenwei,.@max_cost;
+		setd "'boss_state_"+.@stat,.@max_star;
+		callfunc "#sumper";
+		mapannounce 'map_3$, strcharinfo(0)+" maximized Betelgeuse stat #"+.@stat+".",bc_map,"0xFFFF00";
+		goto Challenge1;
+	}
+	if( (.@can_max && .@pick == 3) || (!.@can_max && .@pick == 2) ) {
+		mes "Choose a stat to seal for ^ff0000300^000000 "+getitemname('Fenwei)+".";
+		mes "Sealed stats stay at 0 stars and cannot be changed.";
+		next;
+		switch(select("HP:Attack:Heal:Defense:Traps:Cancel")) {
+		case 1: .@stat = 1; break;
+		case 2: .@stat = 2; break;
+		case 3: .@stat = 3; break;
+		case 4: .@stat = 4; break;
+		case 5: .@stat = 5; break;
+		case 6:
+			goto Challenge;
+		}
+		if(getd("'boss_sealed_"+.@stat)) {
+			mes "That stat is already sealed.";
+			next;
+			goto Challenge;
+		}
+		if(countitem('Fenwei) < 300){
+			mes "You need 300 "+getitemname('Fenwei)+".";
+			close2;
+			cutin "oscar01",255;
+			end;
+		}
+		delitem 'Fenwei,300;
+		setd "'boss_state_"+.@stat,0;
+		setd "'boss_sealed_"+.@stat,1;
+		callfunc "#sumper";
+		mapannounce 'map_3$, strcharinfo(0)+" sealed Betelgeuse stat #"+.@stat+".",bc_map,"0xFFFF00";
+		goto Challenge1;
+	}
+	callfunc "#sumper";
+	'boss_stats_end=1;
+	enablenpc instance_npcname("#BossRoomEntrance");
+	close2;
+	cutin "oscar01",255;
+	end;
 
-		goto Challenge;
-		end;
+sub_roll_stats:
+	.@min_star = ('boss_floor_lv == 75) ? 3 : 1;
+	.@max_star = ('boss_floor_lv == 75) ? 5 : 3;
+	for(.@i = 1; .@i <= 5; .@i++) {
+		if(getd("'boss_sealed_"+.@i))
+			continue;
+		setd "'boss_state_"+.@i, rand(.@min_star,.@max_star);
+	}
+	return;
+
 sub_show:
 	clear;
+	callfunc "#sumper";
 	mes "[Oscar]";
-	mes "Your current challenge star rating:[ "+'sum_pt+" PT]";
+	mes "Current difficulty: ^ff0000"+'sum_pt+"%^000000";
+	if('sum_pt >= 400)
+		mes "^0066ffCostume equipment may appear at 400% or higher.^000000";
 	for(.@i=0;.@i<5;.@i++){
 		.@index = getd("'boss_state_"+(.@i+1));
 		switch(.@index){
-			case 0: setd ".@boss_bouus_"+(.@i+1)+"$","Not Open";break;
+			case 0: setd ".@boss_bouus_"+(.@i+1)+"$", getd("'boss_sealed_"+(.@i+1)) ? "Sealed" : "Not Open"; break;
 			case 1: setd ".@boss_bouus_"+(.@i+1)+"$","X";break;
 			case 2: setd ".@boss_bouus_"+(.@i+1)+"$","XX";break;
 			case 3: setd ".@boss_bouus_"+(.@i+1)+"$","XXX";break;
@@ -1360,7 +1437,7 @@ sub_show:
 		}
 	}
 	mes "1.HP: ^ff0000"+.@boss_bouus_1$+"^000000";
-	mes "2.Demage: ^ff0000"+.@boss_bouus_2$+"^000000";
+	mes "2.Damage: ^ff0000"+.@boss_bouus_2$+"^000000";
 	mes "3.Heal: ^ff0000"+.@boss_bouus_3$+"^000000";
 	mes "4.Defense: ^ff0000"+.@boss_bouus_4$+"^000000";
 	mes "5.Traps: ^ff0000"+.@boss_bouus_5$+"^000000";
@@ -1373,6 +1450,11 @@ OnInstanceInit:
 	'boss_state_3=0;
 	'boss_state_4=0;
 	'boss_state_5=0;
+	'boss_sealed_1=0;
+	'boss_sealed_2=0;
+	'boss_sealed_3=0;
+	'boss_sealed_4=0;
+	'boss_sealed_5=0;
 	'lvl_stats=0;
 	'sum_pt=0;
 	'sum_pt_1=0;
@@ -2649,7 +2731,7 @@ OnInstanceInit:
 	//Headgear Doll Rewards: Droopy Betelgeuse Doll (costume), Black Flame Dragon Wig (costume), Black Lightning (costume), ID added by yourself
 	setarray .@head_id,400147,400148,400149;
 
-	if('sum_pt/100>=4){
+	if('sum_pt >= 400){
 
 		for(.@i= 0;.@i<3;.@i++){
 			if(rand(1000)<10){

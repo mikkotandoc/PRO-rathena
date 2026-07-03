@@ -102246,11 +102246,11 @@ Body:
       - Item: Old_Steel_Plate
         Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 2500
+        Rate: 3750
       - Item: EP17_1_EVT01
         Rate: 100
       - Item: EP17_1_EVT39
-        Rate: 1000
+        Rate: 1500
       - Item: Distorted_Iron_Plate
         Rate: 1500
       - Item: EL_A17T_Card
@@ -102290,7 +102290,7 @@ Body:
       - Item: Needle_Pouch
         Rate: 1250
       - Item: EP17_1_EVT02
-        Rate: 10
+        Rate: 15
       - Item: Scarlet_Dyestuffs
         Rate: 30
       - Item: E_EA1L_Card
@@ -102332,7 +102332,7 @@ Body:
       - Item: Burnt_Parts
         Rate: 1000
       - Item: EP17_1_EVT02
-        Rate: 10
+        Rate: 15
       - Item: E_EA2S_Card
         Rate: 1
         StealProtected: true
@@ -102378,7 +102378,7 @@ Body:
       - Item: Elunium
         Rate: 20
       - Item: EP17_1_EVT39
-        Rate: 3
+        Rate: 5
   - Id: 20344
     AegisName: MD_VENOM_BUG
     Name: Chemical Poison
@@ -102487,11 +102487,11 @@ Body:
       - Item: Tiger's_Skin
         Rate: 3000
       - Item: EP17_1_EVT02
-        Rate: 2500
+        Rate: 3750
       - Item: EP17_1_EVT01
         Rate: 100
       - Item: EP17_1_EVT39
-        Rate: 1000
+        Rate: 1500
       - Item: Apple
         Rate: 50
       - Item: Miguel_Card
@@ -102566,7 +102566,7 @@ Body:
       - Item: Tendon
         Rate: 2000
       - Item: EP17_1_EVT39
-        Rate: 3
+        Rate: 5
       - Item: Caput_Card
         Rate: 1
         StealProtected: true
@@ -102608,7 +102608,7 @@ Body:
       - Item: Wooden_Block
         Rate: 1000
       - Item: EP17_1_EVT39
-        Rate: 3
+        Rate: 5
       - Item: Bloody_Rune
         Rate: 800
       - Item: Dolor_Card
@@ -102656,7 +102656,7 @@ Body:
       - Item: Explosive_Powder
         Rate: 30
       - Item: EP17_1_EVT02
-        Rate: 7
+        Rate: 11
       - Item: Bellare_Card
         Rate: 1
         StealProtected: true
@@ -102786,9 +102786,9 @@ Body:
       - Item: Elunium
         Rate: 12
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 8
       - Item: EP17_1_EVT02
-        Rate: 10
+        Rate: 15
       - Item: Explosive_Powder
         Rate: 30
       - Item: Bellare_Card
@@ -102832,11 +102832,11 @@ Body:
       - Item: Elunium
         Rate: 24
       - Item: EP17_1_EVT39
-        Rate: 10
+        Rate: 15
       - Item: Explosive_Powder
         Rate: 60
       - Item: EP17_1_EVT02
-        Rate: 30
+        Rate: 45
       - Item: Shadowdecon_Ore
         Rate: 70
       - Item: High_Bellare_Card
@@ -102882,7 +102882,7 @@ Body:
       - Item: Oridecon
         Rate: 12
       - Item: EP17_1_EVT02
-        Rate: 10
+        Rate: 15
       - Item: Explosive_Powder
         Rate: 30
       - Item: Sanare_Card
@@ -102926,11 +102926,11 @@ Body:
       - Item: Elunium
         Rate: 24
       - Item: EP17_1_EVT39
-        Rate: 10
+        Rate: 15
       - Item: Explosive_Powder
         Rate: 60
       - Item: EP17_1_EVT02
-        Rate: 30
+        Rate: 45
       - Item: Zelunium_Ore
         Rate: 70
       - Item: High_Sanare_Card
@@ -102976,7 +102976,7 @@ Body:
       - Item: Azure_Jewel
         Rate: 50
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 8
       - Item: Shadowdecon_Ore
         Rate: 70
       - Item: Zelunium_Ore
@@ -103024,7 +103024,7 @@ Body:
       - Item: Azure_Jewel
         Rate: 50
       - Item: EP17_1_EVT39
-        Rate: 10
+        Rate: 15
       - Item: Shadowdecon_Ore
         Rate: 100
       - Item: Zelunium_Ore
@@ -103070,7 +103070,7 @@ Body:
       - Item: Wooden_Block
         Rate: 1000
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 8
       - Item: Bloody_Rune
         Rate: 800
       - Item: Dolor_Card
@@ -103115,7 +103115,7 @@ Body:
       - Item: Wooden_Block
         Rate: 2000
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 8
       - Item: Bloody_Rune
         Rate: 1600
       - Item: Shadowdecon_Ore
@@ -103167,7 +103167,7 @@ Body:
       - Item: Elunium
         Rate: 10
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 8
       - Item: Venenum_Card
         Rate: 1
         StealProtected: true
@@ -103213,7 +103213,7 @@ Body:
       - Item: Elunium
         Rate: 20
       - Item: EP17_1_EVT39
-        Rate: 10
+        Rate: 15
       - Item: Shadowdecon_Ore
         Rate: 90
       - Item: Mt_Venenum_Card
@@ -103259,7 +103259,7 @@ Body:
       - Item: Tendon
         Rate: 1000
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 8
       - Item: Caput_Card
         Rate: 1
         StealProtected: true
@@ -103303,7 +103303,7 @@ Body:
       - Item: Tendon
         Rate: 2000
       - Item: EP17_1_EVT39
-        Rate: 10
+        Rate: 15
       - Item: Shadowdecon_Ore
         Rate: 90
       - Item: Zelunium_Ore
@@ -104052,7 +104052,9 @@ Body:
       - Item: Old_Violet_Box
         Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 4950
+        Rate: 7425
+      - Item: EP17_1_EVT39
+        Rate: 1500
       - Item: Zelunium
         Rate: 50
       - Item: R48_85_Bestia_Card
@@ -108364,6 +108366,10 @@ Body:
         Rate: 500
       - Item: Iron
         Rate: 500
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
   - Id: 20630
     AegisName: EP17_2_BETA_BASIC_NG
     Name: Broken Beta
@@ -110615,9 +110621,9 @@ Body:
       - Item: Heart_Hunter_Seal
         Rate: 2500
       - Item: EP17_1_EVT39
-        Rate: 10
+        Rate: 15
       - Item: EP17_1_EVT02
-        Rate: 30
+        Rate: 45
       - Item: Elunium_Stone
         Rate: 24
       - Item: Ep172_1h_Sword
@@ -110695,9 +110701,9 @@ Body:
       - Item: Heart_Hunter_Seal
         Rate: 2500
       - Item: EP17_1_EVT39
-        Rate: 10
+        Rate: 15
       - Item: EP17_1_EVT02
-        Rate: 30
+        Rate: 45
       - Item: Shadowdecon_Ore
         Rate: 100
       - Item: Ep172_1h_Sword
@@ -110755,6 +110761,10 @@ Body:
       - Item: Ep172_1h_Book2
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Bookworm_Card
         Rate: 1
         StealProtected: true
@@ -110800,6 +110810,10 @@ Body:
       - Item: Ep172_1h_Book
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MELEE_2
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Roaming_Splbook_Card
         Rate: 1
         StealProtected: true
@@ -110847,6 +110861,10 @@ Body:
       - Item: Ep172_1h_Wand
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Venenum3_Card
         Rate: 1
         StealProtected: true
@@ -110892,6 +110910,10 @@ Body:
       - Item: Ep172_1h_Dagger
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: EP17_2_Cramp_Card
         Rate: 1
         StealProtected: true
@@ -110937,6 +110959,10 @@ Body:
       - Item: Ep172_Bh_Katar
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MELEE_2
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Waterfall_Card
         Rate: 1
         StealProtected: true
@@ -110985,6 +111011,10 @@ Body:
       - Item: Ep172_1h_Shotgun
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MELEE_2
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Bellare3_Card
         Rate: 1
         StealProtected: true
@@ -111030,6 +111060,10 @@ Body:
       - Item: Ep172_1h_Foxtail
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Dolor3_Card
         Rate: 1
         StealProtected: true
@@ -111075,6 +111109,10 @@ Body:
         RandomOptionGroup: AUTO_IMP_MAGIC_2
       - Item: Light_Granule
         Rate: 150
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Plasma_Y_Card
         Rate: 1
         StealProtected: true
@@ -111124,6 +111162,10 @@ Body:
         Rate: 150
       - Item: Shadowdecon_Ore
         Rate: 150
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Plaga3_Card
         Rate: 1
         StealProtected: true
@@ -111171,6 +111213,10 @@ Body:
         Rate: 150
       - Item: Shadowdecon_Ore
         Rate: 150
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Sanare3_Card
         Rate: 1
         StealProtected: true
@@ -111218,6 +111264,10 @@ Body:
         Rate: 150
       - Item: Shadowdecon_Ore
         Rate: 150
+      - Item: EP17_1_EVT39
+        Rate: 8
+      - Item: EP17_1_EVT02
+        Rate: 15
       - Item: Plasma_R_Card
         Rate: 1
         StealProtected: true

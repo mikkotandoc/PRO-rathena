@@ -1,0 +1,96 @@
+//===== rAthena Script =======================================
+//= Legendary Hunting Missions
+//===== Description: =========================================
+//= Crafts cash shop weapons and armors using materials
+//= farmed from level 220+ monsters via map drops.
+//= Expect ~24-48 hours of material collection per item.
+//============================================================
+
+prt_mk,120,125,4	script	Legendary Hunting Missions	4_F_EDEN_MASTER,{
+	if (!getbattleflag("feature.barter")) {
+		mes "[Legendary Hunting Missions]";
+		mes "The crafting exchange is unavailable right now.";
+		mes "Please ask a GM to enable the barter system.";
+		close;
+	}
+	mes "[Legendary Hunting Missions]";
+	mes "I forge the same legendary gear sold in the cash shop,";
+	mes "but only for hunters who prove themselves against";
+	mes "monsters of ^0000cdlevel 220 and above^000000.";
+	next;
+	switch (select(
+		"Craft Body Armor:Craft Footwear:Craft Garments:Craft Shields / Off-hand:Craft Accessories:Craft Headgear:Material Guide:^777777Cancel^000000"
+	)) {
+	case 1:
+		mes "[Legendary Hunting Missions]";
+		mes "Select the body armor you wish to forge.";
+		close2;
+		callshop "legendary_lhm_armors";
+		end;
+	case 2:
+		mes "[Legendary Hunting Missions]";
+		mes "Select the footwear you wish to forge.";
+		close2;
+		callshop "legendary_lhm_footwear";
+		end;
+	case 3:
+		mes "[Legendary Hunting Missions]";
+		mes "Select the garment you wish to forge.";
+		close2;
+		callshop "legendary_lhm_garments";
+		end;
+	case 4:
+		mes "[Legendary Hunting Missions]";
+		mes "Select the shield or off-hand gear you wish to forge.";
+		close2;
+		callshop "legendary_lhm_weapons";
+		end;
+	case 5:
+		mes "[Legendary Hunting Missions]";
+		mes "Select the accessory you wish to forge.";
+		close2;
+		callshop "legendary_lhm_accessories";
+		end;
+	case 6:
+		mes "[Legendary Hunting Missions]";
+		mes "Select the headgear you wish to forge.";
+		close2;
+		callshop "legendary_lhm_headgear";
+		end;
+	case 7:
+		mes "[Legendary Hunting Missions]";
+		mes "^0055FFLegend Hunt Scrap^000000";
+		mes "Common crafting fragment.";
+		mes " ";
+		mes "^0055FFLegend Hunt Core^000000";
+		mes "Rare crafting fragment.";
+		mes "MVPs drop both materials at higher rates.";
+		next;
+		mes "[Legendary Hunting Missions]";
+		mes "These materials do ^FF0000not^000000 drop from";
+		mes "monsters below level 220.";
+		mes " ";
+		mes "Drop rates are fixed map drops and are";
+		mes "^FF0000not affected^000000 by server drop bonuses.";
+		next;
+		mes "[Legendary Hunting Missions]";
+		mes "^777777Normal monsters (Lv 220+):^000000";
+		mes "Up to ^0055FF2.4%^000000 per material (scales with level).";
+		mes "^777777MVP monsters (Lv 220+):^000000";
+		mes "Up to ^0055FF20%^000000 for cores, ^0055FF12%^000000 for scrap.";
+		mes " ";
+		mes "Examples: Power Twisted Plains, Mjolnir";
+		mes "Underground Caverns, Biosphere Depth, etc.";
+		next;
+		mes "[Legendary Hunting Missions]";
+		mes "You will also need ^777777Shadowdecon^000000,";
+		mes "^777777Zelunium^000000, and Zeny.";
+		mes "Budget items need about ^0000cd24 hours^000000 of";
+		mes "steady hunting. Premium pieces can take";
+		mes "up to ^0000cd48 hours^000000 to gather everything.";
+		close;
+	case 8:
+		close;
+	}
+	end;
+}

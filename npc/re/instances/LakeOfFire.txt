@@ -25,6 +25,28 @@ function	script	F_lake_boss_name$	{
 	return "Divine Beast";
 }
 
+function	script	F_lake_hunt_quest	{
+	switch( getarg(0) ) {
+	case 22177: return 12613;
+	case 22178: return 12614;
+	case 22179: return 12615;
+	case 22180: return 12616;
+	}
+	return 0;
+}
+
+function	script	F_lake_complete_hunt	{
+	.@q = callfunc("F_lake_hunt_quest", getarg(0));
+	if (.@q < 1)
+		return;
+	if (checkquest(.@q,HUNTING) == 2)
+		return;
+	if (checkquest(.@q) == -1)
+		setquest .@q;
+	completequest .@q;
+	return;
+}
+
 1@f_lake,1,1,0	script	#lake_of_fire_ctrl	-1,{
 	end;
 OnInstanceInit:
@@ -39,8 +61,10 @@ OnInstanceInit:
 	'lake_p2_y = 50;
 	setarray 'lake_trap_x[1], 25, 95, 51, 91, 129, 93, 43, 70;
 	setarray 'lake_trap_y[1], 151, 182, 93, 56, 58, 35, 34, 120;
-	for ( .@i = 1; .@i <= 8; ++.@i )
+	for ( .@i = 1; .@i <= 8; ++.@i ) {
+		'lake_trap_done[.@i] = 0;
 		enablenpc instance_npcname("Lake Trap#" + .@i);
+	}
 	disablenpc instance_npcname("Lake Boss#standby");
 	disablenpc instance_npcname("Lake Exit#reward");
 	end;
@@ -50,14 +74,15 @@ OnBossDead:
 	'lake_phase = 3;
 	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
 	donpcevent instance_npcname("#lake_skill_ai") + "::OnStop";
+	callfunc("F_lake_complete_hunt", 'lake_boss_id);
 	mapannounce 'lake_map$, "The divine beast has been subdued. Claim your reward at the exit portal.", bc_map, 0x00FF99;
 	enablenpc instance_npcname("Lake Exit#reward");
 	end;
 OnTrapReady:
-	'lake_phase = 2;
 	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
 	if (unitexists('lake_boss_gid))
 		unitkill 'lake_boss_gid;
+	'lake_phase = 2;
 	instance_warpall 'lake_map$, 'lake_p2_x, 'lake_p2_y;
 	sleep 1500;
 	.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
@@ -108,8 +133,10 @@ OnTouch:
 	close2;
 	disablenpc();
 	'lake_boss_id = rand(22177,22180);
-	.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
-	'lake_boss_gid = monster('lake_map$, 'lake_p1_x, 'lake_p1_y, "--ja--", 'lake_boss_id, 1, .@event$);
+	.@hunt_q = callfunc("F_lake_hunt_quest", 'lake_boss_id);
+	if (.@hunt_q > 0 && checkquest(.@hunt_q) == -1)
+		setquest .@hunt_q;
+	'lake_boss_gid = monster('lake_map$, 'lake_p1_x, 'lake_p1_y, "--ja--", 'lake_boss_id, 1);
 	if ('lake_boss_gid > 0) {
 		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 1;
 		setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
@@ -252,7 +279,7 @@ OnTouch:
 1@f_lake,43,34,0	duplicate(LakeTrap)	Lake Trap#7	HIDDEN_WARP_NPC,2,2
 1@f_lake,70,120,0	duplicate(LakeTrap)	Lake Trap#8	HIDDEN_WARP_NPC,2,2
 
-1@f_lake,125,50,3	script(DISABLED)	Lake Exit#reward	GATE_SKYBLUE,{
+1@f_lake,275,50,3	script(DISABLED)	Lake Exit#reward	GATE_SKYBLUE,{
 	if ('lake_phase < 3)
 		end;
 	if (checkweight(1201,10) == 0) {
@@ -274,12 +301,7 @@ OnTouch:
 		getitem 1001415,1; // MD_Hol_Key
 		getitem 1001414,10; // MD_Hol_Fragment
 		getitem callfunc("F_lake_energy_item$", 'lake_boss_id), 5;
-		switch( 'lake_boss_id ) {
-		case 22177: if (checkquest(12613,HUNTING) != 2) { setquest 12613; completequest 12613; } break;
-		case 22178: if (checkquest(12614,HUNTING) != 2) { setquest 12614; completequest 12614; } break;
-		case 22179: if (checkquest(12615,HUNTING) != 2) { setquest 12615; completequest 12615; } break;
-		case 22180: if (checkquest(12616,HUNTING) != 2) { setquest 12616; completequest 12616; } break;
-		}
+		callfunc("F_lake_complete_hunt", 'lake_boss_id);
 		mes "You received your Lake of Fire reward.";
 		next;
 		break;
