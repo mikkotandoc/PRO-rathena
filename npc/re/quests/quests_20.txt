@@ -1024,9 +1024,9 @@ jor_safty2,74,363,3	script	Lazy#ep20safty01	4_EP19_RGAN_SR3,{
 	}
 	if (isbegin_quest(17696) == 1) {
 		mes "[Lazy]";
-		mes "Enter ^0000CDSacred Roots (jor_sanct)^000000 when you're ready.";
+		mes "Enter ^0000CDSacred Roots (jor_sanct)^000000 and meet me inside.";
 		close2;
-		navigateto("jor_sanct", 162, 86);
+		navigateto("jor_sanct", 155, 85);
 		end;
 	}
 	mes "[Lazy]";
@@ -1078,7 +1078,7 @@ jor_safty2,78,361,3	script	Horuru#ep20safty01	4_EP19_IWIN,{
 	callfunc("F_ep20_setquest", 17696);
 	close2;
 	cutin "",255;
-	navigateto("jor_sanct", 162, 86);
+	navigateto("jor_sanct", 155, 85);
 	end;
 
 OnInit:
@@ -1110,8 +1110,9 @@ jor_sanct,162,86,3	script	Rgan Guide#ep20ms01	4_EP19_RGAN_R3,{
 	}
 	if (ep20_main == 19) {
 		mes "[Rgan]";
-		mes "Gain trust among the bishops marked on your minimap.";
-		mes "Then report to ^0000CDSerekgand (157, 171)^000000.";
+		mes "Speak with ^0000CDLazy (155, 85)^000000 first.";
+		mes "Then help the bishops and faithful Rgans marked on your minimap.";
+		mes "Report to ^0000CDSerekgand (157, 171)^000000 when they all trust you.";
 		close;
 	}
 	end;
@@ -1127,7 +1128,14 @@ jor_sanct,157,171,3	script	Serekgand#ep20ms01	4_EP19_RGAN_SR1,{
 	if (ep20_main == 19) {
 		if (isbegin_quest(17701) != 2) {
 			mes "[Serekgand]";
-			mes "Earn the trust of the bishops in Sacred Roots first.";
+			mes "Earn the trust of the bishops and marked Rgans in Sacred Roots first.";
+			close;
+		}
+		if (ep20_sanct_mark < 10) {
+			mes "[Serekgand]";
+			mes "The faithful are still watching you. Help every Rgan marked on your minimap.";
+			if (ep20_sanct_mark == 0)
+				navigateto("jor_sanct", 258, 117);
 			close;
 		}
 		mes "[Serekgand]";
@@ -1140,7 +1148,7 @@ jor_sanct,157,171,3	script	Serekgand#ep20ms01	4_EP19_RGAN_SR1,{
 	end;
 
 OnInit:
-	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 19 && isbegin_quest(17701) == 2" );
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "ep20_main == 19 && isbegin_quest(17701) == 2 && ep20_sanct_mark >= 10" );
 	end;
 }
 
