@@ -48,3 +48,33 @@ ACMD_FUNC(mall)
 	clif_displaymessage(fd, "Warping to the Item Mall...");
 	return 0;
 }
+
+/**
+ * Opens the Rune Tablet / Rune System UI for GM testing.
+ * Usage: @runeui {<ui type>}
+ *        @runetablet {<ui type>}
+ *
+ * Optional <ui type> overrides the default OUT_UI_RUNE (11) so GMs can
+ * probe which ZC_UI_OPEN type the client expects.
+ */
+ACMD_FUNC(runeui)
+{
+	nullpo_retr(-1, sd);
+
+#if PACKETVER < 20230802
+	clif_displaymessage(fd, "This command requires packet version 2023-08-02 or newer.");
+	return -1;
+#else
+	int32 ui_type = OUT_UI_RUNE;
+
+	if (message != nullptr && *message) {
+		if (sscanf(message, "%11d", &ui_type) < 1 || ui_type < 0 || ui_type > 127) {
+			clif_displaymessage(fd, "Usage: @runeui {<ui type>}");
+			return -1;
+		}
+	}
+
+	clif_ui_open(*sd, static_cast<enum out_ui_type>(ui_type), 0);
+	return 0;
+#endif
+}

@@ -1226,6 +1226,18 @@ Opens the enchantgrade UI.
 
 ---------------------------------------
 
+@runeui {<ui type>}
+Aliases: @runetablet
+
+Opens the Rune Tablet / Rune System UI.
+
+Optional <ui type> overrides the default ZC_UI_OPEN type (11) so GMs can
+probe which type the client expects.
+
+Note: This command requires packet version 2023-08-02 or newer.
+
+---------------------------------------
+
 @setcard <equip position> <slot> <card_id>
 
 Adds a card or enchant to the specific slot of the equipment.
