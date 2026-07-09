@@ -1237,6 +1237,14 @@ Body:
   - Command: roulette
     Help: |
       Opens the roulette UI.
+  - Command: runeui
+    Aliases:
+      - runetablet
+    Help: |
+      Params: {<ui type>}
+      Opens the Rune Tablet / Rune System UI.
+      Optional <ui type> overrides the default type (11) for client testing.
+      Note: Requires packet version 2023-08-02 or newer.
   - Command: sakura
     Help: |
       Makes all maps to have the sakura weather effect.
