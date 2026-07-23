@@ -88751,3 +88751,1036 @@ Body:
     Name: +12 Armor Refine Permission Exchange Hammer
     Type: Etc
     Weight: 10
+
+
+  #============================================================
+  # Monthly Kachua Key / Secret Box sets (iRO-style, Jan 2024 - Dec 2024)
+  #============================================================
+  - Id: 50070
+    AegisName: Kachua_Key_2024_01
+    Name: Kachua Key - January 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_01";
+      set @kachua_box$,"Kachua_Box_2024_01";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50082
+    AegisName: Kachua_Box_2024_01
+    Name: Kachua's Secret Box - January 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_01,true);
+  - Id: 50071
+    AegisName: Kachua_Key_2024_02
+    Name: Kachua Key - February 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_02";
+      set @kachua_box$,"Kachua_Box_2024_02";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50083
+    AegisName: Kachua_Box_2024_02
+    Name: Kachua's Secret Box - February 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_02,true);
+  - Id: 50072
+    AegisName: Kachua_Key_2024_03
+    Name: Kachua Key - March 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_03";
+      set @kachua_box$,"Kachua_Box_2024_03";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50084
+    AegisName: Kachua_Box_2024_03
+    Name: Kachua's Secret Box - March 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_03,true);
+  - Id: 50073
+    AegisName: Kachua_Key_2024_04
+    Name: Kachua Key - April 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_04";
+      set @kachua_box$,"Kachua_Box_2024_04";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50085
+    AegisName: Kachua_Box_2024_04
+    Name: Kachua's Secret Box - April 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_04,true);
+  - Id: 50074
+    AegisName: Kachua_Key_2024_05
+    Name: Kachua Key - May 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_05";
+      set @kachua_box$,"Kachua_Box_2024_05";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50086
+    AegisName: Kachua_Box_2024_05
+    Name: Kachua's Secret Box - May 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_05,true);
+  - Id: 50075
+    AegisName: Kachua_Key_2024_06
+    Name: Kachua Key - June 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_06";
+      set @kachua_box$,"Kachua_Box_2024_06";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50087
+    AegisName: Kachua_Box_2024_06
+    Name: Kachua's Secret Box - June 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_06,true);
+  - Id: 50076
+    AegisName: Kachua_Key_2024_07
+    Name: Kachua Key - July 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_07";
+      set @kachua_box$,"Kachua_Box_2024_07";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50088
+    AegisName: Kachua_Box_2024_07
+    Name: Kachua's Secret Box - July 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_07,true);
+  - Id: 50077
+    AegisName: Kachua_Key_2024_08
+    Name: Kachua Key - August 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_08";
+      set @kachua_box$,"Kachua_Box_2024_08";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50089
+    AegisName: Kachua_Box_2024_08
+    Name: Kachua's Secret Box - August 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_08,true);
+  - Id: 50078
+    AegisName: Kachua_Key_2024_09
+    Name: Kachua Key - September 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_09";
+      set @kachua_box$,"Kachua_Box_2024_09";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50090
+    AegisName: Kachua_Box_2024_09
+    Name: Kachua's Secret Box - September 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_09,true);
+  - Id: 50079
+    AegisName: Kachua_Key_2024_10
+    Name: Kachua Key - October 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_10";
+      set @kachua_box$,"Kachua_Box_2024_10";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50091
+    AegisName: Kachua_Box_2024_10
+    Name: Kachua's Secret Box - October 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_10,true);
+  - Id: 50080
+    AegisName: Kachua_Key_2024_11
+    Name: Kachua Key - November 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_11";
+      set @kachua_box$,"Kachua_Box_2024_11";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50092
+    AegisName: Kachua_Box_2024_11
+    Name: Kachua's Secret Box - November 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_11,true);
+  - Id: 50081
+    AegisName: Kachua_Key_2024_12
+    Name: Kachua Key - December 2024
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2024_12";
+      set @kachua_box$,"Kachua_Box_2024_12";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50093
+    AegisName: Kachua_Box_2024_12
+    Name: Kachua's Secret Box - December 2024
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2024_12,true);
+
+  #============================================================
+  # Monthly Kachua Key / Secret Box sets (iRO-style, Jan 2025 - Jul 2026)
+  # (2024 sets are listed above)
+  #============================================================
+  - Id: 50100
+    AegisName: Kachua_Key_2025_01
+    Name: Kachua Key - January 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_01";
+      set @kachua_box$,"Kachua_Box_2025_01";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50120
+    AegisName: Kachua_Box_2025_01
+    Name: Kachua's Secret Box - January 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_01,true);
+  - Id: 50101
+    AegisName: Kachua_Key_2025_02
+    Name: Kachua Key - February 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_02";
+      set @kachua_box$,"Kachua_Box_2025_02";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50121
+    AegisName: Kachua_Box_2025_02
+    Name: Kachua's Secret Box - February 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_02,true);
+  - Id: 50102
+    AegisName: Kachua_Key_2025_03
+    Name: Kachua Key - March 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_03";
+      set @kachua_box$,"Kachua_Box_2025_03";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50122
+    AegisName: Kachua_Box_2025_03
+    Name: Kachua's Secret Box - March 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_03,true);
+  - Id: 50103
+    AegisName: Kachua_Key_2025_04
+    Name: Kachua Key - April 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_04";
+      set @kachua_box$,"Kachua_Box_2025_04";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50123
+    AegisName: Kachua_Box_2025_04
+    Name: Kachua's Secret Box - April 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_04,true);
+  - Id: 50104
+    AegisName: Kachua_Key_2025_05
+    Name: Kachua Key - May 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_05";
+      set @kachua_box$,"Kachua_Box_2025_05";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50124
+    AegisName: Kachua_Box_2025_05
+    Name: Kachua's Secret Box - May 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_05,true);
+  - Id: 50105
+    AegisName: Kachua_Key_2025_06
+    Name: Kachua Key - June 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_06";
+      set @kachua_box$,"Kachua_Box_2025_06";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50125
+    AegisName: Kachua_Box_2025_06
+    Name: Kachua's Secret Box - June 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_06,true);
+  - Id: 50106
+    AegisName: Kachua_Key_2025_07
+    Name: Kachua Key - July 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_07";
+      set @kachua_box$,"Kachua_Box_2025_07";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50126
+    AegisName: Kachua_Box_2025_07
+    Name: Kachua's Secret Box - July 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_07,true);
+  - Id: 50107
+    AegisName: Kachua_Key_2025_08
+    Name: Kachua Key - August 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_08";
+      set @kachua_box$,"Kachua_Box_2025_08";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50127
+    AegisName: Kachua_Box_2025_08
+    Name: Kachua's Secret Box - August 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_08,true);
+  - Id: 50108
+    AegisName: Kachua_Key_2025_09
+    Name: Kachua Key - September 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_09";
+      set @kachua_box$,"Kachua_Box_2025_09";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50128
+    AegisName: Kachua_Box_2025_09
+    Name: Kachua's Secret Box - September 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_09,true);
+  - Id: 50109
+    AegisName: Kachua_Key_2025_10
+    Name: Kachua Key - October 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_10";
+      set @kachua_box$,"Kachua_Box_2025_10";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50129
+    AegisName: Kachua_Box_2025_10
+    Name: Kachua's Secret Box - October 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_10,true);
+  - Id: 50110
+    AegisName: Kachua_Key_2025_11
+    Name: Kachua Key - November 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_11";
+      set @kachua_box$,"Kachua_Box_2025_11";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50130
+    AegisName: Kachua_Box_2025_11
+    Name: Kachua's Secret Box - November 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_11,true);
+  - Id: 50111
+    AegisName: Kachua_Key_2025_12
+    Name: Kachua Key - December 2025
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2025_12";
+      set @kachua_box$,"Kachua_Box_2025_12";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50131
+    AegisName: Kachua_Box_2025_12
+    Name: Kachua's Secret Box - December 2025
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2025_12,true);
+  - Id: 50112
+    AegisName: Kachua_Key_2026_01
+    Name: Kachua Key - January 2026
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2026_01";
+      set @kachua_box$,"Kachua_Box_2026_01";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50132
+    AegisName: Kachua_Box_2026_01
+    Name: Kachua's Secret Box - January 2026
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2026_01,true);
+  - Id: 50113
+    AegisName: Kachua_Key_2026_02
+    Name: Kachua Key - February 2026
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2026_02";
+      set @kachua_box$,"Kachua_Box_2026_02";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50133
+    AegisName: Kachua_Box_2026_02
+    Name: Kachua's Secret Box - February 2026
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2026_02,true);
+  - Id: 50114
+    AegisName: Kachua_Key_2026_03
+    Name: Kachua Key - March 2026
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2026_03";
+      set @kachua_box$,"Kachua_Box_2026_03";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50134
+    AegisName: Kachua_Box_2026_03
+    Name: Kachua's Secret Box - March 2026
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2026_03,true);
+  - Id: 50115
+    AegisName: Kachua_Key_2026_04
+    Name: Kachua Key - April 2026
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2026_04";
+      set @kachua_box$,"Kachua_Box_2026_04";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50135
+    AegisName: Kachua_Box_2026_04
+    Name: Kachua's Secret Box - April 2026
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2026_04,true);
+  - Id: 50116
+    AegisName: Kachua_Key_2026_05
+    Name: Kachua Key - May 2026
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2026_05";
+      set @kachua_box$,"Kachua_Box_2026_05";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50136
+    AegisName: Kachua_Box_2026_05
+    Name: Kachua's Secret Box - May 2026
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2026_05,true);
+  - Id: 50117
+    AegisName: Kachua_Key_2026_06
+    Name: Kachua Key - June 2026
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2026_06";
+      set @kachua_box$,"Kachua_Box_2026_06";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50137
+    AegisName: Kachua_Box_2026_06
+    Name: Kachua's Secret Box - June 2026
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2026_06,true);
+  - Id: 50118
+    AegisName: Kachua_Key_2026_07
+    Name: Kachua Key - July 2026
+    Type: Delayconsume
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      set @kachua_key$,"Kachua_Key_2026_07";
+      set @kachua_box$,"Kachua_Box_2026_07";
+      duplicate_dynamic("Kachua's Secret Box#bm");
+  - Id: 50138
+    AegisName: Kachua_Box_2026_07
+    Name: Kachua's Secret Box - July 2026
+    Type: Usable
+    Weight: 10
+    Flags:
+      Container: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getgroupitem(IG_KACHUA_2026_07,true);

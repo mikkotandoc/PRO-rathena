@@ -133934,3 +133934,2486 @@ Body:
             Item: C_Dark_Lord_Cloak
             Amount: 1
             Rate: 4
+
+
+  #============================================================
+  # Monthly Kachua Secret Box groups (iRO-style, Jan 2024 - Dec 2024)
+  # Rates are percent*100 (0.19% => 19). Missing prizes omitted; see comments.
+  #============================================================
+  # Kachua Key - January 2024
+  # Omitted (missing AegisName): Biolab Helmet Box; Automatic Shield I; Cursed Knight's Shield; Dual Shadow World Cloak; Vanishing Cannon Shadow Armor/Shield/Shoes; Bearers Shadow Mix; Lord Bearer's Shadow Spellbook
+  - Group: KACHUA_2024_01
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Fallen_Protect_Manteau
+            Rate: 19
+          - Index: 1
+            Item: Crystal_Blade_Necklace
+            Rate: 19
+          - Index: 2
+            Item: S_Bearers_Cube
+            Rate: 115
+          - Index: 3
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 4
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 5
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 8
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 9
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 10
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Rate: 40
+          - Index: 12
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 13
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 14
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 15
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 16
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 17
+            Item: Guarantee_Armor_11Up
+            Rate: 19
+          - Index: 18
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 19
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - February 2024
+  # Omitted (missing AegisName): Mega Blitz Shadow Synthesis; Talent Status Shadow Spellbook
+  - Group: KACHUA_2024_02
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Kiel_Card
+            Rate: 1
+          - Index: 1
+            Item: Forbidden_Grimoire
+            Rate: 19
+          - Index: 2
+            Item: Valkyrie_Curse_blight
+            Rate: 19
+          - Index: 3
+            Item: Mythical_Moonlight_US
+            Rate: 19
+          - Index: 4
+            Item: Starry_Sky_Twin_Prime
+            Rate: 19
+          - Index: 5
+            Item: Zodiac_Boots_SM
+            Rate: 19
+          - Index: 6
+            Item: S_Focusing_Pendant
+            Rate: 115
+          - Index: 7
+            Item: S_Focusing_Earring
+            Rate: 115
+          - Index: 8
+            Item: S_Centering_Pendant
+            Rate: 115
+          - Index: 9
+            Item: S_Centering_Earring
+            Rate: 115
+          - Index: 10
+            Item: S_Concentration_Weapon
+            Rate: 115
+          - Index: 11
+            Item: S_Concentration_Shield
+            Rate: 115
+          - Index: 12
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 13
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 14
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 15
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 16
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 17
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 18
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 19
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 20
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 21
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 22
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 23
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 24
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 25
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 26
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 27
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - March 2024
+  # Omitted (missing AegisName): Poenetentia Crown Box; Violent Dragon Shadow Armor; Abyss Lake Roaring Armor; Alpha Beast Armor; Great Gunner Armor; Ignition Shadow Earring; Full Tempest Shadow Mix Box; Tempest Shadow Box; Advanced Refining Certificate
+  - Group: KACHUA_2024_03
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Gloom_Card
+            Rate: 1
+          - Index: 1
+            Item: Zodiac_Boots_AC
+            Rate: 19
+          - Index: 2
+            Item: S_Arrow_Shield
+            Rate: 115
+          - Index: 3
+            Item: S_Arrow_Armor
+            Rate: 115
+          - Index: 4
+            Item: S_Arrow_Shoes
+            Rate: 115
+          - Index: 5
+            Item: S_Ignition_Pendant
+            Rate: 115
+          - Index: 6
+            Item: S_Ignition_Weapon
+            Rate: 115
+          - Index: 7
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 11
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 12
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 13
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 14
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 15
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 16
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 17
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 18
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 19
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 20
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 21
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - April 2024
+  # Omitted (missing AegisName): Sprout of World Tree Egg; Overwhelm Armor Box; Cursed Knight's Shield; Midgard Knight Shoes; Scarlet Hero Manteau; Full Penetration Shadow Mix Box; Penetration Shadow Box; Full Tempenet Shadow Spellbook; Phantom's Invitation x8; Advanced Refining Certificate
+  - Group: KACHUA_2024_04
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Samurai_Card
+            Rate: 1
+          - Index: 1
+            Item: Temporal_Manteau_Box
+            Rate: 115
+          - Index: 2
+            Item: New_Wave_Sunglasses
+            Rate: 19
+          - Index: 3
+            Item: Eye_Of_Storm_TH
+            Rate: 115
+          - Index: 4
+            Item: Twinhead_DragonScale_US
+            Rate: 19
+          - Index: 5
+            Item: Destroy_World_Boots
+            Rate: 19
+          - Index: 6
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 11
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 12
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 13
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 14
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 15
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 16
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 17
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 18
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 19
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 20
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - May 2024
+  # Omitted (missing AegisName): Sealed Fallen Bishop Card; Helm of Faith Box 1; Thanatos Helmet Box; Zodiac Boots Box; Demon Hunter Shoes; Legendary Performer Manteau; Divine Bell; Major/Spell Caster Auto Spell mixes; Shadow Enhancement Box; Auto Spell Shadow Box; Spellflow Shadow Pack; Advanced Refining Certificate
+  - Group: KACHUA_2024_05
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Professor_MiniGlass
+            Rate: 115
+          - Index: 1
+            Item: Mythical_Moonlight_US
+            Rate: 19
+          - Index: 2
+            Item: Lord_of_Elemental
+            Rate: 115
+          - Index: 3
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 4
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 5
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 8
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 9
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 10
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 12
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 13
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 14
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 15
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 16
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 17
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - June 2024
+  # Omitted (missing AegisName): Helm of Faith Box 2; Orc Ancestor Armor; Reforming Magic Cloak; Lord Bearer's Shadow Mix Box; Lord Bearer's Shadow Spellbook; Physical Power Shadow Shield/Weapon
+  - Group: KACHUA_2024_06
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Kiel_Card
+            Rate: 1
+          - Index: 1
+            Item: Beast_Area_Shoes
+            Rate: 19
+          - Index: 2
+            Item: Moonlight_Bell_TH
+            Rate: 19
+          - Index: 3
+            Item: Overdrive_Rampage
+            Rate: 19
+          - Index: 4
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 5
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 9
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 10
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 11
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 12
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 13
+            Item: S_Bearers_Cube
+            Rate: 115
+          - Index: 14
+            Item: S_Full_Power_Armor
+            Rate: 115
+          - Index: 15
+            Item: S_Full_Power_Shoes
+            Rate: 115
+          - Index: 16
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 17
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 18
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 19
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 20
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 21
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 22
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - July 2024
+  # Omitted (missing AegisName): Sealed Samurai Card; Helm of Faith Box 3; Smiling Eyes; Great Gunner Armor; Guardian's Shield; Midgard Knight Shoes; Vanishing Cannon Shadow Cube
+  - Group: KACHUA_2024_07
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Twinhead_DragonScale_US
+            Rate: 19
+          - Index: 1
+            Item: Royal_Prontera_US
+            Rate: 19
+          - Index: 2
+            Item: Valkyrie_Curse_blight
+            Rate: 19
+          - Index: 3
+            Item: Battle_Aura_Manteau_TW
+            Rate: 19
+          - Index: 4
+            Item: Black_Eagle_Ring_TH
+            Rate: 115
+          - Index: 5
+            Item: Twin_Dragon_Ring_TH
+            Rate: 115
+          - Index: 6
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 11
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 12
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 13
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 14
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 15
+            Item: S_Ignition_Cube
+            Rate: 115
+          - Index: 16
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 17
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 18
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 19
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 20
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 21
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 22
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - August 2024
+  # Omitted (missing AegisName): Legendary Performer Manteau; Melody Wing (equip); Elemental Ring (exact); Infinity Shadow Selection Box; Infinity Shadow Spellbook; Metallic Shadow Cube
+  - Group: KACHUA_2024_08
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: D_Protect_Shields
+            Rate: 19
+          - Index: 2
+            Item: Crow_Tengu_Mask
+            Rate: 19
+          - Index: 3
+            Item: Forbidden_Grimoire2_TH
+            Rate: 115
+          - Index: 4
+            Item: Mecha_Greaves_US
+            Rate: 19
+          - Index: 5
+            Item: Mythical_Moonlight_US
+            Rate: 19
+          - Index: 6
+            Item: King_Elemental_Ring_TH
+            Rate: 115
+          - Index: 7
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 11
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 12
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 13
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 14
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 15
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 16
+            Item: S_Arms_Cube
+            Rate: 115
+          - Index: 17
+            Item: S_Tornado_Cube
+            Rate: 115
+          - Index: 18
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 19
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 20
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 21
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 22
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 23
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 24
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - September 2024
+  # Omitted (missing AegisName): Good and Evil Box; Heroic Token Box; Rekenber's Celestial Hat; Bear Aimed Bag; Phantom's Invitation x8
+  - Group: KACHUA_2024_09
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Exiled_Ninja_US
+            Rate: 19
+          - Index: 2
+            Item: Bloody_Knight_Shield__
+            Rate: 19
+          - Index: 3
+            Item: Royal_Prontera_US
+            Rate: 19
+          - Index: 4
+            Item: Overdrive_Rampage
+            Rate: 19
+          - Index: 5
+            Item: Imperial_Glove
+            Rate: 115
+          - Index: 6
+            Item: Giant_Protection
+            Rate: 115
+          - Index: 7
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 11
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 12
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 13
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 14
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 15
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 16
+            Item: S_Arrow_Cube
+            Rate: 115
+          - Index: 17
+            Item: S_Shooting_Cube
+            Rate: 115
+          - Index: 18
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 19
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 20
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 21
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 22
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 23
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 24
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - October 2024
+  # Omitted (missing AegisName): Good and Evil Crown Box I; Evil/Good Weapon Box I; Disciple of Bijou; Grey Wolf Cub in Mouth; Guardian's Shield; Valkyrie Curse Blight listed present
+  - Group: KACHUA_2024_10
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Twinhead_DragonScale_US
+            Rate: 19
+          - Index: 2
+            Item: Royal_Payon_US
+            Rate: 19
+          - Index: 3
+            Item: Valkyrie_Curse_blight
+            Rate: 19
+          - Index: 4
+            Item: Destroy_World_Boots
+            Rate: 19
+          - Index: 5
+            Item: Black_Eagle_Ring_TH
+            Rate: 115
+          - Index: 6
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 11
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 12
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 13
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 14
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 15
+            Item: S_Rainstorm_Cube
+            Rate: 115
+          - Index: 16
+            Item: S_Adoramus_Cube
+            Rate: 115
+          - Index: 17
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 18
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 19
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 20
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 21
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 22
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 23
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - November 2024
+  # Omitted (missing AegisName): Great Gunner Armor; Midgard Knight Shoes; Brave Heart (Hyper Novice); Brave Heart (Night Watch)
+  - Group: KACHUA_2024_11
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: DarkSnake_Crown
+            Rate: 115
+          - Index: 2
+            Item: New_Wave_Sunglasses
+            Rate: 76
+          - Index: 3
+            Item: Bloody_Knight_Shield__
+            Rate: 19
+          - Index: 4
+            Item: Royal_Prontera_US
+            Rate: 19
+          - Index: 5
+            Item: Mythical_Moonlight_US
+            Rate: 19
+          - Index: 6
+            Item: Mecha_Greaves_US
+            Rate: 19
+          - Index: 7
+            Item: Overdrive_Rampage
+            Rate: 19
+          - Index: 8
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 11
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 12
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 13
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 14
+            Item: Shadow_Cube_Weapon
+            Rate: 500
+          - Index: 15
+            Item: Shadow_Cube_Armor
+            Rate: 500
+          - Index: 16
+            Item: Shadow_Refine_Hammer
+            Rate: 39
+          - Index: 17
+            Item: S_Super_Power_Cube
+            Rate: 115
+          - Index: 18
+            Item: S_Super_Magic_Cube
+            Rate: 115
+          - Index: 19
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 20
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 21
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 22
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 23
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 24
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 25
+            Item: Refine_Guarantee
+            Rate: 500
+  # Kachua Key - December 2024
+  # Omitted (missing AegisName): Smiling Eyes; Grey Wolf Cub in Mouth; Brave Heart (Sky Emperor); Brave Heart (Shinkiro/Shiranui)
+  - Group: KACHUA_2024_12
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Crow_Tengu_Mask
+            Rate: 19
+          - Index: 2
+            Item: D_Protect_Shields
+            Rate: 19
+          - Index: 3
+            Item: Twinhead_DragonScale_US
+            Rate: 19
+          - Index: 4
+            Item: Royal_Geffen_US
+            Rate: 19
+          - Index: 5
+            Item: Ranger_Shoes_US
+            Rate: 19
+          - Index: 6
+            Item: Juggernaut
+            Rate: 115
+          - Index: 7
+            Item: Twin_Dragon_Ring_TH
+            Rate: 115
+          - Index: 8
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 11
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 12
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 13
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 14
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 15
+            Item: S_Pickyrush_Cube
+            Rate: 115
+          - Index: 16
+            Item: S_Catnip_Cube
+            Rate: 115
+          - Index: 17
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 18
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 19
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 20
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 21
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 22
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 23
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 24
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 25
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+
+  #============================================================
+  # Monthly Kachua Secret Box groups (iRO-style, Jan 2025 - Jul 2026)
+  # Rates are percent*100 (0.19% => 19). Missing prizes omitted; see comments.
+  #============================================================
+  # Kachua Key - January 2025
+  # Omitted (missing AegisName): Constellation Orb; Constellation Blessing; Bear Aimed Bag
+  - Group: KACHUA_2025_01
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: CherubCoronet
+            Rate: 76
+          - Index: 2
+            Item: DarkSnake_Crown
+            Rate: 115
+          - Index: 3
+            Item: Exiled_Ninja_US
+            Rate: 19
+          - Index: 4
+            Item: Royal_Geffen_US
+            Rate: 19
+          - Index: 5
+            Item: Royal_Payon_US
+            Rate: 19
+          - Index: 6
+            Item: Astrolo_Dawn_Boots
+            Rate: 19
+          - Index: 7
+            Item: Memento_ME_BO
+            Rate: 115
+          - Index: 8
+            Item: Memento_ME_WH
+            Rate: 115
+          - Index: 9
+            Item: Memento_MI_BO
+            Rate: 115
+          - Index: 10
+            Item: Memento_MI_WH
+            Rate: 115
+          - Index: 11
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 12
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 13
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 14
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 15
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 16
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 17
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 18
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 19
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 20
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 21
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 22
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 23
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 24
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 25
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 26
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - February 2025
+  # Omitted (missing AegisName): Thanatos Helmet Box; Rekenber's Celestial Hat; Varmundt Energy Suit; Santa Red Boots; Dragon Eye Ring
+  - Group: KACHUA_2025_02
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Ninja_Sheild
+            Rate: 115
+          - Index: 2
+            Item: Royal_Alberta_US
+            Rate: 19
+          - Index: 3
+            Item: Royal_Nightwatch_US
+            Rate: 19
+          - Index: 4
+            Item: Royal_Prontera_US
+            Rate: 19
+          - Index: 5
+            Item: Moonlight_Bell_TH
+            Rate: 115
+          - Index: 6
+            Item: Mecha_Greaves_US
+            Rate: 19
+          - Index: 7
+            Item: Overdrive_Rampage
+            Rate: 19
+          - Index: 8
+            Item: Crystal_Blade_Necklace
+            Rate: 115
+          - Index: 9
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 11
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 12
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 13
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 14
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 15
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 16
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 17
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 18
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 19
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 20
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 21
+            Item: Guarantee_Weapon_11Up
+            Rate: 40
+          - Index: 22
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 23
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 24
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - March 2025
+  # Omitted (missing AegisName): Zodiac Boots Box; Disciple of Bijou; Ghostly Ears; Saint Knight Armor; Orc Ancestor Armor; Black Cat Backpack; Legendary Performer Manteau; Ancient Knight Shoes
+  - Group: KACHUA_2025_03
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: DarkSnake_Crown
+            Rate: 115
+          - Index: 2
+            Item: D_Protect_Shields
+            Rate: 19
+          - Index: 3
+            Item: Professor_MiniGlass
+            Rate: 115
+          - Index: 4
+            Item: Destroy_World_Boots
+            Rate: 19
+          - Index: 5
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 10
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 12
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 13
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 14
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 15
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 16
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 17
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 18
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 19
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 20
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - April 2025
+  # Omitted (missing AegisName): Poenetentia Crown Box; Grey Wolf Cub in Mouth; Dark Apostate Armor; Legendary Dragon Shoes; Green Butterfly Clip; Royal Geffen already included
+  - Group: KACHUA_2025_04
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Crow_Tengu_Mask
+            Rate: 19
+          - Index: 2
+            Item: Exiled_Ninja_US
+            Rate: 19
+          - Index: 3
+            Item: Royal_Geffen_US
+            Rate: 19
+          - Index: 4
+            Item: Black_Eagle_Ring_TH
+            Rate: 115
+          - Index: 5
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 10
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 12
+            Item: S_Bearers_Cube
+            Rate: 115
+          - Index: 13
+            Item: S_Cart_Tornado_Cube
+            Rate: 115
+          - Index: 14
+            Item: S_Genesis_Cube
+            Rate: 115
+          - Index: 15
+            Item: S_Psychic_Cube
+            Rate: 115
+          - Index: 16
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 17
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 18
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 19
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 20
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 21
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 22
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 23
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 24
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - May 2025
+  # Omitted (missing AegisName): Thanatos Helmet Box; Rekenber's Celestial Hat; Dark Apostate Shield; Royal Morroc Cape; Doram Mink Coat; Ancient Royal Guard Greaves; Miracle Stone; Purity Shadow Shield/Weapon; Blitz Shadow Box
+  - Group: KACHUA_2025_05
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Battle_Aura_Manteau_TW
+            Rate: 76
+          - Index: 2
+            Item: Crystal_Blade_Necklace
+            Rate: 115
+          - Index: 3
+            Item: Drop_of_Seven_Colors
+            Rate: 115
+          - Index: 4
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 5
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 9
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 10
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 12
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 13
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 14
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 15
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 16
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 17
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 18
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 19
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - June 2025
+  # Omitted (missing AegisName): Chaos Sword; Odin Grace Shield; White Knight Cape; Royal Geffen Cape listed; Black Cat Backpack; Colorful Potion Cape; Pantheon Boots; Floppy Kitty's Cozy Socks; Dragon Eye Ring; Consecrate Fides Monile; Varmundt Energy Suit
+  - Group: KACHUA_2025_06
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+            Amount: 2
+          - Index: 1
+            Item: Cachua_Coupon
+            Amount: 2
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: CherubCoronet
+            Rate: 115
+          - Index: 2
+            Item: Hatred_Darkness
+            Rate: 115
+          - Index: 3
+            Item: Royal_Geffen_US
+            Rate: 19
+          - Index: 4
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 5
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 9
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 10
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 12
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 13
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 14
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 15
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 16
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 17
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 18
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 19
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - July 2025
+  # Omitted (missing AegisName): Robotic Valkyrie Hairband; Queen Bee Jeweled Crown; Disciple of Bijou; Constellation Orb; Coatneis Knuckle; Royal Monastery Muffler; Ancient Royal Guard Greaves; Green Butterfly Clip
+  - Group: KACHUA_2025_07
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: M_Plant_Hat_W
+            Rate: 115
+          - Index: 2
+            Item: World_All
+            Rate: 115
+          - Index: 3
+            Item: Ranger_Shoes_US
+            Rate: 115
+          - Index: 4
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 5
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 9
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 10
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 12
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 13
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 14
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 15
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 16
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 17
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 18
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 19
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - August 2025
+  # Omitted (missing AegisName): Future Yoyo King Hat; Divine Protect Shield as mid (have D_Protect_Shields); Cosmic Star Blessing; Grey Wolf Cub in Mouth; Royal Morroc Cape; Legendary Dragon Shoes; Ancient Sky Emperor Shoes; Ancient Royal Guard Greaves; Penetration Shadow Box; Tempest Shadow Box
+  - Group: KACHUA_2025_08
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: D_Protect_Shields
+            Rate: 115
+          - Index: 2
+            Item: Royal_Alberta_US
+            Rate: 19
+          - Index: 3
+            Item: Battle_Aura_Manteau_TW
+            Rate: 115
+          - Index: 4
+            Item: Beast_Area_Shoes
+            Rate: 115
+          - Index: 5
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 10
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 12
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 13
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 14
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 15
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 16
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 17
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 18
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 19
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 20
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - September 2025
+  # Omitted (missing AegisName): Future Wolf King Hat; Disciple of Bijou; Frosty Breath; Great Gunner Armor; Dark Apostate Shield; Boreas Wings; Royal Monastery Muffler
+  - Group: KACHUA_2025_09
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: DarkSnake_Crown
+            Rate: 115
+          - Index: 2
+            Item: New_Wave_Sunglasses
+            Rate: 115
+          - Index: 3
+            Item: Ninja_Sheild
+            Rate: 115
+          - Index: 4
+            Item: Forbidden_Grimoire
+            Rate: 115
+          - Index: 5
+            Item: Mecha_Greaves_US
+            Rate: 19
+          - Index: 6
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 10
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 11
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 12
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 13
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 14
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 15
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 16
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 17
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 18
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 19
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 20
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 21
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - October 2025
+  # Omitted (missing AegisName): Kiel Successor Doll; Crimson Suit; Saint Knight Armor; Fallen Valkyrie; Black Cat Backpack; Pantheon Boots
+  - Group: KACHUA_2025_10
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Exiled_Ninja_US
+            Rate: 19
+          - Index: 2
+            Item: Professor_MiniGlass
+            Rate: 115
+          - Index: 3
+            Item: New_Wave_Sunglasses
+            Rate: 115
+          - Index: 4
+            Item: Crystal_Blade_Necklace
+            Rate: 115
+          - Index: 5
+            Item: Class_Shadow_EA_Cube
+            Rate: 293
+          - Index: 6
+            Item: Class_Shadow_PD_Cube
+            Rate: 293
+          - Index: 7
+            Item: Class_Shadow_SD_Cube
+            Rate: 293
+          - Index: 8
+            Item: Class_Shadow_SU_Cube
+            Rate: 293
+          - Index: 9
+            Item: Class_Shadow_AM_Cube
+            Rate: 294
+          - Index: 10
+            Item: Class_Shadow_WP_Cube
+            Rate: 294
+          - Index: 11
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 12
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 13
+            Item: S_Ignition_Cube
+            Rate: 115
+          - Index: 14
+            Item: S_Genesis_Cube
+            Amount: 2
+            Rate: 115
+          - Index: 15
+            Item: S_Arrow_Cube
+            Amount: 2
+            Rate: 115
+          - Index: 16
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 17
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 18
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 19
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 20
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 21
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 22
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 23
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - November 2025
+  # Omitted (missing AegisName): Future Yoyo King Hat; Poenitentia/Hero/OS/Thanatos Follower Mask; Constellation Orb; Grey Wolf Cub in Mouth; Trap Follower Shield; Juncea Follower Wing; Royal Morroc Cape; Pantheon Boots; Consecrate Fides Monile
+  - Group: KACHUA_2025_11
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 3
+          - Index: 1
+            Item: CherubCoronet
+            Rate: 115
+          - Index: 2
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 3
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 4
+            Item: S_Adoramus_Cube
+            Rate: 294
+          - Index: 5
+            Item: S_Aimed_Cube
+            Rate: 294
+          - Index: 6
+            Item: S_Arrow_Cube
+            Rate: 293
+          - Index: 7
+            Item: S_Arms_Cube
+            Rate: 293
+          - Index: 8
+            Item: S_Cart_Tornado_Cube
+            Rate: 293
+          - Index: 9
+            Item: S_Ignition_Cube
+            Rate: 293
+          - Index: 10
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 11
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 12
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 13
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 14
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 15
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 16
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 17
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - December 2025
+  # Omitted (missing AegisName): Disciple of Bijou; Frosty Breath; Varmundt Energy Suit; Chaos Sword; Coatneis Knuckle; Royal Dragon Cape; Royal Moscovia Cape; White Knight Cape; Dragon Eye Ring; Consecrate Fides Monile; Royal Medal Enchant Rune
+  - Group: KACHUA_2025_12
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Rate: 3
+          - Index: 1
+            Item: Royal_Geffen_US
+            Rate: 19
+          - Index: 2
+            Item: Royal_Prontera_US
+            Rate: 115
+          - Index: 3
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 4
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 5
+            Item: S_Rainstorm_Cube
+            Rate: 294
+          - Index: 6
+            Item: S_Psychic_Cube
+            Rate: 294
+          - Index: 7
+            Item: S_Catnip_Cube
+            Rate: 293
+          - Index: 8
+            Item: S_Bearers_Cube
+            Rate: 293
+          - Index: 9
+            Item: S_Dust_Cube
+            Rate: 293
+          - Index: 10
+            Item: S_TigerCannon_Cube
+            Rate: 293
+          - Index: 11
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 12
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 13
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 14
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 15
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 16
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 17
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 18
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - January 2026
+  # Omitted (missing AegisName): Future Wolf/Yoyo King Hat; Poenitentia/Hero Follower Mask; Cosmic Star Blessing; Constellation Orb; Grey Wolf Cub in Mouth; Tiara Follower Dress; Crimson Suit; Polluted Grimoire; Cycle Follower Greaves; Hidden Research Notes; Follower Enchant Rune
+  - Group: KACHUA_2026_01
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 3
+          - Index: 1
+            Item: Professor_MiniGlass
+            Rate: 293
+          - Index: 2
+            Item: Ranger_Shoes_US
+            Rate: 293
+          - Index: 3
+            Item: Mythical_Moonlight_US
+            Rate: 115
+          - Index: 4
+            Item: Memento_ME_CD
+            Rate: 115
+          - Index: 5
+            Item: Memento_MI_CD
+            Rate: 115
+          - Index: 6
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 7
+            Item: S_Psychic_Cube
+            Rate: 115
+          - Index: 8
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 9
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 10
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 11
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 12
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 13
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 14
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 15
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 16
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - February 2026
+  # Omitted (missing AegisName): Queen Scaraba Crown; Angelgolt's Wing; Bone Detardeurus Wing; Hero Follower Mask; Time Distortion; Royal Dragon/Monastery/Morroc/Juncea Capes; Royal Necklace; Cardinal/M.EM Shadow Selection Box; Hidden Research Notes; Follower Enchant Rune; Royal Medal Enchant Rune
+  - Group: KACHUA_2026_02
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 3
+          - Index: 1
+            Item: Royal_Geffen_US
+            Rate: 19
+          - Index: 2
+            Item: Royal_Payon_US
+            Rate: 115
+          - Index: 3
+            Item: Royal_Nightwatch_US
+            Rate: 115
+          - Index: 4
+            Item: Royal_Alberta_US
+            Rate: 115
+          - Index: 5
+            Item: Ranger_Shoes_US
+            Rate: 293
+          - Index: 6
+            Item: Shadow_Refine_Hammer
+            Rate: 37
+          - Index: 7
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 8
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 9
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 10
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 11
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 12
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 13
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 14
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 15
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - March 2026
+  # Omitted (missing AegisName): Future Gryphon Hat; Hero Follower Mask; Buffalo Bandit Scarf; Frosty Breath; Doram Follower Suit; Great Gunner Armor; Varmundt Energy Suit; Arco Experimental; Royal Monastery Muffler; Black Cat Backpack; Fallen Valkyrie; Legendary Dragon Shoes; Ancient Royal Guard Greaves; Pantheon Boots; Consecrate Fides Monile; Hidden Research Notes; Follower Enchant Rune; Royal Medal Enchant Rune
+  - Group: KACHUA_2026_03
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 3
+          - Index: 1
+            Item: New_Wave_Sunglasses
+            Rate: 115
+          - Index: 2
+            Item: Battle_Aura_Manteau_TW
+            Rate: 293
+          - Index: 3
+            Item: Shadow_Refine_Hammer
+            Amount: 2
+            Rate: 500
+          - Index: 4
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 5
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 6
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 7
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 8
+            Item: Guarantee_Armor_11Up
+            Rate: 40
+          - Index: 9
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 10
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 11
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - April 2026
+  # Omitted (missing AegisName): Future Yoyo King Hat; Robotic Valkyrie Hairband; Poenitentia/Thanatos Follower Mask; Cosmic Star Blessing; Constellation Orb; Saint Knight Armor; Dark Apostate Armor/Shield; Boreas Wings; Juncea Follower Wing; White Knight Cape; Constellation Blessing; Shinkiro&Shiranui/Biolo/Windhawk Shadow Selection Box; Reload Shadow Box
+  - Group: KACHUA_2026_04
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+            Amount: 2
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 3
+          - Index: 1
+            Item: Exiled_Ninja_US
+            Rate: 19
+          - Index: 2
+            Item: S_Gemstone_Cube
+            Rate: 293
+          - Index: 3
+            Item: S2_Malicious_Armor
+            Rate: 293
+          - Index: 4
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 5
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 6
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 7
+            Item: Alchemist_Box
+            Rate: 1425
+          - Index: 8
+            Item: Guarantee_Armor_12Up
+            Rate: 50
+          - Index: 9
+            Item: High_Refine_Guarantee
+            Rate: 80
+          - Index: 10
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 11
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+  # Kachua Key - May 2026
+  # Omitted (missing AegisName): Royal Moscovia Cape; Royal Monastery Muffler; Kage Follower Suit; Thorn Breaker; Moon Follower Eyepatch; Royal Necklace; Grey Wolf Cub in Mouth; Crimson Suit; Thanatos Follower Mask; Great Gunner Armor; Melody Wing (equip)
+  - Group: KACHUA_2026_05
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+          - Index: 1
+            Item: Cachua_Coupon
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 5
+          - Index: 1
+            Item: Sixth_Sense_Ring
+            Rate: 25
+          - Index: 2
+            Item: Guarantee_Armor_12Up
+            Rate: 50
+          - Index: 3
+            Item: High_Refine_Guarantee
+            Rate: 96
+          - Index: 4
+            Item: Overdrive_Rampage
+            Rate: 60
+          - Index: 5
+            Item: Royal_Nightwatch_US
+            Rate: 115
+          - Index: 6
+            Item: Twinhead_DragonScale_US
+            Rate: 115
+          - Index: 7
+            Item: Bloody_Knight_Shield__
+            Rate: 115
+          - Index: 8
+            Item: Crow_Tengu_Mask
+            Rate: 115
+          - Index: 9
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 10
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+          - Index: 11
+            Item: Twin_Dragon_Ring_TH
+            Rate: 294
+          - Index: 12
+            Item: Forbidden_Grimoire2_TH
+            Rate: 293
+          - Index: 13
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 14
+            Item: Bloody_Dead_Branch
+            Amount: 4
+            Rate: 1425
+          - Index: 15
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 16
+            Item: Alchemist_Box
+            Rate: 1425
+  # Kachua Key - June 2026
+  # Omitted (missing AegisName): Agni Sword; Future Yoyo King Hat; Time Distortion; Chaos Sword; Heretic Swordman Boots; Eddga Follower Doll; Dragon Eye Ring; Boitata Cap; Royal Necklace; Buffalo Bandit Scarf; Robotic Valkyrie Hairband; White Knight Cape; Queen Scaraba Crown; Grey Wolf Cub in Mouth; Crimson Suit; Thanatos Follower Mask
+  - Group: KACHUA_2026_06
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+            Amount: 2
+          - Index: 1
+            Item: Cachua_Coupon
+            Amount: 2
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 5
+          - Index: 1
+            Item: Armor_13Up_Box
+            Rate: 55
+          - Index: 2
+            Item: High_Refine_Guarantee
+            Rate: 96
+          - Index: 3
+            Item: YSF01_Ring
+            Rate: 65
+          - Index: 4
+            Item: Destroy_World_Boots
+            Rate: 115
+          - Index: 5
+            Item: Exiled_Ninja_US
+            Rate: 115
+          - Index: 6
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 7
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+          - Index: 8
+            Item: Fifth_Element
+            Rate: 294
+          - Index: 9
+            Item: Forbidden_Grimoire2_TH
+            Rate: 293
+          - Index: 10
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 11
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 12
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 13
+            Item: Alchemist_Box
+            Rate: 1425
+  # Kachua Key - July 2026
+  # Omitted (missing AegisName): Thundershell Ward; Polluted Grimoire; Future Yoyo/Gryphon Hat; Juncea Follower Wing; Dark Scientist Robe; Coatneis Knuckle; Ancient Royal Guard Greaves; Comet Cavalry; Kitsune Gaze; Follower Enchant Rune; Reload Shadow Box; Biolo Shadow Selection Box; Consecrate Fides Monile; Crimson Suit; New Wave Sunglasses listed present
+  - Group: KACHUA_2026_07
+    SubGroups:
+      - SubGroup: 0
+        Algorithm: All
+        List:
+          - Index: 0
+            Item: HE_Bubble_Gum
+            Amount: 2
+          - Index: 1
+            Item: Cachua_Coupon
+            Amount: 2
+      - SubGroup: 1
+        Algorithm: Random
+        List:
+          - Index: 0
+            Item: Sealed_Card
+            Amount: 2
+            Rate: 5
+          - Index: 1
+            Item: Armor_13Up_Box
+            Rate: 55
+          - Index: 2
+            Item: High_Refine_Guarantee
+            Rate: 96
+          - Index: 3
+            Item: Poison_Shoes
+            Rate: 115
+          - Index: 4
+            Item: Jasper_Ring
+            Rate: 115
+          - Index: 5
+            Item: Mythical_Moonlight_US
+            Rate: 115
+          - Index: 6
+            Item: Refine_Guarantee
+            Rate: 500
+          - Index: 7
+            Item: Blacksmith_Blessing
+            Amount: 2
+            Rate: 500
+          - Index: 8
+            Item: Crystal_Blade_Necklace
+            Rate: 294
+          - Index: 9
+            Item: New_Wave_Sunglasses
+            Rate: 293
+          - Index: 10
+            Item: HE_Battle_Manual
+            Amount: 2
+            Rate: 1425
+          - Index: 11
+            Item: Bloody_Dead_Branch
+            Amount: 2
+            Rate: 1425
+          - Index: 12
+            Item: Yggdrasilberry_Box
+            Rate: 1425
+          - Index: 13
+            Item: Alchemist_Box
+            Rate: 1425

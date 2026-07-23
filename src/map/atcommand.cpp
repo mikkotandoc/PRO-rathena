@@ -12196,6 +12196,12 @@ bool is_atcommand(const int32 fd, map_session_data* sd, const char* message, int
 		return true;
 	}
 
+	// Block every player-invoked command (including storage/bank commands) while jailed
+	if (type == 1 && sd->sc.getSCE(SC_JAILED)) {
+		clif_displaymessage(fd, "You cannot use commands while you are jailed.");
+		return true;
+	}
+
 	// @commands (script based)
 	if((type == 1 || type == 3) && atcmd_binding_count > 0) {
 		struct atcmd_binding_data *binding = get_atcommandbind_byname(command);

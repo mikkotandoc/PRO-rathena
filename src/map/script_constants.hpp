@@ -7547,6 +7547,37 @@
 	export_constant(IG_C_PRO_GACHA_2);
 	export_constant(IG_ODIN_RELIC);
 	export_constant(IG_DIMEN_W_BOX);
+	export_constant(IG_KACHUA_2024_01);
+	export_constant(IG_KACHUA_2024_02);
+	export_constant(IG_KACHUA_2024_03);
+	export_constant(IG_KACHUA_2024_04);
+	export_constant(IG_KACHUA_2024_05);
+	export_constant(IG_KACHUA_2024_06);
+	export_constant(IG_KACHUA_2024_07);
+	export_constant(IG_KACHUA_2024_08);
+	export_constant(IG_KACHUA_2024_09);
+	export_constant(IG_KACHUA_2024_10);
+	export_constant(IG_KACHUA_2024_11);
+	export_constant(IG_KACHUA_2024_12);
+	export_constant(IG_KACHUA_2025_01);
+	export_constant(IG_KACHUA_2025_02);
+	export_constant(IG_KACHUA_2025_03);
+	export_constant(IG_KACHUA_2025_04);
+	export_constant(IG_KACHUA_2025_05);
+	export_constant(IG_KACHUA_2025_06);
+	export_constant(IG_KACHUA_2025_07);
+	export_constant(IG_KACHUA_2025_08);
+	export_constant(IG_KACHUA_2025_09);
+	export_constant(IG_KACHUA_2025_10);
+	export_constant(IG_KACHUA_2025_11);
+	export_constant(IG_KACHUA_2025_12);
+	export_constant(IG_KACHUA_2026_01);
+	export_constant(IG_KACHUA_2026_02);
+	export_constant(IG_KACHUA_2026_03);
+	export_constant(IG_KACHUA_2026_04);
+	export_constant(IG_KACHUA_2026_05);
+	export_constant(IG_KACHUA_2026_06);
+	export_constant(IG_KACHUA_2026_07);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);
