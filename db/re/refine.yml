@@ -2321,158 +2321,158 @@ Body:
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
           - Level: 2
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
           - Level: 3
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
           - Level: 4
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
           - Level: 5
             Chances:
               - Type: Normal
                 Rate: 6000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
                 BreakingRate: 10000
               - Type: HD
                 Rate: 6000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 9000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
                 BreakingRate: 10000
           - Level: 6
             Chances:
               - Type: Normal
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
                 BreakingRate: 10000
               - Type: HD
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 7000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
                 BreakingRate: 10000
           - Level: 7
             Chances:
               - Type: Normal
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
                 BreakingRate: 10000
               - Type: HD
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 7000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
                 BreakingRate: 10000
           - Level: 8
             Chances:
               - Type: Normal
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
                 BreakingRate: 10000
               - Type: HD
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
                 BreakingRate: 10000
           - Level: 9
             Chances:
               - Type: Normal
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: Elunium
                 BreakingRate: 10000
               - Type: HD
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
                 BreakingRate: 10000
           - Level: 10
             Chances:
               - Type: Normal
                 Rate: 900
-                Price: 10000
+                Price: 20000
                 Material: Elunium
                 BreakingRate: 10000
               - Type: HD
                 Rate: 900
-                Price: 10000
+                Price: 20000
                 Material: HD_Elunium
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Elunium
                 BreakingRate: 10000
   - Group: Shadow_Weapon
@@ -2483,157 +2483,157 @@ Body:
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
           - Level: 2
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
           - Level: 3
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
           - Level: 4
             Chances:
               - Type: Normal
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
               - Type: HD
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
               - Type: Enriched
                 Rate: 10000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
           - Level: 5
             Chances:
               - Type: Normal
                 Rate: 6000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
                 BreakingRate: 10000
               - Type: HD
                 Rate: 6000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 9000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
                 BreakingRate: 10000
           - Level: 6
             Chances:
               - Type: Normal
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
                 BreakingRate: 10000
               - Type: HD
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 7000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
                 BreakingRate: 10000
           - Level: 7
             Chances:
               - Type: Normal
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
                 BreakingRate: 10000
               - Type: HD
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 7000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
                 BreakingRate: 10000
           - Level: 8
             Chances:
               - Type: Normal
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
                 BreakingRate: 10000
               - Type: HD
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
                 BreakingRate: 10000
           - Level: 9
             Chances:
               - Type: Normal
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
                 BreakingRate: 10000
               - Type: HD
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 4000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
                 BreakingRate: 10000
           - Level: 10
             Chances:
               - Type: Normal
                 Rate: 900
-                Price: 10000
+                Price: 20000
                 Material: Oridecon
                 BreakingRate: 10000
               - Type: HD
                 Rate: 900
-                Price: 10000
+                Price: 20000
                 Material: HD_Oridecon
                 DowngradeAmount: 1
               - Type: Enriched
                 Rate: 2000
-                Price: 10000
+                Price: 20000
                 Material: Enriched_Oridecon
                 BreakingRate: 10000

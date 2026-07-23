@@ -1,18 +1,19 @@
 //===== rAthena Script =======================================
 //= Instance: Lake of Fire (Garden of Time)
 //===== Description: =========================================
-//= Daily memorial dungeon. Lure the immune divine beast onto
-//= dimensional traps, then fight it in the second area.
+//= kRO / MuhRO / iRO memorial dungeon.
+//= Enter -> talk to random divine beast -> lure through 8
+//= traps (1 dmg/hit) -> warp to inner prison -> 10% damage taken.
 //============================================================
 
-function	script	F_lake_energy_item$	{
+function	script	F_lake_energy_id	{
 	switch( getarg(0) ) {
-	case 22177: return "Energy_Of_Spring";
-	case 22178: return "Energy_Of_Summer";
-	case 22179: return "Energy_Of_Autumn";
-	case 22180: return "Energy_Of_Winter";
+	case 22177: return 1001440;
+	case 22178: return 1001441;
+	case 22179: return 1001442;
+	case 22180: return 1001443;
 	}
-	return "Energy_Of_Spring";
+	return 1001440;
 }
 
 function	script	F_lake_boss_name$	{
@@ -23,6 +24,16 @@ function	script	F_lake_boss_name$	{
 	case 22180: return "Monarch Penguin";
 	}
 	return "Divine Beast";
+}
+
+function	script	F_lake_boss_season$	{
+	switch( getarg(0) ) {
+	case 22177: return "Spring";
+	case 22178: return "Summer";
+	case 22179: return "Autumn";
+	case 22180: return "Winter";
+	}
+	return "Season";
 }
 
 function	script	F_lake_hunt_quest	{
@@ -47,107 +58,432 @@ function	script	F_lake_complete_hunt	{
 	return;
 }
 
-1@f_lake,1,1,0	script	#lake_of_fire_ctrl	-1,{
-	end;
-OnInstanceInit:
-	'lake_map$ = instance_mapname("1@f_lake");
-	'lake_boss_id = 0;
-	'lake_phase = 0;
-	'lake_traps = 0;
-	'lake_boss_gid = 0;
-	'lake_p1_x = 100;
-	'lake_p1_y = 50;
-	'lake_p2_x = 280;
-	'lake_p2_y = 50;
-	setarray 'lake_trap_x[1], 25, 95, 51, 91, 129, 93, 43, 70;
-	setarray 'lake_trap_y[1], 151, 182, 93, 56, 58, 35, 34, 120;
-	for ( .@i = 1; .@i <= 8; ++.@i ) {
-		'lake_trap_done[.@i] = 0;
-		enablenpc instance_npcname("Lake Trap#" + .@i);
+function	script	F_lake_account_rewarded	{
+	.@aid = getarg(0);
+	for ( .@i = 0; .@i < getarraysize('lake_reward_aid); ++.@i ) {
+		if ('lake_reward_aid[.@i] == .@aid)
+			return 1;
 	}
-	disablenpc instance_npcname("Lake Boss#standby");
-	disablenpc instance_npcname("Lake Exit#reward");
-	end;
-OnBossDead:
-	if ('lake_phase < 2)
-		end;
-	'lake_phase = 3;
-	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
-	donpcevent instance_npcname("#lake_skill_ai") + "::OnStop";
-	callfunc("F_lake_complete_hunt", 'lake_boss_id);
-	mapannounce 'lake_map$, "The divine beast has been subdued. Claim your reward at the exit portal.", bc_map, 0x00FF99;
-	enablenpc instance_npcname("Lake Exit#reward");
-	end;
-OnTrapReady:
-	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
-	if (unitexists('lake_boss_gid))
-		unitkill 'lake_boss_gid;
-	'lake_phase = 2;
-	instance_warpall 'lake_map$, 'lake_p2_x, 'lake_p2_y;
-	sleep 1500;
-	.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
-	'lake_boss_gid = monster('lake_map$, 'lake_p2_x, 'lake_p2_y, "--ja--", 'lake_boss_id, 1, .@event$);
-	if ('lake_boss_gid > 0) {
-		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 0;
-		setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
-		setunitdata 'lake_boss_gid, UMOB_HP, 700000000;
-	}
-	donpcevent instance_npcname("#lake_skill_ai") + "::OnStart";
-	mapannounce 'lake_map$, "The guardian's barrier shattered! Finish the battle in the inner prison!", bc_map, 0xFF4400;
-	end;
-OnActivateTrap:
-	.@idx = 'lake_trap_pending;
-	if ('lake_trap_done[.@idx])
-		end;
-	'lake_trap_done[.@idx] = 1;
-	disablenpc instance_npcname("Lake Trap#" + .@idx);
-	npcskilleffect "WZ_VERMILION", 1, 'lake_trap_x[.@idx], 'lake_trap_y[.@idx];
-	'lake_traps++;
-	mapannounce 'lake_map$, "A dimensional trap activated! (" + 'lake_traps + "/8)", bc_map, 0x00FF99;
-	if ('lake_traps >= 8)
-		donpcevent instance_npcname("#lake_of_fire_ctrl") + "::OnTrapReady";
-	end;
+	return 0;
 }
 
-1@f_lake,100,50,0	script	#LakeStart	HIDDEN_WARP_NPC,5,5,{
+function	script	F_lake_give_reward	{
+	.@aid = getcharid(3);
+	.@energy = callfunc("F_lake_energy_id", 'lake_boss_id);
+
+	if (!callfunc("F_lake_account_rewarded", .@aid)) {
+		'lake_reward_aid[getarraysize('lake_reward_aid)] = .@aid;
+		getitem 1001415,1; // Hall of Life Key
+		getitem 1001414,30; // Dimensional Crystal Fragment
+		getitem .@energy,15;
+		dispbottom "Lake of Fire: full clear reward granted (first character on this master account).";
+	} else {
+		getitem 1001414,10;
+		getitem .@energy,5;
+		dispbottom "Lake of Fire: reduced reward granted (additional character on this master account).";
+	}
+	callfunc("F_lake_complete_hunt", 'lake_boss_id);
+	return;
+}
+
+function	script	F_lake_set_protection	{
+	if (!unitexists('lake_boss_gid))
+		return;
+	switch( getarg(0) ) {
+	case 0: // Phase 2 — barrier broken, 10% damage taken
+		// UMOB_DAMAGETAKEN is percent taken (cap at 99). Values other than 100
+		// are scaled, then floored to at least 1 HP (see battle_apply_mob_damagetaken).
+		setunitdata 'lake_boss_gid, UMOB_DAMAGETAKEN, 10;
+		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 0;
+		break;
+	case 1: // Lure — 1 HP per hit + HP lock (damagetaken 0 => floor to 1)
+		setunitdata 'lake_boss_gid, UMOB_DAMAGETAKEN, 0;
+		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 0;
+		callfunc("F_lake_lock_hp");
+		break;
+	case 2: // Brief trap stun — still lure barrier (1 HP/hit); HP lock allows limited chip
+		setunitdata 'lake_boss_gid, UMOB_DAMAGETAKEN, 0;
+		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 0;
+		break;
+	}
+	return;
+}
+
+function	script	F_lake_lock_hp	{
+	if ('lake_phase != 1 || !unitexists('lake_boss_gid))
+		return;
+	getunitdata 'lake_boss_gid, .@b;
+	if (.@b[UMOB_HP] < 'lake_boss_hp_lock)
+		setunitdata 'lake_boss_gid, UMOB_HP, 'lake_boss_hp_lock;
+	if (.@b[UMOB_DAMAGETAKEN] != 0 && 'lake_trap_window < gettimetick(2))
+		setunitdata 'lake_boss_gid, UMOB_DAMAGETAKEN, 0;
+	return;
+}
+
+function	script	F_lake_init_boss	{
+	.@event$ = getarg(0, "");
+	// monster() stores GID in $@mobid[] — it does not return a value
+	monster 'lake_map$, 'lake_boss_x, 'lake_boss_y, "--ja--", 'lake_boss_id, 1, .@event$;
+	'lake_boss_gid = $@mobid[0];
+	if ('lake_boss_gid <= 0)
+		return 0;
+	setunitdata 'lake_boss_gid, UMOB_MODE, MD_CANMOVE|MD_CANATTACK;
+	setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
+	setunitdata 'lake_boss_gid, UMOB_HP, 700000000;
+	'lake_boss_hp_lock = 700000000;
+	callfunc("F_lake_set_protection", 1);
+	return 'lake_boss_gid;
+}
+
+function	script	F_lake_start_lure	{
+	if ('lake_started || !unitexists('lake_boss_gid))
+		return 0;
+	'lake_started = 1;
+	setunitdata 'lake_boss_gid, UMOB_MODE, MD_CANMOVE|MD_AGGRESSIVE|MD_ANGRY|MD_CANATTACK;
+	callfunc("F_lake_set_protection", 1);
+	donpcevent instance_npcname("#lake_boss_ai") + "::OnStart";
+	donpcevent instance_npcname("#lake_trap_ai") + "::OnStart";
+	mapannounce 'lake_map$, callfunc("F_lake_boss_name$", 'lake_boss_id) + " is protected by a dimensional barrier. Lure it onto the eight seals! (0/8)", bc_map, 0xFFDD44;
+	return 1;
+}
+
+function	script	F_lake_mark_players_in_square	{
+	.@map$ = getarg(0);
+	.@x = getarg(1);
+	.@y = getarg(2);
+	.@size = getarg(3, 2);
+	getareaunits(BL_PC, .@map$, .@x - .@size, .@y - .@size, .@x + .@size, .@y + .@size, .@pc[0]);
+	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+		if (!attachrid(.@pc[.@i]))
+			continue;
+		@lake_marked = gettimetick(2) + 4;
+		detachrid;
+	}
+	return;
+}
+
+function	script	F_lake_damage_marked	{
+	.@pct = getarg(0, 20);
+	getareaunits(BL_PC, 'lake_map$, 0, 0, 150, 200, .@pc[0]);
+	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+		if (!attachrid(.@pc[.@i]))
+			continue;
+		if (@lake_marked >= gettimetick(2))
+			percentheal -.@pct, 0;
+		@lake_marked = 0;
+		detachrid;
+	}
+	return;
+}
+
+function	script	F_lake_cast_small_fields	{
+	.@skill$ = getarg(0, "WZ_METEOR");
+	.@announce$ = getarg(1, "Danger zones are forming!");
+	getunitdata 'lake_boss_gid, .@b;
+	mapannounce 'lake_map$, .@announce$, bc_map, 0xFF8800;
+	for ( .@f = 0; .@f < 3; ++.@f ) {
+		'lake_field_x[.@f] = .@b[UMOB_X] + rand(-8, 8);
+		'lake_field_y[.@f] = .@b[UMOB_Y] + rand(-8, 8);
+		npcskilleffect .@skill$, 1, 'lake_field_x[.@f], 'lake_field_y[.@f];
+	}
+	sleep 2000;
+	for ( .@f = 0; .@f < 3; ++.@f )
+		callfunc("F_lake_mark_players_in_square", 'lake_map$, 'lake_field_x[.@f], 'lake_field_y[.@f], 2);
+	mapannounce 'lake_map$, "Marked targets will be struck soon!", bc_map, 0xFF4400;
+	sleep 2000;
+	callfunc("F_lake_damage_marked", getarg(2, 20));
+	return;
+}
+
+function	script	F_lake_cast_block_explosion	{
+	getunitdata 'lake_boss_gid, .@b;
+	mapannounce 'lake_map$, "Coral Marine is preparing Block Explosion! Use an Unsealing Scroll to break free.", bc_map, 0x00CCFF;
+	for ( .@f = 0; .@f < 3; ++.@f ) {
+		'lake_field_x[.@f] = .@b[UMOB_X] + rand(-8, 8);
+		'lake_field_y[.@f] = .@b[UMOB_Y] + rand(-8, 8);
+		npcskilleffect "WZ_WATERBALL", 5, 'lake_field_x[.@f], 'lake_field_y[.@f];
+	}
+	sleep 2000;
+	for ( .@f = 0; .@f < 3; ++.@f )
+		callfunc("F_lake_mark_players_in_square", 'lake_map$, 'lake_field_x[.@f], 'lake_field_y[.@f], 2);
+	sleep 1500;
+	getareaunits(BL_PC, 'lake_map$, 0, 0, 150, 200, .@pc[0]);
+	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+		if (!attachrid(.@pc[.@i]))
+			continue;
+		if (@lake_marked >= gettimetick(2)) {
+			sc_start SC_WHITEIMPRISON, 6000, 1;
+			percentheal -15, 0;
+		}
+		@lake_marked = 0;
+		detachrid;
+	}
+	return;
+}
+
+function	script	F_lake_cast_frost_field	{
+	getunitdata 'lake_boss_gid, .@b;
+	.@x = .@b[UMOB_X];
+	.@y = .@b[UMOB_Y];
+	mapannounce 'lake_map$, "Monarch Penguin creates a Frost Field! Warm Shield Scrolls block the chill.", bc_map, 0x99CCFF;
+	npcskilleffect "WZ_FROSTNOVA", 10, .@x, .@y;
+	sleep 2000;
+	getareaunits(BL_PC, 'lake_map$, .@x - 7, .@y - 7, .@x + 7, .@y + 7, .@pc[0]);
+	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+		if (!attachrid(.@pc[.@i]))
+			continue;
+		if (@WARM_SHIELD > gettimetick(2)) {
+			detachrid;
+			continue;
+		}
+		percentheal -18, 0;
+		@lake_frosted = 1;
+		sc_start SC_FREEZE, 4000, 0;
+		detachrid;
+	}
+	sleep 1500;
+	mapannounce 'lake_map$, "Lightning Judgement!", bc_map, 0xFFFF44;
+	npcskilleffect "WZ_VERMILION", 10, .@x, .@y;
+	getareaunits(BL_PC, 'lake_map$, .@x - 7, .@y - 7, .@x + 7, .@y + 7, .@pc[0]);
+	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+		if (!attachrid(.@pc[.@i]))
+			continue;
+		if (@lake_frosted && @WARM_SHIELD <= gettimetick(2))
+			percentheal -25, 0;
+		@lake_frosted = 0;
+		detachrid;
+	}
+	return;
+}
+
+//----- Trap NPCs (must be defined before controller) -----
+1@f_lake,0,0,0	script	LakeTrap	-1,{
 	end;
 OnTouch:
-	if (!is_party_leader())
+	if ('lake_phase != 1 || !'lake_started)
 		end;
-	if ('lake_phase > 0)
+	getmapxy .@m$, .@x, .@y, BL_NPC;
+	.@idx = callsub(S_TrapIndex, .@x, .@y);
+	if (.@idx < 1)
 		end;
-	'lake_phase = 1;
-	enablenpc instance_npcname("Lake Boss#standby");
-	mapannounce 'lake_map$, "A divine beast guardian has appeared. Lure it onto the shining traps scattered across the prison.", bc_map, 0xFFDD44;
+	if ('lake_trap_done[.@idx]) {
+		dispbottom "This dimensional seal has already been activated.";
+		end;
+	}
+	if (!unitexists('lake_boss_gid)) {
+		npctalk "The divine beast must stand on this seal.", "", bc_self;
+		end;
+	}
+	getunitdata 'lake_boss_gid, .@b;
+	if (distance(.@b[UMOB_X], .@b[UMOB_Y], .@x, .@y) > 14) {
+		npctalk "The seal stirs... lure the divine beast closer!", "", bc_self;
+		dispbottom "Lure the divine beast onto this seal (within 14 cells).";
+		end;
+	}
+	'lake_trap_pending = .@idx;
+	donpcevent instance_npcname("#lake_trap_ai") + "::OnActivate";
 	end;
+OnTouchNPC:
+	if ('lake_phase != 1 || !'lake_started)
+		end;
+	if (getattachedrid() != 'lake_boss_gid)
+		end;
+	getmapxy .@m$, .@x, .@y, BL_NPC;
+	.@idx = callsub(S_TrapIndex, .@x, .@y);
+	if (.@idx < 1 || 'lake_trap_done[.@idx])
+		end;
+	'lake_trap_pending = .@idx;
+	donpcevent instance_npcname("#lake_trap_ai") + "::OnActivate";
+	end;
+S_TrapIndex:
+	.@x = getarg(0);
+	.@y = getarg(1);
+	for ( .@t = 1; .@t <= 8; ++.@t ) {
+		if (distance(.@x, .@y, 'lake_trap_x[.@t], 'lake_trap_y[.@t]) <= 4)
+			return .@t;
+	}
+	return 0;
 }
 
-1@f_lake,100,50,3	script(DISABLED)	Lake Boss#standby	4_EM_SERPENS,{
-	if ('lake_phase != 1)
+1@f_lake,25,151,0	duplicate(LakeTrap)	LakeTrap#1	4_STAR_BOX_TRAP1,6,6
+1@f_lake,95,182,0	duplicate(LakeTrap)	LakeTrap#2	4_STAR_BOX_TRAP1,6,6
+1@f_lake,51,93,0	duplicate(LakeTrap)	LakeTrap#3	4_STAR_BOX_TRAP1,6,6
+1@f_lake,91,56,0	duplicate(LakeTrap)	LakeTrap#4	4_STAR_BOX_TRAP1,6,6
+1@f_lake,129,58,0	duplicate(LakeTrap)	LakeTrap#5	4_STAR_BOX_TRAP1,6,6
+1@f_lake,93,35,0	duplicate(LakeTrap)	LakeTrap#6	4_STAR_BOX_TRAP1,6,6
+1@f_lake,43,34,0	duplicate(LakeTrap)	LakeTrap#7	4_STAR_BOX_TRAP1,6,6
+// Trap #8 was previously at 70,120 (wall cell) — boss could never reach it (stuck at 7/8).
+1@f_lake,65,164,0	duplicate(LakeTrap)	LakeTrap#8	4_STAR_BOX_TRAP1,6,6
+
+//----- Boss greeting NPC (talk to start — kRO) -----
+1@f_lake,15,193,3	script	LakeBoss#standby	4_EM_SERPENS,{
+	if ('lake_phase != 0)
 		end;
-	mes "[Divine Beast]";
-	mes "You dare challenge a guardian of the dimensional prison?";
+	.@name$ = callfunc("F_lake_boss_name$", 'lake_boss_id);
+	.@season$ = callfunc("F_lake_boss_season$", 'lake_boss_id);
+	mes "[" + .@name$ + "]";
+	switch( 'lake_boss_id ) {
+	case 22177:
+		mes "A divine beast of ^00aa00" + .@season$ + "^000000 stands before you.";
+		mes "Poisoned wings fold against the lava wind.";
+		mes "Its barrier hums — no blade will pierce it yet.";
+		break;
+	case 22178:
+		mes "A divine beast of ^0000ff" + .@season$ + "^000000 rises from the molten shore.";
+		mes "Coral plates grind as it regards your party.";
+		mes "Its barrier hums — no blade will pierce it yet.";
+		break;
+	case 22179:
+		mes "A divine beast of ^ff8800" + .@season$ + "^000000 roots itself in the ash.";
+		mes "Leaves of flame rustle without wind.";
+		mes "Its barrier hums — no blade will pierce it yet.";
+		break;
+	case 22180:
+		mes "A divine beast of ^88ccff" + .@season$ + "^000000 watches from the heat haze.";
+		mes "Frost gathers on its crown despite the lake of fire.";
+		mes "Its barrier hums — no blade will pierce it yet.";
+		break;
+	}
 	next;
-	if (select( "Begin the trial.", "Not yet." ) == 2)
+	mes "[" + .@name$ + "]";
+	mes "I am a jailer of this dimensional prison.";
+	mes "If you mean to weaken me, you must break every seal.";
+	next;
+	if (!is_party_leader()) {
+		mes "Only the party leader may begin the correction.";
+		close;
+	}
+	if (select( "Begin the correction.", "Not yet." ) == 2)
 		close;
 	close2;
 	disablenpc();
-	'lake_boss_id = rand(22177,22180);
-	.@hunt_q = callfunc("F_lake_hunt_quest", 'lake_boss_id);
-	if (.@hunt_q > 0 && checkquest(.@hunt_q) == -1)
-		setquest .@hunt_q;
-	'lake_boss_gid = monster('lake_map$, 'lake_p1_x, 'lake_p1_y, "--ja--", 'lake_boss_id, 1);
-	if ('lake_boss_gid > 0) {
-		setunitdata 'lake_boss_gid, UMOB_DMGIMMUNE, 1;
-		setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
-		setunitdata 'lake_boss_gid, UMOB_HP, 700000000;
+	'lake_phase = 1;
+	.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
+	if (!callfunc("F_lake_init_boss", .@event$)) {
+		mapannounce 'lake_map$, "The divine beast failed to manifest. Please leave and re-enter.", bc_map, 0xFF0000;
+		'lake_phase = 0;
+		enablenpc instance_npcname("LakeBoss#standby");
+		end;
 	}
-	donpcevent instance_npcname("#lake_boss_ai") + "::OnStart";
-	mapannounce 'lake_map$, callfunc("F_lake_boss_name$", 'lake_boss_id) + " is protected. Lure it onto the traps (0/8).", bc_map, 0xFFDD44;
+	setunitdata 'lake_boss_gid, UMOB_MODE, MD_CANMOVE|MD_AGGRESSIVE|MD_ANGRY|MD_CANATTACK;
+	callfunc("F_lake_start_lure");
+	unittalk 'lake_boss_gid, "You cannot harm me while the seals hold!";
 	end;
 }
 
+1@f_lake,125,100,3	script(DISABLED)	LakeExit#reward	GATE_SKYBLUE,{
+	if ('lake_phase < 3)
+		end;
+	if (checkweight(1201,20) == 0) {
+		mes "Your inventory is too full to receive rewards.";
+		close;
+	}
+	mes "[Dimensional Portal]";
+	mes "The divine beast of " + callfunc("F_lake_boss_season$", 'lake_boss_id) + " has been subdued.";
+	mes "Claim your reward and return to the Garden of Time.";
+	next;
+	switch( checkquest(12610,PLAYTIME) ) {
+	case 0:
+	case 1:
+		if ('lake_exit_rewarded) {
+			mes "You have already received today's Lake of Fire reward.";
+			next;
+			if (select( "Leave the instance.", "Stay." ) == 2)
+				close;
+			warp "t_garden",158,235;
+			end;
+		}
+		'lake_exit_rewarded = 1;
+		callfunc("F_lake_give_reward");
+		mes "You received your Lake of Fire reward.";
+		next;
+		break;
+	default:
+		'lake_exit_rewarded = 1;
+		if (checkquest(12610) == 1)
+			erasequest 12610;
+		setquest 12610;
+		callfunc("F_lake_give_reward");
+		mes "You received your Lake of Fire reward.";
+		next;
+		break;
+	}
+	if (select( "Leave the instance.", "Stay a moment." ) == 2)
+		close;
+	warp "t_garden",158,235;
+	end;
+}
+
+//----- AI -----
 1@f_lake,1,1,0	script	#lake_boss_ai	-1,{
+	end;
+OnStart:
+	'lake_boss_tick = 0;
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnTimer200:
+	if ('lake_phase == 1 && 'lake_started && unitexists('lake_boss_gid)) {
+		getunitdata 'lake_boss_gid, .@b;
+		if ('lake_trap_window < gettimetick(2)) {
+			if (.@b[UMOB_HP] < 'lake_boss_hp_lock)
+				setunitdata 'lake_boss_gid, UMOB_HP, 'lake_boss_hp_lock;
+			if (.@b[UMOB_DAMAGETAKEN] != 0)
+				setunitdata 'lake_boss_gid, UMOB_DAMAGETAKEN, 0;
+		} else {
+			// After a trap: keep HP lock baseline but allow chip damage during stun window
+			if (.@b[UMOB_HP] < 'lake_boss_hp_lock - 50000000)
+				setunitdata 'lake_boss_gid, UMOB_HP, 'lake_boss_hp_lock - 50000000;
+		}
+		'lake_boss_tick++;
+		if ('lake_boss_tick % 3 == 0 && 'lake_trap_window < gettimetick(2)) {
+			getunitdata 'lake_boss_gid, .@b;
+			getareaunits(BL_PC, 'lake_map$, 0, 0, 150, 200, .@pc[0]);
+			.@best = 9999;
+			.@tx = .@b[UMOB_X];
+			.@ty = .@b[UMOB_Y];
+			for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
+				getmapxy .@m$, .@px, .@py, BL_PC, .@pc[.@i];
+				if (.@m$ != 'lake_map$)
+					continue;
+				.@d = distance(.@px, .@py, .@b[UMOB_X], .@b[UMOB_Y]);
+				if (.@d < .@best) {
+					.@best = .@d;
+					.@tx = .@px;
+					.@ty = .@py;
+				}
+			}
+			if (.@best < 9999) {
+				.@dx = (.@tx > .@b[UMOB_X] ? 1 : (.@tx < .@b[UMOB_X] ? -1 : 0));
+				.@dy = (.@ty > .@b[UMOB_Y] ? 1 : (.@ty < .@b[UMOB_Y] ? -1 : 0));
+				unitwalk 'lake_boss_gid, .@b[UMOB_X] + (.@dx * 3), .@b[UMOB_Y] + (.@dy * 3);
+			}
+		}
+		// God's Shadow (lure phase)
+		if ('lake_boss_tick % 40 == 0) {
+			getunitdata 'lake_boss_gid, .@b;
+			mapannounce 'lake_map$, "God's Shadow!", bc_map, 0xFF8800;
+			npcskilleffect "WZ_JUPITEL", 5, .@b[UMOB_X], .@b[UMOB_Y];
+			getareaunits(BL_PC, 'lake_map$, .@b[UMOB_X]-12, .@b[UMOB_Y]-12, .@b[UMOB_X]+12, .@b[UMOB_Y]+12, .@hit[0]);
+			for ( .@j = 0; .@j < getarraysize(.@hit); ++.@j ) {
+				if (!attachrid(.@hit[.@j]))
+					continue;
+				percentheal -8, 0;
+				pushpc rand(8), 3;
+				detachrid;
+			}
+		}
+	}
+	if ('lake_phase == 1 && 'lake_started) {
+		initnpctimer;
+		setnpctimer 200;
+	}
+	end;
+}
+
+1@f_lake,1,1,0	script	#lake_trap_ai	-1,{
 	end;
 OnStart:
 	initnpctimer;
@@ -155,55 +491,51 @@ OnStart:
 OnStop:
 	stopnpctimer;
 	end;
-OnTimer500:
-	if ('lake_phase != 1 || !unitexists('lake_boss_gid))
+OnActivate:
+	callsub(S_DoTrap, 'lake_trap_pending);
+	end;
+OnTimer200:
+	if ('lake_phase != 1 || !'lake_started) {
+		initnpctimer;
 		end;
-	getunitdata 'lake_boss_gid, .@b;
-	getareaunits(BL_PC, 'lake_map$, 0, 0, 400, 200, .@pc[0]);
-	.@best = 9999;
-	.@tx = .@b[UMOB_X];
-	.@ty = .@b[UMOB_Y];
-	for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
-		getmapxy .@m$, .@px, .@py, BL_PC, .@pc[.@i];
-		if (.@m$ != 'lake_map$)
-			continue;
-		.@d = distance(.@px, .@py, .@b[UMOB_X], .@b[UMOB_Y]);
-		if (.@d < .@best) {
-			.@best = .@d;
-			.@tx = .@px;
-			.@ty = .@py;
-		}
 	}
-	if (.@best < 9999) {
-		.@dx = (.@tx > .@b[UMOB_X] ? 1 : (.@tx < .@b[UMOB_X] ? -1 : 0));
-		.@dy = (.@ty > .@b[UMOB_Y] ? 1 : (.@ty < .@b[UMOB_Y] ? -1 : 0));
-		unitwalk 'lake_boss_gid, .@b[UMOB_X] + (.@dx * 3), .@b[UMOB_Y] + (.@dy * 3);
-	}
-	for ( .@t = 1; .@t <= 8; ++.@t ) {
-		if ('lake_trap_done[.@t])
-			continue;
-		if (distance(.@b[UMOB_X], .@b[UMOB_Y], 'lake_trap_x[.@t], 'lake_trap_y[.@t]) <= 4) {
-			'lake_trap_pending = .@t;
-			donpcevent instance_npcname("#lake_of_fire_ctrl") + "::OnActivateTrap";
-		}
-	}
-	// God's Shadow - knock players away from the beast during lure phase
-	if (rand(100) < 8) {
-		getareaunits(BL_PC, 'lake_map$, .@b[UMOB_X]-12, .@b[UMOB_Y]-12, .@b[UMOB_X]+12, .@b[UMOB_Y]+12, .@hit[0]);
-		for ( .@j = 0; .@j < getarraysize(.@hit); ++.@j ) {
-			if (!attachrid(.@hit[.@j]))
+	if (unitexists('lake_boss_gid)) {
+		getunitdata 'lake_boss_gid, .@b;
+		for ( .@t = 1; .@t <= 8; ++.@t ) {
+			if ('lake_trap_done[.@t])
 				continue;
-			if (@WARM_SHIELD > gettimetick(2))
-				continue;
-			.@dir = rand(8);
-			pushpc .@dir, 3;
-			detachrid;
+			if (distance(.@b[UMOB_X], .@b[UMOB_Y], 'lake_trap_x[.@t], 'lake_trap_y[.@t]) <= 10) {
+				callsub(S_DoTrap, .@t);
+				initnpctimer;
+				end;
+			}
 		}
-		npcskilleffect "WZ_JUPITEL", 5, .@b[UMOB_X], .@b[UMOB_Y];
 	}
 	initnpctimer;
-	setnpctimer 500;
 	end;
+S_DoTrap:
+	.@idx = getarg(0);
+	if (!'lake_started || 'lake_phase != 1)
+		return;
+	if (.@idx < 1 || .@idx > 8 || 'lake_trap_done[.@idx])
+		return;
+	'lake_trap_done[.@idx] = 1;
+	npcskilleffect "WZ_VERMILION", 10, 'lake_trap_x[.@idx], 'lake_trap_y[.@idx];
+	npcskilleffect "MG_SAFETYWALL", 10, 'lake_trap_x[.@idx], 'lake_trap_y[.@idx];
+	disablenpc instance_npcname("LakeTrap#" + .@idx);
+	if (unitexists('lake_boss_gid)) {
+		sc_start SC_STUN, 3500, 0, 10000, 0, 'lake_boss_gid;
+		'lake_trap_window = gettimetick(2) + 4;
+		callfunc("F_lake_set_protection", 2);
+		getunitdata 'lake_boss_gid, .@b;
+		'lake_boss_hp_lock = .@b[UMOB_HP];
+		unittalk 'lake_boss_gid, "Urgh... a seal cracks!";
+	}
+	'lake_traps++;
+	mapannounce 'lake_map$, "Dimensional seal activated! (" + 'lake_traps + "/8) — strike while it is stunned!", bc_map, 0x00FF99;
+	if ('lake_traps >= 8)
+		donpcevent instance_npcname("#lake_of_fire_ctrl") + "::OnTrapReady";
+	return;
 }
 
 1@f_lake,1,1,0	script	#lake_skill_ai	-1,{
@@ -217,95 +549,123 @@ OnStop:
 OnTimer12000:
 	if ('lake_phase != 2 || !unitexists('lake_boss_gid))
 		end;
-	getunitdata 'lake_boss_gid, .@b;
-	getareaunits(BL_PC, 'lake_map$, .@b[UMOB_X]-14, .@b[UMOB_Y]-14, .@b[UMOB_X]+14, .@b[UMOB_Y]+14, .@pc[0]);
 	switch( 'lake_boss_id ) {
-	case 22177: // Floral Pegasus - thorn field
-		npcskilleffect "NPC_EARTHQUAKE", 2, .@b[UMOB_X], .@b[UMOB_Y];
-		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
-			if (!attachrid(.@pc[.@i]))
-				continue;
-			percentheal -15,0;
-			detachrid;
-		}
+	case 22177:
+		callfunc("F_lake_cast_small_fields", "WZ_METEOR", "Floral Pegasus casts Aimed Shower!", 18);
 		break;
-	case 22178: // Coral Marine - water blast
-		npcskilleffect "WZ_WATERBALL", 10, .@b[UMOB_X], .@b[UMOB_Y];
-		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
-			if (!attachrid(.@pc[.@i]))
-				continue;
-			percentheal -20,0;
-			pushpc rand(8), 2;
-			detachrid;
-		}
+	case 22178:
+		callfunc("F_lake_cast_block_explosion");
 		break;
-	case 22179: // Maple Tree - root
-		npcskilleffect "NPC_PETRIFYATTACK", 5, .@b[UMOB_X], .@b[UMOB_Y];
-		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
-			if (!attachrid(.@pc[.@i]))
-				continue;
-			sc_start SC_ANKLE, 8000, 0;
-			detachrid;
-		}
+	case 22179:
+		callfunc("F_lake_cast_small_fields", "WZ_METEOR", "Maple Tree casts Blazing Eruption!", 22);
 		break;
-	case 22180: // Monarch Penguin - frost field
-		npcskilleffect "WZ_FROSTNOVA", 10, .@b[UMOB_X], .@b[UMOB_Y];
-		for ( .@i = 0; .@i < getarraysize(.@pc); ++.@i ) {
-			if (!attachrid(.@pc[.@i]))
-				continue;
-			if (@WARM_SHIELD > gettimetick(2))
-				continue;
-			sc_start SC_FREEZE, 6000, 0;
-			detachrid;
-		}
+	case 22180:
+		callfunc("F_lake_cast_frost_field");
 		break;
 	}
 	initnpctimer;
 	end;
 }
 
--	script	LakeTrap	-1,{
+1@f_lake,1,1,0	script	#lake_of_fire_ctrl	-1,{
 	end;
-OnTouch:
+OnInstanceInit:
+	'lake_map$ = instance_mapname("1@f_lake");
+	'lake_boss_id = rand(22177,22180);
+	'lake_phase = 0;
+	'lake_started = 0;
+	'lake_traps = 0;
+	'lake_boss_gid = 0;
+	'lake_boss_tick = 0;
+	'lake_exit_rewarded = 0;
+	'lake_trap_window = 0;
+	'lake_p1_x = 15;
+	'lake_p1_y = 193;
+	'lake_p2_x = 100;
+	'lake_p2_y = 130;
+	'lake_boss_x = 'lake_p1_x;
+	'lake_boss_y = 'lake_p1_y;
+	deletearray 'lake_reward_aid;
+	deletearray 'lake_trap_done;
+	setarray 'lake_trap_x[1], 25,95,51,91,129,93,43,65;
+	setarray 'lake_trap_y[1], 151,182,93,56,58,35,34,164;
+	// Show the chosen divine beast sprite/name on the greeting NPC
+	setnpcdisplay(instance_npcname("LakeBoss#standby"), callfunc("F_lake_boss_name$", 'lake_boss_id), 'lake_boss_id);
+	mapannounce 'lake_map$, "A divine beast of " + callfunc("F_lake_boss_season$", 'lake_boss_id) + " — " + callfunc("F_lake_boss_name$", 'lake_boss_id) + " — awaits. Speak with it to begin.", bc_map, 0xFFDD44;
+	end;
+OnBossDead:
+	if ('lake_phase < 2) {
+		// Should be nearly immune in lure; restore if somehow killed
+		.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
+		monster 'lake_map$, 'lake_boss_x, 'lake_boss_y, "--ja--", 'lake_boss_id, 1, .@event$;
+		'lake_boss_gid = $@mobid[0];
+		if ('lake_boss_gid > 0) {
+			setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
+			setunitdata 'lake_boss_gid, UMOB_HP, 700000000;
+			'lake_boss_hp_lock = 700000000;
+			callfunc("F_lake_set_protection", 1);
+			if ('lake_started) {
+				setunitdata 'lake_boss_gid, UMOB_MODE, MD_CANMOVE|MD_AGGRESSIVE|MD_ANGRY|MD_CANATTACK;
+				donpcevent instance_npcname("#lake_trap_ai") + "::OnStart";
+				donpcevent instance_npcname("#lake_boss_ai") + "::OnStart";
+			}
+			mapannounce 'lake_map$, "The divine beast's barrier restored itself!", bc_map, 0xFF4400;
+		}
+		end;
+	}
+	'lake_phase = 3;
+	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
+	donpcevent instance_npcname("#lake_skill_ai") + "::OnStop";
+	callfunc("F_lake_complete_hunt", 'lake_boss_id);
+	mapannounce 'lake_map$, "The divine beast has been subdued. Claim your reward at the exit portal.", bc_map, 0x00FF99;
+	enablenpc instance_npcname("LakeExit#reward");
+	end;
+OnTrapReady:
+	if ('lake_phase != 1)
+		end;
+	donpcevent instance_npcname("#lake_boss_ai") + "::OnStop";
+	donpcevent instance_npcname("#lake_trap_ai") + "::OnStop";
+	'lake_phase = 2;
+	'lake_trap_window = 0;
+	'lake_boss_x = 'lake_p2_x;
+	'lake_boss_y = 'lake_p2_y;
+	mapannounce 'lake_map$, "All eight seals broken! The party and the divine beast are drawn into the inner prison!", bc_map, 0xFFDD44;
+	// 1@f_lake has monster_noteleport — unitwarp on the boss fails silently.
+	// Despawn without firing OnBossDead, then respawn in the inner prison.
+	.@event$ = instance_npcname("#lake_of_fire_ctrl") + "::OnBossDead";
+	if (unitexists('lake_boss_gid))
+		killmonster 'lake_map$, .@event$;
+	'lake_boss_gid = 0;
+	instance_warpall 'lake_map$, 'lake_p2_x, 'lake_p2_y, instance_id();
+	sleep 500;
+	monster 'lake_map$, 'lake_p2_x, 'lake_p2_y, "--ja--", 'lake_boss_id, 1, .@event$;
+	'lake_boss_gid = $@mobid[0];
+	if ('lake_boss_gid > 0) {
+		setunitdata 'lake_boss_gid, UMOB_MAXHP, 700000000;
+		setunitdata 'lake_boss_gid, UMOB_HP, 700000000;
+		setunitdata 'lake_boss_gid, UMOB_MODE, MD_CANMOVE|MD_AGGRESSIVE|MD_ANGRY|MD_CANATTACK;
+		callfunc("F_lake_set_protection", 0);
+		unittalk 'lake_boss_gid, "The seals are gone... now face me!";
+	} else
+		mapannounce 'lake_map$, "The divine beast failed to reappear in the inner prison.", bc_map, 0xFF0000;
+	donpcevent instance_npcname("#lake_skill_ai") + "::OnStart";
+	mapannounce 'lake_map$, "The barrier shattered! " + callfunc("F_lake_boss_name$", 'lake_boss_id) + " now takes 10% damage — defeat it!", bc_map, 0xFF4400;
 	end;
 }
 
-1@f_lake,25,151,0	duplicate(LakeTrap)	Lake Trap#1	HIDDEN_WARP_NPC,2,2
-1@f_lake,95,182,0	duplicate(LakeTrap)	Lake Trap#2	HIDDEN_WARP_NPC,2,2
-1@f_lake,51,93,0	duplicate(LakeTrap)	Lake Trap#3	HIDDEN_WARP_NPC,2,2
-1@f_lake,91,56,0	duplicate(LakeTrap)	Lake Trap#4	HIDDEN_WARP_NPC,2,2
-1@f_lake,129,58,0	duplicate(LakeTrap)	Lake Trap#5	HIDDEN_WARP_NPC,2,2
-1@f_lake,93,35,0	duplicate(LakeTrap)	Lake Trap#6	HIDDEN_WARP_NPC,2,2
-1@f_lake,43,34,0	duplicate(LakeTrap)	Lake Trap#7	HIDDEN_WARP_NPC,2,2
-1@f_lake,70,120,0	duplicate(LakeTrap)	Lake Trap#8	HIDDEN_WARP_NPC,2,2
+1@f_lake	mapflag	loadevent
 
-1@f_lake,275,50,3	script(DISABLED)	Lake Exit#reward	GATE_SKYBLUE,{
-	if ('lake_phase < 3)
+-	script	LakeOfFireEntryFix	-1,{
+OnPCLoadMapEvent:
+	if (instance_id(IM_PARTY) <= 0)
 		end;
-	if (checkweight(1201,10) == 0) {
-		mes "Your inventory is too full to receive rewards.";
-		close;
-	}
-	switch( checkquest(12610,PLAYTIME) ) {
-	case 0:
-	case 1:
-		mes "You have already received today's Lake of Fire reward.";
-		next;
-		if (select( "Leave the instance.", "Stay." ) == 2)
-			close;
-		break;
-	default:
-		if (checkquest(12610) == 1)
-			erasequest 12610;
-		setquest 12610;
-		getitem 1001415,1; // MD_Hol_Key
-		getitem 1001414,10; // MD_Hol_Fragment
-		getitem callfunc("F_lake_energy_item$", 'lake_boss_id), 5;
-		callfunc("F_lake_complete_hunt", 'lake_boss_id);
-		mes "You received your Lake of Fire reward.";
-		next;
-		break;
-	}
-	warp "t_garden",158,235;
+	getmapxy .@m$, .@x, .@y, BL_PC;
+	if (.@m$ != instance_mapname("1@f_lake"))
+		end;
+	if (checkcell(.@m$, .@x, .@y, cell_chkpass))
+		end;
+	getfreecell .@m$, .@nx, .@ny, 15, 193, 20, 20, 2;
+	if (checkcell(.@m$, .@nx, .@ny, cell_chkpass))
+		warp .@m$, .@nx, .@ny;
 	end;
 }

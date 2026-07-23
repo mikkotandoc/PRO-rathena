@@ -1,0 +1,150 @@
+﻿
+================================================================================
+FILE: c:\Users\Mikko Tandoc\Downloads\asd\2\PRO-Ragnarok Asia - Copy\proasia.exe
+SIZE: 29734912 (0x1C5B800)
+================================================================================
+
+--- HIT ASCII 'CRuneSystemMgr' @ 0x00BF2428 (12526632) ---
+Context (64 before / 64 after):
+  00BF23E8  72 75 6E 65 73 79 73 74 65 6D 5F 66 2E 6C 75 62   runesystem_f.lub
+  00BF23F8  00 00 00 00 53 79 73 74 65 6D 5C 52 75 6E 65 5C   ....System\Rune\
+  00BF2408  72 75 6E 65 73 65 74 5F 72 65 77 61 72 64 2E 6C   runeset_reward.l
+  00BF2418  75 62 00 00 6D 61 69 6E 5F 72 75 6E 65 00 00 00   ub..main_rune...
+  00BF2428  43 52 75 6E 65 53 79 73 74 65 6D 4D 67 72 20 6D   CRuneSystemMgr m
+  00BF2438  61 69 6E 5F 72 75 6E 65 20 58 00 00 6D 61 69 6E   ain_rune X..main
+  00BF2448  5F 72 75 6E 65 73 65 74 5F 72 65 77 61 72 64 00   _runeset_reward.
+  00BF2458  43 52 75 6E 65 53 79 73 74 65 6D 4D 67 72 20 6D   CRuneSystemMgr m
+  00BF2468  61 69 6E 5F 72 75 6E 65 73 65 74 5F 72 65         ain_runeset_re
+
+--- HIT ASCII 'CRuneSystemMgr' @ 0x00BF2458 (12526680) ---
+Context (64 before / 64 after):
+  00BF2418  75 62 00 00 6D 61 69 6E 5F 72 75 6E 65 00 00 00   ub..main_rune...
+  00BF2428  43 52 75 6E 65 53 79 73 74 65 6D 4D 67 72 20 6D   CRuneSystemMgr m
+  00BF2438  61 69 6E 5F 72 75 6E 65 20 58 00 00 6D 61 69 6E   ain_rune X..main
+  00BF2448  5F 72 75 6E 65 73 65 74 5F 72 65 77 61 72 64 00   _runeset_reward.
+  00BF2458  43 52 75 6E 65 53 79 73 74 65 6D 4D 67 72 20 6D   CRuneSystemMgr m
+  00BF2468  61 69 6E 5F 72 75 6E 65 73 65 74 5F 72 65 77 61   ain_runeset_rewa
+  00BF2478  72 64 20 58 00 00 00 00 43 52 75 6E 65 53 79 73   rd X....CRuneSys
+  00BF2488  74 65 6D 4D 67 72 00 00 65 72 72 6F 72 20 66 6F   temMgr..error fo
+  00BF2498  75 6E 64 20 3A 00 00 00 4C 75 61 4C 6F 61         und :...LuaLoa
+
+--- HIT ASCII 'CRuneSystemMgr' @ 0x00BF2480 (12526720) ---
+Context (64 before / 64 after):
+  00BF2440  20 58 00 00 6D 61 69 6E 5F 72 75 6E 65 73 65 74    X..main_runeset
+  00BF2450  5F 72 65 77 61 72 64 00 43 52 75 6E 65 53 79 73   _reward.CRuneSys
+  00BF2460  74 65 6D 4D 67 72 20 6D 61 69 6E 5F 72 75 6E 65   temMgr main_rune
+  00BF2470  73 65 74 5F 72 65 77 61 72 64 20 58 00 00 00 00   set_reward X....
+  00BF2480  43 52 75 6E 65 53 79 73 74 65 6D 4D 67 72 00 00   CRuneSystemMgr..
+  00BF2490  65 72 72 6F 72 20 66 6F 75 6E 64 20 3A 00 00 00   error found :...
+  00BF24A0  4C 75 61 4C 6F 61 64 00 41 64 64 52 75 6E 65 5F   LuaLoad.AddRune_
+  00BF24B0  44 65 73 63 72 69 70 74 69 6F 6E 20 C0 CE B4 EC   Description ....
+  00BF24C0  BD BA 20 BF C0 B7 F9 20 25 64 00 00 53 79         .. .... %d..Sy
+
+--- HIT ASCII 'CRuneSystemMgr' @ 0x00C75300 (13062912) ---
+Context (64 before / 64 after):
+  00C752C0  6F 77 5F 58 50 6F 73 00 57 69 6E 64 6F 77 5F 59   ow_XPos.Window_Y
+  00C752D0  50 6F 73 00 49 74 65 6D 49 6E 66 6F 20 66 69 6C   Pos.ItemInfo fil
+  00C752E0  65 20 49 6E 69 74 00 00 53 50 45 43 49 41 4C 50   e Init..SPECIALP
+  00C752F0  4F 50 55 50 20 66 69 6C 65 20 49 6E 69 74 00 00   OPUP file Init..
+  00C75300  43 52 75 6E 65 53 79 73 74 65 6D 4D 67 72 20 66   CRuneSystemMgr f
+  00C75310  69 6C 65 20 49 6E 69 74 00 00 00 00 54 69 70 42   ile Init....TipB
+  00C75320  6F 78 20 66 69 6C 65 20 49 6E 69 74 00 00 00 00   ox file Init....
+  00C75330  00 61 6E 6E 65 72 2E 74 78 74 00 00 52 61 67 6E   .anner.txt..Ragn
+  00C75340  61 72 6F 6B 20 53 65 74 75 70 00 00 4E 4F         arok Setup..NO
+
+--- HIT ASCII 'CRuneSystemMgr' @ 0x00E13B60 (14760800) ---
+Context (64 before / 64 after):
+  00E13B20  00 00 00 00 2E 3F 41 56 44 65 63 6F 6D 5F 49 74   .....?AVDecom_It
+  00E13B30  65 6D 49 6E 66 6F 40 40 00 00 00 00 4C 42 08 01   emInfo@@....LB..
+  00E13B40  00 00 00 00 2E 3F 41 56 43 54 61 67 44 61 74 61   .....?AVCTagData
+  00E13B50  40 40 00 00 4C 42 08 01 00 00 00 00 2E 3F 41 56   @@..LB.......?AV
+  00E13B60  43 52 75 6E 65 53 79 73 74 65 6D 4D 67 72 40 40   CRuneSystemMgr@@
+  00E13B70  00 00 00 00 4C 42 08 01 00 00 00 00 2E 3F 41 56   ....LB.......?AV
+  00E13B80  43 47 47 48 61 73 68 4D 67 72 40 40 00 00 00 00   CGGHashMgr@@....
+  00E13B90  4C 42 08 01 00 00 00 00 2E 3F 41 56 43 4E 50 72   LB.......?AVCNPr
+  00E13BA0  6F 74 65 63 74 47 61 6D 65 47 75 61 72 64         otectGameGuard
+
+--- HIT ASCII 'runesystem' @ 0x00BF2310 (12526352) ---
+Context (64 before / 64 after):
+  00BF22D0  72 75 6E 65 53 79 73 74 65 6D 5F 74 61 62 6C 65   runeSystem_table
+  00BF22E0  2E 6C 75 62 00 00 00 00 53 79 73 74 65 6D 5C 52   .lub....System\R
+  00BF22F0  75 6E 65 5C 69 74 65 6D 44 65 63 6F 6D 2E 6C 75   une\itemDecom.lu
+  00BF2300  62 00 00 00 53 79 73 74 65 6D 5C 52 75 6E 65 5C   b...System\Rune\
+  00BF2310  72 75 6E 65 73 79 73 74 65 6D 69 64 2E 6C 75 62   runesystemid.lub
+  00BF2320  00 00 00 00 53 79 73 74 65 6D 5C 52 75 6E 65 5C   ....System\Rune\
+  00BF2330  72 75 6E 65 5F 69 6E 66 6F 2E 6C 75 62 00 00 00   rune_info.lub...
+  00BF2340  53 79 73 74 65 6D 5C 52 75 6E 65 5C 63 6F 6C 6C   System\Rune\coll
+  00BF2350  65 63 74 69 6F 6E 5F 69 6E 66                     ection_inf
+
+--- HIT ASCII 'runesystem' @ 0x00BF23E8 (12526568) ---
+Context (64 before / 64 after):
+  00BF23A8  72 75 6E 65 73 65 74 5F 69 6E 66 6F 2E 6C 75 62   runeset_info.lub
+  00BF23B8  00 00 00 00 53 79 73 74 65 6D 5C 52 75 6E 65 5C   ....System\Rune\
+  00BF23C8  72 75 6E 65 73 65 74 5F 64 65 73 63 2E 6C 75 62   runeset_desc.lub
+  00BF23D8  00 00 00 00 53 79 73 74 65 6D 5C 52 75 6E 65 5C   ....System\Rune\
+  00BF23E8  72 75 6E 65 73 79 73 74 65 6D 5F 66 2E 6C 75 62   runesystem_f.lub
+  00BF23F8  00 00 00 00 53 79 73 74 65 6D 5C 52 75 6E 65 5C   ....System\Rune\
+  00BF2408  72 75 6E 65 73 65 74 5F 72 65 77 61 72 64 2E 6C   runeset_reward.l
+  00BF2418  75 62 00 00 6D 61 69 6E 5F 72 75 6E 65 00 00 00   ub..main_rune...
+  00BF2428  43 52 75 6E 65 53 79 73 74 65                     CRuneSyste
+
+--- HIT ASCII 'runesystem' @ 0x00BF24D8 (12526808) ---
+Context (64 before / 64 after):
+  00BF2498  75 6E 64 20 3A 00 00 00 4C 75 61 4C 6F 61 64 00   und :...LuaLoad.
+  00BF24A8  41 64 64 52 75 6E 65 5F 44 65 73 63 72 69 70 74   AddRune_Descript
+  00BF24B8  69 6F 6E 20 C0 CE B4 EC BD BA 20 BF C0 B7 F9 20   ion ...... .... 
+  00BF24C8  25 64 00 00 53 79 73 74 65 6D 5C 52 75 6E 65 5C   %d..System\Rune\
+  00BF24D8  72 75 6E 65 73 79 73 74 65 6D 49 6E 66 6F 00 00   runesystemInfo..
+  00BF24E8  3E 64 00 00 47 65 74 44 65 66 75 6C 74 54 61 67   >d..GetDefultTag
+  00BF24F8  00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00   ................
+  00BF2508  01 00 00 00 01 00 00 00 FF FF FF FF FF FF FF FF   ................
+  00BF2518  FF FF FF FF FF FF FF FF 40 75                     ........@u
+
+--- HIT ASCII 'runesystem' @ 0x00C03FB7 (12599223) ---
+Context (64 before / 64 after):
+  00C03F77  00 A0 5D A0 00 80 A4 59 00 A0 92 59 00 F0 A2 59   ..]....Y...Y...Y
+  00C03F87  00 30 EE 59 00 C0 A3 59 00 20 D1 59 00 40 D1 59   .0.Y...Y. .Y.@.Y
+  00C03F97  00 50 A6 A0 00 30 BA A0 00 40 6B A0 00 90 D9 59   .P...0...@k....Y
+  00C03FA7  00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C   ...............\
+  00C03FB7  72 75 6E 65 73 79 73 74 65 6D 5C 72 75 6E 65 73   runesystem\runes
+  00C03FC7  79 73 74 61 6D 5F 74 61 62 5F 25 64 2E 62 6D 70   ystam_tab_%d.bmp
+  00C03FD7  00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C   ...............\
+  00C03FE7  72 75 6E 65 73 79 73 74 65 6D 5C 62 67 5F 72 75   runesystem\bg_ru
+  00C03FF7  6E 65 65 71 75 69 70 5F 65 6D                     neequip_em
+
+--- HIT ASCII 'runesystem' @ 0x00C03FE7 (12599271) ---
+Context (64 before / 64 after):
+  00C03FA7  00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C   ...............\
+  00C03FB7  72 75 6E 65 73 79 73 74 65 6D 5C 72 75 6E 65 73   runesystem\runes
+  00C03FC7  79 73 74 61 6D 5F 74 61 62 5F 25 64 2E 62 6D 70   ystam_tab_%d.bmp
+  00C03FD7  00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C   ...............\
+  00C03FE7  72 75 6E 65 73 79 73 74 65 6D 5C 62 67 5F 72 75   runesystem\bg_ru
+  00C03FF7  6E 65 65 71 75 69 70 5F 65 6D 70 74 79 2E 62 6D   neequip_empty.bm
+  00C04007  70 00 00 00 00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0   p...............
+  00C04017  CC BD BA 5C 72 75 6E 65 73 79 73 74 65 6D 5C 62   ...\runesystem\b
+  00C04027  67 5F 72 75 6E 65 65 71 75 69                     g_runeequi
+
+--- HIT ASCII 'runesystem' @ 0x00C0401B (12599323) ---
+Context (64 before / 64 after):
+  00C03FDB  FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C 72 75 6E 65   ...........\rune
+  00C03FEB  73 79 73 74 65 6D 5C 62 67 5F 72 75 6E 65 65 71   system\bg_runeeq
+  00C03FFB  75 69 70 5F 65 6D 70 74 79 2E 62 6D 70 00 00 00   uip_empty.bmp...
+  00C0400B  00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C   ...............\
+  00C0401B  72 75 6E 65 73 79 73 74 65 6D 5C 62 67 5F 72 75   runesystem\bg_ru
+  00C0402B  6E 65 65 71 75 69 70 2E 62 6D 70 00 00 C0 AF C0   neequip.bmp.....
+  00C0403B  FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C 72 75 6E 65   ...........\rune
+  00C0404B  73 79 73 74 65 6D 5C 72 75 6E 65 5F 69 63 6F 6E   system\rune_icon
+  00C0405B  5C 25 73 2E 62 6D 70 00 00 2B                     \%s.bmp..+
+
+--- HIT ASCII 'runesystem' @ 0x00C04047 (12599367) ---
+Context (64 before / 64 after):
+  00C04007  70 00 00 00 00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0   p...............
+  00C04017  CC BD BA 5C 72 75 6E 65 73 79 73 74 65 6D 5C 62   ...\runesystem\b
+  00C04027  67 5F 72 75 6E 65 65 71 75 69 70 2E 62 6D 70 00   g_runeequip.bmp.
+  00C04037  00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C   ...............\
+  00C04047  72 75 6E 65 73 79 73 74 65 6D 5C 72 75 6E 65 5F   runesystem\rune_
+  00C04057  69 63 6F 6E 5C 25 73 2E 62 6D 70 00 00 2B 25 64   icon\%s.bmp..+%d
+  00C04067  00 C0 AF C0 FA C0 CE C5 CD C6 E4 C0 CC BD BA 5C   ...............\
+  00C04077  72 75 6E 65 73 79 73 74 65 6D 5C 74 61 67 5C 62   runesystem\tag\b
+  00C04087  74 5F 74 61 67 5F 25 64 5F 65                     t_tag_%d_e
+

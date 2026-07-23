@@ -1,0 +1,21 @@
+# Legendary Hunting Missions crafting materials
+
+Header:
+  Type: ITEM_DB
+  Version: 3
+
+Body:
+  - Id: 1000700
+    AegisName: Legend_Hunt_Scrap
+    Name: Legend Hunt Scrap
+    Type: Etc
+    Weight: 10
+    Flags:
+      DropEffect: CLIENT
+  - Id: 1000701
+    AegisName: Legend_Hunt_Core
+    Name: Legend Hunt Core
+    Type: Etc
+    Weight: 20
+    Flags:
+      DropEffect: CLIENT

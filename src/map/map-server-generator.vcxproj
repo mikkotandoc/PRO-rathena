@@ -283,6 +283,7 @@
     <ClCompile Include="pc_groups.cpp" />
     <ClCompile Include="pet.cpp" />
     <ClCompile Include="quest.cpp" />
+    <ClCompile Include="rune.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="searchstore.cpp" />
     <ClCompile Include="skill.cpp" />

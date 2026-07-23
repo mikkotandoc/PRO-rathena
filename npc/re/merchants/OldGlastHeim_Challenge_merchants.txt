@@ -176,7 +176,7 @@ glast_01,137,291,3	script	Oscar#oghcm_enchant	4_ED_OSCAR,{
 	switch( select( "Temporal Circlet Enchantment", "How does it work?", "Cancel" ) ) {
 	case 1:
 		mes "[Oscar]";
-		mes "Make sure the Temporal Circlet is ^0000FFequipped^000000 before continuing.";
+		mes "Keep your Temporal Circlet in ^0000FFinventory^000000 and make sure it is ^0000FFnot equipped^000000 before continuing.";
 		close2;
 		item_enchant(169);
 		end;
@@ -187,6 +187,7 @@ glast_01,137,291,3	script	Oscar#oghcm_enchant	4_ED_OSCAR,{
 		mes "2nd slot special enchant: ^0000CD2 Temporal Spell^000000, upgradeable with more Temporal Spell.";
 		next;
 		mes "[Oscar]";
+		mes "The circlet must be in your inventory and unequipped when you use the enchant window.";
 		mes "Reset all enchants for ^0000CD500,000 zeny^000000 with a 70% success rate.";
 		mes "On failure the circlet is destroyed.";
 		close;

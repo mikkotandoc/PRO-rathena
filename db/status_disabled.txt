@@ -507,3 +507,28 @@ SC_DEEP_POISONING,16
 SC_DEEP_POISONING_OPTION,16
 SC_POISON_SHIELD,16
 SC_POISON_SHIELD_OPTION,16
+
+//----------------------------------------------------------------------------
+// Lake of Fire / Hall of Life (1@f_lake / 1@ba_go) - restricted zone 10 (16384)
+//----------------------------------------------------------------------------
+SC_RAID,16384
+SC_SPORE_EXPLOSION,16384
+SC_DARKCROW,16384
+SC_HOLY_OIL,16384
+SC_RUSH_QUAKE1,16384
+SC_RUSH_QUAKE2,16384
+
+//----------------------------------------------------------------------------
+// Forgotten Time (for_dun01 / for_dun02) - restricted zone 11 (32768)
+//----------------------------------------------------------------------------
+SC_COMPETENTIA,32768
+SC_A_MACHINE,32768
+SC_MUSICAL_INTERLUDE,32768
+SC_JAWAII_SERENADE,32768
+SC_PRON_MARCH,32768
+SC_SPELL_ENCHANTING,32768
+SC_TALISMAN_OF_PROTECTION,32768
+SC_TALISMAN_OF_WARRIOR,32768
+SC_TALISMAN_OF_MAGICIAN,32768
+SC_TALISMAN_OF_FIVE_ELEMENTS,32768
+SC_HEAVEN_AND_EARTH,32768

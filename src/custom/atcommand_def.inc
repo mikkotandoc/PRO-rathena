@@ -7,4 +7,4 @@
  **/
 
 ACMD_DEF(mall),
-ACMD_DEFR(runeui, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
+ACMD_DEF(compensation),

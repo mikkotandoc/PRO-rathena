@@ -1,8 +1,11 @@
 //===== rAthena Script =======================================
 //= Airship Crash Instance
 //===== Description: =========================================
-//= Heroes' Trails - Airship Crash memorial dungeon
-//= Based on kRO / Hazy Forest instance mechanics
+//= kRO Memorial Dungeon: Airship Crash (1@mjo1 / 1@mjo2)
+//= Following the Airship Raid, the airship crashes on an
+//= unknown island. Help the Schwarzwald expedition team
+//= investigate the Ymir Stone-mutated monsters, hunt for
+//= Ymir Fragments, and summon the Unidentified Creature.
 //============================================================
 
 function	script	F_Aircrash_HpMult	{
@@ -190,128 +193,11 @@ dali02,131,86,5	script	Wurmm#mjo	4_M_ALCHE_C,{
 }
 
 //============================================================
-// Instance - Crash Site Story (Heroes' Trails)
+// Instance - Crash Site Survivors (kRO: rescue 5 for weaker boss)
 //============================================================
-1@mjo1,224,205,5	script	Chaos#mjo	4_M_CHAOS,{
-	end;
-OnInstanceInit:
-	hideonnpc instance_npcname("Chaos#mjo");
-	end;
-}
-
-1@mjo1,229,202,3	script	Lydia#mjo	4_F_LYDIA,{
-	end;
-OnInstanceInit:
-	hideonnpc instance_npcname("Lydia#mjo");
-	end;
-}
-
-1@mjo1,227,199,3	script	Seth#mjo	4_CAT,{
-	end;
-OnInstanceInit:
-	hideonnpc instance_npcname("Seth#mjo");
-	end;
-}
-
-1@mjo1,233,207,3	script	Loki#mjo	4_M_ROKI2,{
-	end;
-OnInstanceInit:
-	hideonnpc instance_npcname("Loki#mjo");
-	end;
-}
-
-1@mjo1,236,204,5	script	Iris#mjo	4_F_IRIS,{
-	end;
-OnInstanceInit:
-	hideonnpc instance_npcname("Iris#mjo");
-	end;
-}
-
-1@mjo1,228,198,3	script	Airship Crate#mjo	4_SOIL,{
-	end;
-OnInstanceInit:
-	hideonnpc instance_npcname("Airship Crate#mjo");
-	end;
-}
-
-1@mjo1,241,190,3	script	Captain Pelloch#mjo	4_M_FALLENGONY,{
-	if ('story_phase < 2) {
-		mes "^0000cdThe collapsed man is unconscious.^000000";
-		close;
-	}
-	if ('pelloch_saved) {
-		mes "^0000cdCaptain Pelloch has already been stabilized.^000000";
-		close;
-	}
-	.@account_id = getcharid(3);
-	.@name$ = strcharinfo(0);
-	mes "^0000cdA blonde man in a captain's uniform lies among the wreckage.^000000";
-	next;
-	unittalk .@account_id, .@name$ + ": Look! There's a guy down here.";
-	next;
-	switch (select("I see a collapsed person.:Is he injured?")) {
-	case 1:
-		mes "[" + .@name$ + "]";
-		mes "I see a collapsed person.";
-		unittalk .@account_id, .@name$ + ": I see a collapsed person.";
-		break;
-	case 2:
-		mes "[" + .@name$ + "]";
-		mes "Is he injured?";
-		unittalk .@account_id, .@name$ + ": Is he injured?";
-		break;
-	}
-	next;
-	cutin "lydia_a.bmp",2;
-	mes "[Lydia]";
-	mes "He's still breathing. Help him up, quick!";
-	npctalk "Lydia: He's still breathing. Help him up, quick!", instance_npcname("Lydia#mjo");
-	next;
-	cutin "h_chaos02",2;
-	mes "[Chaos]";
-	mes "Tch, what a mess... Fine, lend me a hand.";
-	npctalk "Chaos: Tch, what a mess... Fine, lend me a hand.", instance_npcname("Chaos#mjo");
-	next;
-	cutin "",255;
-	specialeffect EF_RESURRECTION, AREA, instance_npcname("Captain Pelloch#mjo");
-	sleep2 1000;
-	'pelloch_saved = 1;
-	'injured_rescued++;
-	mapannounce instance_mapname("1@mjo1"), "Captain Pelloch: Ugh... thank you... I thought that was the end...", bc_map, 0xFFFF00;
-	disablenpc instance_npcname("Captain Pelloch#mjo");
-	enablenpc instance_npcname("Captain Pelloch#mjo2");
-	if ('injured_rescued >= 5)
-		mapannounce instance_mapname("1@mjo1"), "The survivors you helped may weaken the contaminated creature lurking in the cave.", bc_map, 0x00FF99;
-	close;
-OnInstanceInit:
-	disablenpc instance_npcname("Captain Pelloch#mjo");
-	end;
-}
-
-1@mjo1,241,190,3	script	Captain Pelloch#mjo2	4_M_REINDEER,{
-	if ('pelloch_saved == 0)
-		end;
-	mes "[Captain Pelloch]";
-	mes "I am Captain Pelloch. Our airship went down after the assault...";
-	mes "The Ymir fragment scattered everywhere and changed the monsters.";
-	next;
-	mes "[Captain Pelloch]";
-	mes "The Schwarzwald expedition team set up inside the cave to the northeast.";
-	mes "Please help them investigate the cavity when you are ready.";
-	close;
-OnInstanceInit:
-	disablenpc instance_npcname("Captain Pelloch#mjo2");
-	end;
-}
-
-// Additional injured passengers (help 5 total for weaker MVP on kRO).
 function	script	F_Aircrash_HelpInjured	{
-	if ('story_phase < 2) {
-		mes "^0000cdYou should investigate the crash site with the others first.^000000";
-		close;
-	}
 	if ('injured_rescued >= 5) {
-		mes "^0000cdYou have already helped enough survivors for now.^000000";
+		mes "^0000cdYou have already helped enough survivors to weaken the creature.^000000";
 		close;
 	}
 	mes "^0000cdAn injured passenger lies among the debris.^000000";
@@ -328,126 +214,58 @@ function	script	F_Aircrash_HelpInjured	{
 	close;
 }
 
+1@mjo1,241,190,3	script	Captain Pelloch#mjo	4_M_FALLENGONY,{
+	if ('pelloch_saved) {
+		mes "[Captain Pelloch]";
+		mes "Thanks to you I can hold on. Please help the expedition team inside the cave.";
+		close;
+	}
+	.@name$ = strcharinfo(0);
+	mes "^0000cdA blonde man in a captain's uniform lies among the wreckage.^000000";
+	next;
+	mes "[" + .@name$ + "]";
+	mes "There's a collapsed person here. Hey, are you alright?";
+	next;
+	specialeffect EF_RESURRECTION, AREA, instance_npcname("Captain Pelloch#mjo");
+	sleep2 1000;
+	'pelloch_saved = 1;
+	'injured_rescued++;
+	mes "[Captain Pelloch]";
+	mes "Ugh... thank you... I thought that was the end.";
+	mes "I am Captain Pelloch. Our airship went down after the assault, and the Ymir fragments scattered everywhere and changed the monsters.";
+	next;
+	mes "[Captain Pelloch]";
+	mes "The Schwarzwald expedition team set up inside the cave to the ^0000cdnortheast^000000.";
+	mes "Please help them investigate the cavity when you are ready.";
+	mapannounce instance_mapname("1@mjo1"), "Captain Pelloch: Ugh... thank you... I thought that was the end...", bc_map, 0xFFFF00;
+	if ('injured_rescued >= 5)
+		mapannounce instance_mapname("1@mjo1"), "The survivors you helped may weaken the contaminated creature lurking in the cave.", bc_map, 0x00FF99;
+	close;
+OnInstanceInit:
+	end;
+}
+
 1@mjo1,205,218,3	script	Injured Passenger#mjo1	4_M_FALLENGONY,{
 	callfunc "F_Aircrash_HelpInjured";
 	end;
 OnInstanceInit:
-	disablenpc instance_npcname("Injured Passenger#mjo1");
 	end;
 }
 1@mjo1,252,225,3	script	Injured Passenger#mjo2	4_M_FALLENGONY,{
 	callfunc "F_Aircrash_HelpInjured";
 	end;
 OnInstanceInit:
-	disablenpc instance_npcname("Injured Passenger#mjo2");
 	end;
 }
-1@mjo1,198,195,3	script	Injured Passenger#mjo3	4_M_FALLENGONY,{
+1@mjo1,197,194,3	script	Injured Passenger#mjo3	4_M_FALLENGONY,{
 	callfunc "F_Aircrash_HelpInjured";
 	end;
 OnInstanceInit:
-	disablenpc instance_npcname("Injured Passenger#mjo3");
 	end;
 }
-1@mjo1,260,198,3	script	Injured Passenger#mjo4	4_M_FALLENGONY,{
+1@mjo1,257,199,3	script	Injured Passenger#mjo4	4_M_FALLENGONY,{
 	callfunc "F_Aircrash_HelpInjured";
 	end;
-OnInstanceInit:
-	disablenpc instance_npcname("Injured Passenger#mjo4");
-	end;
-}
-
-1@mjo1,225,215,0	script	#AircrashIntroWp	HIDDEN_WARP_NPC,12,12,{
-	end;
-OnTouch:
-	if ('story_phase > 0)
-		end;
-	if (is_party_leader() == false)
-		end;
-	donpcevent instance_npcname("#AircrashStory") + "::OnStart";
-	end;
-OnInstanceInit:
-	end;
-}
-
-1@mjo1,1,2,0	script	#AircrashStory	-1,{
-	end;
-OnStart:
-	if ('story_phase > 0)
-		end;
-	'story_phase = 1;
-	.@map$ = instance_mapname("1@mjo1");
-	.@chaos$ = instance_npcname("Chaos#mjo");
-	.@lydia$ = instance_npcname("Lydia#mjo");
-	.@seth$ = instance_npcname("Seth#mjo");
-	.@loki$ = instance_npcname("Loki#mjo");
-	.@iris$ = instance_npcname("Iris#mjo");
-	.@crate$ = instance_npcname("Airship Crate#mjo");
-	.@account_id = getcharid(3);
-	.@name$ = strcharinfo(0);
-
-	hideoffnpc .@chaos$;
-	hideoffnpc .@lydia$;
-	hideoffnpc .@seth$;
-	hideoffnpc .@crate$;
-	setpcblock PCBLOCK_NPC, true;
-
-	npctalk "Chaos: Wow, oh, oh, oh, oh..", .@chaos$;
-	sleep 3500;
-	npctalk "Lydia: Argh! Ha, Ha, Hands!!", .@lydia$;
-	sleep 3500;
-	npctalk "Seth: Meow, meow!", .@seth$;
-	sleep 2000;
-
-	cutin "lydia_a.bmp",2;
-	mapannounce .@map$, "[ Lydia ] What the hell is going on?", bc_map, 0xFFFFFF;
-	sleep 4000;
-	cutin "",255;
-
-	npctalk "Lydia: Well, we don't see anything.", .@lydia$;
-	emotion ET_SWEAT, getnpcid(0, .@lydia$);
-	sleep 3500;
-	mapannounce .@map$, "...and a person that came from the airship that fell.", bc_map, 0xFFFFFF;
-	sleep 3500;
-
-	hideoffnpc .@loki$;
-	hideoffnpc .@iris$;
-	specialeffect EF_SUI_EXPLOSION, AREA, .@loki$;
-
-	cutin "h_iris02",2;
-	npctalk "Iris: Hooray!!!", .@iris$;
-	sleep 3000;
-	cutin "ep14_roki02",2;
-	npctalk "Loki: Who are you?", .@loki$;
-	sleep 3000;
-	cutin "lydia_a.bmp",2;
-	npctalk "Lydia: Ah...", .@lydia$;
-	emotion ET_THROB, getnpcid(0, .@lydia$);
-	sleep 2500;
-	mapannounce .@map$, "[ Lydia ] (Oh, no... this can't be... is this a dream...?)", bc_map, 0xFF99CC;
-	sleep 4000;
-	cutin "",255;
-
-	cutin "h_chaos02",2;
-	mapannounce .@map$, "[Chaos] Hey, quit gawking and look around! Survivors could still be out here!", bc_map, 0xFFFF99;
-	sleep 4000;
-	cutin "",255;
-
-	unittalk .@account_id, .@name$ + ": Look! There's a guy down here.";
-	sleep 2500;
-	mapannounce .@map$, "Search the crash site and help the injured. Survivors appear near the wreckage.", bc_map, 0x00FF99;
-	sleep 2500;
-
-	enablenpc instance_npcname("Captain Pelloch#mjo");
-	enablenpc instance_npcname("Injured Passenger#mjo1");
-	enablenpc instance_npcname("Injured Passenger#mjo2");
-	enablenpc instance_npcname("Injured Passenger#mjo3");
-	enablenpc instance_npcname("Injured Passenger#mjo4");
-	'story_phase = 2;
-	setpcblock PCBLOCK_NPC, false;
-	viewpoint 1, 241, 190, 2, 0xFF0000;
-	end;
-
 OnInstanceInit:
 	end;
 }
@@ -457,37 +275,41 @@ OnInstanceInit:
 //============================================================
 1@mjo1,219,379,3	script	Expedition Scientist#mjo	4_LGTSCIENCE,{
 	mes "[Scientist]";
-	mes "Welcome to the crash site.";
-	if ('story_phase == 0) {
-		mes "Strange figures were spotted near the wreckage to the ^0000cdnorthwest^000000.";
-		mes "You should investigate there before heading to the expedition cave.";
-	} else {
-		mes "The expedition team is waiting inside the cave to the northeast.";
-		mes "Follow the cave entrance marked on your minimap.";
-	}
+	mes "Welcome to the crash site. Our airship went down after the assault, and the Ymir Stone that powered it shattered across the island.";
+	mes "The scattered fragments mutated the monsters here into something far more dangerous.";
 	next;
 	mes "[Scientist]";
-	mes "Coordinates: ^0000cd(277, 253)^000000";
+	mes "The expedition team is waiting inside the cave to the ^0000cdnortheast (277, 253)^000000.";
+	mes "Follow the cave entrance marked on your minimap.";
+	next;
+	mes "[Scientist]";
+	mes "If you find ^0000cdinjured passengers^000000 scattered around the wreckage, please help them.";
+	mes "Rescuing enough survivors will weaken the creature lurking in the cave.";
+	mes "I have marked the survivors and the cave on your minimap.";
 	close2;
+	// Cave entrance (yellow) and known survivor locations (red) on the minimap.
 	viewpoint 1, 277, 253, 1, 0xFFFF00;
-	if ('story_phase == 0)
-		viewpoint 1, 225, 215, 2, 0xFF0000;
+	viewpoint 1, 241, 190, 2, 0xFF0000;
+	viewpoint 1, 205, 218, 3, 0xFF0000;
+	viewpoint 1, 252, 225, 4, 0xFF0000;
+	viewpoint 1, 197, 194, 5, 0xFF0000;
+	viewpoint 1, 257, 199, 6, 0xFF0000;
 	end;
 }
 
 1@mjo1,277,253,0	script	Cave Entrance#mjo	WARPNPC,2,2,{
 	end;
 OnTouch:
-	warp instance_mapname("1@mjo1"), 277, 265;
+	warp instance_mapname("1@mjo1"), 287, 266;
 	end;
 }
 
-1@mjo1,277,260,0	warp	Cave Exit#mjo	2,2,1@mjo1,219,375
+1@mjo1,281,257,0	warp	Cave Exit#mjo	2,2,1@mjo1,219,375
 
 //============================================================
 // Instance - Expedition Base (Cave)
 //============================================================
-1@mjo1,277,268,3	script	Professor#mjo	4_M_SAGE_A,{
+1@mjo1,284,268,3	script	Professor#mjo	4_M_SAGE_A,{
 	mes "[Professor]";
 	if ('investigation == 0) {
 		mes "We are investigating monsters mutated by scattered Ymir Stone fragments.";
@@ -540,7 +362,7 @@ OnTouch:
 	close;
 }
 
-1@mjo1,281,268,3	script	Student Kay#mjo	4_F_NOVICE,{
+1@mjo1,287,268,3	script	Student Kay#mjo	4_F_NOVICE,{
 	mes "[Student Kay]";
 	if ('investigation == 0) {
 		mes "Please speak with the Professor first.";
@@ -587,29 +409,17 @@ OnTouch:
 	close;
 }
 
-1@mjo1,274,268,3	script	Student Rin#mjo	4_M_REPAIR,{
+1@mjo1,290,268,3	script	Student Rin#mjo	4_M_REPAIR,{
 	mes "[Student Rin]";
-	mes "Since you cannot teleport here, use ^0000cdRope Piles^000000 in the cavity to return to base.";
-	mes "Mobile Devices can also guide you back or toward the boss area.";
+	mes "Since you cannot teleport inside the cavity, use ^0000cdRope Piles^000000 to return to this base.";
+	mes "Every time you enter the cavity, the rope locations are automatically marked with yellow ^ff0000+^000000 on your minimap.";
 	next;
-	switch(select("Mark rope locations on minimap.:Cancel")) {
-	case 1:
-		.@map$ = instance_mapname("1@mjo2");
-		viewpointmap .@map$, 1,  45,  45, 1, 0xFFFF00;
-		viewpointmap .@map$, 1, 255,  45, 2, 0xFFFF00;
-		viewpointmap .@map$, 1,  45, 255, 3, 0xFFFF00;
-		viewpointmap .@map$, 1, 255, 255, 4, 0xFFFF00;
-		viewpointmap .@map$, 1, 150,  30, 5, 0xFFFF00;
-		viewpointmap .@map$, 1, 150, 270, 6, 0xFFFF00;
-		mes "[Student Rin]";
-		mes "Rope locations are now marked with yellow ^ff0000+^000000 on your minimap.";
-		close;
-	case 2:
-		close;
-	}
+	mes "[Student Rin]";
+	mes "The Mobile Device here can also send you back to base or to the boss summoning site.";
+	close;
 }
 
-1@mjo1,283,265,3	script	Ghost Zack#mjo	4_GHOST_STAND,{
+1@mjo1,284,264,3	script	Ghost Zack#mjo	4_GHOST_STAND,{
 	mes "[Ghost Zack]";
 	mes "An unidentified creature lurks deeper in the cavity.";
 	mes "Bring me ^0000cd55 Ymir Fragments^000000 and I will summon it.";
@@ -642,13 +452,13 @@ OnTouch:
 	}
 }
 
-1@mjo1,285,265,3	script	Mobile Device#mjo	4_ENERGY_WHITE,{
+1@mjo1,287,264,3	script	Mobile Device#mjo	4_ENERGY_WHITE,{
 	mes "[Mobile Device]";
 	mes "Select a warp destination.";
 	next;
 	switch(select("Expedition base.:Boss summoning site.:Cancel")) {
 	case 1:
-		warp instance_mapname("1@mjo1"), 277, 265;
+		warp instance_mapname("1@mjo1"), 287, 266;
 		end;
 	case 2:
 		if (!'boss_summoned) {
@@ -663,36 +473,36 @@ OnTouch:
 	}
 }
 
-1@mjo1,280,262,0	script	Dungeon Gate#mjo	WARPNPC,2,2,{
+1@mjo1,287,271,0	script	Dungeon Gate#mjo	WARPNPC,2,2,{
 	end;
 OnTouch:
 	if ('investigation == 0) {
 		mes "The cavity is sealed until the Professor registers your investigation party.";
 		close2;
-		warp instance_mapname("1@mjo1"), 277, 265;
+		warp instance_mapname("1@mjo1"), 287, 266;
 		end;
 	}
-	warp instance_mapname("1@mjo2"), 150, 50;
+	warp instance_mapname("1@mjo2"), 150, 52;
 	end;
 }
 
-1@mjo2,150,42,0	warp2	Return Gate#mjo	2,2,1@mjo1,277,265
+1@mjo2,152,43,0	warp2	Return Gate#mjo	2,2,1@mjo1,287,266
 
-// Rope piles - quick return to expedition base
-1@mjo2,45,45,0	warp2	Rope Pile#mjo1	1,1,1@mjo1,277,265
-1@mjo2,255,45,0	warp2	Rope Pile#mjo2	1,1,1@mjo1,277,265
-1@mjo2,45,255,0	warp2	Rope Pile#mjo3	1,1,1@mjo1,277,265
-1@mjo2,255,255,0	warp2	Rope Pile#mjo4	1,1,1@mjo1,277,265
-1@mjo2,150,30,0	warp2	Rope Pile#mjo5	1,1,1@mjo1,277,265
-1@mjo2,150,270,0	warp2	Rope Pile#mjo6	1,1,1@mjo1,277,265
+// Rope piles - quick return to expedition base (cell-verified walkable spots)
+1@mjo2,255,45,0	warp2	Rope Pile#mjo1	1,1,1@mjo1,287,266
+1@mjo2,254,256,0	warp2	Rope Pile#mjo2	1,1,1@mjo1,287,266
+1@mjo2,48,42,0	warp2	Rope Pile#mjo3	1,1,1@mjo1,287,266
+1@mjo2,43,263,0	warp2	Rope Pile#mjo4	1,1,1@mjo1,287,266
+1@mjo2,143,23,0	warp2	Rope Pile#mjo5	1,1,1@mjo1,287,266
+1@mjo2,138,258,0	warp2	Rope Pile#mjo6	1,1,1@mjo1,287,266
 
 // Failsafe in case a player gets clipped into unwalkable terrain.
-1@mjo1,276,266,3	script	Rescue Device#mjo	4_ENERGY_RED,{
+1@mjo1,290,264,3	script	Rescue Device#mjo	4_ENERGY_RED,{
 	mes "[Rescue Device]";
 	mes "Relocate to the expedition base center?";
 	next;
 	if (select("Yes.:No.") == 1)
-		warp instance_mapname("1@mjo1"), 277, 265;
+		warp instance_mapname("1@mjo1"), 287, 266;
 	close;
 }
 
@@ -706,7 +516,6 @@ OnInstanceInit:
 	'investigation = 0;
 	'boss_summoned = 0;
 	'hp_mult = 1;
-	'story_phase = 0;
 	'injured_rescued = 0;
 	'pelloch_saved = 0;
 	'map2$ = instance_mapname("1@mjo2");
@@ -757,7 +566,7 @@ OnBossDead:
 }
 
 // Exit warp
-1@mjo1,273,262,0	script	Leave Instance#mjo	WARPNPC,2,2,{
+1@mjo1,291,261,0	script	Leave Instance#mjo	WARPNPC,2,2,{
 	end;
 OnTouch:
 	mes "Return to the Dimensional Gap?";
@@ -769,5 +578,30 @@ OnTouch:
 	if (isbegin_quest(15092) == 0)
 		setquest 15092;
 	warp "dali02", 137, 86;
+	end;
+}
+
+//============================================================
+// Cavity (1@mjo2) - auto rope minimap marks + entry failsafe
+//============================================================
+1@mjo2	mapflag	loadevent
+
+-	script	#AircrashMjo2Load	-1,{
+OnPCLoadMapEvent:
+	if (instance_id(IM_PARTY) <= 0)
+		end;
+	getmapxy .@m$, .@x, .@y, BL_PC;
+	if (.@m$ != instance_mapname("1@mjo2"))
+		end;
+	// Failsafe: if landed on an unwalkable cell, relocate to a safe spot.
+	if (checkcell(.@m$, .@x, .@y, cell_chknopass))
+		warp .@m$, 150, 52;
+	// Mark rope pile return points on the cavity minimap.
+	viewpoint 1, 255,  45, 1, 0xFFFF00;
+	viewpoint 1, 254, 256, 2, 0xFFFF00;
+	viewpoint 1,  48,  42, 3, 0xFFFF00;
+	viewpoint 1,  43, 263, 4, 0xFFFF00;
+	viewpoint 1, 143,  23, 5, 0xFFFF00;
+	viewpoint 1, 138, 258, 6, 0xFFFF00;
 	end;
 }

@@ -1,7 +1,7 @@
 // ==========================================
 // rAthena Costume Recycler NPC
 // Recycles PRO Gacha Egg I/II costumes (Common–Rare) into Gacha Coins,
-// and exchanges coins for rewards including random gacha costumes.
+// and exchanges coins for Gacha Eggs or Nyangvine Mileage Coupons.
 // ==========================================
 
 prontera,155,199,4	script	costume_recycler	2_VENDING_MACHINE1,{
@@ -99,18 +99,18 @@ S_ExchangeCoins:
 
 	switch (select(
 		"Nyangvine Mileage Coupon (" + .mileage_cost + " coins)",
-		"Random Gacha Egg I costume (" + .random_cost + " coins)",
-		"Random Gacha Egg II costume (" + .random_cost + " coins)",
+		getitemname(.gacha1_id) + " (" + .egg_cost + " coins)",
+		getitemname(.gacha2_id) + " (" + .egg_cost + " coins)",
 		"Cancel"
 	)) {
 	case 1:
 		callsub S_ExchangeMileage;
 		end;
 	case 2:
-		callsub S_ExchangeRandom, 1;
+		callsub S_ExchangeEgg, .gacha1_id;
 		end;
 	case 3:
-		callsub S_ExchangeRandom, 2;
+		callsub S_ExchangeEgg, .gacha2_id;
 		end;
 	case 4:
 		mes .npc_name$;
@@ -134,21 +134,12 @@ S_ExchangeMileage:
 	mes "Here is your ^009900" + getitemname(.mileage_id) + "^000000.";
 	close;
 
-S_ExchangeRandom:
-	.@pool = getarg(0);
-
-	if (.@pool == 1) {
-		.@size = getarraysize(.gacha1_pool);
-		.@pool_name$ = "Gacha Egg I";
-	} else {
-		.@size = getarraysize(.gacha2_pool);
-		.@pool_name$ = "Gacha Egg II";
-	}
+S_ExchangeEgg:
+	.@egg_id = getarg(0);
 
 	mes .npc_name$;
-	mes "Spend ^FF0000" + .random_cost + " " + getitemname(.coin_id) + "(s)^000000";
-	mes "for a random ^009900Common, Uncommon, or Rare^000000 costume";
-	mes "from the " + .@pool_name$ + " pool.";
+	mes "Spend ^FF0000" + .egg_cost + " " + getitemname(.coin_id) + "(s)^000000";
+	mes "for ^009900" + getitemname(.@egg_id) + "^000000.";
 	next;
 
 	if (select("Exchange now.:Not now.") == 2) {
@@ -157,26 +148,24 @@ S_ExchangeRandom:
 		close;
 	}
 
-	if (countitem(.coin_id) < .random_cost) {
+	if (countitem(.coin_id) < .egg_cost) {
 		mes .npc_name$;
-		mes "You need at least ^FF0000" + .random_cost + " " + getitemname(.coin_id) + "(s)^000000.";
+		mes "You need at least ^FF0000" + .egg_cost + " " + getitemname(.coin_id) + "(s)^000000.";
 		close;
 	}
 
-	if (checkweight(501, 1) == 0) {
+	if (checkweight(.@egg_id, 1) == 0) {
 		mes .npc_name$;
 		mes "Your inventory is too heavy. Please free up some space first.";
 		close;
 	}
 
-	.@reward_id = (.@pool == 1 ? .gacha1_pool[rand(.@size)] : .gacha2_pool[rand(.@size)]);
-
-	delitem .coin_id, .random_cost;
-	getitem .@reward_id, 1;
+	delitem .coin_id, .egg_cost;
+	getitem .@egg_id, 1;
 	specialeffect2 EF_FIREWORK, AREA, player;
 
 	mes .npc_name$;
-	mes "Here is your ^009900" + getitemname(.@reward_id) + "^000000!";
+	mes "Here is your ^009900" + getitemname(.@egg_id) + "^000000!";
 	mes "Good luck with your next roll!";
 	close;
 
@@ -220,9 +209,11 @@ OnInit:
 	.npc_name$ = "^0000FF[Costume Recycler]^000000";
 	.coins_reward = 1;
 	.coin_id = 50008;      // Gacha Coin
+	.gacha1_id = 50002;    // PRO Gacha Egg I
+	.gacha2_id = 50003;    // PRO Gacha Egg II
 	.mileage_id = 7000;    // Nyangvine Mileage Coupon
 	.mileage_cost = 5;
-	.random_cost = 3;      // Random Common–Rare costume exchange
+	.egg_cost = 3;         // Gacha Egg exchange cost
 
 	// Gacha Egg I (#50002) — Common, Uncommon, Rare only
 	setarray .gacha1_pool[0],

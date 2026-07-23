@@ -1,0 +1,197 @@
+###########################################################################
+# Rune Book Database - Renewal
+# EP17 rune pages print from engraved "Printed" (R_*_OS) materials.
+# EP20 rune pages (1263080-1263092, kRO client Rp_Ep20_* IDs) use a tuned
+# activation cost (Ep20_Cat_Whiskers + Imperfect_Rune); kRO does not expose a
+# per-page print recipe in the client tables, so these amounts are server-set.
+###########################################################################
+
+Header:
+  Type: RUNEBOOK_DB
+  Version: 1
+
+Body:
+  # Doubtful Components
+  - Id: 1263000
+    Name: Rp_Ep17_Melee
+    Materials:
+      - Material: R_Boost_Lance_OS
+        Amount: 1
+      - Material: R_Blasti_OS
+        Amount: 1
+      - Material: R_Beam_Claymore_OS
+        Amount: 1
+      - Material: R_Cannon_Rapier_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  - Id: 1263001
+    Name: Rp_Ep17_Range
+    Materials:
+      - Material: R_AC_B44_OS
+        Amount: 1
+      - Material: R_Virtual_Bow_OS
+        Amount: 1
+      - Material: R_HR_S55_OS
+        Amount: 1
+      - Material: R_MH_P89_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  - Id: 1263002
+    Name: Rp_Ep17_Magic
+    Materials:
+      - Material: R_Saphir_Hall_OS
+        Amount: 1
+      - Material: R_ElectricFox_OS
+        Amount: 1
+      - Material: R_Rutilus_Stick_OS
+        Amount: 1
+      - Material: R_Circuit_Board_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  - Id: 1263003
+    Name: Rp_Ep17_Razor
+    Materials:
+      - Material: R_Kuroiro_OS
+        Amount: 1
+      - Material: R_Meuchler_OS
+        Amount: 1
+      - Material: R_Burning_Knuckle_OS
+        Amount: 1
+      - Material: R_Ultio_Spes_OS
+        Amount: 1
+      - Material: EP17_1_EVT02
+        Amount: 75
+      - Material: EP17_1_EVT01
+        Amount: 40
+  # Automatic Armor
+  - Id: 1263004
+    Name: Rp_Ep17_Auto_A
+    Materials:
+      - Material: R_Auto_BC_R
+        Amount: 1
+      - Material: R_Auto_B_R
+        Amount: 1
+      - Material: R_Auto_Armor_A
+        Amount: 1
+      - Material: R_Auto_Engine_A
+        Amount: 1
+      - Material: R_Auto_Leg_A
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 250
+  - Id: 1263005
+    Name: Rp_Ep17_Auto_B
+    Materials:
+      - Material: R_Auto_BC_L
+        Amount: 1
+      - Material: R_Auto_B_L
+        Amount: 1
+      - Material: R_Auto_Armor_B
+        Amount: 1
+      - Material: R_Auto_Engine_B
+        Amount: 1
+      - Material: R_Auto_Leg_B
+        Amount: 1
+      - Material: BarMealTicket
+        Amount: 250
+  # Episode 20 rune pages (kRO Rp_Ep20_* IDs 1263080-1263092)
+  - Id: 1263080
+    Name: Rp_Ep20_Armor_A
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263081
+    Name: Rp_Ep20_Armor_B
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263082
+    Name: Rp_Ep20_Guard
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263083
+    Name: Rp_Ep20_Daily
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263084
+    Name: Rp_Ep20_Nest
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263085
+    Name: Rp_Ep20_Snail
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263086
+    Name: Rp_Ep20_Noob
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263087
+    Name: Rp_Ep20_Hide
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263088
+    Name: Rp_Ep20_Mess
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263089
+    Name: Rp_Ep20_Heal
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263090
+    Name: Rp_Ep20_Ranger
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263091
+    Name: Rp_Ep20_Sweeper
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20
+  - Id: 1263092
+    Name: Rp_Ep20_Ult
+    Materials:
+      - Material: Ep20_Cat_Whiskers
+        Amount: 50
+      - Material: Imperfect_Rune
+        Amount: 20

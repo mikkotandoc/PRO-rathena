@@ -1,0 +1,62 @@
+//===== rAthena Script =======================================
+//= Forgotten Time Dungeon (MuhRO)
+//===== Description: =========================================
+//= Direct Garden of Time entrances for for_dun01 / for_dun02.
+//= Access helper: F_ForgottenTimeCanEnter (episode_instance_access.txt)
+//============================================================
+
+t_garden,81,94,0	script	Forgotten Time#zone1	GATE_SKYBLUE,2,2,{
+	if (!callfunc("F_ForgottenTimeCanEnter", 1)) {
+		if (BaseLevel < 250)
+			mes "^0000cdForgotten Time Zone 1^000000 requires base level 250 or higher.";
+		else
+			mes "The passage to ^0000cdForgotten Time Zone 1^000000 is not open yet.";
+		mes "Activate the western dimensional passage in the Garden of Time first.";
+		close;
+	}
+	mes "This gate leads to ^0000cdForgotten Time Zone 1^000000.";
+	mes "Which entry point would you like?";
+	next;
+	switch( select( "Cancel", "6 o'clock", "Center", "10 o'clock" ) ) {
+	case 1:
+		close;
+	case 2:
+		warp "for_dun01",159,35;
+		break;
+	case 3:
+		warp "for_dun01",101,136;
+		break;
+	case 4:
+		warp "for_dun01",62,266;
+		break;
+	}
+	end;
+}
+
+t_garden,154,94,0	script	Forgotten Time#zone2	GATE_SKYBLUE,2,2,{
+	if (!callfunc("F_ForgottenTimeCanEnter", 2)) {
+		if (BaseLevel < 250)
+			mes "^0000cdForgotten Time Zone 2^000000 requires base level 250 or higher.";
+		else
+			mes "The passage to ^0000cdForgotten Time Zone 2^000000 is not open yet.";
+		mes "Activate the eastern dimensional passage in the Garden of Time first.";
+		close;
+	}
+	mes "This gate leads to ^0000cdForgotten Time Zone 2^000000.";
+	mes "Which entry point would you like?";
+	next;
+	switch( select( "Cancel", "7 o'clock", "1 o'clock", "5 o'clock" ) ) {
+	case 1:
+		close;
+	case 2:
+		warp "for_dun02",33,55;
+		break;
+	case 3:
+		warp "for_dun02",211,269;
+		break;
+	case 4:
+		warp "for_dun02",271,38;
+		break;
+	}
+	end;
+}

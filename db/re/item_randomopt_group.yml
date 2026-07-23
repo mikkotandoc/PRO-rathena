@@ -10222,7 +10222,7 @@ Body:
             Chance: 500
           - Option: VAR_CRITICALSUCCESSVALUE
             MinValue: 1
-            MaxValue: 15
+            MaxValue: 5
             Chance: 500
           - Option: DEC_SPELL_CAST_TIME
             MinValue: 1
@@ -10253,6 +10253,10 @@ Body:
             MaxValue: 3
             Chance: 500
           - Option: VAR_PLUSASPDPERCENT
+            MinValue: 1
+            MaxValue: 5
+            Chance: 500
+          - Option: DEC_SPELL_DELAY_TIME
             MinValue: 1
             MaxValue: 5
             Chance: 500

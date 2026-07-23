@@ -177925,6 +177925,7 @@ Body:
     ArmorLevel: 2
     EquipLevelMin: 150
     Refineable: true
+    Gradable: true
     View: 2565
     Script: |
       .@r = getrefine();
@@ -199703,6 +199704,7 @@ Body:
     ArmorLevel: 2
     EquipLevelMin: 150
     Refineable: true
+    Gradable: true
     Script: |
       .@r = getrefine();
       .@g = getenchantgrade();

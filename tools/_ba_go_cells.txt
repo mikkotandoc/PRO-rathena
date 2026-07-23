@@ -1,0 +1,73 @@
+map=1@ba_go
+source_try=db\map_cache.dat maps_parsed=1288 has_target=True
+source_try=db\re\map_cache.dat maps_parsed=9 has_target=False
+  note=Not present in db/re/map_cache.dat; loaded from db/map_cache.dat
+source=db\map_cache.dat
+size=400x100
+clen=148
+dlen=40000
+gat_legend: 0=walkable ground, 1=wall, 3=walkable water, 5=gap(snipable); walkable if gat in {0,2,3,4,6}
+
+=== coordinate checks ===
+x,y,raw_byte,hex,gat,walkable_rathena,in_bounds
+54,37,0,0x00,0,True,true
+55,40,0,0x00,0,True,true
+50,35,0,0x00,0,True,true
+60,40,0,0x00,0,True,true
+200,50,1,0x01,1,False,true
+180,50,1,0x01,1,False,true
+220,50,1,0x01,1,False,true
+200,35,1,0x01,1,False,true
+200,65,1,0x01,1,False,true
+200,12,1,0x01,1,False,true
+200,30,1,0x01,1,False,true
+100,50,1,0x01,1,False,true
+150,50,1,0x01,1,False,true
+80,50,1,0x01,1,False,true
+54,50,0,0x00,0,True,true
+54,80,1,0x01,1,False,true
+100,100,,,,False,false
+120,80,1,0x01,1,False,true
+80,80,1,0x01,1,False,true
+320,50,1,0x01,1,False,true
+290,30,1,0x01,1,False,true
+350,70,1,0x01,1,False,true
+
+=== arena scan around (54,37) ===
+top fight-center candidates (score, clearance_chebyshev, walkable_in_41x41, dist_from_54_37, x, y, gat):
+  score=18,462.0 clear=17 walk41=1482 dist=10.0 pos=(54,47) gat=0
+  score=18,461.9 clear=17 walk41=1482 dist=10.0 pos=(53,47) gat=0
+  score=18,461.9 clear=17 walk41=1482 dist=10.0 pos=(55,47) gat=0
+  score=18,423.6 clear=17 walk41=1444 dist=10.2 pos=(52,47) gat=0
+  score=18,423.6 clear=17 walk41=1444 dist=10.2 pos=(56,47) gat=0
+  score=17,425.0 clear=16 walk41=1443 dist=9.0 pos=(54,46) gat=0
+  score=17,424.9 clear=16 walk41=1443 dist=9.1 pos=(53,46) gat=0
+  score=17,424.9 clear=16 walk41=1443 dist=9.1 pos=(55,46) gat=0
+  score=17,387.6 clear=16 walk41=1406 dist=9.2 pos=(56,46) gat=0
+  score=17,387.6 clear=16 walk41=1406 dist=9.2 pos=(52,46) gat=0
+  score=17,385.1 clear=16 walk41=1406 dist=10.4 pos=(51,47) gat=0
+  score=17,385.1 clear=16 walk41=1406 dist=10.4 pos=(57,47) gat=0
+  score=17,350.0 clear=16 walk41=1369 dist=9.5 pos=(57,46) gat=0
+  score=17,350.0 clear=16 walk41=1369 dist=9.5 pos=(51,46) gat=0
+  score=16,388.0 clear=15 walk41=1404 dist=8.0 pos=(54,45) gat=0
+
+RECOMMENDED_FIGHT_CENTER=(54,47) gat=0 clearance_chebyshev=17 walkable_in_41x41=1482 dist_from_54_37=10.0
+PORTAL_N=name=N x=54 y=59 dist=12 local=25 g=0
+PORTAL_E=name=E x=66 y=47 dist=12 local=25 g=0
+PORTAL_S=name=S x=54 y=35 dist=12 local=25 g=0
+PORTAL_W=name=W x=42 y=47 dist=12 local=25 g=0
+NORTH_PHANTOM_PORTAL=x=46 y=65 dist=18 local=25 g=0
+EXIT_PORTAL=dir=S x=44 y=32 dist=15 local=25 g=0
+
+WALKABLE_COMPONENT_FROM=(54,37) cells=1521 bbox=x[35..73] y[30..68]
+
+ARENA_AT_X54_walkable_y=30..68 count=39
+ARENA_AT_Y47_walkable_x_span_note=row y=47 has walkable cells from x=35 eastward in places, but connected west room from (54,37) is bbox x[35..73] y[30..68] (1521 cells)
+ARENA_DESC=Western open chamber near (54,37): rectangular walkable floor (gat=0) walled on all sides. South wall at y~29, north wall near y~69, west/east walls near x~34 and x~74. Fight center (54,47) has chebyshev clearance 17 (~35x35 open). Map is 400x100; mid/east probe points are mostly wall (gat=1).
+
+=== SUMMARY ===
+map=1@ba_go size=400x100 source=db\map_cache.dat
+fight_center=(54,47)
+portals_NESW=(54,59),(66,47),(54,35),(42,47)
+north_phantom=(46,65)
+exit=(44,32)

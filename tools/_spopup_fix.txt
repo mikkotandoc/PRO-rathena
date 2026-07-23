@@ -1,0 +1,43 @@
+spopup.lub fix status - 2026-07-09 08:58:07
+Client: C:\Users\Mikko Tandoc\Downloads\asd\2\PRO-Ragnarok Asia
+
+1) System\spopup.lub
+   - Exists: True
+   - Size: 3240 bytes
+   - Format: plain UTF-8 text (NOT Lua bytecode; was previously 1B LuaQ compiled from Korean patch)
+   - First bytes: 2D-2D-20-4F-72-69-67-69-6E-61-6C-20-74-72-61-6E
+   - Entry [8] English: Yes (Forgotten Time Zone)
+
+2) SystemEN\spopup.lub
+   - Exists: True
+   - Size: 3240 bytes
+   - Format: plain UTF-8 text
+   - Entry [8] updated to exact requested strings
+
+3) GRF search (system\spopup.lub / data\spopup.lub / binary needles)
+   - proasia_Prontera.grf (MoM): no spopup entries
+   - proasia.grf (MoM): no spopup entries
+   - proasia_Extra.grf (MoM): no spopup entries
+   - proasia_Custom.grf (MoM): no spopup entries
+   - data.grf (Event Horizon header - Extract-GrfFile.ps1 unsupported): raw binary scan found NO 'spopup', NO Korean '잊혀진 시간' / '텔레포테이션' (CP949 or UTF-8) in uncompressed form
+   - Korean was NOT found in any GRF as plaintext; source of Korean UI was loose System\spopup.lub Lua bytecode (compiled from Korean live patch path in debug string)
+
+4) Loose spopup.lub files found:
+   - C:\Users\Mikko Tandoc\Downloads\asd\2\PRO-Ragnarok Asia\System\spopup.lub (3240 bytes)
+   - C:\Users\Mikko Tandoc\Downloads\asd\2\PRO-Ragnarok Asia\SystemEN\spopup.lub (3240 bytes)
+
+5) Preference: keep English plain-text System\spopup.lub so it overrides when Read Data Folder First is enabled.
+
+Entry [8] preview (System\spopup.lub):
+[8] = {
+		uitype = SPUI_IDS.SPU_FLOATING_CHAT,
+		textcolor = 16763904,
+		Description = {
+			"You have entered the Forgotten Time Zone.",
+			"Teleportation-related skills and items are prohibited.",
+			"Some movement-related skills are prohibited."
+		}
+	},
+	[9] = {
+		uitype = SPUI_IDS.SPU_FLOATING_CHAT,
+		textcolor = 16

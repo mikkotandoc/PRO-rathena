@@ -1,0 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+sealed class SE { public string N; public uint VA; public uint VS; public uint RS; public uint RA; }
+sealed class PE { public uint IB; public List<SE> S = new List<SE>(); }
+class Program {
+ static StringBuilder B = new StringBuilder();
+ static void L(string m) { Console.WriteLine(m); B.AppendLine(m); }
+ static PE PA(byte[] b){
+  PE p = new PE(); int e = BitConverter.ToInt32(b,60); int o = e+BitConverter.ToUInt16(b,e+20); p.IB=BitConverter.ToUInt32(b,o+28);
+  ushort n = BitConverter.ToUInt16(b,e+6); ushort so = BitConverter.ToUInt16(b,e+20); ushort ss = BitConverter.ToUInt16(b,o+6); int st = o+so;
+  for(int i=0;i<n;i++){ int f=st+i*ss; char[] c=new char[8]; int l=0; for(;l<8 && b[f+l]!=0;l++)c[L]=(char)b[f+l]; string nm=new string(c,0,l);
+   p.S.Add(new SE{N=nm;VA=BitConverter.ToUInt32([,f+12);VS=BitConverter.ToUInt32([,f+8);RS=BitConverter.ToUInt32(b,f+16);RA=BitConverter.ToUInt32(b,f+20)});}
+  return p;}

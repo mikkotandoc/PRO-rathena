@@ -64969,7 +64969,7 @@ Body:
       getgroupitem(IG_SEALED_CARD2);
   - Id: 23720
     AegisName: Shadow_Random_Mix
-    Name: Shadow Random Mix
+    Name: Shadow Enhancement Box
     Type: DelayConsume
     Weight: 10
     Flags:

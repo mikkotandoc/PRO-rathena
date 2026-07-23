@@ -1,0 +1,433 @@
+//===== rAthena Script =======================================
+//= Episode 21 memorial dungeons
+//===== Description: =========================================
+//= Playable Episode 21 instance framework for Gimle,
+//= Mysterious Ghost Ship, Secret Altar, Final Battle, and
+//= Silent Sanctuary. Access is level 230+, party-based, and
+//= protected by a 20-hour account cooldown.
+//============================================================
+
+function	script	F_ep21_instance_access	{
+	.@name$ = getarg(0);
+	.@index = getarg(1);
+	.@party_id = getcharid(1);
+
+	if (BaseLevel < 230) {
+		mes "Only adventurers of Base Level 230 or higher may enter.";
+		return;
+	}
+	if (.@party_id < 1) {
+		mes "Create a party before requesting entry.";
+		return;
+	}
+	if (#ep21_instance_cd[.@index] > gettimetick(2)) {
+		.@remaining = #ep21_instance_cd[.@index] - gettimetick(2);
+		mes "Your account is still recovering from this mission.";
+		mes "Remaining time: " + (.@remaining / 3600) + " hour(s), " + ((.@remaining % 3600) / 60) + " minute(s).";
+		return;
+	}
+
+	if (instance_live_info(ILI_NAME,instance_id(IM_PARTY)) == .@name$) {
+		if (select("Enter " + .@name$ + ":Cancel") == 2)
+			return;
+		switch (instance_enter(.@name$)) {
+		case IE_OK:
+			#ep21_instance_cd[.@index] = gettimetick(2) + 72000;
+			end;
+		case IE_NOMEMBER:
+			mes "You are not a member of the party that created this instance.";
+			return;
+		case IE_NOINSTANCE:
+			mes "The dimensional passage is not ready.";
+			return;
+		default:
+			mes "The instance could not be entered.";
+			return;
+		}
+	}
+
+	if (!is_party_leader()) {
+		mes "Only the party leader can create this instance.";
+		return;
+	}
+	if (select("Create " + .@name$ + ":Cancel") == 2)
+		return;
+	if (instance_create(.@name$) < 0) {
+		mes "The memorial dungeon could not be created.";
+		return;
+	}
+	mes "The dimensional passage has opened.";
+	mes "Talk to me again to enter.";
+	return;
+}
+
+function	script	F_ep21_instance_reward	{
+	.@hard = getarg(0,0);
+	.@aid = getcharid(3);
+
+	for (.@i = 0; .@i < getarraysize('ep21_reward_aid); ++.@i) {
+		if ('ep21_reward_aid[.@i] == .@aid) {
+			dispbottom "You already claimed this instance reward.";
+			return;
+		}
+	}
+	'ep21_reward_aid[getarraysize('ep21_reward_aid)] = .@aid;
+	if (.@hard) {
+		getexp 100000000,70000000;
+		Zeny += 1000000;
+	} else {
+		getexp 50000000,35000000;
+		Zeny += 500000;
+	}
+	dispbottom "Episode 21 clear reward received.";
+	return;
+}
+
+// ------------------------ Farm Access -----------------------
+
+icecastle,141,212,4	script	Episode 21 Guide#fields	4_M_NFMAN,{
+	mes "[Episode 21 Guide]";
+	if (BaseLevel < 230) {
+		mes "The Rising Lands expedition accepts adventurers of Base Level 230 or higher.";
+		close;
+	}
+	mes "I can send you to Lunaforma and the Episode 21 hunting grounds.";
+	next;
+	switch (select("Lunaforma Base:Northern Rising Lands:Southern Rising Lands:Gimle 1st Floor:Gimle 2nd Floor:Jorscalf 1st Floor:Jorscalf 2nd Floor:Cancel")) {
+	case 1: warp "jor_mbase",200,200; end;
+	case 2: warp "jor_raise1",199,190; end;
+	case 3: warp "jor_raise2",200,200; end;
+	case 4: warp "jor_tmple1",186,72; end;
+	case 5: warp "jor_tmple2",186,72; end;
+	case 6: warp "jor_sklf1",100,100; end;
+	case 7: warp "jor_sklf2",100,100; end;
+	}
+	close;
+}
+
+// -------------------------- Entrances -----------------------
+
+luna_sf2,187,254,4	script	Nadoyo#ep21_gimle	4_M_NFMAN,{
+	mes "[Nadoyo]";
+	mes "The resistance is ready to infiltrate Gimle.";
+	next;
+	callfunc("F_ep21_instance_access","Gimle Infiltration",0);
+	close;
+}
+
+jor_albe,190,186,4	script	Maristella#ep21_ship	4_F_ESTLOVELOY,{
+	mes "[Maristella Walter]";
+	mes "An unidentified ghost ship has appeared offshore.";
+	next;
+	callfunc("F_ep21_instance_access","Mysterious Ghost Ship",1);
+	close;
+}
+
+luna_sf2,258,257,4	script	Suspicious Book#ep21	4_ENERGY_RED,{
+	mes "[Suspicious Book]";
+	mes "The pages reveal a path to the Secret Altar.";
+	next;
+	callfunc("F_ep21_instance_access","Secret Altar",2);
+	close;
+}
+
+luna_sf2,260,46,4	script	Heine#ep21_final	4_EP21_HEINE_TAB,{
+	mes "[Heine]";
+	mes "The serpent's resting place lies beyond this passage.";
+	next;
+	switch (select("Final Battle:Final Battle (Hard):Cancel")) {
+	case 1:
+		callfunc("F_ep21_instance_access","Final Battle",3);
+		break;
+	case 2:
+		if (BaseLevel < 260) {
+			mes "[Heine]";
+			mes "Hard mode requires Base Level 260.";
+			break;
+		}
+		callfunc("F_ep21_instance_access","Final Battle (Hard)",4);
+		break;
+	}
+	close;
+}
+
+jor_twig,122,164,4	script	Nyar#ep21_sanctuary	4_EP20_NYAR,{
+	mes "[Nyar]";
+	mes "The Silent Sanctuary is caught inside the repeating past.";
+	next;
+	callfunc("F_ep21_instance_access","Silent Sanctuary",5);
+	close;
+}
+
+// ---------------------- Gimle Infiltration ------------------
+
+1@mdtem,1,1,0	script	#ep21_gimle_control	-1,{
+	end;
+
+OnInstanceInit:
+	'ep21_clear = 0;
+	.@map$ = instance_mapname("1@mdtem");
+	.@event$ = instance_npcname("#ep21_gimle_control") + "::OnWaveDead";
+	monster .@map$,0,0,"Yoster Cleaner",22323,6,.@event$;
+	monster .@map$,0,0,"Yoster Negotiator",22324,6,.@event$;
+	monster .@map$,0,0,"Yoster Cooker",22325,6,.@event$;
+	monster .@map$,0,0,"Yoster Fixer",22326,6,.@event$;
+	monster .@map$,0,0,"Yoster Collector",22327,6,.@event$;
+	mapannounce .@map$,"Nadoyo: Clear the temple guards and secure the prayer room!",bc_map,0xFFFF00;
+	end;
+
+OnWaveDead:
+	.@map$ = instance_mapname("1@mdtem");
+	.@event$ = instance_npcname("#ep21_gimle_control") + "::OnWaveDead";
+	if (mobcount(.@map$,.@event$) > 0)
+		end;
+	mapannounce .@map$,"The temple's defender has appeared.",bc_map,0xFF6600;
+	monster .@map$,0,0,"Yortus Bishop",22360,1,instance_npcname("#ep21_gimle_control") + "::OnBossDead";
+	end;
+
+OnBossDead:
+	'ep21_clear = 1;
+	mapannounce instance_mapname("1@mdtem"),"Gimle has been secured. The return guide has appeared.",bc_map,0x00FF99;
+	enablenpc instance_npcname("Return Guide#ep21_gimle");
+	end;
+}
+
+1@mdtem,100,100,4	script	Return Guide#ep21_gimle	4_M_NFMAN,{
+	if (!'ep21_clear)
+		end;
+	callfunc("F_ep21_instance_reward");
+	if (select("Return to Lunaforma:Stay") == 1)
+		warp "luna_sf2",187,254;
+	close;
+
+OnInstanceInit:
+	disablenpc instance_npcname("Return Guide#ep21_gimle");
+	end;
+}
+
+// -------------------- Mysterious Ghost Ship -----------------
+
+1@wtgs,1,1,0	script	#ep21_ship_control	-1,{
+	end;
+
+OnInstanceInit:
+	'ep21_clear = 0;
+	.@map$ = instance_mapname("1@wtgs");
+	.@event$ = instance_npcname("#ep21_ship_control") + "::OnWaveDead";
+	monster .@map$,0,0,"Ghost Ship Sailor",22369,30,.@event$;
+	monster .@map$,0,0,"Seawind",22313,8,.@event$;
+	monster .@map$,0,0,"Ice Seahorse",22318,8,.@event$;
+	mapannounce .@map$,"Maristella: Search the ship and purge the creatures aboard!",bc_map,0xFFFF00;
+	end;
+
+OnWaveDead:
+	.@map$ = instance_mapname("1@wtgs");
+	.@event$ = instance_npcname("#ep21_ship_control") + "::OnWaveDead";
+	if (mobcount(.@map$,.@event$) > 0)
+		end;
+	mapannounce .@map$,"The ghost ship captain emerges from the flooded hold.",bc_map,0xFF6600;
+	monster .@map$,0,0,"Ghost Ship Captain",22372,1,instance_npcname("#ep21_ship_control") + "::OnBossDead";
+	end;
+
+OnBossDead:
+	'ep21_clear = 1;
+	mapannounce instance_mapname("1@wtgs"),"The ghost ship has been cleared. The return guide has appeared.",bc_map,0x00FF99;
+	enablenpc instance_npcname("Return Guide#ep21_ship");
+	end;
+}
+
+1@wtgs,100,100,4	script	Return Guide#ep21_ship	4_F_ESTLOVELOY,{
+	if (!'ep21_clear)
+		end;
+	callfunc("F_ep21_instance_reward");
+	if (select("Return to Alberta:Stay") == 1)
+		warp "jor_albe",190,186;
+	close;
+
+OnInstanceInit:
+	disablenpc instance_npcname("Return Guide#ep21_ship");
+	end;
+}
+
+// ------------------------- Secret Altar ---------------------
+
+1@ep21a,1,1,0	script	#ep21_altar_control	-1,{
+	end;
+
+OnInstanceInit:
+	'ep21_clear = 0;
+	.@map$ = instance_mapname("1@ep21a");
+	.@event$ = instance_npcname("#ep21_altar_control") + "::OnWaveDead";
+	monster .@map$,0,0,"Yormi",22353,8,.@event$;
+	monster .@map$,0,0,"Yormi Missionary",22354,8,.@event$;
+	monster .@map$,0,0,"Yordos Investigator",22355,6,.@event$;
+	monster .@map$,0,0,"Yordos Judge",22356,6,.@event$;
+	monster .@map$,0,0,"Yordos Executor",22357,6,.@event$;
+	mapannounce .@map$,"Lehar: Break through the cultists and reach the altar!",bc_map,0xFFFF00;
+	end;
+
+OnWaveDead:
+	.@map$ = instance_mapname("1@ep21a");
+	.@event$ = instance_npcname("#ep21_altar_control") + "::OnWaveDead";
+	if (mobcount(.@map$,.@event$) > 0)
+		end;
+	mapannounce .@map$,"The awakened judge descends upon the altar.",bc_map,0xFF6600;
+	monster .@map$,0,0,"Awakened Yortus Judge",22421,1,instance_npcname("#ep21_altar_control") + "::OnBossDead";
+	end;
+
+OnBossDead:
+	'ep21_clear = 1;
+	mapannounce instance_mapname("1@ep21a"),"The Secret Altar has been purified. The return guide has appeared.",bc_map,0x00FF99;
+	enablenpc instance_npcname("Return Guide#ep21_altar");
+	end;
+}
+
+1@ep21a,100,100,4	script	Return Guide#ep21_altar	4_EP19_LEHAR,{
+	if (!'ep21_clear)
+		end;
+	callfunc("F_ep21_instance_reward");
+	if (select("Return to Lunaforma:Stay") == 1)
+		warp "luna_sf2",258,257;
+	close;
+
+OnInstanceInit:
+	disablenpc instance_npcname("Return Guide#ep21_altar");
+	end;
+}
+
+// ------------------------- Final Battle ---------------------
+
+1@ep21b,1,1,0	script	#ep21_final_control	-1,{
+	end;
+
+OnInstanceInit:
+	'ep21_clear = 0;
+	.@map$ = instance_mapname("1@ep21b");
+	.@event$ = instance_npcname("#ep21_final_control") + "::OnWaveDead";
+	monster .@map$,0,0,"Yoscopus Guardian",22358,10,.@event$;
+	monster .@map$,0,0,"Yoscopus Shaman",22359,10,.@event$;
+	monster .@map$,0,0,"Yortus Bishop",22360,8,.@event$;
+	monster .@map$,0,0,"Yortus Warlock",22361,8,.@event$;
+	mapannounce .@map$,"Heine: Destroy the guardians protecting the serpent's rest!",bc_map,0xFFFF00;
+	end;
+
+OnWaveDead:
+	.@map$ = instance_mapname("1@ep21b");
+	.@event$ = instance_npcname("#ep21_final_control") + "::OnWaveDead";
+	if (mobcount(.@map$,.@event$) > 0)
+		end;
+	mapannounce .@map$,"Eroded Tan blocks the course of history.",bc_map,0xFF6600;
+	monster .@map$,0,0,"Eroded Tan",22373,1,instance_npcname("#ep21_final_control") + "::OnBossDead";
+	end;
+
+OnBossDead:
+	'ep21_clear = 1;
+	mapannounce instance_mapname("1@ep21b"),"The final battle is won. The return guide has appeared.",bc_map,0x00FF99;
+	enablenpc instance_npcname("Return Guide#ep21_final");
+	end;
+}
+
+1@ep21b,100,100,4	script	Return Guide#ep21_final	4_EP21_HEINE_TAB,{
+	if (!'ep21_clear)
+		end;
+	callfunc("F_ep21_instance_reward");
+	if (select("Return to Lunaforma:Stay") == 1)
+		warp "luna_sf2",260,46;
+	close;
+
+OnInstanceInit:
+	disablenpc instance_npcname("Return Guide#ep21_final");
+	end;
+}
+
+// ---------------------- Final Battle Hard -------------------
+
+1@ep21c,1,1,0	script	#ep21_final_h_control	-1,{
+	end;
+
+OnInstanceInit:
+	'ep21_clear = 0;
+	.@map$ = instance_mapname("1@ep21c");
+	.@event$ = instance_npcname("#ep21_final_h_control") + "::OnWaveDead";
+	monster .@map$,0,0,"Awakened Yordos Executor",22414,12,.@event$;
+	monster .@map$,0,0,"Awakened Yordos Judge",22415,12,.@event$;
+	monster .@map$,0,0,"Awakened Yordos Investigator",22416,12,.@event$;
+	monster .@map$,0,0,"Awakened Yormi",22417,12,.@event$;
+	monster .@map$,0,0,"Awakened Yormi Missionary",22418,12,.@event$;
+	mapannounce .@map$,"Heine: The repeating past has empowered every guardian. Hold the line!",bc_map,0xFFFF00;
+	end;
+
+OnWaveDead:
+	.@map$ = instance_mapname("1@ep21c");
+	.@event$ = instance_npcname("#ep21_final_h_control") + "::OnWaveDead";
+	if (mobcount(.@map$,.@event$) > 0)
+		end;
+	mapannounce .@map$,"The strongest echo of Eroded Tan enters the battlefield.",bc_map,0xFF6600;
+	monster .@map$,0,0,"Eroded Tan",22410,1,instance_npcname("#ep21_final_h_control") + "::OnBossDead";
+	end;
+
+OnBossDead:
+	'ep21_clear = 1;
+	mapannounce instance_mapname("1@ep21c"),"Hard mode has been cleared. The return guide has appeared.",bc_map,0x00FF99;
+	enablenpc instance_npcname("Return Guide#ep21_final_h");
+	end;
+}
+
+1@ep21c,100,100,4	script	Return Guide#ep21_final_h	4_EP21_HEINE_TAB,{
+	if (!'ep21_clear)
+		end;
+	callfunc("F_ep21_instance_reward",1);
+	if (select("Return to Lunaforma:Stay") == 1)
+		warp "luna_sf2",260,46;
+	close;
+
+OnInstanceInit:
+	disablenpc instance_npcname("Return Guide#ep21_final_h");
+	end;
+}
+
+// ---------------------- Silent Sanctuary --------------------
+
+1@twbs2,1,1,0	script	#ep21_sanct_control	-1,{
+	end;
+
+OnInstanceInit:
+	'ep21_clear = 0;
+	.@map$ = instance_mapname("1@twbs2");
+	.@event$ = instance_npcname("#ep21_sanct_control") + "::OnWaveDead";
+	monster .@map$,0,0,"Awakened Yormi",22417,10,.@event$;
+	monster .@map$,0,0,"Awakened Yormi Missionary",22418,10,.@event$;
+	monster .@map$,0,0,"Awakened Yordos Executor",22414,8,.@event$;
+	monster .@map$,0,0,"Awakened Yordos Judge",22415,8,.@event$;
+	monster .@map$,0,0,"Awakened Yordos Investigator",22416,8,.@event$;
+	mapannounce .@map$,"Nyar: The sanctuary is trapped in a loop. Defeat every echo!",bc_map,0xFFFF00;
+	end;
+
+OnWaveDead:
+	.@map$ = instance_mapname("1@twbs2");
+	.@event$ = instance_npcname("#ep21_sanct_control") + "::OnWaveDead";
+	if (mobcount(.@map$,.@event$) > 0)
+		end;
+	mapannounce .@map$,"The source of the sanctuary's loop has appeared.",bc_map,0xFF6600;
+	monster .@map$,0,0,"Awakened Yortus Judge",22421,1,instance_npcname("#ep21_sanct_control") + "::OnBossDead";
+	end;
+
+OnBossDead:
+	'ep21_clear = 1;
+	mapannounce instance_mapname("1@twbs2"),"The Silent Sanctuary is stable. The return guide has appeared.",bc_map,0x00FF99;
+	enablenpc instance_npcname("Return Guide#ep21_sanct");
+	end;
+}
+
+1@twbs2,100,100,4	script	Return Guide#ep21_sanct	4_EP20_NYAR,{
+	if (!'ep21_clear)
+		end;
+	callfunc("F_ep21_instance_reward");
+	if (select("Return to the present:Stay") == 1)
+		warp "jor_twig",122,164;
+	close;
+
+OnInstanceInit:
+	disablenpc instance_npcname("Return Guide#ep21_sanct");
+	end;
+}

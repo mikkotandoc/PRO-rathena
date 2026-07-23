@@ -21,6 +21,7 @@
 #include "map.hpp" // RC_ALL
 #include "mob.hpp" //e_size
 #include "pc_groups.hpp" // s_player_group
+#include "rune.hpp"
 #include "script.hpp" // struct script_reg, struct script_regstr
 #include "searchstore.hpp"  // struct s_search_store_info
 #include "status.hpp" // unit_data
@@ -472,6 +473,7 @@ public:
 		bool roulette_open;
 		t_itemid item_reform;
 		uint64 item_enchant_index;
+		bool runeui_open;
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -831,6 +833,9 @@ public:
 		struct achievement *achievements; ///< Achievement log entries
 	} achievement_data;
 
+	/// Rune Tablet System (character-bound)
+	s_pc_rune rune;
+
 	// Title system
 	std::vector<int32> titles;
 
@@ -1180,7 +1185,10 @@ static bool pc_cant_act2( map_session_data* sd ){
 		|| sd->state.barter_open || sd->state.barter_extended_open
 		|| sd->state.laphine_synthesis || sd->state.laphine_upgrade
 		|| sd->state.roulette_open || sd->state.enchantgrade_open
-		|| sd->state.item_reform || sd->state.item_enchant_index;
+		|| sd->state.item_reform || sd->state.item_enchant_index
+		// runeui_open intentionally omitted from cant_act until the official
+		// close packet is confirmed; map-change still clears the flag.
+		;
 }
 // equals pc_cant_act2 and additionally checks for chat rooms and npcs
 static bool pc_cant_act( map_session_data* sd ){

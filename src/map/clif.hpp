@@ -1556,4 +1556,15 @@ void clif_noask_sub( const map_session_data& sd, const map_session_data& tsd, in
 
 void clif_specialpopup(const map_session_data& sd, int32 id);
 
+/// Rune Tablet System
+void clif_runeui_open( map_session_data& sd );
+void clif_rune_ack( map_session_data& sd, uint8 result, uint32 id );
+void clif_rune_sync( map_session_data& sd );
+void clif_parse_runeui_close( int32 fd, map_session_data* sd );
+void clif_parse_rune_activate_book( int32 fd, map_session_data* sd );
+void clif_parse_rune_activate_set( int32 fd, map_session_data* sd );
+void clif_parse_rune_equip_set( int32 fd, map_session_data* sd );
+void clif_parse_rune_upgrade_set( int32 fd, map_session_data* sd );
+void clif_parse_rune_decompose( int32 fd, map_session_data* sd );
+
 #endif /* CLIF_HPP */

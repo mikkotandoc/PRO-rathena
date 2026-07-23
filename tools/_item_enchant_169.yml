@@ -1,0 +1,693 @@
+﻿    TargetItems:
+      S_Circlet_Of_Time_RK: true
+      S_Circlet_Of_Time_LG: true
+      S_Circlet_Of_Time_NC: true
+      S_Circlet_Of_Time_GN: true
+      S_Circlet_Of_Time_GC: true
+      S_Circlet_Of_Time_SC: true
+      S_Circlet_Of_Time_AB: true
+      S_Circlet_Of_Time_SR: true
+      S_Circlet_Of_Time_WL: true
+      S_Circlet_Of_Time_SO: true
+      S_Circlet_Of_Time_RA: true
+      S_Circlet_Of_Time_WM: true
+      S_Circlet_Of_Time_SJ: true
+      S_Circlet_Of_Time_SP: true
+      S_Circlet_Of_Time_RL: true
+      S_Circlet_Of_Time_OB: true
+      S_Circlet_Of_Time_KG: true
+      S_Circlet_Of_Time_NV: true
+      S_Circlet_Of_Time_SU: true
+    Reset:
+      Chance: 70000
+      Price: 500000
+    Order:
+      - Slot: 3
+      - Slot: 2
+      - Slot: 1
+    Slots:
+      - Slot: 3
+        Materials:
+          - Material: Fragment_Of_Time
+            Amount: 10
+        Enchants:
+          - Enchantgrade: 0
+            Items:
+              - Item: Inteligence1
+                Chance: 13000
+              - Item: Inteligence2
+                Chance: 7000
+              - Item: Inteligence3
+                Chance: 4000
+              - Item: Inteligence4
+                Chance: 1000
+              - Item: Strength1
+                Chance: 13000
+              - Item: Strength2
+                Chance: 7000
+              - Item: Strength3
+                Chance: 4000
+              - Item: Strength4
+                Chance: 1000
+              - Item: Vitality1
+                Chance: 13000
+              - Item: Vitality2
+                Chance: 7000
+              - Item: Vitality3
+                Chance: 4000
+              - Item: Vitality4
+                Chance: 1000
+              - Item: Luck1
+                Chance: 13000
+              - Item: Luck2
+                Chance: 7000
+              - Item: Luck3
+                Chance: 4000
+              - Item: Luck4
+                Chance: 1000
+      - Slot: 2
+        Materials:
+          - Material: Fragment_Of_Time
+            Amount: 20
+        Enchants:
+          - Enchantgrade: 0
+            Items:
+              - Item: Inteligence1
+                Chance: 11010
+              - Item: Inteligence2
+                Chance: 6880
+              - Item: Inteligence3
+                Chance: 3850
+              - Item: Inteligence4
+                Chance: 1100
+              - Item: Strength1
+                Chance: 11010
+              - Item: Strength2
+                Chance: 6880
+              - Item: Strength3
+                Chance: 3850
+              - Item: Strength4
+                Chance: 1100
+              - Item: Vitality1
+                Chance: 11010
+              - Item: Vitality2
+                Chance: 6880
+              - Item: Vitality3
+                Chance: 3850
+              - Item: Vitality4
+                Chance: 1100
+              - Item: Luck1
+                Chance: 11010
+              - Item: Luck2
+                Chance: 6880
+              - Item: Luck3
+                Chance: 3850
+              - Item: Luck4
+                Chance: 1100
+              - Item: Time_Jewely_Str_1
+                Chance: 1100
+              - Item: Time_Jewely_Str_2
+                Chance: 220
+              - Item: Time_Jewely_Str_3
+                Chance: 20
+              - Item: Time_Jewely_Agi_1
+                Chance: 1100
+              - Item: Time_Jewely_Agi_2
+                Chance: 220
+              - Item: Time_Jewely_Agi_3
+                Chance: 20
+              - Item: Time_Jewely_Vit_1
+                Chance: 1100
+              - Item: Time_Jewely_Vit_2
+                Chance: 220
+              - Item: Time_Jewely_Vit_3
+                Chance: 20
+              - Item: Time_Jewely_Int_1
+                Chance: 1100
+              - Item: Time_Jewely_Int_2
+                Chance: 220
+              - Item: Time_Jewely_Int_3
+                Chance: 20
+              - Item: Time_Jewely_Dex_1
+                Chance: 1100
+              - Item: Time_Jewely_Dex_2
+                Chance: 220
+              - Item: Time_Jewely_Dex_3
+                Chance: 20
+              - Item: Time_Jewely_Luk_1
+                Chance: 1100
+              - Item: Time_Jewely_Luk_2
+                Chance: 220
+              - Item: Time_Jewely_Luk_3
+                Chance: 20
+        PerfectEnchants:
+          - Item: Time_Jewely_Str_1
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Str_2
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Str_3
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Agi_1
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Agi_2
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Agi_3
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Vit_1
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Vit_2
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Vit_3
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Int_1
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Int_2
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Int_3
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Dex_1
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Dex_2
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Dex_3
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Luk_1
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Luk_2
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+          - Item: Time_Jewely_Luk_3
+            Materials:
+              - Material: Jewel_Of_Time_Ore
+                Amount: 2
+        Upgrades:
+          - Enchant: Time_Jewely_Str_1
+            Upgrade: Time_Jewely_Str_2
+            Price: 3500000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Time_Jewely_Str_2
+            Upgrade: Time_Jewely_Str_3
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 30
+          - Enchant: Time_Jewely_Agi_1
+            Upgrade: Time_Jewely_Agi_2
+            Price: 3500000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Time_Jewely_Agi_2
+            Upgrade: Time_Jewely_Agi_3
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 30
+          - Enchant: Time_Jewely_Vit_1
+            Upgrade: Time_Jewely_Vit_2
+            Price: 3500000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Time_Jewely_Vit_2
+            Upgrade: Time_Jewely_Vit_3
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 30
+          - Enchant: Time_Jewely_Int_1
+            Upgrade: Time_Jewely_Int_2
+            Price: 3500000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Time_Jewely_Int_2
+            Upgrade: Time_Jewely_Int_3
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 30
+          - Enchant: Time_Jewely_Dex_1
+            Upgrade: Time_Jewely_Dex_2
+            Price: 3500000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Time_Jewely_Dex_2
+            Upgrade: Time_Jewely_Dex_3
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 30
+          - Enchant: Time_Jewely_Luk_1
+            Upgrade: Time_Jewely_Luk_2
+            Price: 3500000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Time_Jewely_Luk_2
+            Upgrade: Time_Jewely_Luk_3
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 30
+      - Slot: 1
+        Materials:
+          - Material: Spell_Of_Time
+            Amount: 2
+        Enchants:
+          - Enchantgrade: 0
+            Items:
+              - Item: Sharp4
+                Chance: 260
+              - Item: Sharp3
+                Chance: 520
+              - Item: Sharp2
+                Chance: 1030
+              - Item: Sharp1
+                Chance: 2060
+              - Item: Expert_Archer4
+                Chance: 260
+              - Item: Expert_Archer3
+                Chance: 520
+              - Item: Expert_Archer2
+                Chance: 1030
+              - Item: Expert_Archer1
+                Chance: 2060
+              - Item: Attack_Delay_4
+                Chance: 260
+              - Item: Attack_Delay_3
+                Chance: 520
+              - Item: Attack_Delay_2
+                Chance: 1030
+              - Item: Attack_Delay_1
+                Chance: 2060
+              - Item: Spell4
+                Chance: 260
+              - Item: Spell3
+                Chance: 520
+              - Item: Spell2
+                Chance: 1030
+              - Item: Spell1
+                Chance: 2060
+              - Item: Tenacity1
+                Chance: 12370
+              - Item: Mettle1
+                Chance: 12370
+              - Item: Affection1
+                Chance: 12370
+              - Item: Adamatine1
+                Chance: 12370
+              - Item: MasterArcher1
+                Chance: 12370
+              - Item: MagicEessence1
+                Chance: 12370
+              - Item: Acute1
+                Chance: 12370
+        PerfectEnchants:
+          - Item: Tenacity1
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Item: Mettle1
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Item: Affection1
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Item: Adamatine1
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Item: MasterArcher1
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Item: MagicEessence1
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Item: Acute1
+            Price: 5000000
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+        Upgrades:
+          - Enchant: Tenacity1
+            Upgrade: Tenacity2
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 4
+          - Enchant: Tenacity2
+            Upgrade: Tenacity3
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 6
+          - Enchant: Tenacity3
+            Upgrade: Tenacity4
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 8
+          - Enchant: Tenacity4
+            Upgrade: Tenacity5
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 10
+          - Enchant: Tenacity5
+            Upgrade: Tenacity6
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 12
+          - Enchant: Tenacity6
+            Upgrade: Tenacity7
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 16
+          - Enchant: Tenacity7
+            Upgrade: Tenacity8
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Tenacity8
+            Upgrade: Tenacity9
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 28
+          - Enchant: Tenacity9
+            Upgrade: Tenacity10
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Enchant: Mettle1
+            Upgrade: Mettle2
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 4
+          - Enchant: Mettle2
+            Upgrade: Mettle3
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 6
+          - Enchant: Mettle3
+            Upgrade: Mettle4
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 8
+          - Enchant: Mettle4
+            Upgrade: Mettle5
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 10
+          - Enchant: Mettle5
+            Upgrade: Mettle6
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 12
+          - Enchant: Mettle6
+            Upgrade: Mettle7
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 16
+          - Enchant: Mettle7
+            Upgrade: Mettle8
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Mettle8
+            Upgrade: Mettle9
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 28
+          - Enchant: Mettle9
+            Upgrade: Mettle10
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Enchant: Affection1
+            Upgrade: Affection2
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 4
+          - Enchant: Affection2
+            Upgrade: Affection3
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 6
+          - Enchant: Affection3
+            Upgrade: Affection4
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 8
+          - Enchant: Affection4
+            Upgrade: Affection5
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 10
+          - Enchant: Affection5
+            Upgrade: Affection6
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 12
+          - Enchant: Affection6
+            Upgrade: Affection7
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 16
+          - Enchant: Affection7
+            Upgrade: Affection8
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Affection8
+            Upgrade: Affection9
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 28
+          - Enchant: Affection9
+            Upgrade: Affection10
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Enchant: Adamatine1
+            Upgrade: Adamatine2
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 4
+          - Enchant: Adamatine2
+            Upgrade: Adamatine3
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 6
+          - Enchant: Adamatine3
+            Upgrade: Adamatine4
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 8
+          - Enchant: Adamatine4
+            Upgrade: Adamatine5
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 10
+          - Enchant: Adamatine5
+            Upgrade: Adamatine6
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 12
+          - Enchant: Adamatine6
+            Upgrade: Adamatine7
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 16
+          - Enchant: Adamatine7
+            Upgrade: Adamatine8
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Adamatine8
+            Upgrade: Adamatine9
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 28
+          - Enchant: Adamatine9
+            Upgrade: Adamatine10
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Enchant: MasterArcher1
+            Upgrade: MasterArcher2
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 4
+          - Enchant: MasterArcher2
+            Upgrade: MasterArcher3
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 6
+          - Enchant: MasterArcher3
+            Upgrade: MasterArcher4
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 8
+          - Enchant: MasterArcher4
+            Upgrade: MasterArcher5
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 10
+          - Enchant: MasterArcher5
+            Upgrade: MasterArcher6
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 12
+          - Enchant: MasterArcher6
+            Upgrade: MasterArcher7
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 16
+          - Enchant: MasterArcher7
+            Upgrade: MasterArcher8
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: MasterArcher8
+            Upgrade: MasterArcher9
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 28
+          - Enchant: MasterArcher9
+            Upgrade: MasterArcher10
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Enchant: MagicEessence1
+            Upgrade: MagicEessence2
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 4
+          - Enchant: MagicEessence2
+            Upgrade: MagicEessence3
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 6
+          - Enchant: MagicEessence3
+            Upgrade: MagicEessence4
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 8
+          - Enchant: MagicEessence4
+            Upgrade: MagicEessence5
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 10
+          - Enchant: MagicEessence5
+            Upgrade: MagicEessence6
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 12
+          - Enchant: MagicEessence6
+            Upgrade: MagicEessence7
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 16
+          - Enchant: MagicEessence7
+            Upgrade: MagicEessence8
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: MagicEessence8
+            Upgrade: MagicEessence9
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 28
+          - Enchant: MagicEessence9
+            Upgrade: MagicEessence10
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40
+          - Enchant: Acute1
+            Upgrade: Acute2
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 4
+          - Enchant: Acute2
+            Upgrade: Acute3
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 6
+          - Enchant: Acute3
+            Upgrade: Acute4
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 8
+          - Enchant: Acute4
+            Upgrade: Acute5
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 10
+          - Enchant: Acute5
+            Upgrade: Acute6
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 12
+          - Enchant: Acute6
+            Upgrade: Acute7
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 16
+          - Enchant: Acute7
+            Upgrade: Acute8
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 20
+          - Enchant: Acute8
+            Upgrade: Acute9
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 28
+          - Enchant: Acute9
+            Upgrade: Acute10
+            Materials:
+              - Material: Spell_Of_Time
+                Amount: 40

@@ -3561,6 +3561,9 @@ struct item_data
 		e_item_drop_effect dropEffect; ///< Drop Effect Mode
 		unsigned gradable : 1;
 	} flag;
+	/// Rune Tablet card decomposition pool ids (0 = not decomposable)
+	uint32 rune_decomp_type1;
+	uint32 rune_decomp_type2;
 	struct {// item stacking limitation
 		uint16 amount;
 		bool inventory, cart, storage, guild_storage;

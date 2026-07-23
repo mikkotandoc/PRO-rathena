@@ -51,6 +51,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
 #include "script.hpp"
 #include "storage.hpp"
 #include "trade.hpp"
@@ -11441,6 +11442,86 @@ ACMD_FUNC( enchantgradeui ){
 #endif
 }
 
+/**
+ * Opens / manages the Rune Tablet system
+ * Usage: @runeui
+ *        @rune activatebook <id>
+ *        @rune activateset <id>
+ *        @rune equip <id>
+ *        @rune unequip
+ *        @rune upgrade [id]
+ *        @rune info
+ */
+ACMD_FUNC( runeui ){
+	nullpo_retr( -1, sd );
+
+#if PACKETVER < 20230802
+	sprintf( atcmd_output, msg_txt( sd, 798 ), "2023-08-02" );
+	clif_displaymessage( fd, atcmd_output );
+	return -1;
+#else
+	clif_runeui_open( *sd );
+	return 0;
+#endif
+}
+
+ACMD_FUNC( rune ){
+	nullpo_retr( -1, sd );
+
+	char subcmd[64];
+	uint32 id = 0;
+
+	if( !message || !*message || sscanf( message, "%63s %u", subcmd, &id ) < 1 ){
+		clif_displaymessage( fd, "Usage: @rune <activatebook|activateset|equip|unequip|upgrade|info> [id]" );
+		return -1;
+	}
+
+	if( strcmpi( subcmd, "activatebook" ) == 0 ){
+		if( id == 0 ){
+			clif_displaymessage( fd, "Usage: @rune activatebook <book_id>" );
+			return -1;
+		}
+		return rune_activate_book( *sd, id ) ? 0 : -1;
+	}
+	if( strcmpi( subcmd, "activateset" ) == 0 ){
+		if( id == 0 ){
+			clif_displaymessage( fd, "Usage: @rune activateset <set_id>" );
+			return -1;
+		}
+		return rune_activate_set( *sd, id ) ? 0 : -1;
+	}
+	if( strcmpi( subcmd, "equip" ) == 0 ){
+		if( id == 0 ){
+			clif_displaymessage( fd, "Usage: @rune equip <set_id>" );
+			return -1;
+		}
+		return rune_equip_set( *sd, id ) ? 0 : -1;
+	}
+	if( strcmpi( subcmd, "unequip" ) == 0 ){
+		return rune_unequip_set( *sd ) ? 0 : -1;
+	}
+	if( strcmpi( subcmd, "upgrade" ) == 0 ){
+		if( id == 0 ){
+			id = rune_get_equipped_set( *sd );
+		}
+		if( id == 0 ){
+			clif_displaymessage( fd, "No equipped tablet. Usage: @rune upgrade <set_id>" );
+			return -1;
+		}
+		return rune_upgrade_set( *sd, id ) ? 0 : -1;
+	}
+	if( strcmpi( subcmd, "info" ) == 0 ){
+		char buf[CHAT_SIZE_MAX];
+		safesnprintf( buf, sizeof( buf ), "Equipped set: %u | Grade: %u | Pages: %zu | Sets: %zu",
+			rune_get_equipped_set( *sd ), rune_get_grade( *sd ), sd->rune.books.size(), sd->rune.sets.size() );
+		clif_displaymessage( fd, buf );
+		return 0;
+	}
+
+	clif_displaymessage( fd, "Unknown subcommand. Use activatebook/activateset/equip/unequip/upgrade/info." );
+	return -1;
+}
+
 ACMD_FUNC(aura) {
 	uint32 aura_id = 0;
 	if (!message || !*message || sscanf(message, "%11d", &aura_id) < 1) {
@@ -11962,6 +12043,8 @@ void atcommand_basecommands(void) {
 		ACMD_DEFR(stylist, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 		ACMD_DEF(addfame),
 		ACMD_DEFR(enchantgradeui, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
+		ACMD_DEFR(runeui, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
+		ACMD_DEFR(rune, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 		ACMD_DEFR(roulette, ATCMD_NOCONSOLE|ATCMD_NOAUTOTRADE),
 		ACMD_DEF(setcard),
 		ACMD_DEF(macrochecker),

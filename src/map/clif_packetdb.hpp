@@ -2062,4 +2062,16 @@
 parseable_packet(HEADER_CZ_SHIELD_HEARTBEAT, sizeof(PACKET_CZ_SHIELD_HEARTBEAT), clif_parse_shield_heartbeat, 0);
 packet(HEADER_ZC_SHIELD_CHALLENGE, sizeof(PACKET_ZC_SHIELD_CHALLENGE));
 
+#if PACKETVER >= 20250529
+	parseable_packet( HEADER_CZ_CLOSE_RUNE_UI, sizeof( struct PACKET_CZ_CLOSE_RUNE_UI ), clif_parse_runeui_close, 0 );
+	parseable_packet( HEADER_CZ_RUNE_ACTIVATE_BOOK, sizeof( struct PACKET_CZ_RUNE_ACTIVATE_BOOK ), clif_parse_rune_activate_book, 0 );
+	parseable_packet( HEADER_CZ_RUNE_ACTIVATE_SET, sizeof( struct PACKET_CZ_RUNE_ACTIVATE_SET ), clif_parse_rune_activate_set, 0 );
+	parseable_packet( HEADER_CZ_RUNE_EQUIP_SET, sizeof( struct PACKET_CZ_RUNE_EQUIP_SET ), clif_parse_rune_equip_set, 0 );
+	parseable_packet( HEADER_CZ_RUNE_UPGRADE_SET, sizeof( struct PACKET_CZ_RUNE_UPGRADE_SET ), clif_parse_rune_upgrade_set, 0 );
+	parseable_packet( HEADER_CZ_RUNE_DECOMPOSE, sizeof( struct PACKET_CZ_RUNE_DECOMPOSE ), clif_parse_rune_decompose, 0 );
+	packet( HEADER_ZC_OPEN_RUNE_UI, sizeof( struct PACKET_ZC_OPEN_RUNE_UI ) );
+	packet( HEADER_ZC_RUNE_ACK, sizeof( struct PACKET_ZC_RUNE_ACK ) );
+	packet( HEADER_ZC_RUNE_SYNC, -1 );
+#endif
+
 #endif /* CLIF_PACKETDB_HPP */

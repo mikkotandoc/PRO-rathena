@@ -1,0 +1,48 @@
+map=1@f_lake
+source=db\map_cache.dat
+note=Not present in db/re/map_cache.dat; loaded from db/map_cache.dat (rAthena fallback after db/re)
+size=204x204
+compressed_len=1755
+decompressed_len=41616
+gat_legend: 0=walkable ground, 1=wall, 3=walkable water, 5=gap(snipable); walkable if gat in {0,2,3,4,6}
+alt_bit0: if interpreting raw byte bit0 set => NOT walkable (same as gat==1 for common cells)
+
+=== coordinate checks ===
+x,y,raw_byte,hex,gat,walkable_rathena,alt_bit0_means_blocked,in_bounds
+15,193,0,0x00,0,True,False,true
+18,190,1,0x01,1,False,True,true
+20,185,1,0x01,1,False,True,true
+25,151,0,0x00,0,True,False,true
+95,182,0,0x00,0,True,False,true
+51,93,0,0x00,0,True,False,true
+91,56,0,0x00,0,True,False,true
+129,58,3,0x03,3,True,True,true
+93,35,3,0x03,3,True,True,true
+43,34,3,0x03,3,True,True,true
+70,120,1,0x01,1,False,True,true
+70,160,1,0x01,1,False,True,true
+55,160,0,0x00,0,True,False,true
+80,150,1,0x01,1,False,True,true
+110,150,1,0x01,1,False,True,true
+15,170,0,0x00,0,True,False,true
+40,190,0,0x00,0,True,False,true
+60,180,1,0x01,1,False,True,true
+100,130,0,0x00,0,True,False,true
+125,100,3,0x03,3,True,True,true
+94,58,0,0x00,0,True,False,true
+
+=== 8th trap candidates (walkable, minDist>=20 from 7 known traps, north/center) ===
+known_traps=(25,151),(95,182),(51,93),(91,56),(129,58),(93,35),(43,34)
+scan_anchors=(70,160),(55,170),(80,140) radius=25 preferred_band x=35..110 y=120..185
+
+
+=== refined 8th trap picks (nearest walkable to requested foci, min_trap>=20) ===
+focus(70,160) -> (65,164) raw=0 walkable=true min_trap=34.99 offset=6.4
+focus(55,170) -> (55,169) raw=0 walkable=true min_trap=34.99 offset=1
+focus(80,140) -> (77,146) raw=0 walkable=true min_trap=40.25 offset=6.71
+focus(55,160) -> (55,160) raw=0 walkable=true min_trap=31.32 offset=0
+
+FINAL_SUGGESTED_8TH_TRAP_CANDIDATES:
+1) (65,164)  [near (70,160)]  raw=0  min_trap_dist=34.99  offset_from_focus=6.4
+2) (55,169)  [near (55,170)]  raw=0  min_trap_dist=34.99  offset_from_focus=1
+3) (77,146)  [near (80,140)]  raw=0  min_trap_dist=40.25  offset_from_focus=6.71

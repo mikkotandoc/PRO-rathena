@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5MI24Ad0J8E=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mikko Tandoc\\Documents\\GitHub\\PRO-rathena\\tools\\LuaCheck\\LuaCheck.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mikko Tandoc\\.nuget\\packages\\keralua\\1.4.1\\keralua.1.4.1.nupkg.sha512",
+    "C:\\Users\\Mikko Tandoc\\.nuget\\packages\\nlua\\1.7.3\\nlua.1.7.3.nupkg.sha512"
+  ],
+  "logs": []
+}

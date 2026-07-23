@@ -2486,6 +2486,7 @@ void pc_reg_received(map_session_data *sd)
 
 	chrif_skillcooldown_request(sd->status.account_id, sd->status.char_id);
 	chrif_bsdata_request(sd->status.char_id);
+	rune_load( *sd );
 #ifdef VIP_ENABLE
 	sd->vip.time = 0;
 	sd->vip.enabled = 0;
@@ -6981,6 +6982,7 @@ enum e_setpos pc_setpos(map_session_data* sd, uint16 mapindex, int32 x, int32 y,
 	sd->state.enchantgrade_open = false;
 	sd->state.item_reform = 0;
 	sd->state.item_enchant_index = 0;
+	sd->state.runeui_open = false;
 
 	if( sd->state.changemap ) { // Misc map-changing settings
 		int32 curr_map_instance_id = map_getmapdata(sd->m)->instance_id, new_map_instance_id = (mapdata ? mapdata->instance_id : 0);

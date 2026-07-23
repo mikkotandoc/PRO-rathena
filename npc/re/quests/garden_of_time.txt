@@ -686,8 +686,8 @@ OnTouch:
 		end;
 	case 2:
 		cloakoffnpcself( "Sealing Spirit Stone#life2" );
-		cloakoffnpcself( "Dimensional Prison#1" );
-		cloakoffnpcself( "Dimensional Prison#2" );
+		cloakoffnpcself( "Dimension Prison#1" );
+		cloakoffnpcself( "Dimension Prison#2" );
 		end;
 	}
 	end;
@@ -1017,6 +1017,16 @@ function	script	F_got_instance_enter	{
 }
 
 
+// Uncloak prison gates for warper arrivals and returning players (see episode_instance_access.txt)
+t_garden,158,235,0	script	#got_prison_entry	HIDDEN_WARP_NPC,14,14,{
+	end;
+OnTouch:
+	callfunc("F_GotOnMapLoad");
+	end;
+}
+
+t_garden,173,235,0	duplicate(#got_prison_entry)	#got_prison_entry2	HIDDEN_WARP_NPC,14,14
+
 // t_garden,158,235,2	script(CLOAKED)	Dimension Prison#1	GATE_SKYBLUE,2,2,{	// unknown OnTouch effect
 t_garden,158,235,2	script(CLOAKED)	Dimension Prison#1	GATE_SKYBLUE,{
 	if (isbegin_quest(12597) != 2)
@@ -1053,17 +1063,39 @@ t_garden,158,235,2	script(CLOAKED)	Dimension Prison#1	GATE_SKYBLUE,{
 			erasequest 12610;
 		break;
 	}
-	if (!is_party_leader()) {
-		mes "Only the party leader can create the Lake of Fire instance.";
-		close;
-	}
 	mes "^0000cdLake of Fire^000000";
 	mes "A lava prison where the divine beast guards are held.";
-	mes "Would you like to enter?";
+	mes " ";
+	mes "One of four seasonal wardens appears at random.";
+	mes "Speak with the beast to begin, then lure it onto ^0000ffeight dimensional seals^000000 to break its barrier.";
+	next;
+	mes "^0000cdLake of Fire^000000";
+	mes "After all seals are broken, you will be drawn into the inner prison for the true battle.";
+	mes " ";
+	mes "Clear reward: ^0000cdHall of Life Key^000000, Dimensional Crystal Fragments, and seasonal Energy.";
+	mes "Cooldown: once per day (resettable with 5 fragments).";
 	next;
 	if (select( "Cancel", "Enter Lake of Fire" ) == 1)
 		close;
-	callfunc("F_got_instance_enter", "Lake of Fire", 0);
+	// Party members join an existing reservation; only the leader creates it.
+	if (!is_party_leader()) {
+		switch( instance_enter("Lake of Fire") ) {
+		case IE_OK:
+			if (checkquest(12610) == -1)
+				setquest 12610;
+			end;
+		case IE_NOINSTANCE:
+			mes "Your party leader must create the Lake of Fire instance first.";
+			close;
+		case IE_NOMEMBER:
+			mes "You must be in the party that reserved this memorial dungeon.";
+			close;
+		default:
+			mes "Unable to enter the instance right now.";
+			close;
+		}
+	}
+	callfunc("F_got_instance_enter", "Lake of Fire", 12610);
 	end;
 }
 
@@ -1104,7 +1136,7 @@ t_garden,173,235,2	script(CLOAKED)	Dimension Prison#2	GATE_SKYBLUE,{
 	}
 	mes "^0000cdHall of Life^000000";
 	mes "The prison of the dimensional criminal who stole Rigel's form.";
-	mes "Current barrier level: ^0000ff" + callfunc("F_md_hol_get_level") + "^000000";
+	mes "Current barrier level: ^0000ff" + callfunc("F_md_hol_sync_card") + "^000000";
 	next;
 	if (select( "Cancel", "Enter Hall of Life" ) == 1)
 		close;
@@ -1169,6 +1201,8 @@ OnTouch:
 		mes "^aa0000The reward for helping us and the constellations' work here will be received through that sacred item.^000000";
 		next;
 		completequest 12620;
+		callfunc("F_GotUncloakVending");
+		cloakoffnpcself( "Spirit Complaint Terminal#1" );
 		navigateto("t_garden",126,117);
 		end;
 	}
@@ -1395,12 +1429,11 @@ OnInit:
 t_garden,126,123,0	script	#v_wp01	HIDDEN_WARP_NPC,3,3,{
 	end;
 OnTouch:
-	if (isbegin_quest(12620) != 2)
+	if (!callfunc("F_GotVendingAccess"))
 		end;
-	cloakoffnpcself( "Subspace vending machine#1" );
-	cloakoffnpcself( "Subspace vending machine#2" );
-	cloakoffnpcself( "Subspace vending machine#3" );
-	cloakoffnpcself( "Spirit Complaint Terminal#1" );
+	callfunc("F_GotUncloakVending");
+	if (isbegin_quest(12620) == 2)
+		cloakoffnpcself( "Spirit Complaint Terminal#1" );
 	end;
 }
 t_garden,130,119,0	duplicate(#v_wp01)	#v_wp02	HIDDEN_WARP_NPC,3,3
@@ -1533,10 +1566,13 @@ OnInit:
 }
 
 
-// Exchange and enchants
-t_garden,129,123,2	script(CLOAKED)	Subspace vending machine#1	HEROS_IN_ORB_1,{
-	if (isbegin_quest(12620) != 2)
-		end;
+// Exchange and enchants (central square — visible once dimensional prisons are unlocked)
+t_garden,129,123,2	script	Subspace vending machine#1	HEROS_IN_ORB_1,{
+	if (!callfunc("F_GotVendingAccess")) {
+		mes "[Subspace vending machine]";
+		mes "This device is inactive. Complete the Garden of Time prison unlock first.";
+		close;
+	}
 	if (checkweight(1201,1) == 0) {
 		mes "I cannot communicate with the barrier because I have too many types or weights of objects.";
 		close;
@@ -1562,9 +1598,12 @@ OnInit:
 	end;
 }
 
-t_garden,132,120,2	script(CLOAKED)	Subspace vending machine#2	HEROS_IN_ORB_2,{
-	if (isbegin_quest(12620) != 2)
-		end;
+t_garden,132,120,2	script	Subspace vending machine#2	HEROS_IN_ORB_2,{
+	if (!callfunc("F_GotVendingAccess")) {
+		mes "[Subspace vending machine]";
+		mes "This device is inactive. Complete the Garden of Time prison unlock first.";
+		close;
+	}
 	if (checkweight(1201,1) == 0) {
 		mes "I cannot communicate with the barrier because I have too many types or weights of objects.";
 		close;
@@ -1590,9 +1629,12 @@ OnInit:
 	end;
 }
 
-t_garden,135,117,2	script(CLOAKED)	Subspace vending machine#3	HEROS_IN_ORB_3,{
-	if (isbegin_quest(12620) != 2)
-		end;
+t_garden,135,117,2	script	Subspace vending machine#3	HEROS_IN_ORB_3,{
+	if (!callfunc("F_GotVendingAccess")) {
+		mes "[Subspace vending machine]";
+		mes "This device is inactive. Complete the Garden of Time prison unlock first.";
+		close;
+	}
 	if (checkweight(1201,1) == 0) {
 		mes "I cannot communicate with the barrier because I have too many types or weights of objects.";
 		close;
@@ -1619,9 +1661,12 @@ OnInit:
 	end;
 }
 
-t_garden,138,114,2	script(CLOAKED)	Subspace vending machine#4	HEROS_IN_ORB_4,{
-	if (isbegin_quest(12620) != 2)
-		end;
+t_garden,138,114,2	script	Subspace vending machine#4	HEROS_IN_ORB_4,{
+	if (!callfunc("F_GotVendingAccess")) {
+		mes "[Subspace vending machine]";
+		mes "This device is inactive. Complete the Garden of Time prison unlock first.";
+		close;
+	}
 	if (checkweight(1201,1) == 0) {
 		mes "I cannot communicate with the barrier because I have too many types or weights of objects.";
 		close;

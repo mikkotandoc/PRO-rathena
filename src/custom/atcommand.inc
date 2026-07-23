@@ -50,31 +50,68 @@ ACMD_FUNC(mall)
 }
 
 /**
- * Opens the Rune Tablet / Rune System UI for GM testing.
- * Usage: @runeui {<ui type>}
- *        @runetablet {<ui type>}
- *
- * Optional <ui type> overrides the default OUT_UI_RUNE (11) so GMs can
- * probe which ZC_UI_OPEN type the client expects.
- */
-ACMD_FUNC(runeui)
+ * Sends a compensation package to a player via RODEX.
+ * Restricted to GM level 99 (super users).
+ * Usage: @compensation <char name>
+ **/
+ACMD_FUNC(compensation)
 {
+	// Compensation package configuration. Adjust these to change the reward.
+	const t_itemid compensation_item = 616; // Old Card Album
+	const int16 compensation_amount = 1;
+
+	map_session_data *pl_sd;
+	struct mail_message msg;
+
 	nullpo_retr(-1, sd);
 
-#if PACKETVER < 20230802
-	clif_displaymessage(fd, "This command requires packet version 2023-08-02 or newer.");
-	return -1;
-#else
-	int32 ui_type = OUT_UI_RUNE;
-
-	if (message != nullptr && *message) {
-		if (sscanf(message, "%11d", &ui_type) < 1 || ui_type < 0 || ui_type > 127) {
-			clif_displaymessage(fd, "Usage: @runeui {<ui type>}");
-			return -1;
-		}
+	// Restrict usage to GM level 99 and above.
+	if (pc_get_group_level(sd) < 99) {
+		clif_displaymessage(fd, "You are not authorized to use this command.");
+		return -1;
 	}
 
-	clif_ui_open(*sd, static_cast<enum out_ui_type>(ui_type), 0);
+	memset(atcmd_player_name, '\0', sizeof(atcmd_player_name));
+
+	if (!message || !*message || sscanf(message, "%23[^\n]", atcmd_player_name) < 1) {
+		clif_displaymessage(fd, "Please enter a player name (usage: @compensation <char name>).");
+		return -1;
+	}
+
+	pl_sd = map_nick2sd(atcmd_player_name, true);
+	if (pl_sd == nullptr || strncmp(pl_sd->status.name, atcmd_player_name, NAME_LENGTH) != 0) {
+		clif_displaymessage(fd, msg_txt(sd, 3)); // Character not found.
+		return -1;
+	}
+
+	if (!item_db.exists(compensation_item)) {
+		clif_displaymessage(fd, "The compensation item is not configured correctly.");
+		return -1;
+	}
+
+	memset(&msg, 0, sizeof(struct mail_message));
+
+	msg.dest_id = pl_sd->status.char_id;
+	safestrncpy(msg.dest_name, pl_sd->status.name, NAME_LENGTH);
+	safestrncpy(msg.send_name, "Game Master", NAME_LENGTH);
+	safestrncpy(msg.title, "Compensation Package", MAIL_TITLE_LENGTH);
+	safestrncpy(msg.body, "Please accept this compensation for the recent inconvenience. Thank you for playing!", MAIL_BODY_LENGTH);
+
+	msg.item[0].nameid = compensation_item;
+	msg.item[0].amount = compensation_amount;
+	msg.item[0].identify = 1;
+
+	msg.status = MAIL_NEW;
+	msg.type = MAIL_INBOX_NORMAL;
+	msg.timestamp = time(nullptr);
+
+	intif_Mail_send(0, &msg);
+
+	safesnprintf(atcmd_output, sizeof(atcmd_output), "Compensation package sent to %s.", pl_sd->status.name);
+	clif_displaymessage(fd, atcmd_output);
+
+	safesnprintf(atcmd_output, sizeof(atcmd_output), "You have received a compensation package from %s. Please check your mailbox.", sd->status.name);
+	clif_displaymessage(pl_sd->fd, atcmd_output);
+
 	return 0;
-#endif
 }

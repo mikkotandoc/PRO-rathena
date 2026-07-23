@@ -32,7 +32,7 @@ jor_tmple1	monster	--ja--	22354,75
 jor_tmple1	monster	--ja--	22355,20
 jor_tmple1	monster	--ja--	22356,20
 jor_tmple1	monster	--ja--	22357,20
-jor_tmple1	boss_monster	--ja--	22360,1,21600000,600000,0
+jor_tmple1	boss_monster	--ja--	22363,1,21600000,600000,0
 
 // jor_tmple2 - Gimle 2nd Floor
 jor_tmple2	monster	--ja--	22355,90
@@ -42,7 +42,7 @@ jor_tmple2	monster	--ja--	22358,80
 jor_tmple2	monster	--ja--	22359,80
 jor_tmple2	monster	--ja--	22360,70
 jor_tmple2	monster	--ja--	22361,70
-jor_tmple2	boss_monster	--ja--	22363,1,21600000,600000,0
+jor_tmple2	boss_monster	--ja--	22364,1,21600000,600000,0
 
 // jor_sklf1 - Jorscalf 1st Floor (awakened variants)
 jor_sklf1	monster	--ja--	22417,100
@@ -50,4 +50,14 @@ jor_sklf1	monster	--ja--	22418,100
 jor_sklf1	monster	--ja--	22414,100
 jor_sklf1	monster	--ja--	22415,100
 jor_sklf1	monster	--ja--	22416,100
-jor_sklf1	boss_monster	--ja--	22412,1,21600000,600000,0
+jor_sklf1	boss_monster	--ja--	22421,1,21600000,600000,0
+
+// jor_sklf2 - Jorscalf 2nd Floor (high-level awakened variants)
+jor_sklf2	monster	--ja--	22414,35
+jor_sklf2	monster	--ja--	22415,35
+jor_sklf2	monster	--ja--	22416,35
+jor_sklf2	monster	--ja--	22419,100
+jor_sklf2	monster	--ja--	22420,100
+jor_sklf2	monster	--ja--	22412,100
+jor_sklf2	monster	--ja--	22413,100
+jor_sklf2	boss_monster	--ja--	22422,1,21600000,600000,0

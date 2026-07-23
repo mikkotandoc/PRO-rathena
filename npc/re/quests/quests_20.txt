@@ -40,6 +40,87 @@ function	script	F_ep20_setquest	{
 	return;
 }
 
+// Glacier equipment enchant service (Vellgunde).
+// Opens the client enchant window for the matching item_enchant group.
+// Glacier armor set uses groups 89-94; Dimensional Glacier (Snake God) armor
+// uses groups 95 (Armor/Robe), 96 (Manteau/Muffler) and 97 (Boots/Shoes).
+// (Glacier weapons are enchanted through the EP19 Vellgunde / episode_19 merchant.)
+function	script	F_ep20_glacierEnchant	{
+	cutin "ep19_vellgunde01.png",2;
+	mes "[Vellgunde]";
+	mes "The mana of Rgan and Jormungand can be woven into Glacier equipment.";
+	mes "Which piece would you like me to enchant?";
+	next;
+	switch( select( "Glacier Armor / Robe", "Glacier Manteau / Muffler", "Glacier Boots / Shoes", "Glacier Guard", "Glacier Pendant / Necklace", "Glacier Ring / Earring", "Dimensional Glacier Armor / Robe", "Dimensional Glacier Manteau / Muffler", "Dimensional Glacier Boots / Shoes", "Cancel" ) ) {
+	case 1:
+		mes "[Vellgunde]";
+		mes "Good, good. Let's weave some power into that armor.";
+		close2;
+		cutin "",255;
+		item_enchant(89);
+		end;
+	case 2:
+		mes "[Vellgunde]";
+		mes "A well-made cloak. Let's imbue it.";
+		close2;
+		cutin "",255;
+		item_enchant(90);
+		end;
+	case 3:
+		mes "[Vellgunde]";
+		mes "Sure footing matters in the ice. Come, let's work on it.";
+		close2;
+		cutin "",255;
+		item_enchant(91);
+		end;
+	case 4:
+		mes "[Vellgunde]";
+		mes "A sturdy guard. It should hold the mana well.";
+		close2;
+		cutin "",255;
+		item_enchant(92);
+		end;
+	case 5:
+		mes "[Vellgunde]";
+		mes "Accessories bond beautifully with mana.";
+		close2;
+		cutin "",255;
+		item_enchant(93);
+		end;
+	case 6:
+		mes "[Vellgunde]";
+		mes "Accessories bond beautifully with mana.";
+		close2;
+		cutin "",255;
+		item_enchant(94);
+		end;
+	case 7:
+		mes "[Vellgunde]";
+		mes "Dimensional-grade material... this calls on the Snake God's warmth. Worth it, though.";
+		close2;
+		cutin "",255;
+		item_enchant(95);
+		end;
+	case 8:
+		mes "[Vellgunde]";
+		mes "The Snake God's malice will cling to that cloak. Let's begin.";
+		close2;
+		cutin "",255;
+		item_enchant(96);
+		end;
+	case 9:
+		mes "[Vellgunde]";
+		mes "The Snake God's mystery, bound into your steps. Come.";
+		close2;
+		cutin "",255;
+		item_enchant(97);
+		end;
+	case 10:
+		close3;
+	}
+	end;
+}
+
 function	script	F_ep20_completequest	{
 	if (isbegin_quest(getarg(0)) == 1)
 		completequest getarg(0);
@@ -715,6 +796,8 @@ icas_in,141,216,3	script	Vellgunde#ep20ms01	4_EP19_VELLGUNDE,{
 		callfunc("F_ep20_reward", 20, 90);
 		close3;
 	}
+	// After the canyon briefing, Vellgunde offers Glacier equipment enchanting.
+	callfunc("F_ep20_glacierEnchant");
 	end;
 
 OnInit:

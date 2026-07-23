@@ -71,6 +71,7 @@ function	script	F_Bio5Hard_Instance	{
 		case IE_OTHER:
 			mes "[Ohno Tohiro]";
 			mes "An unknown error occurred.";
+			mes "If a memorial dungeon is already reserved, use ^0000cdDestroy instance^000000 in the Memorial Dungeon window and create a new one.";
 			close;
 		case IE_NOINSTANCE:
 			mes "[Ohno Tohiro]";

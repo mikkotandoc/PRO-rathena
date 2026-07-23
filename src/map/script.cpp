@@ -62,6 +62,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
 #include "storage.hpp"
 
 using namespace rathena;
@@ -27506,6 +27507,118 @@ BUILDIN_FUNC(add_reputation_points)
 	return SCRIPT_CMD_SUCCESS;
 }
 
+BUILDIN_FUNC(runeui){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	clif_runeui_open( *sd );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(getupgrade_rune){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_get_grade( *sd ) );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_activate_book){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_activate_book( *sd, script_getnum( st, 2 ) ) ? 1 : 0 );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_activate_set){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_activate_set( *sd, script_getnum( st, 2 ) ) ? 1 : 0 );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_equip_set){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_equip_set( *sd, script_getnum( st, 2 ) ) ? 1 : 0 );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_unequip_set){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_unequip_set( *sd ) ? 1 : 0 );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_upgrade_set){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_upgrade_set( *sd, script_getnum( st, 2 ) ) ? 1 : 0 );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_decompose){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	uint16 index = script_getnum( st, 2 );
+	uint8 type = script_getnum( st, 3 );
+	script_pushint( st, rune_decompose( *sd, index, type ) ? 1 : 0 );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_has_book){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_has_book( *sd, script_getnum( st, 2 ) ) ? 1 : 0 );
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(rune_equipped_set){
+	map_session_data* sd;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	script_pushint( st, rune_get_equipped_set( *sd ) );
+	return SCRIPT_CMD_SUCCESS;
+}
+
 BUILDIN_FUNC(item_reform){
 #if PACKETVER < 20211103
 	ShowError( "buildin_item_reform: This command requires packet version 2021-11-03 or newer.\n" );
@@ -28895,6 +29008,16 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(get_reputation_points, "i?"),
 	BUILDIN_DEF(add_reputation_points, "ii?"),
 	BUILDIN_DEF(item_reform, "??"),
+	BUILDIN_DEF(runeui, ""),
+	BUILDIN_DEF(getupgrade_rune, ""),
+	BUILDIN_DEF(rune_activate_book, "i"),
+	BUILDIN_DEF(rune_activate_set, "i"),
+	BUILDIN_DEF(rune_equip_set, "i"),
+	BUILDIN_DEF(rune_unequip_set, ""),
+	BUILDIN_DEF(rune_upgrade_set, "i"),
+	BUILDIN_DEF(rune_decompose, "ii"),
+	BUILDIN_DEF(rune_has_book, "i"),
+	BUILDIN_DEF(rune_equipped_set, ""),
 	BUILDIN_DEF(item_enchant, "i?"),
 	BUILDIN_DEF(itemlink, "i?????????"),
 	BUILDIN_DEF(mesitemlink, "v??"),

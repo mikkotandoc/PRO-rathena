@@ -1,0 +1,49 @@
+###########################################################################
+# Rune Decomposition Database - Renewal (EP17 Phase 1)
+###########################################################################
+
+Header:
+  Type: RUNEDECOMPOSITION_DB
+  Version: 1
+
+Body:
+  # Normal card - single
+  - Id: 1
+    Materials:
+      - Material: Imperfect_Rune
+        AmountMin: 1
+        AmountMax: 3
+        Chance: 100000
+  # Normal card - bulk (x30)
+  - Id: 2
+    Materials:
+      - Material: Imperfect_Rune
+        AmountMin: 30
+        AmountMax: 90
+        Chance: 100000
+      - Material: Perfect_Rune
+        AmountMin: 1
+        AmountMax: 1
+        Chance: 25000
+  # MVP card - single
+  - Id: 3
+    Materials:
+      - Material: Imperfect_Rune
+        AmountMin: 5
+        AmountMax: 10
+        Chance: 100000
+      - Material: Perfect_Rune
+        AmountMin: 1
+        AmountMax: 1
+        Chance: 100000
+  # MVP card - bulk (x30)
+  - Id: 4
+    Materials:
+      - Material: Imperfect_Rune
+        AmountMin: 150
+        AmountMax: 300
+        Chance: 100000
+      - Material: Perfect_Rune
+        AmountMin: 15
+        AmountMax: 30
+        Chance: 100000

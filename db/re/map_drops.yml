@@ -3748,10 +3748,10 @@ Body:
         Drops:
           - Index: 0
             Item: ClockTower_Gear
-            Rate: 75
+            Rate: 10000
           - Index: 1
             Item: ClockTower_Lead
-            Rate: 750
+            Rate: 10000
           - Index: 2
             Item: Etel_Dust
             Rate: 150
@@ -3774,10 +3774,10 @@ Body:
         Drops:
           - Index: 0
             Item: ClockTower_Gear
-            Rate: 75
+            Rate: 10000
           - Index: 1
             Item: ClockTower_Lead
-            Rate: 750
+            Rate: 10000
           - Index: 2
             Item: Etel_Dust
             Rate: 150
@@ -3800,10 +3800,10 @@ Body:
         Drops:
           - Index: 0
             Item: ClockTower_Gear
-            Rate: 75
+            Rate: 10000
           - Index: 1
             Item: ClockTower_Lead
-            Rate: 750
+            Rate: 10000
           - Index: 2
             Item: Etel_Dust
             Rate: 150
@@ -3823,10 +3823,10 @@ Body:
         Drops:
           - Index: 0
             Item: ClockTower_Gear
-            Rate: 75
+            Rate: 10000
           - Index: 1
             Item: ClockTower_Lead
-            Rate: 750
+            Rate: 10000
           - Index: 2
             Item: Etel_Dust
             Rate: 150
@@ -3852,10 +3852,10 @@ Body:
         Drops:
           - Index: 0
             Item: ClockTower_Gear
-            Rate: 75
+            Rate: 10000
           - Index: 1
             Item: ClockTower_Lead
-            Rate: 750
+            Rate: 10000
           - Index: 2
             Item: Etel_Dust
             Rate: 150
@@ -3881,10 +3881,10 @@ Body:
         Drops:
           - Index: 0
             Item: ClockTower_Gear
-            Rate: 75
+            Rate: 10000
           - Index: 1
             Item: ClockTower_Lead
-            Rate: 750
+            Rate: 10000
           - Index: 2
             Item: Etel_Dust
             Rate: 150
@@ -4047,6 +4047,17 @@ Body:
         Item: Play_RO_Gold_Coin_
         Rate: 6000
   - Map: ra_fild13
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  # Episode 19.x farm maps (Mjolnir Underground / Power Twisted Plains)
+  - Map: mjo_wst01
+    GlobalDrops:
+      - Index: 0
+        Item: Play_RO_Gold_Coin_
+        Rate: 6000
+  - Map: ra_pol01
     GlobalDrops:
       - Index: 0
         Item: Play_RO_Gold_Coin_

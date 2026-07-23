@@ -102246,11 +102246,11 @@ Body:
       - Item: Old_Steel_Plate
         Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 3750
+        Rate: 3500
       - Item: EP17_1_EVT01
         Rate: 100
       - Item: EP17_1_EVT39
-        Rate: 1500
+        Rate: 3500
       - Item: Distorted_Iron_Plate
         Rate: 1500
       - Item: EL_A17T_Card
@@ -102290,7 +102290,7 @@ Body:
       - Item: Needle_Pouch
         Rate: 1250
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Scarlet_Dyestuffs
         Rate: 30
       - Item: E_EA1L_Card
@@ -102332,7 +102332,7 @@ Body:
       - Item: Burnt_Parts
         Rate: 1000
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: E_EA2S_Card
         Rate: 1
         StealProtected: true
@@ -102378,7 +102378,7 @@ Body:
       - Item: Elunium
         Rate: 20
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 3500
   - Id: 20344
     AegisName: MD_VENOM_BUG
     Name: Chemical Poison
@@ -102487,11 +102487,11 @@ Body:
       - Item: Tiger's_Skin
         Rate: 3000
       - Item: EP17_1_EVT02
-        Rate: 3750
+        Rate: 3500
       - Item: EP17_1_EVT01
         Rate: 100
       - Item: EP17_1_EVT39
-        Rate: 1500
+        Rate: 3500
       - Item: Apple
         Rate: 50
       - Item: Miguel_Card
@@ -102566,7 +102566,7 @@ Body:
       - Item: Tendon
         Rate: 2000
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 3500
       - Item: Caput_Card
         Rate: 1
         StealProtected: true
@@ -102608,7 +102608,7 @@ Body:
       - Item: Wooden_Block
         Rate: 1000
       - Item: EP17_1_EVT39
-        Rate: 5
+        Rate: 3500
       - Item: Bloody_Rune
         Rate: 800
       - Item: Dolor_Card
@@ -102656,7 +102656,7 @@ Body:
       - Item: Explosive_Powder
         Rate: 30
       - Item: EP17_1_EVT02
-        Rate: 11
+        Rate: 3500
       - Item: Bellare_Card
         Rate: 1
         StealProtected: true
@@ -102786,9 +102786,9 @@ Body:
       - Item: Elunium
         Rate: 12
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Explosive_Powder
         Rate: 30
       - Item: Bellare_Card
@@ -102832,11 +102832,11 @@ Body:
       - Item: Elunium
         Rate: 24
       - Item: EP17_1_EVT39
-        Rate: 15
+        Rate: 3500
       - Item: Explosive_Powder
         Rate: 60
       - Item: EP17_1_EVT02
-        Rate: 45
+        Rate: 3500
       - Item: Shadowdecon_Ore
         Rate: 70
       - Item: High_Bellare_Card
@@ -102882,7 +102882,7 @@ Body:
       - Item: Oridecon
         Rate: 12
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Explosive_Powder
         Rate: 30
       - Item: Sanare_Card
@@ -102926,11 +102926,11 @@ Body:
       - Item: Elunium
         Rate: 24
       - Item: EP17_1_EVT39
-        Rate: 15
+        Rate: 3500
       - Item: Explosive_Powder
         Rate: 60
       - Item: EP17_1_EVT02
-        Rate: 45
+        Rate: 3500
       - Item: Zelunium_Ore
         Rate: 70
       - Item: High_Sanare_Card
@@ -102976,7 +102976,7 @@ Body:
       - Item: Azure_Jewel
         Rate: 50
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: Shadowdecon_Ore
         Rate: 70
       - Item: Zelunium_Ore
@@ -103024,7 +103024,7 @@ Body:
       - Item: Azure_Jewel
         Rate: 50
       - Item: EP17_1_EVT39
-        Rate: 15
+        Rate: 3500
       - Item: Shadowdecon_Ore
         Rate: 100
       - Item: Zelunium_Ore
@@ -103070,7 +103070,7 @@ Body:
       - Item: Wooden_Block
         Rate: 1000
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: Bloody_Rune
         Rate: 800
       - Item: Dolor_Card
@@ -103115,7 +103115,7 @@ Body:
       - Item: Wooden_Block
         Rate: 2000
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: Bloody_Rune
         Rate: 1600
       - Item: Shadowdecon_Ore
@@ -103167,7 +103167,7 @@ Body:
       - Item: Elunium
         Rate: 10
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: Venenum_Card
         Rate: 1
         StealProtected: true
@@ -103213,7 +103213,7 @@ Body:
       - Item: Elunium
         Rate: 20
       - Item: EP17_1_EVT39
-        Rate: 15
+        Rate: 3500
       - Item: Shadowdecon_Ore
         Rate: 90
       - Item: Mt_Venenum_Card
@@ -103259,7 +103259,7 @@ Body:
       - Item: Tendon
         Rate: 1000
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: Caput_Card
         Rate: 1
         StealProtected: true
@@ -103303,7 +103303,7 @@ Body:
       - Item: Tendon
         Rate: 2000
       - Item: EP17_1_EVT39
-        Rate: 15
+        Rate: 3500
       - Item: Shadowdecon_Ore
         Rate: 90
       - Item: Zelunium_Ore
@@ -104052,9 +104052,9 @@ Body:
       - Item: Old_Violet_Box
         Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 7425
+        Rate: 3500
       - Item: EP17_1_EVT39
-        Rate: 1500
+        Rate: 3500
       - Item: Zelunium
         Rate: 50
       - Item: R48_85_Bestia_Card
@@ -108367,9 +108367,9 @@ Body:
       - Item: Iron
         Rate: 500
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
   - Id: 20630
     AegisName: EP17_2_BETA_BASIC_NG
     Name: Broken Beta
@@ -110621,9 +110621,9 @@ Body:
       - Item: Heart_Hunter_Seal
         Rate: 2500
       - Item: EP17_1_EVT39
-        Rate: 15
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 45
+        Rate: 3500
       - Item: Elunium_Stone
         Rate: 24
       - Item: Ep172_1h_Sword
@@ -110701,9 +110701,9 @@ Body:
       - Item: Heart_Hunter_Seal
         Rate: 2500
       - Item: EP17_1_EVT39
-        Rate: 15
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 45
+        Rate: 3500
       - Item: Shadowdecon_Ore
         Rate: 100
       - Item: Ep172_1h_Sword
@@ -110762,9 +110762,9 @@ Body:
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Bookworm_Card
         Rate: 1
         StealProtected: true
@@ -110811,9 +110811,9 @@ Body:
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MELEE_2
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Roaming_Splbook_Card
         Rate: 1
         StealProtected: true
@@ -110862,9 +110862,9 @@ Body:
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Venenum3_Card
         Rate: 1
         StealProtected: true
@@ -110911,9 +110911,9 @@ Body:
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: EP17_2_Cramp_Card
         Rate: 1
         StealProtected: true
@@ -110960,9 +110960,9 @@ Body:
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MELEE_2
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Waterfall_Card
         Rate: 1
         StealProtected: true
@@ -111012,9 +111012,9 @@ Body:
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MELEE_2
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Bellare3_Card
         Rate: 1
         StealProtected: true
@@ -111061,9 +111061,9 @@ Body:
         Rate: 3
         RandomOptionGroup: AUTO_IMP_MAGIC_2
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Dolor3_Card
         Rate: 1
         StealProtected: true
@@ -111110,9 +111110,9 @@ Body:
       - Item: Light_Granule
         Rate: 150
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Plasma_Y_Card
         Rate: 1
         StealProtected: true
@@ -111163,9 +111163,9 @@ Body:
       - Item: Shadowdecon_Ore
         Rate: 150
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Plaga3_Card
         Rate: 1
         StealProtected: true
@@ -111214,9 +111214,9 @@ Body:
       - Item: Shadowdecon_Ore
         Rate: 150
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Sanare3_Card
         Rate: 1
         StealProtected: true
@@ -111265,9 +111265,9 @@ Body:
       - Item: Shadowdecon_Ore
         Rate: 150
       - Item: EP17_1_EVT39
-        Rate: 8
+        Rate: 3500
       - Item: EP17_1_EVT02
-        Rate: 15
+        Rate: 3500
       - Item: Plasma_R_Card
         Rate: 1
         StealProtected: true
@@ -126838,24 +126838,318 @@ Body:
 #    AegisName: E_MANANANGGAL
 #  - Id: 22173
 #    AegisName: E_WAKWAK
-#  - Id: 22174
-#    AegisName: MD_PRI_RIGEL
-#  - Id: 22175
-#    AegisName: MD_PRI_RIGEL_AC
-#  - Id: 22176
-#    AegisName: MD_PRI_RIGEL_ACS
+  - Id: 22174
+    AegisName: MD_PRI_RIGEL
+    Name: Rigel
+    JapaneseName: Dimensional Criminal Rigel
+    Level: 275
+    Hp: 800000000
+    Attack: 24998
+    Attack2: 9505
+    Defense: 358
+    MagicDefense: 138
+    Resistance: 1833
+    MagicResistance: 850
+    Str: 515
+    Agi: 330
+    Vit: 413
+    Int: 408
+    Dex: 584
+    Luk: 580
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 1149
+    AttackMotion: 672
+    DamageMotion: 384
+    Ai: 21
+    Class: Boss
+    DamageTaken: 1
+    Modes:
+      Mvp: true
+  - Id: 22175
+    AegisName: MD_PRI_RIGEL_AC
+    Name: Rigel
+    JapaneseName: Dimensional Criminal Rigel
+    Level: 275
+    Hp: 100000000
+    Attack: 24998
+    Attack2: 9505
+    Defense: 358
+    MagicDefense: 138
+    Resistance: 1833
+    MagicResistance: 850
+    Str: 515
+    Agi: 330
+    Vit: 413
+    Int: 408
+    Dex: 584
+    Luk: 580
+    AttackRange: 10
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 1149
+    AttackMotion: 672
+    DamageMotion: 384
+    Ai: 21
+    Class: Boss
+  - Id: 22176
+    AegisName: MD_PRI_RIGEL_ACS
+    Name: Rigel
+    JapaneseName: Dimensional Criminal Rigel
+    Level: 275
+    Hp: 100000000
+    Attack: 24998
+    Attack2: 9505
+    Defense: 358
+    MagicDefense: 138
+    Resistance: 1833
+    MagicResistance: 850
+    Str: 515
+    Agi: 330
+    Vit: 413
+    Int: 408
+    Dex: 584
+    Luk: 580
+    AttackRange: 10
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 2
+    WalkSpeed: 120
+    AttackDelay: 1149
+    AttackMotion: 672
+    DamageMotion: 384
+    Ai: 21
+    Class: Boss
   - Id: 22177
     AegisName: MD_PRI_DRAGON_1
-    Name: MD_PRI_DRAGON_1
+    Name: Floral Pegasus
+    JapaneseName: Floral Pegasus
+    Level: 275
+    Hp: 700000000
+    Attack: 45409
+    Attack2: 14662
+    Defense: 347
+    MagicDefense: 134
+    Resistance: 1741
+    MagicResistance: 807
+    Str: 486
+    Agi: 390
+    Vit: 386
+    Int: 311
+    Dex: 552
+    Luk: 520
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Angel
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 1072
+    AttackMotion: 672
+    DamageMotion: 384
+    Ai: 21
+    Class: Boss
+    DamageTaken: 10
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Energy_Of_Spring
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Spring
+        Rate: 2000
+      - Item: Energy_Of_Spring
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Spring_Material_1
+        Rate: 500
+      - Item: Spring_Material_2
+        Rate: 500
+      - Item: Spring_Material_3
+        Rate: 500
   - Id: 22178
     AegisName: MD_PRI_DRAGON_2
-    Name: MD_PRI_DRAGON_2
+    Name: Coral Marine
+    JapaneseName: Coral Marine
+    Level: 275
+    Hp: 700000000
+    Attack: 43805
+    Attack2: 15192
+    Defense: 213
+    MagicDefense: 241
+    Resistance: 1020
+    MagicResistance: 1682
+    Str: 324
+    Agi: 303
+    Vit: 330
+    Int: 445
+    Dex: 521
+    Luk: 520
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Fish
+    Element: Earth
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 1216
+    AttackMotion: 768
+    DamageMotion: 384
+    Ai: 21
+    Class: Boss
+    DamageTaken: 10
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Energy_Of_Summer
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Summer
+        Rate: 2000
+      - Item: Energy_Of_Summer
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Summer_Material_1
+        Rate: 500
+      - Item: Summer_Material_2
+        Rate: 500
+      - Item: Summer_Material_3
+        Rate: 500
   - Id: 22179
     AegisName: MD_PRI_DRAGON_3
-    Name: MD_PRI_DRAGON_3
+    Name: Maple Tree
+    JapaneseName: Maple Tree
+    Level: 275
+    Hp: 700000000
+    Attack: 35450
+    Attack2: 16798
+    Defense: 213
+    MagicDefense: 241
+    Resistance: 1399
+    MagicResistance: 2324
+    Str: 415
+    Agi: 428
+    Vit: 467
+    Int: 485
+    Dex: 532
+    Luk: 525
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Plant
+    Element: Wind
+    ElementLevel: 1
+    WalkSpeed: 150
+    AttackDelay: 1448
+    AttackMotion: 900
+    DamageMotion: 432
+    Ai: 21
+    Class: Boss
+    DamageTaken: 10
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Energy_Of_Autumn
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Autumn
+        Rate: 2000
+      - Item: Energy_Of_Autumn
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Autumn_Material_1
+        Rate: 500
+      - Item: Autumn_Material_2
+        Rate: 500
+      - Item: Autumn_Material_3
+        Rate: 500
   - Id: 22180
     AegisName: MD_PRI_DRAGON_4
-    Name: MD_PRI_DRAGON_4
+    Name: Monarch Penguin
+    JapaneseName: Monarch Penguin
+    Level: 275
+    Hp: 700000000
+    Attack: 45786
+    Attack2: 15077
+    Defense: 347
+    MagicDefense: 134
+    Resistance: 1741
+    MagicResistance: 807
+    Str: 486
+    Agi: 390
+    Vit: 386
+    Int: 311
+    Dex: 552
+    Luk: 515
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Dragon
+    Element: Water
+    ElementLevel: 1
+    WalkSpeed: 130
+    AttackDelay: 1144
+    AttackMotion: 720
+    DamageMotion: 384
+    Ai: 21
+    Class: Boss
+    DamageTaken: 10
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Energy_Of_Winter
+        Rate: 5000
+      - Item: Old_Card_Album
+        Rate: 2500
+      - Item: Magic_Card_Album
+        Rate: 2500
+    Drops:
+      - Item: Energy_Of_Winter
+        Rate: 2000
+      - Item: Energy_Of_Winter
+        Rate: 1000
+      - Item: MD_Hol_Fragment
+        Rate: 1000
+      - Item: Winter_Material_1
+        Rate: 500
+      - Item: Winter_Material_2
+        Rate: 500
+      - Item: Winter_Material_3
+        Rate: 500
 #  - Id: 22181
 #    AegisName: MD_COMMON_P
 #  - Id: 22182

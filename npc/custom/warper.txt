@@ -572,7 +572,8 @@ menu	"Bakonawa Lake",I1, "Bangungot Hospital 2F",I2, "Buwaya Cave",I3,
 		"Nidhoggur's Nest",I13, "Octopus Cave",I14, "Old Glast Heim",I15,
 		"Orc's Memory",I16, "Sarah and Fenrir",I17, "Sara Memory",I18,
 		"Sealed Shrine",I19, "Wolfchev's Laboratory",I20, "Glast Heim Challenge",I21,
-		"Airship Crash",I22, "Bed of Honor",I23, "Lake of Fire",I24;
+		"Airship Crash",I22, "Bed of Honor",I23, "Lake of Fire",I24, "Tomb of Remorse",I25,
+		"Forgotten Time Z1",I26, "Forgotten Time Z2",I27;
 
 I1: Restrict("RE");
 	Go("ma_scene01",172,175);
@@ -618,6 +619,26 @@ I23: Restrict("RE");
 	Go("lighthalzen",321,218);
 I24: Restrict("RE");
 	Go("t_garden",158,235);
+I25: Restrict("RE");
+	if (BaseLevel >= 220)
+		callfunc("F_RemorseGrantAccess");
+	Go("dali02",78,116);
+I26: Restrict("RE");
+	if (BaseLevel >= 250)
+		callfunc("F_GotGrantFullAccess");
+	if (!callfunc("F_ForgottenTimeCanEnter", 1)) {
+		mes "^0000cdForgotten Time Zone 1^000000 requires Garden of Time step 8.";
+		close;
+	}
+	Go("for_dun01",101,136);
+I27: Restrict("RE");
+	if (BaseLevel >= 250)
+		callfunc("F_GotGrantFullAccess");
+	if (!callfunc("F_ForgottenTimeCanEnter", 2)) {
+		mes "^0000cdForgotten Time Zone 2^000000 requires Garden of Time step 8.";
+		close;
+	}
+	Go("for_dun02",190,147);
 
 // --------------------------------------------------
 	Special:
@@ -1330,6 +1351,9 @@ OnNaviGenerate:
 		naviregisterwarp("Warper > Airship Crash", "dali02", 137, 86);
 		naviregisterwarp("Warper > Bed of Honor", "lighthalzen", 321, 218);
 		naviregisterwarp("Warper > Lake of Fire", "t_garden", 158, 235);
+		naviregisterwarp("Warper > Forgotten Time Z1", "for_dun01", 101, 136);
+		naviregisterwarp("Warper > Forgotten Time Z2", "for_dun02", 190, 147);
+		naviregisterwarp("Warper > Tomb of Remorse", "dali02", 78, 116);
 		naviregisterwarp("Warper > Sarah and Fenrir", "dali02", 92, 141);
 		naviregisterwarp("Warper > Sara Memory", "dali", 133, 108);
 		naviregisterwarp("Warper > Wolfchev's Laboratory", "lhz_dun04", 148, 269);

@@ -1,0 +1,1640 @@
+###########################################################################
+# Rune Tablet Set Database - Renewal
+# - Tag 17 (EPISODE17): initial test sets
+# - Tag 20 (EPISODE20): full set of 8 tablets sourced from kRO client tables
+###########################################################################
+
+Header:
+  Type: RUNE_DB
+  Version: 1
+
+Body:
+  - Id: 17
+    Name: EPISODE17
+    Set:
+      - Id: 1260000
+        Name: Rt_Ep17_Doubt
+        Books:
+          - Slot: 0
+            Id: 1263000
+          - Slot: 1
+            Id: 1263001
+          - Slot: 4
+            Id: 1263002
+          - Slot: 5
+            Id: 1263003
+        Activation:
+          - Material: EP17_1_EVT02
+            Amount: 75
+          - Material: EP17_1_EVT39
+            Amount: 35
+          - Material: EP17_1_EVT01
+            Amount: 5
+          - Material: Imperfect_Rune
+            Amount: 150
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              .@val = getupgrade_rune() / 3;
+              if (.@val > 0) {
+                bonus bBaseAtk, .@val * 2;
+                bonus bMatk, .@val * 2;
+              }
+          - Amount: 4
+            Script: |
+              bonus2 bAddSize, Size_All, 1;
+              bonus2 bMagicAddSize, Size_All, 1;
+              bonus bBaseAtk, 10;
+              bonus bMatk, 10;
+        Upgrades:
+          - Grade: 0
+            Chance: 10000
+            ChancePerFail: 4000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 10
+          - Grade: 1
+            Chance: 10000
+            ChancePerFail: 4000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 12
+          - Grade: 2
+            Chance: 10000
+            ChancePerFail: 4000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 14
+          - Grade: 3
+            Chance: 9000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+          - Grade: 4
+            Chance: 9000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+          - Grade: 5
+            Chance: 8000
+            ChancePerFail: 3200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+          - Grade: 6
+            Chance: 7000
+            ChancePerFail: 2800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 25
+          - Grade: 7
+            Chance: 6000
+            ChancePerFail: 2400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 30
+          - Grade: 8
+            Chance: 5000
+            ChancePerFail: 2000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 35
+          - Grade: 9
+            Chance: 4000
+            ChancePerFail: 1600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 40
+          - Grade: 10
+            Chance: 3000
+            ChancePerFail: 1200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 50
+              - Material: Perfect_Rune
+                Amount: 1
+          - Grade: 11
+            Chance: 2000
+            ChancePerFail: 800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 60
+              - Material: Perfect_Rune
+                Amount: 1
+          - Grade: 12
+            Chance: 1000
+            ChancePerFail: 400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 70
+              - Material: Perfect_Rune
+                Amount: 1
+          - Grade: 13
+            Chance: 500
+            ChancePerFail: 200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 80
+              - Material: Perfect_Rune
+                Amount: 2
+          - Grade: 14
+            Chance: 100
+            ChancePerFail: 40
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 100
+              - Material: Perfect_Rune
+                Amount: 3
+        Rewards:
+          Activation: Rt_Ep17_Doubt_A
+          Completion: Rt_Ep17_Doubt_C
+          Milestones:
+            - Amount: 3
+              Item: Rt_Ep17_Doubt_3
+      - Id: 1260001
+        Name: Rt_Ep17_Auto
+        Books:
+          - Slot: 0
+            Id: 1263004
+          - Slot: 1
+            Id: 1263005
+        Activation:
+          - Material: BarMealTicket
+            Amount: 1350
+          - Material: Imperfect_Rune
+            Amount: 100
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus bDef, 100;
+              bonus bMdef, 25;
+              .@val = getupgrade_rune() / 3;
+              if (.@val > 0)
+                bonus bMaxHPrate, .@val;
+        Upgrades:
+          - Grade: 0
+            Chance: 10000
+            ChancePerFail: 4000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 10
+          - Grade: 1
+            Chance: 10000
+            ChancePerFail: 4000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 12
+          - Grade: 2
+            Chance: 10000
+            ChancePerFail: 4000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 14
+          - Grade: 3
+            Chance: 9000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+          - Grade: 4
+            Chance: 9000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+          - Grade: 5
+            Chance: 8000
+            ChancePerFail: 3200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+          - Grade: 6
+            Chance: 7000
+            ChancePerFail: 2800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 25
+          - Grade: 7
+            Chance: 6000
+            ChancePerFail: 2400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 30
+          - Grade: 8
+            Chance: 5000
+            ChancePerFail: 2000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 35
+          - Grade: 9
+            Chance: 4000
+            ChancePerFail: 1600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 40
+          - Grade: 10
+            Chance: 3000
+            ChancePerFail: 1200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 50
+          - Grade: 11
+            Chance: 2000
+            ChancePerFail: 800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 60
+          - Grade: 12
+            Chance: 1000
+            ChancePerFail: 400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 70
+          - Grade: 13
+            Chance: 500
+            ChancePerFail: 200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 80
+          - Grade: 14
+            Chance: 100
+            ChancePerFail: 40
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 100
+        Rewards:
+          Activation: Rt_Ep17_Auto_A
+          Completion: Rt_Ep17_Auto_C
+
+  ###########################################################################
+  # Episode 20 rune tablet sets.
+  # Set IDs, rune page IDs (books), slot layout, activation/upgrade materials
+  # and grade success/fail chances follow the official kRO client tables
+  # (runesystemid / runeSystem_table / runeset_info). Set bonuses follow the
+  # official kRO effect descriptions (runeset_desc). Materials use:
+  #   Ep20_Cat_Whiskers (1001217), Imperfect_Rune (1001282), Perfect_Rune (1001283)
+  ###########################################################################
+  - Id: 20
+    Name: EPISODE20
+    Set:
+      # ------------------------------------------------------------------
+      - Id: 1260037
+        Name: Rt_Ep20_Glacier
+        Books:
+          - Slot: 0
+            Id: 1263080
+          - Slot: 3
+            Id: 1263081
+          - Slot: 4
+            Id: 1263082
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 100
+          - Material: Imperfect_Rune
+            Amount: 100
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              // kRO: damage against Episode 20 monsters only. rAthena has no
+              // episode-monster tag, so this applies to all monster classes.
+              .@v = getupgrade_rune() / 3;
+              if (.@v > 0) {
+                bonus2 bAddClass, Class_All, .@v;
+                bonus2 bMagicAddClass, Class_All, .@v;
+              }
+          - Amount: 3
+            Script: |
+              bonus2 bAddClass, Class_All, 7;
+              bonus2 bMagicAddClass, Class_All, 7;
+        Upgrades:
+          - Grade: 0
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 5
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 9
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 12
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 19
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 14
+            Chance: 150
+            ChancePerFail: 90
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+        Rewards:
+          Activation: Rt_Ep20_Glacier_A
+          Completion: Rt_Ep20_Glacier_C
+      # ------------------------------------------------------------------
+      - Id: 1260038
+        Name: Rt_Ep20_Sanctuary
+        Books:
+          - Slot: 1
+            Id: 1263089
+          - Slot: 2
+            Id: 1263091
+          - Slot: 3
+            Id: 1263088
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 350
+          - Material: Imperfect_Rune
+            Amount: 250
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus bMaxHPrate, 2;
+              bonus bPow, 3;
+              bonus bCon, 3;
+              .@v = getupgrade_rune() / 5;
+              if (.@v > 0) {
+                bonus bMaxHPrate, .@v;
+                bonus bMaxSPrate, .@v;
+              }
+          - Amount: 3
+            Script: |
+              bonus bMaxHPrate, 5;
+              bonus bPow, 5;
+              bonus bCon, 5;
+              .@v = getupgrade_rune() / 3;
+              if (.@v > 0) {
+                bonus bMaxHPrate, .@v;
+                bonus bPow, .@v;
+                bonus bCon, .@v;
+              }
+        Upgrades:
+          - Grade: 0
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 5
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 9
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 12
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 370
+            ChancePerFail: 220
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 24
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+          - Grade: 14
+            Chance: 70
+            ChancePerFail: 40
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 25
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 9
+        Rewards:
+          Activation: Rt_Ep20_Sanctuary_A
+          Completion: Rt_Ep20_Sanctuary_C
+          Milestones:
+            - Amount: 2
+              Item: Rt_Ep20_Sanctuary_2
+      # ------------------------------------------------------------------
+      - Id: 1260039
+        Name: Rt_Ep20_Predator
+        Books:
+          - Slot: 0
+            Id: 1263087
+          - Slot: 5
+            Id: 1263092
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 350
+          - Material: Imperfect_Rune
+            Amount: 300
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus bPatk, 20;
+              bonus2 bSubEle, Ele_All, -15;
+              bonus2 bAddClass, Class_All, 4;
+              .@v = getupgrade_rune() / 3;
+              if (.@v > 0)
+                bonus2 bSubEle, Ele_All, .@v * 2;
+        Upgrades:
+          - Grade: 0
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 5
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 9
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 12
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 370
+            ChancePerFail: 220
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 24
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+          - Grade: 14
+            Chance: 70
+            ChancePerFail: 40
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 25
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 9
+        Rewards:
+          Activation: Rt_Ep20_Predator_A
+          Completion: Rt_Ep20_Predator_C
+      # ------------------------------------------------------------------
+      - Id: 1260040
+        Name: Rt_Ep20_Guardian
+        Books:
+          - Slot: 0
+            Id: 1263086
+          - Slot: 1
+            Id: 1263090
+          - Slot: 3
+            Id: 1263089
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 150
+          - Material: Imperfect_Rune
+            Amount: 100
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus bVariableCastrate, -7;
+              bonus bPatk, 2;
+              .@v = getupgrade_rune() / 5;
+              if (.@v > 0)
+                bonus bVariableCastrate, -.@v;
+          - Amount: 3
+            Script: |
+              bonus2 bAddClass, Class_All, 4;
+              bonus bUseSPrate, -4;
+        Upgrades:
+          - Grade: 0
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 5
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 9
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 12
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 19
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 14
+            Chance: 150
+            ChancePerFail: 90
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+        Rewards:
+          Activation: Rt_Ep20_Guardian_A
+          Completion: Rt_Ep20_Guardian_C
+          Milestones:
+            - Amount: 3
+              Item: Rt_Ep20_Guardian_3
+      # ------------------------------------------------------------------
+      - Id: 1260041
+        Name: Rt_Ep20_Sangel
+        Books:
+          - Slot: 0
+            Id: 1263085
+          - Slot: 1
+            Id: 1263087
+          - Slot: 3
+            Id: 1263088
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 300
+          - Material: Imperfect_Rune
+            Amount: 250
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus bMaxHPrate, 2;
+              bonus bSpl, 3;
+              bonus bCon, 3;
+              .@v = getupgrade_rune() / 5;
+              if (.@v > 0) {
+                bonus bMaxHPrate, .@v;
+                bonus bMaxSPrate, .@v;
+              }
+          - Amount: 3
+            Script: |
+              bonus bMaxHPrate, 5;
+              bonus bSpl, 5;
+              bonus bCon, 5;
+              .@v = getupgrade_rune() / 3;
+              if (.@v > 0) {
+                bonus bMaxHPrate, .@v;
+                bonus bSpl, .@v;
+                bonus bCon, .@v;
+              }
+        Upgrades:
+          - Grade: 0
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 5
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 9
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 12
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 370
+            ChancePerFail: 220
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 24
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+          - Grade: 14
+            Chance: 70
+            ChancePerFail: 40
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 25
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 9
+        Rewards:
+          Activation: Rt_Ep20_Sangel_A
+          Completion: Rt_Ep20_Sangel_C
+          Milestones:
+            - Amount: 2
+              Item: Rt_Ep20_Sangel_2
+      # ------------------------------------------------------------------
+      - Id: 1260042
+        Name: Rt_Ep20_Day
+        Books:
+          - Slot: 0
+            Id: 1263083
+          - Slot: 1
+            Id: 1263084
+          - Slot: 2
+            Id: 1263086
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 150
+          - Material: Imperfect_Rune
+            Amount: 100
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus bVariableCastrate, -7;
+              bonus bSmatk, 2;
+              .@v = getupgrade_rune() / 5;
+              if (.@v > 0)
+                bonus bVariableCastrate, -.@v;
+          - Amount: 3
+            Script: |
+              bonus2 bMagicAtkEle, Ele_Fire, 5;
+              bonus2 bMagicAtkEle, Ele_Wind, 5;
+              bonus2 bMagicAtkEle, Ele_Holy, 5;
+              bonus2 bMagicAtkEle, Ele_Neutral, 5;
+              bonus bUseSPrate, -4;
+        Upgrades:
+          - Grade: 0
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 5
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 9
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 12
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 19
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 14
+            Chance: 150
+            ChancePerFail: 90
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+        Rewards:
+          Activation: Rt_Ep20_Day_A
+          Completion: Rt_Ep20_Day_C
+      # ------------------------------------------------------------------
+      - Id: 1260043
+        Name: Rt_Ep20_Retire
+        Books:
+          - Slot: 0
+            Id: 1263086
+          - Slot: 1
+            Id: 1263090
+          - Slot: 2
+            Id: 1263083
+          - Slot: 5
+            Id: 1263088
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 200
+          - Material: Imperfect_Rune
+            Amount: 100
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus bCritical, 3;
+              bonus bCritAtkRate, 3;
+          - Amount: 4
+            Script: |
+              bonus bCritical, 5;
+              bonus bCritAtkRate, 10;
+              bonus bCrate, 3;
+        Upgrades:
+          - Grade: 0
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 15000
+            ChancePerFail: 9000
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 15
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 13500
+            ChancePerFail: 8100
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 5
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 16
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 9
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 17
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 12
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 18
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 19
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 14
+            Chance: 150
+            ChancePerFail: 90
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+        Rewards:
+          Activation: Rt_Ep20_Retire_A
+          Completion: Rt_Ep20_Retire_C
+          Milestones:
+            - Amount: 2
+              Item: Rt_Ep20_Retire_2
+            - Amount: 4
+              Item: Rt_Ep20_Retire_4
+      # ------------------------------------------------------------------
+      - Id: 1260044
+        Name: Rt_Ep20_Roots
+        Books:
+          - Slot: 0
+            Id: 1263083
+          - Slot: 1
+            Id: 1263084
+          - Slot: 2
+            Id: 1263085
+          - Slot: 4
+            Id: 1263089
+          - Slot: 5
+            Id: 1263090
+        Activation:
+          - Material: Ep20_Cat_Whiskers
+            Amount: 200
+          - Material: Imperfect_Rune
+            Amount: 100
+          - Material: Perfect_Rune
+            Amount: 1
+        Scripts:
+          - Amount: 2
+            Script: |
+              bonus2 bAddClass, Class_All, 4;
+              bonus2 bMagicAddClass, Class_All, 3;
+          - Amount: 4
+            Script: |
+              bonus bRes, 15;
+              bonus bMres, 15;
+              .@v = getupgrade_rune() / 3;
+              if (.@v > 0) {
+                bonus bRes, .@v * 3;
+                bonus bMres, .@v * 3;
+              }
+          - Amount: 5
+            Script: |
+              bonus bDelayrate, -5;
+              .@v = getupgrade_rune() / 3;
+              if (.@v > 0)
+                bonus bDelayrate, -.@v;
+        Upgrades:
+          - Grade: 0
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 1
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 2
+            Chance: 12000
+            ChancePerFail: 7200
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 3
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 20
+              - Material: Ep20_Cat_Whiskers
+                Amount: 3
+          - Grade: 4
+            Chance: 10500
+            ChancePerFail: 6300
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 5
+            Chance: 9000
+            ChancePerFail: 5400
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 6
+            Chance: 7500
+            ChancePerFail: 4500
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 7
+            Chance: 6000
+            ChancePerFail: 3600
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 21
+              - Material: Ep20_Cat_Whiskers
+                Amount: 5
+          - Grade: 8
+            Chance: 4500
+            ChancePerFail: 2700
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 9
+            Chance: 3000
+            ChancePerFail: 1800
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 10
+            Chance: 1500
+            ChancePerFail: 900
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 22
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 6
+          - Grade: 11
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 12
+            Chance: 750
+            ChancePerFail: 450
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 23
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 7
+          - Grade: 13
+            Chance: 370
+            ChancePerFail: 220
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 24
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 8
+          - Grade: 14
+            Chance: 70
+            ChancePerFail: 40
+            Materials:
+              - Material: Imperfect_Rune
+                Amount: 25
+              - Material: Perfect_Rune
+                Amount: 1
+              - Material: Ep20_Cat_Whiskers
+                Amount: 9
+        Rewards:
+          Activation: Rt_Ep20_Roots_A
+          Completion: Rt_Ep20_Roots_C
+          Milestones:
+            - Amount: 3
+              Item: Rt_Ep20_Roots_3
+            - Amount: 5
+              Item: Rt_Ep20_Roots_5

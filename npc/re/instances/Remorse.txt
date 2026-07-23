@@ -482,6 +482,8 @@ end;
 }
 
 1@spa2,212,55,0	script	#rms_ev_3	HIDDEN_WARP_NPC,2,2,{
+	end;
+
 OnTouch:
 	if(!is_party_leader()) end;
 	if(get_instance_var("rms") > 3) end;

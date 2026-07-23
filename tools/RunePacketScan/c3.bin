@@ -1,0 +1,28 @@
+ static void ScanFile(string path){
+  L("========================================================================");
+  L("FILE: "+path); if(! File.Exists(path)){ L("MISSING"); return;}
+  byte[] b=File.ReadAllBytes(path); L("SIZE: "+b.Length+" (0x"+b.Length.ToString("X")+")");
+  PE pe=PA(b); L("ImageBase=0x"+pe.IB.ToString("X")+" sections="+pe.S.Count);
+  foreach(var s in pe.S)L("   "+s.N+" VA=0x"+s.VA.ToString("X")+" RA=0x"+s.RA.ToString("X")+" RS=0x"+s.RS.ToString("X"));
+  string[] names=new string[]{
+    "CRuneSystemMgr",".?AVCRuneSystemMgr@@","UIRuneSystemWnd","UIRuneSystem_DecomItemWnd","CRuneSystemMgr file Init",
+    "OPEN_RUNE","CLOSE_RUNE","RUNE_ACK","CZ_RUNE","ZC_RUNE","RuneUI","runeui","BANKING","STYLIST","ENCHANTGRADE","REPUTATION","RUNE"
+  };
+  var stringOffs=new List<long>();
+  foreach(var name in names){
+    byte[] n=Encoding.ASCII.GetBytes(name); var hits=FB(b,n); L("--- ASCII '"+name+"' hits="+hits.Count);
+    foreach(var h in hits){ stringOffs.Add(h); uint va=0; bool ok=F2V(pe,h,ref va); L("  hit file=0x"+h.ToString("X")+(ok?(" VA=0x"+va.ToString("X")):" (no VA)")); }
+  }
+  var uniq=new HashSet<long>(); foreach(var h in stringOffs)uniq.Add(h);
+  foreach(var h in uniq){
+    uint strVa=0; if(!F2V(pe,h,ref strVa))continue;
+    byte[] needle=BitConverter.GetBytes(strVa); var xrefs=FB(b,needle);
+    L("--- xrefs to VA=0x"+strVa.ToString("X")+" file=0x"+h.ToString("X")+" count="+xrefs.Count);
+    int cap=0; foreach(var x in xrefs) {
+      if(cap++>80){ L("  ... truncated"); break;}
+      long ds=Math.Max(0, x-128); long de=Math.Min(b.Length, x+132);
+      L("  xref file=0x"+x.ToString("X")); HD(b,ds,(int)Math.Min(de-ds,256));
+      var pkds=new List<string>(); for(long i=ds; i<=de-2; i++){ ushort v=BitConverter.ToUInt16(b,(int)i); if(v >= 0x0B00 && v <= 0x0C50)pkds.Add("0x"+v.ToString("X4")+"@0x"+i.ToString("X"));}
+      if(pkds.Count>0)L("  pk IDs in +/-128: "+string.Join(" ",pkds));
+    }
+  }

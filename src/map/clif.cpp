@@ -52,6 +52,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "rune.hpp"
 #include "script.hpp"
 #include "skill.hpp"
 #include "status.hpp"
@@ -10940,6 +10941,7 @@ void clif_parse_LoadEndAck(int32 fd,map_session_data *sd)
 		clif_updatestatus(*sd,SP_NEXTJOBEXP);
 		clif_updatestatus(*sd,SP_SKILLPOINT);
 		clif_initialstatus( *sd );
+		clif_rune_sync( *sd );
 
 		if (sd->sc.option&OPTION_FALCON)
 			clif_status_load(sd, EFST_FALCON, 1);
@@ -13989,12 +13991,22 @@ void clif_parse_PartyChangeOption(int32 fd, map_session_data *sd)
 		return;
 
 	expflag = RFIFOL(fd,info->pos[0]);
-	if(cmd == 0x0102){ //Client can't change the item-field
-		party_changeoption(sd, expflag, p->party.item);
-	}
-	else {
-		int32 itemflag = (RFIFOB(fd,info->pos[1])?1:0)|(RFIFOB(fd,info->pos[2])?2:0);
-		party_changeoption(sd, expflag, itemflag);
+	if( cmd == 0x0102 ){ //Client can't change the item-field
+		// Client sends current exp when opening the party settings window.
+		if( expflag == p->party.exp ){
+			clif_party_option( p, sd, 0x100 );
+			return;
+		}
+		party_changeoption( sd, expflag, p->party.item );
+	} else {
+		int32 itemflag = ( RFIFOB( fd, info->pos[1] ) ? 1 : 0 ) | ( RFIFOB( fd, info->pos[2] ) ? 2 : 0 );
+
+		// Client sends current settings when opening the party settings window.
+		if( expflag == p->party.exp && itemflag == p->party.item ){
+			clif_party_option( p, sd, 0x100 );
+			return;
+		}
+		party_changeoption( sd, expflag, itemflag );
 	}
 }
 
@@ -22017,6 +22029,15 @@ void clif_ui_open( map_session_data& sd, enum out_ui_type ui_type, int32 data ){
 #else
 			return;
 #endif
+		case OUT_UI_RUNE:
+#if PACKETVER >= 20230802
+			// Track open state for CZ handlers, but do not gate pc_cant_act2 yet —
+			// dedicated close packet is still provisional.
+			sd.state.runeui_open = true;
+			break;
+#else
+			return;
+#endif
 	}
 
 	PACKET_ZC_UI_OPEN p = {};
@@ -25171,6 +25192,150 @@ void clif_parse_enchantwindow_reset( int32 fd, map_session_data* sd ){
 void clif_parse_enchantwindow_close( int32 fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20201118 || PACKETVER_RE_NUM >= 20211103 || PACKETVER_ZERO_NUM >= 20221024
 	sd->state.item_enchant_index = 0;
+#endif
+}
+
+/// Opens the Rune Tablet UI via ZC_UI_OPEN (OUT_UI_RUNE = 11).
+/// Dedicated 0x0bc0+ packets remain provisional; gameplay also works through the Rune Stone NPC.
+void clif_runeui_open( map_session_data& sd ){
+#if PACKETVER >= 20230802
+	clif_ui_open( sd, OUT_UI_RUNE, 0 );
+	clif_rune_sync( sd );
+#else
+	clif_messagecolor( &sd, color_table[COLOR_RED], "Rune Tablet UI requires PACKETVER 20230802+.", false, SELF );
+#endif
+}
+
+void clif_rune_ack( map_session_data& sd, uint8 result, uint32 id ){
+#if PACKETVER >= 20250529
+	PACKET_ZC_RUNE_ACK p = {};
+	p.PacketType = HEADER_ZC_RUNE_ACK;
+	p.result = result;
+	p.id = id;
+	clif_send( &p, sizeof( p ), &sd, SELF );
+#endif
+}
+
+void clif_rune_sync( map_session_data& sd ){
+#if PACKETVER >= 20250529
+	// Provisional variable layout until official capture:
+	// <equipped_set>.L <grade>.B <book_count>.W { <book_id>.L }* <set_count>.W { <set_id>.L <grade>.B <fail_count>.W <equipped>.B }*
+	const size_t book_count = sd.rune.books.size();
+	const size_t set_count = sd.rune.sets.size();
+	const size_t len = sizeof( PACKET_ZC_RUNE_SYNC )
+		+ sizeof( uint16 ) + ( book_count * sizeof( uint32 ) )
+		+ sizeof( uint16 ) + ( set_count * ( sizeof( uint32 ) + sizeof( uint8 ) + sizeof( uint16 ) + sizeof( uint8 ) ) );
+	PACKET_ZC_RUNE_SYNC* p = reinterpret_cast<PACKET_ZC_RUNE_SYNC*>( aMalloc( len ) );
+
+	p->PacketType = HEADER_ZC_RUNE_SYNC;
+	p->PacketLength = static_cast<uint16>( len );
+	p->equipped_set = rune_get_equipped_set( sd );
+	p->grade = rune_get_grade( sd );
+
+	uint8* cursor = reinterpret_cast<uint8*>( p ) + sizeof( PACKET_ZC_RUNE_SYNC );
+	*reinterpret_cast<uint16*>( cursor ) = static_cast<uint16>( book_count );
+	cursor += sizeof( uint16 );
+	for( uint32 book_id : sd.rune.books ){
+		*reinterpret_cast<uint32*>( cursor ) = book_id;
+		cursor += sizeof( uint32 );
+	}
+	*reinterpret_cast<uint16*>( cursor ) = static_cast<uint16>( set_count );
+	cursor += sizeof( uint16 );
+	for( const auto& it : sd.rune.sets ){
+		*reinterpret_cast<uint32*>( cursor ) = it.second.set_id;
+		cursor += sizeof( uint32 );
+		*cursor = it.second.grade;
+		cursor += sizeof( uint8 );
+		*reinterpret_cast<uint16*>( cursor ) = it.second.fail_count;
+		cursor += sizeof( uint16 );
+		*cursor = it.second.equipped ? 1 : 0;
+		cursor += sizeof( uint8 );
+	}
+
+	clif_send( p, p->PacketLength, &sd, SELF );
+	aFree( p );
+#else
+	(void)sd;
+#endif
+}
+
+void clif_parse_runeui_close( int32 fd, map_session_data* sd ){
+#if PACKETVER >= 20250529
+	nullpo_retv( sd );
+	sd->state.runeui_open = false;
+#endif
+}
+
+void clif_parse_rune_activate_book( int32 fd, map_session_data* sd ){
+#if PACKETVER >= 20250529
+	nullpo_retv( sd );
+	if( !sd->state.runeui_open ){
+		return;
+	}
+	const PACKET_CZ_RUNE_ACTIVATE_BOOK* p = reinterpret_cast<PACKET_CZ_RUNE_ACTIVATE_BOOK*>( RFIFOP( fd, 0 ) );
+	bool ok = rune_activate_book( *sd, p->book_id );
+	clif_rune_ack( *sd, ok ? 0 : 1, p->book_id );
+	if( ok ){
+		clif_rune_sync( *sd );
+	}
+#endif
+}
+
+void clif_parse_rune_activate_set( int32 fd, map_session_data* sd ){
+#if PACKETVER >= 20250529
+	nullpo_retv( sd );
+	if( !sd->state.runeui_open ){
+		return;
+	}
+	const PACKET_CZ_RUNE_ACTIVATE_SET* p = reinterpret_cast<PACKET_CZ_RUNE_ACTIVATE_SET*>( RFIFOP( fd, 0 ) );
+	bool ok = rune_activate_set( *sd, p->set_id );
+	clif_rune_ack( *sd, ok ? 0 : 1, p->set_id );
+	if( ok ){
+		clif_rune_sync( *sd );
+	}
+#endif
+}
+
+void clif_parse_rune_equip_set( int32 fd, map_session_data* sd ){
+#if PACKETVER >= 20250529
+	nullpo_retv( sd );
+	if( !sd->state.runeui_open ){
+		return;
+	}
+	const PACKET_CZ_RUNE_EQUIP_SET* p = reinterpret_cast<PACKET_CZ_RUNE_EQUIP_SET*>( RFIFOP( fd, 0 ) );
+	bool ok = rune_equip_set( *sd, p->set_id );
+	clif_rune_ack( *sd, ok ? 0 : 1, p->set_id );
+	if( ok ){
+		clif_rune_sync( *sd );
+	}
+#endif
+}
+
+void clif_parse_rune_upgrade_set( int32 fd, map_session_data* sd ){
+#if PACKETVER >= 20250529
+	nullpo_retv( sd );
+	if( !sd->state.runeui_open ){
+		return;
+	}
+	const PACKET_CZ_RUNE_UPGRADE_SET* p = reinterpret_cast<PACKET_CZ_RUNE_UPGRADE_SET*>( RFIFOP( fd, 0 ) );
+	bool ok = rune_upgrade_set( *sd, p->set_id );
+	clif_rune_ack( *sd, ok ? 0 : 1, p->set_id );
+	if( ok ){
+		clif_rune_sync( *sd );
+	}
+#endif
+}
+
+void clif_parse_rune_decompose( int32 fd, map_session_data* sd ){
+#if PACKETVER >= 20250529
+	nullpo_retv( sd );
+	if( !sd->state.runeui_open ){
+		return;
+	}
+	const PACKET_CZ_RUNE_DECOMPOSE* p = reinterpret_cast<PACKET_CZ_RUNE_DECOMPOSE*>( RFIFOP( fd, 0 ) );
+	uint16 index = server_index( p->index );
+	bool ok = rune_decompose( *sd, index, p->type );
+	clif_rune_ack( *sd, ok ? 0 : 1, p->index );
 #endif
 }
 

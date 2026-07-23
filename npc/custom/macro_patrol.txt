@@ -40,6 +40,9 @@ OnInit:
 
 	// Maps with Play_RO_Gold_Coin_ in GlobalDrops (db/re + db/import map_drops.yml)
 	// Regenerate: powershell tools/sync_macro_patrol_maps.ps1  (or node tools/sync_macro_patrol_maps.js)
+	// EP19 farmable: jor_back1-3, jor_tail, jor_ab01-02, jor_dun01-02
+	// EP20 farmable: jor_back4-6, jor_maze, jor_root1-3, jor_twice, jor_twig
+	// EP19.x farmable: mjo_wst01, ra_pol01
 
 	setarray .farm_maps$,
 		"abyss_01", "abyss_02", "abyss_03", "abyss_04",
@@ -56,9 +59,10 @@ OnInit:
 		"jor_que", "jor_raise1", "jor_raise2", "jor_root1", "jor_root2", "jor_root3", "jor_safty1", "jor_safty2", "jor_sanct",
 		"jor_sklf1", "jor_sklf2", "jor_tail", "jor_tmple1", "jor_tmple2", "jor_twice", "jor_twig",
 		"juperos_01", "kh_dun01", "kh_dun02", "lasa_dun02", "lhz_dun02", "lhz_dun03", "lhz_dun04", "lou_dun03", "mag_dun02",
+		"mjo_wst01",
 		"nif_dun01", "nif_dun02", "odin_past", "odin_tem02", "odin_tem03",
 		"oz_dun01", "oz_dun02", "pay_d03_i", "prt_mz03_i",
-		"ra_fild01", "ra_fild10", "ra_fild11", "ra_fild12", "ra_fild13",
+		"ra_fild01", "ra_fild10", "ra_fild11", "ra_fild12", "ra_fild13", "ra_pol01",
 		"sp_rudus", "sp_rudus2", "sp_rudus3", "sp_rudus4", "spl_fild02",
 		"tha_t01", "tha_t02", "tha_t03", "tha_t04", "tha_t05", "tha_t06",
 		"tur_d03_i", "tur_d04_i", "tur_d04ia", "tur_d04ib", "ve_fild03";

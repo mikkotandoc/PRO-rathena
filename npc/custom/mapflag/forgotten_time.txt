@@ -1,0 +1,33 @@
+//===== rAthena Script =======================================
+//= Mapflags: Forgotten Time (for_dun01 / for_dun02)
+//===== Description: =========================================
+//= MuhRO-style Forgotten Time dungeon rules:
+//=   noteleport / nowarp  - Teleport, Fly Wing, Warp Portal blocked
+//=   restricted 11        - Extra skill/item limits (see db/*_nocast / noequip)
+//=   nosave SavePoint     - Relog inside returns to save point
+//=   nowarpto / nomemo    - No external warps or memo save points
+//=   nobranch             - Dead branches disabled
+//=   norenewal*           - No renewal level penalty
+//============================================================
+
+for_dun01	mapflag	noteleport
+for_dun01	mapflag	nowarp
+for_dun01	mapflag	restricted	11
+for_dun01	mapflag	nosave	SavePoint
+for_dun01	mapflag	nowarpto
+for_dun01	mapflag	nomemo
+for_dun01	mapflag	nobranch
+for_dun01	mapflag	norenewalexppenalty
+for_dun01	mapflag	norenewaldroppenalty
+for_dun01	mapflag	loadevent
+
+for_dun02	mapflag	noteleport
+for_dun02	mapflag	nowarp
+for_dun02	mapflag	restricted	11
+for_dun02	mapflag	nosave	SavePoint
+for_dun02	mapflag	nowarpto
+for_dun02	mapflag	nomemo
+for_dun02	mapflag	nobranch
+for_dun02	mapflag	norenewalexppenalty
+for_dun02	mapflag	norenewaldroppenalty
+for_dun02	mapflag	loadevent

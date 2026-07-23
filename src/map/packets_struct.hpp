@@ -5917,6 +5917,72 @@ struct PACKET_ZC_SHIELD_CHALLENGE {
 } __attribute__((packed));
 DEFINE_PACKET_HEADER(ZC_SHIELD_CHALLENGE, 0x0af9);
 
+/**
+ * Rune Tablet System packets (PACKETVER >= 20250529)
+ *
+ * UI open uses ZC_UI_OPEN with OUT_UI_RUNE (11) — see clif_runeui_open().
+ * 0x0bc1-0x0bc8 remain provisional action/sync packets pending live capture.
+ * Client data path: System\Rune\*.lub (also mirrored under SystemEN\Rune).
+ */
+#if PACKETVER >= 20250529
+struct PACKET_ZC_OPEN_RUNE_UI {
+	int16 PacketType;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_OPEN_RUNE_UI, 0x0bc0);
+
+struct PACKET_ZC_RUNE_ACK {
+	int16 PacketType;
+	uint8 result; // 0 = success, non-zero = fail code
+	uint32 id;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_RUNE_ACK, 0x0bc1);
+
+struct PACKET_CZ_CLOSE_RUNE_UI {
+	int16 PacketType;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_CLOSE_RUNE_UI, 0x0bc2);
+
+struct PACKET_CZ_RUNE_ACTIVATE_BOOK {
+	int16 PacketType;
+	uint32 book_id;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_RUNE_ACTIVATE_BOOK, 0x0bc3);
+
+struct PACKET_CZ_RUNE_ACTIVATE_SET {
+	int16 PacketType;
+	uint32 set_id;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_RUNE_ACTIVATE_SET, 0x0bc4);
+
+struct PACKET_CZ_RUNE_EQUIP_SET {
+	int16 PacketType;
+	uint32 set_id;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_RUNE_EQUIP_SET, 0x0bc5);
+
+struct PACKET_CZ_RUNE_UPGRADE_SET {
+	int16 PacketType;
+	uint32 set_id;
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_RUNE_UPGRADE_SET, 0x0bc6);
+
+struct PACKET_CZ_RUNE_DECOMPOSE {
+	int16 PacketType;
+	uint16 index;
+	uint8 type; // 1 = single, 2 = bulk
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(CZ_RUNE_DECOMPOSE, 0x0bc7);
+
+struct PACKET_ZC_RUNE_SYNC {
+	int16 PacketType;
+	uint16 PacketLength;
+	uint32 equipped_set;
+	uint8 grade;
+	// followed by variable book/set lists once capture is complete
+} __attribute__((packed));
+DEFINE_PACKET_HEADER(ZC_RUNE_SYNC, 0x0bc8);
+#endif // PACKETVER >= 20250529
+
 #if !defined(sun) && (!defined(__NETBSD__) || __NetBSD_Version__ >= 600000000) // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute
 #pragma pack(pop)
 #endif // not NetBSD < 6 / Solaris

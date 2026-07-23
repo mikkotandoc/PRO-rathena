@@ -47,6 +47,7 @@ function	script	F_EpClearApply	{
 			ep20_main = 100;
 		callfunc("F_EpForceComplete", 18233);
 		callfunc("F_EpForceComplete", 20008);
+		callfunc("F_GotGrantFullAccess");
 		break;
 	}
 	callfunc("F_EpUncloakInstances", .@ep, .@part);
@@ -60,6 +61,159 @@ function	script	F_EpUncloakNpcForce	{
 		return 0;
 	cloakoffnpcself(.@name$);
 	return 1;
+}
+
+// Garden of Time - Lake of Fire / Hall of Life / daily services (t_garden)
+function	script	F_GotGrantPrisonAccess	{
+	if (isbegin_quest(12597) == 2)
+		return;
+	if (BaseLevel < 250)
+		return;
+
+	setarray .@q[0], 12592, 12593, 12594, 12595, 12596, 12597;
+	for (.@i = 0; .@i < getarraysize(.@q); ++.@i)
+		callfunc("F_EpForceComplete", .@q[.@i]);
+	return;
+}
+
+function	script	F_GotGrantFullAccess	{
+	if (BaseLevel < 250)
+		return;
+
+	callfunc("F_GotGrantPrisonAccess");
+	if (isbegin_quest(12618) != 2)
+		callfunc("F_EpForceComplete", 12618);
+	if (isbegin_quest(12620) != 2)
+		callfunc("F_EpForceComplete", 12620);
+	return;
+}
+
+function	script	F_GotUncloakMemorial	{
+	if (isbegin_quest(12597) != 2)
+		return 0;
+
+	.@fixed = 0;
+	setarray .@npc$[0],
+		"Dimension Prison#1", "Dimension Prison#2",
+		"Sealing Spirit Stone#life2",
+		"Passage of Time#1", "Passage of Time#2";
+	for (.@i = 0; .@i < getarraysize(.@npc$); ++.@i)
+		.@fixed += callfunc("F_EpUncloakNpcForce", .@npc$[.@i]);
+	return .@fixed;
+}
+
+function	script	F_GotVendingAccess	{
+	return (isbegin_quest(12597) == 2 || isbegin_quest(12620) == 2);
+}
+
+function	script	F_GotUncloakVending	{
+	if (!callfunc("F_GotVendingAccess"))
+		return 0;
+
+	.@fixed = 0;
+	setarray .@npc$[0],
+		"Subspace vending machine#1", "Subspace vending machine#2",
+		"Subspace vending machine#3", "Subspace vending machine#4";
+	for (.@i = 0; .@i < getarraysize(.@npc$); ++.@i)
+		.@fixed += callfunc("F_EpUncloakNpcForce", .@npc$[.@i]);
+	return .@fixed;
+}
+
+function	script	F_GotUncloakServices	{
+	if (isbegin_quest(12620) != 2)
+		return 0;
+
+	.@fixed = callfunc("F_GotUncloakVending");
+	setarray .@npc$[0],
+		"Ardor#life2", "Diluvio#life2", "Procella#life2",
+		"Terremotus#life2", "Serpens#life2",
+		"Spirit Complaint Terminal#1";
+	for (.@i = 0; .@i < getarraysize(.@npc$); ++.@i)
+		.@fixed += callfunc("F_EpUncloakNpcForce", .@npc$[.@i]);
+	return .@fixed;
+}
+
+// Backward-compatible alias
+function	script	F_GotUncloakPrisons	{
+	return callfunc("F_GotUncloakMemorial");
+}
+
+function	script	F_GotOnMapLoad	{
+	// Custom warper sends players directly to memorial gates without the quest walkthrough.
+	if (BaseLevel >= 250)
+		callfunc("F_GotGrantFullAccess");
+	.@fixed = callfunc("F_GotUncloakMemorial");
+	.@fixed += callfunc("F_GotUncloakVending");
+	.@fixed += callfunc("F_GotUncloakServices");
+	return .@fixed;
+}
+
+// Forgotten Time field dungeons (for_dun01 / for_dun02)
+function	script	F_ForgottenTimeCanEnter	{
+	.@zone = getarg(0, 0);
+
+	if (BaseLevel < 250)
+		return 0;
+	if (.@zone == 1)
+		return (isbegin_quest(12595) == 2);
+	if (.@zone == 2)
+		return (isbegin_quest(12596) == 2);
+	return (isbegin_quest(12595) == 2 && isbegin_quest(12596) == 2);
+}
+
+// Tomb of Remorse (dali / dali02) - side memorial after Ghost Palace
+function	script	F_RemorseGrantAccess	{
+	if (BaseLevel < 220)
+		return;
+
+	setarray .@q[0], 16461, 16462, 16463;
+	for (.@i = 0; .@i < getarraysize(.@q); ++.@i)
+		callfunc("F_EpForceComplete", .@q[.@i]);
+	return;
+}
+
+function	script	F_RemorseUncloak	{
+	if (BaseLevel < 220)
+		return 0;
+
+	.@fixed = 0;
+	if (isbegin_quest(16463) == 2) {
+		.@fixed += callfunc("F_EpUncloakNpcForce", "Princess of Remorse#remorse3");
+		.@fixed += callfunc("F_EpUncloakNpcForce", "Marquis of Remorse#remorse");
+	} else if (isbegin_quest(16462) == 1) {
+		.@fixed += callfunc("F_EpUncloakNpcForce", "Princess of Remorse#remorse2");
+	} else if (isbegin_quest(16461) == 0 || isbegin_quest(16461) == 1) {
+		.@fixed += callfunc("F_EpUncloakNpcForce", "Princess of Remorse#remorse");
+	}
+	return .@fixed;
+}
+
+function	script	F_RemorseOnMapLoad	{
+	if (BaseLevel >= 220)
+		callfunc("F_RemorseGrantAccess");
+	return callfunc("F_RemorseUncloak");
+}
+
+function	script	F_EpUncloakEp20Memorial	{
+	.@repair = getarg(0, 0);
+	.@fixed = 0;
+
+	setarray .@npc$[0],
+		"Canyon Exploration#ep20",
+		"Drift Ice Zone#ep20",
+		"Nest of Twigs#ep20",
+		"The Immortal#ep20";
+	setarray .@need[0], 13, 21, 25, 29;
+
+	for (.@i = 0; .@i < getarraysize(.@npc$); ++.@i) {
+		if (ep20_main < .@need[.@i])
+			continue;
+		if (.@repair)
+			.@fixed += callfunc("F_EpRepairTry", .@npc$[.@i]);
+		else
+			callfunc("F_EpUncloakNpcForce", .@npc$[.@i]);
+	}
+	return .@fixed;
 }
 
 function	script	F_EpUncloakEp16	{
@@ -185,13 +339,12 @@ function	script	F_EpUncloakInstances	{
 	if (.@ep == 19 && ep19_main >= 100)
 		cloakoffnpcself( "Arolong#ep19re2" );
 	if (.@ep == 20 && ep20_main >= 13)
-		cloakoffnpcself( "Canyon Exploration#ep20" );
-	if (.@ep == 20 && ep20_main >= 21)
-		cloakoffnpcself( "Drift Ice Zone#ep20" );
-	if (.@ep == 20 && ep20_main >= 25)
-		cloakoffnpcself( "Nest of Twigs#ep20" );
-	if (.@ep == 20 && ep20_main >= 29)
-		cloakoffnpcself( "The Immortal#ep20" );
+		callfunc("F_EpUncloakEp20Memorial", 0);
+	if (.@ep == 20 && ep20_main >= 100) {
+		callfunc("F_GotUncloakMemorial");
+		callfunc("F_GotUncloakVending");
+		callfunc("F_GotUncloakServices");
+	}
 	return;
 }
 
@@ -248,13 +401,13 @@ function	script	F_EpRepairHiddenNpcs	{
 	if (ep19_main >= 100)
 		.@fixed += callfunc("F_EpRepairTry", "Arolong#ep19re2");
 	if (ep20_main >= 13)
-		.@fixed += callfunc("F_EpRepairTry", "Canyon Exploration#ep20");
-	if (ep20_main >= 21)
-		.@fixed += callfunc("F_EpRepairTry", "Drift Ice Zone#ep20");
-	if (ep20_main >= 25)
-		.@fixed += callfunc("F_EpRepairTry", "Nest of Twigs#ep20");
-	if (ep20_main >= 29)
-		.@fixed += callfunc("F_EpRepairTry", "The Immortal#ep20");
+		.@fixed += callfunc("F_EpUncloakEp20Memorial", 1);
+	if (BaseLevel >= 250)
+		callfunc("F_GotGrantFullAccess");
+	.@fixed += callfunc("F_GotUncloakMemorial");
+	.@fixed += callfunc("F_GotUncloakVending");
+	.@fixed += callfunc("F_GotUncloakServices");
+	.@fixed += callfunc("F_RemorseUncloak");
 	return .@fixed;
 }
 
@@ -300,13 +453,17 @@ function	script	F_EpUncloakOnMapLoad	{
 		cloakoffnpcself( "Iwin#i19ms22" );
 	}
 	if (.@map$ == "icecastle" && ep20_main >= 13)
-		cloakoffnpcself( "Canyon Exploration#ep20" );
+		callfunc("F_EpUncloakNpcForce", "Canyon Exploration#ep20");
 	if (.@map$ == "jor_maze" && ep20_main >= 21)
-		cloakoffnpcself( "Drift Ice Zone#ep20" );
+		callfunc("F_EpUncloakNpcForce", "Drift Ice Zone#ep20");
 	if (.@map$ == "jor_twice" && ep20_main >= 25)
-		cloakoffnpcself( "Nest of Twigs#ep20" );
+		callfunc("F_EpUncloakNpcForce", "Nest of Twigs#ep20");
 	if (.@map$ == "jor_twig" && ep20_main >= 29)
-		cloakoffnpcself( "The Immortal#ep20" );
+		callfunc("F_EpUncloakNpcForce", "The Immortal#ep20");
+	if (.@map$ == "t_garden")
+		callfunc("F_GotOnMapLoad");
+	if (.@map$ == "dali" || .@map$ == "dali02")
+		callfunc("F_RemorseOnMapLoad");
 	return;
 }
 
@@ -334,3 +491,6 @@ icecastle	mapflag	loadevent
 jor_maze	mapflag	loadevent
 jor_twice	mapflag	loadevent
 jor_twig	mapflag	loadevent
+t_garden	mapflag	loadevent
+dali	mapflag	loadevent
+dali02	mapflag	loadevent

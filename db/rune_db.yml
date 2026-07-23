@@ -1,0 +1,35 @@
+###########################################################################
+# Rune Tablet Set Database
+###########################################################################
+# - Id         Tag ID (matches client RUNETAGIDTBL, EP17 = 17)
+#   Name
+#   Set:
+#     - Id
+#       Name
+#       Books:
+#         - Slot
+#           Id / Name
+#       Activation:
+#         - Material
+#           Amount
+#       Scripts:
+#         - Amount
+#           Script
+#       Upgrades:
+#         - Grade (0..14)
+#           Chance
+#           ChancePerFail
+#           Materials:
+#       Rewards:
+#         Activation / Completion / Milestones
+###########################################################################
+
+Header:
+  Type: RUNE_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/re/rune_db.yml
+    Mode: Renewal
+  - Path: db/import/rune_db.yml

@@ -1,0 +1,20 @@
+###########################################################################
+# Rune Decomposition Database
+###########################################################################
+# - Id         Pool ID referenced by item Decomposition.Type1 / Type2
+#   Materials:
+#     - Material
+#       AmountMin
+#       AmountMax
+#       Chance     (100000 = 100%)
+###########################################################################
+
+Header:
+  Type: RUNEDECOMPOSITION_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/re/runedecomposition_db.yml
+    Mode: Renewal
+  - Path: db/import/runedecomposition_db.yml

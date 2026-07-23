@@ -109,30 +109,31 @@ L_Enter:
 		mes "You still need to recover from your last expedition.";
 		close;
 	}
-	switch( instance_enter(.instance_name$) ) {
-	case IE_OTHER:
-		mes "[Sierra]";
-		mes "An unknown error has occurred.";
-		close;
-	case IE_NOINSTANCE:
-		switch( instance_enter(.instance_hard_name$) ) {
-		case IE_OTHER:
-			mes "[Sierra]";
-			mes "An unknown error has occurred.";
-			close;
-		case IE_NOINSTANCE:
-			mes "[Sierra]";
-			mes "There is no open instance yet. Create one first.";
-			close;
-		case IE_OK:
-			setquest 16400;
-			mapannounce "yuno", strcharinfo(0) + " is entering " + .instance_hard_name$ + ".", bc_map, "0xFF8800", FW_NORMAL, 12;
-			end;
-		}
+	// Normal and Hard are separate instance DB entries; try both names.
+	.@enter = IE_NOINSTANCE;
+	if (instance_enter(.instance_hard_name$) == IE_OK) {
+		.@enter = IE_OK;
+		.@announce$ = .instance_hard_name$;
+		.@color$ = "0xFF8800";
+	} else if (instance_enter(.instance_name$) == IE_OK) {
+		.@enter = IE_OK;
+		.@announce$ = .instance_name$;
+		.@color$ = "0x00ff99";
+	}
+	switch (.@enter) {
 	case IE_OK:
 		setquest 16400;
-		mapannounce "yuno", strcharinfo(0) + " is entering " + .instance_name$ + ".", bc_map, "0x00ff99", FW_NORMAL, 12;
+		mapannounce "yuno", strcharinfo(0) + " is entering " + .@announce$ + ".", bc_map, .@color$, FW_NORMAL, 12;
 		end;
+	case IE_NOINSTANCE:
+		mes "[Sierra]";
+		mes "There is no open instance yet. Create one first.";
+		close;
+	default:
+		mes "[Sierra]";
+		mes "An unknown error has occurred.";
+		mes "If a memorial dungeon is already reserved, use ^0000cdDestroy instance^000000 in the Memorial Dungeon window and create a new one.";
+		close;
 	}
 	end;
 

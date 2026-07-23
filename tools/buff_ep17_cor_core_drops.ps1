@@ -1,29 +1,24 @@
-# Boost Cor Core (EP17_1_EVT39) and Mysterious Component (EP17_1_EVT02) drops by 50%.
-# - Multiply existing mob drop rates by 1.5
-# - Add both items to 12 additional EP17.2 field mobs (50% more droppers)
+# Set Cor Core (EP17_1_EVT39) and Mysterious Component (EP17_1_EVT02) drops to 35%.
+# - Set existing mob drop rates to 3500 (35% on the 10000 scale)
+# - Add both items to EP17.2 field mobs that lack them (35% each)
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $mobFile = Join-Path $root 'db\re\mob_db.yml'
+$targetRate = 3500
 
-function Round-DropRate {
-	param([double]$Rate)
-	return [int][Math]::Round($Rate, [MidpointRounding]::AwayFromZero)
-}
-
-# AegisName -> @{ EVT02 = rate; EVT39 = rate } (already +50% tuned)
 $newDrops = @{
-	'EP17_2_BELLARE3'       = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_DOLOR3'         = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_SANARE3'        = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_PLAGA3'         = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_VENENUM3'       = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_BOOKWORM'       = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_ROAMING_SPLBOOK' = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_CRAMP'          = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_WATERFALL'      = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_PLASMA_Y'       = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_PLASMA_R'       = @{ EVT02 = 15; EVT39 = 8 }
-	'EP17_2_BETA_BASIC'     = @{ EVT02 = 15; EVT39 = 8 }
+	'EP17_2_BELLARE3'        = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_DOLOR3'          = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_SANARE3'         = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_PLAGA3'          = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_VENENUM3'        = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_BOOKWORM'        = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_ROAMING_SPLBOOK' = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_CRAMP'           = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_WATERFALL'       = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_PLASMA_Y'        = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_PLASMA_R'        = @{ EVT02 = $targetRate; EVT39 = $targetRate }
+	'EP17_2_BETA_BASIC'      = @{ EVT02 = $targetRate; EVT39 = $targetRate }
 }
 
 $lines = [System.Collections.Generic.List[string]]::new()
@@ -31,11 +26,6 @@ $lines.AddRange([string[]](Get-Content $mobFile -Encoding UTF8))
 
 $rateBumps = 0
 $dropsAdded = 0
-$currentMob = $null
-$inDrops = $false
-$dropsStart = -1
-$dropsEnd = -1
-$pendingMobBlocks = @()
 
 function Flush-MobBlock {
 	param(
@@ -60,14 +50,12 @@ function Flush-MobBlock {
 		}
 	}
 
-	# Bump existing rates for target items
 	for ($i = 0; $i -lt $Block.Count - 1; $i++) {
 		if ($Block[$i] -match '^\s+- Item:\s+(EP17_1_EVT02|EP17_1_EVT39)\s*$' -and
 			$Block[$i + 1] -match '^\s+Rate:\s+(\d+)\s*$') {
 			$old = [int]$Matches[1]
-			$new = Round-DropRate ($old * 1.5)
-			if ($new -ne $old) {
-				$Block[$i + 1] = ($Block[$i + 1] -replace 'Rate:\s+\d+', "Rate: $new")
+			if ($old -ne $targetRate) {
+				$Block[$i + 1] = ($Block[$i + 1] -replace 'Rate:\s+\d+', "Rate: $targetRate")
 				$script:rateBumps++
 			}
 		}
@@ -124,4 +112,4 @@ if ($null -ne $currentBlock) {
 
 $utf8NoBom = New-Object System.Text.UTF8Encoding $false
 [System.IO.File]::WriteAllText($mobFile, (($outLines -join "`n") + "`n"), $utf8NoBom)
-Write-Host "Updated ${mobFile}: bumped $rateBumps drop rate(s), added drops to $dropsAdded mob(s)"
+Write-Host "Updated ${mobFile}: set $rateBumps drop rate(s) to ${targetRate}, added drops to $dropsAdded mob(s)"

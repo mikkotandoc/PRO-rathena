@@ -2679,6 +2679,9 @@ Body:
     Script: |
       bonus bLuk,2;
       bonus bFlee2,1;
+    Decomposition:
+      Type1: 1
+      Type2: 2
   - Id: 4002
     AegisName: Fabre_Card
     Name: Fabre Card
@@ -2690,6 +2693,9 @@ Body:
     Flags:
       BuyingStore: true
       DropEffect: CLIENT
+    Decomposition:
+      Type1: 1
+      Type2: 2
     Script: |
       bonus bVit,1;
       bonus bMaxHP,100;
@@ -4683,6 +4689,9 @@ Body:
     Flags:
       BuyingStore: true
       DropEffect: CLIENT
+    Decomposition:
+      Type1: 3
+      Type2: 4
     Script: |
       bonus bHit,-10;
       bonus bSplashRange,1;
@@ -4699,6 +4708,9 @@ Body:
     Flags:
       BuyingStore: true
       DropEffect: CLIENT
+    Decomposition:
+      Type1: 3
+      Type2: 4
     Script: |
       bonus bUseSPrate,-30;
   - Id: 4149

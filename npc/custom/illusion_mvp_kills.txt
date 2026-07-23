@@ -4,43 +4,47 @@
 OnCommand:
 	getmapxy(.@map$, .@x, .@y, BL_PC);
 
-	switch (.@map$) {
-	case "pay_d03_i":
+	if (.@map$ == "pay_d03_i") {
 		callsub S_Moonlight;
 		end;
-	case "com_d02_i":
+	}
+	if (.@map$ == "com_d02_i") {
 		callsub S_SimpleCount, "illusion_luanda", 1500, "", "Tao Gunka / Wootan Defender";
 		end;
-	case "ant_d02_i":
+	}
+	if (.@map$ == "ant_d02_i") {
 		callsub S_SimpleCount, "ant_d02_i_boss", 3000, "ILL_MAYA";
 		end;
-	case "ein_d02_i":
+	}
+	if (.@map$ == "ein_d02_i") {
 		callsub S_SimpleCount, "ein_d02_i_boss", 2500, "ILL_TEDDY_BEAR_S";
 		end;
-	case "iz_d04_i":
+	}
+	if (.@map$ == "iz_d04_i") {
 		callsub S_SimpleCount, "iz_d04_i_boss", 1500, "ILL_KRAKEN";
 		end;
-	case "iz_d05_i":
+	}
+	if (.@map$ == "iz_d05_i") {
 		callsub S_SimpleCount, "iz_d05_i_boss", 1500, "ILL_ABYSMAL_WITCH";
 		end;
-	case "tur_d04_i":
+	}
+	if (.@map$ == "tur_d04_i") {
 		callsub S_Turtle;
 		end;
-	case "prt_mz03_i":
+	}
+	if (.@map$ == "prt_mz03_i") {
 		callsub S_Labyrinth;
 		end;
-	case "lhz_dun_n":
+	}
+	if (.@map$ == "lhz_dun_n") {
 		callsub S_Biolabs;
 		end;
-	case "gef_d01_i":
-	case "ice_d03_i":
-	case "tur_d03_i":
+	}
+	if (.@map$ == "gef_d01_i" || .@map$ == "ice_d03_i" || .@map$ == "tur_d03_i") {
 		callsub S_NoTracker;
 		end;
-	default:
-		callsub S_Help;
-		end;
 	}
+	callsub S_Help;
 	end;
 
 // Standard kill-counter dungeons (.count variable).

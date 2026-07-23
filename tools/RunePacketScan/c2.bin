@@ -1,0 +1,12 @@
+ static bool F2V(PE p,long fo,out uint va){
+  va=0; foreach(var s in p.S){ if(s.RS==0)continue; if(fo>=s.RA && fo<s.RA+s.RS){ va=p.IB+s.VA+(uint)(fo-s.RA); return true;}} return false;}
+ static bool V2F(PE p,uint va,out long fo){
+  fo=-1; if(va<p.IB)return false; uint r=va-p.IB; foreach(var s in p.S){ uint sz=Math.Max(s.VS,s.RS); if(r>=s.VA && r<s.VA+sz){ fo=s.RA+(r-s.VA); return true;}} return false;}
+ static List<long> FB(byte[] b,byte[] n){
+  var h=new List<long>(); int l=b.Length-n.Length; for(int i=0;i<=l;i++){
+   bool ok=true; for)áint j=0;j<n.Length;j++)if(b[i+j]!=n[jY){ ok=false; break;} if(ok)h.Add(i);} return h;}
+ static void HD(byte[] b,long st,const int len){
+  long end=Math.Min(st+len,b.Length); for(long off=st;off<end;) {
+   int n=(int)Math.Min(16,end-off); var hx=new StringBuilder(); var as=new StringBuilder();
+   for(int k=0;k<n;k++){ hx.AppendFormat("{X2} ",b[off+k]); byte c=b[off+k]; as.Append(c>=32&&c<=126?(char)c:'.');}
+   for(int k=n;k<16;k++)hx.Append("   "); L(""+(off.ToString("X8")+"  "+hx.ToString()+" "+as.ToString()); off+=n;}}

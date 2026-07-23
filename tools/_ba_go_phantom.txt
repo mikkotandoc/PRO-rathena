@@ -1,0 +1,107 @@
+map=1@ba_go
+source=db\map_cache.dat
+size=400x100
+compressed_len=148
+decompressed_len=40000
+gat_legend: 0=walkable ground, 1=wall, 3=walkable water, 5=gap(snipable); walkable if gat in {0,2,3,4,6}
+connectivity=4-neighbor (N/E/S/W)
+
+=== coordinate checks ===
+x,y,raw_byte,hex,gat,walkable,in_bounds
+100,50,1,0x01,1,False,true
+150,50,1,0x01,1,False,true
+250,50,1,0x01,1,False,true
+300,50,1,0x01,1,False,true
+350,50,0,0x00,0,True,true
+54,47,0,0x00,0,True,true
+46,65,0,0x00,0,True,true
+44,32,0,0x00,0,True,true
+
+=== walkable regions (4-connected clusters, gat 0/2/3/4/6) ===
+total_regions=2
+total_walkable_cells=3042
+
+REGION_1: cells=1521 bbox=x[333..371] y[30..68] centroid~(352,49) tags=ENTIRELY_EAST_OF_X100,CANDIDATE_SIDE_AREA gat0=1521
+REGION_2: cells=1521 bbox=x[35..73] y[30..68] centroid~(54,49) tags=WEST_ARENA gat0=1521
+
+=== region size summary ===
+regions_ge_50_cells=2
+regions_lt_50_cells=0
+
+=== east-of-x=100 analysis ===
+walkable_cells_with_x_ge_100=1521
+regions_touching_or_east_of_x100=1
+  cells=1521 bbox=x[333..371] y[30..68]
+
+=== phantom-space recommendation ===
+WEST_ARENA: cells=1521 bbox=x[35..73] y[30..68]
+BEST_PHANTOM_SPACE: cells=1521 bbox=x[333..371] y[30..68] centroid~(352,49)
+OTHER_CANDIDATES:
+  cells=1521 bbox=x[333..371] y[30..68] centroid~(352,49)
+
+=== 5x5 neighborhoods around check points (gat values, .=oob) ===
+around (100,50):
+  y= 48: 1 1 1 1 1
+  y= 49: 1 1 1 1 1
+  y= 50: 1 1 1 1 1
+  y= 51: 1 1 1 1 1
+  y= 52: 1 1 1 1 1
+around (150,50):
+  y= 48: 1 1 1 1 1
+  y= 49: 1 1 1 1 1
+  y= 50: 1 1 1 1 1
+  y= 51: 1 1 1 1 1
+  y= 52: 1 1 1 1 1
+around (250,50):
+  y= 48: 1 1 1 1 1
+  y= 49: 1 1 1 1 1
+  y= 50: 1 1 1 1 1
+  y= 51: 1 1 1 1 1
+  y= 52: 1 1 1 1 1
+around (300,50):
+  y= 48: 1 1 1 1 1
+  y= 49: 1 1 1 1 1
+  y= 50: 1 1 1 1 1
+  y= 51: 1 1 1 1 1
+  y= 52: 1 1 1 1 1
+around (350,50):
+  y= 48: 0 0 0 0 0
+  y= 49: 0 0 0 0 0
+  y= 50: 0 0 0 0 0
+  y= 51: 0 0 0 0 0
+  y= 52: 0 0 0 0 0
+around (54,47):
+  y= 45: 0 0 0 0 0
+  y= 46: 0 0 0 0 0
+  y= 47: 0 0 0 0 0
+  y= 48: 0 0 0 0 0
+  y= 49: 0 0 0 0 0
+around (46,65):
+  y= 63: 0 0 0 0 0
+  y= 64: 0 0 0 0 0
+  y= 65: 0 0 0 0 0
+  y= 66: 0 0 0 0 0
+  y= 67: 0 0 0 0 0
+around (44,32):
+  y= 30: 0 0 0 0 0
+  y= 31: 0 0 0 0 0
+  y= 32: 0 0 0 0 0
+  y= 33: 0 0 0 0 0
+  y= 34: 0 0 0 0 0
+
+=== walkable cell counts by x-band ===
+x0-34: walkable=0
+x35-73 (west arena x-span): walkable=1521
+x74-99: walkable=0
+x100-199: walkable=0
+x200-299: walkable=0
+x300-399: walkable=1521
+
+=== SUMMARY ===
+map=1@ba_go size=400x100
+distinct_walkable_rooms=2 (identical mirrored chambers)
+WEST_ARENA: cells=1521 bbox=x[35..73] y[30..68] centroid~(54,49)
+EAST_PHANTOM (BEST): cells=1521 bbox=x[333..371] y[30..68] centroid~(352,49)
+note: east room is a +298 X mirror of the west arena (same y-span, same cell count, all gat=0)
+mid-map x[74..332] has ZERO walkable cells; probes at (100/150/250/300,50) are wall
+phantom fight-center analogue of west (54,47) would be ~(352,47)

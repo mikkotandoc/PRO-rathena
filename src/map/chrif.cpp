@@ -293,6 +293,7 @@ int32 chrif_save(map_session_data *sd, int32 flag) {
 	chrif_check(-1); //Character is saved on reconnect.
 
 	chrif_bsdata_save(sd, ((flag&CSAVE_QUITTING) && !(flag&CSAVE_AUTOTRADE)));
+	rune_save( *sd );
 
 	if (sd->storage.dirty)
 		storage_storagesave(sd);

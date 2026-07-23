@@ -1,0 +1,188 @@
+//===== rAthena Script =======================================
+//= Rune Tablet System - Rune Stone NPC (EP17 Phase 1)
+//= Opens client UI when available, plus full script fallback.
+//===== By: ==================================================
+//= PRO-rathena
+//============================================================
+
+ba_in01,355,55,5	script	Rune Stone#tablet	4_EP17_TABLET,{
+	mes "[Rune Stone]";
+	mes "This is Varmundt's Rune Tablet research terminal.";
+	mes "Collect Printed equipment and runes to activate tablet sets.";
+	next;
+	switch( select( "Open Rune Tablet UI", "Manage Tablets (Script)", "Engrave Equipment", "Decompose Cards", "What is this?", "Cancel" ) ) {
+	case 1:
+		close2;
+		runeui();
+		end;
+	case 2:
+		callsub S_Manage;
+		end;
+	case 3:
+		mes "[Rune Stone]";
+		mes "Engraving converts equipment into Printed materials used to activate rune pages.";
+		mes "Refine, cards, enchants, and grades will be lost.";
+		next;
+		close2;
+		item_reform("R_Ep17_Box");
+		end;
+	case 4:
+		callsub S_Decompose;
+		end;
+	case 5:
+		mes "[Rune Stone]";
+		mes "1) Decompose cards to obtain Imperfect / Perfect Runes.";
+		mes "2) Engrave gear into Printed materials.";
+		mes "3) Activate rune pages, then activate and equip a tablet set.";
+		mes "4) Upgrade the equipped tablet up to +15.";
+		mes "Only one tablet can be equipped per character.";
+		mes "Equipped grade: ^0000FF"+ getupgrade_rune() +"^000000";
+		mes "Equipped set ID: ^0000FF"+ rune_equipped_set() +"^000000";
+		close;
+	case 6:
+		close;
+	}
+	end;
+
+S_Manage:
+	while (1) {
+		.@eq = rune_equipped_set();
+		mes "[Rune Stone]";
+		mes "Equipped set: ^0000FF"+ ( .@eq ? .@eq : "None" ) +"^000000";
+		mes "Upgrade grade: ^0000FF"+ getupgrade_rune() +"^000000";
+		next;
+		switch( select(
+			"Activate Rune Page",
+			"Activate Tablet Set",
+			"Equip Tablet Set",
+			"Unequip Tablet",
+			"Upgrade Equipped Tablet",
+			"Back"
+		) ) {
+		case 1:
+			mes "[Rune Stone]";
+			mes "Enter the Rune Page ID to activate.";
+			mes "EP17 examples: 1263000 ~ 1263005";
+			mes "EP20 examples: 1263080 ~ 1263092";
+			next;
+			input .@id;
+			if (.@id <= 0) {
+				mes "[Rune Stone]";
+				mes "Cancelled.";
+				next;
+				break;
+			}
+			if (rune_activate_book(.@id))
+				mes "Page ^0000FF"+ .@id +"^000000 activated.";
+			else
+				mes "Activation failed.";
+			next;
+			break;
+		case 2:
+			mes "[Rune Stone]";
+			mes "Enter the Tablet Set ID to activate.";
+			mes "EP17 examples: 1260000 (Doubt), 1260001 (Auto)";
+			mes "EP20 examples: 1260037 (Glacier) ~ 1260044 (Root)";
+			next;
+			input .@id;
+			if (.@id <= 0) {
+				mes "[Rune Stone]";
+				mes "Cancelled.";
+				next;
+				break;
+			}
+			if (rune_activate_set(.@id))
+				mes "Tablet ^0000FF"+ .@id +"^000000 activated.";
+			else
+				mes "Activation failed.";
+			next;
+			break;
+		case 3:
+			mes "[Rune Stone]";
+			mes "Enter the Tablet Set ID to equip.";
+			mes "Requires at least 2 activated pages in that set.";
+			next;
+			input .@id;
+			if (.@id <= 0) {
+				mes "[Rune Stone]";
+				mes "Cancelled.";
+				next;
+				break;
+			}
+			if (rune_equip_set(.@id))
+				mes "Tablet ^0000FF"+ .@id +"^000000 equipped.";
+			else
+				mes "Equip failed.";
+			next;
+			break;
+		case 4:
+			if (rune_unequip_set())
+				mes "Tablet unequipped.";
+			else
+				mes "Nothing to unequip.";
+			next;
+			break;
+		case 5:
+			.@eq = rune_equipped_set();
+			if (!.@eq) {
+				mes "[Rune Stone]";
+				mes "Equip a tablet first.";
+				next;
+				break;
+			}
+			if (rune_upgrade_set(.@eq))
+				mes "Upgrade attempt finished. Grade: ^0000FF"+ getupgrade_rune() +"^000000";
+			else
+				mes "Upgrade failed.";
+			next;
+			break;
+		case 6:
+			return;
+		}
+	}
+	return;
+
+S_Decompose:
+	mes "[Rune Stone]";
+	mes "Select a card in your inventory to decompose.";
+	mes "Type 1 = x1, Type 2 = x30.";
+	next;
+	getinventorylist;
+	.@menu$ = "";
+	.@count = 0;
+	for (.@i = 0; .@i < @inventorylist_count; .@i++) {
+		if (getiteminfo(@inventorylist_id[.@i], ITEMINFO_TYPE) != IT_CARD)
+			continue;
+		.@idx[.@count] = @inventorylist_idx[.@i];
+		.@ids[.@count] = @inventorylist_id[.@i];
+		.@amt[.@count] = @inventorylist_amount[.@i];
+		.@menu$ += getitemname(.@ids[.@count]) +" x"+ .@amt[.@count] +":";
+		.@count++;
+		if (.@count >= 50)
+			break;
+	}
+	if (!.@count) {
+		mes "[Rune Stone]";
+		mes "You have no cards to decompose.";
+		close;
+	}
+	.@menu$ += "Cancel";
+	.@sel = select(.@menu$) - 1;
+	if (.@sel < 0 || .@sel >= .@count)
+		close;
+	mes "[Rune Stone]";
+	mes "Decompose ^0000FF"+ getitemname(.@ids[.@sel]) +"^000000?";
+	next;
+	.@mode = select("Decompose x1", "Decompose x30", "Cancel");
+	if (.@mode == 3)
+		close;
+	if (rune_decompose(.@idx[.@sel], .@mode))
+		mes "Decomposition complete.";
+	else
+		mes "Decomposition failed.";
+	close;
+
+OnInit:
+	setunittitle( getnpcid(0), "<Rune Tablet>" );
+	end;
+}

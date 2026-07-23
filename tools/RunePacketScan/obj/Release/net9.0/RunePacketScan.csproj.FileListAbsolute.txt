@@ -1,0 +1,15 @@
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\bin\Release\net9.0\RunePacketScan.exe
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\bin\Release\net9.0\RunePacketScan.deps.json
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\bin\Release\net9.0\RunePacketScan.runtimeconfig.json
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\bin\Release\net9.0\RunePacketScan.dll
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\bin\Release\net9.0\RunePacketScan.pdb
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.AssemblyInfoInputs.cache
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.AssemblyInfo.cs
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.csproj.CoreCompileInputs.cache
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.sourcelink.json
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.dll
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\refint\RunePacketScan.dll
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.pdb
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\RunePacketScan.genruntimeconfig.cache
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RunePacketScan\obj\Release\net9.0\ref\RunePacketScan.dll

@@ -329,6 +329,11 @@ function	script	F_EpClearConfirm	{
 		break;
 	case 20:
 		mes " - ^4d4dffep20_main^000000 set to at least ^0000ff100^000000";
+		mes " - Episode 20 memorial gates restored (Canyon / Drift Ice / Nest / Immortal)";
+		if (BaseLevel >= 250)
+			mes " - Garden of Time unlocked (Lake of Fire, Hall of Life, spirit services)";
+		else
+			mes " - ^777777Garden of Time unlock requires Base Level 250+^000000";
 		break;
 	default:
 		mes " - Episode " + .@ep + " story flags updated";

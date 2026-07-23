@@ -1,6 +1,6 @@
 # Merges item mall cash shop itemInfo entries into the client override table.
 param(
-	[string]$ClientRoot = "C:\Users\Mikko Tandoc\Downloads\asd\2\PRO-Ragnarok Asia w.o alitea"
+	[string]$ClientRoot = "C:\Users\Mikko Tandoc\Downloads\asd\2\PRO-Ragnarok Asia - Copy"
 )
 
 $ErrorActionPreference = "Stop"

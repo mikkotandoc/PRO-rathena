@@ -1,0 +1,19 @@
+###########################################################################
+# Rune Book Database
+###########################################################################
+# - Id         Unique rune page ID (matches client RUNEIDTBL, 1263xxx)
+#   Name       Aegis-style name
+#   Materials: Activation materials
+#     - Material
+#       Amount
+###########################################################################
+
+Header:
+  Type: RUNEBOOK_DB
+  Version: 1
+
+Footer:
+  Imports:
+  - Path: db/re/runebook_db.yml
+    Mode: Renewal
+  - Path: db/import/runebook_db.yml

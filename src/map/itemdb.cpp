@@ -759,6 +759,33 @@ uint64 ItemDatabase::parseBodyNode(const ryml::NodeRef& node) {
 		}
 	}
 
+	if( this->nodeExists( node, "Decomposition" ) ){
+		const auto& decompNode = node["Decomposition"];
+		if( this->nodeExists( decompNode, "Type1" ) ){
+			if( !this->asUInt32( decompNode, "Type1", item->rune_decomp_type1 ) ){
+				return 0;
+			}
+		}else if( !exists ){
+			item->rune_decomp_type1 = 0;
+		}
+		if( this->nodeExists( decompNode, "Type2" ) ){
+			if( !this->asUInt32( decompNode, "Type2", item->rune_decomp_type2 ) ){
+				return 0;
+			}
+		}else if( !exists ){
+			item->rune_decomp_type2 = 0;
+		}
+	}else if( !exists ){
+		// Default: all cards can be decomposed into Imperfect/Perfect Runes
+		if( item->type == IT_CARD ){
+			item->rune_decomp_type1 = 1;
+			item->rune_decomp_type2 = 2;
+		}else{
+			item->rune_decomp_type1 = 0;
+			item->rune_decomp_type2 = 0;
+		}
+	}
+
 	if (this->nodeExists(node, "Delay")) {
 		const auto& delayNode = node["Delay"];
 

@@ -3,7 +3,7 @@
 //===== Description: =========================================
 //= Crafts cash shop weapons and armors using materials
 //= farmed from level 220+ monsters via map drops.
-//= Expect ~24-48 hours of material collection per item.
+//= Expect ~29-58 hours of material collection per item.
 //============================================================
 
 prt_mk,120,125,4	script	Legendary Hunting Missions	4_F_EDEN_MASTER,{
@@ -19,7 +19,7 @@ prt_mk,120,125,4	script	Legendary Hunting Missions	4_F_EDEN_MASTER,{
 	mes "monsters of ^0000cdlevel 220 and above^000000.";
 	next;
 	switch (select(
-		"Craft Body Armor:Craft Footwear:Craft Garments:Craft Shields / Off-hand:Craft Accessories:Craft Headgear:Material Guide:^777777Cancel^000000"
+		"Craft Body Armor:Craft Footwear:Craft Garments:Craft Shields / Off-hand:Craft Accessories:Craft Headgear:Kachua Exchange:Material Guide:^777777Cancel^000000"
 	)) {
 	case 1:
 		mes "[Legendary Hunting Missions]";
@@ -59,6 +59,22 @@ prt_mk,120,125,4	script	Legendary Hunting Missions	4_F_EDEN_MASTER,{
 		end;
 	case 7:
 		mes "[Legendary Hunting Missions]";
+		mes "^0055FF15 Legend Hunt Cores^000000 -> 1 " + getitemname("Cachua_Coupon");
+		mes "^0055FF20 Legend Hunt Cores^000000 -> 1 " + getitemname("K_Secret_Key");
+		next;
+		mes "[Legendary Hunting Missions]";
+		mes "^0055FF600 Legend Hunt Cores^000000 each:";
+		mes getitemname("Coupon_FateSinBoots");
+		mes getitemname("Coupon_GoodnEvil_Helm");
+		mes getitemname("Coupon_Justice_Weapon");
+		mes getitemname("Coupon_Injustice_Weapon");
+		mes getitemname("aegis_1001809");
+		mes getitemname("aegis_1001810");
+		close2;
+		callshop "legendary_lhm_kachua_ticket";
+		end;
+	case 8:
+		mes "[Legendary Hunting Missions]";
 		mes "^0055FFLegend Hunt Scrap^000000";
 		mes "Common crafting fragment.";
 		mes " ";
@@ -75,21 +91,12 @@ prt_mk,120,125,4	script	Legendary Hunting Missions	4_F_EDEN_MASTER,{
 		next;
 		mes "[Legendary Hunting Missions]";
 		mes "^777777Normal monsters (Lv 220+):^000000";
-		mes "Up to ^0055FF2.4%^000000 per material (scales with level).";
+		mes "Legend Hunt Scrap up to ^0055FF2.0%^000000,";
+		mes "Legend Hunt Core up to ^0055FF0.5%^000000.";
 		mes "^777777MVP monsters (Lv 220+):^000000";
-		mes "Up to ^0055FF20%^000000 for cores, ^0055FF12%^000000 for scrap.";
-		mes " ";
-		mes "Examples: Power Twisted Plains, Mjolnir";
-		mes "Underground Caverns, Biosphere Depth, etc.";
-		next;
-		mes "[Legendary Hunting Missions]";
-		mes "You will also need ^777777Shadowdecon^000000,";
-		mes "^777777Zelunium^000000, and Zeny.";
-		mes "Budget items need about ^0000cd24 hours^000000 of";
-		mes "steady hunting. Premium pieces can take";
-		mes "up to ^0000cd48 hours^000000 to gather everything.";
+		mes "Scrap up to ^0055FF5.0%^000000, Core up to ^0055FF1.5%^000000.";
 		close;
-	case 8:
+	case 9:
 		close;
 	}
 	end;

@@ -40,48 +40,87 @@ for_dun02	monster	--ja--	22223,7	// SPIRIT_D_WIND_SL
 for_dun02	monster	--ja--	22227,7	// SPIRIT_R_FLAME_SL
 for_dun02	monster	--ja--	22231,7	// SPIRIT_F_LAND_SL
 
-t_garden,1,1,0	script	control_t_garden	HIDDEN_WARP_NPC,{
+// Contaminated zone controller (MuhRO: alternates hourly between Zone 1 / Zone 2)
+// .contam_zone: 1 = for_dun01, 2 = for_dun02
+-	script	forgotten_time_ctrl	-1,{
 	end;
-OnInit:
-OnMinute59:
-	.zone = !.zone;
 
-	if (.zone == 0) {	// Zone 2 (for_dun01) -> Zone 1 (for_dun02)
-		mapannounce "t_garden", "In approximately 1 minute, the dimensional contamination in Area 2 will subside and a large-scale dimensional contamination will occur in Area 1.", bc_map, 0xCCFF00;
-		mapannounce "for_dun02", "Large-scale dimensional contamination event will occur in this dungeon in approximately 1 minute.", bc_map, 0xFFDD;
-		mapannounce "for_dun01", "The dimensional contamination phenomenon in this dungeon is expected to subside in about 1 minute.", bc_map, 0xFFDD;
-	}
-	else {	// Zone 1 (for_dun02) -> Zone 2 (for_dun01)
-		mapannounce "t_garden", "In approximately 1 minute, the dimensional contamination in Area 1 will subside and a large-scale dimensional contamination will occur in Area 2.", bc_map, 0xCCFF00;
+OnInit:
+	.contam_zone = (gettime(DT_HOUR) % 2) + 1;
+	callsub( S_ClearContam );
+	callsub( S_ApplyContam, 0 );
+	end;
+
+OnMinute59:
+	.@next = (.contam_zone == 1) ? 2 : 1;
+	if (.@next == 1) {
+		mapannounce "t_garden", "In approximately 1 minute, the dimensional contamination in Zone 2 will subside and a large-scale dimensional contamination will occur in Zone 1.", bc_map, 0xCCFF00;
 		mapannounce "for_dun02", "The dimensional contamination phenomenon in this dungeon is expected to subside in about 1 minute.", bc_map, 0xFFDD;
 		mapannounce "for_dun01", "Large-scale dimensional contamination event will occur in this dungeon in approximately 1 minute.", bc_map, 0xFFDD;
+	}
+	else {
+		mapannounce "t_garden", "In approximately 1 minute, the dimensional contamination in Zone 1 will subside and a large-scale dimensional contamination will occur in Zone 2.", bc_map, 0xCCFF00;
+		mapannounce "for_dun01", "The dimensional contamination phenomenon in this dungeon is expected to subside in about 1 minute.", bc_map, 0xFFDD;
+		mapannounce "for_dun02", "Large-scale dimensional contamination event will occur in this dungeon in approximately 1 minute.", bc_map, 0xFFDD;
 	}
 	initnpctimer;
 	end;
 
 OnTimer60000:
 	stopnpctimer;
+	callsub( S_ClearContam );
+	.contam_zone = (.contam_zone == 1) ? 2 : 1;
+	callsub( S_ApplyContam, 1 );
+	end;
 
+OnPCLoadMapEvent:
+	.@map$ = strcharinfo(3);
+	if (.@map$ != "for_dun01" && .@map$ != "for_dun02")
+		end;
+	callsub( S_EnsureContam, .@map$ );
+	end;
+
+S_ClearContam:
 	for ( .@i = 22208; .@i <= 22215; ++.@i )
-		killmonster "for_dun01", "control_t_garden::OnMob" + .@i;
+		killmonster "for_dun01", "forgotten_time_ctrl::OnMob" + .@i;
 	for ( .@i = 22232; .@i <= 22239; ++.@i )
-		killmonster "for_dun02", "control_t_garden::OnMob" + .@i;
+		killmonster "for_dun02", "forgotten_time_ctrl::OnMob" + .@i;
+	return;
 
-	if (.zone == 0) {	// Zone 2 (for_dun01) -> Zone 1 (for_dun02)
-		mapannounce "t_garden", "Forgotten Memories : The dimensional contamination phenomenon in Area 2 has calmed down, and a large-scale dimensional contamination phenomenon has occurred in Area 1.", bc_map, 0xFFDD;
-		mapannounce "for_dun02", "Large-scale dimensional contamination is occurring in this dungeon...", bc_map, 0xFFDD;
-		mapannounce "for_dun01", "All dimensional contamination that occurred in this dungeon has been calmed down.", bc_map, 0xFFDD;
-
-		callsub( S_Spawn, "for_dun02", 22232, 22239, 12 );
-	}
-	else {	// Zone 1 (for_dun02) -> Zone 2 (for_dun01)
-		mapannounce "t_garden", "Forgotten Memories : The dimensional contamination phenomenon in Area 1 has calmed down, and a large-scale dimensional contamination phenomenon has occurred in Area 2.", bc_map, 0xFFDD;
+S_ApplyContam:
+	if (.contam_zone == 1) {
+		if (getarg(0))
+			mapannounce "t_garden", "Forgotten Time : The dimensional contamination in Zone 2 has calmed down, and Zone 1 is now contaminated.", bc_map, 0xFFDD;
 		mapannounce "for_dun02", "All dimensional contamination that occurred in this dungeon has been calmed down.", bc_map, 0xFFDD;
 		mapannounce "for_dun01", "Large-scale dimensional contamination is occurring in this dungeon...", bc_map, 0xFFDD;
-		
 		callsub( S_Spawn, "for_dun01", 22208, 22215, 6 );
 	}
-	end;
+	else {
+		if (getarg(0))
+			mapannounce "t_garden", "Forgotten Time : The dimensional contamination in Zone 1 has calmed down, and Zone 2 is now contaminated.", bc_map, 0xFFDD;
+		mapannounce "for_dun01", "All dimensional contamination that occurred in this dungeon has been calmed down.", bc_map, 0xFFDD;
+		mapannounce "for_dun02", "Large-scale dimensional contamination is occurring in this dungeon...", bc_map, 0xFFDD;
+		callsub( S_Spawn, "for_dun02", 22232, 22239, 12 );
+	}
+	return;
+
+S_EnsureContam:
+	.@map$ = getarg(0);
+	if (.@map$ == "for_dun01" && .contam_zone != 1)
+		return;
+	if (.@map$ == "for_dun02" && .contam_zone != 2)
+		return;
+
+	.@id_min = (.@map$ == "for_dun01") ? 22208 : 22232;
+	.@id_max = (.@map$ == "for_dun01") ? 22215 : 22239;
+	.@amount = (.@map$ == "for_dun01") ? 6 : 12;
+	.@count = 0;
+	for ( .@i = .@id_min; .@i <= .@id_max; ++.@i )
+		.@count += mobcount( .@map$, "forgotten_time_ctrl::OnMob" + .@i );
+	if (.@count > 0)
+		return;
+	callsub( S_Spawn, .@map$, .@id_min, .@id_max, .@amount );
+	return;
 
 S_Spawn:
 	.@map$ = getarg(0);
@@ -90,7 +129,7 @@ S_Spawn:
 	.@amount = getarg(3);
 
 	for ( .@i = .@id_min; .@i <= .@id_max; ++.@i )
-		monster .@map$,0,0,"--ja--",.@i,.@amount, "control_t_garden::OnMob" + .@i;
+		monster .@map$,0,0,"--ja--",.@i,.@amount, "forgotten_time_ctrl::OnMob" + .@i;
 	return;
 
 OnMob22210: callsub( S_Mob, "for_dun01", 22210 );
@@ -112,6 +151,12 @@ OnMob22236: callsub( S_Mob, "for_dun02", 22236 );
 OnMob22239: callsub( S_Mob, "for_dun02", 22239 );
 
 S_Mob:
-	monster getarg(0),0,0,"--ja--",getarg(1),1, "control_t_garden::OnMob" + getarg(1);
+	.@map$ = getarg(0);
+	.@mob_id = getarg(1);
+	if (.@map$ == "for_dun01" && .contam_zone != 1)
+		end;
+	if (.@map$ == "for_dun02" && .contam_zone != 2)
+		end;
+	monster .@map$,0,0,"--ja--",.@mob_id,1, "forgotten_time_ctrl::OnMob" + .@mob_id;
 	end;
 }

@@ -18,7 +18,7 @@
 		close;
 	}
 
-	.@zeny_cost = 200000; // Zeny cost is 200,000 according to official script [Secret]
+	.@zeny_cost = 20000; // Official shadow refine fee (matches refine.yml / Basta Refine UI)
 	disable_items;
 	mes "[Shadow Blacksmith]";
 	mes "Do you want to refine a shadow item? Pick yer poison!";

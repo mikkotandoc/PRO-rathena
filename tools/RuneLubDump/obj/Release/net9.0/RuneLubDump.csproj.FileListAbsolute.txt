@@ -1,0 +1,15 @@
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\bin\Release\net9.0\RuneLubDump.exe
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\bin\Release\net9.0\RuneLubDump.deps.json
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\bin\Release\net9.0\RuneLubDump.runtimeconfig.json
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\bin\Release\net9.0\RuneLubDump.dll
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\bin\Release\net9.0\RuneLubDump.pdb
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.AssemblyInfoInputs.cache
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.AssemblyInfo.cs
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.csproj.CoreCompileInputs.cache
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.sourcelink.json
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.dll
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\refint\RuneLubDump.dll
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.pdb
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\RuneLubDump.genruntimeconfig.cache
+C:\Users\Mikko Tandoc\Documents\GitHub\PRO-rathena\tools\RuneLubDump\obj\Release\net9.0\ref\RuneLubDump.dll

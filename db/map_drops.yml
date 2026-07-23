@@ -47,4 +47,5 @@ Footer:
   Imports:
   - Path: db/re/map_drops.yml
     Mode: Renewal
+  - Path: db/legendary_hunt_map_drops.yml
   - Path: db/import/map_drops.yml
