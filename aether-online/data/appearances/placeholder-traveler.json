@@ -1,0 +1,6 @@
+{
+  "id": "appearance.placeholder.traveler",
+  "displayName": "Placeholder Traveler",
+  "placeholder": true,
+  "notes": "Stand-in appearance descriptor. No sprite sheet is included."
+}

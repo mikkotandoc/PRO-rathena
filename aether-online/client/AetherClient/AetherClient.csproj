@@ -1,0 +1,16 @@
+<Project Sdk="Godot.NET.Sdk/4.5.2">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>Aether.Client</RootNamespace>
+    <AssemblyName>AetherClient</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aether.ClientSim\Aether.ClientSim.csproj" />
+    <ProjectReference Include="..\..\shared\Aether.Contracts\Aether.Contracts.csproj" />
+    <ProjectReference Include="..\..\shared\Aether.GameData\Aether.GameData.csproj" />
+    <ProjectReference Include="..\..\shared\Aether.GameRules\Aether.GameRules.csproj" />
+  </ItemGroup>
+</Project>

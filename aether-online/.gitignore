@@ -1,0 +1,37 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+TestResults/
+*.nupkg
+*.snupkg
+artifacts/
+
+# Godot
+.godot/
+.mono/
+mono_crash.*.json
+*.csproj.old
+export.cfg
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local secrets. Samples such as .env.example stay tracked.
+.env
+.env.*
+!.env.example
+*.pfx
+*.pem
+*.key
+
+# Logs
+*.log

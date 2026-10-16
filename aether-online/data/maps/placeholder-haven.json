@@ -1,0 +1,6 @@
+{
+  "id": "map.placeholder.haven",
+  "displayName": "Placeholder Haven",
+  "placeholder": true,
+  "notes": "Stand-in map descriptor. No geometry, encounters, or rules."
+}

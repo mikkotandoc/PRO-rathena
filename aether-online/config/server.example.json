@@ -1,0 +1,12 @@
+{
+  "logging": {
+    "minimumLevel": "Information",
+    "writeToConsole": true,
+    "eventFormat": "[{level}] {message}"
+  },
+  "database": {
+    "provider": "postgresql",
+    "enabled": false,
+    "connectionStringEnv": "AETHER_DB_CONNECTION_STRING"
+  }
+}

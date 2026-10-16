@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Aether.GameRules</RootNamespace>
+    <AssemblyName>Aether.GameRules</AssemblyName>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aether.Contracts\Aether.Contracts.csproj" />
+    <ProjectReference Include="..\Aether.GameData\Aether.GameData.csproj" />
+  </ItemGroup>
+</Project>

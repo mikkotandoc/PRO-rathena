@@ -1,0 +1,12 @@
+{
+  "logging": {
+    "minimumLevel": "Information",
+    "writeToConsole": true,
+    "eventFormat": "[{level}] {message}"
+  },
+  "window": {
+    "width": 1280,
+    "height": 720,
+    "mode": "windowed"
+  }
+}
