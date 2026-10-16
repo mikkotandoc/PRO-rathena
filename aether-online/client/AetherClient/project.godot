@@ -1,0 +1,29 @@
+; Engine configuration file.
+config_version=5
+
+[application]
+
+config/name="AETHER Online"
+config/description="AETHER Online client"
+run/main_scene="res://scenes/maps/VerdantTestField.tscn"
+config/features=PackedStringArray("4.5", "GL Compatibility", "C#")
+config/icon="res://icon.svg"
+
+[aether]
+
+role="client"
+headless=false
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[dotnet]
+
+project/assembly_name="AetherClient"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.106, 0.141, 0.188, 1)

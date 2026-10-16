@@ -1,0 +1,29 @@
+{
+  "id": "map.verdant-test-field",
+  "displayName": "Verdant Test Field",
+  "placeholder": true,
+  "size": { "x": 40, "z": 40 },
+  "cellsAlongShortSide": 20,
+  "playerStart": { "x": -14, "z": -10 },
+  "blocked": [
+    { "id": "central-grove", "minX": -4, "maxX": 4, "minZ": -4, "maxZ": 4 },
+    { "id": "east-ruin", "minX": 9, "maxX": 15, "minZ": -6, "maxZ": 2 },
+    { "id": "north-rocks", "minX": 4, "maxX": 8, "minZ": 8, "maxZ": 12 }
+  ],
+  "paths": [
+    { "id": "south-lane", "minX": -16, "maxX": 16, "minZ": -12, "maxZ": -8 },
+    { "id": "west-lane", "minX": -18, "maxX": -12, "minZ": -16, "maxZ": 16 }
+  ],
+  "props": [
+    { "kind": "tree", "x": -2, "z": -1 },
+    { "kind": "tree", "x": 1.5, "z": 2 },
+    { "kind": "tree", "x": 2, "z": -2.2 },
+    { "kind": "tree", "x": -16, "z": 15, "blockHalfExtent": 0.7 },
+    { "kind": "tree", "x": 16, "z": 15, "blockHalfExtent": 0.7 },
+    { "kind": "tree", "x": 16, "z": -15, "blockHalfExtent": 0.7 },
+    { "kind": "rock", "x": 5.2, "z": 9.2 },
+    { "kind": "rock", "x": 6.8, "z": 11 },
+    { "kind": "building", "x": 12, "z": -2 },
+    { "kind": "building", "x": -1.2, "z": 1.4 }
+  ]
+}

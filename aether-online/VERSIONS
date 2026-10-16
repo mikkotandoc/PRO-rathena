@@ -1,0 +1,16 @@
+# Pinned toolchain for AETHER Online.
+# Update these together with global.json, the Godot.NET.Sdk attribute, and docs/DECISIONS.md.
+
+godot_version=4.5.2
+godot_release=4.5.2-stable
+godot_version_string=4.5.2.stable.mono.official.6ce3de25a
+godot_feature=4.5
+godot_net_sdk=4.5.2
+dotnet_sdk=8.0.426
+dotnet_runtime=8.0.32
+target_framework=net8.0
+csharp_lang=12.0
+powershell=7.6.7
+xunit=2.9.3
+xunit_runner_visualstudio=2.8.2
+microsoft_net_test_sdk=17.14.1

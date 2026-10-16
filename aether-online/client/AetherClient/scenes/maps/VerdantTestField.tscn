@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/session/VerdantFieldSession.cs" id="1_session"]
+[ext_resource type="Script" path="res://scripts/maps/FieldMap.cs" id="2_field"]
+[ext_resource type="Script" path="res://scripts/player/PlayerController.cs" id="3_player"]
+[ext_resource type="Script" path="res://scripts/player/PlayerVisual.cs" id="4_visual"]
+[ext_resource type="Script" path="res://scripts/player/CharacterAnimationController.cs" id="5_anim"]
+[ext_resource type="Script" path="res://scripts/navigation/LocalNavigationController.cs" id="6_nav"]
+[ext_resource type="Script" path="res://scripts/input/ClickToMoveInput.cs" id="7_input"]
+[ext_resource type="Script" path="res://scripts/camera/IsometricCameraController.cs" id="8_camera"]
+[ext_resource type="Script" path="res://scripts/debug/DebugOverlay.cs" id="9_debug"]
+
+[node name="VerdantTestField" type="Node3D"]
+script = ExtResource("1_session")
+
+[node name="Field" type="Node3D" parent="."]
+script = ExtResource("2_field")
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("3_player")
+
+[node name="Visual" type="AnimatedSprite3D" parent="Player"]
+script = ExtResource("4_visual")
+
+[node name="Shadow" type="MeshInstance3D" parent="Player"]
+
+[node name="Animation" type="Node" parent="Player"]
+script = ExtResource("5_anim")
+
+[node name="Navigation" type="NavigationAgent3D" parent="Player"]
+
+[node name="NavigationController" type="Node" parent="Player"]
+script = ExtResource("6_nav")
+
+[node name="ClickInput" type="Node" parent="."]
+script = ExtResource("7_input")
+
+[node name="CameraRig" type="Node3D" parent="."]
+script = ExtResource("8_camera")
+
+[node name="Camera" type="Camera3D" parent="CameraRig"]
+projection = 1
+current = true
+
+[node name="DebugOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("9_debug")
+
+[node name="Readout" type="Label" parent="DebugOverlay"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 520.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0.93, 0.91, 0.84, 1)
+theme_override_font_sizes/font_size = 18
+text = "Verdant Test Field"
