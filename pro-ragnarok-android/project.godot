@@ -1,0 +1,51 @@
+; Engine configuration file.
+; PRO-Ragnarok Android — Phase 1 offline Godot 4.x client prototype.
+
+config_version=5
+
+[application]
+
+config/name="PRO-Ragnarok"
+config/description="Native Android-first offline MMORPG client prototype (Phase 1)."
+config/version="0.1.0-phase1"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameBootstrap="*res://scripts/core/game_bootstrap.gd"
+GraphicsSettings="*res://scripts/rendering/graphics_settings.gd"
+AssetService="*res://scripts/assets/asset_service.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=4
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="character"
+3d_navigation/layer_1="walkable"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=1
+
+[navigation]
+
+3d/default_cell_size=0.25
+3d/default_cell_height=0.25
+3d/default_agent_height=1.6
+3d/default_agent_radius=0.35

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="24" fill="#1a3a5c"/>
+  <circle cx="64" cy="52" r="28" fill="#4a90d9"/>
+  <rect x="40" y="78" width="48" height="32" rx="8" fill="#2d6a9f"/>
+  <text x="64" y="118" text-anchor="middle" font-size="14" fill="#c8e0ff" font-family="sans-serif">PRO</text>
+</svg>
