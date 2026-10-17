@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpro_player"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/player_controller.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/rendering/billboard_sprite_animator.gd" id="2_anim"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.35
+height = 1.4
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+floor_stop_on_slope = true
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_1")
+
+[node name="BillboardSpriteAnimator" type="Node3D" parent="."]
+script = ExtResource("2_anim")
+character_id = "test_adventurer"

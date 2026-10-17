@@ -1,0 +1,17 @@
+# Godot 4
+.godot/
+*.translation
+export/*.apk
+export/*.aab
+export/*.idsig
+android/
+.import/
+*.pyc
+.DS_Store
+*~
+*.swp
+
+# Local editor / keystores (never commit secrets)
+*.keystore
+*.jks
+export_credentials.cfg
